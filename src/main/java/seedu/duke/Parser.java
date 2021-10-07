@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Parser class adapted from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
+
 /**
  * Parser Class. Manages parsing of user input for different commands.
  */
@@ -50,8 +51,8 @@ public class Parser {
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
             "Input invalid command format.\nCorrect format: \n%s\n";
-    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n" +
-            "quantity: %s\nremarks: %s\n";
+    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n"
+            + "quantity: %s\nremarks: %s\n";
     public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\n";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "category: %s\n";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "itemName: %s\nproperty: %s\n";
@@ -64,7 +65,7 @@ public class Parser {
      *
      * @param userInputLine The user input Line.
      */
-    public static String parseCommand(String userInputLine){
+    public static String parseCommand(String userInputLine) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
         if (!matcher.matches()) {
             return INVALID_COMMAND_MESSAGE_STRING;
@@ -118,7 +119,7 @@ public class Parser {
         try {
             System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
                     matcher.group("itemName"), matcher.group("category"),
-                    matcher.group("price"),matcher.group("quantity"), matcher.group("remarks")));
+                    matcher.group("price"), matcher.group("quantity"), matcher.group("remarks")));
             return PARSE_SUCCESS_MESSAGE_STRING;
 
         } catch (Exception e) {
