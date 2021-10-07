@@ -48,50 +48,58 @@ public class Parser {
     public static final String GET_STRING = "get";
     public static final String EDIT_STRING = "edit";
 
-    public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
             "Input invalid command format.\nCorrect format: \n%s\n";
+    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n" +
+            "quantity: %s\nremarks: %s\n";
+    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\n";
+    public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "category: %s\n";
+    public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "itemName: %s\nproperty: %s\n";
+
+    public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
+    public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
     /**
      * Parses the User input line.
      *
      * @param userInputLine The user input Line.
      */
-    public static void parseCommand(String userInputLine){
+    public static String parseCommand(String userInputLine){
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
         if (!matcher.matches()) {
-            System.out.println(INVALID_COMMAND_MESSAGE_STRING);
-            return;
+            return INVALID_COMMAND_MESSAGE_STRING;
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        String resultString = "";
 
         switch (commandWord) {
-
         case ADD_STRING:
-            prepareAdd(arguments);
+            resultString = prepareAdd(arguments);
             break;
 
         case DELETE_STRING:
-            prepareDelete(arguments);
+            resultString = prepareDelete(arguments);
             break;
 
         case LIST_STRING:
-            prepareList(arguments);
+            resultString = prepareList(arguments);
             break;
 
         case GET_STRING:
-            prepareGet(arguments);
+            resultString = prepareGet(arguments);
             break;
 
         case EDIT_STRING:
-            prepareEdit(arguments);
+            resultString = prepareEdit(arguments);
             break;
 
         default:
-            System.out.println(INVALID_COMMAND_MESSAGE_STRING);
+            return INVALID_COMMAND_MESSAGE_STRING;
         }
+
+        return resultString;
     }
 
     /**
@@ -99,23 +107,22 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      */
-    private static void prepareAdd(String arguments) {
+    private static String prepareAdd(String arguments) {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            System.out.println(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
-            return;
+            return String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
-            System.out.println(String.format("name: %s", matcher.group("itemName")));
-            System.out.println(String.format("category: %s", matcher.group("category")));
-            System.out.println(String.format("price: $%s", matcher.group("price")));
-            System.out.println(String.format("quantity: %s", matcher.group("quantity")));
-            System.out.println(String.format("remarks: %s", matcher.group("remarks")));
+            System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
+                    matcher.group("itemName"), matcher.group("category"),
+                    matcher.group("price"),matcher.group("quantity"), matcher.group("remarks")));
+            return PARSE_SUCCESS_MESSAGE_STRING;
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return String.format(e.getMessage());
         }
     }
 
@@ -124,19 +131,19 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      */
-    private static void prepareDelete(String arguments) {
+    private static String prepareDelete(String arguments) {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            System.out.println(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
-            return;
+            return String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
-            System.out.println(String.format("name: %s", matcher.group("itemName")));
+            System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, matcher.group("itemName")));
+            return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
     }
 
@@ -145,19 +152,19 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      */
-    private static void prepareList(String arguments) {
+    private static String prepareList(String arguments) {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            System.out.println(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
-            return;
+            return String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
-            System.out.println(String.format("category: %s", matcher.group("category")));
+            System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
+            return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
     }
 
@@ -166,20 +173,20 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      */
-    private static void prepareGet(String arguments) {
+    private static String prepareGet(String arguments) {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            System.out.println(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
-            return;
+            return String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
-            System.out.println(String.format("name: %s", matcher.group("itemName")));
-            System.out.println(String.format("property: %s", matcher.group("property")));
+            System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT,
+                    matcher.group("itemName"), matcher.group("property")));
+            return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
     }
 
@@ -188,22 +195,21 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      */
-    private static void prepareEdit(String arguments) {
+    private static String prepareEdit(String arguments) {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            System.out.println(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
-            return;
+            return String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
-            System.out.println(String.format("name: %s", matcher.group("itemName")));
-            System.out.println(String.format("property: %s", matcher.group("property")));
-            System.out.println(String.format("value: %s", matcher.group("value")));
-            System.out.println(String.format("show result: %s", matcher.group("showResult")));
+            System.out.println(String.format("itemName: %s\nproperty: %s\nvalue: %s\nshow result: %s\n",
+                    matcher.group("itemName"), matcher.group("property"),
+                    matcher.group("value"), matcher.group("showResult")));
+            return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
     }
 }
