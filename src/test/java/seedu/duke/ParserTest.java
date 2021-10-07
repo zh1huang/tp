@@ -27,6 +27,10 @@ public class ParserTest {
         assertEquals(parser.INVALID_COMMAND_MESSAGE_STRING, parser.parseCommand(notProgramCommandInput));
     }
 
+    /*
+     * Tests for add command ===============================================================
+     */
+
     @Test
     public void parse_addCommandInvalidArgs_errorMessage(){
         final String[] inputs = {
@@ -53,6 +57,10 @@ public class ParserTest {
         }
     }
 
+    /*
+     * Tests for delete command ===============================================================
+     */
+
     @Test
     public void parse_deleteCommandInvalidArgs_errorMessage(){
         final String[] inputs = {
@@ -78,6 +86,10 @@ public class ParserTest {
             assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
         }
     }
+
+    /*
+     * Tests for list command ===============================================================
+     */
 
     @Test
     public void parse_listCommandInvalidArgs_errorMessage(){
@@ -106,6 +118,10 @@ public class ParserTest {
         }
     }
 
+    /*
+     * Tests for get command ===============================================================
+     */
+
     @Test
     public void parse_getCommandInvalidArgs_errorMessage(){
         final String[] inputs = {
@@ -130,6 +146,10 @@ public class ParserTest {
             assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
         }
     }
+
+    /*
+     * Tests for edit command ===============================================================
+     */
 
     @Test
     public void parse_editCommandInvalidArgs_errorMessage(){
