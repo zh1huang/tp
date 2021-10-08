@@ -3,7 +3,8 @@ package seedu.duke;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Parser class adapted from https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
+// Parser class adapted from
+// https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
 
 /**
  * Parser Class. Manages parsing of user input for different commands.
@@ -61,12 +62,18 @@ public class Parser {
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
     /**
-     * Parses the User input line.
+     * Parses the User input line. Checks the user input line against the basic command format
+     * and extracts the command word which is the first word in the user input line. After
+     * extraction of the command word, pass the remaining user input line arguments to the
+     * respective cases depending on the command word.
      *
      * @param userInputLine The user input Line.
+     * @return A string indicating parse success or failure.
      */
     public static String parseCommand(String userInputLine) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
+
+        /* Checks valid basic command format */
         if (!matcher.matches()) {
             return INVALID_COMMAND_MESSAGE_STRING;
         }
@@ -107,6 +114,7 @@ public class Parser {
      * Parses add command arguments.
      *
      * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
      */
     private static String prepareAdd(String arguments) {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -131,6 +139,7 @@ public class Parser {
      * Parses delete command arguments.
      *
      * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
      */
     private static String prepareDelete(String arguments) {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -152,6 +161,7 @@ public class Parser {
      * Parses list command arguments.
      *
      * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
      */
     private static String prepareList(String arguments) {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -173,6 +183,7 @@ public class Parser {
      * Parses get command arguments.
      *
      * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
      */
     private static String prepareGet(String arguments) {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -195,6 +206,7 @@ public class Parser {
      * Parses edit command arguments.
      *
      * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
      */
     private static String prepareEdit(String arguments) {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
