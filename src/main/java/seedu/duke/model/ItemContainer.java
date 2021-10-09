@@ -6,7 +6,7 @@ public class ItemContainer {
     String name;
     ArrayList<Item> items;
 
-    ItemContainer (String name) {
+    ItemContainer(String name) {
         setName(name);
         items = new ArrayList<Item>();
     }
@@ -34,15 +34,14 @@ public class ItemContainer {
     public void updateItem(Item originalItem, Item updatedItem) {
         try {
             int index = items.indexOf(originalItem);
-            items.remove(index);
-            items.add(index, updatedItem);
+            items.set(index, updatedItem);
         } catch (NullPointerException e) {
             // todo throw exception cuz no item found
         }
     }
 
     public Item getItem(String name) {
-        for (Item item: items) {
+        for (Item item : items) {
             if (item.getName().equals(name)) {
                 return item;
             }
@@ -51,13 +50,20 @@ public class ItemContainer {
         return null;
     }
 
-    public boolean contains(String name) {
-        if (getItem(name) != null) {
-            return true;
+    public Item getItem(int index) {
+        try {
+            return items.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            // todo item does not exist at the index
         }
-        return false;
+        return null;
     }
 
+    public boolean contains(String name) {
+        return getItem(name) != null;
+    }
+
+    // todo add printItemContainer() method
     public void printItemContainer() {
 
     }

@@ -14,4 +14,17 @@ public class ContainerList {
     public void addContainer(String location) {
         containers.add(new ItemContainer(location));
     }
+
+    // todo add deleteContainer method
+
+    public ItemContainer getContainer(String location) {
+        for (ItemContainer container : containers) {
+            if (container.getName().equals(location)) {
+                return container;
+            }
+        }
+
+        // todo throw error when no container found
+        return null;
+    }
 }

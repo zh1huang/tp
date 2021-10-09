@@ -6,14 +6,12 @@ public class Item {
     String name;
     BigDecimal purchaseCost;
     BigDecimal sellingPrice;
-    SKU sku;
     ItemContainer location; // todo add a location class
 
-    Item (String name, BigDecimal cost, BigDecimal price, SKU sku, ItemContainer location) {
+    Item(String name, BigDecimal cost, BigDecimal price, ItemContainer location) {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
-        setSku(sku);
         setLocation(location);
     }
 
@@ -29,24 +27,16 @@ public class Item {
         return purchaseCost;
     }
 
-    public void setPurchaseCost(BigDecimal purchaseCost) { // todo check format
-        this.purchaseCost = purchaseCost;
+    public void setPurchaseCost(BigDecimal cost) { // todo check format
+        purchaseCost = cost;
     }
 
     public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) { // todo check format
-        this.sellingPrice = sellingPrice;
-    }
-
-    public SKU getSku() {
-        return sku;
-    }
-
-    public void setSku(SKU sku) {
-        this.sku = sku;
+    public void setSellingPrice(BigDecimal price) { // todo check format
+        sellingPrice = price;
     }
 
     public ItemContainer getLocation() {
@@ -54,6 +44,8 @@ public class Item {
     }
 
     public void setLocation(ItemContainer location) {
+        this.location.deleteItem(this);
         this.location = location;
+        location.addItem(this);
     }
 }
