@@ -6,6 +6,8 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
+    public static String userInputSample = "add n/Geronimo c/book p/$19 q/1";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,5 +19,7 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+        String output = Parser.parseCommand(userInputSample);
+        System.out.println(output);
     }
 }
