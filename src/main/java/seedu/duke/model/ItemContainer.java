@@ -1,7 +1,5 @@
 package seedu.duke.model;
 
-import seedu.duke.command.exception.CommandException;
-
 import java.util.ArrayList;
 
 public class ItemContainer {
@@ -21,7 +19,7 @@ public class ItemContainer {
         this.name = name;
     }
 
-    public void addItem(Item item) throws CommandException {
+    public void addItem(Item item) {
         items.add(item);
     }
 
