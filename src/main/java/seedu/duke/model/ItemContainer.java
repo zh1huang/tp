@@ -54,8 +54,9 @@ public class ItemContainer {
      * @param item The item to be added
      */
     public void addItem(Item item) {
-        items.add(item);
-        assert item.getLocation() == this : "The item should know its location";
+        if (!items.contains(item)) {
+            items.add(item);
+        }
     }
 
     /**

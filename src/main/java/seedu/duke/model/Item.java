@@ -12,7 +12,6 @@ public class Item {
     String name;
     BigDecimal purchaseCost;
     BigDecimal sellingPrice;
-    ItemContainer location;
 
     /**
      * Constructor for Item class.
@@ -23,14 +22,12 @@ public class Item {
      *                 must be non-negative
      * @param price    the selling price of the item
      *                 must be non-negative
-     * @param location the ItemContainer that this item belongs to
      * @throws InvalidFormat if any of the inputs does not follow the requirement
      */
-    Item(String name, BigDecimal cost, BigDecimal price, ItemContainer location) throws InvalidFormat {
+    public Item(String name, BigDecimal cost, BigDecimal price) throws InvalidFormat {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
-        setLocation(location);
     }
 
     public String getName() {
@@ -90,24 +87,6 @@ public class Item {
             // error if cost is negative
             throw new InvalidFormat("Item cost cannot be negative.");
         }
-    }
-
-    public ItemContainer getLocation() {
-        return location;
-    }
-
-    /**
-     * Move the Item from its original ItemContainer to the new ItemContainer.
-     *
-     * @param newLocation The ItemContainer location to store the Item
-     */
-    public void setLocation(ItemContainer newLocation) {
-        if (location != null) {
-            location.deleteItem(this);
-        }
-        location = newLocation;
-        newLocation.addItem(this);
-        assert newLocation.contains(this.getName()) : "The new location should contain this item";
     }
 
     @Override
