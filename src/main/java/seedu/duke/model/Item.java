@@ -110,9 +110,6 @@ public class Item {
         assert newLocation.contains(this.getName()) : "The new location should contain this item";
     }
 
-    /**
-     * @return the name of the item
-     */
     @Override
     public String toString() {
         return getName();
