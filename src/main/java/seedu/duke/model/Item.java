@@ -17,12 +17,12 @@ public class Item {
     /**
      * Constructor for Item class.
      *
-     * @param name the name of the item
-     *             consists of alphabet, number, underscore and hyphen
-     * @param cost the cost of the item
-     *             must be non-negative
-     * @param price the selling price of the item
-     *              must be non-negative
+     * @param name     the name of the item
+     *                 consists of alphabet, number, underscore and hyphen
+     * @param cost     the cost of the item
+     *                 must be non-negative
+     * @param price    the selling price of the item
+     *                 must be non-negative
      * @param location the ItemContainer that this item belongs to
      * @throws InvalidFormat if any of the inputs does not follow the requirement
      */
@@ -102,11 +102,19 @@ public class Item {
      * @param newLocation The ItemContainer location to store the Item
      */
     public void setLocation(ItemContainer newLocation) {
-        if (location == newLocation) {
-            return;
+        if (location != null) {
+            location.deleteItem(this);
         }
-        location.deleteItem(this);
         location = newLocation;
         newLocation.addItem(this);
+        assert newLocation.contains(this.getName()) : "The new location should contain this item";
+    }
+
+    /**
+     * @return the name of the item
+     */
+    @Override
+    public String toString() {
+        return getName();
     }
 }

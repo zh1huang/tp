@@ -55,6 +55,7 @@ public class ItemContainer {
      */
     public void addItem(Item item) {
         items.add(item);
+        assert item.getLocation() == this : "The item should know its location";
     }
 
     /**
@@ -77,6 +78,8 @@ public class ItemContainer {
     public void updateItem(Item originalItem, Item updatedItem) throws NullPointerException {
         int index = items.indexOf(originalItem);
         items.set(index, updatedItem);
+        assert items.get(index) == updatedItem : "The index of the updated item should be the same " +
+                "as the index of the original item before replacement";
     }
 
     /**
@@ -121,9 +124,10 @@ public class ItemContainer {
     }
 
     /**
-     * Returns a String of names of the items in the ItemContainer separated by "\n".
+     * Returns a string of names of the items in the ItemContainer separated by "\n".
      */
-    public String printItemContainer() {
+    @Override
+    public String toString() {
         String output = "";
         for (Item temp : items) {
             output += temp.getName();
