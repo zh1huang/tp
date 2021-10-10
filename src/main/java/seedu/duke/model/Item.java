@@ -2,11 +2,15 @@ package seedu.duke.model;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents an item that can be stored in an ItemContainer.
+ * e.g. You can store 10 Items named "Dune" in an ItemContainer named "Shelf - Sci-fi"
+ */
 public class Item {
     String name;
     BigDecimal purchaseCost;
     BigDecimal sellingPrice;
-    ItemContainer location; // todo add a location class
+    ItemContainer location;
 
     Item(String name, BigDecimal cost, BigDecimal price, ItemContainer location) {
         setName(name);
@@ -19,7 +23,8 @@ public class Item {
         return name;
     }
 
-    public void setName(String name) { // todo check format
+    // todo check format
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -27,7 +32,8 @@ public class Item {
         return purchaseCost;
     }
 
-    public void setPurchaseCost(BigDecimal cost) { // todo check format
+    // todo check format
+    public void setPurchaseCost(BigDecimal cost) {
         purchaseCost = cost;
     }
 
@@ -35,7 +41,8 @@ public class Item {
         return sellingPrice;
     }
 
-    public void setSellingPrice(BigDecimal price) { // todo check format
+    // todo check format
+    public void setSellingPrice(BigDecimal price) {
         sellingPrice = price;
     }
 
@@ -43,6 +50,11 @@ public class Item {
         return location;
     }
 
+    /**
+     * Move the Item from its original ItemContainer to the new ItemContainer.
+     *
+     * @param location The ItemContainer to store the Item
+     */
     public void setLocation(ItemContainer location) {
         this.location.deleteItem(this);
         this.location = location;
