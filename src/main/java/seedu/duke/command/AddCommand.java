@@ -1,17 +1,37 @@
 package seedu.duke.command;
 
+import seedu.duke.model.Item;
+import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.InvalidFormat;
+
 import java.math.BigDecimal;
 
+/**
+ * The command that adds a new item to the list
+ */
 public class AddCommand extends Command {
-    private final ItemContainer list;
+    private static final String ADD_COMPLETE_MESSAGE = "This item has been added to the list."; //to be added to UI part later
     private final Item newItem;
 
-    public AddCommand(String name, BigDecimal purchaseCost, BigDecimal sellingPrice, ItemContainer list) {
+    /**
+     * AddCommand Constructor.
+     * @param name the name of the new item
+     * @param purchaseCost the cost of the item
+     * @param sellingPrice the price of the item
+     * @param list the list where the item will be stored in
+     * @throws InvalidFormat if the name/cost/price/list parameters are not in correct format
+     */
+    public AddCommand(String name, BigDecimal purchaseCost, BigDecimal sellingPrice, ItemContainer list) throws InvalidFormat {
         this.newItem = new Item(name, purchaseCost, sellingPrice, list);
-        this.list = list;
     }
 
-    public void execute() {
-        
+    /**
+     * Executes the operation of adding the item to the list.
+     * @param list the itemContainer to remove the item from
+     */
+    @Override
+    public void execute(ItemContainer list) {
+        list.addItem(newItem);
+        System.out.println(ADD_COMPLETE_MESSAGE);
     }
 }

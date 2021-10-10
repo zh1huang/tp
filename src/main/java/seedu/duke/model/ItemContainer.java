@@ -19,7 +19,7 @@ public class ItemContainer {
      *             consists of alphabet, number, underscore and hyphen
      * @throws InvalidFormat if the name contains other characters
      */
-    ItemContainer(String name) throws InvalidFormat {
+    public ItemContainer(String name) throws InvalidFormat {
         setName(name);
         items = new ArrayList<Item>();
     }
@@ -129,5 +129,13 @@ public class ItemContainer {
             output += temp.getName();
         }
         return output;
+    }
+
+    /**
+     * Get the number of items in this container
+     * @return the number of items in this container
+     */
+    public int getSize() {
+        return items.size();
     }
 }
