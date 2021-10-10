@@ -1,5 +1,7 @@
 package seedu.duke.model;
 
+import seedu.duke.model.exception.InvalidFormat;
+
 import java.util.ArrayList;
 
 /**
@@ -19,7 +21,7 @@ public class ContainerList {
      *
      * @param location A brief description of the position of ItemContainer
      */
-    public void addContainer(String location) {
+    public void addContainer(String location) throws InvalidFormat {
         containers.add(new ItemContainer(location));
     }
 

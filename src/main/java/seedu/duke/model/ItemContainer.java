@@ -1,5 +1,7 @@
 package seedu.duke.model;
 
+import seedu.duke.model.exception.InvalidFormat;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +12,14 @@ public class ItemContainer {
     String name;
     ArrayList<Item> items;
 
-    ItemContainer(String name) {
+    /**
+     * Constructor for the ItemContainer class.
+     *
+     * @param name new name for the ItemContainer
+     *             consists of alphabet, number, underscore and hyphen
+     * @throws InvalidFormat if the name contains other characters
+     */
+    ItemContainer(String name) throws InvalidFormat {
         setName(name);
         items = new ArrayList<Item>();
     }
@@ -28,10 +37,15 @@ public class ItemContainer {
      * Rename the ItemContainer to the new name.
      *
      * @param name New name
+     *             consists of alphabet, number, underscore and hyphen
      */
     // todo check format
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws InvalidFormat {
+        if (name.matches("[a-zA-Z0-9_-]+")) {
+            this.name = name;
+        } else {
+            throw new InvalidFormat("Invalid item name.");
+        }
     }
 
     /**
@@ -47,7 +61,7 @@ public class ItemContainer {
      * Remove the reference of the Item from the ItemContainer.
      *
      * @param item The Item to be removed from the ItemContainer
-     * @throws NullPointerException If the Item does not belong to the ItemContainer
+     * @throws NullPointerException If the Item does not exist in the ItemContainer
      */
     public void deleteItem(Item item) throws NullPointerException {
         items.remove(item);
@@ -58,14 +72,11 @@ public class ItemContainer {
      *
      * @param originalItem The Item that is in the ItemContainer
      * @param updatedItem  The replacement Item
+     * @throws NullPointerException If the originalItem does not exist in the ItemContainer
      */
-    public void updateItem(Item originalItem, Item updatedItem) {
-        try {
-            int index = items.indexOf(originalItem);
-            items.set(index, updatedItem);
-        } catch (NullPointerException e) {
-            // todo throw exception cuz no item found
-        }
+    public void updateItem(Item originalItem, Item updatedItem) throws NullPointerException {
+        int index = items.indexOf(originalItem);
+        items.set(index, updatedItem);
     }
 
     /**
