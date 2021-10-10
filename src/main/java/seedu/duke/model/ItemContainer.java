@@ -78,8 +78,7 @@ public class ItemContainer {
     public void updateItem(Item originalItem, Item updatedItem) throws NullPointerException {
         int index = items.indexOf(originalItem);
         items.set(index, updatedItem);
-        assert items.get(index) == updatedItem : "The index of the updated item should be the same " +
-                "as the index of the original item before replacement";
+        assert items.get(index) == updatedItem : "Updated item should be at the index of the original item";
     }
 
     /**
