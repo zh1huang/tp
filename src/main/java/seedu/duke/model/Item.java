@@ -9,6 +9,11 @@ import java.math.BigDecimal;
  * e.g. You can store 10 Items named "Dune" in an ItemContainer named "Shelf_Sci-fi_1"
  */
 public class Item {
+
+    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item name";
+    public static final String MESSAGE_INVALID_NEGATIVE_COST = "Item cost cannot be negative";
+    public static final String MESSAGE_INVALID_NEGATIVE_PRICE = "Item price cannot be negative";
+
     String name;
     BigDecimal purchaseCost;
     BigDecimal sellingPrice;
@@ -17,7 +22,7 @@ public class Item {
      * Constructor for Item class.
      *
      * @param name     the name of the item
-     *                 consists of alphabet, number, underscore and hyphen
+     *                 consists of alphabet, number, space, underscore and hyphen
      * @param cost     the cost of the item
      *                 must be non-negative
      * @param price    the selling price of the item
@@ -38,14 +43,14 @@ public class Item {
      * Set a new name for the item.
      *
      * @param name new name
-     *             consists of alphabet, number, underscore and hyphen
+     *             consists of alphabet, number, space, underscore and hyphen
      * @throws InvalidFormat if the name contains other characters
      */
     public void setName(String name) throws InvalidFormat {
-        if (name.matches("[a-zA-Z0-9_-]+")) {
+        if (name.matches("[a-zA-Z0-9 _-]+")) {
             this.name = name;
         } else {
-            throw new InvalidFormat("Invalid item name.");
+            throw new InvalidFormat(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -65,7 +70,7 @@ public class Item {
             purchaseCost = cost;
         } else {
             // error if cost is negative
-            throw new InvalidFormat("Item cost cannot be negative.");
+            throw new InvalidFormat(MESSAGE_INVALID_NEGATIVE_COST);
         }
     }
 
@@ -85,7 +90,7 @@ public class Item {
             sellingPrice = price;
         } else {
             // error if cost is negative
-            throw new InvalidFormat("Item cost cannot be negative.");
+            throw new InvalidFormat(MESSAGE_INVALID_NEGATIVE_PRICE);
         }
     }
 
