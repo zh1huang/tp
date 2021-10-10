@@ -15,7 +15,7 @@ public class ContainerList {
     }
 
     /**
-     * Creates a new ItemContainer with the name of the location in the ContainerList
+     * Creates a new ItemContainer with the name of the location in the ContainerList.
      *
      * @param location A brief description of the position of ItemContainer
      */

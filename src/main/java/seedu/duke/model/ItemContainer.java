@@ -25,7 +25,7 @@ public class ItemContainer {
     }
 
     /**
-     * Rename the ItemContainer to the new name
+     * Rename the ItemContainer to the new name.
      *
      * @param name New name
      */
@@ -37,14 +37,14 @@ public class ItemContainer {
     /**
      * Adds the Item to the ItemContainer.
      *
-     * @param item
+     * @param item The item to be added
      */
     public void addItem(Item item) {
         items.add(item);
     }
 
     /**
-     * Remove the reference of the Item from the ItemContainer
+     * Remove the reference of the Item from the ItemContainer.
      *
      * @param item The Item to be removed from the ItemContainer
      * @throws NullPointerException If the Item does not belong to the ItemContainer
@@ -69,7 +69,7 @@ public class ItemContainer {
     }
 
     /**
-     * Search through the ItemContainer and returns the first Item with the specified name
+     * Search through the ItemContainer and returns the first Item with the specified name.
      *
      * @param name The specified name of Item
      * @return Item with the specified name
@@ -85,7 +85,7 @@ public class ItemContainer {
     }
 
     /**
-     * Return the Item at the specified index
+     * Return the Item at the specified index.
      *
      * @param index The index of the Item
      * @return The Item at the specified index
@@ -100,7 +100,7 @@ public class ItemContainer {
     }
 
     /**
-     * Returns true if there is an Item in the ItemContainer with the specified name
+     * Returns true if there is an Item in the ItemContainer with the specified name.
      *
      * @param name Name of the item
      * @return True if the item exists
@@ -110,7 +110,7 @@ public class ItemContainer {
     }
 
     /**
-     * Returns a String of names of the items in the ItemContainer separated by "\n"
+     * Returns a String of names of the items in the ItemContainer separated by "\n".
      */
     public String printItemContainer() {
         String output = "";
