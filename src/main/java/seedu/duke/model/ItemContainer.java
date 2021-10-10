@@ -19,7 +19,7 @@ public class ItemContainer {
      * Constructor for the ItemContainer class.
      *
      * @param name new name for the ItemContainer
-     *             consists of alphabet, number, space, underscore and hyphen
+     *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws InvalidFormat if the name contains other characters
      */
     ItemContainer(String name) throws InvalidFormat {
@@ -40,11 +40,11 @@ public class ItemContainer {
      * Rename the ItemContainer to the new name.
      *
      * @param name New name
-     *             consists of alphabet, number, space, underscore and hyphen
+     *             consists of alphabet, number, space, underscore, round bracket and hyphen
      */
     // todo check format
     public void setName(String name) throws InvalidFormat {
-        if (name.matches("[a-zA-Z0-9 _-]+")) {
+        if (name.matches("[a-zA-Z0-9 _()-]+")) {
             this.name = name;
         } else {
             throw new InvalidFormat(MESSAGE_INVALID_NAME_FORMAT);
