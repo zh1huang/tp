@@ -24,13 +24,13 @@ public class EditCommandTest {
 
     @Test
     public void editCommandExecute() {
-        int numberOfItemsBeforeEditing = testList.getSize();
         assertTrue(testList.contains("HarryPotter"));
         assertEquals(new BigDecimal("25.12"), testList.getItem("HarryPotter").getSellingPrice());
+        int numberOfItemsBeforeEditing = testList.getSize();
         testCommand.execute(testList);
-        assertTrue(testList.contains("HarryPotter"));
-        assertEquals(new BigDecimal("20"), testList.getItem("HarryPotter").getSellingPrice());
         int numberOfItemAfterEditing = testList.getSize();
         assertTrue(numberOfItemAfterEditing == numberOfItemsBeforeEditing);
+        assertTrue(testList.contains("HarryPotter"));
+        assertEquals(new BigDecimal("20"), testList.getItem("HarryPotter").getSellingPrice());
     }
 }

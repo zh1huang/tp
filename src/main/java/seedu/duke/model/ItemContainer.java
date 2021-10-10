@@ -132,7 +132,7 @@ public class ItemContainer {
     }
 
     /**
-     * Get the number of items in this container
+     * Get the number of items in this container.
      * @return the number of items in this container
      */
     public int getSize() {

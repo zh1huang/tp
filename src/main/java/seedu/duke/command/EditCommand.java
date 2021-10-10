@@ -23,7 +23,8 @@ public class EditCommand extends Command {
      * @param list the itemContainer where the selected item is stored in
      * @throws InvalidFormat when the new parameters do not have the correct format
      */
-    public EditCommand(String name, BigDecimal purchaseCost, BigDecimal sellingPrice, ItemContainer list) throws InvalidFormat {
+    public EditCommand(String name, BigDecimal purchaseCost, BigDecimal sellingPrice, ItemContainer list)
+            throws InvalidFormat {
         this.selectedItem = list.getItem(name);
         this.updatedItem = new Item(name, purchaseCost, sellingPrice, list);
     }
