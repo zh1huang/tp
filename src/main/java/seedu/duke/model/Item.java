@@ -1,6 +1,6 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.InvalidFormat;
+import seedu.duke.model.exception.IllegalArgumentException;
 
 import java.math.BigDecimal;
 
@@ -9,28 +9,30 @@ import java.math.BigDecimal;
  * e.g. You can store 10 Items named "Dune" in an ItemContainer named "Shelf_Sci-fi_1"
  */
 public class Item {
-    String name;
-    BigDecimal purchaseCost;
-    BigDecimal sellingPrice;
-    ItemContainer location;
+
+    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item name";
+    public static final String MESSAGE_INVALID_PRICE_FORMAT = "Invalid price format";
+    public static final String MESSAGE_INVALID_NEGATIVE_PRICE = "Price cannot be negative";
+
+    private String name;
+    private BigDecimal purchaseCost;
+    private BigDecimal sellingPrice;
 
     /**
      * Constructor for Item class.
      *
-     * @param name the name of the item
-     *             consists of alphabet, number, underscore and hyphen
-     * @param cost the cost of the item
-     *             must be non-negative
+     * @param name  the name of the item
+     *              consists of alphabet, number, space, underscore, round bracket and hyphen
+     * @param cost  the cost of the item
+     *              must be non-negative
      * @param price the selling price of the item
      *              must be non-negative
-     * @param location the ItemContainer that this item belongs to
-     * @throws InvalidFormat if any of the inputs does not follow the requirement
+     * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
-    public Item(String name, BigDecimal cost, BigDecimal price, ItemContainer location) throws InvalidFormat {
+    public Item(String name, String cost, String price) throws IllegalArgumentException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
-        setLocation(location);
     }
 
     public String getName() {
@@ -41,14 +43,14 @@ public class Item {
      * Set a new name for the item.
      *
      * @param name new name
-     *             consists of alphabet, number, underscore and hyphen
-     * @throws InvalidFormat if the name contains other characters
+     *             consists of alphabet, number, space, underscore, round bracket and hyphen
+     * @throws IllegalArgumentException if the name contains other characters
      */
-    public void setName(String name) throws InvalidFormat {
-        if (name.matches("[a-zA-Z0-9_-]+")) {
+    public void setName(String name) throws IllegalArgumentException {
+        if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
             this.name = name;
         } else {
-            throw new InvalidFormat("Invalid item name.");
+            throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -61,15 +63,11 @@ public class Item {
      *
      * @param cost new cost of the item
      *             must be non-negative
-     * @throws InvalidFormat if the new cost is negative
+     * @throws IllegalArgumentException if the new cost is negative
      */
-    public void setPurchaseCost(BigDecimal cost) throws InvalidFormat {
-        if (cost.compareTo(new BigDecimal(0)) >= 0) {
-            purchaseCost = cost;
-        } else {
-            // error if cost is negative
-            throw new InvalidFormat("Item cost cannot be negative.");
-        }
+    public void setPurchaseCost(String cost) throws IllegalArgumentException {
+        purchaseCost = convert2BD_NonNegative(cost);
+
     }
 
     public BigDecimal getSellingPrice() {
@@ -81,31 +79,28 @@ public class Item {
      *
      * @param price new price of the item
      *              must be non-negative
-     * @throws InvalidFormat if the new price is negative
+     * @throws IllegalArgumentException if the new price is negative
      */
-    public void setSellingPrice(BigDecimal price) throws InvalidFormat {
-        if (price.compareTo(new BigDecimal(0)) >= 0) {
-            sellingPrice = price;
-        } else {
-            // error if cost is negative
-            throw new InvalidFormat("Item cost cannot be negative.");
+    public void setSellingPrice(String price) throws IllegalArgumentException {
+        //
+
+        sellingPrice = convert2BD_NonNegative(price);
+    }
+
+    private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentException {
+        try {
+            BigDecimal newValue = new BigDecimal(value);
+            if (newValue.compareTo(new BigDecimal("0")) < 0) {
+                throw new IllegalArgumentException(MESSAGE_INVALID_NEGATIVE_PRICE);
+            }
+            return newValue;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_PRICE_FORMAT);
         }
     }
 
-    public ItemContainer getLocation() {
-        return location;
-    }
-
-    /**
-     * Move the Item from its original ItemContainer to the new ItemContainer.
-     *
-     * @param newLocation The ItemContainer location to store the Item
-     */
-    public void setLocation(ItemContainer newLocation) {
-        if (location != null) {
-            location.deleteItem(this);
-            newLocation.addItem(this);
-        }
-        location = newLocation;
+    @Override
+    public String toString() {
+        return getName();
     }
 }
