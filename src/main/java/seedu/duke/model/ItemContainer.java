@@ -1,7 +1,8 @@
 package seedu.duke.model;
 
 import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.InvalidFormatException;
+import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ItemNotExistException;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,6 @@ public class ItemContainer {
 
     public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
-    public static final String MESSAGE_ITEM_NOT_EXIST = "%s does not exist in the item container";
 
     private String name;
     private final ArrayList<Item> items;
@@ -23,9 +23,9 @@ public class ItemContainer {
      *
      * @param name new name for the ItemContainer
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     * @throws InvalidFormatException if the name contains other characters
+     * @throws IllegalArgumentException if the name contains other characters
      */
-    ItemContainer(String name) throws InvalidFormatException {
+    ItemContainer(String name) throws IllegalArgumentException {
         setName(name);
         items = new ArrayList<>();
     }
@@ -44,13 +44,13 @@ public class ItemContainer {
      *
      * @param name New name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     * @throws InvalidFormatException if the name contains other characters
+     * @throws IllegalArgumentException if the name contains other characters
      */
-    public void setName(String name) throws InvalidFormatException {
+    public void setName(String name) throws IllegalArgumentException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
             this.name = name;
         } else {
-            throw new InvalidFormatException(MESSAGE_INVALID_NAME_FORMAT);
+            throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -58,28 +58,28 @@ public class ItemContainer {
      * Adds the Item to the ItemContainer.
      *
      * @param item The item to be added
-     * @throws NullPointerException   if item is null
      * @throws DuplicateItemException if the item already exists in the ItemContainer
      */
     public void addItem(Item item) {
-        if (item == null) {
-            throw new NullPointerException(MESSAGE_NULL_ITEM_ADDITION);
-        } else if (items.contains(item)) {
+        if (!contains(item)) {
+            items.add(item);
+        } else {
             throw new DuplicateItemException(item.getName());
         }
-        items.add(item);
     }
 
     /**
      * Remove the reference of the Item from the ItemContainer.
      *
      * @param item The Item to be removed from the ItemContainer
-     * @throws NullPointerException If the Item does not exist in the ItemContainer
      */
-    public void deleteItem(Item item) throws NullPointerException {
-        if (!items.remove(item)) {
-            throw new NullPointerException(String.format(MESSAGE_ITEM_NOT_EXIST, item.getName()));
+    public void deleteItem(Item item) {
+        if (item == null) {
+            throw new NullPointerException();
+        } else if (!contains(item)) {
+            throw new ItemNotExistException(item.getName());
         }
+        items.remove(item);
     }
 
     /**
@@ -87,16 +87,18 @@ public class ItemContainer {
      *
      * @param originalItem The Item that is in the ItemContainer
      * @param updatedItem  The replacement Item
-     * @throws NullPointerException If the originalItem does not exist in the ItemContainer
-     * @throws DuplicateItemException if the updatedItem already exist in the ItemContainer
+     * @throws IllegalArgumentException If the originalItem does not exist in the ItemContainer
+     * @throws DuplicateItemException   if the updatedItem already exist in the ItemContainer
      */
-    public void updateItem(Item originalItem, Item updatedItem) throws NullPointerException, DuplicateItemException {
+    public void updateItem(Item originalItem, Item updatedItem)
+            throws IllegalArgumentException, DuplicateItemException {
         int index = items.indexOf(originalItem);
-        if (index == -1 || updatedItem == null) {
-            throw new NullPointerException(String.format(MESSAGE_ITEM_NOT_EXIST, originalItem.getName()));
-        }
-        if (items.contains(updatedItem)) {
+        if (originalItem == null) {
+            throw new NullPointerException();
+        } else if (contains(updatedItem)) {
             throw new DuplicateItemException(updatedItem.getName());
+        } else if (index == -1) {
+            throw new ItemNotExistException(originalItem.getName());
         }
         items.set(index, updatedItem);
         assert items.get(index) == updatedItem : "Updated item should be at the index of the original item";
@@ -110,12 +112,15 @@ public class ItemContainer {
      * @throws NullPointerException if no item has the name
      */
     public Item getItem(String name) {
+        if (name == null) {
+            throw new NullPointerException();
+        }
         for (Item item : items) {
             if (item.getName().equals(name)) {
                 return item;
             }
         }
-        throw new NullPointerException(String.format(MESSAGE_ITEM_NOT_EXIST, name));
+        throw new ItemNotExistException(name);
     }
 
     /**
@@ -138,10 +143,23 @@ public class ItemContainer {
     public boolean contains(String name) {
         try {
             getItem(name);
-        } catch (NullPointerException e) {
+        } catch (ItemNotExistException e) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns true if there is an Item in the ItemContainer with the specified name.
+     *
+     * @param item the specified item
+     * @return True if the item exists
+     */
+    public boolean contains(Item item) {
+        if (item == null) {
+            throw new NullPointerException();
+        }
+        return items.contains(item);
     }
 
     /**

@@ -3,7 +3,8 @@ package seedu.duke.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.InvalidFormatException;
+import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ItemNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -37,8 +38,13 @@ class ItemContainerTest {
     void setName_wrongInputFormat_throwsInvalidFormatException() {
         String[] wrongInputs = new String[]{"", " ", "\t", "\n", " \r", "1984+", "Bazinga!", "something~"};
         for (String input : wrongInputs) {
-            assertThrows(InvalidFormatException.class, () -> testContainer.setName(input));
+            assertThrows(IllegalArgumentException.class, () -> testContainer.setName(input));
         }
+    }
+
+    @Test
+    void setName_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> testContainer.setName(null));
     }
 
     @Test
@@ -60,9 +66,9 @@ class ItemContainerTest {
     }
 
     @Test
-    void deleteItem_itemNotExist_throwsNullPointerException() {
+    void deleteItem_itemNotExist_throwsItemNotExistException() {
         testContainer.addItem(testItem1);
-        assertThrows(NullPointerException.class, () -> testContainer.deleteItem(testItem2));
+        assertThrows(ItemNotExistException.class, () -> testContainer.deleteItem(testItem2));
     }
 
     @Test
@@ -83,10 +89,10 @@ class ItemContainerTest {
     }
 
     @Test
-    void updateItem_originalItemNotExist_throwsNullPointerException() {
+    void updateItem_originalItemNotExist_throwsItemNotExistException() {
         testContainer.addItem(testItem1);
-        assertThrows(NullPointerException.class, () -> testContainer.updateItem(testItem2, testItem2));
-        assertThrows(NullPointerException.class, () -> testContainer.updateItem(testItem2, testItem3));
+        assertThrows(ItemNotExistException.class, () -> testContainer.updateItem(testItem2, testItem2));
+        assertThrows(ItemNotExistException.class, () -> testContainer.updateItem(testItem2, testItem3));
     }
 
     @Test
@@ -115,6 +121,11 @@ class ItemContainerTest {
     }
 
     @Test
+    void getItem_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> testContainer.getItem(null));
+    }
+
+    @Test
     void getItem_correctIndex_returnNormally() {
         testContainer.addItem(testItem1);
         testContainer.addItem(testItem2);
@@ -127,7 +138,15 @@ class ItemContainerTest {
         testContainer.addItem(testItem1);
         assertTrue(testContainer.contains(testItem1.getName()));
         assertFalse(testContainer.contains(testItem2.getName()));
-        assertFalse(testContainer.contains(null));
+    }
+
+    @Test
+    void contains_nullInput_throwsNullPointerException() {
+        String nullString = null;
+        assertThrows(NullPointerException.class, () -> testContainer.contains(nullString));
+
+        Item nullItem = null;
+        assertThrows(NullPointerException.class, () -> testContainer.contains(nullItem));
     }
 
     @Test

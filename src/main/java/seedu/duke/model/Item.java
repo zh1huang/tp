@@ -1,6 +1,6 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.InvalidFormatException;
+import seedu.duke.model.exception.IllegalArgumentException;
 
 import java.math.BigDecimal;
 
@@ -27,9 +27,9 @@ public class Item {
      *              must be non-negative
      * @param price the selling price of the item
      *              must be non-negative
-     * @throws InvalidFormatException if any of the inputs does not follow the requirement
+     * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
-    public Item(String name, String cost, String price) throws InvalidFormatException {
+    public Item(String name, String cost, String price) throws IllegalArgumentException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
@@ -44,13 +44,13 @@ public class Item {
      *
      * @param name new name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     * @throws InvalidFormatException if the name contains other characters
+     * @throws IllegalArgumentException if the name contains other characters
      */
-    public void setName(String name) throws InvalidFormatException {
+    public void setName(String name) throws IllegalArgumentException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
             this.name = name;
         } else {
-            throw new InvalidFormatException(MESSAGE_INVALID_NAME_FORMAT);
+            throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -63,9 +63,9 @@ public class Item {
      *
      * @param cost new cost of the item
      *             must be non-negative
-     * @throws InvalidFormatException if the new cost is negative
+     * @throws IllegalArgumentException if the new cost is negative
      */
-    public void setPurchaseCost(String cost) throws InvalidFormatException {
+    public void setPurchaseCost(String cost) throws IllegalArgumentException {
         purchaseCost = convert2BD_NonNegative(cost);
 
     }
@@ -79,23 +79,24 @@ public class Item {
      *
      * @param price new price of the item
      *              must be non-negative
-     * @throws InvalidFormatException if the new price is negative
+     * @throws IllegalArgumentException if the new price is negative
      */
-    public void setSellingPrice(String price) throws InvalidFormatException {
+    public void setSellingPrice(String price) throws IllegalArgumentException {
+        //
+
         sellingPrice = convert2BD_NonNegative(price);
     }
 
-    private BigDecimal convert2BD_NonNegative(String value) throws InvalidFormatException {
+    private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentException {
         try {
             BigDecimal newValue = new BigDecimal(value);
-            if (newValue.compareTo(new BigDecimal(0)) < 0) {
-                throw new InvalidFormatException(MESSAGE_INVALID_NEGATIVE_PRICE);
+            if (newValue.compareTo(new BigDecimal("0")) < 0) {
+                throw new IllegalArgumentException(MESSAGE_INVALID_NEGATIVE_PRICE);
             }
             return newValue;
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException(MESSAGE_INVALID_PRICE_FORMAT);
+            throw new IllegalArgumentException(MESSAGE_INVALID_PRICE_FORMAT);
         }
-
     }
 
     @Override

@@ -1,6 +1,6 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.InvalidFormatException;
+import seedu.duke.model.exception.IllegalArgumentException;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class ContainerList {
      *
      * @param location A brief description of the position of ItemContainer
      */
-    public void addContainer(String location) throws InvalidFormatException {
+    public void addContainer(String location) throws IllegalArgumentException {
         containers.add(new ItemContainer(location));
     }
 

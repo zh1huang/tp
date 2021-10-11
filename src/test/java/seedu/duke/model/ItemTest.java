@@ -2,7 +2,7 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.model.exception.InvalidFormatException;
+import seedu.duke.model.exception.IllegalArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,8 +28,13 @@ class ItemTest {
     void setName_wrongInputFormat_throwsInvalidFormatException() {
         String[] wrongInputs = new String[]{"", " ", "\t", "\n", " \r", "1984+", "Bazinga!", "something~"};
         for (String input : wrongInputs) {
-            assertThrows(InvalidFormatException.class, () -> testItem.setName(input));
+            assertThrows(IllegalArgumentException.class, () -> testItem.setName(input));
         }
+    }
+
+    @Test
+    void setName_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> testItem.setName(null));
     }
 
     @Test
@@ -63,6 +68,9 @@ class ItemTest {
                 assertEquals(Item.MESSAGE_INVALID_PRICE_FORMAT, e.getMessage());
             }
         }
+
+        // null input
+        assertThrows(NullPointerException.class, () -> testItem.setPurchaseCost(null));
     }
 
     @Test
@@ -96,5 +104,8 @@ class ItemTest {
                 assertEquals(Item.MESSAGE_INVALID_PRICE_FORMAT, e.getMessage());
             }
         }
+
+        // null input
+        assertThrows(NullPointerException.class, () -> testItem.setSellingPrice(null));
     }
 }
