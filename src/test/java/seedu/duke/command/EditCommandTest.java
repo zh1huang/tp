@@ -23,7 +23,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editCommandExecute() {
+    public void execute_oneItemAlreadyInList_editsNormally() {
         assertTrue(testList.contains("HarryPotter"));
         assertEquals(new BigDecimal("25.12"), testList.getItem("HarryPotter").getSellingPrice());
         int numberOfItemsBeforeEditing = testList.getSize();

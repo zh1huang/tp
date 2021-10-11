@@ -22,7 +22,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void deleteCommandExecute() {
+    public void execute_oneItemAlreadyInList_deletesNormally() {
         int numberOfItemsBeforeDeleting = testList.getSize();
         assertTrue(testList.contains("HarryPotter"));
         testCommand.execute(testList);

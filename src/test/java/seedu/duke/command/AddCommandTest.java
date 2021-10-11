@@ -19,7 +19,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommandExecute() {
+    public void execute_emptyList_addsNormally() {
         int numberOfItemsBeforeAdding = testList.getSize();
         testCommand.execute(testList);
         assertTrue(testList.contains("HarryPotter"));
