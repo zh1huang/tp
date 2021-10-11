@@ -2,7 +2,7 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.model.exception.InvalidFormat;
+import seedu.duke.model.exception.InvalidFormatException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -13,33 +13,35 @@ class ItemTest {
     Item testItem;
 
     @BeforeEach
-    void prepare() {
+    void setup() {
         testItem = new Item("Dune", "1.00", "2.00");
     }
 
     @Test
-    void setName() {
-        // correct name format
+    void setName_correctInputFormat_setNormally() {
         testItem.setName("The Lord of the Rings");
         testItem.setName("1984_someone");
         testItem.setName("A LEVEL H2 PHYSICS (TOPICAL) 2011-2020");
+    }
 
-        // empty name or wrong format
+    @Test
+    void setName_wrongInputFormat_throwsInvalidFormatException() {
         String[] wrongInputs = new String[]{"", " ", "\t", "\n", " \r", "1984+", "Bazinga!", "something~"};
         for (String input : wrongInputs) {
-            assertThrows(InvalidFormat.class, () -> testItem.setName(input));
+            assertThrows(InvalidFormatException.class, () -> testItem.setName(input));
         }
     }
 
     @Test
-    void setPurchaseCost() {
-        // correct amount
-        testItem.setPurchaseCost("0.01");
-        testItem.setPurchaseCost("1000");
-        testItem.setPurchaseCost("-0.00");
-        testItem.setPurchaseCost("0.0");
-        testItem.setPurchaseCost(".1");
+    void setPurchaseCost_correctInputFormat_setNormally() {
+        String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
+        for (String input: correctInput) {
+            testItem.setPurchaseCost(input);
+        }
+    }
 
+    @Test
+    void setPurchaseCost_wrongInputFormat_throwsInvalidFormatException() {
         // negative amount
         String[] negativeInputs = new String[]{"-10", "-0.1"};
         for (String input : negativeInputs) {
@@ -64,14 +66,15 @@ class ItemTest {
     }
 
     @Test
-    void setSellingPrice() {
-        // correct amount
-        testItem.setSellingPrice("0.01");
-        testItem.setSellingPrice("1000");
-        testItem.setSellingPrice("-0.00");
-        testItem.setSellingPrice("0.0");
-        testItem.setSellingPrice(".1");
+    void setSellingPrice_correctInputFormat_setNormally()  {
+        String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
+        for (String input: correctInput) {
+            testItem.setSellingPrice(input);
+        }
+    }
 
+    @Test
+    void setSellingPrice_wrongInputFormat_throwsInvalidFormatException()  {
         // negative amount
         String[] negativeInputs = new String[]{"-10", "-0.1"};
         for (String input : negativeInputs) {
