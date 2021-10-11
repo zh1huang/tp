@@ -36,7 +36,7 @@ public class GetCommandTest {
     public void getCommandExecute() {
         assertTrue(testList.contains("HarryPotter"));
         testCommand.execute(testList);
-        String expected = "name: HarryPotter\n selling price: 25.12\n purchase cost: 16.1";
+        String expected = "name: HarryPotter" + "\n" + "selling price: 25.12" + "\n" + "purchase cost: 16.1";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 }

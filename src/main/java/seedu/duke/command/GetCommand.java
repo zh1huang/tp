@@ -3,16 +3,12 @@ package seedu.duke.command;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
-import java.math.BigDecimal;
-
 public class GetCommand extends Command {
 
     private final Item selectedItem;
-    //private final String name;
 
     public GetCommand(String name, ItemContainer list) {
         this.selectedItem = list.getItem(name);
-        //this.name = selectedItem.getName();
     }
 
     /**

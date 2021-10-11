@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.command.GetCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.model.ItemContainer;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,6 +65,9 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
+    private static final String P_SEPARATOR = "/p";
+    private static final int SEPARATOR_LENGTH = 3;
+
     /**
      * Parses the User input line. Checks the user input line against the basic command format
      * and extracts the command word which is the first word in the user input line. After
@@ -82,6 +89,7 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         String resultString = "";
 
+
         switch (commandWord) {
         case ADD_STRING:
             resultString = prepareAdd(arguments);
@@ -93,6 +101,7 @@ public class Parser {
 
         case LIST_STRING:
             resultString = prepareList(arguments);
+
             break;
 
         case GET_STRING:
@@ -172,7 +181,11 @@ public class Parser {
         }
 
         try {
+            //todo check category
             System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
+            ListCommand listcommand = new ListCommand();
+            listcommand.execute(Duke.container);
+
             return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
             return (e.getMessage());
@@ -196,6 +209,13 @@ public class Parser {
         try {
             System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT,
                     matcher.group("itemName"), matcher.group("property")));
+
+            String[] str = arguments.split(P_SEPARATOR);
+            String truncated = str[0];
+            String name = truncated.substring(SEPARATOR_LENGTH).trim();
+            GetCommand getcommand = new GetCommand(name, Duke.container);
+            getcommand.execute(Duke.container);
+
             return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
             return (e.getMessage());

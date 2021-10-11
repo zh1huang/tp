@@ -127,13 +127,14 @@ public class ItemContainer {
     public String printItemContainer() {
         String output = "";
         for (Item temp : items) {
-            output += temp.getName();
+            output += temp.getName() + "\n";
         }
         return output;
     }
 
     /**
-     * Gets description of item
+     * Gets description of item.
+     *
      * @param selectedItem Item which description is retrieved from
      * @return String of description
      */
@@ -143,8 +144,8 @@ public class ItemContainer {
         BigDecimal sellingPrice = selectedItem.getSellingPrice();
         BigDecimal purchaseCost = selectedItem.getPurchaseCost();
 
-        temp += "name: " + name + "\n selling price: " + sellingPrice
-                + "\n purchase cost: " + purchaseCost;
+        temp += "name: " + name + "\nselling price: " + sellingPrice
+                + "\npurchase cost: " + purchaseCost;
 
         return temp;
     }
