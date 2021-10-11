@@ -26,7 +26,7 @@ public class Item {
      * @param location the ItemContainer that this item belongs to
      * @throws InvalidFormat if any of the inputs does not follow the requirement
      */
-    Item(String name, BigDecimal cost, BigDecimal price, ItemContainer location) throws InvalidFormat {
+    public Item(String name, BigDecimal cost, BigDecimal price, ItemContainer location) throws InvalidFormat {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
@@ -105,7 +105,11 @@ public class Item {
         if (location == newLocation) {
             return;
         }
-        location.deleteItem(this);
+        if (location != null) {
+            location.deleteItem(this);
+        }
+
+
         location = newLocation;
         newLocation.addItem(this);
     }

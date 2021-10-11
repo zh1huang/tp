@@ -2,6 +2,7 @@ package seedu.duke.model;
 
 import seedu.duke.model.exception.InvalidFormat;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ public class ItemContainer {
      *             consists of alphabet, number, underscore and hyphen
      * @throws InvalidFormat if the name contains other characters
      */
-    ItemContainer(String name) throws InvalidFormat {
+    public ItemContainer(String name) throws InvalidFormat {
         setName(name);
         items = new ArrayList<Item>();
     }
@@ -130,4 +131,22 @@ public class ItemContainer {
         }
         return output;
     }
+
+    /**
+     * Gets description of item
+     * @param selectedItem Item which description is retrieved from
+     * @return String of description
+     */
+    public String getDescription(Item selectedItem) {
+        String temp = "";
+        String name = selectedItem.getName();
+        BigDecimal sellingPrice = selectedItem.getSellingPrice();
+        BigDecimal purchaseCost = selectedItem.getPurchaseCost();
+
+        temp += "name: " + name + "\n selling price: " + sellingPrice
+                + "\n purchase cost: " + purchaseCost;
+
+        return temp;
+    }
+
 }
