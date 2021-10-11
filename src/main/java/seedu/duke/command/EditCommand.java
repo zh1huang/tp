@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.InvalidFormat;
 
 import java.math.BigDecimal;
 
@@ -21,12 +20,10 @@ public class EditCommand extends Command {
      * @param purchaseCost the new cost of the item
      * @param sellingPrice the new price of the item
      * @param list the itemContainer where the selected item is stored in
-     * @throws InvalidFormat when the new parameters do not have the correct format
      */
-    public EditCommand(String name, BigDecimal purchaseCost, BigDecimal sellingPrice, ItemContainer list)
-            throws InvalidFormat {
+    public EditCommand(String name, String purchaseCost, String sellingPrice, ItemContainer list) {
         this.selectedItem = list.getItem(name);
-        this.updatedItem = new Item(name, purchaseCost, sellingPrice, list);
+        this.updatedItem = new Item(name, purchaseCost, sellingPrice);
     }
 
     /**

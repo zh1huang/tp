@@ -17,7 +17,7 @@ public class DeleteCommandTest {
     @BeforeEach
     public void setUp() throws Exception {
         testList = new ItemContainer("test");
-        testList.addItem(new Item("HarryPotter", new BigDecimal("16.1"), new BigDecimal("25.12"), testList));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         testCommand = new DeleteCommand("HarryPotter", testList);
     }
 

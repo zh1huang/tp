@@ -18,8 +18,8 @@ public class EditCommandTest {
     @BeforeEach
     public void setUp() throws Exception {
         testList = new ItemContainer("test");
-        testList.addItem(new Item("HarryPotter", new BigDecimal("16.1"), new BigDecimal("25.12"), testList));
-        testCommand = new EditCommand("HarryPotter", new BigDecimal("16.1"), new BigDecimal("20"), testList);
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testCommand = new EditCommand("HarryPotter", "16.1", "20", testList);
     }
 
     @Test
