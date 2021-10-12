@@ -54,8 +54,8 @@ public class Item {
         }
     }
 
-    public BigDecimal getPurchaseCost() {
-        return purchaseCost;
+    public String getPurchaseCost() {
+        return purchaseCost.toString();
     }
 
     /**
@@ -70,8 +70,8 @@ public class Item {
 
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public String getSellingPrice() {
+        return sellingPrice.toString();
     }
 
     /**

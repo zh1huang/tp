@@ -19,9 +19,12 @@ class ItemTest {
 
     @Test
     void setName_correctInputFormat_setNormally() {
-        testItem.setName("The Lord of the Rings");
-        testItem.setName("1984_someone");
-        testItem.setName("A LEVEL H2 PHYSICS (TOPICAL) 2011-2020");
+        String[] correctInputs =
+                new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
+        for (String input: correctInputs) {
+            testItem.setName(input);
+            assertEquals(input, testItem.getName());
+        }
     }
 
     @Test
@@ -74,6 +77,12 @@ class ItemTest {
     }
 
     @Test
+    void getPurchaseCost() {
+        testItem.setPurchaseCost("10.001");
+        assertEquals("10.001", testItem.getPurchaseCost());
+    }
+
+    @Test
     void setSellingPrice_correctInputFormat_setNormally()  {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
         for (String input: correctInput) {
@@ -107,5 +116,11 @@ class ItemTest {
 
         // null input
         assertThrows(NullPointerException.class, () -> testItem.setSellingPrice(null));
+    }
+
+    @Test
+    void getSellingPrice() {
+        testItem.setSellingPrice("10.001");
+        assertEquals("10.001", testItem.getSellingPrice());
     }
 }
