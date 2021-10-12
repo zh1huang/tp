@@ -186,8 +186,6 @@ public class Parser {
         try {
             //todo check category
             System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
-//            ListCommand listcommand = new ListCommand();
-//            listcommand.execute(Duke.container);
 
             return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
