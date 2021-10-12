@@ -29,9 +29,12 @@ class ItemContainerTest {
 
     @Test
     void setName_correctInputFormat_setNormally() {
-        testContainer.setName("The Lord of the Rings");
-        testContainer.setName("1984_someone");
-        testContainer.setName("A LEVEL H2 PHYSICS (TOPICAL) 2011-2020");
+        String[] correctInputs =
+            new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
+        for (String input : correctInputs) {
+            testContainer.setName(input);
+            assertEquals(input, testContainer.getName());
+        }
     }
 
     @Test
