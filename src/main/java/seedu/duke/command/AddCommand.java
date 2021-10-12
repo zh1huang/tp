@@ -4,7 +4,7 @@ import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
 /**
- * The command that adds a new item to the list
+ * The command that adds a new item to the list.
  */
 public class AddCommand extends Command {
     private static final String ADD_COMPLETE_MESSAGE =
