@@ -7,11 +7,3 @@ Hello from
 
 What is your name?
 Hello James Gosling
-name: Geronimo
-category: book
-price: $19
-quantity: 1
-remarks: null
-
-Parsed successful.
-
