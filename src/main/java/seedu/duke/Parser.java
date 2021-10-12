@@ -209,8 +209,8 @@ public class Parser {
                     matcher.group("itemName"), matcher.group("property")));
 
             String name = matcher.group("itemName");
-            GetCommand getcommand = new GetCommand(name, Duke.container);
-            getcommand.execute(Duke.container);
+            //GetCommand getcommand = new GetCommand(name, Duke.container);
+            //getcommand.execute(Duke.container);
 
             return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {

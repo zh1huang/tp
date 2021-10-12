@@ -19,7 +19,7 @@ public class ParserTest {
     @BeforeEach
     public void setUp() {
         parser = new Parser();
-        }
+    }
 
 
     @Test
