@@ -15,10 +15,10 @@ public class EditCommand extends Command {
     /**
      * The EditCommand constructor.
      *
-     * @param name the name of the selected item
+     * @param name         the name of the selected item
      * @param purchaseCost the new cost of the item
      * @param sellingPrice the new price of the item
-     * @param list the itemContainer where the selected item is stored in
+     * @param list         the itemContainer where the selected item is stored in
      */
     public EditCommand(String name, String purchaseCost, String sellingPrice, ItemContainer list) {
         this.selectedItem = list.getItem(name);

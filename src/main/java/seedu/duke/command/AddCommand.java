@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     /**
      * AddCommand Constructor.
      *
-     * @param name the name of the new item
+     * @param name         the name of the new item
      * @param purchaseCost the cost of the item
      * @param sellingPrice the price of the item
      */
