@@ -149,19 +149,16 @@ public class ParserTest {
         }
     }
 
-//    @Test
-//    public void parse_getCommandValidArgs_errorMessage() throws InvalidFormat {
-//        final String[] inputs = {
-//            "get n/LordoftheRings",
-//            "get n/ApplesNeverFall p/quantity"
-//        };
-//        new Item("HarryPotter", new BigDecimal("16.1"), new BigDecimal("25.12"), Duke.container);
-//        new Item("ApplesNeverFall", new BigDecimal("16.1"), new BigDecimal("25.12"), Duke.container);
-//
-//        for (String input : inputs) {
-//            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
-//        }
-//    }
+    @Test
+    public void parse_getCommandValidArgs_errorMessage() throws InvalidFormat {
+        final String[] inputs = {
+            "get n/Lord of theRings",
+            "get n/Apples Never Fall p/quantity"
+        };
+        for (String input : inputs) {
+            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
+        }
+    }
 
     /*
      * Tests for edit command ===============================================================

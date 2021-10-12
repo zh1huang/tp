@@ -36,12 +36,14 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommandExecute() {
+    public void execute_itemsAlreadyInList_listsNormally() {
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
         testCommand.execute(testList);
         String expected = "HarryPotter\nLOTR";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
+
+    //todo for which no items in list
 
 }

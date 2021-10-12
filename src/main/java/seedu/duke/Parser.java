@@ -65,8 +65,6 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
-    private static final String P_SEPARATOR = "/p";
-    private static final int SEPARATOR_LENGTH = 3;
 
     /**
      * Parses the User input line. Checks the user input line against the basic command format
@@ -210,9 +208,7 @@ public class Parser {
             System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT,
                     matcher.group("itemName"), matcher.group("property")));
 
-            String[] str = arguments.split(P_SEPARATOR);
-            String truncated = str[0];
-            String name = truncated.substring(SEPARATOR_LENGTH).trim();
+            String name = matcher.group("itemName");
             GetCommand getcommand = new GetCommand(name, Duke.container);
             getcommand.execute(Duke.container);
 

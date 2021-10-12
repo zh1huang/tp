@@ -33,10 +33,13 @@ public class GetCommandTest {
     }
 
     @Test
-    public void getCommandExecute() {
+    public void execute_oneItemAlreadyInList_getsNormally() {
         assertTrue(testList.contains("HarryPotter"));
         testCommand.execute(testList);
         String expected = "name: HarryPotter" + "\n" + "selling price: 25.12" + "\n" + "purchase cost: 16.1";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
+
+    //todo test for which no items in list
+
 }
