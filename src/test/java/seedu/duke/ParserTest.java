@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.model.ItemContainer;
 
 // Parser Test class adapted from
 // https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
@@ -13,7 +14,8 @@ public class ParserTest {
 
     @BeforeEach
     public void setUp() {
-        parser = new Parser();
+        ItemContainer testList = new ItemContainer("test");
+        parser = new Parser(testList);
     }
 
     @Test

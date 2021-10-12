@@ -8,7 +8,7 @@ import seedu.duke.model.ItemContainer;
  */
 public class AddCommand extends Command {
     private static final String ADD_COMPLETE_MESSAGE =
-            "This item has been added to the list."; //to be added to UI part later
+            "This item has be   en added to the list."; //to be added to UI part later
     private final Item newItem;
 
     /**
