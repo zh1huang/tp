@@ -2,6 +2,8 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import seedu.duke.model.ItemContainer;
@@ -23,6 +25,6 @@ public class AddCommandTest {
         testCommand.execute(testList);
         assertTrue(testList.contains("HarryPotter"));
         int numberOfItemAfterAdding = testList.getSize();
-        assertTrue(numberOfItemAfterAdding == numberOfItemsBeforeAdding + 1);
+        assertEquals(numberOfItemAfterAdding, numberOfItemsBeforeAdding + 1);
     }
 }

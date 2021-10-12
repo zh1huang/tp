@@ -25,13 +25,13 @@ public class ParserTest {
     @Test
     public void parse_EmptyInput_errorMessage() {
         final String emptyInput = "";
-        assertEquals(parser.INVALID_COMMAND_MESSAGE_STRING, parser.parseCommand(emptyInput));
+        assertEquals(Parser.INVALID_COMMAND_MESSAGE_STRING, Parser.parseCommand(emptyInput));
     }
 
     @Test
     public void parse_NotProgramCommand_errorMessage() {
         final String notProgramCommandInput = "blahdsdsh";
-        assertEquals(parser.INVALID_COMMAND_MESSAGE_STRING, parser.parseCommand(notProgramCommandInput));
+        assertEquals(Parser.INVALID_COMMAND_MESSAGE_STRING, Parser.parseCommand(notProgramCommandInput));
     }
 
     /*
@@ -47,9 +47,9 @@ public class ParserTest {
         };
 
         final String expectedErrorOutput = String.format(
-                parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, parser.ADD_ITEM_DATA_ARGS_FORMAT_STRING);
+            Parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, Parser.ADD_ITEM_DATA_ARGS_FORMAT_STRING);
         for (String input : inputs) {
-            assertEquals(expectedErrorOutput, parser.parseCommand(input));
+            assertEquals(expectedErrorOutput, Parser.parseCommand(input));
         }
     }
 
@@ -60,7 +60,7 @@ public class ParserTest {
             "add n/Pilot P100 c/stationary p/$1 q/1 r/Not many people bought this. Can consider a 50% discount."
         };
         for (String input : inputs) {
-            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
+            assertEquals(Parser.PARSE_SUCCESS_MESSAGE_STRING, Parser.parseCommand(input));
         }
     }
 
@@ -77,9 +77,9 @@ public class ParserTest {
         };
 
         final String expectedErrorOutput = String.format(
-                parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, parser.DELETE_ITEM_DATA_ARGS_FORMAT_STRING);
+            Parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, Parser.DELETE_ITEM_DATA_ARGS_FORMAT_STRING);
         for (String input : inputs) {
-            assertEquals(expectedErrorOutput, parser.parseCommand(input));
+            assertEquals(expectedErrorOutput, Parser.parseCommand(input));
         }
     }
 
@@ -90,7 +90,7 @@ public class ParserTest {
             "delete n/Stabilo colour pencil"
         };
         for (String input : inputs) {
-            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
+            assertEquals(Parser.PARSE_SUCCESS_MESSAGE_STRING, Parser.parseCommand(input));
         }
     }
 
@@ -108,9 +108,9 @@ public class ParserTest {
         };
 
         final String expectedErrorOutput = String.format(
-                parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, parser.LIST_ITEM_DATA_ARGS_FORMAT_STRING);
+            Parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, Parser.LIST_ITEM_DATA_ARGS_FORMAT_STRING);
         for (String input : inputs) {
-            assertEquals(expectedErrorOutput, parser.parseCommand(input));
+            assertEquals(expectedErrorOutput, Parser.parseCommand(input));
         }
     }
 
@@ -122,7 +122,7 @@ public class ParserTest {
             "list c/stationary "
         };
         for (String input : inputs) {
-            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
+            assertEquals(Parser.PARSE_SUCCESS_MESSAGE_STRING, Parser.parseCommand(input));
         }
     }
 
@@ -138,9 +138,9 @@ public class ParserTest {
         };
 
         final String expectedErrorOutput = String.format(
-                parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, parser.GET_ITEM_DATA_ARGS_FORMAT_STRING);
+            Parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, Parser.GET_ITEM_DATA_ARGS_FORMAT_STRING);
         for (String input : inputs) {
-            assertEquals(expectedErrorOutput, parser.parseCommand(input));
+            assertEquals(expectedErrorOutput, Parser.parseCommand(input));
         }
     }
 
@@ -151,7 +151,7 @@ public class ParserTest {
             "get n/Apples Never Fall p/quantity"
         };
         for (String input : inputs) {
-            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
+            assertEquals(Parser.PARSE_SUCCESS_MESSAGE_STRING, Parser.parseCommand(input));
         }
     }
 
@@ -168,9 +168,9 @@ public class ParserTest {
         };
 
         final String expectedErrorOutput = String.format(
-                parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, parser.EDIT_ITEM_DATA_ARGS_FORMAT_STRING);
+            Parser.CORRECT_COMMAND_MESSAGE_STRING_FORMAT, Parser.EDIT_ITEM_DATA_ARGS_FORMAT_STRING);
         for (String input : inputs) {
-            assertEquals(expectedErrorOutput, parser.parseCommand(input));
+            assertEquals(expectedErrorOutput, Parser.parseCommand(input));
         }
     }
 
@@ -182,7 +182,7 @@ public class ParserTest {
             "edit n/Apples Never Fall p/quantity v/100 s/true"
         };
         for (String input : inputs) {
-            assertEquals(parser.PARSE_SUCCESS_MESSAGE_STRING, parser.parseCommand(input));
+            assertEquals(Parser.PARSE_SUCCESS_MESSAGE_STRING, Parser.parseCommand(input));
         }
     }
 }
