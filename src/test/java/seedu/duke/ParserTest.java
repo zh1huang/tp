@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.InvalidFormat;
 
 import java.math.BigDecimal;
 
@@ -20,12 +19,8 @@ public class ParserTest {
     @BeforeEach
     public void setUp() {
         parser = new Parser();
-        try {
-            Duke.container = new ItemContainer("test");
-        } catch (InvalidFormat e) {
-            e.printStackTrace();
         }
-    }
+
 
     @Test
     public void parse_EmptyInput_errorMessage() {
@@ -150,7 +145,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_getCommandValidArgs_errorMessage() throws InvalidFormat {
+    public void parse_getCommandValidArgs_errorMessage() {
         final String[] inputs = {
             "get n/Lord of theRings",
             "get n/Apples Never Fall p/quantity"

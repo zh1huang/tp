@@ -22,10 +22,8 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() throws Exception {
         testList = new ItemContainer("test");
-        new Item("HarryPotter", new BigDecimal("16.1"), new BigDecimal("25.12"), testList);
-        new Item("LOTR", new BigDecimal("10.2"), new BigDecimal("15.7"), testList);
-        //testList.addItem(new Item("HarryPotter", new BigDecimal("16.1"), new BigDecimal("25.12"), testList));
-        //testList.addItem(new Item("LOTR", new BigDecimal("10.2"), new BigDecimal("15.7"), testList));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testList.addItem(new Item("LOTR", "10.2", "15.7"));
         testCommand = new ListCommand();
         System.setOut(new PrintStream(outputStreamCaptor));
     }
