@@ -12,7 +12,7 @@ public class GetCommand extends Command {
     }
 
     /**
-     * Executes the operation of adding the item to the list.
+     * Executes the operation of getting the information the item.
      *
      * @param list the ItemContainer to get the information
      */

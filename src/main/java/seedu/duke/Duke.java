@@ -23,6 +23,9 @@ public class Duke {
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
+        ItemContainer list = new ItemContainer("test");
+        Parser parser = new Parser(list);
+
         System.out.println("Hello " + in.nextLine());
 
     }

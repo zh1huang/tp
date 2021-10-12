@@ -18,7 +18,7 @@ public class ParserTest {
 
     @BeforeEach
     public void setUp() {
-        parser = new Parser();
+        parser = new Parser(new ItemContainer("test"));
     }
 
 

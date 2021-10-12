@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
  */
 public class Parser {
 
+    private ItemContainer items;
+
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
@@ -65,6 +67,9 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
+    public Parser(ItemContainer list) {
+        items = list;
+    }
 
     /**
      * Parses the User input line. Checks the user input line against the basic command format
@@ -181,8 +186,8 @@ public class Parser {
         try {
             //todo check category
             System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
-            ListCommand listcommand = new ListCommand();
-            listcommand.execute(Duke.container);
+//            ListCommand listcommand = new ListCommand();
+//            listcommand.execute(Duke.container);
 
             return PARSE_SUCCESS_MESSAGE_STRING;
         } catch (Exception e) {
