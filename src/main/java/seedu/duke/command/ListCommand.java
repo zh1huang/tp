@@ -10,7 +10,6 @@ public class ListCommand extends Command {
      * @param list the ItemContainer to retrieve list of items
      */
     public void execute(ItemContainer list) {
-        //String output = list.printItemContainer();
         System.out.println(list);
     }
 }

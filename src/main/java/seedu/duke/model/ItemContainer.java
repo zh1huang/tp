@@ -4,7 +4,6 @@ import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -201,8 +200,8 @@ public class ItemContainer {
     public String getDescription(Item selectedItem) {
         String temp = "";
         String name = selectedItem.getName();
-        BigDecimal sellingPrice = selectedItem.getSellingPrice();
-        BigDecimal purchaseCost = selectedItem.getPurchaseCost();
+        String sellingPrice = selectedItem.getSellingPrice();
+        String purchaseCost = selectedItem.getPurchaseCost();
 
         temp += "name: " + name + "\nselling price: " + sellingPrice
                 + "\npurchase cost: " + purchaseCost;

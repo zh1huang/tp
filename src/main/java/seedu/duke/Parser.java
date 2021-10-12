@@ -1,6 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.model.ItemContainer;
@@ -16,8 +19,6 @@ import java.util.regex.Pattern;
  * Parser Class. Manages parsing of user input for different commands.
  */
 public class Parser {
-
-    private final ItemContainer list;
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
@@ -69,9 +70,7 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
-    public Parser(ItemContainer list) {
-        this.list = list;
-    }
+
 
     /**
      * Parses the User input line. Checks the user input line against the basic command format
@@ -82,46 +81,46 @@ public class Parser {
      * @param userInputLine The user input Line.
      * @return A string indicating parse success or failure.
      */
-    public Command parseCommand(String userInputLine) {
+    public Command parseCommand(String userInputLine, ItemContainer list) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
         /* Checks valid basic command format */
-//        if (!matcher.matches()) {
-//            return INVALID_COMMAND_MESSAGE_STRING;
-//        }
+        if (!matcher.matches()) {
+            throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
+        }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         String resultString = "";
-        Command command = null;
+        Command command;
 
         switch (commandWord) {
         case ADD_STRING:
-            //resultString = prepareAdd(arguments);
+            resultString = prepareAdd(arguments);
+            command = new AddCommand("name", "12.55", "13.55"); //placeholders for now
             break;
 
         case DELETE_STRING:
-            //resultString = prepareDelete(arguments);
+            resultString = prepareDelete(arguments);
+            command = new DeleteCommand("name", list); //placeholders for now
             break;
 
         case LIST_STRING:
-            //resultString = prepareList(arguments);
             command = prepareList(arguments);
             break;
 
         case GET_STRING:
-            //resultString = prepareGet(arguments);
-            command = prepareGet(arguments);
+            command = prepareGet(arguments, list);
             break;
 
         case EDIT_STRING:
-            //resultString = prepareEdit(arguments);
+            resultString = prepareEdit(arguments);
+            command = new EditCommand("name", "12.55", "13.55", list); //placeholders for now
             break;
 
         default:
-            //return INVALID_COMMAND_MESSAGE_STRING;
+            throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
-
         return command;
     }
 
@@ -135,8 +134,8 @@ public class Parser {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-//            return String.format(
-//                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING);
+            return String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
@@ -184,20 +183,9 @@ public class Parser {
         if (!matcher.matches()) {
             throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
-//            return String.format(
-//                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
-//        try {
-//            //todo check category
-//            System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
-//
-//            return PARSE_SUCCESS_MESSAGE_STRING;
-//        } catch (Exception e) {
-//            return (e.getMessage());
-//        }
         return new ListCommand();
-
     }
 
     /**
@@ -206,7 +194,7 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private Command prepareGet(String arguments) {
+    private Command prepareGet(String arguments, ItemContainer list) {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -214,19 +202,7 @@ public class Parser {
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
-//        try {
-//            System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT,
-//                    matcher.group("itemName"), matcher.group("property")));
-//
-//            String name = matcher.group("itemName");
-//            //GetCommand getcommand = new GetCommand(name, Duke.container);
-//            //getcommand.execute(Duke.container);
-//
-//            return PARSE_SUCCESS_MESSAGE_STRING;
-//        } catch (Exception e) {
-//            return (e.getMessage());
-//        }
-        return new GetCommand(matcher.group("itemName"), list);
+        return new GetCommand(matcher.group("itemName"));
     }
 
     /**

@@ -20,7 +20,7 @@ public class GetCommandTest {
     public void setUp() throws Exception {
         testList = new ItemContainer("test");
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
-        testCommand = new GetCommand("HarryPotter", testList);
+        testCommand = new GetCommand("HarryPotter");
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 

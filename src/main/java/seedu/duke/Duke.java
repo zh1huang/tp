@@ -10,7 +10,6 @@ public class Duke {
      */
     public static String userInputSample = "add n/Geronimo c/book p/$19 q/1";
     public static String LIST_userInputSample = "list c/all";
-    public static ItemContainer container;
 
 
     public static void main(String[] args) {
@@ -21,11 +20,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
-
         Scanner in = new Scanner(System.in);
-        ItemContainer list = new ItemContainer("test");
-        Parser parser = new Parser(list);
-
         System.out.println("Hello " + in.nextLine());
 
     }

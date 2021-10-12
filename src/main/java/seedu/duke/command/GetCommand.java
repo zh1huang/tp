@@ -5,16 +5,15 @@ import seedu.duke.model.ItemContainer;
 
 public class GetCommand extends Command {
 
-    private final Item selectedItem;
+    private final String name;
 
     /**
      * Constructor for GetCommand.
      *
      * @param name the name of selected item
-     * @param list the itemContainer where the selected item is stored in
      */
-    public GetCommand(String name, ItemContainer list) {
-        this.selectedItem = list.getItem(name);
+    public GetCommand(String name) {
+        this.name = name;
     }
 
     /**
@@ -23,6 +22,7 @@ public class GetCommand extends Command {
      * @param list the ItemContainer in which information of item is retrieved.
      */
     public void execute(ItemContainer list) {
+        Item selectedItem = list.getItem(name);
         String output = list.getDescription(selectedItem);
         System.out.println(output);
     }
