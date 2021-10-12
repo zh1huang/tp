@@ -25,7 +25,6 @@ public class ItemContainer {
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws IllegalArgumentException if the name contains other characters
      */
-
     public ItemContainer(String name) throws IllegalArgumentException {
         setName(name);
         items = new ArrayList<>();

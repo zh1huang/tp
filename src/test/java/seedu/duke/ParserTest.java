@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
@@ -88,7 +87,6 @@ public class ParserTest {
         for (String input : inputs) {
             Command expected = parser.parseCommand(input, list);
             assertEquals(expected, expected); //placeholder for now: todo equals method for comparing classes
-
         }
     }
 
@@ -132,6 +130,7 @@ public class ParserTest {
             "list c/all",
             "list c/stationary "
         };
+
         for (String input : inputs) {
             Command expected = parser.parseCommand(input, list);
             assertEquals(expected, expected); //placeholder for now: todo equals method for comparing classes
@@ -197,8 +196,6 @@ public class ParserTest {
             "edit n/Apples Never Fall p/quantity v/100 s/true"
         };
         list.addItem(new Item("name", "12.55", "13.55"));
-
-
         for (String input : inputs) {
             Command expected = parser.parseCommand(input, list);
             assertEquals(expected, expected); //placeholder for now: todo equals method for comparing classes

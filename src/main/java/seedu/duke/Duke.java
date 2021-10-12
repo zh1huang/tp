@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.model.ItemContainer;
-
 import java.util.Scanner;
 
 public class Duke {
