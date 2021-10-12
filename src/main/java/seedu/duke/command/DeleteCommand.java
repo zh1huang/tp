@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
 
     /**
      * The DeleteCommand constructor.
+     *
      * @param name the name of the item
      * @param list the itemContainer where the item is stored in
      */
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete operation.
+     *
      * @param list the itemContainer to remove the item from
      */
     public void execute(ItemContainer list) {
