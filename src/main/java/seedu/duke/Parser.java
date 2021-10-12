@@ -1,8 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.IllegalFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class Parser {
 
-    private ItemContainer items;
+    private final ItemContainer list;
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
@@ -68,7 +70,7 @@ public class Parser {
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
     public Parser(ItemContainer list) {
-        items = list;
+        this.list = list;
     }
 
     /**
@@ -80,46 +82,47 @@ public class Parser {
      * @param userInputLine The user input Line.
      * @return A string indicating parse success or failure.
      */
-    public static String parseCommand(String userInputLine) {
+    public Command parseCommand(String userInputLine) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
         /* Checks valid basic command format */
-        if (!matcher.matches()) {
-            return INVALID_COMMAND_MESSAGE_STRING;
-        }
+//        if (!matcher.matches()) {
+//            return INVALID_COMMAND_MESSAGE_STRING;
+//        }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         String resultString = "";
-
+        Command command = null;
 
         switch (commandWord) {
         case ADD_STRING:
-            resultString = prepareAdd(arguments);
+            //resultString = prepareAdd(arguments);
             break;
 
         case DELETE_STRING:
-            resultString = prepareDelete(arguments);
+            //resultString = prepareDelete(arguments);
             break;
 
         case LIST_STRING:
-            resultString = prepareList(arguments);
-
+            //resultString = prepareList(arguments);
+            command = prepareList(arguments);
             break;
 
         case GET_STRING:
-            resultString = prepareGet(arguments);
+            //resultString = prepareGet(arguments);
+            command = prepareGet(arguments);
             break;
 
         case EDIT_STRING:
-            resultString = prepareEdit(arguments);
+            //resultString = prepareEdit(arguments);
             break;
 
         default:
-            return INVALID_COMMAND_MESSAGE_STRING;
+            //return INVALID_COMMAND_MESSAGE_STRING;
         }
 
-        return resultString;
+        return command;
     }
 
     /**
@@ -128,12 +131,12 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private static String prepareAdd(String arguments) {
+    private String prepareAdd(String arguments) {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING);
+//            return String.format(
+//                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
         try {
@@ -153,7 +156,7 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private static String prepareDelete(String arguments) {
+    private String prepareDelete(String arguments) {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -175,22 +178,26 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private static String prepareList(String arguments) {
+    private Command prepareList(String arguments) {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING);
+            throw new IllegalFormatException(String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
+//            return String.format(
+//                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING);
         }
 
-        try {
-            //todo check category
-            System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
+//        try {
+//            //todo check category
+//            System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, matcher.group("category")));
+//
+//            return PARSE_SUCCESS_MESSAGE_STRING;
+//        } catch (Exception e) {
+//            return (e.getMessage());
+//        }
+        return new ListCommand();
 
-            return PARSE_SUCCESS_MESSAGE_STRING;
-        } catch (Exception e) {
-            return (e.getMessage());
-        }
     }
 
     /**
@@ -199,26 +206,27 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private static String prepareGet(String arguments) {
+    private Command prepareGet(String arguments) {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING);
+            throw new IllegalFormatException(String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
-        try {
-            System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT,
-                    matcher.group("itemName"), matcher.group("property")));
-
-            String name = matcher.group("itemName");
-            //GetCommand getcommand = new GetCommand(name, Duke.container);
-            //getcommand.execute(Duke.container);
-
-            return PARSE_SUCCESS_MESSAGE_STRING;
-        } catch (Exception e) {
-            return (e.getMessage());
-        }
+//        try {
+//            System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT,
+//                    matcher.group("itemName"), matcher.group("property")));
+//
+//            String name = matcher.group("itemName");
+//            //GetCommand getcommand = new GetCommand(name, Duke.container);
+//            //getcommand.execute(Duke.container);
+//
+//            return PARSE_SUCCESS_MESSAGE_STRING;
+//        } catch (Exception e) {
+//            return (e.getMessage());
+//        }
+        return new GetCommand(matcher.group("itemName"), list);
     }
 
     /**
@@ -227,7 +235,7 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private static String prepareEdit(String arguments) {
+    private String prepareEdit(String arguments) {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
