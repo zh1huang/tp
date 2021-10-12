@@ -2,14 +2,13 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-
-import java.math.BigDecimal;
 
 public class EditCommandTest {
     private ItemContainer testList;
@@ -25,12 +24,12 @@ public class EditCommandTest {
     @Test
     public void execute_oneItemAlreadyInList_editsNormally() {
         assertTrue(testList.contains("HarryPotter"));
-        assertEquals(new BigDecimal("25.12"), testList.getItem("HarryPotter").getSellingPrice());
+        assertEquals("25.12", testList.getItem("HarryPotter").getSellingPrice());
         int numberOfItemsBeforeEditing = testList.getSize();
         testCommand.execute(testList);
         int numberOfItemAfterEditing = testList.getSize();
-        assertTrue(numberOfItemAfterEditing == numberOfItemsBeforeEditing);
+        assertEquals(numberOfItemAfterEditing, numberOfItemsBeforeEditing);
         assertTrue(testList.contains("HarryPotter"));
-        assertEquals(new BigDecimal("20"), testList.getItem("HarryPotter").getSellingPrice());
+        assertEquals("20", testList.getItem("HarryPotter").getSellingPrice());
     }
 }

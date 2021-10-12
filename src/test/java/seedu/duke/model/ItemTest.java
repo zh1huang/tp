@@ -20,8 +20,8 @@ class ItemTest {
     @Test
     void setName_correctInputFormat_setNormally() {
         String[] correctInputs =
-                new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
-        for (String input: correctInputs) {
+            new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
+        for (String input : correctInputs) {
             testItem.setName(input);
             assertEquals(input, testItem.getName());
         }
@@ -43,7 +43,7 @@ class ItemTest {
     @Test
     void setPurchaseCost_correctInputFormat_setNormally() {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
-        for (String input: correctInput) {
+        for (String input : correctInput) {
             testItem.setPurchaseCost(input);
         }
     }
@@ -83,15 +83,15 @@ class ItemTest {
     }
 
     @Test
-    void setSellingPrice_correctInputFormat_setNormally()  {
+    void setSellingPrice_correctInputFormat_setNormally() {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
-        for (String input: correctInput) {
+        for (String input : correctInput) {
             testItem.setSellingPrice(input);
         }
     }
 
     @Test
-    void setSellingPrice_wrongInputFormat_throwsInvalidFormatException()  {
+    void setSellingPrice_wrongInputFormat_throwsInvalidFormatException() {
         // negative amount
         String[] negativeInputs = new String[]{"-10", "-0.1"};
         for (String input : negativeInputs) {
