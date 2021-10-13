@@ -24,9 +24,11 @@ public class GetCommand extends Command {
      */
     public void execute(ItemContainer list) throws ItemNotExistException {
         try {
+            int initialSize = list.getSize();
             Item selectedItem = list.getItem(name);
-            String output = list.getDescription(selectedItem);
-            System.out.println(output);
+            System.out.printf((ItemContainer.ITEM_DESCRIPTION) + "%n",
+                selectedItem.getName(),selectedItem.getSellingPrice(), selectedItem.getPurchaseCost());
+            assert initialSize == list.getSize() : "List size should not be changed";
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             throw new ItemNotExistException(e.getMessage());
         }
