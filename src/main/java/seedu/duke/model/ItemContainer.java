@@ -57,7 +57,9 @@ public class ItemContainer {
             this.name = name;
             logger.log(Level.INFO, String.format("Successfully set ItemContainer %s's name as %s", temp, name));
         } else {
-            logger.log(Level.WARNING, String.format("Trying to set ItemContainer %s's name as %s", this.getName(), name));
+            logger.log(Level.WARNING, String.format(
+                "Trying to set ItemContainer %s's name as %s",
+                this.getName(), name));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }

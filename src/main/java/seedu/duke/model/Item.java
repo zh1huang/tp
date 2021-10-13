@@ -75,9 +75,8 @@ public class Item {
      * @throws IllegalArgumentException if the new cost is negative
      */
     public void setPurchaseCost(String cost) throws IllegalArgumentException {
-        String temp = purchaseCost.toString();
         purchaseCost = convert2BD_NonNegative(cost);
-        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", temp, cost));
+        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), cost));
     }
 
     public String getSellingPrice() {
@@ -92,9 +91,8 @@ public class Item {
      * @throws IllegalArgumentException if the new price is negative
      */
     public void setSellingPrice(String price) throws IllegalArgumentException {
-        String temp = sellingPrice.toString();
         sellingPrice = convert2BD_NonNegative(price);
-        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", temp, price));
+        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), price));
     }
 
     private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentException {
