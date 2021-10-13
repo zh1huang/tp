@@ -23,7 +23,7 @@ public class GetCommand extends Command {
      */
     public void execute(ItemContainer list) {
         Item selectedItem = list.getItem(name);
-        String output = list.getDescription(selectedItem);
-        System.out.println(output);
+        System.out.println(String.format(ItemContainer.ITEM_DESCRIPTION,
+                selectedItem.getName(),selectedItem.getSellingPrice(), selectedItem.getPurchaseCost()));
     }
 }
