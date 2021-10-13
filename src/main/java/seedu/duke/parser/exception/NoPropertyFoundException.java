@@ -1,4 +1,4 @@
-package seedu.duke.model.exception;
+package seedu.duke.parser.exception;
 
 public class NoPropertyFoundException extends Exception {
 

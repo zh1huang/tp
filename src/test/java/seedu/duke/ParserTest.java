@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import seedu.duke.model.ItemContainer;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
-import seedu.duke.model.exception.NoPropertyFoundException;
+import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 import seedu.duke.parser.Parser;
 

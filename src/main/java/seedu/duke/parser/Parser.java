@@ -8,7 +8,7 @@ import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.model.exception.ItemNotExistException;
-import seedu.duke.model.exception.NoPropertyFoundException;
+import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 
 import java.util.regex.Matcher;
