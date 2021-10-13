@@ -189,4 +189,25 @@ public class ItemContainer {
     public int getSize() {
         return items.size();
     }
+
+    /**
+     * Gets description of item.
+     *
+     * @param selectedItem Item which description is retrieved from
+     * @return String of description
+     */
+    public String getDescription(Item selectedItem) {
+        String temp = "";
+        String name = selectedItem.getName();
+        String sellingPrice = selectedItem.getSellingPrice();
+        String purchaseCost = selectedItem.getPurchaseCost();
+
+        temp += "name: " + name + "\nselling price: " + sellingPrice
+                + "\npurchase cost: " + purchaseCost;
+
+        return temp;
+    }
+
+
+
 }
