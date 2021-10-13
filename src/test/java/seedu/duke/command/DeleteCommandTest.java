@@ -13,6 +13,7 @@ import seedu.duke.model.ItemContainer;
 import java.math.BigDecimal;
 
 public class DeleteCommandTest {
+
     private ItemContainer testList;
     private Command testCommand;
 

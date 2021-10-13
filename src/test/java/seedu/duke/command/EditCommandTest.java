@@ -11,6 +11,7 @@ import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
 public class EditCommandTest {
+
     private ItemContainer testList;
     private Command testCommand;
 

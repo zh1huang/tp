@@ -10,6 +10,7 @@ import seedu.duke.model.ItemContainer;
 
 
 public class AddCommandTest {
+
     private ItemContainer testList;
     private Command testCommand;
 

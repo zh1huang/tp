@@ -3,6 +3,8 @@ package seedu.duke.model;
 import seedu.duke.model.exception.IllegalArgumentException;
 
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents an item that can be stored in an ItemContainer.
@@ -13,6 +15,8 @@ public class Item {
     public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item name";
     public static final String MESSAGE_INVALID_PRICE_FORMAT = "Invalid price format";
     public static final String MESSAGE_INVALID_NEGATIVE_PRICE = "Price cannot be negative";
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String name;
     private BigDecimal purchaseCost;
@@ -33,6 +37,7 @@ public class Item {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
+        logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
     public String getName() {
@@ -48,8 +53,11 @@ public class Item {
      */
     public void setName(String name) throws IllegalArgumentException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
+            String temp = this.name;
             this.name = name;
+            logger.log(Level.INFO, String.format("Successfully set Item %s's name as %s", temp, name));
         } else {
+            logger.log(Level.WARNING, String.format("Trying to set Item %s's name as %s", this.getName(), name));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
@@ -66,8 +74,9 @@ public class Item {
      * @throws IllegalArgumentException if the new cost is negative
      */
     public void setPurchaseCost(String cost) throws IllegalArgumentException {
+        String temp = purchaseCost.toString();
         purchaseCost = convert2BD_NonNegative(cost);
-
+        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", temp, cost));
     }
 
     public String getSellingPrice() {
@@ -82,9 +91,9 @@ public class Item {
      * @throws IllegalArgumentException if the new price is negative
      */
     public void setSellingPrice(String price) throws IllegalArgumentException {
-        //
-
+        String temp = sellingPrice.toString();
         sellingPrice = convert2BD_NonNegative(price);
+        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", temp, price));
     }
 
     private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentException {

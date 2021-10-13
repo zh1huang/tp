@@ -5,6 +5,8 @@ import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a container that is able to store items.
@@ -14,6 +16,8 @@ public class ItemContainer {
 
     public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String name;
     private final ArrayList<Item> items;
@@ -28,6 +32,7 @@ public class ItemContainer {
     public ItemContainer(String name) throws IllegalArgumentException {
         setName(name);
         items = new ArrayList<>();
+        logger.log(Level.INFO, String.format("ItemContainer %s created", name));
     }
 
     /**
@@ -48,8 +53,11 @@ public class ItemContainer {
      */
     public void setName(String name) throws IllegalArgumentException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
+            String temp = this.getName();
             this.name = name;
+            logger.log(Level.INFO, String.format("Successfully set ItemContainer %s's name as %s", temp, name));
         } else {
+            logger.log(Level.WARNING, String.format("Trying to set ItemContainer %s's name as %s", this.getName(), name));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
@@ -58,12 +66,16 @@ public class ItemContainer {
      * Adds the Item to the ItemContainer.
      *
      * @param item The item to be added
-     * @throws DuplicateItemException if the item already exists in the ItemContainer
+     * @throws DuplicateItemException If the item already exists in the ItemContainer
      */
-    public void addItem(Item item) {
+    public void addItem(Item item) throws DuplicateItemException {
         if (!contains(item)) {
             items.add(item);
+            logger.log(Level.INFO, String.format("Successfully added Item %s into ItemContainer %s",
+                item.getName(), this.getName()));
         } else {
+            logger.log(Level.WARNING, String.format("Item %s already exists in ItemContainer %s",
+                item.getName(), this.getName()));
             throw new DuplicateItemException(item.getName());
         }
     }
@@ -72,11 +84,16 @@ public class ItemContainer {
      * Remove the reference of the Item from the ItemContainer.
      *
      * @param item The Item to be removed from the ItemContainer
+     * @throws ItemNotExistException If the Item does not exist
      */
-    public void deleteItem(Item item) {
+    public void deleteItem(Item item) throws ItemNotExistException {
         if (item == null) {
+            logger.log(Level.WARNING, String.format("Trying to delete Null item from ItemContainer %s",
+                this.getName()));
             throw new NullPointerException();
         } else if (!contains(item)) {
+            logger.log(Level.WARNING, String.format("Trying to delete Item %s which does not exist in ItemContainer %s",
+                item.getName(), this.getName()));
             throw new ItemNotExistException(item.getName());
         }
         items.remove(item);
@@ -87,21 +104,32 @@ public class ItemContainer {
      *
      * @param originalItem The Item that is in the ItemContainer
      * @param updatedItem  The replacement Item
-     * @throws IllegalArgumentException If the originalItem does not exist in the ItemContainer
-     * @throws DuplicateItemException   if the updatedItem already exist in the ItemContainer
+     * @throws ItemNotExistException  If the originalItem does not exist in the ItemContainer
+     * @throws DuplicateItemException if the updatedItem already exist in the ItemContainer
      */
     public void updateItem(Item originalItem, Item updatedItem)
-            throws IllegalArgumentException, DuplicateItemException {
+        throws ItemNotExistException, DuplicateItemException {
         int index = items.indexOf(originalItem);
         if (originalItem == null) {
+            logger.log(Level.WARNING, String.format("Trying to update Null item from ItemContainer %s",
+                this.getName()));
             throw new NullPointerException();
         } else if (contains(updatedItem)) {
+            logger.log(Level.WARNING, String.format(
+                "Trying to replace Item %s with %s, which already exists in the ItemContainer %s",
+                originalItem.getName(), updatedItem.getName(), this.getName()));
             throw new DuplicateItemException(updatedItem.getName());
         } else if (index == -1) {
+            logger.log(Level.WARNING, String.format(
+                "Trying to replace Item %s, which does not exist in ItemContainer %s",
+                originalItem.getName(), this.getName()));
             throw new ItemNotExistException(originalItem.getName());
         }
         items.set(index, updatedItem);
         assert items.get(index) == updatedItem : "Updated item should be at the index of the original item";
+        logger.log(Level.INFO, String.format(
+            "Successfully replace Item %s with %s in the ItemContainer %s",
+            originalItem.getName(), updatedItem.getName(), this.getName()));
     }
 
     /**
@@ -109,10 +137,12 @@ public class ItemContainer {
      *
      * @param name The specified name of Item
      * @return Item with the specified name
-     * @throws NullPointerException if no item has the name
+     * @throws ItemNotExistException If the Item does not exist in the ItemContainer
      */
-    public Item getItem(String name) {
+    public Item getItem(String name) throws ItemNotExistException {
         if (name == null) {
+            logger.log(Level.WARNING, String.format("Trying to get Null item from ItemContainer %s",
+                this.getName()));
             throw new NullPointerException();
         }
         for (Item item : items) {
@@ -120,6 +150,8 @@ public class ItemContainer {
                 return item;
             }
         }
+        logger.log(Level.WARNING, String.format("Item %s is not fond in the ItemContainer %s",
+            name, this.getName()));
         throw new ItemNotExistException(name);
     }
 
