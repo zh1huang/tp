@@ -7,8 +7,10 @@ import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.model.exception.ItemNotExistException;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class DeleteCommandTest {
     private ItemContainer testList;

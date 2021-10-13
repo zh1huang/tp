@@ -109,7 +109,8 @@ public class ItemContainer {
      *
      * @param name The specified name of Item
      * @return Item with the specified name
-     * @throws NullPointerException if no item has the name
+     * @throws NullPointerException if the input name is null
+     * @throws ItemNotExistException if no item has the name
      */
     public Item getItem(String name) {
         if (name == null) {
@@ -189,4 +190,25 @@ public class ItemContainer {
     public int getSize() {
         return items.size();
     }
+
+    /**
+     * Gets description of item.
+     *
+     * @param selectedItem Item which description is retrieved from
+     * @return String of description
+     */
+    public String getDescription(Item selectedItem) {
+        String temp = "";
+        String name = selectedItem.getName();
+        String sellingPrice = selectedItem.getSellingPrice();
+        String purchaseCost = selectedItem.getPurchaseCost();
+
+        temp += "name: " + name + "\nselling price: " + sellingPrice
+                + "\npurchase cost: " + purchaseCost;
+
+        return temp;
+    }
+
+
+
 }

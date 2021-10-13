@@ -2,6 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ItemNotExistException;
 
 /**
  * The command that edits a selected item.
@@ -30,8 +32,12 @@ public class EditCommand extends Command {
      * Executes the update operation.
      *
      * @param list the itemContainer to remove the item from
+     * @throws ItemNotExistException when cannot find any item with the name
+     * @throws NullPointerException when the name specified is null
+     * @throws IllegalArgumentException when the argument is invalid
      */
-    public void execute(ItemContainer list) {
+    public void execute(ItemContainer list) throws ItemNotExistException, NullPointerException,
+            IllegalArgumentException {
         Item selectedItem = list.getItem(name);
         selectedItem.setPurchaseCost(purcaseCost);
         selectedItem.setSellingPrice(sellingPrice);

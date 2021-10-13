@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.IllegalArgumentException;
 
 /**
  * The command that adds a new item to the list.
@@ -30,9 +31,10 @@ public class AddCommand extends Command {
      * Executes the operation of adding the item to the list.
      *
      * @param list the itemContainer to remove the item from
+     * @throws IllegalArgumentException if the input argument is wrong
      */
     @Override
-    public void execute(ItemContainer list) {
+    public void execute(ItemContainer list) throws IllegalArgumentException {
         Item newItem = new Item(name, purchaseCost, sellingPrice);
         list.addItem(newItem);
         System.out.println(ADD_COMPLETE_MESSAGE);

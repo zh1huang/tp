@@ -8,7 +8,9 @@ import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.model.exception.ItemNotExistException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EditCommandTest {
     private ItemContainer testList;
