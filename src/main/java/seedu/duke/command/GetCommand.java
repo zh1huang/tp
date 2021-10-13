@@ -22,8 +22,9 @@ public class GetCommand extends Command {
      * @param list the ItemContainer in which information of item is retrieved.
      */
     public void execute(ItemContainer list) {
+        assert list != null : "List should not be null";
         Item selectedItem = list.getItem(name);
-        System.out.println(String.format(ItemContainer.ITEM_DESCRIPTION,
-                selectedItem.getName(),selectedItem.getSellingPrice(), selectedItem.getPurchaseCost()));
+        System.out.printf((ItemContainer.ITEM_DESCRIPTION) + "%n",
+                selectedItem.getName(),selectedItem.getSellingPrice(), selectedItem.getPurchaseCost());
     }
 }

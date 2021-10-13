@@ -176,8 +176,8 @@ public class ItemContainer {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Item temp : items) {
-            output.append(temp.getName() + "\n");
+        for (int i = 0; i < items.size();  i++) {
+            output.append((i + 1) + ". " + items.get(i).getName() + "\n");
         }
         return output.toString().trim();
     }
