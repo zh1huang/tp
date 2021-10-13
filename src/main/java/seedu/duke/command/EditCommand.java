@@ -7,10 +7,11 @@ import seedu.duke.model.ItemContainer;
  * The command that edits a selected item.
  */
 public class EditCommand extends Command {
-    private final Item selectedItem;
-    private final Item updatedItem;
-    private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated."; //to be added to UI part later
-
+    private final String name;
+    private final String purcaseCost;
+    private final String sellingPrice;
+    private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
+    //to be added to UI part later
 
     /**
      * The EditCommand constructor.
@@ -18,11 +19,11 @@ public class EditCommand extends Command {
      * @param name         the name of the selected item
      * @param purchaseCost the new cost of the item
      * @param sellingPrice the new price of the item
-     * @param list         the itemContainer where the selected item is stored in
      */
-    public EditCommand(String name, String purchaseCost, String sellingPrice, ItemContainer list) {
-        this.selectedItem = list.getItem(name);
-        this.updatedItem = new Item(name, purchaseCost, sellingPrice);
+    public EditCommand(String name, String purchaseCost, String sellingPrice) {
+        this.name = name;
+        this.purcaseCost = purchaseCost;
+        this.sellingPrice = sellingPrice;
     }
 
     /**
@@ -31,7 +32,9 @@ public class EditCommand extends Command {
      * @param list the itemContainer to remove the item from
      */
     public void execute(ItemContainer list) {
-        list.updateItem(selectedItem, updatedItem);
+        Item selectedItem = list.getItem(name);
+        selectedItem.setPurchaseCost(purcaseCost);
+        selectedItem.setSellingPrice(sellingPrice);
         System.out.println(UPDATE_COMPLETE_MESSAGE);
     }
 }

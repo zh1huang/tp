@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
  * Parser Class. Manages parsing of user input for different commands.
  */
 public class Parser {
-    private final ItemContainer list;
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
@@ -72,9 +71,6 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
-    public Parser(ItemContainer list) {
-        this.list = list;
-    }
     /**
      * Parses the User input line. Checks the user input line against the basic command format
      * and extracts the command word which is the first word in the user input line. After
@@ -84,12 +80,12 @@ public class Parser {
      * @param userInputLine The user input Line.
      * @return A string indicating parse success or failure.
      */
-    public static String parseCommand(String userInputLine) {
+    public Command parseCommand(String userInputLine, ItemContainer list) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
         /* Checks valid basic command format */
         if (!matcher.matches()) {
-            return INVALID_COMMAND_MESSAGE_STRING;
+            throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -98,37 +94,39 @@ public class Parser {
 
         switch (commandWord) {
         case ADD_STRING:
-            newCommand = prepareAdd(arguments);
+            newCommand = prepareAdd(arguments, list);
             break;
 
         case DELETE_STRING:
-            newCommand= prepareDelete(arguments);
+            newCommand= prepareDelete(arguments, list);
             break;
 
-        case LIST_STRING:
-            newCommand = prepareList(arguments);
-            break;
-
-        case GET_STRING:
-            newCommand = prepareGet(arguments);
-            break;
+//        case LIST_STRING:
+//            newCommand = prepareList(arguments);
+//            break;
+//
+//        case GET_STRING:
+//            newCommand = prepareGet(arguments);
+//            break;
 
         case EDIT_STRING:
-            newCommand = prepareEdit(arguments);
+            newCommand = prepareEdit(arguments, list);
             break;
 
         default:
             throw new NoCommandFoundException();
         }
+        return newCommand;
     }
 
     /**
      * Parses add command arguments.
      *
      * @param arguments The additional arguments after command word.
+     * @param list
      * @return A string indicating parse success or failure.
      */
-    private Command prepareAdd(String arguments) {
+    private Command prepareAdd(String arguments, ItemContainer list) {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -143,9 +141,9 @@ public class Parser {
 //                matcher.group("itemName"), matcher.group("category"),
 //                matcher.group("price"), matcher.group("quantity"), matcher.group("remarks")));
         String itemName = matcher.group("itemName");
-
-        return new AddCommand(, matcher.group("purchaseCost"),
-                matcher.group("sellingPrice"));
+        String purchaseCost = matcher.group("purchaseCost");
+        String sellingPrice = matcher.group("sellingPrice");
+        return new AddCommand(itemName, purchaseCost, sellingPrice);
 
 //        } catch (Exception e) {
 //            return String.format(e.getMessage());
@@ -158,7 +156,7 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private Command prepareDelete(String arguments) {
+    private Command prepareDelete(String arguments, ItemContainer list) {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -174,7 +172,8 @@ public class Parser {
 //        } catch (Exception e) {
 //            return (e.getMessage());
 //        }
-       return new DeleteCommand(matcher.group("itemName"), list) ;
+        String itemName = matcher.group("itemName");
+        return new DeleteCommand(itemName) ;
     }
 
     /**
@@ -228,7 +227,7 @@ public class Parser {
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
      */
-    private String prepareEdit(String arguments) {
+    private Command prepareEdit(String arguments, ItemContainer list) {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -243,11 +242,11 @@ public class Parser {
         if (selectedProperty.equals("purchaseCost")) {
             String updatedPurchaseCost = selectedProperty;
             String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
-            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice, list);
+            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
         } else if (selectedProperty.equals("sellingPrice")) {
             String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
             String updatedSellingPrice = selectedProperty;
-            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice, list);
+            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
         } else {
             throw new NoPropertyFoundException(selectedProperty);
         }

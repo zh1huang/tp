@@ -8,8 +8,10 @@ import seedu.duke.model.ItemContainer;
  */
 public class AddCommand extends Command {
     private static final String ADD_COMPLETE_MESSAGE =
-            "This item has be   en added to the list."; //to be added to UI part later
-    private final Item newItem;
+            "This item has been added to the list."; //to be added to UI part later
+    private final String name;
+    private final String purchaseCost;
+    private final String sellingPrice;
 
     /**
      * AddCommand Constructor.
@@ -19,7 +21,9 @@ public class AddCommand extends Command {
      * @param sellingPrice the price of the item
      */
     public AddCommand(String name, String purchaseCost, String sellingPrice) {
-        this.newItem = new Item(name, purchaseCost, sellingPrice);
+        this.name = name;
+        this.purchaseCost = purchaseCost;
+        this.sellingPrice = sellingPrice;
     }
 
     /**
@@ -29,6 +33,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ItemContainer list) {
+        Item newItem = new Item(name, purchaseCost, sellingPrice);
         list.addItem(newItem);
         System.out.println(ADD_COMPLETE_MESSAGE);
     }

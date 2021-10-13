@@ -56,6 +56,12 @@ class ItemContainerTest {
     }
 
     @Test
+    void addItem_repeatedInput_throwsDuplicateItemException() {
+        testContainer.addItem(testItem1);
+        assertThrows(DuplicateItemException.class, () -> testContainer.addItem(testItem1));
+    }
+
+    @Test
     void addItem_normalInput_addNormally() {
         testContainer.addItem(testItem1);
         assertEquals(1, testContainer.getItemCount());

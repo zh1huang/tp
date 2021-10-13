@@ -19,7 +19,7 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
-        String output = Parser.parseCommand(userInputSample);
-        System.out.println(output);
+//        String output = Parser.parseCommand(userInputSample);
+//        System.out.println(output);
     }
 }
