@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AddCommandTest {
+
     private ItemContainer testList;
     private Command testCommand1;
 

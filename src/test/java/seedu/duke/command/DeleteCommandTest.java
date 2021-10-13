@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class DeleteCommandTest {
+
     private ItemContainer testList;
     private Command testCommand1;
     private Command testCommand2;
