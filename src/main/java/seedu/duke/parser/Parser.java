@@ -211,7 +211,7 @@ public class Parser {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            throw new seedu.duke.model.exception.IllegalFormatException(String.format(
+            throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
