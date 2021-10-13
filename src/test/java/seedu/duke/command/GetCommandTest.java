@@ -30,7 +30,7 @@ public class GetCommandTest {
     }
 
     @Test
-    public void execute_oneItemAlreadyInList_getsNormally() {
+    public void execute_oneItemAlreadyInList_getsNormally() throws Exception {
         assertTrue(testList.contains("HarryPotter"));
         testCommand.execute(testList);
         String expected = String.format(ItemContainer.ITEM_DESCRIPTION, "HarryPotter", "25.12", "16.1");
