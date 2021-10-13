@@ -40,10 +40,12 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ItemContainer list) throws IllegalArgumentException, DuplicateItemException {
-        assert list != null : "list should not be null";
         try {
+            int sizeBeforeAdding = list.getSize();
             Item newItem = new Item(name, purchaseCost, sellingPrice);
             list.addItem(newItem);
+            int sizeAfterAdding = list.getSize();
+            assert sizeBeforeAdding + 1 == sizeAfterAdding : "After adding an item the list size should increase by 1";
             System.out.println(ADD_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "AddCommand successfully executed.");
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
