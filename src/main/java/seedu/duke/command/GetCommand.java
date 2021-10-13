@@ -30,6 +30,5 @@ public class GetCommand extends Command {
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             throw new ItemNotExistException(e.getMessage());
         }
-
     }
 }
