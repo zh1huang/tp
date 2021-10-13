@@ -35,7 +35,7 @@ public class ListCommandTest {
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
         testCommand.execute(testList);
-        String expected = "HarryPotter\nLOTR";
+        String expected = "1. HarryPotter\n2. LOTR";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 

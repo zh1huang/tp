@@ -162,7 +162,7 @@ class ItemContainerTest {
     void toStringTest() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         testContainer.addItem(testItem2);
-        String expectedResult = testItem1.getName() + "\n" + testItem2.getName();
+        String expectedResult = "1. " + testItem1.getName() + "\n" + "2. " + testItem2.getName();
         assertEquals(expectedResult, testContainer.toString());
     }
 }

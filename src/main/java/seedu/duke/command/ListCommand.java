@@ -10,6 +10,8 @@ public class ListCommand extends Command {
      * @param list the ItemContainer to retrieve list of items
      */
     public void execute(ItemContainer list) {
+        int initialSize = list.getSize();
         System.out.println(list);
+        assert initialSize == list.getSize() : "List size should not be changed";
     }
 }

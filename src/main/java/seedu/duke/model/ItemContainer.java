@@ -16,6 +16,7 @@ public class ItemContainer {
 
     public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
+    public static final String ITEM_DESCRIPTION = "name: %s\nselling price: %s\npurchase cost: %s";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -209,8 +210,8 @@ public class ItemContainer {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Item temp : items) {
-            output.append(temp.getName() + "\n");
+        for (int i = 0; i < items.size();  i++) {
+            output.append((i + 1) + ". " + items.get(i).getName() + "\n");
         }
         return output.toString().trim();
     }
@@ -223,25 +224,4 @@ public class ItemContainer {
     public int getSize() {
         return items.size();
     }
-
-    /**
-     * Gets description of item.
-     *
-     * @param selectedItem Item which description is retrieved from
-     * @return String of description
-     */
-    public String getDescription(Item selectedItem) {
-        String temp = "";
-        String name = selectedItem.getName();
-        String sellingPrice = selectedItem.getSellingPrice();
-        String purchaseCost = selectedItem.getPurchaseCost();
-
-        temp += "name: " + name + "\nselling price: " + sellingPrice
-                + "\npurchase cost: " + purchaseCost;
-
-        return temp;
-    }
-
-
-
 }
