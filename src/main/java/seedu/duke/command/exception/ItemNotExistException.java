@@ -1,4 +1,4 @@
-package seedu.duke.model.exception;
+package seedu.duke.command.exception;
 
 public class ItemNotExistException extends Exception {
 

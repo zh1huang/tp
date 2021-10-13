@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
@@ -21,9 +22,14 @@ public class GetCommand extends Command {
      *
      * @param list the ItemContainer in which information of item is retrieved.
      */
-    public void execute(ItemContainer list) {
-        Item selectedItem = list.getItem(name);
-        String output = list.getDescription(selectedItem);
-        System.out.println(output);
+    public void execute(ItemContainer list) throws ItemNotExistException {
+        try {
+            Item selectedItem = list.getItem(name);
+            String output = list.getDescription(selectedItem);
+            System.out.println(output);
+        } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            throw new ItemNotExistException(e.getMessage());
+        }
+
     }
 }

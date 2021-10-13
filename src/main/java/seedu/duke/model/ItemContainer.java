@@ -110,7 +110,7 @@ public class ItemContainer {
      * @throws DuplicateItemException if the updatedItem already exist in the ItemContainer
      */
     public void updateItem(Item originalItem, Item updatedItem)
-        throws ItemNotExistException, DuplicateItemException {
+            throws DuplicateItemException, ItemNotExistException {
         int index = items.indexOf(originalItem);
         if (originalItem == null) {
             logger.log(Level.WARNING, String.format("Trying to update Null item from ItemContainer %s",
@@ -139,7 +139,7 @@ public class ItemContainer {
      *
      * @param name The specified name of Item
      * @return Item with the specified name
-     * @throws ItemNotExistException If the Item does not exist in the ItemContainer
+     * @throws ItemNotExistException if no item has the name
      */
     public Item getItem(String name) throws ItemNotExistException {
         if (name == null) {

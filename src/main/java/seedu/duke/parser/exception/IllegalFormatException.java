@@ -1,6 +1,6 @@
 package seedu.duke.parser.exception;
 
-public class IllegalFormatException extends RuntimeException {
+public class IllegalFormatException extends Exception {
     public IllegalFormatException(String message) {
         super(message);
     }
