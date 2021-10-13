@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.IllegalFormatException;
+import seedu.duke.parser.exception.IllegalFormatException;
+import seedu.duke.parser.Parser;
 
 
 // Parser Test class adapted from

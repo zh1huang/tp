@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.parser;
 
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
@@ -7,7 +7,7 @@ import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.IllegalFormatException;
+import seedu.duke.parser.exception.IllegalFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
