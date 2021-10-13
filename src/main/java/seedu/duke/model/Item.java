@@ -33,6 +33,7 @@ public class Item {
      *              must be non-negative
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
+
     public Item(String name, String cost, String price) throws IllegalArgumentException {
         setName(name);
         setPurchaseCost(cost);
@@ -106,6 +107,7 @@ public class Item {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(MESSAGE_INVALID_PRICE_FORMAT);
         }
+
     }
 
     @Override
