@@ -5,6 +5,9 @@ import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.ItemNotExistException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * The command that edits a selected item.
  */
@@ -14,6 +17,7 @@ public class EditCommand extends Command {
     private final String sellingPrice;
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
     //to be added to UI part later
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * The EditCommand constructor.
@@ -38,14 +42,20 @@ public class EditCommand extends Command {
      */
     public void execute(ItemContainer list) throws ItemNotExistException,
             IllegalArgumentException {
+        assert list != null : "list should not be null";
         try {
             Item selectedItem = list.getItem(name);
             selectedItem.setPurchaseCost(purcaseCost);
             selectedItem.setSellingPrice(sellingPrice);
             System.out.println(UPDATE_COMPLETE_MESSAGE);
+            logger.log(Level.INFO, "EditCommand successfully executed.");
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            logger.log(Level.WARNING, "EditCommand failed to execute with error message %s",
+                    e.getMessage());
             throw new ItemNotExistException(e.getMessage());
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+            logger.log(Level.WARNING, "EditCommand failed to execute with error message %s",
+                    e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         }
     }

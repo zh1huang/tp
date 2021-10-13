@@ -4,6 +4,9 @@ import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.ItemNotExistException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * The command that deletes a selected item.
  */
@@ -11,6 +14,7 @@ public class DeleteCommand extends Command {
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
     private final String name;
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * The DeleteCommand constructor.
@@ -29,11 +33,15 @@ public class DeleteCommand extends Command {
      * @throws ItemNotExistException if the specified item does not exist
      */
     public void execute(ItemContainer list) throws ItemNotExistException {
+        assert list != null : "list should not be null";
         try {
             Item selectedItem = list.getItem(name);
             list.deleteItem(selectedItem);
             System.out.println(DELETE_COMPLETE_MESSAGE);
+            logger.log(Level.INFO, "DeleteCommand successfully executed.");
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            logger.log(Level.WARNING, "DeleteCommand failed to execute with error message %s",
+                    e.getMessage());
             throw new ItemNotExistException(e.getMessage());
         }
 
