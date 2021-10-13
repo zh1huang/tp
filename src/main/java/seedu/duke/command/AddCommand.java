@@ -5,6 +5,9 @@ import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.DuplicateItemException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * The command that adds a new item to the list.
  */
@@ -14,6 +17,7 @@ public class AddCommand extends Command {
     private final String name;
     private final String purchaseCost;
     private final String sellingPrice;
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * AddCommand Constructor.
@@ -36,15 +40,20 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ItemContainer list) throws IllegalArgumentException, DuplicateItemException {
+        assert list != null : "list should not be null";
         try {
             Item newItem = new Item(name, purchaseCost, sellingPrice);
             list.addItem(newItem);
             System.out.println(ADD_COMPLETE_MESSAGE);
+            logger.log(Level.INFO, "AddCommand successfully executed.");
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+            logger.log(Level.WARNING, "AddCommand failed to execute with error message %s",
+                    e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         } catch (seedu.duke.model.exception.DuplicateItemException e) {
+            logger.log(Level.WARNING, "AddCommand failed to execute with error message %s",
+                    e.getMessage());
             throw new DuplicateItemException(e.getMessage());
         }
-
     }
 }
