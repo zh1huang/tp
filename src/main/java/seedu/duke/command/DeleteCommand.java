@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.command.exception.ItemNotExistException;
 
 /**
  * The command that deletes a selected item.
@@ -29,8 +29,13 @@ public class DeleteCommand extends Command {
      * @throws ItemNotExistException if the specified item does not exist
      */
     public void execute(ItemContainer list) throws ItemNotExistException {
-        Item selectedItem = list.getItem(name);
-        list.deleteItem(selectedItem);
-        System.out.println(DELETE_COMPLETE_MESSAGE);
+        try {
+            Item selectedItem = list.getItem(name);
+            list.deleteItem(selectedItem);
+            System.out.println(DELETE_COMPLETE_MESSAGE);
+        } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            throw new ItemNotExistException(e.getMessage());
+        }
+
     }
 }

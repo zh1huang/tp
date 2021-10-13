@@ -4,16 +4,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.DuplicateItemException;
+import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.model.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 import seedu.duke.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -26,7 +28,7 @@ public class ParserTest {
     private ItemContainer list;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IllegalArgumentException {
         parser = new Parser();
         list = new ItemContainer("test");
     }
@@ -81,7 +83,7 @@ public class ParserTest {
      */
 
     @Test
-    public void parse_deleteCommandInvalidArgs_errorMessage() {
+    public void parse_deleteCommandInvalidArgs_errorMessage() throws IllegalArgumentException, DuplicateItemException {
         final String[] inputs = {
             "delete ",
             "delete p/$37",
@@ -97,7 +99,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deleteCommandValidArgs_errorMessage() {
+    public void parse_deleteCommandValidArgs_errorMessage() throws IllegalFormatException, IllegalArgumentException,
+            DuplicateItemException, ItemNotExistException, NoPropertyFoundException {
         final String[] inputs = {
             "delete n/Alice in wonderland",
             "delete n/Stabilo colour pencil"
@@ -130,7 +133,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_listCommandValidArgs_errorMessage() {
+    public void parse_listCommandValidArgs_errorMessage() throws IllegalFormatException,
+            ItemNotExistException, NoPropertyFoundException {
         final String[] inputs = {
             "list",
             "list c/all",
@@ -162,7 +166,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_getCommandValidArgs_errorMessage() {
+    public void parse_getCommandValidArgs_errorMessage() throws IllegalFormatException,
+            ItemNotExistException, NoPropertyFoundException {
         final String[] inputs = {
             "get n/Lord of the Rings",
             "get n/Apples Never Fall p/quantity"
@@ -178,7 +183,7 @@ public class ParserTest {
      */
 
     @Test
-    public void parse_editCommandInvalidArgs_errorMessage() {
+    public void parse_editCommandInvalidArgs_errorMessage() throws IllegalArgumentException, DuplicateItemException {
         final String[] inputs = {
             "edit ",
             "edit n/Apples Never Fall ",
@@ -194,7 +199,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_editCommandValidArgs_errorMessage() {
+    public void parse_editCommandValidArgs_errorMessage() throws IllegalArgumentException, DuplicateItemException {
         final String[] inputs = {
             "edit n/Lord of the Rings p/price v/30",
             "edit n/Apples Never Fall p/quantity v/100 s/false",

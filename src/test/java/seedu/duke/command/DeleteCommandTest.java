@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.command.exception.DuplicateItemException;
+import seedu.duke.command.exception.ItemNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_oneItemAlreadyInList_deletesNormally() {
+    public void execute_oneItemAlreadyInList_deletesNormally() throws Exception {
         testList.addItem(testItem1);
         int numberOfItemsBeforeDeleting = testList.getSize();
         assertTrue(testList.contains("HarryPotter"));
@@ -45,13 +46,13 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_noMatchedItemInList_throwsItemNotExitException() {
+    public void execute_noMatchedItemInList_throwsItemNotExitException() throws Exception {
         testList.addItem(testItem1);
         assertThrows(ItemNotExistException.class, () -> testCommand2.execute(testList));
     }
 
     @Test
-    public void execute_itemsWithSameNameInList_deletesNormally() {
+    public void execute_itemsWithSameNameInList_deletesNormally() throws Exception {
         testList.addItem(testItem1);
         testList.addItem(testItem2);
         int numberOfItemsBeforeDeleting = testList.getSize();

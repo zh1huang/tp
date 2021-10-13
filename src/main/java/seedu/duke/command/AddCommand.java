@@ -2,7 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.command.exception.IllegalArgumentException;
+import seedu.duke.command.exception.DuplicateItemException;
 
 /**
  * The command that adds a new item to the list.
@@ -34,9 +35,16 @@ public class AddCommand extends Command {
      * @throws IllegalArgumentException if the input argument is wrong
      */
     @Override
-    public void execute(ItemContainer list) throws IllegalArgumentException {
-        Item newItem = new Item(name, purchaseCost, sellingPrice);
-        list.addItem(newItem);
-        System.out.println(ADD_COMPLETE_MESSAGE);
+    public void execute(ItemContainer list) throws IllegalArgumentException, DuplicateItemException {
+        try {
+            Item newItem = new Item(name, purchaseCost, sellingPrice);
+            list.addItem(newItem);
+            System.out.println(ADD_COMPLETE_MESSAGE);
+        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        } catch (seedu.duke.model.exception.DuplicateItemException e) {
+            throw new DuplicateItemException(e.getMessage());
+        }
+
     }
 }

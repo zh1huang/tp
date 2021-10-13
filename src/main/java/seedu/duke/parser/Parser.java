@@ -7,6 +7,7 @@ import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 
@@ -86,7 +87,8 @@ public class Parser {
      * @param list The itemContainer used to prepare the command
      * @return A string indicating parse success or failure
      */
-    public Command parseCommand(String userInputLine, ItemContainer list) {
+    public Command parseCommand(String userInputLine, ItemContainer list) throws IllegalFormatException,
+            ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
         /* Checks valid basic command format */
@@ -207,7 +209,8 @@ public class Parser {
      * @return A string indicating parse success or failure.
      * @throws IllegalFormatException when the input format is wrong
      */
-    private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException {
+    private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
+            ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {

@@ -31,7 +31,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_itemsAlreadyInList_listsNormally() {
+    public void execute_itemsAlreadyInList_listsNormally() throws Exception {
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
         testCommand.execute(testList);

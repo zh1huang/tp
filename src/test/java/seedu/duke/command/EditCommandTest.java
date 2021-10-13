@@ -1,12 +1,15 @@
 package seedu.duke.command;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.command.exception.ItemNotExistException;
+import seedu.duke.command.exception.DuplicateItemException;
+import seedu.duke.command.exception.IllegalArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +25,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_oneItemAlreadyInList_editsNormally() {
+    public void execute_oneItemAlreadyInList_editsNormally() throws Exception {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         testCommand = new EditCommand("HarryPotter", "16.1", "20");
         assertTrue(testList.contains("HarryPotter"));
@@ -42,7 +45,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noMatchedItemInList_throwItemNotExitException() {
+    public void execute_noMatchedItemInList_throwItemNotExitException() throws Exception {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         testCommand = new EditCommand("HarryPotter2", "16.1", "20");
         assertThrows(ItemNotExistException.class, () -> testCommand.execute(testList));

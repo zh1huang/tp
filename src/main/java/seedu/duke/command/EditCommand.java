@@ -2,8 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.IllegalArgumentException;
-import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.command.exception.IllegalArgumentException;
+import seedu.duke.command.exception.ItemNotExistException;
 
 /**
  * The command that edits a selected item.
@@ -36,11 +36,17 @@ public class EditCommand extends Command {
      * @throws NullPointerException when the name specified is null
      * @throws IllegalArgumentException when the argument is invalid
      */
-    public void execute(ItemContainer list) throws ItemNotExistException, NullPointerException,
+    public void execute(ItemContainer list) throws ItemNotExistException,
             IllegalArgumentException {
-        Item selectedItem = list.getItem(name);
-        selectedItem.setPurchaseCost(purcaseCost);
-        selectedItem.setSellingPrice(sellingPrice);
-        System.out.println(UPDATE_COMPLETE_MESSAGE);
+        try {
+            Item selectedItem = list.getItem(name);
+            selectedItem.setPurchaseCost(purcaseCost);
+            selectedItem.setSellingPrice(sellingPrice);
+            System.out.println(UPDATE_COMPLETE_MESSAGE);
+        } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            throw new ItemNotExistException(e.getMessage());
+        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 }

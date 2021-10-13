@@ -30,7 +30,7 @@ public class GetCommandTest {
     }
 
     @Test
-    public void execute_oneItemAlreadyInList_getsNormally() {
+    public void execute_oneItemAlreadyInList_getsNormally() throws Exception {
         assertTrue(testList.contains("HarryPotter"));
         testCommand.execute(testList);
         String expected = "name: HarryPotter" + "\n" + "selling price: 25.12" + "\n" + "purchase cost: 16.1";

@@ -60,7 +60,7 @@ public class ItemContainer {
      * @param item The item to be added
      * @throws DuplicateItemException if the item already exists in the ItemContainer
      */
-    public void addItem(Item item) {
+    public void addItem(Item item) throws DuplicateItemException {
         if (!contains(item)) {
             items.add(item);
         } else {
@@ -73,7 +73,7 @@ public class ItemContainer {
      *
      * @param item The Item to be removed from the ItemContainer
      */
-    public void deleteItem(Item item) {
+    public void deleteItem(Item item) throws ItemNotExistException {
         if (item == null) {
             throw new NullPointerException();
         } else if (!contains(item)) {
@@ -91,7 +91,7 @@ public class ItemContainer {
      * @throws DuplicateItemException   if the updatedItem already exist in the ItemContainer
      */
     public void updateItem(Item originalItem, Item updatedItem)
-            throws IllegalArgumentException, DuplicateItemException {
+            throws IllegalArgumentException, DuplicateItemException, ItemNotExistException {
         int index = items.indexOf(originalItem);
         if (originalItem == null) {
             throw new NullPointerException();
@@ -112,7 +112,7 @@ public class ItemContainer {
      * @throws NullPointerException if the input name is null
      * @throws ItemNotExistException if no item has the name
      */
-    public Item getItem(String name) {
+    public Item getItem(String name) throws ItemNotExistException {
         if (name == null) {
             throw new NullPointerException();
         }
