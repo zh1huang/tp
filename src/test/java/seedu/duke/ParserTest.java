@@ -39,7 +39,7 @@ public class ParserTest {
 
     public static final String ITEM_NAME_EXAMPLE_2 = "Mechanical Pencil";
     public static final String CATEGORY_EXAMPLE_2 = "Stationary";
-    public static final String PURCHASE_PRICE_EXAMPLE_2 = "0.70";
+    public static final String PURCHASE_COST_EXAMPLE_2 = "0.70";
     public static final String SELLING_PRICE_EXAMPLE_2 = "1.90";
     public static final String VALUE_EXAMPLE_2 = "3.4";
     public static final String QUANTITY_EXAMPLE_2 = "100";
@@ -101,13 +101,21 @@ public class ParserTest {
     public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
             NoPropertyFoundException, IllegalFormatException {
 
-        String input = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " c/" + CATEGORY_EXAMPLE_1 + " p/$"
+        String input1 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " c/" + CATEGORY_EXAMPLE_1 + " p/$"
                 + PURCHASE_COST_EXAMPLE_1 + " s/$" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
 
-        AddCommand expectedCommand = new AddCommand(ITEM_NAME_EXAMPLE_1,
+        AddCommand expectedCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1,
                 PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
 
-        assertEquals(expectedCommand.getClass(), parser.parseCommand(input, list).getClass());
+        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+
+        String input2 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " c/" + CATEGORY_EXAMPLE_2 + " p/$"
+                + PURCHASE_COST_EXAMPLE_2 + " s/$" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_2;
+
+        AddCommand expectedCommand2 = new AddCommand(ITEM_NAME_EXAMPLE_2,
+                PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2);
+
+        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
     }
 
     /*
@@ -130,10 +138,16 @@ public class ParserTest {
     @Test
     public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
-        String input = DELETE_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
 
-        Command expected = new DeleteCommand(ITEM_NAME_EXAMPLE_1);
-        assertEquals(expected.getClass(), parser.parseCommand(input, list).getClass());
+        String input1 = DELETE_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
+
+        Command expectedCommand1 = new DeleteCommand(ITEM_NAME_EXAMPLE_1);
+        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+
+        String input2 = DELETE_STRING + " n/" + ITEM_NAME_EXAMPLE_2;
+
+        Command expectedCommand2 = new DeleteCommand(ITEM_NAME_EXAMPLE_2);
+        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
     }
 
     /*
@@ -158,8 +172,8 @@ public class ParserTest {
             ItemNotExistException, NoPropertyFoundException {
         String input = LIST_STRING;
 
-        Command expected = new ListCommand();
-        assertEquals(expected.getClass(), parser.parseCommand(input, list).getClass());
+        Command expectedCommand = new ListCommand();
+        assertEquals(expectedCommand.getClass(), parser.parseCommand(input, list).getClass());
     }
 
     /*
@@ -181,9 +195,15 @@ public class ParserTest {
     @Test
     public void parse_getCommandValidArgs_returnsGetCommand() throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
-        String input = GET_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
-        Command expected = new GetCommand(ITEM_NAME_EXAMPLE_1);
-        assertEquals(expected.getClass(), parser.parseCommand(input, list).getClass());
+        String input1 = GET_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
+
+        Command expectedCommand1 = new GetCommand(ITEM_NAME_EXAMPLE_1);
+        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+
+        String input2 = GET_STRING + " n/" + ITEM_NAME_EXAMPLE_2;
+
+        Command expectedCommand2 = new GetCommand(ITEM_NAME_EXAMPLE_2);
+        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
     }
 
     /*
@@ -210,13 +230,22 @@ public class ParserTest {
             IllegalArgumentException, DuplicateItemException {
 
         // add item to container first
-        Item newItem = new Item(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
-        list.addItem(newItem);
+        Item newItem1 = new Item(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
+        Item newItem2 = new Item(ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2);
+        list.addItem(newItem1);
+        list.addItem(newItem2);
 
-        String input = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " p/" + PURCHASE_COST_PROPERTY_STRING
+        // Test edit Purchase Cost
+        String input1 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " p/" + PURCHASE_COST_PROPERTY_STRING
                 + " v/$" + VALUE_EXAMPLE_1;
-        Command expectedCommand = new EditCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1);
-        assertEquals(expectedCommand.getClass(), parser.parseCommand(input, list).getClass());
+        Command expectedCommand1 = new EditCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1);
+        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+
+        // Test edit Selling Price
+        String input2 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " p/" + SELLING_PRICE_PROPERTY_STRING
+                + " v/$" + VALUE_EXAMPLE_2;
+        Command expectedCommand2 = new EditCommand(ITEM_NAME_EXAMPLE_2, SELLING_PRICE_PROPERTY_STRING, VALUE_EXAMPLE_2);
+        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
     }
 
 }

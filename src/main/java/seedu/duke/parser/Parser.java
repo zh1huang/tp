@@ -74,8 +74,8 @@ public class Parser {
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "category: %s\n";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "itemName: %s\nproperty: %s\n";
 
-    public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
+    public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -106,7 +106,6 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        //String resultString = "";
         Command command;
 
         switch (commandWord) {
