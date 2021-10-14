@@ -3,8 +3,6 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.parser.Parser;
-import seedu.duke.parser.exception.IllegalFormatException;
-import seedu.duke.parser.exception.NoPropertyFoundException;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -36,8 +34,12 @@ public class Duke {
         Parser parser = new Parser();
         while (!input.trim().equals("bye")) {
 
-            Command command = parser.parseCommand(input, warehouse);
-            command.execute(warehouse); // todo remove execute input argument because unnecessary.
+            try {
+                Command command = parser.parseCommand(input, warehouse);
+                command.execute(warehouse); // todo remove execute input argument because unnecessary.
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
             // prepare for next input
             input = in.nextLine();
