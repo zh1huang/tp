@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.ItemNotExistException;
-import seedu.duke.command.exception.DuplicateItemException;
-import seedu.duke.command.exception.IllegalArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;

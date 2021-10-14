@@ -1,6 +1,6 @@
 package seedu.duke.command.exception;
 
-public class ItemNotExistException extends Exception {
+public class ItemNotExistException extends CommandException {
 
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item %s does not exist";
 
