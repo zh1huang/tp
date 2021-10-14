@@ -3,7 +3,12 @@ package seedu.duke;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.EditCommand;
+import seedu.duke.command.GetCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.model.exception.DuplicateItemException;
@@ -21,7 +26,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
 public class ParserTest {
 
-    public static final String WHITESPACE = " ";
+    public static final String PURCHASE_COST_PROPERTY_STRING = "purchaseCost";
+    public static final String SELLING_PRICE_PROPERTY_STRING = "sellingPrice";
+
+    public static final String ITEM_NAME_EXAMPLE_1 = "Geronimo";
+    public static final String CATEGORY_EXAMPLE_1 = "books";
+    public static final String PURCHASE_COST_EXAMPLE_1 = "25";
+    public static final String SELLING_PRICE_EXAMPLE_1 = "30.99";
+    public static final String VALUE_EXAMPLE_1 = "3.45";
+    public static final String QUANTITY_EXAMPLE_1 = "1";
+    public static final String REMARKS_EXAMPLE_1 = "Hello World!";
+
+    public static final String ITEM_NAME_EXAMPLE_2 = "Mechanical Pencil";
+    public static final String CATEGORY_EXAMPLE_2 = "Stationary";
+    public static final String PURCHASE_PRICE_EXAMPLE_2 = "0.70";
+    public static final String SELLING_PRICE_EXAMPLE_2 = "1.90";
+    public static final String VALUE_EXAMPLE_2 = "3.4";
+    public static final String QUANTITY_EXAMPLE_2 = "100";
+    public static final String REMARKS_EXAMPLE_2 = "need restock!";
+
+    public static final String ADD_STRING = "add";
+    public static final String DELETE_STRING = "delete";
+    public static final String LIST_STRING = "list";
+    public static final String GET_STRING = "get";
+    public static final String EDIT_STRING = "edit";
+
+    public static final String WHITESPACE = "\\s";
     private Parser parser;
     private ItemContainer list;
 
@@ -50,19 +80,14 @@ public class ParserTest {
     @Test
     public void parse_addCommandInvalidArgs_throwsIllegalFormatException() {
         //throws IllegalFormatException in parser package: todo decide whether to merge exceptions into one package
-        String addString = "add";
-        String itemName = "c/books";
-        String purchasePrice = "p/$25";
-        String sellingPrice = "p/$30.99";
-        String quantity = "q/1";
 
         final String[] inputs = {
-            addString,
-            addString + WHITESPACE + itemName + WHITESPACE + quantity,
-            addString + WHITESPACE + purchasePrice + WHITESPACE + itemName,
-            addString + WHITESPACE + quantity + WHITESPACE + purchasePrice,
-            addString + WHITESPACE + itemName + WHITESPACE  + purchasePrice + WHITESPACE + sellingPrice,
-            addString + WHITESPACE + itemName + WHITESPACE  + purchasePrice + WHITESPACE + quantity
+            ADD_STRING,
+            ADD_STRING + WHITESPACE + CATEGORY_EXAMPLE_1 + WHITESPACE + QUANTITY_EXAMPLE_1,
+            ADD_STRING + WHITESPACE + PURCHASE_COST_EXAMPLE_1 + WHITESPACE + CATEGORY_EXAMPLE_1,
+            ADD_STRING + WHITESPACE + QUANTITY_EXAMPLE_1 + WHITESPACE + PURCHASE_COST_EXAMPLE_1,
+            ADD_STRING + WHITESPACE + CATEGORY_EXAMPLE_1 + WHITESPACE + PURCHASE_COST_EXAMPLE_1 + WHITESPACE + SELLING_PRICE_EXAMPLE_1,
+            ADD_STRING + WHITESPACE + CATEGORY_EXAMPLE_1 + WHITESPACE + PURCHASE_COST_EXAMPLE_1 + WHITESPACE + QUANTITY_EXAMPLE_1
         };
 
         for (String input : inputs) {
@@ -71,16 +96,15 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommandValidArgs_returnsAddCommand() {
+    public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
+        NoPropertyFoundException, IllegalFormatException {
 
-        final String[] inputs = {
-            "add n/Harry Potter 1 c/books p/$37 s/$50 q/1",
-            "add n/Pilot P100 c/stationary p/$37 s/$50 q/1 r/Not many people bought this. Consider a 50% discount."
-        };
-        for (String input : inputs) {
-            //placeholder for now: todo equals method for comparing classes
-            assertTrue(true);
-        }
+        String input = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " c/" + CATEGORY_EXAMPLE_1 + " p/$"
+            + PURCHASE_COST_EXAMPLE_1 + " s/$" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
+
+        AddCommand expectedCommand = new AddCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
+
+        assertEquals(expectedCommand.getClass(), parser.parseCommand(input, list).getClass());
     }
 
     /*
@@ -102,17 +126,12 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException, IllegalArgumentException,
-            DuplicateItemException, ItemNotExistException, NoPropertyFoundException {
-        final String[] inputs = {
-            "delete n/Alice in wonderland",
-            "delete n/Stabilo colour pencil"
-        };
-        list.addItem(new Item("name", "12.55", "13.55"));
-        for (String input : inputs) {
-            Command expected = parser.parseCommand(input, list);
-            assertEquals(expected, expected); //placeholder for now: todo equals method for comparing classes
-        }
+    public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException,
+        ItemNotExistException, NoPropertyFoundException {
+        String input = DELETE_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
+
+        Command expected = new DeleteCommand(ITEM_NAME_EXAMPLE_1);
+        assertEquals(expected.getClass(), parser.parseCommand(input, list).getClass());
     }
 
     /*
@@ -135,17 +154,11 @@ public class ParserTest {
 
     @Test
     public void parse_listCommandValidArgs_returnsListCommand() throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
-        final String[] inputs = {
-            "list",
-            "list c/all",
-            "list c/stationary "
-        };
+        ItemNotExistException, NoPropertyFoundException {
+        String input = LIST_STRING;
 
-        for (String input : inputs) {
-            Command expected = parser.parseCommand(input, list);
-            assertEquals(expected, expected); //placeholder for now: todo equals method for comparing classes
-        }
+        Command expected = new ListCommand();
+        assertEquals(expected.getClass(), parser.parseCommand(input, list).getClass());
     }
 
     /*
@@ -166,15 +179,10 @@ public class ParserTest {
 
     @Test
     public void parse_getCommandValidArgs_returnsGetCommand() throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
-        final String[] inputs = {
-            "get n/Lord of the Rings",
-            "get n/Apples Never Fall p/quantity"
-        };
-        for (String input : inputs) {
-            Command expected = parser.parseCommand(input, list);
-            assertEquals(expected, expected); //placeholder for now: todo equals method for comparing classes
-        }
+        ItemNotExistException, NoPropertyFoundException {
+        String input = GET_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
+        Command expected = new GetCommand(ITEM_NAME_EXAMPLE_1);
+        assertEquals(expected.getClass(), parser.parseCommand(input, list).getClass());
     }
 
     /*
@@ -198,16 +206,15 @@ public class ParserTest {
 
     @Test
     public void parse_editCommandValidArgs_returnsEditCommand() throws
-        IllegalArgumentException, DuplicateItemException {
-        final String[] inputs = {
-            "edit n/Lord of the Rings p/price v/30",
-            "edit n/Apples Never Fall p/quantity v/100 s/false",
-            "edit n/Apples Never Fall p/quantity v/100 s/true"
-        };
-        list.addItem(new Item("name", "12.55", "13.55"));
-        for (String input : inputs) {
-            assertTrue(true); //placeholder for now: todo equals method for comparing classes
-        }
+        ItemNotExistException, NoPropertyFoundException, IllegalFormatException, IllegalArgumentException, DuplicateItemException {
+
+        // add item to container first
+        Item newItem = new Item(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
+        list.addItem(newItem);
+
+        String input = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " p/" + PURCHASE_COST_PROPERTY_STRING + " v/$" + VALUE_EXAMPLE_1;
+        Command expectedCommand = new EditCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1);
+        assertEquals(expectedCommand.getClass(), parser.parseCommand(input, list).getClass());
     }
 
 }

@@ -47,11 +47,11 @@ public class Parser {
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
                     + " p/(?<property>[^/]+)"
-                    + " v/(?<value>[^/]+)"
+                    + " v/[$](?<value>([0-9]+([.][0-9]{1,2})?))"
                     + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-            "add n/NAME c/CATEGORY p/PRICE q/QUANTITY [r/REMARKS]";
+            "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete n/NAME";
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [c/CATEGORY]";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get n/NAME [p/PROPERTY]";
@@ -75,8 +75,6 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
-
-
     /**
      * Parses the User input line. Checks the user input line against the basic command format
      * and extracts the command word which is the first word in the user input line. After
@@ -98,7 +96,7 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        String resultString = "";
+        //String resultString = "";
         Command command;
 
         switch (commandWord) {
@@ -121,6 +119,7 @@ public class Parser {
         case EDIT_STRING:
             command = prepareEdit(arguments, list);
             break;
+
 
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
@@ -209,24 +208,50 @@ public class Parser {
      * @return A string indicating parse success or failure.
      * @throws IllegalFormatException when the input format is wrong
      */
+//    private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
+//            ItemNotExistException, NoPropertyFoundException {
+//        final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+//        // Validate arg string format
+//        if (!matcher.matches()) {
+//            throw new IllegalFormatException(String.format(
+//                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
+//        }
+//        String itemName = matcher.group("itemName");
+//        String selectedProperty = matcher.group("property");
+//        String newValue = matcher.group("value");
+//
+//        if (selectedProperty.equals("purchaseCost")) {
+//            String updatedPurchaseCost = selectedProperty;
+//            String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
+//            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+//        } else if (selectedProperty.equals("sellingPrice")) {
+//            String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
+//            String updatedSellingPrice = selectedProperty;
+//            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+//        } else {
+//            throw new NoPropertyFoundException(selectedProperty);
+//        }
+//    }
+
     private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String selectedProperty = matcher.group("property");
+        String newValue = matcher.group("value");
 
         if (selectedProperty.equals("purchaseCost")) {
-            String updatedPurchaseCost = selectedProperty;
+            String updatedPurchaseCost = newValue;
             String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
             return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
         } else if (selectedProperty.equals("sellingPrice")) {
             String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
-            String updatedSellingPrice = selectedProperty;
+            String updatedSellingPrice = newValue;
             return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
         } else {
             throw new NoPropertyFoundException(selectedProperty);
