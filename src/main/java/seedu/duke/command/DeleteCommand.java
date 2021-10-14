@@ -33,10 +33,13 @@ public class DeleteCommand extends Command {
      * @throws ItemNotExistException if the specified item does not exist
      */
     public void execute(ItemContainer list) throws ItemNotExistException {
-        assert list != null : "list should not be null";
         try {
+            int sizeBeforeDeleting = list.getSize();
             Item selectedItem = list.getItem(name);
             list.deleteItem(selectedItem);
+            int sizeAfterDeleting = list.getSize();
+            assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
+                    "After deleting an item the list size should decrease by 1";
             System.out.println(DELETE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "DeleteCommand successfully executed.");
         } catch (seedu.duke.model.exception.ItemNotExistException e) {

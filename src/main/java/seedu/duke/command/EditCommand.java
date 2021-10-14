@@ -42,11 +42,14 @@ public class EditCommand extends Command {
      */
     public void execute(ItemContainer list) throws ItemNotExistException,
             IllegalArgumentException {
-        assert list != null : "list should not be null";
         try {
+            int sizeBeforeEditing = list.getSize();
             Item selectedItem = list.getItem(name);
             selectedItem.setPurchaseCost(purcaseCost);
             selectedItem.setSellingPrice(sellingPrice);
+            int sizeAfterEditing = list.getSize();
+            assert sizeBeforeEditing == sizeAfterEditing :
+                    "After editing an item the list size should remain unchanged";
             System.out.println(UPDATE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "EditCommand successfully executed.");
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
