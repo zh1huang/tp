@@ -21,7 +21,7 @@ public class ListCommand extends Command {
             info += String.format(ITEM_INFO, index,
                     selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice());
         }
-        return info;
+        return info.trim();
     }
 
     /**

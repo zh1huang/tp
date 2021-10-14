@@ -15,7 +15,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws IllegalArgumentException {
+    public static void main(String[] args) throws Exception {
 
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.WARNING);
@@ -35,15 +35,9 @@ public class Duke {
         String input = in.nextLine();
         Parser parser = new Parser();
         while (!input.trim().equals("bye")) {
-            try {
-                Command command = parser.parseCommand(input, warehouse);
-            } catch (IllegalFormatException e) {
-                e.printStackTrace();
-            } catch (ItemNotExistException e) {
-                e.printStackTrace();
-            } catch (NoPropertyFoundException e) {
-                e.printStackTrace();
-            }
+
+            Command command = parser.parseCommand(input, warehouse);
+            command.execute(warehouse); // todo remove execute input argument because unnecessary.
 
             // prepare for next input
             input = in.nextLine();
