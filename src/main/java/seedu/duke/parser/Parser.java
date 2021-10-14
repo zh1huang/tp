@@ -208,31 +208,6 @@ public class Parser {
      * @return A string indicating parse success or failure.
      * @throws IllegalFormatException when the input format is wrong
      */
-//    private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
-//            ItemNotExistException, NoPropertyFoundException {
-//        final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
-//        // Validate arg string format
-//        if (!matcher.matches()) {
-//            throw new IllegalFormatException(String.format(
-//                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
-//        }
-//        String itemName = matcher.group("itemName");
-//        String selectedProperty = matcher.group("property");
-//        String newValue = matcher.group("value");
-//
-//        if (selectedProperty.equals("purchaseCost")) {
-//            String updatedPurchaseCost = selectedProperty;
-//            String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
-//            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
-//        } else if (selectedProperty.equals("sellingPrice")) {
-//            String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
-//            String updatedSellingPrice = selectedProperty;
-//            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
-//        } else {
-//            throw new NoPropertyFoundException(selectedProperty);
-//        }
-//    }
-
     private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
