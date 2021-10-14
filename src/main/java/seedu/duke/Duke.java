@@ -1,8 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.parser.Parser;
 
 import java.util.Scanner;
