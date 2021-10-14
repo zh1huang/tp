@@ -78,6 +78,7 @@ public class Parser {
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     /**
      * Parses the User input line. Checks the user input line against the basic command format
      * and extracts the command word which is the first word in the user input line. After
@@ -85,12 +86,12 @@ public class Parser {
      * respective cases depending on the command word.
      *
      * @param userInputLine The user input Line.
-     * @param list The itemContainer used to prepare the command.
+     * @param list          The itemContainer used to prepare the command.
      * @return A string indicating parse success or failure.
-     * @throws IllegalFormatException If user input line does not match the respective command format.
-     * @throws ItemNotExistException If item name not found in the container.
+     * @throws IllegalFormatException   If user input line does not match the respective command format.
+     * @throws ItemNotExistException    If item name not found in the container.
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
-     * by the user.
+     *                                  by the user.
      */
     public Command parseCommand(String userInputLine, ItemContainer list) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
@@ -232,18 +233,18 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
-     * @throws IllegalFormatException If the input format is wrong.
-     * @throws ItemNotExistException If the item cannot be found from the container.
+     * @throws IllegalFormatException   If the input format is wrong.
+     * @throws ItemNotExistException    If the item cannot be found from the container.
      * @throws NoPropertyFoundException If the associated item property cannot be found.
      */
     private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
-        ItemNotExistException, NoPropertyFoundException {
+            ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Edit Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String selectedProperty = matcher.group("property");
