@@ -37,13 +37,13 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_emptyList_throwsItemNotExitException() {
+    public void execute_emptyList_throwsItemNotExistException() {
         testCommand = new EditCommand("HarryPotter", "16.1", "20");
         assertThrows(ItemNotExistException.class, () -> testCommand.execute(testList));
     }
 
     @Test
-    public void execute_noMatchedItemInList_throwItemNotExitException() throws Exception {
+    public void execute_noMatchedItemInList_throwItemNotExistException() throws Exception {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         testCommand = new EditCommand("HarryPotter2", "16.1", "20");
         assertThrows(ItemNotExistException.class, () -> testCommand.execute(testList));
