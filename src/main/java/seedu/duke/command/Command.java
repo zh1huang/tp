@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.DuplicateItemException;
 
 /**
  * The abstract command.
