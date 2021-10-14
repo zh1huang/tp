@@ -87,7 +87,7 @@ public class Parser {
      *
      * @param userInputLine The user input Line.
      * @param list          The itemContainer used to prepare the command.
-     * @return A string indicating parse success or failure.
+     * @return Command object depending on the command type.
      * @throws IllegalFormatException   If user input line does not match the respective command format.
      * @throws ItemNotExistException    If item name not found in the container.
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
@@ -140,7 +140,7 @@ public class Parser {
      * Parses add command arguments.
      *
      * @param arguments The additional arguments after command word.
-     * @return A string indicating parse success or failure.
+     * @return AddCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
@@ -164,7 +164,7 @@ public class Parser {
      * Parses delete command arguments.
      *
      * @param arguments The additional arguments after command word.
-     * @return A string indicating parse success or failure.
+     * @return DeleteCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
@@ -186,7 +186,7 @@ public class Parser {
      * Parses list command arguments.
      *
      * @param arguments The additional arguments after command word.
-     * @return A string indicating parse success or failure.
+     * @return ListCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
@@ -207,7 +207,7 @@ public class Parser {
      * Parses get command arguments.
      *
      * @param arguments The additional arguments after command word.
-     * @return A string indicating parse success or failure.
+     * @return GetCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareGet(String arguments, ItemContainer list) throws IllegalFormatException {
@@ -231,7 +231,7 @@ public class Parser {
      * Parses edit command arguments.
      *
      * @param arguments The additional arguments after command word.
-     * @return A string indicating parse success or failure.
+     * @return EditCommand object.
      * @throws IllegalFormatException   If the input format is wrong.
      * @throws ItemNotExistException    If the item cannot be found from the container.
      * @throws NoPropertyFoundException If the associated item property cannot be found.
@@ -250,26 +250,36 @@ public class Parser {
         String newValue = matcher.group("value");
 
         if (selectedProperty.equals("purchaseCost")) {
-            String updatedPurchaseCost = newValue;
             String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
+            String updatedPurchaseCost = newValue;
 
-            Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
-            assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
-            logger.log(Level.INFO, "EditCommand parse success.");
+            return formEditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
 
-            return editCommand;
         } else if (selectedProperty.equals("sellingPrice")) {
             String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
             String updatedSellingPrice = newValue;
 
-            Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
-            assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
-            logger.log(Level.INFO, "EditCommand parse success.");
+            return formEditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
 
-            return editCommand;
         } else {
             logger.log(Level.WARNING, "EditCommand can't find item property.");
             throw new NoPropertyFoundException(selectedProperty);
         }
+    }
+
+    /**
+     * Creates EditCommand Object.
+     *
+     * @param itemName Name of item to be edited.
+     * @param updatedPurchaseCost New Purchase Cost.
+     * @param updatedSellingPrice New Selling Price.
+     * @return EditCommand object.
+     */
+    private Command formEditCommand(String itemName, String updatedPurchaseCost, String updatedSellingPrice) {
+        Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+        assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
+        logger.log(Level.INFO, "EditCommand parse success.");
+
+        return editCommand;
     }
 }
