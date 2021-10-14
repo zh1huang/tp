@@ -19,7 +19,7 @@ public class ListCommand extends Command {
             Item selectedItem = list.getItem(i);
             int index = i + 1;
             info += String.format(ITEM_INFO, index,
-                    selectedItem.getName(),selectedItem.getPurchaseCost(),selectedItem.getSellingPrice());
+                    selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice());
         }
         return info;
     }
