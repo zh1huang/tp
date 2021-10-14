@@ -6,4 +6,17 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What is your name?
-Hello hello
+Hello someone, what can I do for you?
+This item has been added to the list.
+1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
+This item has been added to the list.
+1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
+2. The Great Gatsby (purchase cost: 15, selling price: 45.5)
+This item has been removed from the list.
+1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
+name: Beauty and the beast
+selling price: 25.5
+purchase cost: 10
+This item has been updated.
+1. Beauty and the beast (purchase cost: 9.5, selling price: 25.5)
+See you next time
