@@ -29,9 +29,9 @@ public class Parser {
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
                     + " c/(?<category>[^/]+)"
-                    + " p/[$](?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+                    + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " s/[$](?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+                    + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
                     + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
                     + "( r/(?<remarks>[^/]+))?$"); // optional argument
@@ -49,7 +49,7 @@ public class Parser {
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
                     + " p/(?<property>[^/]+)"
-                    + " v/[$](?<value>([0-9]+([.][0-9]{1,2})?))"
+                    + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
                     + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
@@ -85,13 +85,13 @@ public class Parser {
      * extraction of the command word, pass the remaining user input line arguments to the
      * respective cases depending on the command word.
      *
-     * @param userInputLine The user input Line.
-     * @param list          The itemContainer used to prepare the command.
-     * @return Command object depending on the command type.
-     * @throws IllegalFormatException   If user input line does not match the respective command format.
-     * @throws ItemNotExistException    If item name not found in the container.
+     * @param userInputLine The user input Line
+     * @param list          The itemContainer used to prepare the command
+     * @return Command object depending on the command type
+     * @throws IllegalFormatException   If user input line does not match the respective command format
+     * @throws ItemNotExistException    If item name not found in the container
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
-     *                                  by the user.
+     *                                  by the user
      */
     public Command parseCommand(String userInputLine, ItemContainer list) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {

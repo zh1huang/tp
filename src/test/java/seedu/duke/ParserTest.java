@@ -101,16 +101,16 @@ public class ParserTest {
     public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
             NoPropertyFoundException, IllegalFormatException {
 
-        String input1 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " c/" + CATEGORY_EXAMPLE_1 + " p/$"
-                + PURCHASE_COST_EXAMPLE_1 + " s/$" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
+        String input1 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " c/" + CATEGORY_EXAMPLE_1 + " p/"
+                + PURCHASE_COST_EXAMPLE_1 + " s/" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
 
         AddCommand expectedCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1,
                 PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
 
         assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
 
-        String input2 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " c/" + CATEGORY_EXAMPLE_2 + " p/$"
-                + PURCHASE_COST_EXAMPLE_2 + " s/$" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_2;
+        String input2 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " c/" + CATEGORY_EXAMPLE_2 + " p/"
+                + PURCHASE_COST_EXAMPLE_2 + " s/" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_2;
 
         AddCommand expectedCommand2 = new AddCommand(ITEM_NAME_EXAMPLE_2,
                 PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2);
@@ -126,7 +126,7 @@ public class ParserTest {
     public void parse_deleteCommandInvalidArgs_throwsIllegalFormatException() {
         final String[] inputs = {
             "delete ",
-            "delete p/$37",
+            "delete p/37",
             "delete q/37"
         };
 
@@ -237,13 +237,13 @@ public class ParserTest {
 
         // Test edit Purchase Cost
         String input1 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " p/" + PURCHASE_COST_PROPERTY_STRING
-                + " v/$" + VALUE_EXAMPLE_1;
+                + " v/" + VALUE_EXAMPLE_1;
         Command expectedCommand1 = new EditCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1);
         assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
 
         // Test edit Selling Price
         String input2 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " p/" + SELLING_PRICE_PROPERTY_STRING
-                + " v/$" + VALUE_EXAMPLE_2;
+                + " v/" + VALUE_EXAMPLE_2;
         Command expectedCommand2 = new EditCommand(ITEM_NAME_EXAMPLE_2, SELLING_PRICE_PROPERTY_STRING, VALUE_EXAMPLE_2);
         assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
     }
