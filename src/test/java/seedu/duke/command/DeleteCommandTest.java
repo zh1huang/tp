@@ -49,7 +49,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_noMatchedItemInList_throwsItemNotExitException() throws DuplicateItemException {
+    public void execute_noMatchedItemInList_throwsItemNotExistException() throws DuplicateItemException {
         testList.addItem(testItem1);
         assertThrows(ItemNotExistException.class, () -> testCommand2.execute(testList));
     }
