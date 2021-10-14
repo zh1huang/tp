@@ -1,25 +1,49 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.model.ItemContainer;
+import seedu.duke.parser.Parser;
+
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Duke {
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static String userInputSample = "add n/Geronimo c/book p/$19 q/1";
-    public static String LIST_userInputSample = "list c/all";
+    public static void main(String[] args) throws Exception {
+
+        Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        logger.setLevel(Level.WARNING);
+
+        ItemContainer warehouse = new ItemContainer("warehouse");
 
 
-    public static void main(String[] args) {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        System.out.println("Hello " + in.nextLine() + ", what can I do for you?");
+        String input = in.nextLine();
+        Parser parser = new Parser();
+        while (!input.trim().equals("bye")) {
 
+            try {
+                Command command = parser.parseCommand(input, warehouse);
+                command.execute(warehouse); // todo remove execute input argument because unnecessary.
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            // prepare for next input
+            input = in.nextLine();
+        }
+        System.out.println("See you next time");
     }
 }

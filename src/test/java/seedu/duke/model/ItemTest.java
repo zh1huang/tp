@@ -14,12 +14,12 @@ class ItemTest {
     Item testItem;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IllegalArgumentException {
         testItem = new Item("Dune", "1.00", "2.00");
     }
 
     @Test
-    void setName_correctInputFormat_setNormally() {
+    void setName_correctInputFormat_setNormally() throws IllegalArgumentException {
         String[] correctInputs =
             new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
         for (String input : correctInputs) {
@@ -42,7 +42,7 @@ class ItemTest {
     }
 
     @Test
-    void setPurchaseCost_correctInputFormat_setNormally() {
+    void setPurchaseCost_correctInputFormat_setNormally() throws IllegalArgumentException {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
         for (String input : correctInput) {
             testItem.setPurchaseCost(input);
@@ -78,13 +78,13 @@ class ItemTest {
     }
 
     @Test
-    void getPurchaseCost() {
+    void getPurchaseCost() throws IllegalArgumentException {
         testItem.setPurchaseCost("10.001");
         assertEquals("10.001", testItem.getPurchaseCost());
     }
 
     @Test
-    void setSellingPrice_correctInputFormat_setNormally() {
+    void setSellingPrice_correctInputFormat_setNormally() throws IllegalArgumentException {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
         for (String input : correctInput) {
             testItem.setSellingPrice(input);
@@ -120,7 +120,7 @@ class ItemTest {
     }
 
     @Test
-    void getSellingPrice() {
+    void getSellingPrice() throws IllegalArgumentException {
         testItem.setSellingPrice("10.001");
         assertEquals("10.001", testItem.getSellingPrice());
     }

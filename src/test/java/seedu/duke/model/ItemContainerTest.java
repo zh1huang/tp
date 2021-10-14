@@ -19,16 +19,15 @@ class ItemContainerTest {
     ItemStub testItem3;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IllegalArgumentException {
         testContainer = new ItemContainer("testContainer");
-
         testItem1 = new ItemStub("Item1");
         testItem2 = new ItemStub("Item2");
         testItem3 = new ItemStub("Item3");
     }
 
     @Test
-    void setName_correctInputFormat_setNormally() {
+    void setName_correctInputFormat_setNormally() throws IllegalArgumentException {
         String[] correctInputs =
             new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
         for (String input : correctInputs) {
@@ -56,33 +55,39 @@ class ItemContainerTest {
     }
 
     @Test
-    void addItem_normalInput_addNormally() {
+    void addItem_repeatedInput_throwsDuplicateItemException() throws DuplicateItemException {
+        testContainer.addItem(testItem1);
+        assertThrows(DuplicateItemException.class, () -> testContainer.addItem(testItem1));
+    }
+
+    @Test
+    void addItem_normalInput_addNormally() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         assertEquals(1, testContainer.getItemCount());
         assertEquals(testItem1, testContainer.getItem(0));
     }
 
     @Test
-    void deleteItem_nullInput_throwsNullPointerException() {
+    void deleteItem_nullInput_throwsNullPointerException() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         assertThrows(NullPointerException.class, () -> testContainer.deleteItem(null));
     }
 
     @Test
-    void deleteItem_itemNotExist_throwsItemNotExistException() {
+    void deleteItem_itemNotExist_throwsItemNotExistException() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         assertThrows(ItemNotExistException.class, () -> testContainer.deleteItem(testItem2));
     }
 
     @Test
-    void deleteItem_itemExists_deleteNormally() {
+    void deleteItem_itemExists_deleteNormally() throws DuplicateItemException, ItemNotExistException {
         testContainer.addItem(testItem1);
         testContainer.deleteItem(testItem1);
         assertEquals(0, testContainer.getItemCount());
     }
 
     @Test
-    void updateItem_nullInput_throwsNullPointerException() {
+    void updateItem_nullInput_throwsNullPointerException() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         assertThrows(NullPointerException.class, () -> testContainer.updateItem(null, null));
         assertThrows(NullPointerException.class, () -> testContainer.updateItem(testItem1, null));
@@ -92,14 +97,14 @@ class ItemContainerTest {
     }
 
     @Test
-    void updateItem_originalItemNotExist_throwsItemNotExistException() {
+    void updateItem_originalItemNotExist_throwsItemNotExistException() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         assertThrows(ItemNotExistException.class, () -> testContainer.updateItem(testItem2, testItem2));
         assertThrows(ItemNotExistException.class, () -> testContainer.updateItem(testItem2, testItem3));
     }
 
     @Test
-    void updateItem_updatedItemExist_throwsDuplicateItemException() {
+    void updateItem_updatedItemExist_throwsDuplicateItemException() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         testContainer.addItem(testItem2);
         assertThrows(DuplicateItemException.class, () -> testContainer.updateItem(testItem1, testItem2));
@@ -107,7 +112,8 @@ class ItemContainerTest {
     }
 
     @Test
-    void updateItem_originalExistUpdatedNotExist_updateNormally() {
+    void updateItem_originalExistUpdatedNotExist_updateNormally() throws DuplicateItemException,
+            ItemNotExistException, IllegalArgumentException {
         testContainer.addItem(testItem1);
         testContainer.updateItem(testItem1, testItem2);
         assertEquals(1, testContainer.getItemCount());
@@ -115,7 +121,7 @@ class ItemContainerTest {
     }
 
     @Test
-    void getItem_wrongIndex_throwsIndexOutOfBoundsException() {
+    void getItem_wrongIndex_throwsIndexOutOfBoundsException() throws DuplicateItemException {
         assertThrows(IndexOutOfBoundsException.class, () -> testContainer.getItem(0));
         assertThrows(IndexOutOfBoundsException.class, () -> testContainer.getItem(1));
         testContainer.addItem(testItem1);
@@ -129,7 +135,7 @@ class ItemContainerTest {
     }
 
     @Test
-    void getItem_correctIndex_returnNormally() {
+    void getItem_correctIndex_returnNormally() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         testContainer.addItem(testItem2);
         assertEquals(testItem1, testContainer.getItem(0));
@@ -137,7 +143,7 @@ class ItemContainerTest {
     }
 
     @Test
-    void contains_normalInput_returnNormally() {
+    void contains_normalInput_returnNormally() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         assertTrue(testContainer.contains(testItem1.getName()));
         assertFalse(testContainer.contains(testItem2.getName()));
@@ -153,10 +159,10 @@ class ItemContainerTest {
     }
 
     @Test
-    void toStringTest() {
+    void toStringTest() throws DuplicateItemException {
         testContainer.addItem(testItem1);
         testContainer.addItem(testItem2);
-        String expectedResult = testItem1.getName() + "\n" + testItem2.getName();
+        String expectedResult = "1. " + testItem1.getName() + "\n" + "2. " + testItem2.getName();
         assertEquals(expectedResult, testContainer.toString());
     }
 }

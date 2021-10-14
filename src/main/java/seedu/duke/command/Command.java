@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.ItemContainer;
 
 /**
@@ -11,7 +12,8 @@ public abstract class Command {
      * Abstract execute method.
      *
      * @param list the ItemContainer that manipulates the item
+     * @throws CommandException if anything goes wrong
      */
-    public abstract void execute(ItemContainer list);
+    public abstract void execute(ItemContainer list) throws CommandException;
 }
 

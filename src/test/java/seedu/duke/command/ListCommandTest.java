@@ -31,11 +31,12 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_itemsAlreadyInList_listsNormally() {
+    public void execute_itemsAlreadyInList_listsNormally() throws Exception {
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
         testCommand.execute(testList);
-        String expected = "HarryPotter\nLOTR";
+        String expected = "1. HarryPotter (purchase cost: 16.1, selling price: 25.12)\n"
+                + "2. LOTR (purchase cost: 10.2, selling price: 15.7)";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 

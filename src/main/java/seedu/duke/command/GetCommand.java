@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
@@ -17,13 +18,32 @@ public class GetCommand extends Command {
     }
 
     /**
-     * Executes the operation of getting the information the item.
+     * Retrieves information of item from list.
      *
-     * @param list the ItemContainer in which information of item is retrieved.
+     * @param list the ItemContainer in which information of item is retrieved
+     * @return information of item
+     * @throws ItemNotExistException if specified item does not exist
      */
-    public void execute(ItemContainer list) {
-        Item selectedItem = list.getItem(name);
-        String output = list.getDescription(selectedItem);
-        System.out.println(output);
+    private String getInfo(ItemContainer list) throws ItemNotExistException {
+        try {
+            int initialSize = list.getSize();
+            Item selectedItem = list.getItem(name);
+            assert initialSize == list.getSize();
+            return "name: " + selectedItem.getName() + "\nselling price: " + selectedItem.getSellingPrice()
+                    + "\npurchase cost: " + selectedItem.getPurchaseCost();
+        } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            throw new ItemNotExistException(e.getMessage());
+        }
+    }
+
+    /**
+     * Executes the operation of retrieving information of specified item.
+     *
+     * @param list the ItemContainer that manipulates the item
+     * @throws ItemNotExistException if specified item does not exist
+     */
+    public void execute(ItemContainer list) throws ItemNotExistException {
+        String info = getInfo(list);
+        System.out.println(info);
     }
 }
