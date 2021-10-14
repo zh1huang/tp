@@ -21,13 +21,14 @@ public class GetCommand extends Command {
      * Executes the operation of getting the information the item.
      *
      * @param list the ItemContainer in which information of item is retrieved.
+     * @throws ItemNotExistException if the selected item does not exist
      */
     public void execute(ItemContainer list) throws ItemNotExistException {
         try {
             int initialSize = list.getSize();
             Item selectedItem = list.getItem(name);
             System.out.printf((ItemContainer.ITEM_DESCRIPTION) + "%n",
-                selectedItem.getName(),selectedItem.getSellingPrice(), selectedItem.getPurchaseCost());
+                    selectedItem.getName(), selectedItem.getSellingPrice(), selectedItem.getPurchaseCost());
             assert initialSize == list.getSize() : "List size should not be changed";
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             throw new ItemNotExistException(e.getMessage());
