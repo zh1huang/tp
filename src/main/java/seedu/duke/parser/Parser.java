@@ -84,9 +84,13 @@ public class Parser {
      * extraction of the command word, pass the remaining user input line arguments to the
      * respective cases depending on the command word.
      *
-     * @param userInputLine The user input Line
-     * @param list The itemContainer used to prepare the command
-     * @return A string indicating parse success or failure
+     * @param userInputLine The user input Line.
+     * @param list The itemContainer used to prepare the command.
+     * @return A string indicating parse success or failure.
+     * @throws IllegalFormatException If user input line does not match the respective command format.
+     * @throws ItemNotExistException If item name not found in the container.
+     * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
+     * by the user.
      */
     public Command parseCommand(String userInputLine, ItemContainer list) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
@@ -135,9 +139,9 @@ public class Parser {
     /**
      * Parses add command arguments.
      *
-     * @param arguments The additional arguments after command word
-     * @return A string indicating parse success or failure
-     * @throws IllegalFormatException when the input format is wrong
+     * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
+     * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -159,9 +163,9 @@ public class Parser {
     /**
      * Parses delete command arguments.
      *
-     * @param arguments The additional arguments after command word
-     * @return A string indicating parse success or failure
-     * @throws IllegalFormatException when the input format is wrong
+     * @param arguments The additional arguments after command word.
+     * @return A string indicating parse success or failure.
+     * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -183,7 +187,7 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
-     * @throws IllegalFormatException when the input format is wrong
+     * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -204,7 +208,7 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
-     * @throws IllegalFormatException when the input format is wrong
+     * @throws IllegalFormatException If the input format is wrong.
      */
     private Command prepareGet(String arguments, ItemContainer list) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -228,7 +232,9 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      * @return A string indicating parse success or failure.
-     * @throws IllegalFormatException when the input format is wrong
+     * @throws IllegalFormatException If the input format is wrong.
+     * @throws ItemNotExistException If the item cannot be found from the container.
+     * @throws NoPropertyFoundException If the associated item property cannot be found.
      */
     private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
