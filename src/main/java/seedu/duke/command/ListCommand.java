@@ -5,6 +5,8 @@ import seedu.duke.model.ItemContainer;
 
 public class ListCommand extends Command {
 
+    private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
+
     /**
      * Retrieves list of items from ItemContainer.
      *
@@ -12,20 +14,14 @@ public class ListCommand extends Command {
      * @return list of items
      */
     private String getList(ItemContainer list) {
-        StringBuilder result = new StringBuilder();
+        String info = "";
         for (int i = 0; i < list.getSize();  i++) {
             Item selectedItem = list.getItem(i);
-            result.append(i + 1).append(". ")
-                    .append(selectedItem.getName())
-                    .append(" (purchase cost: ")
-                    .append(selectedItem.getPurchaseCost())
-                    .append(", selling price: ")
-                    .append(selectedItem.getSellingPrice())
-                    .append(")")
-                    .append("\n");
+            int index = i + 1;
+            info += String.format(ITEM_INFO, index,
+                    selectedItem.getName(),selectedItem.getPurchaseCost(),selectedItem.getSellingPrice());
         }
-
-        return result.toString().trim();
+        return info;
     }
 
     /**
