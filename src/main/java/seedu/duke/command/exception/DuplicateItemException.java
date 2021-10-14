@@ -1,6 +1,6 @@
 package seedu.duke.command.exception;
 
-public class DuplicateItemException extends Exception {
+public class DuplicateItemException extends CommandException {
 
     public static final String MESSAGE_DUPLICATE_ITEM = "The item %s already exists";
 

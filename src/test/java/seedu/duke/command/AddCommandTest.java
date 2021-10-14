@@ -3,6 +3,7 @@ package seedu.duke.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.IllegalArgumentException;
 
@@ -17,12 +18,12 @@ public class AddCommandTest {
     private Command testCommand1;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException, seedu.duke.model.exception.IllegalArgumentException {
+    public void setUp() throws seedu.duke.model.exception.IllegalArgumentException {
         testList = new ItemContainer("test");
     }
 
     @Test
-    public void execute_emptyList_addsNormally() throws Exception {
+    public void execute_emptyList_addsNormally() throws CommandException {
         testCommand1 = new AddCommand("HarryPotter", "16.1",
                 "25.12");
         int numberOfItemsBeforeAdding = testList.getSize();
@@ -33,7 +34,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_itemsWithSameNameInList_addsNormally() throws Exception {
+    public void execute_itemsWithSameNameInList_addsNormally() throws CommandException {
         testCommand1 = new AddCommand("HarryPotter", "16.1",
                 "25.12");
         int numberOfItemsBeforeAdding = testList.getSize();

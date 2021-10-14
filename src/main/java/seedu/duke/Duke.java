@@ -2,8 +2,6 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.IllegalArgumentException;
-import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.Parser;
 import seedu.duke.parser.exception.IllegalFormatException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
