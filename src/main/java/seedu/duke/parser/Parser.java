@@ -11,6 +11,8 @@ import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,6 +77,7 @@ public class Parser {
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
 
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     /**
      * Parses the User input line. Checks the user input line against the basic command format
      * and extracts the command word which is the first word in the user input line. After
@@ -87,10 +90,12 @@ public class Parser {
      */
     public Command parseCommand(String userInputLine, ItemContainer list) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
+        logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
         /* Checks valid basic command format */
         if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Basic Command Format");
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
 
@@ -120,10 +125,10 @@ public class Parser {
             command = prepareEdit(arguments, list);
             break;
 
-
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
+
         return command;
     }
 
@@ -138,13 +143,17 @@ public class Parser {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Add Command Format");
             throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String purchaseCost = matcher.group("purchaseCost");
         String sellingPrice = matcher.group("sellingPrice");
-        return new AddCommand(itemName, purchaseCost, sellingPrice);
+        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice);
+        assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
+        logger.log(Level.INFO, "AddCommand parse success.");
+        return addCommand;
     }
 
     /**
@@ -158,11 +167,15 @@ public class Parser {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Delete Command Format");
             throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
-        return new DeleteCommand(itemName);
+        Command deleteCommand = new DeleteCommand(itemName);
+        assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
+        logger.log(Level.INFO, "DeleteCommand parse success.");
+        return deleteCommand;
     }
 
     /**
@@ -176,11 +189,14 @@ public class Parser {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match List Command Format");
             throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
         }
-
-        return new ListCommand();
+        Command listCommand = new ListCommand();
+        assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
+        logger.log(Level.INFO, "ListCommand parse success.");
+        return listCommand;
     }
 
     /**
@@ -194,11 +210,17 @@ public class Parser {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Get Command Format");
             throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
-        return new GetCommand(matcher.group("itemName"));
+        String itemName = matcher.group("itemName");
+
+        Command getCommand = new GetCommand(itemName);
+        assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
+        logger.log(Level.INFO, "GetCommand parse success.");
+        return getCommand;
     }
 
     /**
@@ -213,6 +235,7 @@ public class Parser {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Edit Command Format");
             throw new IllegalFormatException(String.format(
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
@@ -223,12 +246,23 @@ public class Parser {
         if (selectedProperty.equals("purchaseCost")) {
             String updatedPurchaseCost = newValue;
             String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
-            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+
+            Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+            assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
+            logger.log(Level.INFO, "EditCommand parse success.");
+
+            return editCommand;
         } else if (selectedProperty.equals("sellingPrice")) {
             String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
             String updatedSellingPrice = newValue;
-            return new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+
+            Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+            assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
+            logger.log(Level.INFO, "EditCommand parse success.");
+
+            return editCommand;
         } else {
+            logger.log(Level.WARNING, "EditCommand can't find item property.");
             throw new NoPropertyFoundException(selectedProperty);
         }
     }
