@@ -36,12 +36,12 @@ public class EditCommand extends Command {
      * Executes the update operation.
      *
      * @param list the itemContainer to remove the item from
-     * @throws ItemNotExistException when cannot find any item with the name
-     * @throws NullPointerException when the name specified is null
+     * @throws ItemNotExistException    when cannot find any item with the name
+     * @throws NullPointerException     when the name specified is null
      * @throws IllegalArgumentException when the argument is invalid
      */
     public void execute(ItemContainer list) throws ItemNotExistException,
-            IllegalArgumentException {
+            NullPointerException, IllegalArgumentException {
         try {
             int sizeBeforeEditing = list.getSize();
             Item selectedItem = list.getItem(name);

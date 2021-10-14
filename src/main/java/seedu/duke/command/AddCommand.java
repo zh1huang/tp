@@ -37,6 +37,7 @@ public class AddCommand extends Command {
      *
      * @param list the itemContainer to remove the item from
      * @throws IllegalArgumentException if the input argument is wrong
+     * @throws DuplicateItemException if exactly the same item is added to the list
      */
     @Override
     public void execute(ItemContainer list) throws IllegalArgumentException, DuplicateItemException {
