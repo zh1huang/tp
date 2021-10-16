@@ -4,8 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.command.exception.CommandException;
+import seedu.duke.model.ContainerList;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.IllegalArgumentException;
+import seedu.duke.model.exception.DuplicateItemContainerException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +20,8 @@ public class AddCommandTest {
     private Command testCommand1;
 
     @BeforeEach
-    public void setUp() throws seedu.duke.model.exception.IllegalArgumentException {
+    public void setUp() throws seedu.duke.model.exception.IllegalArgumentException, DuplicateItemContainerException {
+        ContainerList.getContainerList().resetContainerList();
         testList = new ItemContainer("test");
     }
 

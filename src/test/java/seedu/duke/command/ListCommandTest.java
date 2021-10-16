@@ -3,6 +3,7 @@ package seedu.duke.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.model.ContainerList;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import java.io.ByteArrayOutputStream;
@@ -18,6 +19,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+        ContainerList.getContainerList().resetContainerList();
         testList = new ItemContainer("test");
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         testList.addItem(new Item("LOTR", "10.2", "15.7"));

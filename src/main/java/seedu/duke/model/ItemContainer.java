@@ -1,5 +1,6 @@
 package seedu.duke.model;
 
+import seedu.duke.model.exception.DuplicateItemContainerException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
@@ -30,10 +31,19 @@ public class ItemContainer {
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws IllegalArgumentException if the name contains other characters
      */
-    public ItemContainer(String name) throws IllegalArgumentException {
+    public ItemContainer(String name) throws IllegalArgumentException, DuplicateItemContainerException {
+        ContainerList containerList = ContainerList.getContainerList();
+        if (containerList.existContainer(name)) {
+            throw new DuplicateItemContainerException(name);
+        }
         setName(name);
         items = new ArrayList<>();
+        containerList.addContainer(this);
         logger.log(Level.INFO, String.format("ItemContainer %s created", name));
+    }
+
+    public void deleteItemContainer() {
+        ContainerList.getContainerList().deleteContainer(this);
     }
 
     /**
@@ -52,8 +62,11 @@ public class ItemContainer {
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws IllegalArgumentException if the name contains other characters
      */
-    public void setName(String name) throws IllegalArgumentException {
+    public void setName(String name) throws IllegalArgumentException, DuplicateItemContainerException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
+            if (ContainerList.getContainerList().existContainer(name)) {
+                throw new DuplicateItemContainerException(name);
+            }
             String temp = this.getName();
             this.name = name;
             logger.log(Level.INFO, String.format("Successfully set ItemContainer %s's name as %s", temp, name));
