@@ -35,4 +35,15 @@ public class ListCommand extends Command {
         System.out.println(result);
         assert initialSize == list.getSize() : "List size should not be changed";
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        return other instanceof ListCommand;
+    }
 }

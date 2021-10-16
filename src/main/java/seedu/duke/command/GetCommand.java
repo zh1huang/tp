@@ -46,4 +46,20 @@ public class GetCommand extends Command {
         String info = getInfo(list);
         System.out.println(info);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof GetCommand)) {
+            return false;
+        }
+
+        GetCommand command = (GetCommand) other;
+        return name.equals(command.name);
+    }
 }

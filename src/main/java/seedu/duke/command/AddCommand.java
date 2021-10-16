@@ -59,4 +59,22 @@ public class AddCommand extends Command {
             throw new DuplicateItemException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof AddCommand)) {
+            return false;
+        }
+
+        AddCommand command = (AddCommand) other;
+        return name.equals(command.name)
+                && purchaseCost.equals(command.purchaseCost)
+                && sellingPrice.equals(command.sellingPrice);
+    }
 }
