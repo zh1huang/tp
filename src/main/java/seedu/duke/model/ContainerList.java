@@ -130,8 +130,8 @@ public class ContainerList {
      * @throws ItemNotExistException If the item does not belong to any ItemContainer
      */
     public ItemContainer containerOfItem(Item item) throws ItemNotExistException {
-        for (ItemContainer container: containers) {
-            if (container.contains(item)){
+        for (ItemContainer container : containers) {
+            if (container.contains(item)) {
                 return container;
             }
         }
