@@ -3,6 +3,7 @@ package seedu.duke.model;
 import seedu.duke.model.exception.DuplicateItemContainerException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemContainerNotExistException;
+import seedu.duke.model.exception.ItemNotExistException;
 
 import java.util.ArrayList;
 
@@ -119,5 +120,21 @@ public class ContainerList {
             temp.append("\n");
         }
         return temp.toString();
+    }
+
+    /**
+     * Return the ItemContainer that is storing the specified Item.
+     *
+     * @param item The target item
+     * @return The ItemContainer that contains the item
+     * @throws ItemNotExistException If the item does not belong to any ItemContainer
+     */
+    public ItemContainer containerOfItem(Item item) throws ItemNotExistException {
+        for (ItemContainer container: containers) {
+            if (container.contains(item)){
+                return container;
+            }
+        }
+        throw new ItemNotExistException(item.getName());
     }
 }
