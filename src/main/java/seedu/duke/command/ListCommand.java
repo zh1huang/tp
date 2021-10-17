@@ -11,6 +11,8 @@ public class ListCommand extends Command {
 
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
+    private static final String EMPTY_LIST_MESSAGE = "List is empty!";
 
     /**
      * Retrieves list of items from ItemContainer.
@@ -18,12 +20,9 @@ public class ListCommand extends Command {
      * @param list the ItemContainer in which list is retrieved
      * @return list of items
      */
-    private String getList(ItemContainer list) throws EmptyListException {
+    private String getList(ItemContainer list) {
         StringBuilder info = new StringBuilder();
-        if (list.getSize() == 0) {
-            logger.log(Level.WARNING, "ListCommand failed to execute because list is empty");
-            throw new EmptyListException("List is empty");
-        }
+
 
         for (int i = 0; i < list.getSize();  i++) {
             Item selectedItem = list.getItem(i);
@@ -41,9 +40,14 @@ public class ListCommand extends Command {
      */
     public void execute(ItemContainer list) throws EmptyListException {
         int initialSize = list.getSize();
+        if (list.getSize() == 0) {
+            logger.log(Level.WARNING, "ListCommand failed to execute because list is empty");
+            throw new EmptyListException("List is empty");
+        }
+
         String result = getList(list);
         assert initialSize == list.getSize() : "List size should not be changed";
-        System.out.println(result);
+        System.out.println(LIST_COMPLETE_MESSAGE + result);
         logger.log(Level.INFO, "ListCommand successfully executed");
     }
 

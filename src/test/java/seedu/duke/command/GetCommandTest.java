@@ -38,7 +38,8 @@ public class GetCommandTest {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         assertTrue(testList.contains("HarryPotter"));
         testCommand1.execute(testList);
-        String expected = String.format(ItemContainer.ITEM_DESCRIPTION, "HarryPotter", "25.12", "16.1");
+        String expected = "Here is the information of your item\n"
+                + String.format(ItemContainer.ITEM_DESCRIPTION, "HarryPotter", "25.12", "16.1");
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 

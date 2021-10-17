@@ -11,6 +11,7 @@ public class GetCommand extends Command {
 
     private final String name;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item\n";
 
     /**
      * Constructor for GetCommand.
@@ -49,7 +50,7 @@ public class GetCommand extends Command {
      */
     public void execute(ItemContainer list) throws ItemNotExistException {
         String info = getInfo(list);
-        System.out.println(info);
+        System.out.println(GET_COMPLETE_MESSAGE + info);
         logger.log(Level.INFO, "GetCommand successfully executed");
     }
 
