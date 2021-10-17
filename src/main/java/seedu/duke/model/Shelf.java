@@ -1,9 +1,9 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.DuplicateItemContainerException;
+import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
-import seedu.duke.model.exception.ItemContainerNotExistException;
+import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.model.exception.ItemNotExistException;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * Represents a container that is able to store items.
  * e.g. A shelf
  */
-public class ItemContainer {
+public class Shelf {
 
     public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
@@ -26,90 +26,90 @@ public class ItemContainer {
     private final ArrayList<Item> items;
 
     /**
-     * Constructor for the ItemContainer class.
+     * Constructor for the Shelf class.
      *
-     * @param name new name for the ItemContainer
+     * @param name new name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws IllegalArgumentException if the name contains other characters
      */
-    public ItemContainer(String name) throws IllegalArgumentException, DuplicateItemContainerException {
-        ContainerList containerList = ContainerList.getContainerList();
-        if (containerList.existContainer(name)) {
-            throw new DuplicateItemContainerException(name);
+    public Shelf(String name) throws IllegalArgumentException, DuplicateShelfException {
+        ShelfList shelfList = ShelfList.getShelfList();
+        if (shelfList.existShelf(name)) {
+            throw new DuplicateShelfException(name);
         }
         setName(name);
         items = new ArrayList<>();
-        containerList.addContainer(this);
-        logger.log(Level.INFO, String.format("ItemContainer %s created", name));
+        shelfList.addShelf(this);
+        logger.log(Level.INFO, String.format("Shelf %s created", name));
     }
 
-    public void deleteItemContainer() throws ItemContainerNotExistException {
-        ContainerList.getContainerList().deleteContainer(this);
+    public void deleteShelf() throws ShelfNotExistException {
+        ShelfList.getShelfList().deleteShelf(this);
     }
 
     /**
-     * Returns the name of the ItemContainer. e.g. Shelf-Scifi
+     * Returns the name of the Shelf. e.g. Shelf-Scifi
      *
-     * @return name of the ItemContainer
+     * @return name of the Shelf
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Rename the ItemContainer to the new name.
+     * Rename the Shelf to the new name.
      *
      * @param name New name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws IllegalArgumentException if the name contains other characters
      */
-    public void setName(String name) throws IllegalArgumentException, DuplicateItemContainerException {
+    public void setName(String name) throws IllegalArgumentException, DuplicateShelfException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
-            if (ContainerList.getContainerList().existContainer(name)) {
-                throw new DuplicateItemContainerException(name);
+            if (ShelfList.getShelfList().existShelf(name)) {
+                throw new DuplicateShelfException(name);
             }
             String temp = this.getName();
             this.name = name;
-            logger.log(Level.INFO, String.format("Successfully set ItemContainer %s's name as %s", temp, name));
+            logger.log(Level.INFO, String.format("Successfully set Shelf %s's name as %s", temp, name));
         } else {
             logger.log(Level.WARNING, String.format(
-                "Trying to set ItemContainer %s's name as %s",
+                "Trying to set Shelf %s's name as %s",
                 this.getName(), name));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
     /**
-     * Adds the Item to the ItemContainer.
+     * Adds the Item to the Shelf.
      *
      * @param item The item to be added
-     * @throws DuplicateItemException If the item already exists in the ItemContainer
+     * @throws DuplicateItemException If the item already exists in the Shelf
      */
     public void addItem(Item item) throws DuplicateItemException {
         if (!contains(item)) {
             items.add(item);
-            logger.log(Level.INFO, String.format("Successfully added Item %s into ItemContainer %s",
+            logger.log(Level.INFO, String.format("Successfully added Item %s into Shelf %s",
                 item.getName(), this.getName()));
         } else {
-            logger.log(Level.WARNING, String.format("Item %s already exists in ItemContainer %s",
+            logger.log(Level.WARNING, String.format("Item %s already exists in Shelf %s",
                 item.getName(), this.getName()));
             throw new DuplicateItemException(item.getName());
         }
     }
 
     /**
-     * Remove the reference of the Item from the ItemContainer.
+     * Remove the reference of the Item from the Shelf.
      *
-     * @param item The Item to be removed from the ItemContainer
+     * @param item The Item to be removed from the Shelf
      * @throws ItemNotExistException If the Item does not exist
      */
     public void deleteItem(Item item) throws ItemNotExistException {
         if (item == null) {
-            logger.log(Level.WARNING, String.format("Trying to delete Null item from ItemContainer %s",
+            logger.log(Level.WARNING, String.format("Trying to delete Null item from Shelf %s",
                 this.getName()));
             throw new NullPointerException();
         } else if (!contains(item)) {
-            logger.log(Level.WARNING, String.format("Trying to delete Item %s which does not exist in ItemContainer %s",
+            logger.log(Level.WARNING, String.format("Trying to delete Item %s which does not exist in Shelf %s",
                 item.getName(), this.getName()));
             throw new ItemNotExistException(item.getName());
         }
@@ -117,40 +117,40 @@ public class ItemContainer {
     }
 
     /**
-     * Replace an Item in the ItemContainer with another Item.
+     * Replace an Item in the Shelf with another Item.
      *
-     * @param originalItem The Item that is in the ItemContainer
+     * @param originalItem The Item that is in the Shelf
      * @param updatedItem  The replacement Item
-     * @throws ItemNotExistException  If the originalItem does not exist in the ItemContainer
-     * @throws DuplicateItemException if the updatedItem already exist in the ItemContainer
+     * @throws ItemNotExistException  If the originalItem does not exist in the Shelf
+     * @throws DuplicateItemException if the updatedItem already exist in the Shelf
      */
     public void updateItem(Item originalItem, Item updatedItem)
             throws DuplicateItemException, ItemNotExistException {
         int index = items.indexOf(originalItem);
         if (originalItem == null) {
-            logger.log(Level.WARNING, String.format("Trying to update Null item from ItemContainer %s",
+            logger.log(Level.WARNING, String.format("Trying to update Null item from Shelf %s",
                 this.getName()));
             throw new NullPointerException();
         } else if (contains(updatedItem)) {
             logger.log(Level.WARNING, String.format(
-                "Trying to replace Item %s with %s, which already exists in the ItemContainer %s",
+                "Trying to replace Item %s with %s, which already exists in the Shelf %s",
                 originalItem.getName(), updatedItem.getName(), this.getName()));
             throw new DuplicateItemException(updatedItem.getName());
         } else if (index == -1) {
             logger.log(Level.WARNING, String.format(
-                "Trying to replace Item %s, which does not exist in ItemContainer %s",
+                "Trying to replace Item %s, which does not exist in Shelf %s",
                 originalItem.getName(), this.getName()));
             throw new ItemNotExistException(originalItem.getName());
         }
         items.set(index, updatedItem);
         assert items.get(index) == updatedItem : "Updated item should be at the index of the original item";
         logger.log(Level.INFO, String.format(
-            "Successfully replace Item %s with %s in the ItemContainer %s",
+            "Successfully replace Item %s with %s in the Shelf %s",
             originalItem.getName(), updatedItem.getName(), this.getName()));
     }
 
     /**
-     * Search through the ItemContainer and returns the first Item with the specified name.
+     * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param name The specified name of Item
      * @return Item with the specified name
@@ -158,7 +158,7 @@ public class ItemContainer {
      */
     public Item getItem(String name) throws ItemNotExistException {
         if (name == null) {
-            logger.log(Level.WARNING, String.format("Trying to get Null item from ItemContainer %s",
+            logger.log(Level.WARNING, String.format("Trying to get Null item from Shelf %s",
                 this.getName()));
             throw new NullPointerException();
         }
@@ -167,7 +167,7 @@ public class ItemContainer {
                 return item;
             }
         }
-        logger.log(Level.WARNING, String.format("Item %s is not fond in the ItemContainer %s",
+        logger.log(Level.WARNING, String.format("Item %s is not fond in the Shelf %s",
             name, this.getName()));
         throw new ItemNotExistException(name);
     }
@@ -184,7 +184,7 @@ public class ItemContainer {
     }
 
     /**
-     * Returns true if there is an Item in the ItemContainer with the specified name.
+     * Returns true if there is an Item in the Shelf with the specified name.
      *
      * @param name Name of the item
      * @return True if the item exists
@@ -199,7 +199,7 @@ public class ItemContainer {
     }
 
     /**
-     * Returns true if there is an Item in the ItemContainer with the specified name.
+     * Returns true if there is an Item in the Shelf with the specified name.
      *
      * @param item the specified item
      * @return True if the item exists
@@ -219,7 +219,7 @@ public class ItemContainer {
     }
 
     /**
-     * Returns a string of names of the items in the ItemContainer separated by "\n".
+     * Returns a string of names of the items in the Shelf separated by "\n".
      */
     @Override
     public String toString() {

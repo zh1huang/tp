@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.parser.Parser;
 
 import java.util.Scanner;
@@ -18,7 +18,7 @@ public class Duke {
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.WARNING);
 
-        ItemContainer warehouse = new ItemContainer("warehouse");
+        Shelf warehouse = new Shelf("warehouse");
 
 
         String logo = " ____        _        \n"

@@ -9,10 +9,10 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
-import seedu.duke.model.ContainerList;
+import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.DuplicateItemContainerException;
+import seedu.duke.model.Shelf;
+import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
@@ -55,13 +55,13 @@ public class ParserTest {
 
     public static final String WHITESPACE = "\\s";
     private Parser parser;
-    private ItemContainer list;
+    private Shelf list;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException, DuplicateItemContainerException {
+    public void setUp() throws IllegalArgumentException, DuplicateShelfException {
         parser = new Parser();
-        ContainerList.getContainerList().resetContainerList();
-        list = new ItemContainer("test");
+        ShelfList.getShelfList().resetShelfList();
+        list = new Shelf("test");
     }
 
     @Test
