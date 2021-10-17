@@ -9,8 +9,10 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.model.ContainerList;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
+import seedu.duke.model.exception.DuplicateItemContainerException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
@@ -56,8 +58,9 @@ public class ParserTest {
     private ItemContainer list;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException {
+    public void setUp() throws IllegalArgumentException, DuplicateItemContainerException {
         parser = new Parser();
+        ContainerList.getContainerList().resetContainerList();
         list = new ItemContainer("test");
     }
 

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import seedu.duke.model.ContainerList;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.ItemNotExistException;
@@ -19,6 +20,7 @@ public class EditCommandTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+        ContainerList.getContainerList().resetContainerList();
         testList = new ItemContainer("test");
     }
 

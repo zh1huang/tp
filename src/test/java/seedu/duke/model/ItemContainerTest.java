@@ -2,6 +2,7 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.model.exception.DuplicateItemContainerException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
@@ -19,7 +20,8 @@ class ItemContainerTest {
     ItemStub testItem3;
 
     @BeforeEach
-    void setup() throws IllegalArgumentException {
+    void setup() throws IllegalArgumentException, DuplicateItemContainerException {
+        ContainerList.getContainerList().resetContainerList();
         testContainer = new ItemContainer("testContainer");
         testItem1 = new ItemStub("Item1");
         testItem2 = new ItemStub("Item2");
@@ -27,7 +29,7 @@ class ItemContainerTest {
     }
 
     @Test
-    void setName_correctInputFormat_setNormally() throws IllegalArgumentException {
+    void setName_correctInputFormat_setNormally() throws IllegalArgumentException, DuplicateItemContainerException {
         String[] correctInputs =
             new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
         for (String input : correctInputs) {

@@ -4,9 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.command.exception.CommandException;
+import seedu.duke.model.ContainerList;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import seedu.duke.command.exception.ItemNotExistException;
+import seedu.duke.model.exception.DuplicateItemContainerException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 
@@ -24,7 +26,8 @@ public class DeleteCommandTest {
     private Item testItem2;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException {
+    public void setUp() throws IllegalArgumentException, DuplicateItemContainerException {
+        ContainerList.getContainerList().resetContainerList();
         testList = new ItemContainer("test");
         testItem1 = new Item("HarryPotter", "16.1", "25.12");
         testItem2 = new Item("HarryPotter", "16.1", "25.12");
