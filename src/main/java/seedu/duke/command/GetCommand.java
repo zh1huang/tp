@@ -4,9 +4,13 @@ import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class GetCommand extends Command {
 
     private final String name;
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * Constructor for GetCommand.
@@ -32,6 +36,7 @@ public class GetCommand extends Command {
             return "name: " + selectedItem.getName() + "\nselling price: " + selectedItem.getSellingPrice()
                     + "\npurchase cost: " + selectedItem.getPurchaseCost();
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
+            logger.log(Level.WARNING, "GetCommand failed to execute because item not in list");
             throw new ItemNotExistException(e.getMessage());
         }
     }
@@ -45,6 +50,7 @@ public class GetCommand extends Command {
     public void execute(ItemContainer list) throws ItemNotExistException {
         String info = getInfo(list);
         System.out.println(info);
+        logger.log(Level.INFO, "GetCommand successfully executed");
     }
 
     @Override
