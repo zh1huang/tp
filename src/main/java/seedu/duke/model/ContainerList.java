@@ -63,16 +63,20 @@ public class ContainerList {
      * Remove the item container from the ContainerList.
      *
      * @param itemContainer The ItemContainer to be removed
+     * @throws ItemContainerNotExistException If the ItemContainer is not in the ContainerList
      */
-    public void deleteContainer(ItemContainer itemContainer) {
-        assert containers.contains(itemContainer);
-        containers.remove(itemContainer);
+    public void deleteContainer(ItemContainer itemContainer) throws ItemContainerNotExistException {
+        if (!containers.remove(itemContainer)) {
+            throw new ItemContainerNotExistException(itemContainer.getName());
+        }
+        assert !containers.contains(itemContainer);
     }
 
     /**
      * Remove the item container with the specified name from the ContainerList.
      *
      * @param name Name of the ItemContainer to be removed
+     * @throws ItemContainerNotExistException If no ItemContainer in the ContainerList has the specified name
      */
     public void deleteContainer(String name) throws ItemContainerNotExistException {
         containers.remove(getContainer(name));
@@ -83,6 +87,7 @@ public class ContainerList {
      *
      * @param name The name of the ItemContainer
      * @return The ItemContainer that matches the specified name
+     * @throws ItemContainerNotExistException If no ItemContainer in the ContainerList has the specified name
      */
     public ItemContainer getContainer(String name) throws ItemContainerNotExistException {
         for (ItemContainer container : containers) {

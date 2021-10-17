@@ -3,6 +3,7 @@ package seedu.duke.model;
 import seedu.duke.model.exception.DuplicateItemContainerException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ItemContainerNotExistException;
 import seedu.duke.model.exception.ItemNotExistException;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class ItemContainer {
         logger.log(Level.INFO, String.format("ItemContainer %s created", name));
     }
 
-    public void deleteItemContainer() {
+    public void deleteItemContainer() throws ItemContainerNotExistException {
         ContainerList.getContainerList().deleteContainer(this);
     }
 
