@@ -20,7 +20,6 @@ public class SalesManager {
         try {
             soldItems = containerList.getContainer("soldItems");
         } catch (ItemContainerNotExistException e) {
-            // this is why i want to make the model exceptions RuntimeExceptions
             try {
                 soldItems = containerList.addContainer("soldItems");
             } catch (Exception ex) {
