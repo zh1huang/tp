@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.EmptyListException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 
@@ -13,15 +14,19 @@ public class ListCommand extends Command {
      * @param list the ItemContainer in which lsit is retrieved
      * @return list of items
      */
-    private String getList(ItemContainer list) {
-        String info = "";
+    private String getList(ItemContainer list) throws EmptyListException {
+        StringBuilder info = new StringBuilder();
+        if (list.getSize() == 0) {
+            throw new EmptyListException("List is empty");
+        }
+
         for (int i = 0; i < list.getSize();  i++) {
             Item selectedItem = list.getItem(i);
             int index = i + 1;
-            info += String.format(ITEM_INFO, index,
-                    selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice());
+            info.append(String.format(ITEM_INFO, index,
+                    selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
         }
-        return info.trim();
+        return info.toString().trim();
     }
 
     /**
@@ -29,7 +34,7 @@ public class ListCommand extends Command {
      *
      * @param list the ItemContainer to retrieve list of items
      */
-    public void execute(ItemContainer list) {
+    public void execute(ItemContainer list) throws EmptyListException {
         int initialSize = list.getSize();
         String result = getList(list);
         System.out.println(result);

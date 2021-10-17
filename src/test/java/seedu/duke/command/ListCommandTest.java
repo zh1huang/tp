@@ -3,12 +3,16 @@ package seedu.duke.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.exception.EmptyListException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ItemContainer;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ListCommandTest {
     private ItemContainer testList;
@@ -19,8 +23,6 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() throws Exception {
         testList = new ItemContainer("test");
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
-        testList.addItem(new Item("LOTR", "10.2", "15.7"));
         testCommand = new ListCommand();
         System.setOut(new PrintStream(outputStreamCaptor));
     }
@@ -32,6 +34,8 @@ public class ListCommandTest {
 
     @Test
     public void execute_itemsAlreadyInList_listsNormally() throws Exception {
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testList.addItem(new Item("LOTR", "10.2", "15.7"));
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
         testCommand.execute(testList);
@@ -40,6 +44,8 @@ public class ListCommandTest {
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
-    //todo for which no items in list
-
+    @Test
+    public void execute_noItemsInList_throwsEmptyListException() {
+        assertThrows(EmptyListException.class, () -> testCommand.execute(testList));
+    }
 }
