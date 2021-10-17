@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.ItemNotExistException;
 
@@ -40,7 +40,7 @@ public class EditCommand extends Command {
      * @throws NullPointerException     when the name specified is null
      * @throws IllegalArgumentException when the argument is invalid
      */
-    public void execute(ItemContainer list) throws ItemNotExistException,
+    public void execute(Shelf list) throws ItemNotExistException,
             NullPointerException, IllegalArgumentException {
         try {
             int sizeBeforeEditing = list.getSize();

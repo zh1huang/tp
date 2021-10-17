@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.DuplicateItemException;
 
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      * @throws DuplicateItemException if exactly the same item is added to the list
      */
     @Override
-    public void execute(ItemContainer list) throws IllegalArgumentException, DuplicateItemException {
+    public void execute(Shelf list) throws IllegalArgumentException, DuplicateItemException {
         try {
             int sizeBeforeAdding = list.getSize();
             Item newItem = new Item(name, purchaseCost, sellingPrice);

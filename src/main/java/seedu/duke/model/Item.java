@@ -7,8 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Represents an item that can be stored in an ItemContainer.
- * e.g. You can store 10 Items named "Dune" in an ItemContainer named "Shelf_Sci-fi_1"
+ * Represents an item that can be stored in an Shelf.
+ * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
  */
 public class Item {
 

@@ -1,19 +1,19 @@
 package seedu.duke.command;
 
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 
 public class ListCommand extends Command {
 
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
 
     /**
-     * Retrieves list of items from ItemContainer.
+     * Retrieves list of items from Shelf.
      *
-     * @param list the ItemContainer in which lsit is retrieved
+     * @param list the Shelf in which lsit is retrieved
      * @return list of items
      */
-    private String getList(ItemContainer list) {
+    private String getList(Shelf list) {
         String info = "";
         for (int i = 0; i < list.getSize();  i++) {
             Item selectedItem = list.getItem(i);
@@ -27,9 +27,9 @@ public class ListCommand extends Command {
     /**
      * Executes the operation of listing all the items.
      *
-     * @param list the ItemContainer to retrieve list of items
+     * @param list the Shelf to retrieve list of items
      */
-    public void execute(ItemContainer list) {
+    public void execute(Shelf list) {
         int initialSize = list.getSize();
         String result = getList(list);
         System.out.println(result);
