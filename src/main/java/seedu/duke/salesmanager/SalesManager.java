@@ -1,27 +1,25 @@
 package seedu.duke.salesmanager;
 
-import seedu.duke.model.ContainerList;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
-import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.IllegalArgumentException;
-import seedu.duke.model.exception.ItemContainerNotExistException;
+import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.time.LocalDateTime;
 
 public class SalesManager {
 
     private static SalesManager salesManager;
-    private ItemContainer soldItems;
+    private Shelf soldItems;
 
     private SalesManager() {
-        ContainerList containerList = ContainerList.getContainerList();
+        ShelfList shelfList = ShelfList.getShelfList();
         try {
-            soldItems = containerList.getContainer("soldItems");
-        } catch (ItemContainerNotExistException e) {
+            soldItems = shelfList.getShelf("soldItems");
+        } catch (ShelfNotExistException e) {
             try {
-                soldItems = containerList.addContainer("soldItems");
+                soldItems = shelfList.addShelf("soldItems");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -50,7 +48,7 @@ public class SalesManager {
      */
     public SoldItem sell(Item item) throws ItemNotExistException {
         // todo check if already sold
-        ContainerList.getContainerList().containerOfItem(item).deleteItem(item);
+        ShelfList.getShelfList().shelfOfItem(item).deleteItem(item);
         SoldItem temp;
         LocalDateTime saleTime = LocalDateTime.now();
         try {

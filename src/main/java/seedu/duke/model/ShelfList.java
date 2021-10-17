@@ -2,8 +2,8 @@ package seedu.duke.model;
 
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
-import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.util.ArrayList;
 
