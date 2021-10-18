@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ShelfList {
 
     private static ShelfList shelfList;
-    ArrayList<Shelf> shelves;
+    private ArrayList<Shelf> shelves;
 
     private ShelfList() {
         shelves = new ArrayList<Shelf>();
@@ -34,11 +34,11 @@ public class ShelfList {
 
     /**
      * Adds the specified shelf to the ShelfList.
-     * (not recommended, as this method skips some checks)
+     * (not recommended, as this method skips some essential checks)
      *
      * @param shelf The Shelf to be added
      */
-    public void addShelf(Shelf shelf) {
+    protected void addShelf(Shelf shelf) {
         shelves.add(shelf);
     }
 
@@ -55,7 +55,6 @@ public class ShelfList {
         }
 
         Shelf temp = new Shelf(name);
-        shelves.add(temp);
         return temp;
     }
 
@@ -111,6 +110,15 @@ public class ShelfList {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Return the total number of shelves.
+     *
+     * @return Number of shelves
+     */
+    public int getNumberOfShelves() {
+        return shelves.size();
     }
 
     /**
