@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +25,11 @@ public class GetCommand extends Command {
     /**
      * Retrieves information of item from list.
      *
-     * @param list the ItemContainer in which information of item is retrieved
+     * @param list the Shelf in which information of item is retrieved
      * @return information of item
      * @throws ItemNotExistException if specified item does not exist
      */
-    private String getInfo(ItemContainer list) throws ItemNotExistException {
+    private String getInfo(Shelf list) throws ItemNotExistException {
         try {
             int initialSize = list.getSize();
             Item selectedItem = list.getItem(name);
@@ -45,10 +45,10 @@ public class GetCommand extends Command {
     /**
      * Executes the operation of retrieving information of specified item.
      *
-     * @param list the ItemContainer that manipulates the item
+     * @param list the Shelf that manipulates the item
      * @throws ItemNotExistException if specified item does not exist
      */
-    public void execute(ItemContainer list) throws ItemNotExistException {
+    public void execute(Shelf list) throws ItemNotExistException {
         String info = getInfo(list);
         System.out.println(GET_COMPLETE_MESSAGE + info);
         logger.log(Level.INFO, "GetCommand successfully executed");

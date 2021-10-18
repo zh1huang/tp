@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.command.exception.EmptyListException;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,14 +15,13 @@ public class ListCommand extends Command {
     private static final String EMPTY_LIST_MESSAGE = "List is empty!";
 
     /**
-     * Retrieves list of items from ItemContainer.
+     * Retrieves list of items from Shelf.
      *
-     * @param list the ItemContainer in which list is retrieved
+     * @param list the Shelf in which lsit is retrieved
      * @return list of items
      */
-    private String getList(ItemContainer list) {
+    private String getList(Shelf list) {
         StringBuilder info = new StringBuilder();
-
 
         for (int i = 0; i < list.getSize();  i++) {
             Item selectedItem = list.getItem(i);
@@ -36,9 +35,10 @@ public class ListCommand extends Command {
     /**
      * Executes the operation of listing all the items.
      *
-     * @param list the ItemContainer to retrieve list of items
+     * @param list the Shelf to retrieve list of items
      */
-    public void execute(ItemContainer list) throws EmptyListException {
+
+    public void execute(Shelf list) throws EmptyListException {
         int initialSize = list.getSize();
         if (list.getSize() == 0) {
             logger.log(Level.WARNING, "ListCommand failed to execute because list is empty");

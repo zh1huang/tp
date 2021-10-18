@@ -6,7 +6,7 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
@@ -93,7 +93,7 @@ public class Parser {
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
      *                                  by the user
      */
-    public Command parseCommand(String userInputLine, ItemContainer list) throws IllegalFormatException,
+    public Command parseCommand(String userInputLine, Shelf list) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
         logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
@@ -210,7 +210,7 @@ public class Parser {
      * @return GetCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
-    private Command prepareGet(String arguments, ItemContainer list) throws IllegalFormatException {
+    private Command prepareGet(String arguments, Shelf list) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -236,7 +236,7 @@ public class Parser {
      * @throws ItemNotExistException    If the item cannot be found from the container.
      * @throws NoPropertyFoundException If the associated item property cannot be found.
      */
-    private Command prepareEdit(String arguments, ItemContainer list) throws IllegalFormatException,
+    private Command prepareEdit(String arguments, Shelf list) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format

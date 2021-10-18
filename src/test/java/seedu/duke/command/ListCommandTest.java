@@ -3,9 +3,12 @@ package seedu.duke.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.duke.command.exception.EmptyListException;
+import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -15,14 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ListCommandTest {
-    private ItemContainer testList;
+    private Shelf testList;
     private Command testCommand;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() throws Exception {
-        testList = new ItemContainer("test");
+        ShelfList.getShelfList().resetShelfList();
+        testList = new Shelf("test");
         testCommand = new ListCommand();
         System.setOut(new PrintStream(outputStreamCaptor));
     }

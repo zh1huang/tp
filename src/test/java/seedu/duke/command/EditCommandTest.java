@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.command.exception.ItemNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,12 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EditCommandTest {
 
-    private ItemContainer testList;
+    private Shelf testList;
     private Command testCommand;
 
     @BeforeEach
     public void setUp() throws Exception {
-        testList = new ItemContainer("test");
+        ShelfList.getShelfList().resetShelfList();
+        testList = new Shelf("test");
     }
 
     @Test
