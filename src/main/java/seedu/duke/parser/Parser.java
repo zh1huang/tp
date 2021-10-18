@@ -4,6 +4,7 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.model.Shelf;
@@ -65,7 +66,9 @@ public class Parser {
     public static final String LIST_STRING = "list";
     public static final String GET_STRING = "get";
     public static final String EDIT_STRING = "edit";
+    public static final String BYE_STRING = "bye";
 
+    public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
             "Input invalid command format.\nCorrect format: \n%s\n";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n"
@@ -129,11 +132,28 @@ public class Parser {
             command = prepareEdit(arguments, list);
             break;
 
+        case BYE_STRING:
+            return prepareBye(arguments);
+
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
 
         return command;
+    }
+
+    /**
+     * Parses bye command arguments
+     *
+     * @param arguments The additional arguments after command word
+     * @return ByeCommand object
+     * @throws IllegalFormatException if exists extra argument after bye
+     */
+    private Command prepareBye(String arguments) throws IllegalFormatException {
+        if (!arguments.isEmpty()) {
+            throw new IllegalFormatException(INVALID_BYE_COMMAND);
+        }
+        return new ExitCommand();
     }
 
     /**

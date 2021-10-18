@@ -14,12 +14,10 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) throws Exception {
-
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.WARNING);
 
         Shelf warehouse = new Shelf("warehouse");
-
 
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -30,20 +28,19 @@ public class Duke {
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine() + ", what can I do for you?");
-        String input = in.nextLine();
+        String input;
         Parser parser = new Parser();
-        while (!input.trim().equals("bye")) {
 
+        boolean isExit = false;
+        while (!isExit) {
+            input = in.nextLine();
             try {
                 Command command = parser.parseCommand(input, warehouse);
                 command.execute(warehouse); // todo remove execute input argument because unnecessary.
+                isExit = command.isExit();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
-            // prepare for next input
-            input = in.nextLine();
         }
-        System.out.println("See you next time");
     }
 }
