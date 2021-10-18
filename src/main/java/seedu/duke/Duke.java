@@ -10,6 +10,15 @@ import java.util.logging.Logger;
 
 public class Duke {
 
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String HELLO_MESSAGE = "Hello from\n" + LOGO + "What is your name?";
+    private static final String HELP_PROMPT_MESSAGE = "Enter 'help' for the list of available commands";
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -19,15 +28,10 @@ public class Duke {
 
         Shelf warehouse = new Shelf("warehouse");
 
-        String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        System.out.println(HELLO_MESSAGE);
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine() + ", what can I do for you?");
+        System.out.println(HELP_PROMPT_MESSAGE);
         String input;
         Parser parser = new Parser();
 
