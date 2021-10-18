@@ -20,6 +20,11 @@ public class HelpCommand extends Command {
             + "8. Exit program: bye\n"
             + "____________________________________________________________________________________________\n";
 
+    /**
+     * Executes help command.
+     *
+     * @param list the Shelf in which HelpCommand is executed
+     */
     public void execute(Shelf list) {
         System.out.println(commandList);
     }
