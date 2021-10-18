@@ -23,21 +23,21 @@ public class GetCommand extends Command {
     }
 
     /**
-     * Retrieves information of item from list.
+     * Retrieves information of item from shelf.
      *
-     * @param list the Shelf in which information of item is retrieved
+     * @param shelf the Shelf in which information of item is retrieved
      * @return information of item
      * @throws ItemNotExistException if specified item does not exist
      */
-    private String getInfo(Shelf list) throws ItemNotExistException {
+    private String getInfo(Shelf shelf) throws ItemNotExistException {
         try {
-            int initialSize = list.getSize();
-            Item selectedItem = list.getItem(name);
-            assert initialSize == list.getSize();
+            int initialSize = shelf.getSize();
+            Item selectedItem = shelf.getItem(name);
+            assert initialSize == shelf.getSize();
             return "name: " + selectedItem.getName() + "\nselling price: " + selectedItem.getSellingPrice()
                     + "\npurchase cost: " + selectedItem.getPurchaseCost();
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
-            logger.log(Level.WARNING, "GetCommand failed to execute because item not in list");
+            logger.log(Level.WARNING, "GetCommand failed to execute because item not in shelf");
             throw new ItemNotExistException(e.getMessage());
         }
     }
@@ -45,11 +45,11 @@ public class GetCommand extends Command {
     /**
      * Executes the operation of retrieving information of specified item.
      *
-     * @param list the Shelf that manipulates the item
+     * @param shelf the Shelf that manipulates the item
      * @throws ItemNotExistException if specified item does not exist
      */
-    public void execute(Shelf list) throws ItemNotExistException {
-        String info = getInfo(list);
+    public void execute(Shelf shelf) throws ItemNotExistException {
+        String info = getInfo(shelf);
         System.out.println(GET_COMPLETE_MESSAGE + info);
         logger.log(Level.INFO, "GetCommand successfully executed");
     }

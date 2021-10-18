@@ -15,16 +15,16 @@ public class ListCommand extends Command {
     private static final String EMPTY_LIST_MESSAGE = "List is empty!";
 
     /**
-     * Retrieves list of items from Shelf.
+     * Retrieves shelf of items from Shelf.
      *
-     * @param list the Shelf in which lsit is retrieved
-     * @return list of items
+     * @param shelf the Shelf in which list is retrieved
+     * @return shelf of items
      */
-    private String getList(Shelf list) {
+    private String getList(Shelf shelf) {
         StringBuilder info = new StringBuilder();
 
-        for (int i = 0; i < list.getSize();  i++) {
-            Item selectedItem = list.getItem(i);
+        for (int i = 0; i < shelf.getSize();  i++) {
+            Item selectedItem = shelf.getItem(i);
             int index = i + 1;
             info.append(String.format(ITEM_INFO, index,
                     selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
@@ -41,8 +41,8 @@ public class ListCommand extends Command {
     public void execute(Shelf list) throws EmptyListException {
         int initialSize = list.getSize();
         if (list.getSize() == 0) {
-            logger.log(Level.WARNING, "ListCommand failed to execute because list is empty");
-            throw new EmptyListException("List is empty");
+            logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
+            throw new EmptyListException("Shelf is empty");
         }
 
         String result = getList(list);
