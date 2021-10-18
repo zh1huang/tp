@@ -4,7 +4,7 @@ import seedu.duke.model.Shelf;
 
 public class ExitCommand extends Command {
 
-    private static final String BYE_MESSAGE = "add n/Beauty and the beast c/novel p/10 s/25.5 q/1";
+    private static final String BYE_MESSAGE = "Bye! Hope to see you again!";
 
     /**
      * Override superclass Command to not perform any actions.
