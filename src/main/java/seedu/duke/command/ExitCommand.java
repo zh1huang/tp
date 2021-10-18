@@ -4,7 +4,7 @@ import seedu.duke.model.Shelf;
 
 public class ExitCommand extends Command {
 
-    private static final String BYE_MESSAGE = "Bye! Hope to see you again!";
+    private static final String BYE_MESSAGE = "See you next time";
 
     /**
      * Override superclass Command to not perform any actions.
