@@ -4,19 +4,24 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
 What is your name?
 Hello someone, what can I do for you?
-Enter 'help' for the list of available commands
 This item has been added to the list.
+Here is the list of items:
 1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
 This item has been added to the list.
+Here is the list of items:
 1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
 2. The Great Gatsby (purchase cost: 15, selling price: 45.5)
 This item has been removed from the list.
+Here is the list of items:
 1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
+Here is the information of your item
 name: Beauty and the beast
 selling price: 25.5
 purchase cost: 10
 This item has been updated.
+Here is the list of items:
 1. Beauty and the beast (purchase cost: 9.5, selling price: 25.5)
 See you next time
