@@ -2,10 +2,16 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.model.exception.ShelfNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ShelfListTest {
 
@@ -31,40 +37,80 @@ class ShelfListTest {
     }
 
     @Test
-    void addShelf_() {
-
+    void addShelf_duplicateName_throwsDuplicateShelfException()
+            throws DuplicateShelfException, IllegalArgumentException {
+        shelfList.addShelf("someRandomShelf");
+        assertThrows(DuplicateShelfException.class, () -> shelfList.addShelf("someRandomShelf"));
+        assertThrows(DuplicateShelfException.class, () -> shelfList.addShelf("someRandomShelf "));
+        assertThrows(DuplicateShelfException.class, () -> shelfList.addShelf(" someRandomShelf"));
     }
 
     @Test
-    void addShelf() {
-
+    void addShelf_emptyName_throwIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> shelfList.addShelf(""));
+        assertThrows(IllegalArgumentException.class, () -> shelfList.addShelf(" "));
     }
 
     @Test
-    void testAddShelf() {
+    void addShelf_correctName_throwIllegalArgumentException() throws DuplicateShelfException, IllegalArgumentException {
+        shelfList.addShelf("basdAKLDJFL91203_ 3(sda)-sdf");
+        assertTrue(shelfList.existShelf("basdAKLDJFL91203_ 3(sda)-sdf"));
     }
 
     @Test
-    void deleteShelf() {
+    void deleteShelf_emptyName_throwIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> shelfList.addShelf(""));
+        assertThrows(IllegalArgumentException.class, () -> shelfList.addShelf(" "));
     }
 
     @Test
-    void testDeleteShelf() {
+    void deleteShelf_shelfNotExist_throwShelfNotExistException() {
+        shelfList.resetShelfList();
+        assertThrows(ShelfNotExistException.class, () -> shelfList.deleteShelf("something"));
     }
 
     @Test
-    void getShelf() {
+    void deleteShelf_existShelf_deleteNormally()
+            throws DuplicateShelfException, IllegalArgumentException, ShelfNotExistException {
+        shelfList.addShelf("correctShelf");
+        shelfList.deleteShelf("correctShelf");
+        assertFalse(shelfList.existShelf("correctShelf"));
     }
 
     @Test
-    void existShelf() {
+    void getShelf_shelfNotExist_throwShelfNotExistException() {
+        shelfList.resetShelfList();
+        assertThrows(ShelfNotExistException.class, () -> shelfList.getShelf("shelfNotExist"));
     }
 
     @Test
-    void getAllShelvesName() {
+    void getShelf_shelfExist_returnNormally()
+            throws ShelfNotExistException, DuplicateShelfException, IllegalArgumentException {
+        Shelf addedShelf = shelfList.addShelf("theShelfThatExists");
+        assertEquals(addedShelf, shelfList.getShelf("theShelfThatExists"));
     }
 
     @Test
-    void shelfOfItem() {
+    void existShelf() throws DuplicateShelfException, IllegalArgumentException {
+        shelfList.addShelf("somerandomshelf1");
+        shelfList.addShelf("somerandomshelf2");
+        assertTrue(shelfList.existShelf("somerandomshelf1"));
+        assertTrue(shelfList.existShelf("somerandomshelf2"));
+    }
+
+    @Test
+    void getAllShelvesName() throws DuplicateShelfException, IllegalArgumentException {
+        shelfList.addShelf("somerandomshelf1");
+        shelfList.addShelf("somerandomshelf2");
+        assertEquals("somerandomshelf1\nsomerandomshelf2", shelfList.getAllShelvesName());
+    }
+
+    @Test
+    void shelfOfItem() throws IllegalArgumentException, ShelfNotExistException, DuplicateItemException,
+            ItemNotExistException, DuplicateShelfException {
+        ItemStub testItem = new ItemStub("randomName");
+        shelfList.addShelf("somerandomshelf1");
+        shelfList.getShelf("somerandomshelf1").addItem(testItem);
+        assertEquals(shelfList.getShelf("somerandomshelf1"), shelfList.shelfOfItem(testItem));
     }
 }
