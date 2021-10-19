@@ -22,16 +22,21 @@ class ShelfTest {
     @BeforeEach
     void setup() throws IllegalArgumentException, DuplicateShelfException {
         ShelfList.getShelfList().resetShelfList();
-        testShelf = new Shelf("testContainer");
+        testShelf = new Shelf("testShelf");
         testItem1 = new ItemStub("Item1");
         testItem2 = new ItemStub("Item2");
         testItem3 = new ItemStub("Item3");
     }
 
     @Test
+    void shelfConstructor_instantiateDuplicateShelves_throwsDuplicateShelfException() {
+        assertThrows(DuplicateShelfException.class, () -> new Shelf("testShelf"));
+    }
+
+    @Test
     void setName_correctInputFormat_setNormally() throws IllegalArgumentException, DuplicateShelfException {
         String[] correctInputs =
-            new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
+                new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
         for (String input : correctInputs) {
             testShelf.setName(input);
             assertEquals(input, testShelf.getName());

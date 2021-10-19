@@ -132,7 +132,7 @@ public class ShelfList {
             temp.append(container.getName());
             temp.append("\n");
         }
-        return temp.toString();
+        return temp.toString().trim();
     }
 
     /**
