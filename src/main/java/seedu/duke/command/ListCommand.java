@@ -12,7 +12,8 @@ public class ListCommand extends Command {
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
-    private static final String EMPTY_LIST_MESSAGE = "List is empty!";
+    private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
+
 
     /**
      * Retrieves shelf of items from Shelf.
@@ -35,18 +36,18 @@ public class ListCommand extends Command {
     /**
      * Executes the operation of listing all the items.
      *
-     * @param list the Shelf to retrieve list of items
+     * @param shelf the Shelf to retrieve shelf of items
      */
 
-    public void execute(Shelf list) throws EmptyListException {
-        int initialSize = list.getSize();
-        if (list.getSize() == 0) {
+    public void execute(Shelf shelf) throws EmptyListException {
+        int initialSize = shelf.getSize();
+        if (shelf.getSize() == 0) {
             logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
-            throw new EmptyListException("Shelf is empty");
+            throw new EmptyListException(EMPTY_LIST_MESSAGE);
         }
 
-        String result = getList(list);
-        assert initialSize == list.getSize() : "List size should not be changed";
+        String result = getList(shelf);
+        assert initialSize == shelf.getSize() : "List size should not be changed";
         System.out.println(LIST_COMPLETE_MESSAGE + result);
         logger.log(Level.INFO, "ListCommand successfully executed");
     }
