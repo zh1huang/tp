@@ -10,40 +10,41 @@ import java.util.logging.Logger;
 
 public class Duke {
 
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String HELLO_MESSAGE = "Hello from\n" + LOGO + "What is your name?";
+    private static final String HELP_PROMPT_MESSAGE = "Enter 'help' for the list of available commands";
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) throws Exception {
-
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.WARNING);
 
         Shelf warehouse = new Shelf("warehouse");
 
-
-        String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        System.out.println(HELLO_MESSAGE);
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine() + ", what can I do for you?");
-        String input = in.nextLine();
+        System.out.println(HELP_PROMPT_MESSAGE);
+        String input;
         Parser parser = new Parser();
-        while (!input.trim().equals("bye")) {
 
+        boolean isExit = false;
+        while (!isExit) {
+            input = in.nextLine();
             try {
                 Command command = parser.parseCommand(input, warehouse);
                 command.execute(warehouse); // todo remove execute input argument because unnecessary.
+                isExit = command.isExit();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
-            // prepare for next input
-            input = in.nextLine();
         }
-        System.out.println("See you next time");
     }
 }
