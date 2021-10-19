@@ -22,15 +22,21 @@ original source as well}
 **API**:
 
 1. [Item.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/Item.java)
-   1. A `Item` object stores the information about a product in the bookstore.
+   1. A `Item` object stores the information about a product in the bookstore:
+      1. `name` of the product, consists of alphabet, number, whitespace, underscore and round bracket. e.g., Time Magazine.
+      2. `purchaseCost`, the non-negative price the bookstore owner paid for the product. 
+      3. `sellingPrice`, the non-negative amount a buyer pays for the product.
 2. [Shelf.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/Shelf.java)
     1. A `Shelf` object stores `Item` objects.
     2. All `Item` are stored in one and only one of the `Shelf` objects.
+    3. A `Shelf` object can be instantiated using the constructor `new Shelf(name: String)` or `ShelfList.getShelfList().addShelf(name: String)`
 3. [ShelfList.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/ShelfList.java)
     1. The `ShelfList` stores all the shelves data i.e., all `Shelf` objects
-    2. `ShelfList` is implemented using Singleton Pattern. The single instance can be obtained
-       using `ShelfList.getShelfList()`
+    2. `ShelfList` is implemented using Singleton Pattern. The single instance can be obtained using `ShelfList.getShelfList()`
 
+The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
+
+![](diagrams/seedu_duke_model new shelf.drawio.svg)
 ### Storage component
 
 ## Product scope
