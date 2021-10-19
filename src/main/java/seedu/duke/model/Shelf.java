@@ -59,22 +59,23 @@ public class Shelf {
     /**
      * Rename the Shelf to the new name.
      *
-     * @param name New name
+     * @param name New name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      * @throws IllegalArgumentException if the name contains other characters
      */
     public void setName(String name) throws IllegalArgumentException, DuplicateShelfException {
-        if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
-            if (ShelfList.getShelfList().existShelf(name)) {
-                throw new DuplicateShelfException(name);
+        String newName = name.trim();
+        if (newName.matches("[a-zA-Z0-9 _()-]+") && !newName.isBlank()) {
+            if (ShelfList.getShelfList().existShelf(newName)) {
+                throw new DuplicateShelfException(newName);
             }
             String temp = this.getName();
-            this.name = name;
+            this.name = newName;
             logger.log(Level.INFO, String.format("Successfully set Shelf %s's name as %s", temp, name));
         } else {
             logger.log(Level.WARNING, String.format(
                 "Trying to set Shelf %s's name as %s",
-                this.getName(), name));
+                this.getName(), newName));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
