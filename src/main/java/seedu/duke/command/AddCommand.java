@@ -50,12 +50,12 @@ public class AddCommand extends Command {
             System.out.println(ADD_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "AddCommand successfully executed.");
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
-            logger.log(Level.WARNING, "AddCommand failed to execute with error message %s",
-                    e.getMessage());
+            logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
+                    e.getMessage()));
             throw new IllegalArgumentException(e.getMessage());
         } catch (seedu.duke.model.exception.DuplicateItemException e) {
-            logger.log(Level.WARNING, "AddCommand failed to execute with error message %s",
-                    e.getMessage());
+            logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
+                    e.getMessage()));
             throw new DuplicateItemException(e.getMessage());
         }
     }
