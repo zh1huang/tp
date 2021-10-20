@@ -47,7 +47,7 @@ original source as well}
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](diagrams/seedu_duke_model new shelf.drawio.svg)
+![](diagrams/seedu_duke_model_new_shelf.drawio.svg)
 ### Storage component
 
 ## Product scope
