@@ -15,5 +15,15 @@ public abstract class Command {
      * @throws CommandException if anything goes wrong
      */
     public abstract void execute(Shelf list) throws CommandException;
+
+
+    /**
+     * Checks if exit command has been called.
+     *
+     * @return true if exit command is called
+     */
+    public boolean isExit() {
+        return false;
+    }
 }
 

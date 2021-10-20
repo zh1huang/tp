@@ -4,9 +4,9 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
 What is your name?
 Hello someone, what can I do for you?
+Enter 'help' for the list of available commands
 This item has been added to the list.
 Here is the list of items:
 1. Beauty and the beast (purchase cost: 10, selling price: 25.5)
