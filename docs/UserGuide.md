@@ -53,6 +53,16 @@ add n/Pilot P100 c/stationary p/1 s/1.5 q/100 r/Not many people bought this. Can
 
 Expected outcome
 ```
+add n/Harry Potter c/book p/27 s/37 q/5
+This item has been added to the list.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+
+add n/Pilot P100 c/stationary p/1 s/1.5 q/100 r/Not many people bought this. Can consider a 50% discount.
+This item has been added to the list.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
 
 ```
 
@@ -68,7 +78,15 @@ delete n/Alice in wonderland
 ```
 Expected outcome:
 ```
-
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+3. Alice in wonderland (purchase cost: 27, selling price: 37)
+delete n/Alice in wonderland
+This item has been removed from the list.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
 ```
 
 ### Listing all items 
@@ -115,14 +133,23 @@ Format: `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]`
 
 Examples of usage:
 ```
-edit n/Lord of the Rings p/selling price v/30
+edit n/Lord of the Rings p/sellingPrice v/30
 
 edit n/Apples Never Fall p/quantity v/100 s/false
 ```
 
 Expected outcome:
 ```
-
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+3. Lord of the Rings (purchase cost: 27, selling price: 37)
+edit n/Lord of the Rings p/sellingPrice v/30
+This item has been updated.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+3. Lord of the Rings (purchase cost: 27, selling price: 30)
 ```
 
 ### Generate sales report
