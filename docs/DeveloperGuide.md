@@ -15,6 +15,18 @@ original source as well}
 
 ### Logic component
 
+![](diagrams/seedu_duke_logic.drawio.svg)
+
+**API**:
+
+1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
+
+2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+    1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
+    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
+    3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
+![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+
 ### Model component
 
 ![](diagrams/seedu_duke_model.drawio.svg)
@@ -36,7 +48,7 @@ original source as well}
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](diagrams/seedu_duke_model new shelf.drawio.svg)
+![](diagrams/seedu_duke_model_new_shelf.drawio.svg)
 ### Storage component
 
 ## Product scope
