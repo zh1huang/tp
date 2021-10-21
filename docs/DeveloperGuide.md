@@ -66,7 +66,17 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|add new items to inventory list||
+|v1.0|user|delete items from inventory list|remove entries that I no longer need|
+|v1.0|user|get a list of inventory according to their category|keep track of what I have in stock for selling|
+|v1.0|user|retrieve information about an item|decide if I need to restock|
+|v1.0|user|update the information of the items|keep the list updated|
+|v2.0|user|store and retrieve the inventory list|save the data when program closes and automatically loads when program restarts|
+|v2.0|user|retrieve a list of items low in stock|replenish items low in stock|
+|v2.0|user|mark an item as sold|remove item from inventory list and add to revenue|
+|v2.0|user|add the total cost of all the items|know the total cost and deduct from revenue to find profit|
+|v2.0|user|view the monthly sales report|know if I am making a profit|
+
 
 ## Non-Functional Requirements
 
