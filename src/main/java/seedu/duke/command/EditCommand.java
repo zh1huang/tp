@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class EditCommand extends Command {
     private final String name;
-    private final String purcaseCost;
+    private final String purchaseCost;
     private final String sellingPrice;
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
     //to be added to UI part later
@@ -28,7 +28,7 @@ public class EditCommand extends Command {
      */
     public EditCommand(String name, String purchaseCost, String sellingPrice) {
         this.name = name;
-        this.purcaseCost = purchaseCost;
+        this.purchaseCost = purchaseCost;
         this.sellingPrice = sellingPrice;
     }
 
@@ -45,7 +45,7 @@ public class EditCommand extends Command {
         try {
             int sizeBeforeEditing = list.getSize();
             Item selectedItem = list.getItem(name);
-            selectedItem.setPurchaseCost(purcaseCost);
+            selectedItem.setPurchaseCost(purchaseCost);
             selectedItem.setSellingPrice(sellingPrice);
             int sizeAfterEditing = list.getSize();
             assert sizeBeforeEditing == sizeAfterEditing :
@@ -61,5 +61,23 @@ public class EditCommand extends Command {
                     e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof EditCommand)) {
+            return false;
+        }
+
+        EditCommand command = (EditCommand) other;
+        return name.equals(command.name)
+                && purchaseCost.equals(command.purchaseCost)
+                && sellingPrice.equals(command.sellingPrice);
     }
 }
