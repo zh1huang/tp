@@ -55,11 +55,16 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 
 ### Target user profile
 
-{Describe the target user profile}
+* has a need to manage inventories & finances of small scaled book stores
+* prefers to operate the store by themselves without additional hires
+* prefers typing over clicking on GUI applications
+* ability to type fast
+* comfortable with command line applications
+* does not mind the plain output from command line applications
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Allows efficient and simplified management of inventory and finances of the store
 
 ## User Stories
 
