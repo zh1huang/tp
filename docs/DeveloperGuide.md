@@ -11,7 +11,11 @@ original source as well}
 
 ### Architecture
 
+{Illustrate overall how the different component in the system interacts with each other.}
+
 ### UI component
+
+{Illustrate how the UI package work.}
 
 ### Logic component
 
@@ -48,7 +52,7 @@ original source as well}
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](diagrams/seedu_duke_model_new_shelf.drawio.svg)
+![](diagrams/seedu_duke_model_newshelf.drawio.svg)
 ### Storage component
 
 ## Product scope
