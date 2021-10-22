@@ -163,9 +163,9 @@ public class Parser {
     /**
      * Parses add command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return AddCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return AddCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -187,9 +187,9 @@ public class Parser {
     /**
      * Parses delete command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return DeleteCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return DeleteCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -209,9 +209,9 @@ public class Parser {
     /**
      * Parses list command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return ListCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return ListCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -230,9 +230,9 @@ public class Parser {
     /**
      * Parses get command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return GetCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return GetCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareGet(String arguments, Shelf list) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -254,11 +254,11 @@ public class Parser {
     /**
      * Parses edit command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return EditCommand object.
-     * @throws IllegalFormatException   If the input format is wrong.
-     * @throws ItemNotExistException    If the item cannot be found from the container.
-     * @throws NoPropertyFoundException If the associated item property cannot be found.
+     * @param arguments The additional arguments after command word
+     * @return EditCommand object
+     * @throws IllegalFormatException   If the input format is wrong
+     * @throws ItemNotExistException    If the item cannot be found from the container
+     * @throws NoPropertyFoundException If the associated item property cannot be found
      */
     private Command prepareEdit(String arguments, Shelf list) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
@@ -294,9 +294,9 @@ public class Parser {
     /**
      * Creates EditCommand Object.
      *
-     * @param itemName            Name of item to be edited.
-     * @param updatedPurchaseCost New Purchase Cost.
-     * @param updatedSellingPrice New Selling Price.
+     * @param itemName            Name of item to be edited
+     * @param updatedPurchaseCost New Purchase Cost
+     * @param updatedSellingPrice New Selling Price
      * @return EditCommand object.
      */
     private Command formEditCommand(String itemName, String updatedPurchaseCost, String updatedSellingPrice) {
@@ -335,6 +335,13 @@ public class Parser {
         return new ExitCommand();
     }
 
+    /**
+     * Parses total cost command arguments.
+     *
+     * @param arguments The additional arguments after command word.
+     * @return TotalCostAndIncomeCommand object
+     * @throws IllegalFormatException If the input format is wrong
+     */
     private Command prepareTotalCost(String arguments) throws IllegalFormatException {
         final Matcher matcher = TOTAL_COST_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
@@ -344,7 +351,6 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, TOTAL_COST_DATA_ARGS_FORMAT_STRING));
         }
 
-        //change below to totalCostCommand
         Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
         assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
             "tCost should return totalCostAndIncomeCommand\n";
