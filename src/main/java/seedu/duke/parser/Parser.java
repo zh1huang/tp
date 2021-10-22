@@ -30,41 +30,41 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)"
-                    + " c/(?<category>[^/]+)"
-                    + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
-                    //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
-                    //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
-                    + "( r/(?<remarks>[^/]+))?$"); // optional argument
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + " c/(?<category>[^/]+)"
+            + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+            //only accepts numbers or decimals in 1 or 2 d.p.
+            + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+            //only accepts numbers or decimals in 1 or 2 d.p.
+            + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
+            + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)");
+        Pattern.compile("n/(?<itemName>[^/]+)");
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
+        Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)"
-                    + "( p/(?<property>[^/]+))?"); // optional argument property
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + "( p/(?<property>[^/]+))?"); // optional argument property
 
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)"
-                    + " p/(?<property>[^/]+)"
-                    + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
-                    + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + " p/(?<property>[^/]+)"
+            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
+            + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
 
     public static final Pattern TOTAL_COST_DATA_ARGS_FORMAT =
         Pattern.compile("(c/(?<month>[^/]+))?"); // optional argument category
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-            "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
+        "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete n/NAME";
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [c/CATEGORY]";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get n/NAME [p/PROPERTY]";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
-            "edit n/NAME p/PROPERTY v/VALUE [s/SHOW_RESULT]";
+        "edit n/NAME p/PROPERTY v/VALUE [s/SHOW_RESULT]";
     public static final String TOTAL_COST_DATA_ARGS_FORMAT_STRING = "list [m/MONTH]";
 
 
@@ -81,9 +81,9 @@ public class Parser {
     public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
-            "Input invalid command format.\nCorrect format: \n%s\n";
+        "Input invalid command format.\nCorrect format: \n%s\n";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n"
-            + "quantity: %s\nremarks: %s\n";
+        + "quantity: %s\nremarks: %s\n";
     public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\n";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "category: %s\n";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "itemName: %s\nproperty: %s\n";
@@ -108,7 +108,7 @@ public class Parser {
      *                                  by the user
      */
     public Command parseCommand(String userInputLine, Shelf list) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
         logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
@@ -173,7 +173,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Add Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String purchaseCost = matcher.group("purchaseCost");
@@ -197,7 +197,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Delete Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         Command deleteCommand = new DeleteCommand(itemName);
@@ -219,7 +219,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         Command listCommand = new ListCommand();
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
@@ -240,7 +240,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Get Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
         String itemName = matcher.group("itemName");
@@ -261,13 +261,13 @@ public class Parser {
      * @throws NoPropertyFoundException If the associated item property cannot be found.
      */
     private Command prepareEdit(String arguments, Shelf list) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Edit Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String selectedProperty = matcher.group("property");
@@ -294,7 +294,7 @@ public class Parser {
     /**
      * Creates EditCommand Object.
      *
-     * @param itemName Name of item to be edited.
+     * @param itemName            Name of item to be edited.
      * @param updatedPurchaseCost New Purchase Cost.
      * @param updatedSellingPrice New Selling Price.
      * @return EditCommand object.
@@ -346,7 +346,8 @@ public class Parser {
 
         //change below to totalCostCommand
         Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
-        assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class : "List should return ListCommand\n";
+        assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
+            "tCost should return totalCostAndIncomeCommand\n";
         logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
         return totalCostAndIncomeCommand;
     }

@@ -10,19 +10,19 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.logging.Logger;
 
-public class TotalCostAndIncomeCommand extends Command{
+public class TotalCostAndIncomeCommand extends Command {
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: %s\n"
         + "Total Selling Price: %s\nTotal Profits: %s";
     public static final String SOLD_ITEM_SHELF_NOT_EXIST_MESSAGE = "None of the items have been sold.";
     private Shelf soldItemsShelf;
-    
+
     @Override
     public void execute(Shelf list) throws EmptyListException {
-        try{
+        try {
             checkSoldItemShelfExist();
-        }catch (ShelfNotExistException e){
+        } catch (ShelfNotExistException e) {
             throw new EmptyListException(SOLD_ITEM_SHELF_NOT_EXIST_MESSAGE);
         }
 
@@ -30,7 +30,7 @@ public class TotalCostAndIncomeCommand extends Command{
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
         DecimalFormat df = new DecimalFormat("0.00");
 
-        for (int i = 0; i < soldItemsShelf.getSize();  i++) {
+        for (int i = 0; i < soldItemsShelf.getSize(); i++) {
             Item selectedItem = soldItemsShelf.getItem(i);
 
             totalPurchaseCost = totalPurchaseCost.add(new BigDecimal(selectedItem.getPurchaseCost()));
