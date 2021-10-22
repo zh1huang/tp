@@ -8,6 +8,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.TotalCostAndIncomeCommand;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
@@ -54,6 +55,9 @@ public class Parser {
                     + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
                     + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
 
+    public static final Pattern TOTAL_COST_DATA_ARGS_FORMAT =
+        Pattern.compile("(c/(?<month>[^/]+))?"); // optional argument category
+
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
             "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete n/NAME";
@@ -61,6 +65,8 @@ public class Parser {
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get n/NAME [p/PROPERTY]";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
             "edit n/NAME p/PROPERTY v/VALUE [s/SHOW_RESULT]";
+    public static final String TOTAL_COST_DATA_ARGS_FORMAT_STRING = "list [m/MONTH]";
+
 
     public static final String ADD_STRING = "add";
     public static final String DELETE_STRING = "delete";
@@ -69,6 +75,7 @@ public class Parser {
     public static final String EDIT_STRING = "edit";
     public static final String BYE_STRING = "bye";
     public static final String HELP_STRING = "help";
+    public static final String TOTAL_COST_STRING = "tcost";
 
     public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
     public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
@@ -143,39 +150,14 @@ public class Parser {
         case BYE_STRING:
             return prepareBye(arguments);
 
+        case TOTAL_COST_STRING:
+            return prepareTotalCost(arguments);
+
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
 
         return command;
-    }
-
-    /**
-     * Parses bye command.
-     *
-     * @param arguments The additional arguments after command word, should be none
-     * @return ByeCommand object
-     * @throws IllegalFormatException if exists extra argument after bye
-     */
-    private Command prepareBye(String arguments) throws IllegalFormatException {
-        if (!arguments.isEmpty()) {
-            throw new IllegalFormatException(INVALID_BYE_COMMAND);
-        }
-        return new ExitCommand();
-    }
-
-    /**
-     * Parses help command.
-     *
-     * @param arguments The additional arguments after command word, should be none
-     * @return HelpCommand object
-     * @throws IllegalFormatException if exists extra argument after bye
-     */
-    private Command prepareHelp(String arguments) throws IllegalFormatException {
-        if (!arguments.isEmpty()) {
-            throw new IllegalFormatException(INVALID_HELP_COMMAND);
-        }
-        return new HelpCommand();
     }
 
     /**
@@ -323,5 +305,49 @@ public class Parser {
         logger.log(Level.INFO, "EditCommand parse success.");
 
         return editCommand;
+    }
+
+    /**
+     * Parses help command.
+     *
+     * @param arguments The additional arguments after command word, should be none
+     * @return HelpCommand object
+     * @throws IllegalFormatException if exists extra argument after bye
+     */
+    private Command prepareHelp(String arguments) throws IllegalFormatException {
+        if (!arguments.isEmpty()) {
+            throw new IllegalFormatException(INVALID_HELP_COMMAND);
+        }
+        return new HelpCommand();
+    }
+
+    /**
+     * Parses bye command.
+     *
+     * @param arguments The additional arguments after command word, should be none
+     * @return ByeCommand object
+     * @throws IllegalFormatException if exists extra argument after bye
+     */
+    private Command prepareBye(String arguments) throws IllegalFormatException {
+        if (!arguments.isEmpty()) {
+            throw new IllegalFormatException(INVALID_BYE_COMMAND);
+        }
+        return new ExitCommand();
+    }
+
+    private Command prepareTotalCost(String arguments) throws IllegalFormatException {
+        final Matcher matcher = TOTAL_COST_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match List Command Format");
+            throw new IllegalFormatException(String.format(
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, TOTAL_COST_DATA_ARGS_FORMAT_STRING));
+        }
+
+        //change below to totalCostCommand
+        Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
+        assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class : "List should return ListCommand\n";
+        logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
+        return totalCostAndIncomeCommand;
     }
 }

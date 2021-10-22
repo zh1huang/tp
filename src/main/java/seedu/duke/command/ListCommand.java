@@ -14,7 +14,6 @@ public class ListCommand extends Command {
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
 
-
     /**
      * Retrieves shelf of items from Shelf.
      *
