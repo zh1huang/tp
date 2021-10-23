@@ -24,7 +24,8 @@ business, where they can view these information in a user-friendly manner.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
 
 ## Usage
 
@@ -80,7 +81,9 @@ add n/Harry Potter c/book p/27 s/37 q/5
 
 Expected outcome
 ```
-
+This item has been added to the list.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
 ```
 
 Example: **Add 100 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50. Also added additional remarks**
@@ -90,7 +93,10 @@ add n/Pilot P100 c/stationary p/1 s/1.5 q/100 r/Not many people bought this. Can
 
 Expected outcome:
 ```
-
+This item has been added to the list.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
 ```
 
 ### Delete an item
@@ -105,7 +111,15 @@ delete n/Alice in Wonderland
 ```
 Expected outcome:
 ```
-
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+3. Alice in wonderland (purchase cost: 27, selling price: 37)
+delete n/Alice in wonderland
+This item has been removed from the list.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
 ```
 
 ### Listing all items 
@@ -165,14 +179,14 @@ Format: `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]`
 
 Example: **Update "Lord of the Rings"'s selling price as $30**
 ```
-edit n/Lord of the Rings p/selling price v/30
+edit n/Lord of the Rings p/sellingPrice v/30
 ```
 
 Expected outcome:
-```
 
 ```
 
+```
 Example:
 ```
 edit n/Apples Never Fall p/quantity v/100 s/false
@@ -180,7 +194,16 @@ edit n/Apples Never Fall p/quantity v/100 s/false
 
 Expected outcome:
 ```
-
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+3. Lord of the Rings (purchase cost: 27, selling price: 37)
+edit n/Lord of the Rings p/sellingPrice v/30
+This item has been updated.
+list
+1. Harry Potter (purchase cost: 27, selling price: 37)
+2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+3. Lord of the Rings (purchase cost: 27, selling price: 30)
 ```
 
 ### Generate sales report
@@ -207,8 +230,6 @@ Format: `bye`
 
 Expected outcome:
 ```
-bye
-_______________________________________________________
 Bye! Hope to see you again!
 ```
 
