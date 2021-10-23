@@ -28,7 +28,7 @@ public class TotalCostAndIncomeCommand extends Command {
 
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
         for (int i = 0; i < soldItemsShelf.getSize(); i++) {
             Item selectedItem = soldItemsShelf.getItem(i);
@@ -40,8 +40,8 @@ public class TotalCostAndIncomeCommand extends Command {
         BigDecimal totalProfits = totalSellingPrice.subtract(totalPurchaseCost);
 
         System.out.println(String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
-            df.format(totalPurchaseCost), df.format(totalSellingPrice),
-            df.format(totalProfits)));
+            decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
+            decimalFormat.format(totalProfits)));
 
     }
 
