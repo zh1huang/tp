@@ -17,7 +17,7 @@ public class EditCommand extends Command {
     private final String itemName;
     private final String selectedProperty;
     private final String newValue;
-    private final String[] properties = {"purchaseCost", "sellingPrice"};
+    private final String[] properties = {"cost", "price"};
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
     //to be added to UI part later
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -52,12 +52,12 @@ public class EditCommand extends Command {
         }
         try {
             int sizeBeforeEditing = list.getSize();
-            if (selectedProperty.equals("purchaseCost")) {
+            if (selectedProperty.equals("cost")) {
                 Item selectedItem = list.getItem(itemName);
                 selectedItem.setPurchaseCost(newValue);
 
             } else {
-                assert selectedProperty.equals("sellingPrice") :
+                assert selectedProperty.equals("price") :
                         "All properties should have been listed";
                 Item selectedItem = list.getItem(itemName);
                 selectedItem.setSellingPrice(newValue);
