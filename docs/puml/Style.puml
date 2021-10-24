@@ -1,0 +1,5 @@
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam box white
+!define PARSER_COLOR #aqua
+!define MAIN_COLOR #orange

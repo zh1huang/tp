@@ -13,6 +13,15 @@ original source as well}
 
 {Illustrate overall how the different component in the system interacts with each other.}
 
+### General Program Flow
+![](diagrams/GeneralProgramFlowSequenceDiagram.png)
+
+1. User runs the programs & input user commands
+2. `Main` calls `Parser` to `parseCommand()`
+3. `Parser` returns a `Command` object when parsed successful
+4. `Main` calls `Command` object to `execute()`, and returning a `resultString`
+5. `Main` instantiates `UI` component to print the `resultString`
+
 ### UI component
 
 {Illustrate how the UI package work.}
