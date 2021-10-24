@@ -11,7 +11,11 @@ original source as well}
 
 ### Architecture
 
+{Illustrate overall how the different component in the system interacts with each other.}
+
 ### UI component
+
+{Illustrate how the UI package work.}
 
 ### Logic component
 
@@ -20,7 +24,7 @@ original source as well}
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
-
+   
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
@@ -48,25 +52,40 @@ original source as well}
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](diagrams/seedu_duke_model_new_shelf.drawio.svg)
+![](diagrams/seedu_duke_model_newshelf.drawio.svg)
 ### Storage component
 
 ## Product scope
 
 ### Target user profile
 
-{Describe the target user profile}
+* has a need to manage inventories & finances of small scaled book stores
+* prefers to operate the store by themselves without additional hires
+* prefers typing over clicking on GUI applications
+* ability to type fast
+* comfortable with command line applications
+* does not mind the plain output from command line applications
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Allows efficient and simplified management of inventory and finances of the store
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|add new items to inventory list||
+|v1.0|user|delete items from inventory list|remove entries that I no longer need|
+|v1.0|user|get a list of inventory according to their category|keep track of what I have in stock for selling|
+|v1.0|user|retrieve information about an item|decide if I need to restock|
+|v1.0|user|update the information of the items|keep the list updated|
+|v2.0|user|store and retrieve the inventory list|save the data when program closes and automatically loads when program restarts|
+|v2.0|user|retrieve a list of items low in stock|replenish items low in stock|
+|v2.0|user|mark an item as sold|remove item from inventory list and add to revenue|
+|v2.0|user|add the total cost of all the items|know the total cost and deduct from revenue to find profit|
+|v2.0|user|view the monthly sales report|know if I am making a profit|
+
 
 ## Non-Functional Requirements
 
