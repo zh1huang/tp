@@ -8,6 +8,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.TotalCostAndIncomeCommand;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
@@ -29,38 +30,43 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)"
-                    + " c/(?<category>[^/]+)"
-                    + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
-                    //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
-                    //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
-                    + "( r/(?<remarks>[^/]+))?$"); // optional argument
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + " c/(?<category>[^/]+)"
+            + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+            //only accepts numbers or decimals in 1 or 2 d.p.
+            + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+            //only accepts numbers or decimals in 1 or 2 d.p.
+            + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
+            + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)");
+        Pattern.compile("n/(?<itemName>[^/]+)");
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
+        Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)"
-                    + "( p/(?<property>[^/]+))?"); // optional argument property
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + "( p/(?<property>[^/]+))?"); // optional argument property
 
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)"
-                    + " p/(?<property>[^/]+)"
-                    + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
-                    + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + " p/(?<property>[^/]+)"
+            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
+            + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
+
+    public static final Pattern TOTAL_COST_DATA_ARGS_FORMAT =
+        Pattern.compile("(c/(?<month>[^/]+))?"); // optional argument category
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-            "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
+        "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete n/NAME";
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [c/CATEGORY]";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get n/NAME [p/PROPERTY]";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
-            "edit n/NAME p/PROPERTY v/VALUE [s/SHOW_RESULT]";
+        "edit n/NAME p/PROPERTY v/VALUE [s/SHOW_RESULT]";
+    public static final String TOTAL_COST_DATA_ARGS_FORMAT_STRING = "list [m/MONTH]";
+
 
     public static final String ADD_STRING = "add";
     public static final String DELETE_STRING = "delete";
@@ -69,14 +75,15 @@ public class Parser {
     public static final String EDIT_STRING = "edit";
     public static final String BYE_STRING = "bye";
     public static final String HELP_STRING = "help";
+    public static final String TOTAL_COST_STRING = "tcost";
 
     public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
     public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
-            "Input invalid command format.\nCorrect format: \n%s\n";
+        "Input invalid command format.\nCorrect format: \n%s\n";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n"
-            + "quantity: %s\nremarks: %s\n";
+        + "quantity: %s\nremarks: %s\n";
     public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\n";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "category: %s\n";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "itemName: %s\nproperty: %s\n";
@@ -101,7 +108,7 @@ public class Parser {
      *                                  by the user
      */
     public Command parseCommand(String userInputLine, Shelf list) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
         logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
@@ -143,6 +150,9 @@ public class Parser {
         case BYE_STRING:
             return prepareBye(arguments);
 
+        case TOTAL_COST_STRING:
+            return prepareTotalCost(arguments);
+
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
@@ -151,39 +161,11 @@ public class Parser {
     }
 
     /**
-     * Parses bye command.
-     *
-     * @param arguments The additional arguments after command word, should be none
-     * @return ByeCommand object
-     * @throws IllegalFormatException if exists extra argument after bye
-     */
-    private Command prepareBye(String arguments) throws IllegalFormatException {
-        if (!arguments.isEmpty()) {
-            throw new IllegalFormatException(INVALID_BYE_COMMAND);
-        }
-        return new ExitCommand();
-    }
-
-    /**
-     * Parses help command.
-     *
-     * @param arguments The additional arguments after command word, should be none
-     * @return HelpCommand object
-     * @throws IllegalFormatException if exists extra argument after bye
-     */
-    private Command prepareHelp(String arguments) throws IllegalFormatException {
-        if (!arguments.isEmpty()) {
-            throw new IllegalFormatException(INVALID_HELP_COMMAND);
-        }
-        return new HelpCommand();
-    }
-
-    /**
      * Parses add command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return AddCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return AddCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -191,7 +173,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Add Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String purchaseCost = matcher.group("purchaseCost");
@@ -205,9 +187,9 @@ public class Parser {
     /**
      * Parses delete command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return DeleteCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return DeleteCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -215,7 +197,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Delete Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         Command deleteCommand = new DeleteCommand(itemName);
@@ -227,9 +209,9 @@ public class Parser {
     /**
      * Parses list command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return ListCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return ListCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -237,7 +219,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         Command listCommand = new ListCommand();
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
@@ -248,9 +230,9 @@ public class Parser {
     /**
      * Parses get command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return GetCommand object.
-     * @throws IllegalFormatException If the input format is wrong.
+     * @param arguments The additional arguments after command word
+     * @return GetCommand object
+     * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareGet(String arguments, Shelf list) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
@@ -258,7 +240,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Get Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
         String itemName = matcher.group("itemName");
@@ -272,20 +254,20 @@ public class Parser {
     /**
      * Parses edit command arguments.
      *
-     * @param arguments The additional arguments after command word.
-     * @return EditCommand object.
-     * @throws IllegalFormatException   If the input format is wrong.
-     * @throws ItemNotExistException    If the item cannot be found from the container.
-     * @throws NoPropertyFoundException If the associated item property cannot be found.
+     * @param arguments The additional arguments after command word
+     * @return EditCommand object
+     * @throws IllegalFormatException   If the input format is wrong
+     * @throws ItemNotExistException    If the item cannot be found from the container
+     * @throws NoPropertyFoundException If the associated item property cannot be found
      */
     private Command prepareEdit(String arguments, Shelf list) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Edit Command Format");
             throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String selectedProperty = matcher.group("property");
@@ -312,9 +294,9 @@ public class Parser {
     /**
      * Creates EditCommand Object.
      *
-     * @param itemName Name of item to be edited.
-     * @param updatedPurchaseCost New Purchase Cost.
-     * @param updatedSellingPrice New Selling Price.
+     * @param itemName            Name of item to be edited
+     * @param updatedPurchaseCost New Purchase Cost
+     * @param updatedSellingPrice New Selling Price
      * @return EditCommand object.
      */
     private Command formEditCommand(String itemName, String updatedPurchaseCost, String updatedSellingPrice) {
@@ -323,5 +305,56 @@ public class Parser {
         logger.log(Level.INFO, "EditCommand parse success.");
 
         return editCommand;
+    }
+
+    /**
+     * Parses help command.
+     *
+     * @param arguments The additional arguments after command word, should be none
+     * @return HelpCommand object
+     * @throws IllegalFormatException if exists extra argument after bye
+     */
+    private Command prepareHelp(String arguments) throws IllegalFormatException {
+        if (!arguments.isEmpty()) {
+            throw new IllegalFormatException(INVALID_HELP_COMMAND);
+        }
+        return new HelpCommand();
+    }
+
+    /**
+     * Parses bye command.
+     *
+     * @param arguments The additional arguments after command word, should be none
+     * @return ByeCommand object
+     * @throws IllegalFormatException if exists extra argument after bye
+     */
+    private Command prepareBye(String arguments) throws IllegalFormatException {
+        if (!arguments.isEmpty()) {
+            throw new IllegalFormatException(INVALID_BYE_COMMAND);
+        }
+        return new ExitCommand();
+    }
+
+    /**
+     * Parses total cost command arguments.
+     *
+     * @param arguments The additional arguments after command word.
+     * @return TotalCostAndIncomeCommand object
+     * @throws IllegalFormatException If the input format is wrong
+     */
+    private Command prepareTotalCost(String arguments) throws IllegalFormatException {
+        final Matcher matcher = TOTAL_COST_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match List Command Format");
+            throw new IllegalFormatException(String.format(
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, TOTAL_COST_DATA_ARGS_FORMAT_STRING));
+        }
+
+        Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
+        assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
+            "tCost should return totalCostAndIncomeCommand\n";
+        logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
+        return totalCostAndIncomeCommand;
     }
 }
