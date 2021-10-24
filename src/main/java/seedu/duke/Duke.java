@@ -40,7 +40,7 @@ public class Duke {
             input = in.nextLine();
             try {
                 Command command = parser.parseCommand(input, warehouse);
-                command.execute(warehouse); // todo remove execute input argument because unnecessary.
+                command.execute(); // todo remove execute input argument because unnecessary.
                 isExit = command.isExit();
             } catch (Exception e) {
                 System.out.println(e.getMessage());

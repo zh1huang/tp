@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 public class GetCommand extends Command {
 
     private final String name;
+    private final Shelf shelf;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item\n";
 
@@ -18,8 +19,9 @@ public class GetCommand extends Command {
      *
      * @param name the name of selected item
      */
-    public GetCommand(String name) {
+    public GetCommand(String name, Shelf shelf) {
         this.name = name;
+        this.shelf = shelf;
     }
 
     /**
@@ -45,10 +47,9 @@ public class GetCommand extends Command {
     /**
      * Executes the operation of retrieving information of specified item.
      *
-     * @param shelf the Shelf that manipulates the item
      * @throws ItemNotExistException if specified item does not exist
      */
-    public void execute(Shelf shelf) throws ItemNotExistException {
+    public void execute() throws ItemNotExistException {
         String info = getInfo(shelf);
         System.out.println(GET_COMPLETE_MESSAGE + info);
         logger.log(Level.INFO, "GetCommand successfully executed");

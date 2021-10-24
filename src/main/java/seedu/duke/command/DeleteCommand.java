@@ -14,6 +14,8 @@ public class DeleteCommand extends Command {
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
     private final String name;
+    private final int quantity;
+    private final Shelf shelf;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
@@ -21,8 +23,10 @@ public class DeleteCommand extends Command {
      *
      * @param name the name of the item
      */
-    public DeleteCommand(String name) {
+    public DeleteCommand(String name, int quantity, Shelf shelf) {
         this.name = name;
+        this.quantity = quantity;
+        this.shelf = shelf;
     }
 
 
@@ -32,12 +36,12 @@ public class DeleteCommand extends Command {
      * @param list the itemContainer to remove the item from
      * @throws ItemNotExistException if the specified item does not exist
      */
-    public void execute(Shelf list) throws ItemNotExistException {
+    public void execute() throws ItemNotExistException {
         try {
-            int sizeBeforeDeleting = list.getSize();
-            Item selectedItem = list.getItem(name);
-            list.deleteItem(selectedItem);
-            int sizeAfterDeleting = list.getSize();
+            int sizeBeforeDeleting = shelf.getSize();
+            Item selectedItem = shelf.getItem(name);
+            shelf.deleteItem(selectedItem);
+            int sizeAfterDeleting = shelf.getSize();
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
                     "After deleting an item the list size should decrease by 1";
             System.out.println(DELETE_COMPLETE_MESSAGE);

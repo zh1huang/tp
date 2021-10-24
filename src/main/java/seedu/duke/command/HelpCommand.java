@@ -25,7 +25,7 @@ public class HelpCommand extends Command {
      *
      * @param list the Shelf in which HelpCommand is executed
      */
-    public void execute(Shelf list) {
+    public void execute() {
         System.out.println(commandList);
     }
 }

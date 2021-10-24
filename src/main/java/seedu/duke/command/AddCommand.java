@@ -17,6 +17,8 @@ public class AddCommand extends Command {
     private final String name;
     private final String purchaseCost;
     private final String sellingPrice;
+    private final int quantity;
+    private final Shelf shelf;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
@@ -26,10 +28,12 @@ public class AddCommand extends Command {
      * @param purchaseCost the cost of the item
      * @param sellingPrice the price of the item
      */
-    public AddCommand(String name, String purchaseCost, String sellingPrice) {
+    public AddCommand(String name, String purchaseCost, String sellingPrice, int quantity, Shelf shelf) {
         this.name = name;
         this.purchaseCost = purchaseCost;
         this.sellingPrice = sellingPrice;
+        this.quantity = quantity;
+        this.shelf = shelf;
     }
 
     /**
@@ -40,23 +44,25 @@ public class AddCommand extends Command {
      * @throws DuplicateItemException if exactly the same item is added to the list
      */
     @Override
-    public void execute(Shelf list) throws IllegalArgumentException, DuplicateItemException {
-        try {
-            int sizeBeforeAdding = list.getSize();
-            Item newItem = new Item(name, purchaseCost, sellingPrice);
-            list.addItem(newItem);
-            int sizeAfterAdding = list.getSize();
-            assert sizeBeforeAdding + 1 == sizeAfterAdding : "After adding an item the list size should increase by 1";
-            System.out.println(ADD_COMPLETE_MESSAGE);
-            logger.log(Level.INFO, "AddCommand successfully executed.");
-        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
-            logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
-                    e.getMessage()));
-            throw new IllegalArgumentException(e.getMessage());
-        } catch (seedu.duke.model.exception.DuplicateItemException e) {
-            logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
-                    e.getMessage()));
-            throw new DuplicateItemException(e.getMessage());
+    public void execute() throws IllegalArgumentException, DuplicateItemException {
+        for (int i = 0; i < quantity; i ++) {
+            try {
+                int sizeBeforeAdding = shelf.getSize();
+                Item newItem = new Item(name, purchaseCost, sellingPrice);
+                shelf.addItem(newItem);
+                int sizeAfterAdding = shelf.getSize();
+                assert sizeBeforeAdding + 1 == sizeAfterAdding : "After adding an item the list size should increase by 1";
+                System.out.println(ADD_COMPLETE_MESSAGE);
+                logger.log(Level.INFO, "AddCommand successfully executed.");
+            } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+                logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
+                        e.getMessage()));
+                throw new IllegalArgumentException(e.getMessage());
+            } catch (seedu.duke.model.exception.DuplicateItemException e) {
+                logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
+                        e.getMessage()));
+                throw new DuplicateItemException(e.getMessage());
+            }
         }
     }
 

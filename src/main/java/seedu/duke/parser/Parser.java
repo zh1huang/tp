@@ -39,7 +39,8 @@ public class Parser {
                     + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("n/(?<itemName>[^/]+)");
+            Pattern.compile("n/(?<itemName>[^/]+)"
+                    + " q/(?<quantity>[0-9]+)"); // only accepts numbers, no decimals
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
@@ -93,14 +94,14 @@ public class Parser {
      * respective cases depending on the command word.
      *
      * @param userInputLine The user input Line
-     * @param list          The itemContainer used to prepare the command
+     * @param shelf         The itemContainer used to prepare the command
      * @return Command object depending on the command type
      * @throws IllegalFormatException   If user input line does not match the respective command format
      * @throws ItemNotExistException    If item name not found in the container
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
      *                                  by the user
      */
-    public Command parseCommand(String userInputLine, Shelf list) throws IllegalFormatException,
+    public Command parseCommand(String userInputLine, Shelf shelf) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
         logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
@@ -117,23 +118,23 @@ public class Parser {
 
         switch (commandWord) {
         case ADD_STRING:
-            command = prepareAdd(arguments);
+            command = prepareAdd(arguments, shelf);
             break;
 
         case DELETE_STRING:
-            command = prepareDelete(arguments);
+            command = prepareDelete(arguments, shelf);
             break;
 
         case LIST_STRING:
-            command = prepareList(arguments);
+            command = prepareList(arguments, shelf);
             break;
 
         case GET_STRING:
-            command = prepareGet(arguments, list);
+            command = prepareGet(arguments, shelf);
             break;
 
         case EDIT_STRING:
-            command = prepareEdit(arguments, list);
+            command = prepareEdit(arguments, shelf);
             break;
 
         case HELP_STRING:
@@ -185,7 +186,7 @@ public class Parser {
      * @return AddCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
-    private Command prepareAdd(String arguments) throws IllegalFormatException {
+    private Command prepareAdd(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -196,7 +197,8 @@ public class Parser {
         String itemName = matcher.group("itemName");
         String purchaseCost = matcher.group("purchaseCost");
         String sellingPrice = matcher.group("sellingPrice");
-        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice);
+        int quantity = Integer.parseInt(matcher.group("quantity"));
+        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice, quantity, shelf);
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");
         return addCommand;
@@ -209,7 +211,7 @@ public class Parser {
      * @return DeleteCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
-    private Command prepareDelete(String arguments) throws IllegalFormatException {
+    private Command prepareDelete(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -218,7 +220,8 @@ public class Parser {
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
-        Command deleteCommand = new DeleteCommand(itemName);
+        int quantity = Integer.parseInt(matcher.group("quantity"));
+        Command deleteCommand = new DeleteCommand(itemName, quantity, shelf);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
         logger.log(Level.INFO, "DeleteCommand parse success.");
         return deleteCommand;
@@ -231,7 +234,7 @@ public class Parser {
      * @return ListCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
-    private Command prepareList(String arguments) throws IllegalFormatException {
+    private Command prepareList(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -239,7 +242,7 @@ public class Parser {
             throw new IllegalFormatException(String.format(
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
         }
-        Command listCommand = new ListCommand();
+        Command listCommand = new ListCommand(shelf);
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
         logger.log(Level.INFO, "ListCommand parse success.");
         return listCommand;
@@ -252,7 +255,7 @@ public class Parser {
      * @return GetCommand object.
      * @throws IllegalFormatException If the input format is wrong.
      */
-    private Command prepareGet(String arguments, Shelf list) throws IllegalFormatException {
+    private Command prepareGet(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -263,7 +266,7 @@ public class Parser {
 
         String itemName = matcher.group("itemName");
 
-        Command getCommand = new GetCommand(itemName);
+        Command getCommand = new GetCommand(itemName, shelf);
         assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
         logger.log(Level.INFO, "GetCommand parse success.");
         return getCommand;
@@ -278,7 +281,7 @@ public class Parser {
      * @throws ItemNotExistException    If the item cannot be found from the container.
      * @throws NoPropertyFoundException If the associated item property cannot be found.
      */
-    private Command prepareEdit(String arguments, Shelf list) throws IllegalFormatException,
+    private Command prepareEdit(String arguments, Shelf shelf) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
@@ -290,7 +293,7 @@ public class Parser {
         String itemName = matcher.group("itemName");
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
-        return new EditCommand(itemName, selectedProperty, newValue);
+        return new EditCommand(itemName, selectedProperty, newValue, shelf);
 
     }
 
@@ -302,8 +305,9 @@ public class Parser {
      * @param updatedSellingPrice New Selling Price.
      * @return EditCommand object.
      */
-    private Command formEditCommand(String itemName, String updatedPurchaseCost, String updatedSellingPrice) {
-        Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+    private Command formEditCommand(String itemName, String updatedPurchaseCost, String updatedSellingPrice,
+                                    Shelf shelf) {
+        Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice, shelf);
         assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
 

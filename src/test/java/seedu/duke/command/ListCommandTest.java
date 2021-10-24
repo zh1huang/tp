@@ -27,7 +27,7 @@ public class ListCommandTest {
     public void setUp() throws Exception {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
-        testCommand = new ListCommand();
+        testCommand = new ListCommand(testList);
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
@@ -42,7 +42,7 @@ public class ListCommandTest {
         testList.addItem(new Item("LOTR", "10.2", "15.7"));
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
-        testCommand.execute(testList);
+        testCommand.execute();
         String expected = "Here is the list of items:\n"
                 + "1. HarryPotter (purchase cost: 16.1, selling price: 25.12)\n"
                 + "2. LOTR (purchase cost: 10.2, selling price: 15.7)";
@@ -51,6 +51,6 @@ public class ListCommandTest {
 
     @Test
     public void execute_noItemsInList_throwsEmptyListException() {
-        assertThrows(EmptyListException.class, () -> testCommand.execute(testList));
+        assertThrows(EmptyListException.class, () -> testCommand.execute());
     }
 }

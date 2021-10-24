@@ -17,6 +17,7 @@ public class EditCommand extends Command {
     private final String itemName;
     private final String selectedProperty;
     private final String newValue;
+    private final Shelf shelf;
     private final String[] properties = {"cost", "price"};
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
     //to be added to UI part later
@@ -29,21 +30,21 @@ public class EditCommand extends Command {
      * @param property the property to be changed
      * @param newValue the new value of the property
      */
-    public EditCommand(String itemName, String property, String newValue) {
+    public EditCommand(String itemName, String property, String newValue, Shelf shelf) {
         this.itemName = itemName;
         this.selectedProperty = property;
         this.newValue = newValue;
+        this.shelf = shelf;
     }
 
     /**
      * Executes the update operation.
      *
-     * @param list the itemContainer to remove the item from
      * @throws ItemNotExistException    when cannot find any item with the name
      * @throws NullPointerException     when the name specified is null
      * @throws IllegalArgumentException when the argument is invalid
      */
-    public void execute(Shelf list) throws ItemNotExistException,
+    public void execute() throws ItemNotExistException,
             NullPointerException, IllegalArgumentException, NoPropertyFoundException {
         boolean isProperty = Arrays.asList(properties).contains(selectedProperty);
         if (!isProperty) {
@@ -51,18 +52,18 @@ public class EditCommand extends Command {
             throw new NoPropertyFoundException(selectedProperty);
         }
         try {
-            int sizeBeforeEditing = list.getSize();
+            int sizeBeforeEditing = shelf.getSize();
             if (selectedProperty.equals("cost")) {
-                Item selectedItem = list.getItem(itemName);
+                Item selectedItem = shelf.getItem(itemName);
                 selectedItem.setPurchaseCost(newValue);
 
             } else {
                 assert selectedProperty.equals("price") :
                         "All properties should have been listed";
-                Item selectedItem = list.getItem(itemName);
+                Item selectedItem = shelf.getItem(itemName);
                 selectedItem.setSellingPrice(newValue);
             }
-            int sizeAfterEditing = list.getSize();
+            int sizeAfterEditing = shelf.getSize();
             assert sizeBeforeEditing == sizeAfterEditing :
                     "After editing an item the list size should remain unchanged";
             System.out.println(UPDATE_COMPLETE_MESSAGE);
