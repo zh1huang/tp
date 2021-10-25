@@ -12,7 +12,13 @@
    5. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
    1. [Adding an item](#adding-an-item)
-   2. 
+   2. [Editing an item](#editing-an-item)
+   3. [Listing all items](#listing-all-items)
+   4. [Getting an item](#getting-an-item)
+   5. [Selling an item](#selling-an-item)
+   6. [Generating sales report](#generating-sales-report)
+   7. [Getting help](#getting-help)
+   8. [Exiting the program](#editing-an-item)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
@@ -188,6 +194,10 @@ ___
 #### Design considerations:
 
 ### Getting an item
+
+#### Design considerations:
+
+### Selling an item
 
 #### Design considerations:
 
