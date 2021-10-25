@@ -185,3 +185,31 @@ ___
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+### Launch and shut down
+
+#### Initial launch
+1. Download and save the latest JAR file in a desired file directory.
+2. Open up your terminal and navigate to where that directory is saved.
+3. Run `java -jar Duke.jar` to launch the program. 
+4. A `data` folder containing `output.txt` is expected to appear.
+
+#### Subsequent launch
+1. Open up your terminal and navigate to where the directory in which the JAR file is saved under.
+2. Run `java -jar Duke.jar` to launch the program.
+3. Data will be automatically saved into the data file.
+
+#### Shut down
+1. To terminate the program, type `bye`.
+2. Data will be automatically saved into the data file.
+3. The data is expected to still be saved normally even if program crashes.
+
+### Adding an item
+
+### Deleting an item
+
+### Getting information of an item
+
+### Listing the items
+
+### Editing an item
