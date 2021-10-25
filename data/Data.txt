@@ -1,0 +1,12 @@
+{"warehouse": {"items": {
+    "0": {
+        "cost": "11",
+        "price": "120",
+        "name": "some book"
+    },
+    "1": {
+        "cost": "11",
+        "price": "120",
+        "name": "some book"
+    }
+}}}

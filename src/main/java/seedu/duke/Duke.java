@@ -2,7 +2,9 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
 import seedu.duke.parser.Parser;
+import seedu.duke.storage.Storage;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -26,7 +28,12 @@ public class Duke {
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(Level.WARNING);
 
-        Shelf warehouse = new Shelf("warehouse");
+        Storage storage = new Storage();
+        try {
+            storage.loadData();
+        } catch (Exception e) {
+            // todo warn user cannot load data/ initializing data
+        }
 
         System.out.println(HELLO_MESSAGE);
         Scanner in = new Scanner(System.in);
@@ -39,12 +46,14 @@ public class Duke {
         while (!isExit) {
             input = in.nextLine();
             try {
-                Command command = parser.parseCommand(input, warehouse);
-                command.execute(warehouse); // todo remove execute input argument because unnecessary.
+                Command command = parser.parseCommand(input, ShelfList.getShelfList().getShelf("warehouse"));
+                // todo remove execute input argument because unnecessary.
+                command.execute(ShelfList.getShelfList().getShelf("warehouse"));
                 isExit = command.isExit();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            storage.saveData();
         }
     }
 }
