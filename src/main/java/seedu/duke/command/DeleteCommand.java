@@ -23,9 +23,9 @@ public class DeleteCommand extends Command {
      *
      * @param name the name of the item
      */
-    public DeleteCommand(String name, int quantity, Shelf shelf) {
+    public DeleteCommand(String name, String quantity, Shelf shelf) {
         this.name = name;
-        this.quantity = quantity;
+        this.quantity = Integer.parseInt(quantity);
         this.shelf = shelf;
     }
 

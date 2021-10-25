@@ -31,8 +31,8 @@ public class DeleteCommandTest {
         testList = new Shelf("test");
         testItem1 = new Item("HarryPotter", "16.1", "25.12");
         testItem2 = new Item("HarryPotter", "16.1", "25.12");
-        testCommand1 = new DeleteCommand("HarryPotter", 1, testList);
-        testCommand2 = new DeleteCommand("TYS", 1, testList);
+        testCommand1 = new DeleteCommand("HarryPotter", "1", testList);
+        testCommand2 = new DeleteCommand("TYS", "1", testList);
     }
 
     @Test

@@ -30,11 +30,11 @@ public class AddCommand extends Command {
      * @param purchaseCost the cost of the item
      * @param sellingPrice the price of the item
      */
-    public AddCommand(String name, String purchaseCost, String sellingPrice, int quantity, Shelf shelf) {
+    public AddCommand(String name, String purchaseCost, String sellingPrice, String quantity, Shelf shelf) {
         this.name = name;
         this.purchaseCost = purchaseCost;
         this.sellingPrice = sellingPrice;
-        this.quantity = quantity;
+        this.quantity = Integer.parseInt(quantity);
         this.shelf = shelf;
     }
 

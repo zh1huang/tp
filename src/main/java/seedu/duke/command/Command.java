@@ -11,7 +11,6 @@ public abstract class Command {
     /**
      * Abstract execute method.
      *
-     * @param list the Shelf that manipulates the item
      * @throws CommandException if anything goes wrong
      */
     public abstract String execute() throws CommandException;
