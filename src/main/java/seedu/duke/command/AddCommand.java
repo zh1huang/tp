@@ -12,8 +12,10 @@ import java.util.logging.Logger;
  * The command that adds a new item to the list.
  */
 public class AddCommand extends Command {
-    private static final String ADD_COMPLETE_MESSAGE =
+    private static final String ADD_COMPLETE_MESSAGE_SINGLE =
             "This item has been added to the list."; //to be added to UI part later
+    private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =
+            " items have been added to the list."; //to be added to UI part later
     private final String name;
     private final String purchaseCost;
     private final String sellingPrice;
@@ -39,12 +41,11 @@ public class AddCommand extends Command {
     /**
      * Executes the operation of adding the item to the list.
      *
-     * @param list the itemContainer to remove the item from
      * @throws IllegalArgumentException if the input argument is wrong
      * @throws DuplicateItemException if exactly the same item is added to the list
      */
     @Override
-    public void execute() throws IllegalArgumentException, DuplicateItemException {
+    public String execute() throws IllegalArgumentException, DuplicateItemException {
         for (int i = 0; i < quantity; i ++) {
             try {
                 int sizeBeforeAdding = shelf.getSize();
@@ -52,7 +53,7 @@ public class AddCommand extends Command {
                 shelf.addItem(newItem);
                 int sizeAfterAdding = shelf.getSize();
                 assert sizeBeforeAdding + 1 == sizeAfterAdding : "After adding an item the list size should increase by 1";
-                System.out.println(ADD_COMPLETE_MESSAGE);
+                System.out.println(ADD_COMPLETE_MESSAGE_SINGLE);
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             } catch (seedu.duke.model.exception.IllegalArgumentException e) {
                 logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
@@ -63,6 +64,11 @@ public class AddCommand extends Command {
                         e.getMessage()));
                 throw new DuplicateItemException(e.getMessage());
             }
+        }
+        if (quantity > 1) {
+            return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
+        } else {
+            return ADD_COMPLETE_MESSAGE_SINGLE;
         }
     }
 

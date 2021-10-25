@@ -49,10 +49,11 @@ public class GetCommand extends Command {
      *
      * @throws ItemNotExistException if specified item does not exist
      */
-    public void execute() throws ItemNotExistException {
+    public String execute() throws ItemNotExistException {
         String info = getInfo(shelf);
         System.out.println(GET_COMPLETE_MESSAGE + info);
         logger.log(Level.INFO, "GetCommand successfully executed");
+        return GET_COMPLETE_MESSAGE;
     }
 
     @Override

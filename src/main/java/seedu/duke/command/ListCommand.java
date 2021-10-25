@@ -41,7 +41,7 @@ public class ListCommand extends Command {
      * Executes the operation of listing all the items.
      */
 
-    public void execute() throws EmptyListException {
+    public String execute() throws EmptyListException {
         int initialSize = shelf.getSize();
         if (shelf.getSize() == 0) {
             logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
@@ -52,6 +52,7 @@ public class ListCommand extends Command {
         assert initialSize == shelf.getSize() : "List size should not be changed";
         System.out.println(LIST_COMPLETE_MESSAGE + result);
         logger.log(Level.INFO, "ListCommand successfully executed");
+        return LIST_COMPLETE_MESSAGE + result;
     }
 
     @Override

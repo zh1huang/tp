@@ -44,7 +44,7 @@ public class EditCommand extends Command {
      * @throws NullPointerException     when the name specified is null
      * @throws IllegalArgumentException when the argument is invalid
      */
-    public void execute() throws ItemNotExistException,
+    public String execute() throws ItemNotExistException,
             NullPointerException, IllegalArgumentException, NoPropertyFoundException {
         boolean isProperty = Arrays.asList(properties).contains(selectedProperty);
         if (!isProperty) {
@@ -68,6 +68,7 @@ public class EditCommand extends Command {
                     "After editing an item the list size should remain unchanged";
             System.out.println(UPDATE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "EditCommand successfully executed.");
+            return UPDATE_COMPLETE_MESSAGE;
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             logger.log(Level.WARNING, String.format("EditCommand failed to execute with error message %s",
                     e.getMessage()));

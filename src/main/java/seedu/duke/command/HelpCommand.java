@@ -4,7 +4,7 @@ import seedu.duke.model.Shelf;
 
 public class HelpCommand extends Command {
 
-    private static final String commandList = "Here are the performable actions:\n"
+    private static final String COMMANDLIST = "Here are the performable actions:\n"
             + "Words in UPPER_CASE are the parameters to be supplied by the user.\n"
             + "Items in square brackets [ ] are optional.\n"
             + "____________________________________________________________________________________________\n"
@@ -22,10 +22,9 @@ public class HelpCommand extends Command {
 
     /**
      * Executes help command.
-     *
-     * @param list the Shelf in which HelpCommand is executed
      */
-    public void execute() {
-        System.out.println(commandList);
+    public String execute() {
+        System.out.println(COMMANDLIST);
+        return COMMANDLIST;
     }
 }
