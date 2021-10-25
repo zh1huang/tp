@@ -9,8 +9,8 @@ participant Main MAIN_COLOR
 user -> Main: Run program & Input commands
 Main -> Parser: parseCommand(input, warehouse)
 Parser --> Main: Command
-Main -> "{action}Command": execute(warehouse)
-"{action}Command" --> Main: resultString
+Main -> "{commandWord}Command": execute(warehouse)
+"{commandWord}Command" --> Main: resultString
 Main -> UI: printMessageBubble(resultString)
 
 @enduml
