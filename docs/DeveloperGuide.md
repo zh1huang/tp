@@ -1,23 +1,106 @@
 # Developer Guide
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Setting up](#setting-up)
+3. [Acknowledgements](#acknowledgements)
+4. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI Component](#ui-component)
+   3. [Logic Component](#logic-component)
+   4. [Model Component](#model-component)
+   5. [Storage Component](#storage-component)
+5. [Implementation](#implementation)
+6. [Product Scope](#product-scope)
+7. [User stories](#user-stories)
+8. [Non-Functional Requirements](#non-functional-requirements)
+9. [Glossary](#glossary)
+10. [Instructions for manual testing](#instructions-for-manual-testing)
+
+___
+
+## Introduction
+**Welcome to CLIver Shelf!**
+
+**CLIver Shelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. 
+With **CLIver Shelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that they know how well their business is going. 
+
+This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is to get developers 
+and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
+
+___
+## Setting up
+**Pre-requisites**
+1. JDK 11
+2. IntelliJ IDEA IDE
+
+**Setting up the Project in Your Computer**
+1. Fork [this repository](https://github.com/AY2122S1-CS2113T-F11-4/tp), and clone the fork to your computer.
+2. Open up IntelliJ. If you are not at the welcome screen, click `File` > `Close Project` to close any existing project
+3. Set up the correct JDK version for Gradle
+   1. Click `File` > `New Project Setup` > `Structure`, and ensure `Project SDK` is using `JDK 11`. Click `OK`
+4. Import the project
+   1. Click `File` > `Open Project`
+   2. Select the project directory, and click `OK` to accept the default settings
+5. Verify the setup: After the importing is complete, locate `Duke.java` file, right-click it and `Run 'Duke.main()'`. If the setup is correct, you should see something like this:
+```
+> Task :compileJava UP-TO-DATE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+
+> Task :Duke.main()
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+What is your name?
+```
+___
 ## Acknowledgements
+1. [addressbook-level3](https://se-education.org/addressbook-level3/)
+___
+## Design
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
-
-## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 ### Architecture
+![](diagrams/seedu_duke_architecture.svg)
+The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
-{Illustrate overall how the different component in the system interacts with each other.}
+1. `Main` Responsible for initializing the various components and connecting them up with one another at app launch.  
+2. `UI`: Handles the interactions with the user. 
+3. `Logic`: Parses and executes the user input commands.
+4. `Model`: Holds the data of the App in memory
+5. `Storage`: Reads data from, and writes data to, the hard disk.
+
 
 ### UI component
 
-{Illustrate how the UI package work.}
+The `UI` component is responsible for all the user inputs and system outputs. It is in charge of the display of success command executions, error messages and also user interactions by prompting for the next command.
+
+The class diagram below shows the associations between classes of the UI components
+
+![](diagrams/seedu_duke_ui.svg)
+
+The `UI` component is made up of 2 classes:
+* `MessageBubble`: Responsible for the display of messages
+* `PredefinedMessages`: Holds the messages required for MessageBubble to print to console.
 
 ### Logic component
+
+The class diagram below shows the associations between the classes that make up the `Logic` component.
+
+![](diagrams/seedu_duke_logic_component.svg)
+
+The `Logic` component consists of `Parser` and `Command` components. 
+1. After user enters input, `UI` fetches and passes it to Parser for parsing.
+2. Parser then returns a `Command` object, which is then executed.
+3. The command execution directly affects the objects in the `Model` component.
+4. After execution, `Command` instructs the `UI` component to print out relevant output messages (e.g successful command execution or error messages)
+5. `Command` then checks the `ExitCommand` on whether the program should exit.
+6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
 ![](diagrams/seedu_duke_logic.drawio.svg)
 
@@ -54,7 +137,10 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 
 ![](diagrams/seedu_duke_model_newshelf.drawio.svg)
 ### Storage component
-
+The storage component consists of `Storage` class. It handles the saving of user data by the command component and also loading data on program start up.
+___
+## Implementation
+___
 ## Product scope
 
 ### Target user profile
@@ -69,7 +155,7 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 ### Value proposition
 
 Allows efficient and simplified management of inventory and finances of the store
-
+___
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -86,15 +172,16 @@ Allows efficient and simplified management of inventory and finances of the stor
 |v2.0|user|add the total cost of all the items|know the total cost and deduct from revenue to find profit|
 |v2.0|user|view the monthly sales report|know if I am making a profit|
 
-
+___
 ## Non-Functional Requirements
+1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
+2. Users with fast typing speed should be able to accomplish tasks faster using commands than using the mouse
 
-{Give non-functional requirements}
-
+___
 ## Glossary
 
 * *glossary item* - Definition
-
+___
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
