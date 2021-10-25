@@ -11,6 +11,8 @@
    4. [Model Component](#model-component)
    5. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
+   1. [Adding an item](#adding-an-item)
+   2. 
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
@@ -60,13 +62,11 @@ What is your name?
 ___
 ## Acknowledgements
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
+2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
 ___
 ## Design
 
 All UML diagrams in this guide are stored in `docs/diagrams` directory.
-=======
-* Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
-
 
 
 ### Architecture
@@ -163,6 +163,43 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 The storage component consists of `Storage` class. It handles the saving of user data by the command component and also loading data on program start up.
 ___
 ## Implementation
+
+### Adding an item
+
+
+#### Design considerations:
+* Aspect: Long chain for add command
+   * Alternative 1 (current choice): Long command with chain of flags such `/n` for name and `/q` for quantity.
+      * Pros: Clear demarcation of different parameters that users have to input.
+      * Cons: Susceptible to errors as users might miss out some flags.
+   * Alternative 2: No flags required for each parameter.
+      * Pros: Shorter command length, less prone to errors.
+      * Cons: Increased difficulty in parsing and higher chance to encounter exceptions or errors.
+   * Alternative 3: Prompt for different inputs for each parameter after pressing `enter`
+     * Pros: Even less prone to human errors as the user is prompted what is required as input each time.
+     * Cons: Additional methods and passing of data will be required. 
+
+### Editing an item
+
+#### Design considerations:
+
+### Listing all items
+
+#### Design considerations:
+
+### Getting an item
+
+#### Design considerations:
+
+### Generating sales report
+
+#### Design considerations:
+
+### Getting help
+
+### Exiting the program
+
+
 ___
 ## Product scope
 
@@ -170,7 +207,7 @@ ___
 
 * has a need to manage inventories & finances of small scaled book stores
 * prefers to operate the store by themselves without additional hires
-* prefers typing over clicking on GUI applications
+* prefers typing to clicking on GUI applications
 * ability to type fast
 * comfortable with command line applications
 * does not mind the plain output from command line applications
