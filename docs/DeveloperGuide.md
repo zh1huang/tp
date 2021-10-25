@@ -64,6 +64,10 @@ ___
 ## Design
 
 All UML diagrams in this guide are stored in `docs/diagrams` directory.
+=======
+* Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
+
+
 
 ### Architecture
 ![](diagrams/seedu_duke_architecture.svg)
@@ -75,6 +79,16 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `Model`: Holds the data of the App in memory
 5. `Storage`: Reads data from, and writes data to, the hard disk.
 
+
+### General Program Flow
+
+1. User runs the programs & input user commands
+2. `Main` calls `Parser` to `parseCommand()`
+3. `Parser` returns a `Command` object when parsed successful
+4. `Main` calls `Command` object to `execute()`, and returning a `resultString`
+5. `Main` instantiates `UI` component to print the `resultString`
+
+![](diagrams/GeneralProgramFlowSequenceDiagram.png)
 
 ### UI component
 
@@ -107,8 +121,17 @@ The `Logic` component consists of `Parser` and `Command` components.
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
+   
+   1. When user enters a command into the terminal, upon submission, the `Main` program receives the input line and calls the `Parser` to `parseCommand()`
+   2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
+   3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`, `DELETE_STRING` shown in the diagram below.
+   4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute the `prepare{commandWord}()` function of the `Parser`
+      1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
+   5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `Main` component
+   
+![](diagrams/ParserClassDiagram.png)
 
-2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+3. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
@@ -176,12 +199,13 @@ ___
 ## Non-Functional Requirements
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
 2. Users with fast typing speed should be able to accomplish tasks faster using commands than using the mouse
+3. Users should be able to easily understand the command formats in the User Guide and use the commands to accomplish the tasks.
+4. Users should be able to see improvements in terms of the efficiency and management of the bookstore within a months of using the app.
 
-___
 ## Glossary
 
-* *glossary item* - Definition
-___
+* *Mainstream OS* - MacOS, Windows, Linux, Unix
+
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
