@@ -272,23 +272,8 @@ public class Parser {
         String itemName = matcher.group("itemName");
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
+        return new EditCommand(itemName, selectedProperty, newValue);
 
-        if (selectedProperty.equals("purchaseCost")) {
-            String updatedSellingPrice = list.getItem(itemName).getSellingPrice();
-            String updatedPurchaseCost = newValue;
-
-            return formEditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
-
-        } else if (selectedProperty.equals("sellingPrice")) {
-            String updatedPurchaseCost = list.getItem(itemName).getPurchaseCost();
-            String updatedSellingPrice = newValue;
-
-            return formEditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
-
-        } else {
-            logger.log(Level.WARNING, "EditCommand can't find item property.");
-            throw new NoPropertyFoundException(selectedProperty);
-        }
     }
 
     /**
