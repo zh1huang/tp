@@ -5,7 +5,9 @@ import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.MessageBubble;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +35,7 @@ public class Duke {
             storage.loadData();
         } catch (Exception e) {
             // todo warn user cannot load data/ initializing data
+            MessageBubble.printMessageBubble("Failed to load data:\n" + e.getMessage());
         }
 
         System.out.println(HELLO_MESSAGE);
