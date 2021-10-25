@@ -8,10 +8,5 @@
         "cost": "11",
         "price": "120",
         "name": "some book"
-    },
-    "2": {
-        "cost": "9.5",
-        "price": "25.5",
-        "name": "Beauty and the beast"
     }
 }}}
