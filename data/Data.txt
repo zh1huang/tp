@@ -1,0 +1,9 @@
+{"warehouse": {
+    "remark": " ",
+    "items": {"0": {
+        "cost": "12.25",
+        "price": "25",
+        "name": "sample item",
+        "remark": " "
+    }}
+}}
