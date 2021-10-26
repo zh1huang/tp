@@ -42,7 +42,6 @@ public class TotalCostAndIncomeCommand extends Command {
         System.out.println(String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
             decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
             decimalFormat.format(totalProfits)));
-
     }
 
     /**

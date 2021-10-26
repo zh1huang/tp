@@ -1,11 +1,2 @@
-add n/Beauty and the beast c/novel p/10 s/25.5 q/1
-list
-add n/The Great Gatsby c/novel p/15 s/45.5 q/1
-list
-delete n/The Great Gatsby
-list
-get n/Beauty and the beast
-edit n/Beauty and the beast p/cost v/9.5
-list
-delete n/Beauty and the beast
+someone
 bye

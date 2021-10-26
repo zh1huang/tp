@@ -11,26 +11,7 @@
                           ...................................................
                           : Enter 'help' for the list of available commands :
                           ......................................................
-This item has been added to the list.
-Here is the list of items:
-1. sample item (purchase cost: 12.25, selling price: 25)
-2. Beauty and the beast (purchase cost: 10, selling price: 25.5)
-This item has been added to the list.
-Here is the list of items:
-1. sample item (purchase cost: 12.25, selling price: 25)
-2. Beauty and the beast (purchase cost: 10, selling price: 25.5)
-3. The Great Gatsby (purchase cost: 15, selling price: 45.5)
-This item has been removed from the list.
-Here is the list of items:
-1. sample item (purchase cost: 12.25, selling price: 25)
-2. Beauty and the beast (purchase cost: 10, selling price: 25.5)
-Here is the information of your item
-name: Beauty and the beast
-selling price: 25.5
-purchase cost: 10
-This item has been updated.
-Here is the list of items:
-1. sample item (purchase cost: 12.25, selling price: 25)
-2. Beauty and the beast (purchase cost: 9.5, selling price: 25.5)
-This item has been removed from the list.
+                                       ......................................
+                                       : Invalid command, please try again. :
+                                       .........................................
 See you next time
