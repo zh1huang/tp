@@ -1,8 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.command.exception.ItemNotExistException;
+import seedu.duke.model.ShelfList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,20 +15,20 @@ import java.util.logging.Logger;
 public class DeleteCommand extends Command {
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
-    private final String name;
-    private final int quantity;
-    private final Shelf shelf;
+    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
+    private final String shelfName;
+    private final String index;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * The DeleteCommand constructor.
      *
-     * @param name the name of the item
+     * @param shelfName the name of the shelf the item is on
+     * @param index     the index number of the item in the shelf
      */
-    public DeleteCommand(String name, String quantity, Shelf shelf) {
-        this.name = name;
-        this.quantity = Integer.parseInt(quantity);
-        this.shelf = shelf;
+    public DeleteCommand(String shelfName, String index) {
+        this.shelfName = shelfName;
+        this.index = index;
     }
 
 
@@ -35,12 +37,15 @@ public class DeleteCommand extends Command {
      *
      * @throws ItemNotExistException if the specified item does not exist
      */
-    public String execute() throws ItemNotExistException {
+    public String execute() throws ItemNotExistException, ShelfNotExistException {
         try {
-            int sizeBeforeDeleting = shelf.getSize();
-            Item selectedItem = shelf.getItem(name);
-            shelf.deleteItem(selectedItem);
-            int sizeAfterDeleting = shelf.getSize();
+            Shelf selectedShelf= ShelfList
+                    .getShelfList()
+                    .getShelf(shelfName);
+            int sizeBeforeDeleting = selectedShelf.getSize();
+            Item selectedItem = selectedShelf.getItem(Integer.parseInt(index));
+            selectedShelf.deleteItem(selectedItem);
+            int sizeAfterDeleting = selectedShelf.getSize();
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
                     "After deleting an item the list size should decrease by 1";
             System.out.println(DELETE_COMPLETE_MESSAGE);
@@ -50,6 +55,10 @@ public class DeleteCommand extends Command {
             logger.log(Level.WARNING, String.format("DeleteCommand failed to execute with error message %s",
                     e.getMessage()));
             throw new ItemNotExistException(e.getMessage());
+        } catch (seedu.duke.model.exception.ShelfNotExistException e) {
+            throw new ShelfNotExistException(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
         }
     }
 
@@ -66,6 +75,6 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand command = (DeleteCommand) other;
-        return name.equals(command.name);
+        return shelfName.equals(command.shelfName) && index.equals(command.index);
     }
 }
