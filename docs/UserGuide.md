@@ -33,7 +33,7 @@ business, where they can view these information in a user-friendly manner.
    * `delete n/Narnia` - Deletes the Book "Narnia" from the shelf
    * `list l/book1` - list the items from shelf name book1
    * `get n/Pilot pen` - get information about an item "Pilot pen"
-   * `report t/stats` - Show a report summary of the sales statistics
+   * `report c/stats` - Show a report summary of the sales statistics
    * `bye` - exit the app
 
 ## Usage
@@ -66,9 +66,9 @@ ________________________________________________________________________________
 Description: Command format
 ____________________________________________________________________________________________
 1. Get help : help
-2. Add item: add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
+2. Add item: add n/NAME l/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
 3. Delete item: delete n/NAME
-4. List items: list [c/CATEGORY]
+4. List items: list [l/SHELF_NAME] [c/CATEGORY]
 5. Get information of item : get n/NAME [p/PROPERTY]
 6. Edit an item: edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]
 7. Generate sales report: report t/PERIOD
@@ -81,7 +81,7 @@ ________________________________________________________________________________
 
 Adds a new item to the inventory, specifying its name, category, purchase cost, selling price, quantity (and remarks if any).
 
-Format: `add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
+Format: `add n/NAME l/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
 Example: **Add 5 books titled "Harry Potter" with a purchase cost of $27 and selling price of $37**
 ```
@@ -135,7 +135,7 @@ list
 
 Shows a list of all items in the inventory list.
 
-Format: `list [c/CATEGORY]`
+Format: `list [l/SHELF_NAME] [c/CATEGORY]`
 
 Example: **Listing all items in all categories**
 ```
@@ -219,7 +219,7 @@ list
 
 Generates the sales report for given month.
 
-Format: `report t/PERIOD`
+Format: `report {c/stats OR c/items} [ym/YEAR-MONTH]`
 
 Example: **Generate sales report for the month of June 2020**
 ```
