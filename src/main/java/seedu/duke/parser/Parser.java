@@ -31,7 +31,7 @@ public class Parser {
 
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("n/(?<itemName>[^/]+)"
-            + " c/(?<category>[^/]+)"
+            + " shlv/(?<shelfName>[^/]+)"
             + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
             //only accepts numbers or decimals in 1 or 2 d.p.
             + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
@@ -40,7 +40,7 @@ public class Parser {
             + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("n/(?<itemName>[^/]+)");
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
@@ -87,11 +87,16 @@ public class Parser {
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
         "Input invalid command format.\nCorrect format: \n%s\n";
-    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\ncategory: %s\nprice: $%s\n"
-        + "quantity: %s\nremarks: %s\n";
-    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\n";
-    public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "category: %s\n";
-    public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "itemName: %s\nproperty: %s\n";
+    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
+        + "price: %s\nquantity: %s\nremarks: %s\n";
+    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";
+    public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
+    public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
+    public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
+    public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\ndate: %s\n";
+    public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
+    public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
+    public static final String PARSE_SELL_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
 
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
@@ -156,7 +161,7 @@ public class Parser {
             return prepareBye(arguments);
 
         case REPORT_STRING:
-            return prepareTotalCost(arguments);
+            return prepareReport(arguments);
 
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
@@ -181,8 +186,14 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
+        String shelfName = matcher.group("shelfName");
         String purchaseCost = matcher.group("purchaseCost");
         String sellingPrice = matcher.group("sellingPrice");
+        String quantity = matcher.group("quantity");
+        String remarks = matcher.group("remarks");
+        System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
+            itemName,shelfName, purchaseCost, sellingPrice, quantity, remarks));
+
         Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice);
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");
@@ -204,8 +215,13 @@ public class Parser {
             throw new IllegalFormatException(String.format(
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
-        String itemName = matcher.group("itemName");
-        Command deleteCommand = new DeleteCommand(itemName);
+
+        String itemName = "item name";
+        String shelfName = matcher.group("shelfName");
+        String indexInShelf = matcher.group("indexInShelf");
+        System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName,indexInShelf));
+
+        Command deleteCommand = new DeleteCommand(shelfName);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
         logger.log(Level.INFO, "DeleteCommand parse success.");
         return deleteCommand;
@@ -278,7 +294,6 @@ public class Parser {
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
         return new EditCommand(itemName, selectedProperty, newValue);
-
     }
 
     /**
@@ -332,7 +347,7 @@ public class Parser {
      * @return TotalCostAndIncomeCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareTotalCost(String arguments) throws IllegalFormatException {
+    private Command prepareReport(String arguments) throws IllegalFormatException {
         final Matcher matcher = TOTAL_COST_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -343,7 +358,7 @@ public class Parser {
 
         Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
         assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
-            "tCost should return totalCostAndIncomeCommand\n";
+            "report should return totalCostAndIncomeCommand\n";
         logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
         return totalCostAndIncomeCommand;
     }
