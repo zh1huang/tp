@@ -43,20 +43,31 @@ public class Parser {
         Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("(c/(?<category>[^/]+))?"); // optional argument category
+        Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("n/(?<itemName>[^/]+)"
-            + "( p/(?<property>[^/]+))?"); // optional argument property
+        Pattern.compile("shlv/(?<shelfName>[^/]+)"
+            + " i/(?<indexInShelf>[0-9]+)");
 
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("n/(?<itemName>[^/]+)"
+        Pattern.compile("shlv/(?<shelfName>[^/]+)"
+            + " i/(?<indexInShelf>[0-9]+)"
             + " p/(?<property>[^/]+)"
-            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))"
-            + "( s/(?<showResult>[^/]+))?"); // optional argument showResult
+            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
 
-    public static final Pattern TOTAL_COST_DATA_ARGS_FORMAT =
-        Pattern.compile("(c/(?<month>[^/]+))?"); // optional argument category
+    public static final Pattern REPORT_DATA_ARGS_FORMAT =
+        Pattern.compile("t/(?<type>(stats|items))" +
+            "( ym/(?<yearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
+
+    public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+)");
+
+    public static final Pattern REMOVE_SHELF_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+)");
+
+    public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+)"
+            + " i/(?<indexInShelf>[0-9]+)");
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
         "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
@@ -65,10 +76,10 @@ public class Parser {
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
         "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
-    public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE [ym/YEAR-MONTH]\n";
-    public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME\n\n";
-    public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME\n\n";
-    public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX \n";
+    public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE [ym/YEAR-MONTH]";
+    public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
+    public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
+    public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX";
 
     public static final String ADD_STRING = "add";
     public static final String DELETE_STRING = "delete";
@@ -163,6 +174,15 @@ public class Parser {
         case REPORT_STRING:
             return prepareReport(arguments);
 
+        case SELL_STRING:
+            return prepareSell(arguments);
+
+        case CREATE_STRING:
+            return prepareCreate(arguments);
+
+        case REMOVE_STRING:
+            return prepareRemove(arguments);
+
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
@@ -242,6 +262,10 @@ public class Parser {
             throw new IllegalFormatException(String.format(
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
         }
+
+        String shelfName = matcher.group("shelfName");
+        System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
+
         Command listCommand = new ListCommand();
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
         logger.log(Level.INFO, "ListCommand parse success.");
@@ -264,7 +288,11 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
-        String itemName = matcher.group("itemName");
+        String itemName = "itemName";
+        String shelfName = matcher.group("shelfName");
+        String indexInShelf = matcher.group("indexInShelf");
+
+        System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command getCommand = new GetCommand(itemName);
         assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
@@ -290,22 +318,16 @@ public class Parser {
             throw new IllegalFormatException(String.format(
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
-        String itemName = matcher.group("itemName");
+        String itemName = "itemName";
+        String shelfName = matcher.group("shelfName");
+        String indexInShelf = matcher.group("indexInShelf");
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
-        return new EditCommand(itemName, selectedProperty, newValue);
-    }
 
-    /**
-     * Creates EditCommand Object.
-     *
-     * @param itemName            Name of item to be edited
-     * @param updatedPurchaseCost New Purchase Cost
-     * @param updatedSellingPrice New Selling Price
-     * @return EditCommand object.
-     */
-    private Command formEditCommand(String itemName, String updatedPurchaseCost, String updatedSellingPrice) {
-        Command editCommand = new EditCommand(itemName, updatedPurchaseCost, updatedSellingPrice);
+        System.out.println(String.format(PARSE_EDIT_SUCCESS_MESSAGE_FORMAT,
+            shelfName, indexInShelf, selectedProperty, newValue));
+
+        Command editCommand = new EditCommand(itemName, selectedProperty, newValue);
         assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
 
@@ -341,14 +363,14 @@ public class Parser {
     }
 
     /**
-     * Parses total cost command arguments.
+     * Parses report command arguments.
      *
      * @param arguments The additional arguments after command word.
      * @return TotalCostAndIncomeCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareReport(String arguments) throws IllegalFormatException {
-        final Matcher matcher = TOTAL_COST_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = REPORT_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
@@ -356,10 +378,100 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, REPORT_DATA_ARGS_FORMAT_STRING));
         }
 
+        String type = matcher.group("type");
+        String yearMonth = matcher.group("yearMonth");
+        System.out.println(String.format(PARSE_REPORT_SUCCESS_MESSAGE_FORMAT, type, yearMonth));
+
         Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
         assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
             "report should return totalCostAndIncomeCommand\n";
         logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
         return totalCostAndIncomeCommand;
+    }
+
+    /**
+     * Parses sell command arguments.
+     *
+     * @param arguments The additional arguments after command word.
+     * @return SellCommand object
+     * @throws IllegalFormatException If the input format is wrong
+     */
+    private Command prepareSell(String arguments) throws IllegalFormatException {
+        final Matcher matcher = SELL_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Sell Command Format");
+            throw new IllegalFormatException(String.format(
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, SELL_DATA_ARGS_FORMAT_STRING));
+        }
+
+        String shelfName = matcher.group("shelfName");
+        String indexInShelf = matcher.group("indexInShelf");
+
+        System.out.println(String.format(PARSE_SELL_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
+        /**
+         Command sellCommand = new SellCommand();
+         assert sellCommand.getClass() == SellCommand.class :
+         "report should return createShelfCommand\n";
+         logger.log(Level.INFO, "SellCommand parse success.");
+         return sellCommand;
+         */
+        return new HelpCommand();
+    }
+
+    /**
+     * Parses create shelf command arguments.
+     *
+     * @param arguments The additional arguments after command word.
+     * @return CreateShelfCommand object
+     * @throws IllegalFormatException If the input format is wrong
+     */
+    private Command prepareCreate(String arguments) throws IllegalFormatException {
+        final Matcher matcher = CREATE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Create Shelf Command Format");
+            throw new IllegalFormatException(String.format(
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, CREATE_DATA_ARGS_FORMAT_STRING));
+        }
+
+        String shelfName = matcher.group("shelfName");
+        System.out.println(String.format(PARSE_CREATE_SUCCESS_MESSAGE_FORMAT, shelfName));
+        /**
+        Command createShelfCommand = new CreateShelfCommand();
+        assert createShelfCommand.getClass() == CreateShelfCommand.class :
+            "report should return createShelfCommand\n";
+        logger.log(Level.INFO, "CreateShelfCommand parse success.");
+        return createShelfCommand;
+         */
+        return new HelpCommand();
+    }
+
+    /**
+     * Parses remove shelf command arguments.
+     *
+     * @param arguments The additional arguments after command word.
+     * @return RemoveShelfCommand object
+     * @throws IllegalFormatException If the input format is wrong
+     */
+    private Command prepareRemove(String arguments) throws IllegalFormatException {
+        final Matcher matcher = REMOVE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Remove Shelf Command Format");
+            throw new IllegalFormatException(String.format(
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, REMOVE_DATA_ARGS_FORMAT_STRING));
+        }
+
+        String shelfName = matcher.group("shelfName");
+        System.out.println(String.format(PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT, shelfName));
+        /**
+         Command RemoveShelfCommand = new TotalCostAndIncomeCommand();
+         assert RemoveShelfCommand.getClass() == RemoveShelfCommand.class :
+         "remove should return removeShelfCommand\n";
+         logger.log(Level.INFO, "RemoveShelfCommand parse success.");
+         return removeShelfCommand;
+         */
+        return new HelpCommand();
     }
 }
