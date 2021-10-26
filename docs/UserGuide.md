@@ -25,7 +25,7 @@ business, where they can view these information in a user-friendly manner.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+2. &#11015; Download the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
 3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
 4. {placeholder: show a screenshot when the app first start up}
 5. Type `help` to see the basic commands available, you may try to using the example commands below:
@@ -35,7 +35,7 @@ business, where they can view these information in a user-friendly manner.
    * `get n/Pilot pen` - get information about an item "Pilot pen"
    * `report c/stats` - Show a report summary of the sales statistics
    * `bye` - exit the app
-
+6. Refer to the [Features](#features) below for details of each command.
 ## Usage
 
 Notes about the command format:
@@ -178,8 +178,6 @@ get n/Apples Never Fall p/quantity
 Expected outcome:
 ```
 ```
-
-
 ### Edit an item
 
 Updates the properties of an item.
@@ -243,9 +241,6 @@ Expected outcome:
 ```
 Bye! Hope to see you again!
 ```
-
-### Saving the data
-All data will be saved into a txt file in JSON format.
 
 ### Add customer rating & review for each item `[coming in v3.0]`
 
