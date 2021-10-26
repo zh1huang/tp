@@ -31,13 +31,14 @@ public class Parser {
 
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("n/(?<itemName>[^/]+)"
-            + " c/(?<category>[^/]+)"
-            + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
-            //only accepts numbers or decimals in 1 or 2 d.p.
-            + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
-            //only accepts numbers or decimals in 1 or 2 d.p.
-            + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
-            + "( r/(?<remarks>[^/]+))?$"); // optional argument
+                + " c/(?<category>[^/]+)"
+                + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+                //only accepts numbers or decimals in 1 or 2 d.p.
+                + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+                //only accepts numbers or decimals in 1 or 2 d.p.
+                + " q/(?<quantity>[0-9]+)" // only accepts numbers, no decimals
+                //+ " l/(?<location>[^/]+)"
+                + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
@@ -180,6 +181,7 @@ public class Parser {
         String purchaseCost = matcher.group("purchaseCost");
         String sellingPrice = matcher.group("sellingPrice");
         String quantity = matcher.group("quantity");
+        //String location = matcher.group("location");
         Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice, quantity, shelf);
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");

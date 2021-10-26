@@ -28,4 +28,8 @@ public class SoldItem extends Item {
     protected void setSaleTime(LocalDateTime newSaleTime) {
         this.saleTime = newSaleTime;
     }
+
+    public LocalDateTime getSaleTime() {
+        return this.saleTime;
+    }
 }
