@@ -177,10 +177,10 @@ public class Parser {
             return prepareSell(arguments);
 
         case CREATE_STRING:
-            return prepareCreate(arguments);
+            return prepareCreateShelf(arguments);
 
         case REMOVE_STRING:
-            return prepareRemove(arguments);
+            return prepareRemoveShelf(arguments);
 
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
@@ -240,7 +240,7 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
         System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
-        Command deleteCommand = new DeleteCommand(shelfName);
+        Command deleteCommand = new DeleteCommand(itemName);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
         logger.log(Level.INFO, "DeleteCommand parse success.");
         return deleteCommand;
@@ -425,7 +425,7 @@ public class Parser {
      * @return CreateShelfCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareCreate(String arguments) throws IllegalFormatException {
+    private Command prepareCreateShelf(String arguments) throws IllegalFormatException {
         final Matcher matcher = CREATE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -453,7 +453,7 @@ public class Parser {
      * @return RemoveShelfCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareRemove(String arguments) throws IllegalFormatException {
+    private Command prepareRemoveShelf(String arguments) throws IllegalFormatException {
         final Matcher matcher = REMOVE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
