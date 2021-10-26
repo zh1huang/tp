@@ -27,7 +27,7 @@ public class ListCommandTest {
     public void setUp() throws Exception {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
-        testCommand = new ListCommand(testList);
+        testCommand = new ListCommand("test");
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
@@ -44,8 +44,8 @@ public class ListCommandTest {
         assertTrue(testList.contains("LOTR"));
         testCommand.execute();
         String expected = "Here is the list of items:\n"
-                + "1. HarryPotter (purchase cost: 16.1, selling price: 25.12)\n"
-                + "2. LOTR (purchase cost: 10.2, selling price: 15.7)";
+                + "1. HarryPotter (Cost: 16.1, Price: 25.12)\n"
+                + "2. LOTR (Cost: 10.2, Price: 15.7)";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 

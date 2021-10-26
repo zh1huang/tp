@@ -23,7 +23,7 @@ public class GetCommandTest {
     private Command testCommand2;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    public static final String ITEM_DESCRIPTION = "Name: %s\nCost: %s\nPrice: %s\nRemarks:";
+    public static final String ITEM_DESCRIPTION = "Name: %s\nCost: %s\nPrice: %s\nRemarks:%s";
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -44,7 +44,7 @@ public class GetCommandTest {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         assertTrue(testList.contains("HarryPotter"));
         testCommand1.execute();
-        String expected = String.format(ITEM_DESCRIPTION, "HarryPotter", "16.1", "25.12");
+        String expected = String.format(ITEM_DESCRIPTION, "HarryPotter", "16.1", "25.12", "");
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 

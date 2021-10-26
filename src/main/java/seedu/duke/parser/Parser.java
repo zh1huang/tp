@@ -266,7 +266,13 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
         System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
 
-        Command listCommand = new ListCommand(shelf); //temporary placeholder
+        Command listCommand;
+        if (shelfName.isEmpty()) {
+            listCommand = new ListCommand();
+        } else {
+            listCommand = new ListCommand(shelfName);
+        }
+
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
         logger.log(Level.INFO, "ListCommand parse success.");
         return listCommand;

@@ -3,56 +3,74 @@ package seedu.duke.command;
 import seedu.duke.command.exception.EmptyListException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.ShelfNotExistException;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ListCommand extends Command {
 
-    private final Shelf shelf;
-    private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
+    private String shelfName = null;
+    private final boolean toPrintAll;
+    private static final String ITEM_INFO = "%o. %s (Cost: %s, Price: %s)\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
 
-    public ListCommand(Shelf shelf) {
-        this.shelf = shelf;
+
+    public ListCommand(String shelfName) {
+        this.shelfName = shelfName;
+        this.toPrintAll = false;
     }
 
-    /**
-     * Retrieves shelf of items from Shelf.
-     *
-     * @param shelf the Shelf in which list is retrieved
-     * @return shelf of items
-     */
-    private String getList(Shelf shelf) {
-        StringBuilder info = new StringBuilder();
+    //if no shelfName in optional parameter
+    public ListCommand() {
+        this.toPrintAll = true;
+    }
 
-        for (int i = 0; i < shelf.getSize();  i++) {
+
+    public String execute() throws ShelfNotExistException, EmptyListException {
+        if (!toPrintAll) { //optional parameter entered so print that particular shelf
+            try {
+                Shelf selectedShelf = ShelfList
+                        .getShelfList()
+                        .getShelf(shelfName);
+                if (selectedShelf.getSize() == 0) {
+                    logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
+                    throw new EmptyListException(EMPTY_LIST_MESSAGE);
+                }
+
+                System.out.print(LIST_COMPLETE_MESSAGE);
+                getList(selectedShelf);
+
+            } catch (seedu.duke.model.exception.ShelfNotExistException e) {
+                logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
+                throw new ShelfNotExistException(e.getMessage());
+            }
+        } else {
+            ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();
+            for (Shelf shelf: shelves) {
+                getList(shelf);
+            }
+        }
+
+        return LIST_COMPLETE_MESSAGE;
+    }
+
+    private void getList(Shelf shelf) {
+        for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
             int index = i + 1;
-            info.append(String.format(ITEM_INFO, index,
-                    selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
+            String name = selectedItem.getName();
+            String cost = selectedItem.getPurchaseCost();
+            String price = selectedItem.getSellingPrice();
+
+            String output = String.format(ITEM_INFO, index, name, cost, price);
+            System.out.print(output);
+            logger.log(Level.INFO, "ListCommand successfully executed");
         }
-        return info.toString().trim();
-    }
-
-    /**
-     * Executes the operation of listing all the items.
-     */
-
-    public String execute() throws EmptyListException {
-        int initialSize = shelf.getSize();
-        if (shelf.getSize() == 0) {
-            logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
-            throw new EmptyListException(EMPTY_LIST_MESSAGE);
-        }
-
-        String result = getList(shelf);
-        assert initialSize == shelf.getSize() : "List size should not be changed";
-        System.out.println(LIST_COMPLETE_MESSAGE + result);
-        logger.log(Level.INFO, "ListCommand successfully executed");
-        return LIST_COMPLETE_MESSAGE + result;
     }
 
     @Override
