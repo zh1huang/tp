@@ -25,7 +25,7 @@ business, where they can view these information in a user-friendly manner.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. &#11015; Download the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+2. Download &#11015; the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
 3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
 4. {placeholder: show a screenshot when the app first start up}
 5. Type `help` to see the basic commands available, you may try to using the example commands below:
@@ -219,7 +219,9 @@ Generates the sales report for given month.
 
 Format: `report c/CONTENT_TYPE [ym/YEAR-MONTH]`
 
-Note: Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items 
+&#128456; Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items
+
+&#128456; `YEAR-MONTH` need to follow the format `YYYY-MM`
 
 Example: **Generate sales report for the month of June 2020**
 ```
