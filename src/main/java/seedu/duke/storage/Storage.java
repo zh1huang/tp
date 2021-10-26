@@ -8,12 +8,14 @@ import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.salesmanager.SoldItem;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 public class Storage {
 
@@ -29,7 +31,6 @@ public class Storage {
         JSONObject storedData = new JSONObject();
 
         if (nameOfAllShelves.isBlank()) {
-
             storedData = sampleData();
         } else {
             for (String nameOfShelf : nameOfAllShelves.split("\n")) {
@@ -43,6 +44,9 @@ public class Storage {
                     itemDetail.put("name", currentItem.getName());
                     itemDetail.put("cost", currentItem.getPurchaseCost());
                     itemDetail.put("price", currentItem.getSellingPrice());
+                    if (currentShelf.getName() == "soldItems") {
+                        itemDetail.put("saleTime", ((SoldItem) currentItem).getSaleTime());
+                    }
                     itemsInShelf.put(Integer.toString(i), itemDetail);
                 }
                 shelfInfo.put("items", itemsInShelf);
@@ -79,11 +83,21 @@ public class Storage {
             JSONObject itemsJson = storedData.getJSONObject(shelfName).getJSONObject("items");
             for (String itemName : itemsJson.keySet()) {
                 JSONObject itemJson = itemsJson.getJSONObject(itemName);
-                Item item = new Item(
-                        itemJson.get("name").toString(),
-                        itemJson.get("cost").toString(),
-                        itemJson.get("price").toString()
-                );
+                Item item;
+                if (shelfName != "soldItems") {
+                    item = new Item(
+                            itemJson.get("name").toString(),
+                            itemJson.get("cost").toString(),
+                            itemJson.get("price").toString()
+                    );
+                } else {
+                    item = new SoldItem(
+                            itemJson.get("name").toString(),
+                            itemJson.get("cost").toString(),
+                            itemJson.get("price").toString(),
+                            LocalDateTime.parse(itemJson.get("saleTime").toString())
+                    );
+                }
                 currentShelf.addItem(item);
             }
         }
