@@ -30,6 +30,6 @@ public class SoldItem extends Item {
     }
 
     public LocalDateTime getSaleTime() {
-        return this.saleTime;
+        return saleTime;
     }
 }

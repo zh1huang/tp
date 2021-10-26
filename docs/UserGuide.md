@@ -13,6 +13,7 @@
   6. [`edit` - Update an item](#edit-an-item)
   7. [`report` - Generate sales report](#generate-sales-report)
   8. [`bye` - Exit command](#exit-program)
+  9. [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -24,17 +25,25 @@ business, where they can view these information in a user-friendly manner.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+2. Download &#11015; the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
 3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
-
+4. {placeholder: show a screenshot when the app first start up}
+5. Type `help` to see the basic commands available, you may try to using the example commands below:
+   * `add  n/Geronimo shlv/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
+   * `delete n/Narnia` - Deletes the Book "Narnia" from the shelf
+   * `list shlv/book1` - list the items from shelf name "book1"
+   * `get n/Pilot pen` - get information about an item "Pilot pen"
+   * `report c/stats` - Show a report summary of the sales statistics
+   * `bye` - exit the app
+6. Refer to the [Features](#features) below for details of each command.
 ## Usage
 
 Notes about the command format:
 
 * Words in UPPER_CASE are the parameters to be supplied by the user. E.g. in delete `n/NAME`, `NAME` is the parameter
   which can be used as add n/Pilot Pen.
-* Items in square brackets are optional. E.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Extraneous parameters for commands that do not take in parameters (such as list) will be ignored.
+* Items in square brackets are optional and can only be specified **once** for that command. E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
+* &#9888; Commands that do not take in extra unspecified parameters from user guide will be flagged as **invalid** command formats.
 
 {give detailed instructions on how to use the command here}
 
@@ -57,9 +66,9 @@ ________________________________________________________________________________
 Description: Command format
 ____________________________________________________________________________________________
 1. Get help : help
-2. Add item: add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
+2. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
 3. Delete item: delete n/NAME
-4. List items: list [c/CATEGORY]
+4. List items: list [shlv/SHELF_NAME] [c/CATEGORY]
 5. Get information of item : get n/NAME [p/PROPERTY]
 6. Edit an item: edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]
 7. Generate sales report: report t/PERIOD
@@ -72,7 +81,7 @@ ________________________________________________________________________________
 
 Adds a new item to the inventory, specifying its name, category, purchase cost, selling price, quantity (and remarks if any).
 
-Format: `add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
+Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
 Example: **Add 5 books titled "Harry Potter" with a purchase cost of $27 and selling price of $37**
 ```
@@ -126,7 +135,7 @@ list
 
 Shows a list of all items in the inventory list.
 
-Format: `list [c/CATEGORY]`
+Format: `list [shlv/SHELF_NAME] [c/CATEGORY]`
 
 Example: **Listing all items in all categories**
 ```
@@ -169,8 +178,6 @@ get n/Apples Never Fall p/quantity
 Expected outcome:
 ```
 ```
-
-
 ### Edit an item
 
 Updates the properties of an item.
@@ -210,11 +217,15 @@ list
 
 Generates the sales report for given month.
 
-Format: `report t/PERIOD`
+Format: `report c/CONTENT_TYPE [ym/YEAR-MONTH]`
+
+&#128221; Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items
+
+&#128221; `YEAR-MONTH` need to follow the format `YYYY-MM`
 
 Example: **Generate sales report for the month of June 2020**
 ```
-report Jun 2020
+report c/stats
 ```
 
 Expected outcome:
@@ -233,24 +244,36 @@ Expected outcome:
 Bye! Hope to see you again!
 ```
 
+### Add customer rating & review for each item `[coming in v3.0]`
+
+Users would be able to record the customer ratings and review of each item sold in the bookstore. 
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**A**: Copy the save file `data/output.txt` on your current computer into the other computer that you wish to use. Launch the program again and the saved data should load.
+
+**Q**: What happens if my app crashes half-way?
+
+**A**: Do not worry as your data will always be automatically saved in the text file whenever there are any changes made throughout the program. 
+You can simply restart the program and your last updated data will be loaded.
+
+**Q**: I have some suggestions/found some bugs for CLIver Shelf, what should I do?
+
+**A**: Please do not hesitate to contact the [team](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/docs/AboutUs.md).
 
 ## Command Summary
 
 |Commands    |Format, Examples                                                                                                                 |
 | ----       | ----                                                                                                                            |
 |**Help**    | `help`                                                                                                                          |
-|**Add**     | `add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: add n/Harry Potter c/book p/27 s/37 q/5|
+|**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter c/book p/27 s/37 q/5`|
 |**Delete**  | `delete n/NAME` <br> eg: `delete n/Alice in wonderland`                                                                         |
 |**List**    | `list [c/CATEGORY]` <br> eg: `list c/stationary`                                                                                |
 |**Get**     | `get n/NAME [p/PROPERTY]` <br> eg: `get n/Apples Never Fall p/quantity`                                                         |
-|**Edit**    | `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]` <br> eg: edit n/Apples Never Fall p/quantity v/100 s/false                      |
-|**Report**  | `report t/PERIOD` <br> eg: `report Jun 2020`                                                                                    |
+|**Edit**    | `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]` <br> eg: `edit n/Apples Never Fall p/quantity v/100 s/false`                      |
+|**Report**  | `report c/CONTENT_TYPE [ym/YEAR-MONTH]` <br> eg: `report c/stats`                                                                                    |
 |**Bye**     | `bye`                                                                                                                           |
 
 
