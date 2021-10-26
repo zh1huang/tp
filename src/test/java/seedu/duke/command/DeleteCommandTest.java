@@ -37,7 +37,9 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_oneItemAlreadyInList_deletesNormally() throws CommandException, DuplicateItemException, ShelfNotExistException {
+    public void execute_oneItemAlreadyInList_deletesNormally()
+            throws CommandException, DuplicateItemException, ShelfNotExistException {
+
         testList.addItem(testItem1);
         int numberOfItemsBeforeDeleting = testList.getSize();
         assertTrue(testList.contains("HarryPotter"));
@@ -53,7 +55,9 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_itemsWithSameNameInList_deletesNormally() throws CommandException, DuplicateItemException, ShelfNotExistException {
+    public void execute_itemsWithSameNameInList_deletesNormally()
+            throws CommandException, DuplicateItemException, ShelfNotExistException {
+
         testList.addItem(testItem1);
         testList.addItem(testItem2);
         int numberOfItemsBeforeDeleting = testList.getSize();
