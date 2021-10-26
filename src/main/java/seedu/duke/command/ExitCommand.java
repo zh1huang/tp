@@ -8,11 +8,10 @@ public class ExitCommand extends Command {
 
     /**
      * Override superclass Command to not perform any actions.
-     *
-     * @param list the Shelf in which exit command is executed
      */
-    public void execute(Shelf list) {
+    public String execute() {
         System.out.println(BYE_MESSAGE);
+        return BYE_MESSAGE;
     }
 
     /**

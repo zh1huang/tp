@@ -9,10 +9,15 @@ import java.util.logging.Logger;
 
 public class ListCommand extends Command {
 
+    private final Shelf shelf;
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
+
+    public ListCommand(Shelf shelf) {
+        this.shelf = shelf;
+    }
 
     /**
      * Retrieves shelf of items from Shelf.
@@ -34,11 +39,9 @@ public class ListCommand extends Command {
 
     /**
      * Executes the operation of listing all the items.
-     *
-     * @param shelf the Shelf to retrieve shelf of items
      */
 
-    public void execute(Shelf shelf) throws EmptyListException {
+    public String execute() throws EmptyListException {
         int initialSize = shelf.getSize();
         if (shelf.getSize() == 0) {
             logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
@@ -49,6 +52,7 @@ public class ListCommand extends Command {
         assert initialSize == shelf.getSize() : "List size should not be changed";
         System.out.println(LIST_COMPLETE_MESSAGE + result);
         logger.log(Level.INFO, "ListCommand successfully executed");
+        return LIST_COMPLETE_MESSAGE + result;
     }
 
     @Override
