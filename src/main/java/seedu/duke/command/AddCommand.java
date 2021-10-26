@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.DuplicateItemException;
 
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      * @throws DuplicateItemException if exactly the same item is added to the list
      */
     @Override
-    public void execute(ItemContainer list) throws IllegalArgumentException, DuplicateItemException {
+    public void execute(Shelf list) throws IllegalArgumentException, DuplicateItemException {
         try {
             int sizeBeforeAdding = list.getSize();
             Item newItem = new Item(name, purchaseCost, sellingPrice);
@@ -50,13 +50,31 @@ public class AddCommand extends Command {
             System.out.println(ADD_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "AddCommand successfully executed.");
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
-            logger.log(Level.WARNING, "AddCommand failed to execute with error message %s",
-                    e.getMessage());
+            logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
+                    e.getMessage()));
             throw new IllegalArgumentException(e.getMessage());
         } catch (seedu.duke.model.exception.DuplicateItemException e) {
-            logger.log(Level.WARNING, "AddCommand failed to execute with error message %s",
-                    e.getMessage());
+            logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
+                    e.getMessage()));
             throw new DuplicateItemException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof AddCommand)) {
+            return false;
+        }
+
+        AddCommand command = (AddCommand) other;
+        return name.equals(command.name)
+                && purchaseCost.equals(command.purchaseCost)
+                && sellingPrice.equals(command.sellingPrice);
     }
 }

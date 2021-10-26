@@ -6,6 +6,7 @@ list
 delete n/The Great Gatsby
 list
 get n/Beauty and the beast
-edit n/Beauty and the beast p/purchaseCost v/9.5
+edit n/Beauty and the beast p/cost v/9.5
 list
+delete n/Beauty and the beast
 bye

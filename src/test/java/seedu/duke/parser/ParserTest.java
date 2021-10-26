@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +9,10 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
+import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
@@ -53,12 +55,13 @@ public class ParserTest {
 
     public static final String WHITESPACE = "\\s";
     private Parser parser;
-    private ItemContainer list;
+    private Shelf list;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException {
+    public void setUp() throws IllegalArgumentException, DuplicateShelfException {
         parser = new Parser();
-        list = new ItemContainer("test");
+        ShelfList.getShelfList().resetShelfList();
+        list = new Shelf("test");
     }
 
     @Test
@@ -87,9 +90,9 @@ public class ParserTest {
             ADD_STRING + WHITESPACE + PURCHASE_COST_EXAMPLE_1 + WHITESPACE + CATEGORY_EXAMPLE_1,
             ADD_STRING + WHITESPACE + QUANTITY_EXAMPLE_1 + WHITESPACE + PURCHASE_COST_EXAMPLE_1,
             ADD_STRING + WHITESPACE + CATEGORY_EXAMPLE_1 + WHITESPACE + PURCHASE_COST_EXAMPLE_1
-                    + WHITESPACE + SELLING_PRICE_EXAMPLE_1,
+                + WHITESPACE + SELLING_PRICE_EXAMPLE_1,
             ADD_STRING + WHITESPACE + CATEGORY_EXAMPLE_1 + WHITESPACE + PURCHASE_COST_EXAMPLE_1
-                    + WHITESPACE + QUANTITY_EXAMPLE_1
+                + WHITESPACE + QUANTITY_EXAMPLE_1
         };
 
         for (String input : inputs) {
@@ -99,23 +102,23 @@ public class ParserTest {
 
     @Test
     public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
-            NoPropertyFoundException, IllegalFormatException {
+        NoPropertyFoundException, IllegalFormatException {
 
         String input1 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " c/" + CATEGORY_EXAMPLE_1 + " p/"
-                + PURCHASE_COST_EXAMPLE_1 + " s/" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
+            + PURCHASE_COST_EXAMPLE_1 + " s/" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
 
         AddCommand expectedCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1,
-                PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
+            PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
 
-        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+        assertEquals(expectedCommand1, parser.parseCommand(input1, list));
 
         String input2 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " c/" + CATEGORY_EXAMPLE_2 + " p/"
-                + PURCHASE_COST_EXAMPLE_2 + " s/" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_2;
+            + PURCHASE_COST_EXAMPLE_2 + " s/" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_2;
 
         AddCommand expectedCommand2 = new AddCommand(ITEM_NAME_EXAMPLE_2,
-                PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2);
+            PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2);
 
-        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
+        assertEquals(expectedCommand2, parser.parseCommand(input2, list));
     }
 
     /*
@@ -137,17 +140,17 @@ public class ParserTest {
 
     @Test
     public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
 
         String input1 = DELETE_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
 
         Command expectedCommand1 = new DeleteCommand(ITEM_NAME_EXAMPLE_1);
-        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+        assertEquals(expectedCommand1, parser.parseCommand(input1, list));
 
         String input2 = DELETE_STRING + " n/" + ITEM_NAME_EXAMPLE_2;
 
         Command expectedCommand2 = new DeleteCommand(ITEM_NAME_EXAMPLE_2);
-        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
+        assertEquals(expectedCommand2, parser.parseCommand(input2, list));
     }
 
     /*
@@ -169,11 +172,10 @@ public class ParserTest {
 
     @Test
     public void parse_listCommandValidArgs_returnsListCommand() throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
-        String input = LIST_STRING;
+        ItemNotExistException, NoPropertyFoundException {
 
         Command expectedCommand = new ListCommand();
-        assertEquals(expectedCommand.getClass(), parser.parseCommand(input, list).getClass());
+        assertEquals(expectedCommand, parser.parseCommand(LIST_STRING, list));
     }
 
     /*
@@ -194,16 +196,16 @@ public class ParserTest {
 
     @Test
     public void parse_getCommandValidArgs_returnsGetCommand() throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        ItemNotExistException, NoPropertyFoundException {
         String input1 = GET_STRING + " n/" + ITEM_NAME_EXAMPLE_1;
 
         Command expectedCommand1 = new GetCommand(ITEM_NAME_EXAMPLE_1);
-        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+        assertEquals(expectedCommand1, parser.parseCommand(input1, list));
 
         String input2 = GET_STRING + " n/" + ITEM_NAME_EXAMPLE_2;
 
         Command expectedCommand2 = new GetCommand(ITEM_NAME_EXAMPLE_2);
-        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
+        assertEquals(expectedCommand2, parser.parseCommand(input2, list));
     }
 
     /*
@@ -212,7 +214,7 @@ public class ParserTest {
 
     @Test
     public void parse_editCommandInvalidArgs_throwsIllegalFormatException() throws
-            IllegalArgumentException, DuplicateItemException {
+        IllegalArgumentException, DuplicateItemException {
         final String[] inputs = {
             "edit ",
             "edit n/Apples Never Fall ",
@@ -226,8 +228,8 @@ public class ParserTest {
 
     @Test
     public void parse_editCommandValidArgs_returnsEditCommand() throws
-            ItemNotExistException, NoPropertyFoundException, IllegalFormatException,
-            IllegalArgumentException, DuplicateItemException {
+        ItemNotExistException, NoPropertyFoundException, IllegalFormatException,
+        IllegalArgumentException, DuplicateItemException {
 
         // add item to container first
         Item newItem1 = new Item(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1);
@@ -237,15 +239,15 @@ public class ParserTest {
 
         // Test edit Purchase Cost
         String input1 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_1 + " p/" + PURCHASE_COST_PROPERTY_STRING
-                + " v/" + VALUE_EXAMPLE_1;
+            + " v/" + VALUE_EXAMPLE_1;
         Command expectedCommand1 = new EditCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1);
-        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass());
+        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, list).getClass()); //todo remove getclass
 
         // Test edit Selling Price
         String input2 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " p/" + SELLING_PRICE_PROPERTY_STRING
-                + " v/" + VALUE_EXAMPLE_2;
+            + " v/" + VALUE_EXAMPLE_2;
         Command expectedCommand2 = new EditCommand(ITEM_NAME_EXAMPLE_2, SELLING_PRICE_PROPERTY_STRING, VALUE_EXAMPLE_2);
-        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass());
+        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, list).getClass()); //todo remove getclass
     }
 
 }

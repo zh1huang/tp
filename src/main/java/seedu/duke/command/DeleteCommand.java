@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.model.Item;
-import seedu.duke.model.ItemContainer;
+import seedu.duke.model.Shelf;
 import seedu.duke.command.exception.ItemNotExistException;
 
 import java.util.logging.Level;
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      * @param list the itemContainer to remove the item from
      * @throws ItemNotExistException if the specified item does not exist
      */
-    public void execute(ItemContainer list) throws ItemNotExistException {
+    public void execute(Shelf list) throws ItemNotExistException {
         try {
             int sizeBeforeDeleting = list.getSize();
             Item selectedItem = list.getItem(name);
@@ -43,10 +43,26 @@ public class DeleteCommand extends Command {
             System.out.println(DELETE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "DeleteCommand successfully executed.");
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
-            logger.log(Level.WARNING, "DeleteCommand failed to execute with error message %s",
-                    e.getMessage());
+            logger.log(Level.WARNING, String.format("DeleteCommand failed to execute with error message %s",
+                    e.getMessage()));
             throw new ItemNotExistException(e.getMessage());
         }
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof DeleteCommand)) {
+            return false;
+        }
+
+        DeleteCommand command = (DeleteCommand) other;
+        return name.equals(command.name);
     }
 }

@@ -7,8 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Represents an item that can be stored in an ItemContainer.
- * e.g. You can store 10 Items named "Dune" in an ItemContainer named "Shelf_Sci-fi_1"
+ * Represents an item that can be stored in an Shelf.
+ * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
  */
 public class Item {
 
@@ -21,6 +21,7 @@ public class Item {
     private String name;
     private BigDecimal purchaseCost;
     private BigDecimal sellingPrice;
+    private String remark;
 
     /**
      * Constructor for Item class.
@@ -38,6 +39,7 @@ public class Item {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
+        setRemark("");
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
@@ -93,6 +95,18 @@ public class Item {
     public void setSellingPrice(String price) throws IllegalArgumentException {
         sellingPrice = convert2BD_NonNegative(price);
         logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), price));
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String newRemark) {
+        if (newRemark.isBlank()) {
+            remark = " ";
+        } else {
+            remark = newRemark;
+        }
     }
 
     private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentException {
