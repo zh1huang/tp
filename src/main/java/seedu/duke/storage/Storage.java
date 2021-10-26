@@ -20,6 +20,9 @@ import java.time.LocalDateTime;
 public class Storage {
 
     public static String STORAGE_PATH = "data\\Data.txt";
+
+    private static final int JSON_INDENTATION_LEVEL = 4;
+
     ShelfList shelfList;
 
     public Storage() {
@@ -63,7 +66,7 @@ public class Storage {
             file.createNewFile();
         }
         FileWriter writer = new FileWriter(STORAGE_PATH);
-        writer.write(storedData.toString(4));
+        writer.write(storedData.toString(JSON_INDENTATION_LEVEL));
         writer.close();
     }
 
@@ -76,7 +79,7 @@ public class Storage {
             file.createNewFile();
 
             FileWriter writer = new FileWriter(STORAGE_PATH);
-            writer.write(sampleData().toString(4));
+            writer.write(sampleData().toString(JSON_INDENTATION_LEVEL));
             writer.close();
         }
         String text = Files.readString(Paths.get(STORAGE_PATH));

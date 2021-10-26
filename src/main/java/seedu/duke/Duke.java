@@ -5,6 +5,7 @@ import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.DukePredefinedMessages;
 import seedu.duke.ui.MessageBubble;
 
 import java.util.Arrays;
@@ -33,10 +34,9 @@ public class Duke {
         Storage storage = new Storage();
         storage.loadData();
 
-        System.out.println(HELLO_MESSAGE);
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine() + ", what can I do for you?");
-        System.out.println(HELP_PROMPT_MESSAGE);
+        DukePredefinedMessages.printWelcomeMessage();
+        MessageBubble.printMessageBubble(HELP_PROMPT_MESSAGE);
         String input;
         Parser parser = new Parser();
 
@@ -49,7 +49,7 @@ public class Duke {
                 command.execute(ShelfList.getShelfList().getShelf("warehouse"));
                 isExit = command.isExit();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                MessageBubble.printMessageBubble(e.getMessage());
             }
             storage.saveData();
         }
