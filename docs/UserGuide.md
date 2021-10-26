@@ -13,6 +13,7 @@
   6. [`edit` - Update an item](#edit-an-item)
   7. [`report` - Generate sales report](#generate-sales-report)
   8. [`bye` - Exit command](#exit-program)
+  9. [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -26,6 +27,14 @@ business, where they can view these information in a user-friendly manner.
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
 3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
+4. {placeholder: show a screenshot when the app first start up}
+5. Type `help` to see the basic commands available, you may try to using the example commands below:
+   * `add  n/Geronimo l/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
+   * `delete n/Narnia` - Deletes the Book "Narnia" from the shelf
+   * `list l/book1` - list the items from shelf name book1
+   * `get n/Pilot pen` - get information about an item "Pilot pen"
+   * `report t/stats` - Show a report summary of the sales statistics
+   * `bye` - exit the app
 
 ## Usage
 
@@ -33,8 +42,8 @@ Notes about the command format:
 
 * Words in UPPER_CASE are the parameters to be supplied by the user. E.g. in delete `n/NAME`, `NAME` is the parameter
   which can be used as add n/Pilot Pen.
-* Items in square brackets are optional. E.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Extraneous parameters for commands that do not take in parameters (such as list) will be ignored.
+* Items in square brackets are optional and can only be specified **once** for that command. E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
+* &#9888; Commands that do not take in extra unspecified parameters from user guide will be flagged as **invalid** command formats.
 
 {give detailed instructions on how to use the command here}
 
@@ -233,6 +242,12 @@ Expected outcome:
 Bye! Hope to see you again!
 ```
 
+### Saving the data
+All data will be saved into a txt file in JSON format.
+
+### Add customer rating & review for each item `[coming in v3.0]`
+
+Users would be able to record the customer ratings and review of each item sold in the bookstore. 
 
 ## FAQ
 
