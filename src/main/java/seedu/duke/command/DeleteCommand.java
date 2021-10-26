@@ -43,10 +43,26 @@ public class DeleteCommand extends Command {
             System.out.println(DELETE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "DeleteCommand successfully executed.");
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
-            logger.log(Level.WARNING, "DeleteCommand failed to execute with error message %s",
-                    e.getMessage());
+            logger.log(Level.WARNING, String.format("DeleteCommand failed to execute with error message %s",
+                    e.getMessage()));
             throw new ItemNotExistException(e.getMessage());
         }
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof DeleteCommand)) {
+            return false;
+        }
+
+        DeleteCommand command = (DeleteCommand) other;
+        return name.equals(command.name);
     }
 }
