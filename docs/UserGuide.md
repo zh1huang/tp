@@ -29,9 +29,9 @@ business, where they can view these information in a user-friendly manner.
 3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
 4. {placeholder: show a screenshot when the app first start up}
 5. Type `help` to see the basic commands available, you may try to using the example commands below:
-   * `add  n/Geronimo l/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
+   * `add  n/Geronimo shlv/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
    * `delete n/Narnia` - Deletes the Book "Narnia" from the shelf
-   * `list l/book1` - list the items from shelf name "book1"
+   * `list shlv/book1` - list the items from shelf name "book1"
    * `get n/Pilot pen` - get information about an item "Pilot pen"
    * `report c/stats` - Show a report summary of the sales statistics
    * `bye` - exit the app
@@ -66,9 +66,9 @@ ________________________________________________________________________________
 Description: Command format
 ____________________________________________________________________________________________
 1. Get help : help
-2. Add item: add n/NAME l/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
+2. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
 3. Delete item: delete n/NAME
-4. List items: list [l/SHELF_NAME] [c/CATEGORY]
+4. List items: list [shlv/SHELF_NAME] [c/CATEGORY]
 5. Get information of item : get n/NAME [p/PROPERTY]
 6. Edit an item: edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]
 7. Generate sales report: report t/PERIOD
@@ -81,7 +81,7 @@ ________________________________________________________________________________
 
 Adds a new item to the inventory, specifying its name, category, purchase cost, selling price, quantity (and remarks if any).
 
-Format: `add n/NAME l/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
+Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
 Example: **Add 5 books titled "Harry Potter" with a purchase cost of $27 and selling price of $37**
 ```
@@ -135,7 +135,7 @@ list
 
 Shows a list of all items in the inventory list.
 
-Format: `list [l/SHELF_NAME] [c/CATEGORY]`
+Format: `list [shlv/SHELF_NAME] [c/CATEGORY]`
 
 Example: **Listing all items in all categories**
 ```
@@ -268,7 +268,7 @@ You can simply restart the program and your last updated data will be loaded.
 |Commands    |Format, Examples                                                                                                                 |
 | ----       | ----                                                                                                                            |
 |**Help**    | `help`                                                                                                                          |
-|**Add**     | `add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter c/book p/27 s/37 q/5`|
+|**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter c/book p/27 s/37 q/5`|
 |**Delete**  | `delete n/NAME` <br> eg: `delete n/Alice in wonderland`                                                                         |
 |**List**    | `list [c/CATEGORY]` <br> eg: `list c/stationary`                                                                                |
 |**Get**     | `get n/NAME [p/PROPERTY]` <br> eg: `get n/Apples Never Fall p/quantity`                                                         |
