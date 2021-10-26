@@ -31,12 +31,7 @@ public class Duke {
         logger.setLevel(Level.WARNING);
 
         Storage storage = new Storage();
-        try {
-            storage.loadData();
-        } catch (Exception e) {
-            // todo warn user cannot load data/ initializing data
-            MessageBubble.printMessageBubble("Failed to load data:\n" + e.getMessage());
-        }
+        storage.loadData();
 
         System.out.println(HELLO_MESSAGE);
         Scanner in = new Scanner(System.in);
