@@ -219,11 +219,13 @@ list
 
 Generates the sales report for given month.
 
-Format: `report {c/stats OR c/items} [ym/YEAR-MONTH]`
+Format: `report c/CONTENT_TYPE [ym/YEAR-MONTH]`
+
+Note: Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items 
 
 Example: **Generate sales report for the month of June 2020**
 ```
-report Jun 2020
+report c/stats
 ```
 
 Expected outcome:
@@ -269,12 +271,12 @@ You can simply restart the program and your last updated data will be loaded.
 |Commands    |Format, Examples                                                                                                                 |
 | ----       | ----                                                                                                                            |
 |**Help**    | `help`                                                                                                                          |
-|**Add**     | `add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: add n/Harry Potter c/book p/27 s/37 q/5|
+|**Add**     | `add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter c/book p/27 s/37 q/5`|
 |**Delete**  | `delete n/NAME` <br> eg: `delete n/Alice in wonderland`                                                                         |
 |**List**    | `list [c/CATEGORY]` <br> eg: `list c/stationary`                                                                                |
 |**Get**     | `get n/NAME [p/PROPERTY]` <br> eg: `get n/Apples Never Fall p/quantity`                                                         |
-|**Edit**    | `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]` <br> eg: edit n/Apples Never Fall p/quantity v/100 s/false                      |
-|**Report**  | `report t/PERIOD` <br> eg: `report Jun 2020`                                                                                    |
+|**Edit**    | `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]` <br> eg: `edit n/Apples Never Fall p/quantity v/100 s/false`                      |
+|**Report**  | `report c/CONTENT_TYPE [ym/YEAR-MONTH]` <br> eg: `report c/stats`                                                                                    |
 |**Bye**     | `bye`                                                                                                                           |
 
 
