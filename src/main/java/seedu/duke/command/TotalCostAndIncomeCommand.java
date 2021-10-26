@@ -19,7 +19,7 @@ public class TotalCostAndIncomeCommand extends Command {
     private Shelf soldItemsShelf;
 
     @Override
-    public void execute(Shelf list) throws EmptyListException {
+    public String execute() throws EmptyListException {
         try {
             checkSoldItemShelfExist();
         } catch (ShelfNotExistException e) {
@@ -42,6 +42,9 @@ public class TotalCostAndIncomeCommand extends Command {
         System.out.println(String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
             decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
             decimalFormat.format(totalProfits)));
+        return String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
+                decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
+                decimalFormat.format(totalProfits));
     }
 
     /**

@@ -57,7 +57,7 @@ class TotalCostAndIncomeCommandTest {
         soldItemsTestShelf.addItem(new Item(itemName2, itemPurchaseCost2, itemSellingPrice2));
         assertTrue(soldItemsTestShelf.contains("Narnia"));
         assertTrue(soldItemsTestShelf.contains("Mechanical Pencil"));
-        totalCostAndIncomeTestCommand.execute(dummyShelf);
+        totalCostAndIncomeTestCommand.execute();
 
         String expectedOutput = String.format(
             TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT, "18.10", "26.90", "8.80");

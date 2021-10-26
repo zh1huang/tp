@@ -3,10 +3,13 @@ package seedu.duke.salesmanager;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DuplicateShelfException;
+import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class SalesManager {
 
@@ -60,4 +63,27 @@ public class SalesManager {
         }
         return null;
     }
+
+    /**
+     * Filter out soldItems that are not sold within the input date.
+     * @param selectedDate the target date
+     * @return an ArrayList of SoldItems
+     */
+    public ArrayList<SoldItem> filterSoldItems(String selectedDate) {
+        ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
+        int selectedYear = Integer.parseInt(selectedDate.split("-")[0]);
+        int selectedMonth = Integer.parseInt(selectedDate.split("-")[1]);
+        for (int i = 0; i < soldItems.getSize();  i++) {
+            SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i); //todo: check if can use cast
+            int yearOfItem = selectedSoldItem.getSaleTime().getYear();
+            int monthOfItem = selectedSoldItem.getSaleTime().getMonthValue();
+            boolean isWithinSelectedYear = (yearOfItem == selectedYear);
+            boolean isWithinSelectedMonth = (monthOfItem == selectedMonth);
+            if (isWithinSelectedYear && isWithinSelectedMonth) {
+                filteredSoldItems.add(selectedSoldItem);
+            }
+        }
+        return filteredSoldItems; //todo: check if can use arraylist here
+    }
+
 }
