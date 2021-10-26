@@ -219,9 +219,9 @@ Generates the sales report for given month.
 
 Format: `report c/CONTENT_TYPE [ym/YEAR-MONTH]`
 
-&#128456; Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items
+&#128221; Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items
 
-&#128456; `YEAR-MONTH` need to follow the format `YYYY-MM`
+&#128221; `YEAR-MONTH` need to follow the format `YYYY-MM`
 
 Example: **Generate sales report for the month of June 2020**
 ```
