@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+class Parser PARSER_COLOR {
+    +BASIC_COMMAND_FORMAT:Pattern
+    +ADD_ITEM_DATA_ARGS_FORMAT:Pattern
+    +DELETE_ITEM_DATA_ARGS_FORMAT:Pattern
+    +LIST_ITEM_DATA_ARGS_FORMAT :Pattern
+    +GET_ITEM_DATA_ARGS_FORMAT :Pattern
+    +EDIT_ITEM_DATA_ARGS_FORMAT :Pattern
+
+    +ADD_STRING : String
+    +DELETE_STRING : String
+    +LIST_STRING : String
+    +GET_STRING : String
+    +EDIT_STRING : String
+
+    +parseCommand(inputLine: String) : Command
+    -prepareAdd(arguments: String) : AddCommand
+    -prepareDelete(arguments: String) : DeleteCommand
+    -prepareList(arguments: String) : ListCommand
+    -prepareGet(arguments: String) : GetCommand
+    -prepareEdit(arguments: String) : EditCommand
+    -prepareSell(arguments: String) : SellCommand
+    -prepareReport(arguments: String) : ReportCommand
+
+}
+
+@enduml
