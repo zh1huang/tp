@@ -294,7 +294,7 @@ public class Parser {
 
         System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
-        Command getCommand = new GetCommand(itemName, shelf); //temporary placeholder
+        Command getCommand = new GetCommand(shelfName, indexInShelf);
         assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
         logger.log(Level.INFO, "GetCommand parse success.");
         return getCommand;

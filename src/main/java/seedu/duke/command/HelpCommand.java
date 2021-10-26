@@ -1,17 +1,15 @@
 package seedu.duke.command;
 
-import seedu.duke.model.Shelf;
-
 public class HelpCommand extends Command {
 
-    private static final String COMMANDLIST = "Here are the performable actions:\n"
+    private static final String COMMAND_LIST = "Here are the performable actions:\n"
             + "Words in UPPER_CASE are the parameters to be supplied by the user.\n"
             + "Items in square brackets [ ] are optional.\n"
             + "____________________________________________________________________________________________\n"
             + "Description: Command format\n"
             + "____________________________________________________________________________________________\n"
             + "1. Get help : help\n"
-            + "2. Add item: add n/NAME c/CATEGORY p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
+            + "2. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
             + "3. Delete item: delete n/NAME\n"
             + "4. List items: list [c/CATEGORY]\n"
             + "5. Get information of item : get n/NAME [p/PROPERTY]\n"
@@ -24,7 +22,7 @@ public class HelpCommand extends Command {
      * Executes help command.
      */
     public String execute() {
-        System.out.println(COMMANDLIST);
-        return COMMANDLIST;
+        System.out.println(COMMAND_LIST);
+        return COMMAND_LIST;
     }
 }
