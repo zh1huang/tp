@@ -19,18 +19,31 @@ public class ListCommand extends Command {
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
 
-
+    /**
+     * Constructor if ListCommand takes in shelfName as parameter.
+     * ListCommand will only print out items in that specified shelf
+     *
+     * @param shelfName the name of shelf in which items are printed out
+     */
     public ListCommand(String shelfName) {
         this.shelfName = shelfName;
         this.toPrintAll = false;
     }
 
-    //if no shelfName in optional parameter
+    /**
+     * Constructor if ListCommand does not take in optional parameters.
+     */
     public ListCommand() {
         this.toPrintAll = true;
     }
 
-
+    /**
+     * Executes the list operation.
+     *
+     * @return Message string to be passed to UI
+     * @throws ShelfNotExistException If the Shelf is not in the ShelfList
+     * @throws EmptyListException If list is empty
+     */
     public String execute() throws ShelfNotExistException, EmptyListException {
         if (!toPrintAll) { //optional parameter entered so print that particular shelf
             try {
@@ -52,13 +65,19 @@ public class ListCommand extends Command {
         } else {
             ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();
             for (Shelf shelf: shelves) {
+                String shelfName = shelf.getName();
+                System.out.println("-----[" + shelfName + "]-----:");
                 getList(shelf);
             }
         }
-
         return LIST_COMPLETE_MESSAGE;
     }
 
+    /**
+     * Gets the list of items from specified shelf.
+     *
+     * @param shelf Shelf to get list of items from
+     */
     private void getList(Shelf shelf) {
         for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
