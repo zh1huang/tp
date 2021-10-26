@@ -31,7 +31,7 @@ business, where they can view these information in a user-friendly manner.
 5. Type `help` to see the basic commands available, you may try to using the example commands below:
    * `add  n/Geronimo l/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
    * `delete n/Narnia` - Deletes the Book "Narnia" from the shelf
-   * `list l/book1` - list the items from shelf name book1
+   * `list l/book1` - list the items from shelf name "book1"
    * `get n/Pilot pen` - get information about an item "Pilot pen"
    * `report c/stats` - Show a report summary of the sales statistics
    * `bye` - exit the app
