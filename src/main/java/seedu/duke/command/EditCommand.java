@@ -29,7 +29,8 @@ public class EditCommand extends Command {
 
     /**
      * EditCommand constructor.
-     * @param itemName the name of the selected item
+     * @param shelfName the name of the shelf where the item is on
+     * @param index     the index of the item in the shelf
      * @param property the property to be changed
      * @param newValue the new value of the property
      */
