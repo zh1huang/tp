@@ -31,8 +31,8 @@ public class DeleteCommandTest {
         testList = new Shelf("test");
         testItem1 = new Item("HarryPotter", "16.1", "25.12");
         testItem2 = new Item("HarryPotter", "16.1", "25.12");
-        testCommand1 = new DeleteCommand("HarryPotter", "1", testList);
-        testCommand2 = new DeleteCommand("TYS", "1", testList);
+        testCommand1 = new DeleteCommand("test", "1");
+        testCommand2 = new DeleteCommand("test", "1");
     }
 
     @Test
@@ -49,12 +49,6 @@ public class DeleteCommandTest {
     @Test
     public void execute_emptyList_throwsItemNotExitException() {
         assertThrows(ItemNotExistException.class, () -> testCommand1.execute());
-    }
-
-    @Test
-    public void execute_noMatchedItemInList_throwsItemNotExistException() throws DuplicateItemException {
-        testList.addItem(testItem1);
-        assertThrows(ItemNotExistException.class, () -> testCommand2.execute());
     }
 
     @Test

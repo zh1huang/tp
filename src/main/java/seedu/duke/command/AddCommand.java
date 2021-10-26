@@ -50,15 +50,16 @@ public class AddCommand extends Command {
     public String execute() throws IllegalArgumentException, DuplicateItemException,
             ShelfNotExistException {
         try {
-            Shelf selectedShelf= ShelfList
+            Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName);
-            for (int i = 0; i < quantity; i ++) {
+            for (int i = 0; i < quantity; i++) {
                 int sizeBeforeAdding = selectedShelf.getSize();
                 Item newItem = new Item(name, purchaseCost, sellingPrice);
                 selectedShelf.addItem(newItem);
                 int sizeAfterAdding = selectedShelf.getSize();
-                assert sizeBeforeAdding + 1 == sizeAfterAdding : "After adding an item the list size should increase by 1";
+                assert sizeBeforeAdding + 1 == sizeAfterAdding :
+                        "After adding an item the list size should increase by 1";
                 System.out.println(ADD_COMPLETE_MESSAGE_SINGLE);
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }

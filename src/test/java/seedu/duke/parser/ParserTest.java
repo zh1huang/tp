@@ -250,14 +250,16 @@ public class ParserTest {
             + " v/" + VALUE_EXAMPLE_1;
         Command expectedCommand1 = new EditCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1,
                 testShelf);
-        assertEquals(expectedCommand1.getClass(), parser.parseCommand(input1, testShelf).getClass()); //todo remove getclass
+        assertEquals(expectedCommand1.getClass(),
+        parser.parseCommand(input1, testShelf).getClass()); //todo remove getclass
 
         // Test edit Selling Price
         String input2 = EDIT_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " p/" + SELLING_PRICE_PROPERTY_STRING
             + " v/" + VALUE_EXAMPLE_2;
         Command expectedCommand2 = new EditCommand(ITEM_NAME_EXAMPLE_2, SELLING_PRICE_PROPERTY_STRING, VALUE_EXAMPLE_2,
                 testShelf);
-        assertEquals(expectedCommand2.getClass(), parser.parseCommand(input2, testShelf).getClass()); //todo remove getclass
+        assertEquals(expectedCommand2.getClass(),
+        parser.parseCommand(input2, testShelf).getClass()); //todo remove getclass
     }
     */
 

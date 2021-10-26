@@ -12,14 +12,15 @@ public class SellCommand extends Command {
             "This item has been sold."; //to be added to UI part later
     private final String shelfName;
     private final String index;
+
     public SellCommand(String shelfName, String index) {
         this.shelfName = shelfName;
-        this.index = index;
+        this.index = Integer.toString(Integer.parseInt(index) - 1);
     }
 
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         try {
-            Item selectedItem= ShelfList
+            Item selectedItem = ShelfList
                     .getShelfList()
                     .getShelf(shelfName)
                     .getItem(Integer.parseInt(index));

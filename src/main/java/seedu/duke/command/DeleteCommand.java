@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String shelfName, String index) {
         this.shelfName = shelfName;
-        this.index = index;
+        this.index = Integer.toString(Integer.parseInt(index) - 1);
     }
 
 
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
      */
     public String execute() throws ItemNotExistException, ShelfNotExistException {
         try {
-            Shelf selectedShelf= ShelfList
+            Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName);
             int sizeBeforeDeleting = selectedShelf.getSize();

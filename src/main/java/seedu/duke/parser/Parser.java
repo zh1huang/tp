@@ -213,7 +213,8 @@ public class Parser {
         System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
             itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
 
-        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice);
+        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
+                quantity, shelfName);
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");
         return addCommand;
@@ -240,7 +241,7 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
         System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
-        Command deleteCommand = new DeleteCommand(itemName);
+        Command deleteCommand = new DeleteCommand(shelfName, indexInShelf);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
         logger.log(Level.INFO, "DeleteCommand parse success.");
         return deleteCommand;
@@ -265,7 +266,7 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
         System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
 
-        Command listCommand = new ListCommand();
+        Command listCommand = new ListCommand(shelf); //temporary placeholder
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
         logger.log(Level.INFO, "ListCommand parse success.");
         return listCommand;
@@ -293,7 +294,7 @@ public class Parser {
 
         System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
-        Command getCommand = new GetCommand(itemName);
+        Command getCommand = new GetCommand(itemName, shelf); //temporary placeholder
         assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
         logger.log(Level.INFO, "GetCommand parse success.");
         return getCommand;
@@ -322,15 +323,14 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
-        return new EditCommand(itemName, selectedProperty, newValue, shelf);
 
         System.out.println(String.format(PARSE_EDIT_SUCCESS_MESSAGE_FORMAT,
             shelfName, indexInShelf, selectedProperty, newValue));
 
-        Command editCommand = new EditCommand(itemName, selectedProperty, newValue);
+        Command editCommand = new EditCommand(shelfName, indexInShelf,
+                selectedProperty, newValue);
         assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
-
         return editCommand;
     }
 

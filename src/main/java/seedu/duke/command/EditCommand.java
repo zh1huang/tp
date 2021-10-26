@@ -36,7 +36,7 @@ public class EditCommand extends Command {
      */
     public EditCommand(String shelfName, String index, String property, String newValue) {
         this.shelfName = shelfName;
-        this.index = index;
+        this.index = Integer.toString(Integer.parseInt(index) - 1);
         this.selectedProperty = property;
         this.newValue = newValue;
     }
@@ -57,7 +57,7 @@ public class EditCommand extends Command {
             throw new NoPropertyFoundException(selectedProperty);
         }
         try {
-            Shelf selectedShelf= ShelfList
+            Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName);
             int sizeBeforeEditing = selectedShelf.getSize();
