@@ -9,13 +9,16 @@ public class HelpCommand extends Command {
             + "Description: Command format\n"
             + "____________________________________________________________________________________________\n"
             + "1. Get help : help\n"
-            + "2. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
-            + "3. Delete item: delete n/NAME\n"
-            + "4. List items: list [c/CATEGORY]\n"
-            + "5. Get information of item : get n/NAME [p/PROPERTY]\n"
-            + "6. Edit an item: edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]\n"
-            + "7. Generate sales report: report t/PERIOD\n"
-            + "8. Exit program: bye\n"
+            + "2. Create new shelf: create shlv/SHELF_NAME\n"
+            + "3. Remove existing shelf: remove shlv/SHELF_NAME\n"
+            + "4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
+            + "5. Delete item: delete shlv/SHELF_NAME i/INDEX\n"
+            + "6. List items: list [shlv/SHELF_NAME]\n"
+            + "7. Get information of item : get shlv/SHELF_NAME i/INDEX\n"
+            + "8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE \n"
+            + "9. Sell an item: sell shlv/SHELF_NAME i/INDEX\n"
+            + "10. Generate sales report: report t/TYPE [ym/YEAR-MONTH]\n"
+            + "11. Exit program: bye\n"
             + "____________________________________________________________________________________________\n";
 
     /**
