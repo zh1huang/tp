@@ -7,6 +7,7 @@ import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,8 +76,8 @@ public class Shelf {
             logger.log(Level.INFO, String.format("Successfully set Shelf %s's name as %s", temp, name));
         } else {
             logger.log(Level.WARNING, String.format(
-                "Trying to set Shelf %s's name as %s",
-                this.getName(), newName));
+                    "Trying to set Shelf %s's name as %s",
+                    this.getName(), newName));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
@@ -91,12 +92,15 @@ public class Shelf {
         if (!contains(item)) {
             items.add(item);
             logger.log(Level.INFO, String.format("Successfully added Item %s into Shelf %s",
-                item.getName(), this.getName()));
+                    item.getName(), this.getName()));
         } else {
             logger.log(Level.WARNING, String.format("Item %s already exists in Shelf %s",
-                item.getName(), this.getName()));
+                    item.getName(), this.getName()));
             throw new DuplicateItemException(item.getName());
         }
+
+        // sort items alphabetically
+        sortItems();
     }
 
     /**
@@ -108,11 +112,11 @@ public class Shelf {
     public void deleteItem(Item item) throws ItemNotExistException {
         if (item == null) {
             logger.log(Level.WARNING, String.format("Trying to delete Null item from Shelf %s",
-                this.getName()));
+                    this.getName()));
             throw new NullPointerException();
         } else if (!contains(item)) {
             logger.log(Level.WARNING, String.format("Trying to delete Item %s which does not exist in Shelf %s",
-                item.getName(), this.getName()));
+                    item.getName(), this.getName()));
             throw new ItemNotExistException(item.getName());
         }
         items.remove(item);
@@ -131,24 +135,28 @@ public class Shelf {
         int index = items.indexOf(originalItem);
         if (originalItem == null) {
             logger.log(Level.WARNING, String.format("Trying to update Null item from Shelf %s",
-                this.getName()));
+                    this.getName()));
             throw new NullPointerException();
         } else if (contains(updatedItem)) {
             logger.log(Level.WARNING, String.format(
-                "Trying to replace Item %s with %s, which already exists in the Shelf %s",
-                originalItem.getName(), updatedItem.getName(), this.getName()));
+                    "Trying to replace Item %s with %s, which already exists in the Shelf %s",
+                    originalItem.getName(), updatedItem.getName(), this.getName()));
             throw new DuplicateItemException(updatedItem.getName());
         } else if (index == -1) {
             logger.log(Level.WARNING, String.format(
-                "Trying to replace Item %s, which does not exist in Shelf %s",
-                originalItem.getName(), this.getName()));
+                    "Trying to replace Item %s, which does not exist in Shelf %s",
+                    originalItem.getName(), this.getName()));
             throw new ItemNotExistException(originalItem.getName());
         }
         items.set(index, updatedItem);
+
+        // sort items alphabetically
+        sortItems();
+
         assert items.get(index) == updatedItem : "Updated item should be at the index of the original item";
         logger.log(Level.INFO, String.format(
-            "Successfully replace Item %s with %s in the Shelf %s",
-            originalItem.getName(), updatedItem.getName(), this.getName()));
+                "Successfully replace Item %s with %s in the Shelf %s",
+                originalItem.getName(), updatedItem.getName(), this.getName()));
     }
 
     /**
@@ -161,7 +169,7 @@ public class Shelf {
     public Item getItem(String name) throws ItemNotExistException {
         if (name == null) {
             logger.log(Level.WARNING, String.format("Trying to get Null item from Shelf %s",
-                this.getName()));
+                    this.getName()));
             throw new NullPointerException();
         }
         for (Item item : items) {
@@ -170,7 +178,7 @@ public class Shelf {
             }
         }
         logger.log(Level.WARNING, String.format("Item %s is not fond in the Shelf %s",
-            name, this.getName()));
+                name, this.getName()));
         throw new ItemNotExistException(name);
     }
 
@@ -232,13 +240,22 @@ public class Shelf {
         return items.size();
     }
 
+    private void sortItems() {
+        Comparator<Item> byName = (Item o1, Item o2) -> o1.getName().compareTo(o2.getName());
+        items.sort(byName);
+    }
+
     /**
      * Returns a string of names of the items in the Shelf separated by "\n".
      */
     @Override
     public String toString() {
+
+        // sort items alphabetically
+        sortItems();
+
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < items.size();  i++) {
+        for (int i = 0; i < items.size(); i++) {
             output.append((i + 1) + ". " + items.get(i).getName() + "\n");
         }
         return output.toString().trim();
