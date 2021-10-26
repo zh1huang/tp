@@ -59,14 +59,16 @@ public class Parser {
         Pattern.compile("(c/(?<month>[^/]+))?"); // optional argument category
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-        "add n/NAME c/CATEGORY p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
-    public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete n/NAME";
-    public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [c/CATEGORY]";
-    public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get n/NAME [p/PROPERTY]";
+        "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
+    public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
+    public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "List [shlv/SHELF_NAME]";
+    public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
-        "edit n/NAME p/PROPERTY v/VALUE [s/SHOW_RESULT]";
-    public static final String TOTAL_COST_DATA_ARGS_FORMAT_STRING = "list [m/MONTH]";
-
+        "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
+    public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE [ym/YEAR-MONTH]\n";
+    public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME\n\n";
+    public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME\n\n";
+    public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX \n\n";
 
     public static final String ADD_STRING = "add";
     public static final String DELETE_STRING = "delete";
@@ -333,7 +335,7 @@ public class Parser {
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, TOTAL_COST_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, REPORT_DATA_ARGS_FORMAT_STRING));
         }
 
         Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
