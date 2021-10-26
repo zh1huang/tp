@@ -56,8 +56,8 @@ public class Parser {
             + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
-        Pattern.compile("t/(?<type>(stats|items))" +
-            "( ym/(?<yearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
+        Pattern.compile("t/(?<type>(stats|items))"
+            + "( ym/(?<yearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
         Pattern.compile("shlv/(?<shelfName>[^/]+)");
@@ -103,7 +103,8 @@ public class Parser {
     public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
-    public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
+    public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
+        "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
     public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\ndate: %s\n";
     public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
@@ -212,7 +213,7 @@ public class Parser {
         String quantity = matcher.group("quantity");
         String remarks = matcher.group("remarks");
         System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
-            itemName,shelfName, purchaseCost, sellingPrice, quantity, remarks));
+            itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
 
         Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice);
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
@@ -239,7 +240,7 @@ public class Parser {
         String itemName = "item name";
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
-        System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName,indexInShelf));
+        System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command deleteCommand = new DeleteCommand(shelfName);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
@@ -438,11 +439,11 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
         System.out.println(String.format(PARSE_CREATE_SUCCESS_MESSAGE_FORMAT, shelfName));
         /**
-        Command createShelfCommand = new CreateShelfCommand();
-        assert createShelfCommand.getClass() == CreateShelfCommand.class :
-            "report should return createShelfCommand\n";
-        logger.log(Level.INFO, "CreateShelfCommand parse success.");
-        return createShelfCommand;
+         Command createShelfCommand = new CreateShelfCommand();
+         assert createShelfCommand.getClass() == CreateShelfCommand.class :
+         "report should return createShelfCommand\n";
+         logger.log(Level.INFO, "CreateShelfCommand parse success.");
+         return createShelfCommand;
          */
         return new HelpCommand();
     }
