@@ -46,13 +46,12 @@ public class Parser {
         Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+)"
-            + " i/(?<indexInShelf>[0-9]+)");
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
 
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("shlv/(?<shelfName>[^/]+)"
             + " i/(?<indexInShelf>[0-9]+)"
-            + " p/(?<property>[^/]+)"
+            + " p/(?<property>(cost|price)+)"
             + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
@@ -66,8 +65,7 @@ public class Parser {
         Pattern.compile("shlv/(?<shelfName>[^/]+)");
 
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+)"
-            + " i/(?<indexInShelf>[0-9]+)");
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
 
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
         "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
