@@ -68,7 +68,7 @@ public class Parser {
     public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE [ym/YEAR-MONTH]\n";
     public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME\n\n";
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME\n\n";
-    public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX \n\n";
+    public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX \n";
 
     public static final String ADD_STRING = "add";
     public static final String DELETE_STRING = "delete";
@@ -77,7 +77,10 @@ public class Parser {
     public static final String EDIT_STRING = "edit";
     public static final String BYE_STRING = "bye";
     public static final String HELP_STRING = "help";
-    public static final String TOTAL_COST_STRING = "tcost";
+    public static final String REPORT_STRING = "report";
+    public static final String CREATE_STRING = "create";
+    public static final String REMOVE_STRING = "remove";
+    public static final String SELL_STRING = "sell";
 
     public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
     public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
@@ -152,7 +155,7 @@ public class Parser {
         case BYE_STRING:
             return prepareBye(arguments);
 
-        case TOTAL_COST_STRING:
+        case REPORT_STRING:
             return prepareTotalCost(arguments);
 
         default:
