@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 
 public class Storage {
 
-    public static String STORAGE_PATH = "data\\Data.txt";
+    public static String STORAGE_PATH = "data/Data.txt";
 
     private static final int JSON_INDENTATION_LEVEL = 4;
 
@@ -61,7 +61,7 @@ public class Storage {
         }
         File file = new File(STORAGE_PATH);
         if (!file.exists()) {
-            String directory = STORAGE_PATH.substring(0, STORAGE_PATH.lastIndexOf("\\"));
+            String directory = STORAGE_PATH.substring(0, STORAGE_PATH.lastIndexOf("/"));
             Files.createDirectories(Paths.get(directory));
             file.createNewFile();
         }
@@ -74,7 +74,7 @@ public class Storage {
             throws IOException, DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
         File file = new File(STORAGE_PATH);
         if (!file.exists()) {
-            String directory = STORAGE_PATH.substring(0, STORAGE_PATH.lastIndexOf("\\"));
+            String directory = STORAGE_PATH.substring(0, STORAGE_PATH.lastIndexOf("/"));
             Files.createDirectories(Paths.get(directory));
             file.createNewFile();
 
