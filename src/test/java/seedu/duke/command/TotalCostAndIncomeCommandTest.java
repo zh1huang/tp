@@ -44,7 +44,7 @@ class TotalCostAndIncomeCommandTest {
 
     @Test
     public void execute_soldItemsAlreadyInList_showsNormally()
-        throws IllegalArgumentException, DuplicateItemException, CommandException {
+            throws IllegalArgumentException, DuplicateItemException, CommandException, ShelfNotExistException {
 
         String itemName1 = "Narnia";
         String itemPurchaseCost1 = "17.4";

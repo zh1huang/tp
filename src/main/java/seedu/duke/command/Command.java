@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.exception.ShelfNotExistException;
 
 /**
  * The abstract command.
@@ -13,7 +14,7 @@ public abstract class Command {
      *
      * @throws CommandException if anything goes wrong
      */
-    public abstract String execute() throws CommandException;
+    public abstract String execute() throws CommandException, ShelfNotExistException;
 
 
     /**

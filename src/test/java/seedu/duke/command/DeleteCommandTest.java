@@ -11,6 +11,7 @@ import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.ShelfNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +37,9 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_oneItemAlreadyInList_deletesNormally() throws CommandException, DuplicateItemException {
+    public void execute_oneItemAlreadyInList_deletesNormally()
+            throws CommandException, DuplicateItemException, ShelfNotExistException {
+
         testList.addItem(testItem1);
         int numberOfItemsBeforeDeleting = testList.getSize();
         assertTrue(testList.contains("HarryPotter"));
@@ -52,7 +55,9 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_itemsWithSameNameInList_deletesNormally() throws CommandException, DuplicateItemException {
+    public void execute_itemsWithSameNameInList_deletesNormally()
+            throws CommandException, DuplicateItemException, ShelfNotExistException {
+
         testList.addItem(testItem1);
         testList.addItem(testItem2);
         int numberOfItemsBeforeDeleting = testList.getSize();
