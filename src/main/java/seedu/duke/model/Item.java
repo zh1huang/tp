@@ -35,11 +35,11 @@ public class Item {
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
 
-    public Item(String name, String cost, String price) throws IllegalArgumentException {
+    public Item(String name, String cost, String price, String remarks) throws IllegalArgumentException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
-        setRemark("");
+        setRemarks("");
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
@@ -97,11 +97,11 @@ public class Item {
         logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), price));
     }
 
-    public String getRemark() {
+    public String getRemarks() {
         return remark;
     }
 
-    public void setRemark(String newRemark) {
+    public void setRemarks(String newRemark) {
         if (newRemark.isBlank()) {
             remark = " ";
         } else {

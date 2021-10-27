@@ -24,7 +24,7 @@ public class Shelf {
 
     private String name;
     private final ArrayList<Item> items;
-    private String remark;
+    private String remarks;
 
     /**
      * Constructor for the Shelf class.
@@ -185,15 +185,15 @@ public class Shelf {
         return items.get(index);
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String newRemark) {
-        if (newRemark.isBlank()) {
-            remark = " ";
+    public void setRemark(String newRemarks) {
+        if (newRemarks.isBlank()) {
+            remarks = " ";
         } else {
-            remark = newRemark;
+            remarks = newRemarks;
         }
     }
 

@@ -28,7 +28,7 @@ public class GetCommandTest {
     public void setUp() throws Exception {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12",""));
         testCommand1 = new GetCommand("HarryPotter", testList);
         testCommand2 = new GetCommand("Mr Midnight", testList);
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -41,7 +41,7 @@ public class GetCommandTest {
 
     @Test
     public void execute_ItemInList_getsNormally() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12", ""));
         assertTrue(testList.contains("HarryPotter"));
         testCommand1.execute();
         String expected = "Here is the information of your item\n"
@@ -56,7 +56,7 @@ public class GetCommandTest {
 
     @Test
     public void execute_noMatchedItemInList_throwItemNotExistException() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12", ""));
         assertTrue(testList.contains("HarryPotter"));
         assertThrows(ItemNotExistException.class, () -> testCommand2.execute());
     }

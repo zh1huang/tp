@@ -41,7 +41,7 @@ public class Duke {
         MessageBubble.printMessageBubble(HELP_PROMPT_MESSAGE);
         String input;
         Parser parser = new Parser();
-        Shelf warehouse = new Shelf("anotherwarehouse");
+        Shelf warehouse = new Shelf("anotherwarehouse"); //place holder
         boolean isExit = false;
         while (!isExit) {
             input = in.nextLine();

@@ -26,7 +26,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_oneItemAlreadyInList_editsNormally() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12", ""));
         testCommand = new EditCommand("test", "1", "price", "20");
         assertTrue(testList.contains("HarryPotter"));
         assertEquals("25.12", testList.getItem("HarryPotter").getSellingPrice());

@@ -12,7 +12,6 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.SellCommand;
 import seedu.duke.command.TotalCostAndIncomeCommand;
-import seedu.duke.command.ViewSoldItemsCommand;
 
 import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.ItemNotExistException;
@@ -217,9 +216,14 @@ public class Parser {
         String remarks = matcher.group("remarks");
         System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
             itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
-
-        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
-                quantity, shelfName);
+        Command addCommand;
+        if (remarks == null) {
+            addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
+                    quantity, shelfName, "");
+        } else {
+            addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
+                    quantity, shelfName, remarks);
+        }
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");
         return addCommand;

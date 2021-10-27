@@ -15,7 +15,7 @@ class ItemTest {
 
     @BeforeEach
     void setup() throws IllegalArgumentException {
-        testItem = new Item("Dune", "1.00", "2.00");
+        testItem = new Item("Dune", "1.00", "2.00", "");
     }
 
     @Test

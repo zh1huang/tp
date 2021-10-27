@@ -28,7 +28,7 @@ public class AddCommandTest {
     @Test
     public void execute_emptyList_addsNormally() throws CommandException {
         testCommand1 = new AddCommand("HarryPotter", "16.1",
-                "25.12", "1", "test");
+                "25.12", "1", "test", "");
         int numberOfItemsBeforeAdding = testList.getSize();
         testCommand1.execute();
         assertTrue(testList.contains("HarryPotter"));
@@ -39,7 +39,7 @@ public class AddCommandTest {
     @Test
     public void execute_itemsWithSameNameInList_addsNormally() throws CommandException {
         testCommand1 = new AddCommand("HarryPotter", "16.1",
-                "25.12", "1", "test");
+                "25.12", "1", "test", "");
         int numberOfItemsBeforeAdding = testList.getSize();
         testCommand1.execute();
         assertTrue(testList.contains("HarryPotter"));
@@ -50,7 +50,7 @@ public class AddCommandTest {
     @Test
     public void execute_itemWithIllegalArgument_throwsIllegalArgumentException() {
         testCommand1 = new AddCommand("HarryPotter", "-16.1",
-                "25.12", "1", "test");
+                "25.12", "1", "test", "");
         assertThrows(IllegalArgumentException.class, () -> testCommand1.execute());
     }
 }
