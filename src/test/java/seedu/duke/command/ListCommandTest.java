@@ -20,21 +20,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ListCommandTest {
     private Shelf testList;
     private Command testCommand;
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    //private final PrintStream standardOut = System.out;
+    //private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() throws Exception {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
         testCommand = new ListCommand("test");
-        System.setOut(new PrintStream(outputStreamCaptor));
+        //System.setOut(new PrintStream(outputStreamCaptor));
     }
 
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
+    //@AfterEach
+    //public void tearDown() {
+       // System.setOut(standardOut);
+    //}
 
     @Test
     public void execute_itemsAlreadyInList_listsNormally() throws Exception {
@@ -42,11 +42,10 @@ public class ListCommandTest {
         testList.addItem(new Item("LOTR", "10.2", "15.7"));
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
-        testCommand.execute();
         String expected = "Here is the list of items:\n"
                 + "1. HarryPotter (Cost: 16.1, Price: 25.12)\n"
-                + "2. LOTR (Cost: 10.2, Price: 15.7)";
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+                + "2. LOTR (Cost: 10.2, Price: 15.7)\n";
+        assertEquals(expected, testCommand.execute());
     }
 
     @Test

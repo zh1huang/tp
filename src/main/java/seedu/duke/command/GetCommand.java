@@ -14,9 +14,9 @@ public class GetCommand extends Command {
     private final int index;
     private final String shelfName;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item\n";
+    private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
-    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
+    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nRemarks:%s";
 
     /**
      * Constructor for GetCommand.
@@ -36,6 +36,7 @@ public class GetCommand extends Command {
      * @throws ItemNotExistException If empty does not exist in the shelf
      */
     public String execute() throws ShelfNotExistException, ItemNotExistException {
+        String output= "";
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
@@ -50,8 +51,7 @@ public class GetCommand extends Command {
             String price = selectedItem.getSellingPrice();
             String remarks = selectedItem.getRemark();
 
-            String output = String.format(GET_OUTPUT, name, cost, price, remarks);
-            System.out.println(output);
+            output = String.format(GET_OUTPUT, name, cost, price, remarks);
             logger.log(Level.INFO, "GetCommand successfully executed");
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
@@ -62,7 +62,7 @@ public class GetCommand extends Command {
         }
 
         logger.log(Level.INFO, "GetCommand successfully executed");
-        return GET_COMPLETE_MESSAGE;
+        return GET_COMPLETE_MESSAGE + output;
     }
 
     @Override

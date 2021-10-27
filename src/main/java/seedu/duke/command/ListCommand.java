@@ -45,6 +45,7 @@ public class ListCommand extends Command {
      * @throws EmptyListException If list is empty
      */
     public String execute() throws ShelfNotExistException, EmptyListException {
+        String output = "";
         if (!toPrintAll) { //optional parameter entered so print that particular shelf
             try {
                 Shelf selectedShelf = ShelfList
@@ -56,7 +57,7 @@ public class ListCommand extends Command {
                 }
 
                 System.out.print(LIST_COMPLETE_MESSAGE);
-                getList(selectedShelf);
+                output = getList(selectedShelf);
 
             } catch (seedu.duke.model.exception.ShelfNotExistException e) {
                 logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
@@ -66,11 +67,10 @@ public class ListCommand extends Command {
             ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();
             for (Shelf shelf: shelves) {
                 String shelfName = shelf.getName();
-                System.out.println("-----[" + shelfName + "]-----:");
-                getList(shelf);
+                output += "-----[" + shelfName + "]-----:\n" + getList(shelf);
             }
         }
-        return LIST_COMPLETE_MESSAGE;
+        return LIST_COMPLETE_MESSAGE + output;
     }
 
     /**
@@ -78,7 +78,8 @@ public class ListCommand extends Command {
      *
      * @param shelf Shelf to get list of items from
      */
-    private void getList(Shelf shelf) {
+    private String getList(Shelf shelf) {
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
             int index = i + 1;
@@ -86,10 +87,10 @@ public class ListCommand extends Command {
             String cost = selectedItem.getPurchaseCost();
             String price = selectedItem.getSellingPrice();
 
-            String output = String.format(ITEM_INFO, index, name, cost, price);
-            System.out.print(output);
+            output.append(String.format(ITEM_INFO, index, name, cost, price));
             logger.log(Level.INFO, "ListCommand successfully executed");
         }
+        return output.toString();
     }
 
     @Override
