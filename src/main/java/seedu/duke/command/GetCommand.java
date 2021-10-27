@@ -36,7 +36,7 @@ public class GetCommand extends Command {
      * @throws ItemNotExistException If empty does not exist in the shelf
      */
     public String execute() throws ShelfNotExistException, ItemNotExistException {
-        String output= "";
+        String output = "";
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()

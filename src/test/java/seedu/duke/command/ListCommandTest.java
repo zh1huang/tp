@@ -31,11 +31,6 @@ public class ListCommandTest {
         //System.setOut(new PrintStream(outputStreamCaptor));
     }
 
-    //@AfterEach
-    //public void tearDown() {
-       // System.setOut(standardOut);
-    //}
-
     @Test
     public void execute_itemsAlreadyInList_listsNormally() throws Exception {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
