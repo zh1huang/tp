@@ -9,6 +9,8 @@ import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SalesManager {
@@ -67,24 +69,54 @@ public class SalesManager {
 
     /**
      * Filter out soldItems that are not sold within the input date.
-     * @param selectedDate the target date
+     * @param selectedStartDate the target date
      * @return an ArrayList of SoldItems
      */
-    public ArrayList<SoldItem> filterSoldItems(String selectedDate) {
+    public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate) {
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
-        int selectedYear = Integer.parseInt(selectedDate.split("-")[0]);
-        int selectedMonth = Integer.parseInt(selectedDate.split("-")[1]);
-        for (int i = 0; i < soldItems.getSize();  i++) {
-            SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i); //todo: check if can use cast
-            int yearOfItem = selectedSoldItem.getSaleTime().getYear();
-            int monthOfItem = selectedSoldItem.getSaleTime().getMonthValue();
-            boolean isWithinSelectedYear = (yearOfItem == selectedYear);
-            boolean isWithinSelectedMonth = (monthOfItem == selectedMonth);
-            if (isWithinSelectedYear && isWithinSelectedMonth) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
+
+        if(selectedEndDate == null){
+            filteredSoldItems = getFilteredListInSpecificMonth(selectedStartDate, dateTimeFormatter);
+        }else {
+            filteredSoldItems = getFilteredListWithinAPeriod(selectedStartDate,
+                selectedEndDate, dateTimeFormatter);
+        }
+
+        return filteredSoldItems; //todo: check if can use arraylist here
+    }
+
+    private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
+        DateTimeFormatter dateTimeFormatter) {
+
+        ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
+        YearMonth yearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
+        for(int i = 0; i < soldItems.getSize();  i++){
+            SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
+            YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
+            if(itemSoldYearMonth.equals(yearMonthToSearch)){
                 filteredSoldItems.add(selectedSoldItem);
             }
         }
-        return filteredSoldItems; //todo: check if can use arraylist here
+        return filteredSoldItems;
     }
+
+    private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
+        String selectedEndDate, DateTimeFormatter dateTimeFormatter) {
+
+        ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
+        YearMonth startYearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
+        YearMonth endYearMonthToSearch = YearMonth.parse(selectedEndDate, dateTimeFormatter);
+        for(int i = 0; i < soldItems.getSize();  i++){
+            SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
+            YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
+            if(!itemSoldYearMonth.isBefore(startYearMonthToSearch)
+                && !itemSoldYearMonth.isAfter(endYearMonthToSearch)){
+                filteredSoldItems.add(selectedSoldItem);
+            }
+        }
+        return filteredSoldItems;
+    }
+
 
 }

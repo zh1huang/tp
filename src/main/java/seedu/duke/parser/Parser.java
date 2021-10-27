@@ -391,7 +391,7 @@ public class Parser {
         String startYearMonth = matcher.group("startYearMonth");
         String endYearMonth = matcher.group("endYearMonth");
 
-        Command reportCommand = new ReportCommand(startYearMonth, type);
+        Command reportCommand = new ReportCommand(startYearMonth, endYearMonth, type);
         assert reportCommand.getClass() == ReportCommand.class :
             "report should return reportCommand\n";
         logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");

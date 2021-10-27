@@ -17,14 +17,16 @@ public class SalesReport {
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: %s\n"
             + "Total Selling Price: %s\nTotal Profits: %s";
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
+    private final String selectedEndDate;
 
-    public SalesReport(String selectedDate) {
+    public SalesReport(String selectedDate, String selectedEndDate) {
         this.selectedDate = selectedDate;
+        this.selectedEndDate = selectedEndDate;
     }
 
     public String generateSoldItemStats() throws EmptyListException {
         SalesManager salesManager = SalesManager.getSalesManager();
-        ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate);
+        ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -48,7 +50,7 @@ public class SalesReport {
 
     public String generateSoldItemDetails() {
         SalesManager salesManager = SalesManager.getSalesManager();
-        ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate);
+        ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         StringBuilder info = new StringBuilder();
         for (int i = 0; i < selectedSoldItems.size();  i++) {
             Item selectedItem = selectedSoldItems.get(i);
