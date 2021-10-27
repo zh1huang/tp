@@ -28,6 +28,10 @@ public class ShelfList {
         return shelfList;
     }
 
+    public ArrayList<Shelf> getShelves() {
+        return shelves;
+    }
+
     public void resetShelfList() {
         shelves = new ArrayList<>();
     }
