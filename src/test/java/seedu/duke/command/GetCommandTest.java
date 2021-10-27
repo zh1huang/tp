@@ -20,33 +20,33 @@ public class GetCommandTest {
 
     private Shelf testList;
     private Command testCommand1;
+    private Command testCommand2;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private Command testCommand2;
+    public static final String ITEM_DESCRIPTION = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
+    public static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
 
     @BeforeEach
     public void setUp() throws Exception {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
-        testCommand1 = new GetCommand("HarryPotter", testList);
-        testCommand2 = new GetCommand("Mr Midnight", testList);
-        System.setOut(new PrintStream(outputStreamCaptor));
+        testCommand1 = new GetCommand("test", "1");
+        testCommand2 = new GetCommand("test", "3");
+        //System.setOut(new PrintStream(outputStreamCaptor));
     }
 
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
+    //@AfterEach
+    //public void tearDown() {
+    //    System.setOut(standardOut);
+    //}
 
     @Test
     public void execute_ItemInList_getsNormally() throws Exception {
         testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
         assertTrue(testList.contains("HarryPotter"));
-        testCommand1.execute();
-        String expected = "Here is the information of your item\n"
-                + String.format(Shelf.ITEM_DESCRIPTION, "HarryPotter", "25.12", "16.1");
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+        //testCommand1.execute();
+        String expected = String.format(GET_COMPLETE_MESSAGE + ITEM_DESCRIPTION, "HarryPotter", "16.1", "25.12", "");
+        assertEquals(expected, testCommand1.execute());
     }
 
     @Test
@@ -56,8 +56,8 @@ public class GetCommandTest {
 
     @Test
     public void execute_noMatchedItemInList_throwItemNotExistException() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
-        assertTrue(testList.contains("HarryPotter"));
+        testList.addItem(new Item("Hello", "25.12", "16.1"));
+        assertTrue(testList.contains("Hello"));
         assertThrows(ItemNotExistException.class, () -> testCommand2.execute());
     }
 }
