@@ -15,9 +15,9 @@ import java.util.logging.Logger;
 public class DeleteCommand extends Command {
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
-    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
+    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private final String shelfName;
-    private final String index;
+    private final int index;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String shelfName, String index) {
         this.shelfName = shelfName;
-        this.index = Integer.toString(Integer.parseInt(index) - 1);
+        this.index = Integer.parseInt(index) - 1;
     }
 
 
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
                     .getShelfList()
                     .getShelf(shelfName);
             int sizeBeforeDeleting = selectedShelf.getSize();
-            Item selectedItem = selectedShelf.getItem(Integer.parseInt(index));
+            Item selectedItem = selectedShelf.getItem(index);
             selectedShelf.deleteItem(selectedItem);
             int sizeAfterDeleting = selectedShelf.getSize();
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
@@ -75,6 +75,6 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand command = (DeleteCommand) other;
-        return shelfName.equals(command.shelfName) && index.equals(command.index);
+        return shelfName.equals(command.shelfName) && index == command.index;
     }
 }

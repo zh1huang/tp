@@ -55,7 +55,8 @@ public class SalesManager {
         SoldItem temp;
         LocalDateTime saleTime = LocalDateTime.now();
         try {
-            temp = new SoldItem(item.getName(), item.getPurchaseCost(), item.getSellingPrice(), saleTime);
+            temp = new SoldItem(item.getName(), item.getPurchaseCost(), item.getSellingPrice(),
+                    item.getRemarks(), saleTime);
             soldItems.addItem(temp);
             return temp;
         } catch (Exception e) {

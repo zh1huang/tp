@@ -20,8 +20,9 @@ public class SoldItem extends Item {
      *              must be non-negative
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
-    public SoldItem(String name, String cost, String price, LocalDateTime saleTime) throws IllegalArgumentException {
-        super(name, cost, price);
+    public SoldItem(String name, String cost, String price, String remarks, LocalDateTime saleTime)
+            throws IllegalArgumentException {
+        super(name, cost, price, remarks);
         setSaleTime(saleTime);
     }
 

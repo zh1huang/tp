@@ -30,8 +30,8 @@ public class DeleteCommandTest {
     public void setUp() throws IllegalArgumentException, DuplicateShelfException {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
-        testItem1 = new Item("HarryPotter", "16.1", "25.12");
-        testItem2 = new Item("HarryPotter", "16.1", "25.12");
+        testItem1 = new Item("HarryPotter", "16.1", "25.12", "");
+        testItem2 = new Item("HarryPotter", "16.1", "25.12", "");
         testCommand1 = new DeleteCommand("test", "1");
         testCommand2 = new DeleteCommand("test", "1");
     }

@@ -7,6 +7,7 @@ import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.DuplicateItemException;
 import seedu.duke.model.ShelfList;
 
+import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,14 +16,18 @@ import java.util.logging.Logger;
  */
 public class AddCommand extends Command {
     private static final String ADD_COMPLETE_MESSAGE_SINGLE =
-            "This item has been added to the list."; //to be added to UI part later
+            "This item has been added to the list.";
     private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =
-            " items have been added to the list."; //to be added to UI part later
+            " items have been added to the list.";
+    private static final String PRICE_WARNING =
+            "\nYour price of selling is not higher than your purchase cost. "
+                    + "\nMake sure you did not type wrongly";
     private final String name;
     private final String purchaseCost;
     private final String sellingPrice;
     private final int quantity;
     private final String shelfName;
+    private final String remarks;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
@@ -32,12 +37,14 @@ public class AddCommand extends Command {
      * @param purchaseCost the cost of the item
      * @param sellingPrice the price of the item
      */
-    public AddCommand(String name, String purchaseCost, String sellingPrice, String quantity, String shelfName) {
+    public AddCommand(String name, String purchaseCost, String sellingPrice, String quantity,
+                      String shelfName, String remarks) {
         this.name = name;
         this.purchaseCost = purchaseCost;
         this.sellingPrice = sellingPrice;
         this.quantity = Integer.parseInt(quantity);
         this.shelfName = shelfName;
+        this.remarks = remarks;
     }
 
     /**
@@ -55,7 +62,7 @@ public class AddCommand extends Command {
                     .getShelf(shelfName);
             for (int i = 0; i < quantity; i++) {
                 int sizeBeforeAdding = selectedShelf.getSize();
-                Item newItem = new Item(name, purchaseCost, sellingPrice);
+                Item newItem = new Item(name, purchaseCost, sellingPrice, remarks);
                 selectedShelf.addItem(newItem);
                 int sizeAfterAdding = selectedShelf.getSize();
                 assert sizeBeforeAdding + 1 == sizeAfterAdding :
@@ -63,10 +70,20 @@ public class AddCommand extends Command {
                 System.out.println(ADD_COMPLETE_MESSAGE_SINGLE);
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }
+            boolean hasNegativeProfit = (new BigDecimal(sellingPrice).compareTo(new BigDecimal(purchaseCost)) == -1);
             if (quantity > 1) {
-                return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
+                if (hasNegativeProfit) {
+                    return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE + PRICE_WARNING;
+                } else {
+                    return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
+                }
             } else {
-                return ADD_COMPLETE_MESSAGE_SINGLE;
+                if (hasNegativeProfit) {
+                    return ADD_COMPLETE_MESSAGE_SINGLE + PRICE_WARNING;
+                } else {
+                    return ADD_COMPLETE_MESSAGE_SINGLE;
+                }
+
             }
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
             logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",

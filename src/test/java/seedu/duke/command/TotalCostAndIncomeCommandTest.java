@@ -53,8 +53,8 @@ class TotalCostAndIncomeCommandTest {
         String itemPurchaseCost2 = "0.70";
         String itemSellingPrice2 = "1.9";
 
-        soldItemsTestShelf.addItem(new Item(itemName1, itemPurchaseCost1, itemSellingPrice1));
-        soldItemsTestShelf.addItem(new Item(itemName2, itemPurchaseCost2, itemSellingPrice2));
+        soldItemsTestShelf.addItem(new Item(itemName1, itemPurchaseCost1, itemSellingPrice1, ""));
+        soldItemsTestShelf.addItem(new Item(itemName2, itemPurchaseCost2, itemSellingPrice2, ""));
         assertTrue(soldItemsTestShelf.contains("Narnia"));
         assertTrue(soldItemsTestShelf.contains("Mechanical Pencil"));
         totalCostAndIncomeTestCommand.execute();

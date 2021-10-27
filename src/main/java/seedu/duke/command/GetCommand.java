@@ -49,7 +49,7 @@ public class GetCommand extends Command {
             String name = selectedItem.getName();
             String cost = selectedItem.getPurchaseCost();
             String price = selectedItem.getSellingPrice();
-            String remarks = selectedItem.getRemark();
+            String remarks = selectedItem.getRemarks();
 
             output = String.format(GET_OUTPUT, name, cost, price, remarks);
             logger.log(Level.INFO, "GetCommand successfully executed");

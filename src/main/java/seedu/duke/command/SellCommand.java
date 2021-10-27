@@ -7,15 +7,15 @@ import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.salesmanager.SalesManager;
 
 public class SellCommand extends Command {
-    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
+    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final String SELL_COMPLETE_MESSAGE =
             "This item has been sold."; //to be added to UI part later
     private final String shelfName;
-    private final String index;
+    private final int index;
 
     public SellCommand(String shelfName, String index) {
         this.shelfName = shelfName;
-        this.index = Integer.toString(Integer.parseInt(index) - 1);
+        this.index = Integer.parseInt(index) - 1;
     }
 
     public String execute() throws ShelfNotExistException, ItemNotExistException {
@@ -23,7 +23,7 @@ public class SellCommand extends Command {
             Item selectedItem = ShelfList
                     .getShelfList()
                     .getShelf(shelfName)
-                    .getItem(Integer.parseInt(index));
+                    .getItem(index);
             SalesManager.getSalesManager().sell(selectedItem);
             System.out.println(SELL_COMPLETE_MESSAGE);
             return SELL_COMPLETE_MESSAGE;

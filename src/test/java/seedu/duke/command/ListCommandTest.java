@@ -33,8 +33,8 @@ public class ListCommandTest {
 
     @Test
     public void execute_itemsAlreadyInList_listsNormally() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12"));
-        testList.addItem(new Item("LOTR", "10.2", "15.7"));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12", ""));
+        testList.addItem(new Item("LOTR", "10.2", "15.7", ""));
         assertTrue(testList.contains("HarryPotter"));
         assertTrue(testList.contains("LOTR"));
         String expected = "Here is the list of items:\n"

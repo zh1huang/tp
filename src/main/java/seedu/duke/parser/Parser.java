@@ -2,13 +2,17 @@ package seedu.duke.parser;
 
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
+import seedu.duke.command.CreateShelfCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.RemoveShelfCommand;
+import seedu.duke.command.SellCommand;
 import seedu.duke.command.TotalCostAndIncomeCommand;
+
 import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
@@ -212,9 +216,14 @@ public class Parser {
         String remarks = matcher.group("remarks");
         System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
             itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
-
-        Command addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
-                quantity, shelfName);
+        Command addCommand;
+        if (remarks == null) {
+            addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
+                    quantity, shelfName, "");
+        } else {
+            addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
+                    quantity, shelfName, remarks);
+        }
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");
         return addCommand;
@@ -415,14 +424,12 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
 
         System.out.println(String.format(PARSE_SELL_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
-        /**
-         Command sellCommand = new SellCommand();
-         assert sellCommand.getClass() == SellCommand.class :
-         "report should return createShelfCommand\n";
-         logger.log(Level.INFO, "SellCommand parse success.");
-         return sellCommand;
-         */
-        return new HelpCommand();
+
+        Command sellCommand = new SellCommand(shelfName, indexInShelf);
+        assert sellCommand.getClass() == SellCommand.class :
+                "report should return createShelfCommand\n";
+        logger.log(Level.INFO, "SellCommand parse success.");
+        return sellCommand;
     }
 
     /**
@@ -443,14 +450,12 @@ public class Parser {
 
         String shelfName = matcher.group("shelfName");
         System.out.println(String.format(PARSE_CREATE_SUCCESS_MESSAGE_FORMAT, shelfName));
-        /**
-         Command createShelfCommand = new CreateShelfCommand();
-         assert createShelfCommand.getClass() == CreateShelfCommand.class :
-         "report should return createShelfCommand\n";
-         logger.log(Level.INFO, "CreateShelfCommand parse success.");
-         return createShelfCommand;
-         */
-        return new HelpCommand();
+
+        Command createShelfCommand = new CreateShelfCommand(shelfName);
+        assert createShelfCommand.getClass() == CreateShelfCommand.class :
+                "report should return createShelfCommand\n";
+        logger.log(Level.INFO, "CreateShelfCommand parse success.");
+        return createShelfCommand;
     }
 
     /**
@@ -471,13 +476,10 @@ public class Parser {
 
         String shelfName = matcher.group("shelfName");
         System.out.println(String.format(PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT, shelfName));
-        /**
-         Command RemoveShelfCommand = new TotalCostAndIncomeCommand();
-         assert RemoveShelfCommand.getClass() == RemoveShelfCommand.class :
-         "remove should return removeShelfCommand\n";
-         logger.log(Level.INFO, "RemoveShelfCommand parse success.");
-         return removeShelfCommand;
-         */
-        return new HelpCommand();
+        Command removeShelfCommand = new TotalCostAndIncomeCommand();
+        assert removeShelfCommand.getClass() == RemoveShelfCommand.class :
+                "remove should return removeShelfCommand\n";
+        logger.log(Level.INFO, "RemoveShelfCommand parse success.");
+        return removeShelfCommand;
     }
 }

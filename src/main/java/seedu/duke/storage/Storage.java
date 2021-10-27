@@ -40,7 +40,7 @@ public class Storage {
                 Shelf currentShelf = shelfList.getShelf(nameOfShelf);
                 JSONObject shelfInfo = new JSONObject();
 
-                shelfInfo.put("remark", currentShelf.getRemark());
+                shelfInfo.put("remarks", currentShelf.getRemarks());
 
                 JSONObject itemsInShelf = new JSONObject();
                 for (int i = 0; i < currentShelf.getSize(); i = i + 1) {
@@ -49,7 +49,7 @@ public class Storage {
                     itemDetail.put("name", currentItem.getName());
                     itemDetail.put("cost", currentItem.getPurchaseCost());
                     itemDetail.put("price", currentItem.getSellingPrice());
-                    itemDetail.put("remark", currentItem.getRemark());
+                    itemDetail.put("remarks", currentItem.getRemarks());
                     if (currentShelf.getName() == "soldItems") {
                         itemDetail.put("saleTime", ((SoldItem) currentItem).getSaleTime());
                     }
@@ -97,7 +97,7 @@ public class Storage {
             throws DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
         for (String shelfName : storedData.keySet()) {
             Shelf currentShelf = shelfList.addShelf(shelfName);
-            currentShelf.setRemark(storedData.getJSONObject(shelfName).getString("remark"));
+            currentShelf.setRemark(storedData.getJSONObject(shelfName).getString("remarks"));
             JSONObject itemsJson = storedData.getJSONObject(shelfName).getJSONObject("items");
             for (String itemName : itemsJson.keySet()) {
                 JSONObject itemJson = itemsJson.getJSONObject(itemName);
@@ -106,17 +106,18 @@ public class Storage {
                     item = new Item(
                             itemJson.get("name").toString(),
                             itemJson.get("cost").toString(),
-                            itemJson.get("price").toString()
+                            itemJson.get("price").toString(),
+                            itemJson.getString("remarks")
                     );
                 } else {
                     item = new SoldItem(
                             itemJson.get("name").toString(),
                             itemJson.get("cost").toString(),
                             itemJson.get("price").toString(),
+                            itemJson.getString("remarks"),
                             LocalDateTime.parse(itemJson.get("saleTime").toString())
                     );
                 }
-                item.setRemark(itemJson.getString("remark"));
                 currentShelf.addItem(item);
             }
         }
@@ -130,10 +131,10 @@ public class Storage {
         sampleItem.put("name", "sample item");
         sampleItem.put("cost", "12.25");
         sampleItem.put("price", "25");
-        sampleItem.put("remark", " ");
+        sampleItem.put("remarks", " ");
         defaultItems.put("0", sampleItem);
         defaultWarehouse.put("items", defaultItems);
-        defaultWarehouse.put("remark", " ");
+        defaultWarehouse.put("remarks", " ");
         defaultShelves.put("warehouse", defaultWarehouse);
         return defaultShelves;
     }
