@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  * The command that edits a selected item.
  */
 public class EditCommand extends Command {
-    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
+    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private final String shelfName;
-    private final String index;
+    private final int index;
     private final String selectedProperty;
     private final String newValue;
     private final String[] properties = {"cost", "price"};
@@ -36,7 +36,7 @@ public class EditCommand extends Command {
      */
     public EditCommand(String shelfName, String index, String property, String newValue) {
         this.shelfName = shelfName;
-        this.index = Integer.toString(Integer.parseInt(index) - 1);
+        this.index = Integer.parseInt(index) - 1;
         this.selectedProperty = property;
         this.newValue = newValue;
     }
@@ -61,7 +61,7 @@ public class EditCommand extends Command {
                     .getShelfList()
                     .getShelf(shelfName);
             int sizeBeforeEditing = selectedShelf.getSize();
-            Item selectedItem = selectedShelf.getItem(Integer.parseInt(index));
+            Item selectedItem = selectedShelf.getItem(index);
             if (selectedProperty.equals("cost")) {
                 selectedItem.setPurchaseCost(newValue);
 
