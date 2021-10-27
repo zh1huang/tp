@@ -59,7 +59,8 @@ public class Parser {
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
         Pattern.compile("t/(?<type>(stats|items))"
-            + "( ym/(?<yearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
+            + " ym/(?<startYearMonth>[0-9]{4}-[0-9]{2})"
+            + "( ym/(?<endYearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
         Pattern.compile("shlv/(?<shelfName>[^/]+)");
@@ -77,7 +78,7 @@ public class Parser {
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
         "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
-    public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE [ym/YEAR-MONTH]";
+    public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]";
     public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
     public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX";
@@ -106,7 +107,7 @@ public class Parser {
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
     public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
         "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
-    public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\ndate: %s\n";
+    public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\nstart date: %s\nend date: %s\n";
     public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_SELL_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
@@ -131,8 +132,6 @@ public class Parser {
      */
     public Command parseCommand(String userInputLine) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
-//    public Command parseCommand(String userInputLine, Shelf shelf) throws IllegalFormatException,
-//            ItemNotExistException, NoPropertyFoundException {
         logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
@@ -148,29 +147,22 @@ public class Parser {
 
         switch (commandWord) {
         case ADD_STRING:
-            //command = prepareAdd(arguments, shelf);
             command = prepareAdd(arguments);
-
             break;
 
         case DELETE_STRING:
-            //command = prepareDelete(arguments, shelf);
             command = prepareDelete(arguments);
-
             break;
 
         case LIST_STRING:
-            //command = prepareList(arguments, shelf);
             command = prepareList(arguments);
             break;
 
         case GET_STRING:
-            //command = prepareGet(arguments, shelf);
             command = prepareGet(arguments);
             break;
 
         case EDIT_STRING:
-            //command = prepareEdit(arguments, shelf);
             command = prepareEdit(arguments);
             break;
 
@@ -209,7 +201,6 @@ public class Parser {
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
 
-        //private Command prepareAdd(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -223,8 +214,7 @@ public class Parser {
         String sellingPrice = matcher.group("sellingPrice");
         String quantity = matcher.group("quantity");
         String remarks = matcher.group("remarks");
-//        System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
-//            itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
+
         Command addCommand;
         if (remarks == null) {
             addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
@@ -256,10 +246,8 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
-        String itemName = "item name";
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
-//        System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command deleteCommand = new DeleteCommand(shelfName, indexInShelf);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
@@ -284,7 +272,6 @@ public class Parser {
         }
 
         String shelfName = matcher.group("shelfName");
-//        System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
 
         Command listCommand;
         if (shelfName==null) {
@@ -316,11 +303,8 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
-        String itemName = "itemName";
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
-
-//        System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command getCommand = new GetCommand(shelfName, indexInShelf);
         assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
@@ -347,14 +331,10 @@ public class Parser {
             throw new IllegalFormatException(String.format(
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
-        String itemName = "itemName";
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
-
-//        System.out.println(String.format(PARSE_EDIT_SUCCESS_MESSAGE_FORMAT,
-//            shelfName, indexInShelf, selectedProperty, newValue));
 
         Command editCommand = new EditCommand(shelfName, indexInShelf,
                 selectedProperty, newValue);
@@ -408,10 +388,10 @@ public class Parser {
         }
 
         String type = matcher.group("type");
-        String yearMonth = matcher.group("yearMonth");
-//        System.out.println(String.format(PARSE_REPORT_SUCCESS_MESSAGE_FORMAT, type, yearMonth));
+        String startYearMonth = matcher.group("startYearMonth");
+        String endYearMonth = matcher.group("endYearMonth");
 
-        Command reportCommand = new ReportCommand(yearMonth, type);
+        Command reportCommand = new ReportCommand(startYearMonth, type);
         assert reportCommand.getClass() == ReportCommand.class :
             "report should return reportCommand\n";
         logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
@@ -437,8 +417,6 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
 
-//        System.out.println(String.format(PARSE_SELL_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
-
         Command sellCommand = new SellCommand(shelfName, indexInShelf);
         assert sellCommand.getClass() == SellCommand.class :
                 "report should return createShelfCommand\n";
@@ -463,7 +441,6 @@ public class Parser {
         }
 
         String shelfName = matcher.group("shelfName");
-//        System.out.println(String.format(PARSE_CREATE_SUCCESS_MESSAGE_FORMAT, shelfName));
 
         Command createShelfCommand = new CreateShelfCommand(shelfName);
         assert createShelfCommand.getClass() == CreateShelfCommand.class :
@@ -489,7 +466,7 @@ public class Parser {
         }
 
         String shelfName = matcher.group("shelfName");
-//        System.out.println(String.format(PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT, shelfName));
+
         Command removeShelfCommand = new RemoveShelfCommand(shelfName);
         assert removeShelfCommand.getClass() == RemoveShelfCommand.class :
                 "remove should return removeShelfCommand\n";

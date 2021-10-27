@@ -27,15 +27,15 @@ public class ReportCommand extends Command {
         }
         try {
             if (reportType.equals("stats")) {
-                SalesReport newSalesReport = new SalesReport(selectedDate);
-                logger.log(Level.INFO, "ReportCommand successfully executed.");
-                return newSalesReport.generateSoldItemDetails();
-            } else {
                 assert reportType.equals("items") :
-                        "All types should have been listed";
+                    "All types should have been listed";
                 SalesReport newSalesReport = new SalesReport(selectedDate);
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemStats();
+            } else {
+                SalesReport newSalesReport = new SalesReport(selectedDate);
+                logger.log(Level.INFO, "ReportCommand successfully executed.");
+                return newSalesReport.generateSoldItemDetails();
             }
         } catch (seedu.duke.salesmanager.exception.EmptyListException e) {
             throw new EmptyListException(e.getMessage());
