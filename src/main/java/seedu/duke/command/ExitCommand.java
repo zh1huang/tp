@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
      * Override superclass Command to not perform any actions.
      */
     public String execute() {
-        System.out.println(BYE_MESSAGE);
+        // System.out.println(BYE_MESSAGE);
         return BYE_MESSAGE;
     }
 

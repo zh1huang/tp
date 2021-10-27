@@ -214,8 +214,8 @@ public class Parser {
         String sellingPrice = matcher.group("sellingPrice");
         String quantity = matcher.group("quantity");
         String remarks = matcher.group("remarks");
-        System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
-            itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
+//        System.out.println(String.format(PARSE_ADD_SUCCESS_MESSAGE_FORMAT,
+//            itemName, shelfName, purchaseCost, sellingPrice, quantity, remarks));
         Command addCommand;
         if (remarks == null) {
             addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
@@ -248,7 +248,7 @@ public class Parser {
         String itemName = "item name";
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
-        System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
+//        System.out.println(String.format(PARSE_DELETE_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command deleteCommand = new DeleteCommand(shelfName, indexInShelf);
         assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
@@ -273,7 +273,7 @@ public class Parser {
         }
 
         String shelfName = matcher.group("shelfName");
-        System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
+//        System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
 
         Command listCommand;
         if (shelfName.isEmpty()) {
@@ -307,7 +307,7 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
 
-        System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
+//        System.out.println(String.format(PARSE_GET_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command getCommand = new GetCommand(shelfName, indexInShelf);
         assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
@@ -339,8 +339,8 @@ public class Parser {
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
 
-        System.out.println(String.format(PARSE_EDIT_SUCCESS_MESSAGE_FORMAT,
-            shelfName, indexInShelf, selectedProperty, newValue));
+//        System.out.println(String.format(PARSE_EDIT_SUCCESS_MESSAGE_FORMAT,
+//            shelfName, indexInShelf, selectedProperty, newValue));
 
         Command editCommand = new EditCommand(shelfName, indexInShelf,
                 selectedProperty, newValue);
@@ -395,7 +395,7 @@ public class Parser {
 
         String type = matcher.group("type");
         String yearMonth = matcher.group("yearMonth");
-        System.out.println(String.format(PARSE_REPORT_SUCCESS_MESSAGE_FORMAT, type, yearMonth));
+//        System.out.println(String.format(PARSE_REPORT_SUCCESS_MESSAGE_FORMAT, type, yearMonth));
 
         Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
         assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
@@ -423,7 +423,7 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
 
-        System.out.println(String.format(PARSE_SELL_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
+//        System.out.println(String.format(PARSE_SELL_SUCCESS_MESSAGE_FORMAT, shelfName, indexInShelf));
 
         Command sellCommand = new SellCommand(shelfName, indexInShelf);
         assert sellCommand.getClass() == SellCommand.class :
@@ -449,7 +449,7 @@ public class Parser {
         }
 
         String shelfName = matcher.group("shelfName");
-        System.out.println(String.format(PARSE_CREATE_SUCCESS_MESSAGE_FORMAT, shelfName));
+//        System.out.println(String.format(PARSE_CREATE_SUCCESS_MESSAGE_FORMAT, shelfName));
 
         Command createShelfCommand = new CreateShelfCommand(shelfName);
         assert createShelfCommand.getClass() == CreateShelfCommand.class :
@@ -475,8 +475,8 @@ public class Parser {
         }
 
         String shelfName = matcher.group("shelfName");
-        System.out.println(String.format(PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT, shelfName));
-        Command removeShelfCommand = new TotalCostAndIncomeCommand();
+//        System.out.println(String.format(PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT, shelfName));
+        Command removeShelfCommand = new RemoveShelfCommand(shelfName);
         assert removeShelfCommand.getClass() == RemoveShelfCommand.class :
                 "remove should return removeShelfCommand\n";
         logger.log(Level.INFO, "RemoveShelfCommand parse success.");

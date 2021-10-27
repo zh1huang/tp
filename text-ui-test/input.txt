@@ -1,2 +1,4 @@
 someone
+create shlv/book1
+create shlv/book1
 bye
