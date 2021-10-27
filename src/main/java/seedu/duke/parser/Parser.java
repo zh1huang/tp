@@ -10,10 +10,9 @@ import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.RemoveShelfCommand;
+import seedu.duke.command.ReportCommand;
 import seedu.duke.command.SellCommand;
-import seedu.duke.command.TotalCostAndIncomeCommand;
 
-import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
@@ -124,15 +123,16 @@ public class Parser {
      * respective cases depending on the command word.
      *
      * @param userInputLine The user input Line
-     * @param shelf         The itemContainer used to prepare the command
      * @return Command object depending on the command type
      * @throws IllegalFormatException   If user input line does not match the respective command format
      * @throws ItemNotExistException    If item name not found in the container
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
      *                                  by the user
      */
-    public Command parseCommand(String userInputLine, Shelf shelf) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+    public Command parseCommand(String userInputLine) throws IllegalFormatException,
+        ItemNotExistException, NoPropertyFoundException {
+//    public Command parseCommand(String userInputLine, Shelf shelf) throws IllegalFormatException,
+//            ItemNotExistException, NoPropertyFoundException {
         logger.log(Level.INFO, "Parsing Start...");
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputLine.trim());
 
@@ -148,23 +148,30 @@ public class Parser {
 
         switch (commandWord) {
         case ADD_STRING:
-            command = prepareAdd(arguments, shelf);
+            //command = prepareAdd(arguments, shelf);
+            command = prepareAdd(arguments);
+
             break;
 
         case DELETE_STRING:
-            command = prepareDelete(arguments, shelf);
+            //command = prepareDelete(arguments, shelf);
+            command = prepareDelete(arguments);
+
             break;
 
         case LIST_STRING:
-            command = prepareList(arguments, shelf);
+            //command = prepareList(arguments, shelf);
+            command = prepareList(arguments);
             break;
 
         case GET_STRING:
-            command = prepareGet(arguments, shelf);
+            //command = prepareGet(arguments, shelf);
+            command = prepareGet(arguments);
             break;
 
         case EDIT_STRING:
-            command = prepareEdit(arguments, shelf);
+            //command = prepareEdit(arguments, shelf);
+            command = prepareEdit(arguments);
             break;
 
         case HELP_STRING:
@@ -200,7 +207,9 @@ public class Parser {
      * @return AddCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareAdd(String arguments, Shelf shelf) throws IllegalFormatException {
+    private Command prepareAdd(String arguments) throws IllegalFormatException {
+
+        //private Command prepareAdd(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -236,7 +245,9 @@ public class Parser {
      * @return DeleteCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareDelete(String arguments, Shelf shelf) throws IllegalFormatException {
+    private Command prepareDelete(String arguments) throws IllegalFormatException {
+
+        //private Command prepareDelete(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -263,7 +274,7 @@ public class Parser {
      * @return ListCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareList(String arguments, Shelf shelf) throws IllegalFormatException {
+    private Command prepareList(String arguments) throws IllegalFormatException {
         final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -276,7 +287,7 @@ public class Parser {
 //        System.out.println(String.format(PARSE_LIST_SUCCESS_MESSAGE_FORMAT, shelfName));
 
         Command listCommand;
-        if (shelfName.isEmpty()) {
+        if (shelfName==null) {
             listCommand = new ListCommand();
         } else {
             listCommand = new ListCommand(shelfName);
@@ -294,7 +305,9 @@ public class Parser {
      * @return GetCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
-    private Command prepareGet(String arguments, Shelf shelf) throws IllegalFormatException {
+    private Command prepareGet(String arguments) throws IllegalFormatException {
+
+        //private Command prepareGet(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -324,7 +337,8 @@ public class Parser {
      * @throws ItemNotExistException    If the item cannot be found from the container
      * @throws NoPropertyFoundException If the associated item property cannot be found
      */
-    private Command prepareEdit(String arguments, Shelf shelf) throws IllegalFormatException,
+    private Command prepareEdit(String arguments) throws IllegalFormatException,
+    //private Command prepareEdit(String arguments, Shelf shelf) throws IllegalFormatException,
             ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
@@ -397,11 +411,11 @@ public class Parser {
         String yearMonth = matcher.group("yearMonth");
 //        System.out.println(String.format(PARSE_REPORT_SUCCESS_MESSAGE_FORMAT, type, yearMonth));
 
-        Command totalCostAndIncomeCommand = new TotalCostAndIncomeCommand();
-        assert totalCostAndIncomeCommand.getClass() == TotalCostAndIncomeCommand.class :
-            "report should return totalCostAndIncomeCommand\n";
+        Command reportCommand = new ReportCommand(yearMonth, type);
+        assert reportCommand.getClass() == ReportCommand.class :
+            "report should return reportCommand\n";
         logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
-        return totalCostAndIncomeCommand;
+        return reportCommand;
     }
 
     /**
