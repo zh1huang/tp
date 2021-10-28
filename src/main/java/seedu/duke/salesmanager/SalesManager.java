@@ -11,6 +11,7 @@ import seedu.duke.model.exception.ShelfNotExistException;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class SalesManager {
@@ -73,8 +74,8 @@ public class SalesManager {
      * @param selectedStartDate the target date
      * @return an ArrayList of SoldItems
      */
-    public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate) {
-        ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
+    public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate) throws IllegalArgumentException {
+        ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
         if (selectedEndDate == null) {
@@ -95,10 +96,15 @@ public class SalesManager {
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
-                                                               DateTimeFormatter dateTimeFormatter) {
-
+        DateTimeFormatter dateTimeFormatter) throws IllegalArgumentException {
+        YearMonth yearMonthToSearch;
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
-        YearMonth yearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
+        try {
+            yearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
+        } catch ( DateTimeParseException e ) {
+            throw new IllegalArgumentException("Invalid Year Month");
+        }
+
         for (int i = 0; i < soldItems.getSize(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
@@ -119,11 +125,17 @@ public class SalesManager {
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
-        String selectedEndDate, DateTimeFormatter dateTimeFormatter) {
+        String selectedEndDate, DateTimeFormatter dateTimeFormatter) throws IllegalArgumentException {
+        YearMonth startYearMonthToSearch;
+        YearMonth endYearMonthToSearch;
 
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
-        YearMonth startYearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
-        YearMonth endYearMonthToSearch = YearMonth.parse(selectedEndDate, dateTimeFormatter);
+        try {
+            startYearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
+            endYearMonthToSearch = YearMonth.parse(selectedEndDate, dateTimeFormatter);
+        } catch ( DateTimeParseException e ) {
+            throw new IllegalArgumentException("Invalid Year Month");
+        }
         for (int i = 0; i < soldItems.getSize(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());

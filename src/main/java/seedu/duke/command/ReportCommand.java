@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.command.exception.NoTypeFoundException;
+import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.salesmanager.SalesReport;
 import seedu.duke.command.exception.EmptyListException;
 
@@ -21,7 +22,7 @@ public class ReportCommand extends Command {
         this.reportType = reportType;
     }
 
-    public String execute() throws NoTypeFoundException, EmptyListException {
+    public String execute() throws NoTypeFoundException, EmptyListException, IllegalArgumentException {
         boolean isType = Arrays.asList(types).contains(reportType);
         if (!isType) {
             logger.log(Level.WARNING, "ReportCommand can't find the given type.");

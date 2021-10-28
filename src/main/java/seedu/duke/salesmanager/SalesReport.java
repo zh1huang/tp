@@ -1,5 +1,6 @@
 package seedu.duke.salesmanager;
 
+import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.salesmanager.exception.EmptyListException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
@@ -33,7 +34,7 @@ public class SalesReport {
      * @return A String containing the sold items statistics
      * @throws EmptyListException If the soldItems shelf does not contain items
      */
-    public String generateSoldItemStats() throws EmptyListException {
+    public String generateSoldItemStats() throws EmptyListException, IllegalArgumentException {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
@@ -64,7 +65,7 @@ public class SalesReport {
      *
      * @return A String containing all sold item details
      */
-    public String generateSoldItemDetails() {
+    public String generateSoldItemDetails() throws IllegalArgumentException {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         StringBuilder info = new StringBuilder();
