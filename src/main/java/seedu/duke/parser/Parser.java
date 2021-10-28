@@ -9,6 +9,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.MarkUpCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.ReportCommand;
 import seedu.duke.command.SellCommand;
@@ -71,6 +72,10 @@ public class Parser {
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
 
+    public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
+            + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
+
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
         "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
@@ -82,6 +87,7 @@ public class Parser {
     public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
     public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX";
+    public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
 
     public static final String ADD_STRING = "add";
     public static final String DELETE_STRING = "delete";
@@ -94,6 +100,7 @@ public class Parser {
     public static final String CREATE_STRING = "create";
     public static final String REMOVE_STRING = "remove";
     public static final String SELL_STRING = "sell";
+    public static final String MARKUP_STRING = "markup";
 
     public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
     public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
@@ -111,6 +118,7 @@ public class Parser {
     public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_SELL_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
+    public static final String PARSE_MARKUP_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\npercent: %s\n";
 
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
@@ -184,7 +192,8 @@ public class Parser {
 
         case REMOVE_STRING:
             return prepareRemoveShelf(arguments);
-
+        case MARKUP_STRING:
+            return prepareMarkUp(arguments);
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
@@ -200,7 +209,6 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
-
         final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -236,8 +244,6 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
-
-        //private Command prepareDelete(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -293,8 +299,6 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareGet(String arguments) throws IllegalFormatException {
-
-        //private Command prepareGet(String arguments, Shelf shelf) throws IllegalFormatException {
         final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -322,7 +326,6 @@ public class Parser {
      * @throws NoPropertyFoundException If the associated item property cannot be found
      */
     private Command prepareEdit(String arguments) throws IllegalFormatException,
-        //private Command prepareEdit(String arguments, Shelf shelf) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
@@ -472,5 +475,25 @@ public class Parser {
             "remove should return removeShelfCommand\n";
         logger.log(Level.INFO, "RemoveShelfCommand parse success.");
         return removeShelfCommand;
+    }
+
+    private Command prepareMarkUp(String arguments) throws IllegalFormatException {
+        final Matcher matcher = MARKUP_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Sell Command Format");
+            throw new IllegalFormatException(String.format(
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, MARKUP_DATA_ARGS_FORMAT_STRING));
+        }
+
+        String shelfName = matcher.group("shelfName");
+        String indexInShelf = matcher.group("indexInShelf");
+        String percent = matcher.group("percent");
+
+        Command markUpCommand = new MarkUpCommand(shelfName, indexInShelf, percent);
+        assert markUpCommand.getClass() == MarkUpCommand.class :
+            "report should return MarkUpCommand\n";
+        logger.log(Level.INFO, "MarkUpCommand parse success.");
+        return markUpCommand;
     }
 }
