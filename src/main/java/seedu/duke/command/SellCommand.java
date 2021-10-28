@@ -6,8 +6,15 @@ import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.salesmanager.SalesManager;
 
+import java.util.regex.Pattern;
+
 public class SellCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
+    public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+    public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX";
+    public static final String SELL_STRING = "sell";
+    public static final String PARSE_SELL_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
     private static final String SELL_COMPLETE_MESSAGE =
             "This item has been sold."; //to be added to UI part later
     private final String shelfName;

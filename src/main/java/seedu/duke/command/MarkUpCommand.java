@@ -8,17 +8,17 @@ import seedu.duke.model.exception.ShelfNotExistException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.regex.Pattern;
 
 public class MarkUpCommand extends Command {
     public static final int INTEGER_ONE_HUNDRED = 100;
     public static final BigDecimal ONE_HUNDRED = new BigDecimal(INTEGER_ONE_HUNDRED);
-    private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
-    private static final String ITEM_NAME_MESSAGE_FORMAT = "Item: %s\nCost: %s, Price: %s\n";
-    private static final String CURRENT_ITEM_MARKUP_MESSAGE_FORMAT =
-        "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
-    private static final String ESTIMATED_MARKUP_MESSAGE_FORMAT =
-        "markup: %s%%, increase: $%s, Final price: $%s\n";
-    private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
+            + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
+    public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
+    public static final String MARKUP_STRING = "markup";
+    public static final String PARSE_MARKUP_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\npercent: %s\n";
     public static final int INTEGER_TEN = 10;
     public static final int INTEGER_ELEVEN = 11;
     public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: "
@@ -27,9 +27,16 @@ public class MarkUpCommand extends Command {
     public static final int TWO_DECIMAL_POINTS = 2;
     public static final int FOUR_DECIMAL_POINT = 4;
 
+    private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
+    private static final String ITEM_NAME_MESSAGE_FORMAT = "Item: %s\nCost: %s, Price: %s\n";
+    private static final String CURRENT_ITEM_MARKUP_MESSAGE_FORMAT =
+        "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
+    private static final String ESTIMATED_MARKUP_MESSAGE_FORMAT =
+        "markup: %s%%, increase: $%s, Final price: $%s\n";
+    private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     private final String shelfName;
-    private String itemName;
     private final int index;
+    private String itemName;
     private BigDecimal userRequestPercent;
     private BigDecimal cost;
     private BigDecimal price;
