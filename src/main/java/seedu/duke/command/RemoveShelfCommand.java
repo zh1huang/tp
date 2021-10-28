@@ -6,8 +6,6 @@ import seedu.duke.model.ShelfList;
 import java.util.regex.Pattern;
 
 public class RemoveShelfCommand extends Command {
-    public static final Pattern REMOVE_SHELF_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+)");
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
     public static final String REMOVE_STRING = "remove";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";

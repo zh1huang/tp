@@ -33,6 +33,49 @@ public class Parser {
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("n/(?<itemName>[^/]+)"
+            + " shlv/(?<shelfName>[^/]+)"
+            + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+            //only accepts numbers or decimals in 1 or 2 d.p.
+            + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+            //only accepts numbers or decimals in 1 or 2 d.p.
+            + " q/(?<quantity>[0-9]+)" // only accepts integers, no decimals
+            + "( r/(?<remarks>[^/]+))?$"); // optional argument
+
+    public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+
+    public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
+
+    public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+
+    public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+)"
+            + " i/(?<indexInShelf>[0-9]+)"
+            + " p/(?<property>(cost|price)+)"
+            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
+
+    public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+)");
+
+    public static final Pattern REMOVE_SHELF_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+)");
+
+    public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+
+    public static final Pattern REPORT_DATA_ARGS_FORMAT =
+        Pattern.compile("t/(?<type>(stats|items))"
+            + " ym/(?<startYearMonth>[0-9]{4}-[0-9]{2})"
+            + "( ym/(?<endYearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
+
+    public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
+        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
+            + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
+
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
         "Input invalid command format.\nCorrect format: \n%s\n";
 
@@ -127,7 +170,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
-        final Matcher matcher = AddCommand.ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Add Command Format");
@@ -162,7 +205,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
-        final Matcher matcher = DeleteCommand.DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Delete Command Format");
@@ -187,7 +230,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
-        final Matcher matcher = ListCommand.LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
@@ -217,7 +260,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareGet(String arguments) throws IllegalFormatException {
-        final Matcher matcher = GetCommand.GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Get Command Format");
@@ -245,7 +288,7 @@ public class Parser {
      */
     private Command prepareEdit(String arguments) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
-        final Matcher matcher = EditCommand.EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Edit Command Format");
@@ -300,7 +343,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareReport(String arguments) throws IllegalFormatException {
-        final Matcher matcher = ReportCommand.REPORT_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = REPORT_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
@@ -327,7 +370,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareSell(String arguments) throws IllegalFormatException {
-        final Matcher matcher = SellCommand.SELL_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = SELL_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Sell Command Format");
@@ -353,7 +396,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareCreateShelf(String arguments) throws IllegalFormatException {
-        final Matcher matcher = CreateShelfCommand.CREATE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = CREATE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Create Shelf Command Format");
@@ -378,7 +421,7 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareRemoveShelf(String arguments) throws IllegalFormatException {
-        final Matcher matcher = RemoveShelfCommand.REMOVE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = REMOVE_SHELF_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Remove Shelf Command Format");
@@ -403,7 +446,7 @@ public class Parser {
      * @throws IllegalFormatException If arguments do not follow input format specified
      */
     private Command prepareMarkUp(String arguments) throws IllegalFormatException {
-        final Matcher matcher = MarkUpCommand.MARKUP_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = MARKUP_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Sell Command Format");

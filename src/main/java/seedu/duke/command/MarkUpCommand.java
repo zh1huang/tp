@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
 public class MarkUpCommand extends Command {
     public static final int INTEGER_ONE_HUNDRED = 100;
     public static final BigDecimal ONE_HUNDRED = new BigDecimal(INTEGER_ONE_HUNDRED);
-    public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
-            + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
     public static final String MARKUP_STRING = "markup";
     public static final String PARSE_MARKUP_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\npercent: %s\n";

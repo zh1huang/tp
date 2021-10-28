@@ -11,10 +11,6 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class ReportCommand extends Command {
-    public static final Pattern REPORT_DATA_ARGS_FORMAT =
-        Pattern.compile("t/(?<type>(stats|items))"
-            + " ym/(?<startYearMonth>[0-9]{4}-[0-9]{2})"
-            + "( ym/(?<endYearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
     public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]";
     public static final String REPORT_STRING = "report";
     public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\nstart date: %s\nend date: %s\n";

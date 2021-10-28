@@ -14,8 +14,6 @@ import java.util.regex.Pattern;
  * The command that deletes a selected item.
  */
 public class DeleteCommand extends Command {
-    public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
     public static final String DELETE_STRING = "delete";
     public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";

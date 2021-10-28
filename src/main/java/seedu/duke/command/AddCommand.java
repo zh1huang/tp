@@ -16,15 +16,6 @@ import java.util.regex.Pattern;
  * The command that adds a new item to the list.
  */
 public class AddCommand extends Command {
-    public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("n/(?<itemName>[^/]+)"
-            + " shlv/(?<shelfName>[^/]+)"
-            + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
-            //only accepts numbers or decimals in 1 or 2 d.p.
-            + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
-            //only accepts numbers or decimals in 1 or 2 d.p.
-            + " q/(?<quantity>[0-9]+)" // only accepts integers, no decimals
-            + "( r/(?<remarks>[^/]+))?$"); // optional argument
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
         "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String ADD_STRING = "add";

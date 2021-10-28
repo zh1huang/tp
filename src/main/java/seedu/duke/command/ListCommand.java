@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 public class ListCommand extends Command {
 
-    public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "List [shlv/SHELF_NAME]";
     public static final String LIST_STRING = "list";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";

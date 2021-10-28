@@ -18,11 +18,6 @@ import java.util.regex.Pattern;
  */
 public class EditCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
-    public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+)"
-            + " i/(?<indexInShelf>[0-9]+)"
-            + " p/(?<property>(cost|price)+)"
-            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
         "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
     public static final String EDIT_STRING = "edit";
