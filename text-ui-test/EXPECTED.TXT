@@ -1,6 +1,3 @@
-                                       ......................................
-                                       : Initializing with sample database. :
-                                       .........................................
                 .............................................................
                 : Hello from                                                :
                 :   _____ _      _____              _____ _          _  __  :
@@ -14,9 +11,6 @@
                           ...................................................
                           : Enter 'help' for the list of available commands :
                           ......................................................
-                                       ......................................
-                                       : Invalid command, please try again. :
-                                       .........................................
                                              ................................
                                              : This shelf has been created. :
                                              ...................................
@@ -46,8 +40,6 @@ This item has been added to the list.
                                      ...........................................
                      ........................................................
                      : Here is the list of items:                           :
-                     : -----[warehouse]-----:                               :
-                     : 1. sample item (Cost: 12.25, Price: 25)              :
                      : -----[book1]-----:                                   :
                      : 1. Geronimo (Cost: 17.90, Price: 20.90)              :
                      : 2. Harry Potter (Cost: 25.90, Price: 30.90)          :
@@ -56,6 +48,16 @@ This item has been added to the list.
                      : 5. Three Little Pigs (Cost: 10.90, Price: 12.99)     :
                      : 6. Three Little Pigs (Cost: 10.90, Price: 12.99)     :
                      : -----[book2]-----:                                   :
+                     : -----[sampleShelf1]-----:                            :
+                     : -----[sampleShelf2]-----:                            :
+                     : 1. sample book 1 (Cost: 25.90, Price: 30.90)         :
+                     : 2. sample book 2 (Cost: 10.90, Price: 12.99)         :
+                     : 3. sample book 3 (Cost: 10.90, Price: 12.99)         :
+                     : -----[sampleShelf3]-----:                            :
+                     : 1. sample item (Cost: 12.25, Price: 25)              :
+                     : -----[soldItems]-----:                               :
+                     : 1. sampleSoldItem1 (Cost: 17.40, Price: 25)          :
+                     : 2. sampleSoldItem2 (Cost: 8.88, Price: 23.90)        :
                      ...........................................................
 This item has been removed from the list.
                                 .............................................
@@ -63,8 +65,6 @@ This item has been removed from the list.
                                 ................................................
                      ........................................................
                      : Here is the list of items:                           :
-                     : -----[warehouse]-----:                               :
-                     : 1. sample item (Cost: 12.25, Price: 25)              :
                      : -----[book1]-----:                                   :
                      : 1. Harry Potter (Cost: 25.90, Price: 30.90)          :
                      : 2. Narnia (Cost: 17.40, Price: 25)                   :
@@ -72,6 +72,16 @@ This item has been removed from the list.
                      : 4. Three Little Pigs (Cost: 10.90, Price: 12.99)     :
                      : 5. Three Little Pigs (Cost: 10.90, Price: 12.99)     :
                      : -----[book2]-----:                                   :
+                     : -----[sampleShelf1]-----:                            :
+                     : -----[sampleShelf2]-----:                            :
+                     : 1. sample book 1 (Cost: 25.90, Price: 30.90)         :
+                     : 2. sample book 2 (Cost: 10.90, Price: 12.99)         :
+                     : 3. sample book 3 (Cost: 10.90, Price: 12.99)         :
+                     : -----[sampleShelf3]-----:                            :
+                     : 1. sample item (Cost: 12.25, Price: 25)              :
+                     : -----[soldItems]-----:                               :
+                     : 1. sampleSoldItem1 (Cost: 17.40, Price: 25)          :
+                     : 2. sampleSoldItem2 (Cost: 8.88, Price: 23.90)        :
                      ...........................................................
                                     .........................................
                                     : Here is the information of your item: :
@@ -86,8 +96,6 @@ This item has been updated.
                                               ..................................
                       .......................................................
                       : Here is the list of items:                          :
-                      : -----[warehouse]-----:                              :
-                      : 1. sample item (Cost: 12.25, Price: 25)             :
                       : -----[book1]-----:                                  :
                       : 1. Harry Potter (Cost: 25.90, Price: 30.90)         :
                       : 2. Narnia (Cost: 17.40, Price: 25)                  :
@@ -95,6 +103,16 @@ This item has been updated.
                       : 4. Three Little Pigs (Cost: 10.90, Price: 12.99)    :
                       : 5. Three Little Pigs (Cost: 10.90, Price: 12.99)    :
                       : -----[book2]-----:                                  :
+                      : -----[sampleShelf1]-----:                           :
+                      : -----[sampleShelf2]-----:                           :
+                      : 1. sample book 1 (Cost: 25.90, Price: 30.90)        :
+                      : 2. sample book 2 (Cost: 10.90, Price: 12.99)        :
+                      : 3. sample book 3 (Cost: 10.90, Price: 12.99)        :
+                      : -----[sampleShelf3]-----:                           :
+                      : 1. sample item (Cost: 12.25, Price: 25)             :
+                      : -----[soldItems]-----:                              :
+                      : 1. sampleSoldItem1 (Cost: 17.40, Price: 25)         :
+                      : 2. sampleSoldItem2 (Cost: 8.88, Price: 23.90)       :
                       ..........................................................
 This item has been sold.
                                                  ............................
@@ -102,16 +120,23 @@ This item has been sold.
                                                  ...............................
                       .......................................................
                       : Here is the list of items:                          :
-                      : -----[warehouse]-----:                              :
-                      : 1. sample item (Cost: 12.25, Price: 25)             :
                       : -----[book1]-----:                                  :
                       : 1. Harry Potter (Cost: 25.90, Price: 30.90)         :
                       : 2. The Lord of the Rings (Cost: 8.88, Price: 23.90) :
                       : 3. Three Little Pigs (Cost: 10.90, Price: 12.99)    :
                       : 4. Three Little Pigs (Cost: 10.90, Price: 12.99)    :
                       : -----[book2]-----:                                  :
+                      : -----[sampleShelf1]-----:                           :
+                      : -----[sampleShelf2]-----:                           :
+                      : 1. sample book 1 (Cost: 25.90, Price: 30.90)        :
+                      : 2. sample book 2 (Cost: 10.90, Price: 12.99)        :
+                      : 3. sample book 3 (Cost: 10.90, Price: 12.99)        :
+                      : -----[sampleShelf3]-----:                           :
+                      : 1. sample item (Cost: 12.25, Price: 25)             :
                       : -----[soldItems]-----:                              :
                       : 1. Narnia (Cost: 17.40, Price: 25)                  :
+                      : 2. sampleSoldItem1 (Cost: 17.40, Price: 25)         :
+                      : 3. sampleSoldItem2 (Cost: 8.88, Price: 23.90)       :
                       ..........................................................
 This item has been sold.
                                                  ............................
@@ -119,25 +144,32 @@ This item has been sold.
                                                  ...............................
                       .......................................................
                       : Here is the list of items:                          :
-                      : -----[warehouse]-----:                              :
-                      : 1. sample item (Cost: 12.25, Price: 25)             :
                       : -----[book1]-----:                                  :
                       : 1. Harry Potter (Cost: 25.90, Price: 30.90)         :
                       : 2. Three Little Pigs (Cost: 10.90, Price: 12.99)    :
                       : 3. Three Little Pigs (Cost: 10.90, Price: 12.99)    :
                       : -----[book2]-----:                                  :
+                      : -----[sampleShelf1]-----:                           :
+                      : -----[sampleShelf2]-----:                           :
+                      : 1. sample book 1 (Cost: 25.90, Price: 30.90)        :
+                      : 2. sample book 2 (Cost: 10.90, Price: 12.99)        :
+                      : 3. sample book 3 (Cost: 10.90, Price: 12.99)        :
+                      : -----[sampleShelf3]-----:                           :
+                      : 1. sample item (Cost: 12.25, Price: 25)             :
                       : -----[soldItems]-----:                              :
                       : 1. Narnia (Cost: 17.40, Price: 25)                  :
                       : 2. The Lord of the Rings (Cost: 8.88, Price: 23.90) :
+                      : 3. sampleSoldItem1 (Cost: 17.40, Price: 25)         :
+                      : 4. sampleSoldItem2 (Cost: 8.88, Price: 23.90)       :
                       ..........................................................
-Total Purchase Cost: $ 26.28
-Total Selling Price: $ 48.90
-Total Profits: $ 22.62
+Total Purchase Cost: $ 52.56
+Total Selling Price: $ 97.80
+Total Profits: $ 45.24
 Gross Profit Margin (in percent): 46.00
                                   ...........................................
-                                  : Total Purchase Cost: $ 26.28            :
-                                  : Total Selling Price: $ 48.90            :
-                                  : Total Profits: $ 22.62                  :
+                                  : Total Purchase Cost: $ 52.56            :
+                                  : Total Selling Price: $ 97.80            :
+                                  : Total Profits: $ 45.24                  :
                                   : Gross Profit Margin (in percent): 46.00 :
                                   ..............................................
                       .......................................................
