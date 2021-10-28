@@ -6,7 +6,9 @@ import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
+//@@author yuejunfeng0909
 /**
  * Represents a collection of ItemContainers.
  * Provides methods to better manage ItemContainers.
@@ -44,6 +46,8 @@ public class ShelfList {
      */
     protected void addShelf(Shelf shelf) {
         shelves.add(shelf);
+        Comparator<Shelf> byName = (Shelf o1, Shelf o2) -> o1.getName().compareTo(o2.getName());
+        shelves.sort(byName);
     }
 
     /**
