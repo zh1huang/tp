@@ -477,6 +477,13 @@ public class Parser {
         return removeShelfCommand;
     }
 
+    /**
+     * Parses mark up command arguments.
+     *
+     * @param arguments The additional arguments after command word.
+     * @return MarkUpCommand object
+     * @throws IllegalFormatException If arguments do not follow input format specified
+     */
     private Command prepareMarkUp(String arguments) throws IllegalFormatException {
         final Matcher matcher = MARKUP_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format

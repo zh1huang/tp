@@ -87,6 +87,13 @@ public class SalesManager {
         return filteredSoldItems; //todo: check if can use arraylist here
     }
 
+    /**
+     * Filters the list of sold items for items in the specific month.
+     *
+     * @param selectedStartDate Starting year-month string
+     * @param dateTimeFormatter Defines DateTimeFormat to parse
+     * @return Arraylist of filtered sold items
+     */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
                                                                DateTimeFormatter dateTimeFormatter) {
 
@@ -102,6 +109,15 @@ public class SalesManager {
         return filteredSoldItems;
     }
 
+    /**
+     * Filters the list for items sold between the starting year-month to the ending year-month specified
+     * by the user.
+     *
+     * @param selectedStartDate Starting year-month string
+     * @param selectedEndDate Ending year-month string
+     * @param dateTimeFormatter Defines DateTimeFormat to parse
+     * @return Arraylist of filtered sold items
+     */
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
         String selectedEndDate, DateTimeFormatter dateTimeFormatter) {
 

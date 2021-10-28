@@ -137,30 +137,30 @@ Gross Profit Margin (in percent): 46.00
                                   : Total Profits: $ 22.62                  :
                                   : Gross Profit Margin (in percent): 46.00 :
                                   ..............................................
+                      .......................................................
+                      : Item: Three Little Pigs                             :
+                      : Cost: 10.90, Price: 12.99                           :
+                      : Amount Difference: 2.09                             :
+                      : Current Mark Up: 19%                                :
+                      : markup: 0%, increase: $0.00, Final price: $10.90    :
+                      : markup: 10%, increase: $1.09, Final price: $11.99   :
+                      : markup: 20%, increase: $2.18, Final price: $13.08   :
+                      : markup: 30%, increase: $3.27, Final price: $14.17   :
+                      : markup: 40%, increase: $4.36, Final price: $15.26   :
+                      : markup: 50%, increase: $5.45, Final price: $16.35   :
+                      : markup: 60%, increase: $6.54, Final price: $17.44   :
+                      : markup: 70%, increase: $7.63, Final price: $18.53   :
+                      : markup: 80%, increase: $8.72, Final price: $19.62   :
+                      : markup: 90%, increase: $9.81, Final price: $20.71   :
+                      : markup: 100%, increase: $10.90, Final price: $21.80 :
+                      ..........................................................
                      ........................................................
                      : Item: Three Little Pigs                              :
                      : Cost: 10.90, Price: 12.99                            :
                      : Amount Difference: 2.09                              :
-                     : Current % Mark Up: 19.17                             :
-                     : % markup: 0, $ increase: 0.00, Final price: 10.90    :
-                     : % markup: 10, $ increase: 1.090, Final price: 11.990 :
-                     : % markup: 20, $ increase: 2.180, Final price: 13.080 :
-                     : % markup: 30, $ increase: 3.270, Final price: 14.170 :
-                     : % markup: 40, $ increase: 4.360, Final price: 15.260 :
-                     : % markup: 50, $ increase: 5.450, Final price: 16.350 :
-                     : % markup: 60, $ increase: 6.540, Final price: 17.440 :
-                     : % markup: 70, $ increase: 7.630, Final price: 18.530 :
-                     : % markup: 80, $ increase: 8.720, Final price: 19.620 :
-                     : % markup: 90, $ increase: 9.810, Final price: 20.710 :
-                     : % markup: 100, $ increase: 10.90, Final price: 21.80 :
+                     : Current Mark Up: 19%                                 :
+                     : markup: 40.50%, increase: $4.41, Final price: $15.31 :
                      ...........................................................
-              ...............................................................
-              : Item: Three Little Pigs                                     :
-              : Cost: 10.90, Price: 12.99                                   :
-              : Amount Difference: 2.09                                     :
-              : Current % Mark Up: 19.17                                    :
-              : % markup: 40.50, $ increase: 4.41450, Final price: 15.31450 :
-              ..................................................................
                                                         .....................
                                                         : See you next time :
                                                         ........................

@@ -27,6 +27,12 @@ public class SalesReport {
         this.selectedEndDate = selectedEndDate;
     }
 
+    /**
+     * Generate a string to contain all sold item statistics.
+     *
+     * @return A String containing the sold items statistics
+     * @throws EmptyListException If the soldItems shelf does not contain items
+     */
     public String generateSoldItemStats() throws EmptyListException {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
@@ -53,6 +59,11 @@ public class SalesReport {
             decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
     }
 
+    /**
+     * Generate and gets every sold item details in the soldItems shelf.
+     *
+     * @return A String containing all sold item details
+     */
     public String generateSoldItemDetails() {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);

@@ -15,15 +15,17 @@ public class MarkUpCommand extends Command {
     private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final String ITEM_NAME_MESSAGE_FORMAT = "Item: %s\nCost: %s, Price: %s\n";
     private static final String CURRENT_ITEM_MARKUP_MESSAGE_FORMAT =
-        "Amount Difference: %s\nCurrent %% Mark Up: %s\n";
+        "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
     private static final String ESTIMATED_MARKUP_MESSAGE_FORMAT =
-        "%% markup: %s, $ increase: %s, Final price: %s\n";
-    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    public static final int FOUR_DECIMAL_POINT = 4;
+        "markup: %s%%, increase: $%s, Final price: $%s\n";
+    private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     public static final int INTEGER_TEN = 10;
     public static final int INTEGER_ELEVEN = 11;
-    public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: NOT recommended to set a percentage > 100 to $%s.\n"
-        + "This is to keep the price of the item resonable";
+    public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: "
+        + "NOT recommended to set a percentage > 100 to $%s.\n"
+        + "This is to keep the price of the item reasonable";
+    public static final int TWO_DECIMAL_POINTS = 2;
+    public static final int FOUR_DECIMAL_POINT = 4;
 
     private final String shelfName;
     private String itemName;
@@ -32,6 +34,13 @@ public class MarkUpCommand extends Command {
     private BigDecimal cost;
     private BigDecimal price;
 
+    /**
+     * MarkUpCommand constructor. Initialises shelf name, index, user requested percent for markup if not null.
+     *
+     * @param shelfName Name of shelf
+     * @param index index in shelf
+     * @param userRequestPercent user input percentage for markup
+     */
     public MarkUpCommand(String shelfName, String index, String userRequestPercent) {
         this.shelfName = shelfName;
         this.index = Integer.parseInt(index) - 1;
@@ -51,7 +60,7 @@ public class MarkUpCommand extends Command {
             String currentItemInfo = String.format(ITEM_NAME_MESSAGE_FORMAT, itemName, cost, price);
             resultString.append(currentItemInfo);
 
-            String currentItemMarkUpInfoString = getCurrentItemMarkUpInfo();
+            String currentItemMarkUpInfoString = getSelectedItemMarkUpInfo();
             resultString.append(currentItemMarkUpInfoString);
 
             if (userRequestPercent == null) {
@@ -80,25 +89,42 @@ public class MarkUpCommand extends Command {
         this.price = price.add(new BigDecimal(selectedItem.getSellingPrice()));
     }
 
+    /**
+     * Calculates the markup information based on the user requested markup percent.
+     * Shows a warning when user requests for a percent more than one hundred.
+     *
+     * @return String containing calculations for user requested markup percentage information.
+     */
     private String getUserRequestMarkUpInfo() {
-        String stringToAppend, warningString;
-        BigDecimal amountIncrease = userRequestPercent.divide(ONE_HUNDRED).multiply(cost);
+        BigDecimal amountIncrease = userRequestPercent
+            .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
+            .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);
         BigDecimal finalPrice = cost.add(amountIncrease);
 
-        stringToAppend = String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT, userRequestPercent, amountIncrease, finalPrice);
+        String stringToAppend = String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT,
+            userRequestPercent, amountIncrease, finalPrice);
+
         if (userRequestPercent.compareTo(ONE_HUNDRED) > 1) {
-            warningString = String.format(WARNING_LARGE_PERCENT_MESSAGE_FORMAT, finalPrice);
+            String warningString = String.format(WARNING_LARGE_PERCENT_MESSAGE_FORMAT, finalPrice);
             stringToAppend += warningString;
         }
 
         return stringToAppend;
     }
 
+    /**
+     * Calculates markup percentages in multiples of 10, along with the corresponding price increase
+     * final price.
+     *
+     * @return String containing the estimated markup information
+     */
     private String getEstimatedMarkUpInfo() {
         StringBuilder stringToAppend = new StringBuilder();
         for (int i = 0; i < INTEGER_ELEVEN; i++) {
             BigDecimal estimatePercentMarkUp = new BigDecimal(i).multiply(BigDecimal.valueOf(INTEGER_TEN));
-            BigDecimal amountIncrease = estimatePercentMarkUp.divide(ONE_HUNDRED).multiply(cost);
+            BigDecimal amountIncrease = estimatePercentMarkUp
+                .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
+                .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);
             BigDecimal finalPrice = cost.add(amountIncrease);
 
             stringToAppend.append(
@@ -108,11 +134,16 @@ public class MarkUpCommand extends Command {
         return stringToAppend.toString();
     }
 
-    private String getCurrentItemMarkUpInfo() {
+    /**
+     * Get the selected item markup information based on the current selling price.
+     *
+     * @return String containing the selected item markup information
+     */
+    private String getSelectedItemMarkUpInfo() {
         String stringToAppend;
         BigDecimal difference = price.subtract(cost);
         BigDecimal markUpPercent = difference
-            .divide(cost, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
+            .divide(cost, TWO_DECIMAL_POINTS, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
         stringToAppend = String.format(CURRENT_ITEM_MARKUP_MESSAGE_FORMAT,
             decimalFormat.format(difference), decimalFormat.format(markUpPercent));
