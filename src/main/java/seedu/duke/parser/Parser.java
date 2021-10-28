@@ -33,19 +33,6 @@ public class Parser {
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("n/(?<itemName>[^/]+)"
-            + " shlv/(?<shelfName>[^/]+)"
-            + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
-            //only accepts numbers or decimals in 1 or 2 d.p.
-            + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
-            //only accepts numbers or decimals in 1 or 2 d.p.
-            + " q/(?<quantity>[0-9]+)" // only accepts integers, no decimals
-            + "( r/(?<remarks>[^/]+))?$"); // optional argument
-
-    public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
-
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
 
@@ -76,9 +63,6 @@ public class Parser {
         Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
             + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
 
-    public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-        "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
-    public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "List [shlv/SHELF_NAME]";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
@@ -89,8 +73,6 @@ public class Parser {
     public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX";
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
 
-    public static final String ADD_STRING = "add";
-    public static final String DELETE_STRING = "delete";
     public static final String LIST_STRING = "list";
     public static final String GET_STRING = "get";
     public static final String EDIT_STRING = "edit";
@@ -107,9 +89,6 @@ public class Parser {
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
         "Input invalid command format.\nCorrect format: \n%s\n";
-    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
-        + "price: %s\nquantity: %s\nremarks: %s\n";
-    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
     public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
@@ -154,11 +133,11 @@ public class Parser {
         Command command;
 
         switch (commandWord) {
-        case ADD_STRING:
+        case AddCommand.ADD_STRING:
             command = prepareAdd(arguments);
             break;
 
-        case DELETE_STRING:
+        case DeleteCommand.DELETE_STRING:
             command = prepareDelete(arguments);
             break;
 
@@ -192,8 +171,10 @@ public class Parser {
 
         case REMOVE_STRING:
             return prepareRemoveShelf(arguments);
+
         case MARKUP_STRING:
             return prepareMarkUp(arguments);
+
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
@@ -209,12 +190,12 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
-        final Matcher matcher = ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = AddCommand.ADD_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Add Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ADD_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, AddCommand.ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String shelfName = matcher.group("shelfName");
@@ -244,12 +225,12 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
-        final Matcher matcher = DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DeleteCommand.DELETE_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Delete Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, DeleteCommand.DELETE_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
         String shelfName = matcher.group("shelfName");
