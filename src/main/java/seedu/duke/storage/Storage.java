@@ -17,8 +17,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+//@@author yuejunfeng0909
 public class Storage {
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private static final int JSON_INDENTATION_LEVEL = 4;
     public static String STORAGE_PATH = "data/Data.txt";
@@ -36,7 +41,12 @@ public class Storage {
         return singleStorageInstance;
     }
 
-    public void saveData() throws ShelfNotExistException, IOException {
+    /**
+     * Stores all data to STORAGE_PATH.
+     *
+     * @throws IOException if CLIverShelf do not have IO privileges
+     */
+    public void saveData() throws IOException {
         String nameOfAllShelves = shelfList.getAllShelvesName();
         JSONObject storedData = new JSONObject();
 
@@ -44,7 +54,14 @@ public class Storage {
             storedData = sampleData();
         } else {
             for (String nameOfShelf : nameOfAllShelves.split("\n")) {
-                Shelf currentShelf = shelfList.getShelf(nameOfShelf);
+                Shelf currentShelf = null;
+
+                try {
+                    currentShelf = shelfList.getShelf(nameOfShelf);
+                } catch (ShelfNotExistException e) {
+                    e.printStackTrace();
+                }
+
                 JSONObject shelfInfo = new JSONObject();
 
                 shelfInfo.put("remarks", currentShelf.getRemarks());
@@ -57,7 +74,7 @@ public class Storage {
                     itemDetail.put("cost", currentItem.getPurchaseCost());
                     itemDetail.put("price", currentItem.getSellingPrice());
                     itemDetail.put("remarks", currentItem.getRemarks());
-                    if (currentShelf.getName() == "soldItems") {
+                    if (currentShelf.getName().equals("soldItems")) {
                         itemDetail.put("saleTime", ((SoldItem) currentItem).getSaleTime());
                     }
                     itemsInShelf.put(Integer.toString(i), itemDetail);
@@ -77,6 +94,12 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Load data from STORAGE_PATH back to CLIverShelf.
+     *
+     * @throws IOException             if CLIverShelf do not have IO privileges
+     * @throws DataCorruptionException if the data in STORAGE_PATH is of incorrect format
+     */
     public void loadData()
             throws IOException, DataCorruptionException {
         File file = new File(STORAGE_PATH);
@@ -117,7 +140,7 @@ public class Storage {
                 }
                 JSONObject itemJson = itemsJson.getJSONObject(itemName);
                 Item item;
-                if (shelfName != "soldItems") {
+                if (!shelfName.equals("soldItems")) {
                     item = new Item(
                             itemJson.getString("name"),
                             itemJson.getString("cost"),
@@ -130,7 +153,7 @@ public class Storage {
                             itemJson.getString("cost"),
                             itemJson.getString("price"),
                             itemJson.getString("remarks"),
-                            LocalDateTime.parse(itemJson.get("saleTime").toString())
+                            LocalDateTime.parse(itemJson.getString("saleTime"))
                     );
                 }
                 currentShelf.addItem(item);

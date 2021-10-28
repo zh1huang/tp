@@ -14,7 +14,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Duke {
+public class CliverShelf {
     private static final String HELP_PROMPT_MESSAGE = "Enter 'help' for the list of available commands";
 
     /**
