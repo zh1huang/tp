@@ -33,18 +33,6 @@ public class Parser {
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
-
-    public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
-
-    public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+)"
-            + " i/(?<indexInShelf>[0-9]+)"
-            + " p/(?<property>(cost|price)+)"
-            + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
-
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
         Pattern.compile("t/(?<type>(stats|items))"
             + " ym/(?<startYearMonth>[0-9]{4}-[0-9]{2})"
@@ -63,19 +51,12 @@ public class Parser {
         Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
             + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
 
-    public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "List [shlv/SHELF_NAME]";
-    public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
-    public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
-        "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
     public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]";
     public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
     public static final String SELL_DATA_ARGS_FORMAT_STRING = "Sell shlv/SHELF_NAME i/INDEX";
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
 
-    public static final String LIST_STRING = "list";
-    public static final String GET_STRING = "get";
-    public static final String EDIT_STRING = "edit";
     public static final String BYE_STRING = "bye";
     public static final String HELP_STRING = "help";
     public static final String REPORT_STRING = "report";
@@ -89,10 +70,6 @@ public class Parser {
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
         "Input invalid command format.\nCorrect format: \n%s\n";
-    public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
-    public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
-    public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
-        "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
     public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\nstart date: %s\nend date: %s\n";
     public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
@@ -141,15 +118,15 @@ public class Parser {
             command = prepareDelete(arguments);
             break;
 
-        case LIST_STRING:
+        case ListCommand.LIST_STRING:
             command = prepareList(arguments);
             break;
 
-        case GET_STRING:
+        case GetCommand.GET_STRING:
             command = prepareGet(arguments);
             break;
 
-        case EDIT_STRING:
+        case EditCommand.EDIT_STRING:
             command = prepareEdit(arguments);
             break;
 
@@ -250,12 +227,12 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
-        final Matcher matcher = LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = ListCommand.LIST_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match List Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, LIST_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ListCommand.LIST_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
         String shelfName = matcher.group("shelfName");
@@ -280,12 +257,12 @@ public class Parser {
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareGet(String arguments) throws IllegalFormatException {
-        final Matcher matcher = GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = GetCommand.GET_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Get Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GET_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, GetCommand.GET_ITEM_DATA_ARGS_FORMAT_STRING));
         }
 
         String shelfName = matcher.group("shelfName");
@@ -308,12 +285,12 @@ public class Parser {
      */
     private Command prepareEdit(String arguments) throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
-        final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = EditCommand.EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Edit Command Format");
             throw new IllegalFormatException(String.format(
-                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
+                CORRECT_COMMAND_MESSAGE_STRING_FORMAT, EditCommand.EDIT_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
