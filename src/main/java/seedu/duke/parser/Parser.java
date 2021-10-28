@@ -218,10 +218,10 @@ public class Parser {
         Command addCommand;
         if (remarks == null) {
             addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
-                    quantity, shelfName, "");
+                quantity, shelfName, "");
         } else {
             addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
-                    quantity, shelfName, remarks);
+                quantity, shelfName, remarks);
         }
         assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
         logger.log(Level.INFO, "AddCommand parse success.");
@@ -274,7 +274,7 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
 
         Command listCommand;
-        if (shelfName==null) {
+        if (shelfName == null) {
             listCommand = new ListCommand();
         } else {
             listCommand = new ListCommand(shelfName);
@@ -322,8 +322,8 @@ public class Parser {
      * @throws NoPropertyFoundException If the associated item property cannot be found
      */
     private Command prepareEdit(String arguments) throws IllegalFormatException,
-    //private Command prepareEdit(String arguments, Shelf shelf) throws IllegalFormatException,
-            ItemNotExistException, NoPropertyFoundException {
+        //private Command prepareEdit(String arguments, Shelf shelf) throws IllegalFormatException,
+        ItemNotExistException, NoPropertyFoundException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -337,7 +337,7 @@ public class Parser {
         String newValue = matcher.group("value");
 
         Command editCommand = new EditCommand(shelfName, indexInShelf,
-                selectedProperty, newValue);
+            selectedProperty, newValue);
         assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
         return editCommand;
@@ -419,7 +419,7 @@ public class Parser {
 
         Command sellCommand = new SellCommand(shelfName, indexInShelf);
         assert sellCommand.getClass() == SellCommand.class :
-                "report should return createShelfCommand\n";
+            "report should return createShelfCommand\n";
         logger.log(Level.INFO, "SellCommand parse success.");
         return sellCommand;
     }
@@ -444,7 +444,7 @@ public class Parser {
 
         Command createShelfCommand = new CreateShelfCommand(shelfName);
         assert createShelfCommand.getClass() == CreateShelfCommand.class :
-                "report should return createShelfCommand\n";
+            "report should return createShelfCommand\n";
         logger.log(Level.INFO, "CreateShelfCommand parse success.");
         return createShelfCommand;
     }
@@ -469,7 +469,7 @@ public class Parser {
 
         Command removeShelfCommand = new RemoveShelfCommand(shelfName);
         assert removeShelfCommand.getClass() == RemoveShelfCommand.class :
-                "remove should return removeShelfCommand\n";
+            "remove should return removeShelfCommand\n";
         logger.log(Level.INFO, "RemoveShelfCommand parse success.");
         return removeShelfCommand;
     }

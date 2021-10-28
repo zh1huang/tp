@@ -127,14 +127,16 @@ This item has been sold.
                       : 1. Narnia (Cost: 17.40, Price: 25)                  :
                       : 2. The Lord of the Rings (Cost: 8.88, Price: 23.90) :
                       ..........................................................
-Total Purchase Cost: 26.28
-Total Selling Price: 48.90
-Total Profits: 22.62
-                                               ..............................
-                                               : Total Purchase Cost: 26.28 :
-                                               : Total Selling Price: 48.90 :
-                                               : Total Profits: 22.62       :
-                                               .................................
+Total Purchase Cost: $ 26.28
+Total Selling Price: $ 48.90
+Total Profits: $ 22.62
+Gross Profit Margin (in percent): 46.00
+                                  ...........................................
+                                  : Total Purchase Cost: $ 26.28            :
+                                  : Total Selling Price: $ 48.90            :
+                                  : Total Profits: $ 22.62                  :
+                                  : Gross Profit Margin (in percent): 46.00 :
+                                  ..............................................
                                                         .....................
                                                         : See you next time :
                                                         ........................
