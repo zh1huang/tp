@@ -12,7 +12,8 @@ for /f "tokens=*" %%a in (
     set jarloc=%%a
 )
 
-rmdir ..\..\text-ui-test\data
+del /f ..\..\text-ui-test\data
+copy ..\..\text-ui-test\sampledata\Data.txt ..\..\text-ui-test\data
 java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUAL.TXT
 
 cd ..\..\text-ui-test
