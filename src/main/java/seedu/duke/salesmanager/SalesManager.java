@@ -4,9 +4,9 @@ import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.command.exception.IllegalArgumentException;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
@@ -74,7 +74,8 @@ public class SalesManager {
      * @param selectedStartDate the target date
      * @return an ArrayList of SoldItems
      */
-    public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate) throws IllegalArgumentException {
+    public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate)
+        throws IllegalArgumentException {
         ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
@@ -101,7 +102,7 @@ public class SalesManager {
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
         try {
             yearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
-        } catch ( DateTimeParseException e ) {
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid Year Month");
         }
 
@@ -120,12 +121,13 @@ public class SalesManager {
      * by the user.
      *
      * @param selectedStartDate Starting year-month string
-     * @param selectedEndDate Ending year-month string
+     * @param selectedEndDate   Ending year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
-        String selectedEndDate, DateTimeFormatter dateTimeFormatter) throws IllegalArgumentException {
+        String selectedEndDate, DateTimeFormatter dateTimeFormatter)
+        throws IllegalArgumentException {
         YearMonth startYearMonthToSearch;
         YearMonth endYearMonthToSearch;
 
@@ -133,9 +135,10 @@ public class SalesManager {
         try {
             startYearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
             endYearMonthToSearch = YearMonth.parse(selectedEndDate, dateTimeFormatter);
-        } catch ( DateTimeParseException e ) {
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid Year Month");
         }
+
         for (int i = 0; i < soldItems.getSize(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());

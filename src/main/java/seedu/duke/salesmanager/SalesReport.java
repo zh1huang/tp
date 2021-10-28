@@ -1,11 +1,11 @@
 package seedu.duke.salesmanager;
 
-import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.salesmanager.exception.EmptyListException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.command.exception.IllegalArgumentException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -34,7 +34,8 @@ public class SalesReport {
      * @return A String containing the sold items statistics
      * @throws EmptyListException If the soldItems shelf does not contain items
      */
-    public String generateSoldItemStats() throws EmptyListException, IllegalArgumentException {
+    public String generateSoldItemStats()
+        throws EmptyListException, IllegalArgumentException {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;

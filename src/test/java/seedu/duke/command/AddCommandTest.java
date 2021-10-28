@@ -27,7 +27,8 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_emptyList_addsNormally() throws CommandException, ShelfNotExistException {
+    public void execute_emptyList_addsNormally() throws CommandException, ShelfNotExistException,
+        seedu.duke.model.exception.IllegalArgumentException {
         testCommand1 = new AddCommand("HarryPotter", "16.1",
                 "25.12", "1", "test", "");
         int numberOfItemsBeforeAdding = testList.getSize();
@@ -38,7 +39,8 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_itemsWithSameNameInList_addsNormally() throws CommandException, ShelfNotExistException {
+    public void execute_itemsWithSameNameInList_addsNormally() throws CommandException,
+        ShelfNotExistException, seedu.duke.model.exception.IllegalArgumentException {
         testCommand1 = new AddCommand("HarryPotter", "16.1",
                 "25.12", "1", "test", "");
         int numberOfItemsBeforeAdding = testList.getSize();

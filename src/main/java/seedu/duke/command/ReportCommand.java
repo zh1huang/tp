@@ -1,9 +1,9 @@
 package seedu.duke.command;
 
 import seedu.duke.command.exception.NoTypeFoundException;
-import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.salesmanager.SalesReport;
 import seedu.duke.command.exception.EmptyListException;
+import seedu.duke.command.exception.IllegalArgumentException;
 
 import java.util.Arrays;
 import java.util.logging.Level;
