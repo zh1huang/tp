@@ -10,11 +10,17 @@ import seedu.duke.model.ShelfList;
 import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * The command that adds a new item to the list.
  */
 public class AddCommand extends Command {
+    public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
+        "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
+    public static final String ADD_STRING = "add";
+    public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
+        + "price: %s\nquantity: %s\nremarks: %s\n";
     private static final String ADD_COMPLETE_MESSAGE_SINGLE =
             "This item has been added to the list.";
     private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =

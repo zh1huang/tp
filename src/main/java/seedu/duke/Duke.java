@@ -31,14 +31,15 @@ public class Duke {
         MessageBubble.printMessageBubble(HELP_PROMPT_MESSAGE);
         String input;
         Parser parser = new Parser();
-        Shelf warehouse = new Shelf("anotherwarehouse"); //place holder
+        // Shelf warehouse = new Shelf("anotherwarehouse"); //place holder
         boolean isExit = false;
         while (!isExit) {
             input = in.nextLine();
             try {
-                Command command = parser.parseCommand(input, warehouse);
-                command.execute(); // todo remove execute input argument because unnecessary.
-                // isExit = command.isExit();
+                Command command = parser.parseCommand(input);
+                String resultString = command.execute(); // todo remove execute input argument because unnecessary.
+                isExit = command.isExit();
+                MessageBubble.printMessageBubble(resultString);
             } catch (Exception e) {
                 MessageBubble.printMessageBubble(e.getMessage());
             }

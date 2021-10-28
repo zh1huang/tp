@@ -11,12 +11,18 @@ import seedu.duke.model.ShelfList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * The command that edits a selected item.
  */
 public class EditCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
+    public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
+        "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
+    public static final String EDIT_STRING = "edit";
+    public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
+        "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
     private final String shelfName;
     private final int index;
     private final String selectedProperty;

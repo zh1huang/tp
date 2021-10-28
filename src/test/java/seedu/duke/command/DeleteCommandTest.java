@@ -38,7 +38,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_oneItemAlreadyInList_deletesNormally()
-            throws CommandException, DuplicateItemException, ShelfNotExistException {
+        throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalArgumentException {
 
         testList.addItem(testItem1);
         int numberOfItemsBeforeDeleting = testList.getSize();
@@ -56,7 +56,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_itemsWithSameNameInList_deletesNormally()
-            throws CommandException, DuplicateItemException, ShelfNotExistException {
+        throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalArgumentException {
 
         testList.addItem(testItem1);
         testList.addItem(testItem2);
