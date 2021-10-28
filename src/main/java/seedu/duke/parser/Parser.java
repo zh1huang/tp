@@ -488,9 +488,9 @@ public class Parser {
 
         String shelfName = matcher.group("shelfName");
         String indexInShelf = matcher.group("indexInShelf");
-        String percent = matcher.group("percent");
+        String userRequestPercent = matcher.group("percent");
 
-        Command markUpCommand = new MarkUpCommand(shelfName, indexInShelf, percent);
+        Command markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
         assert markUpCommand.getClass() == MarkUpCommand.class :
             "report should return MarkUpCommand\n";
         logger.log(Level.INFO, "MarkUpCommand parse success.");

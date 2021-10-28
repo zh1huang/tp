@@ -22,19 +22,21 @@ public class MarkUpCommand extends Command {
     public static final int FOUR_DECIMAL_POINT = 4;
     public static final int INTEGER_TEN = 10;
     public static final int INTEGER_ELEVEN = 11;
+    public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: NOT recommended to set a percentage > 100 to $%s.\n"
+        + "This is to keep the price of the item resonable";
 
     private final String shelfName;
     private String itemName;
     private final int index;
-    private BigDecimal percent;
+    private BigDecimal userRequestPercent;
     private BigDecimal cost;
     private BigDecimal price;
 
-    public MarkUpCommand(String shelfName, String index, String percent) {
+    public MarkUpCommand(String shelfName, String index, String userRequestPercent) {
         this.shelfName = shelfName;
         this.index = Integer.parseInt(index) - 1;
-        if (percent != null) {
-            this.percent = new BigDecimal(percent);
+        if (userRequestPercent != null) {
+            this.userRequestPercent = new BigDecimal(userRequestPercent);
         }
         this.cost = BigDecimal.ZERO;
         this.price = BigDecimal.ZERO;
@@ -52,7 +54,7 @@ public class MarkUpCommand extends Command {
             String currentItemMarkUpInfoString = getCurrentItemMarkUpInfo();
             resultString.append(currentItemMarkUpInfoString);
 
-            if (percent == null) {
+            if (userRequestPercent == null) {
                 String getEstimatedMarkUpInfoString = getEstimatedMarkUpInfo();
                 resultString.append(getEstimatedMarkUpInfoString);
             } else {
@@ -79,11 +81,16 @@ public class MarkUpCommand extends Command {
     }
 
     private String getUserRequestMarkUpInfo() {
-        String stringToAppend;
-        BigDecimal amountIncrease = percent.divide(ONE_HUNDRED).multiply(cost);
+        String stringToAppend, warningString;
+        BigDecimal amountIncrease = userRequestPercent.divide(ONE_HUNDRED).multiply(cost);
         BigDecimal finalPrice = cost.add(amountIncrease);
 
-        stringToAppend = String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT, percent, amountIncrease, finalPrice);
+        stringToAppend = String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT, userRequestPercent, amountIncrease, finalPrice);
+        if (userRequestPercent.compareTo(ONE_HUNDRED) > 1) {
+            warningString = String.format(WARNING_LARGE_PERCENT_MESSAGE_FORMAT, finalPrice);
+            stringToAppend += warningString;
+        }
+
         return stringToAppend;
     }
 
