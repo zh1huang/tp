@@ -52,7 +52,6 @@ public class DeleteCommand extends Command {
             int sizeAfterDeleting = selectedShelf.getSize();
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
                     "After deleting an item the list size should decrease by 1";
-            System.out.println(DELETE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "DeleteCommand successfully executed.");
             return DELETE_COMPLETE_MESSAGE;
         } catch (seedu.duke.model.exception.ItemNotExistException e) {

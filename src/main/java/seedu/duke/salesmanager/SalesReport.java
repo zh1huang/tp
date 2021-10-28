@@ -53,9 +53,6 @@ public class SalesReport {
         BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, 2,
             RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
-        System.out.println(String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
-            decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
-            decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin)));
         return String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
             decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
             decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));

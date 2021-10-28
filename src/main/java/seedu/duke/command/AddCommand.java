@@ -73,7 +73,6 @@ public class AddCommand extends Command {
                 int sizeAfterAdding = selectedShelf.getSize();
                 assert sizeBeforeAdding + 1 == sizeAfterAdding :
                         "After adding an item the list size should increase by 1";
-                System.out.println(ADD_COMPLETE_MESSAGE_SINGLE);
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }
             boolean hasNegativeProfit = (new BigDecimal(sellingPrice).compareTo(new BigDecimal(purchaseCost)) == -1);

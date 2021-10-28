@@ -79,7 +79,6 @@ public class EditCommand extends Command {
             int sizeAfterEditing = selectedShelf.getSize();
             assert sizeBeforeEditing == sizeAfterEditing :
                     "After editing an item the list size should remain unchanged";
-            System.out.println(UPDATE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "EditCommand successfully executed.");
             return UPDATE_COMPLETE_MESSAGE;
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {

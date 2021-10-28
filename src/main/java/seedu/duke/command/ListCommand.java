@@ -60,7 +60,6 @@ public class ListCommand extends Command {
                     throw new EmptyListException(EMPTY_LIST_MESSAGE);
                 }
 
-                System.out.print(LIST_COMPLETE_MESSAGE);
                 output = getList(selectedShelf);
 
             } catch (seedu.duke.model.exception.ShelfNotExistException e) {
