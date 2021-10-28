@@ -3,55 +3,70 @@ package seedu.duke.command;
 import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class GetCommand extends Command {
 
-    private final String name;
+    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
+    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nRemarks:%s";
+    public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
+    public static final String GET_STRING = "get";
+    public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
+    private final int index;
+    private final String shelfName;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item\n";
+    private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
 
     /**
      * Constructor for GetCommand.
      *
-     * @param name the name of selected item
+     * @param shelfName the name of selected shelf
      */
-    public GetCommand(String name) {
-        this.name = name;
+    public GetCommand(String shelfName, String index) {
+        this.index = Integer.parseInt(index) - 1;
+        this.shelfName = shelfName;
     }
 
     /**
-     * Retrieves information of item from shelf.
+     * Executes the get command.
      *
-     * @param shelf the Shelf in which information of item is retrieved
-     * @return information of item
-     * @throws ItemNotExistException if specified item does not exist
+     * @return Message string to be passed to UI
+     * @throws ShelfNotExistException If the Shelf is not in the ShelfList
+     * @throws ItemNotExistException If empty does not exist in the shelf
      */
-    private String getInfo(Shelf shelf) throws ItemNotExistException {
+    public String execute() throws ShelfNotExistException, ItemNotExistException {
+        String output = "";
         try {
-            int initialSize = shelf.getSize();
-            Item selectedItem = shelf.getItem(name);
-            assert initialSize == shelf.getSize();
-            return "name: " + selectedItem.getName() + "\nselling price: " + selectedItem.getSellingPrice()
-                    + "\npurchase cost: " + selectedItem.getPurchaseCost();
-        } catch (seedu.duke.model.exception.ItemNotExistException e) {
-            logger.log(Level.WARNING, "GetCommand failed to execute because item not in shelf");
-            throw new ItemNotExistException(e.getMessage());
-        }
-    }
+            Shelf selectedShelf = ShelfList
+                    .getShelfList()
+                    .getShelf(shelfName);
+            int initialSize = selectedShelf.getSize();
+            Item selectedItem = selectedShelf.getItem(index);
+            assert initialSize == selectedShelf.getSize()
+                    : "After getting the list size should remain constant";
 
-    /**
-     * Executes the operation of retrieving information of specified item.
-     *
-     * @param shelf the Shelf that manipulates the item
-     * @throws ItemNotExistException if specified item does not exist
-     */
-    public void execute(Shelf shelf) throws ItemNotExistException {
-        String info = getInfo(shelf);
-        System.out.println(GET_COMPLETE_MESSAGE + info);
+            String name = selectedItem.getName();
+            String cost = selectedItem.getPurchaseCost();
+            String price = selectedItem.getSellingPrice();
+            String remarks = selectedItem.getRemarks();
+
+            output = String.format(GET_OUTPUT, name, cost, price, remarks);
+            logger.log(Level.INFO, "GetCommand successfully executed");
+        } catch (seedu.duke.model.exception.ShelfNotExistException e) {
+            logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
+            throw new ShelfNotExistException(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "GetCommand failed to execute because item not in shelf");
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
+        }
+
         logger.log(Level.INFO, "GetCommand successfully executed");
+        return GET_COMPLETE_MESSAGE + output;
     }
 
     @Override
@@ -67,6 +82,6 @@ public class GetCommand extends Command {
         }
 
         GetCommand command = (GetCommand) other;
-        return name.equals(command.name);
+        return shelfName.equals(command.shelfName);
     }
 }

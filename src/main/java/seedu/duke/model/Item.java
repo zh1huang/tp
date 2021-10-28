@@ -21,6 +21,7 @@ public class Item {
     private String name;
     private BigDecimal purchaseCost;
     private BigDecimal sellingPrice;
+    private String remark;
 
     /**
      * Constructor for Item class.
@@ -34,10 +35,11 @@ public class Item {
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
 
-    public Item(String name, String cost, String price) throws IllegalArgumentException {
+    public Item(String name, String cost, String price, String remarks) throws IllegalArgumentException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
+        setRemarks("");
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
@@ -93,6 +95,18 @@ public class Item {
     public void setSellingPrice(String price) throws IllegalArgumentException {
         sellingPrice = convert2BD_NonNegative(price);
         logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), price));
+    }
+
+    public String getRemarks() {
+        return remark;
+    }
+
+    public void setRemarks(String newRemark) {
+        if (newRemark.isBlank()) {
+            remark = " ";
+        } else {
+            remark = newRemark;
+        }
     }
 
     private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentException {

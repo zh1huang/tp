@@ -1,23 +1,126 @@
 # Developer Guide
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Setting up](#setting-up)
+3. [Acknowledgements](#acknowledgements)
+4. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI Component](#ui-component)
+   3. [Logic Component](#logic-component)
+   4. [Model Component](#model-component)
+   5. [Storage Component](#storage-component)
+5. [Implementation](#implementation)
+   1. [Adding an item](#adding-an-item)
+   2. [Editing an item](#editing-an-item)
+   3. [Listing all items](#listing-all-items)
+   4. [Getting an item](#getting-an-item)
+   5. [Selling an item](#selling-an-item)
+   6. [Generating sales report](#generating-sales-report)
+   7. [Getting help](#getting-help)
+   8. [Exiting the program](#editing-an-item)
+6. [Product Scope](#product-scope)
+7. [User stories](#user-stories)
+8. [Non-Functional Requirements](#non-functional-requirements)
+9. [Glossary](#glossary)
+10. [Instructions for manual testing](#instructions-for-manual-testing)
+
+___
+
+## Introduction
+**Welcome to CLIver Shelf!**
+
+**CLIver Shelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. 
+With **CLIver Shelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that they know how well their business is going. 
+
+This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is to get developers 
+and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
+
+___
+## Setting up
+**Pre-requisites**
+1. JDK 11
+2. IntelliJ IDEA IDE
+
+**Setting up the Project in Your Computer**
+1. Fork [this repository](https://github.com/AY2122S1-CS2113T-F11-4/tp), and clone the fork to your computer.
+2. Open up IntelliJ. If you are not at the welcome screen, click `File` > `Close Project` to close any existing project
+3. Set up the correct JDK version for Gradle
+   1. Click `File` > `New Project Setup` > `Structure`, and ensure `Project SDK` is using `JDK 11`. Click `OK`
+4. Import the project
+   1. Click `File` > `Open Project`
+   2. Select the project directory, and click `OK` to accept the default settings
+5. Verify the setup: After the importing is complete, locate `Duke.java` file, right-click it and `Run 'Duke.main()'`. If the setup is correct, you should see something like this:
+```
+> Task :compileJava UP-TO-DATE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+
+> Task :Duke.main()
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+What is your name?
+```
+___
 ## Acknowledgements
+1. [addressbook-level3](https://se-education.org/addressbook-level3/)
+2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
+___
+## Design
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
-## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ### Architecture
+![](diagrams/seedu_duke_architecture.svg)
+The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
-{Illustrate overall how the different component in the system interacts with each other.}
+1. `Main` Responsible for initializing the various components and connecting them up with one another at app launch.  
+2. `UI`: Handles the interactions with the user. 
+3. `Logic`: Parses and executes the user input commands.
+4. `Model`: Holds the data of the App in memory
+5. `Storage`: Reads data from, and writes data to, the hard disk.
+
+
+### General Program Flow
+
+1. User runs the programs & input user commands
+2. `Main` calls `Parser` to `parseCommand()`
+3. `Parser` returns a `Command` object when parsed successful
+4. `Main` calls `Command` object to `execute()`, and returning a `resultString`
+5. `Main` instantiates `UI` component to print the `resultString`
+
+![](diagrams/GeneralProgramFlowSequenceDiagram.png)
 
 ### UI component
 
-{Illustrate how the UI package work.}
+The `UI` component is responsible for all the user inputs and system outputs. It is in charge of the display of success command executions, error messages and also user interactions by prompting for the next command.
+
+The class diagram below shows the associations between classes of the UI components
+
+![](diagrams/seedu_duke_ui.svg)
+
+The `UI` component is made up of 2 classes:
+* `MessageBubble`: Responsible for the display of messages
+* `PredefinedMessages`: Holds the messages required for MessageBubble to print to console.
 
 ### Logic component
+
+The class diagram below shows the associations between the classes that make up the `Logic` component.
+
+![](diagrams/seedu_duke_logic_component.svg)
+
+The `Logic` component consists of `Parser` and `Command` components. 
+1. After user enters input, `UI` fetches and passes it to Parser for parsing.
+2. Parser then returns a `Command` object, which is then executed.
+3. The command execution directly affects the objects in the `Model` component.
+4. After execution, `Command` instructs the `UI` component to print out relevant output messages (e.g successful command execution or error messages)
+5. `Command` then checks the `ExitCommand` on whether the program should exit.
+6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
 ![](diagrams/seedu_duke_logic.drawio.svg)
 
@@ -25,7 +128,16 @@ original source as well}
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
    
-2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+   1. When user enters a command into the terminal, upon submission, the `Main` program receives the input line and calls the `Parser` to `parseCommand()`
+   2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
+   3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`, `DELETE_STRING` shown in the diagram below.
+   4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute the `prepare{commandWord}()` function of the `Parser`
+      1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
+   5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `Main` component
+   
+![](diagrams/ParserClassDiagram.png)
+
+3. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
@@ -54,14 +166,58 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 
 ![](diagrams/seedu_duke_model_newshelf.drawio.svg)
 ### Storage component
+The storage component consists of `Storage` class. It handles the saving of user data by the command component and also loading data on program start up.
+___
+## Implementation
 
+### Adding an item
+
+
+#### Design considerations:
+* Aspect: Long chain for add command
+   * Alternative 1 (current choice): Long command with chain of flags such `/n` for name and `/q` for quantity.
+      * Pros: Clear demarcation of different parameters that users have to input.
+      * Cons: Susceptible to errors as users might miss out some flags.
+   * Alternative 2: No flags required for each parameter.
+      * Pros: Shorter command length, less prone to errors.
+      * Cons: Increased difficulty in parsing and higher chance to encounter exceptions or errors.
+   * Alternative 3: Prompt for different inputs for each parameter after pressing `enter`
+     * Pros: Even less prone to human errors as the user is prompted what is required as input each time.
+     * Cons: Additional methods and passing of data will be required. 
+
+### Editing an item
+
+#### Design considerations:
+
+### Listing all items
+
+#### Design considerations:
+
+### Getting an item
+
+#### Design considerations:
+
+### Selling an item
+
+#### Design considerations:
+
+### Generating sales report
+
+#### Design considerations:
+
+### Getting help
+
+### Exiting the program
+
+
+___
 ## Product scope
 
 ### Target user profile
 
 * has a need to manage inventories & finances of small scaled book stores
 * prefers to operate the store by themselves without additional hires
-* prefers typing over clicking on GUI applications
+* prefers typing to clicking on GUI applications
 * ability to type fast
 * comfortable with command line applications
 * does not mind the plain output from command line applications
@@ -69,7 +225,7 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 ### Value proposition
 
 Allows efficient and simplified management of inventory and finances of the store
-
+___
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -86,15 +242,102 @@ Allows efficient and simplified management of inventory and finances of the stor
 |v2.0|user|add the total cost of all the items|know the total cost and deduct from revenue to find profit|
 |v2.0|user|view the monthly sales report|know if I am making a profit|
 
-
+___
 ## Non-Functional Requirements
-
-{Give non-functional requirements}
+1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
+2. Users with fast typing speed should be able to accomplish tasks faster using commands than using the mouse
+3. Users should be able to easily understand the command formats in the User Guide and use the commands to accomplish the tasks.
+4. Users should be able to see improvements in terms of the efficiency and management of the bookstore within a months of using the app.
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS* - MacOS, Windows, Linux, Unix
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are the instructions to test the app manually.
+
+:information_source: **Note:** These instructions only provide a base of how the app is currently being tested by the 
+developing team. These test cases may and may not cover all possible outcomes. You are welcome to do more exploratory testing. 
+Should there be any bugs, please do contact 
+the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
+
+### Launch and shut down
+
+#### Initial launch
+1. Download and save the latest JAR file in a desired file directory.
+2. Open up your terminal and navigate to where that directory is saved.
+3. Run `java -jar Duke.jar` to launch the program. 
+4. A `data` folder containing `output.txt` is expected to appear.
+
+#### Subsequent launch
+1. Open up your terminal and navigate to where the directory in which the JAR file is saved under.
+2. Run `java -jar Duke.jar` to launch the program.
+3. Data will be automatically saved into the data file.
+
+#### Shut down
+1. To terminate the program, type `bye`.
+2. Data will be automatically saved into the data file.
+3. The data is expected to still be saved normally even if program crashes.
+
+### Getting help
+1. To get help information, type `help`.
+
+### Creating a shelf
+1. To create a shelf with a unique name that does not exit before in the shelf list.
+   1. Pre-requisites shelf name `Book1` does not previously exist. The user may check by doing a `list`.
+   2. Test case 1: `create shlv/Book1`
+      Expected: Shelf name `Book1` will be created.
+
+   3. Test case 2: `create shlv/Book1`
+      Expected: DuplicateShelfException thrown, details will be shown in the output. No shelf name `Book1` is created again, since the shelf name already exists. 
+
+   4. Test case 3: User inputs with the incorrect format such as `create`, `create shlv/`, `create sh`, `create shlv/Book2 shlv/Pencil1` 
+      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
+
+### Removing a shelf
+
+### Adding an item
+
+### Deleting an item
+
+### Getting information of an item
+
+### Listing the items
+
+### Editing an item
+
+### Getting a Report
+1. Getting a sales statistic report when there are already items sold
+   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
+   2. Test case: `report t/stats` 
+      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales from the beginning of time.
+   3. Test case: `report t/stats ym/2021-09`
+      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales in the months of september in year 2021.
+   4. Test case: `report t/stats ym/0000-26`
+      Expected: Shows an exception message where the time range is not correct. 
+   
+2. Getting a sales items report when there are already items sold
+   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
+   2. Test case: `report t/items`
+      Expected: Shows a report of the items detail of the sales from the beginning of time.
+   3. Test case: `report t/items ym/2021-07`
+      Expected: Shows a report of the items detail of the sales in the months of July in year 2021.
+   4. Test case: `report t/stats ym/0600-33`
+      Expected: Shows an exception message where the time range is not correct.
+
+3. Getting a report when none of the items are sold
+   1. Pre-requisite: `list shlv/soldItems` to check that there does **not** exist a shelf name sold items
+   2. Test case: `report t/stats` 
+      Expected: Shows a message none of the items have been sold to generate the statistics report
+   3. Test case: `report t/items`
+      Expected: Shows a message none of the items have been sold to generate the items report
+
+4. Getting a sales report but the user input format is wrong
+   1. Test case with wrong input formats 
+      1. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
+      2. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
+      3. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
+      Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
+
+### Selling an item
