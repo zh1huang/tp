@@ -3,9 +3,14 @@ package seedu.duke.command;
 import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.ShelfList;
 
+import java.util.regex.Pattern;
+
 public class RemoveShelfCommand extends Command {
-    private static final String CREATE_COMPLETE_MESSAGE =
-            "This shelf has been created.";
+    public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
+    public static final String REMOVE_STRING = "remove";
+    public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
+    private static final String REMOVE_COMPLETE_MESSAGE =
+            "This shelf %s has been deleted.";
     private final String shelfName;
 
     public RemoveShelfCommand(String shelfName) {
@@ -16,7 +21,7 @@ public class RemoveShelfCommand extends Command {
     public String execute() throws ShelfNotExistException {
         try {
             ShelfList.getShelfList().deleteShelf(shelfName);
-            return CREATE_COMPLETE_MESSAGE;
+            return String.format(REMOVE_COMPLETE_MESSAGE, shelfName);
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             throw new ShelfNotExistException(e.getMessage());
         }

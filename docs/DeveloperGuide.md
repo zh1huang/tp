@@ -255,7 +255,12 @@ ___
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are the instructions to test the app manually.
+
+:information_source: **Note:** These instructions only provide a base of how the app is currently being tested by the 
+developing team. These test cases may and may not cover all possible outcomes. You are welcome to do more exploratory testing. 
+Should there be any bugs, please do contact 
+the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 ### Launch and shut down
 
@@ -275,6 +280,23 @@ ___
 2. Data will be automatically saved into the data file.
 3. The data is expected to still be saved normally even if program crashes.
 
+### Getting help
+1. To get help information, type `help`.
+
+### Creating a shelf
+1. To create a shelf with a unique name that does not exit before in the shelf list.
+   1. Pre-requisites shelf name `Book1` does not previously exist. The user may check by doing a `list`.
+   2. Test case 1: `create shlv/Book1`
+      Expected: Shelf name `Book1` will be created.
+
+   3. Test case 2: `create shlv/Book1`
+      Expected: DuplicateShelfException thrown, details will be shown in the output. No shelf name `Book1` is created again, since the shelf name already exists. 
+
+   4. Test case 3: User inputs with the incorrect format such as `create`, `create shlv/`, `create sh`, `create shlv/Book2 shlv/Pencil1` 
+      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
+
+### Removing a shelf
+
 ### Adding an item
 
 ### Deleting an item
@@ -284,3 +306,38 @@ ___
 ### Listing the items
 
 ### Editing an item
+
+### Getting a Report
+1. Getting a sales statistic report when there are already items sold
+   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
+   2. Test case: `report t/stats` 
+      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales from the beginning of time.
+   3. Test case: `report t/stats ym/2021-09`
+      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales in the months of september in year 2021.
+   4. Test case: `report t/stats ym/0000-26`
+      Expected: Shows an exception message where the time range is not correct. 
+   
+2. Getting a sales items report when there are already items sold
+   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
+   2. Test case: `report t/items`
+      Expected: Shows a report of the items detail of the sales from the beginning of time.
+   3. Test case: `report t/items ym/2021-07`
+      Expected: Shows a report of the items detail of the sales in the months of July in year 2021.
+   4. Test case: `report t/stats ym/0600-33`
+      Expected: Shows an exception message where the time range is not correct.
+
+3. Getting a report when none of the items are sold
+   1. Pre-requisite: `list shlv/soldItems` to check that there does **not** exist a shelf name sold items
+   2. Test case: `report t/stats` 
+      Expected: Shows a message none of the items have been sold to generate the statistics report
+   3. Test case: `report t/items`
+      Expected: Shows a message none of the items have been sold to generate the items report
+
+4. Getting a sales report but the user input format is wrong
+   1. Test case with wrong input formats 
+      1. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
+      2. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
+      3. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
+      Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
+
+### Selling an item

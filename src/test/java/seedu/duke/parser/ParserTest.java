@@ -67,13 +67,13 @@ public class ParserTest {
     @Test
     public void parse_EmptyInput_throwsIllegalFormatException() {
         final String emptyInput = "";
-        assertThrows(IllegalFormatException.class, () -> parser.parseCommand(emptyInput, testShelf));
+        assertThrows(IllegalFormatException.class, () -> parser.parseCommand(emptyInput));
     }
 
     @Test
     public void parse_NotProgramCommand_throwsIllegalFormatException() {
         final String notProgramCommandInput = "blahdsdsh";
-        assertThrows(IllegalFormatException.class, () -> parser.parseCommand(notProgramCommandInput, testShelf));
+        assertThrows(IllegalFormatException.class, () -> parser.parseCommand(notProgramCommandInput));
     }
 
     /*

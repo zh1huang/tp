@@ -8,11 +8,15 @@ import seedu.duke.model.ShelfList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * The command that deletes a selected item.
  */
 public class DeleteCommand extends Command {
+    public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
+    public static final String DELETE_STRING = "delete";
+    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";

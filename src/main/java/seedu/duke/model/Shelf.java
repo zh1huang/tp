@@ -21,9 +21,8 @@ public class Shelf {
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
-    private String name;
     private final ArrayList<Item> items;
+    private String name;
     private String remarks;
 
     /**

@@ -5,7 +5,12 @@ import seedu.duke.command.exception.DuplicateShelfException;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.model.ShelfList;
 
+import java.util.regex.Pattern;
+
 public class CreateShelfCommand extends Command {
+    public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
+    public static final String CREATE_STRING = "create";
+    public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private static final String CREATE_COMPLETE_MESSAGE =
             "This shelf has been created.";
     private final String shelfName;
