@@ -9,6 +9,7 @@ import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.salesmanager.SoldItem;
+import seedu.duke.ui.MessageBubble;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,14 +20,20 @@ import java.time.LocalDateTime;
 
 public class Storage {
 
-    public static String STORAGE_PATH = "data/Data.txt";
-
     private static final int JSON_INDENTATION_LEVEL = 4;
-
+    public static String STORAGE_PATH = "data/Data.txt";
+    private static Storage singleStorageInstance;
     ShelfList shelfList;
 
-    public Storage() {
+    private Storage() {
         shelfList = ShelfList.getShelfList();
+    }
+
+    public static Storage getStorageManager() {
+        if (singleStorageInstance == null) {
+            singleStorageInstance = new Storage();
+        }
+        return singleStorageInstance;
     }
 
     public void saveData() throws ShelfNotExistException, IOException {
@@ -71,49 +78,57 @@ public class Storage {
     }
 
     public void loadData()
-            throws IOException, DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
+            throws IOException, DataCorruptionException {
         File file = new File(STORAGE_PATH);
         if (!file.exists()) {
+            // No file found
+            MessageBubble.printMessageBubble("Initializing with sample database.");
             String directory = STORAGE_PATH.substring(0, STORAGE_PATH.lastIndexOf("/"));
             Files.createDirectories(Paths.get(directory));
             file.createNewFile();
-
             FileWriter writer = new FileWriter(STORAGE_PATH);
             writer.write(sampleData().toString(JSON_INDENTATION_LEVEL));
             writer.close();
         }
+
         String text = Files.readString(Paths.get(STORAGE_PATH));
         try {
             JSONObject storedData = new JSONObject(text);
             loadFromJson(storedData);
         } catch (Exception e) {
-            shelfList.resetShelfList();
-            loadFromJson(sampleData());
+            throw new DataCorruptionException();
         }
 
     }
 
-    private void loadFromJson(JSONObject storedData)
+    protected void loadFromJson(JSONObject storedData)
             throws DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
         for (String shelfName : storedData.keySet()) {
             Shelf currentShelf = shelfList.addShelf(shelfName);
-            currentShelf.setRemark(storedData.getJSONObject(shelfName).getString("remarks"));
+            try {
+                currentShelf.setRemark(storedData.getJSONObject(shelfName).getString("remarks"));
+            } catch (org.json.JSONException e) {
+                currentShelf.setRemark(" ");
+            }
             JSONObject itemsJson = storedData.getJSONObject(shelfName).getJSONObject("items");
             for (String itemName : itemsJson.keySet()) {
+                if (itemName.isBlank()) {
+                    continue;
+                }
                 JSONObject itemJson = itemsJson.getJSONObject(itemName);
                 Item item;
                 if (shelfName != "soldItems") {
                     item = new Item(
-                            itemJson.get("name").toString(),
-                            itemJson.get("cost").toString(),
-                            itemJson.get("price").toString(),
+                            itemJson.getString("name"),
+                            itemJson.getString("cost"),
+                            itemJson.getString("price"),
                             itemJson.getString("remarks")
                     );
                 } else {
                     item = new SoldItem(
-                            itemJson.get("name").toString(),
-                            itemJson.get("cost").toString(),
-                            itemJson.get("price").toString(),
+                            itemJson.getString("name"),
+                            itemJson.getString("cost"),
+                            itemJson.getString("price"),
                             itemJson.getString("remarks"),
                             LocalDateTime.parse(itemJson.get("saleTime").toString())
                     );
@@ -123,7 +138,7 @@ public class Storage {
         }
     }
 
-    private JSONObject sampleData() {
+    protected JSONObject sampleData() {
         final JSONObject defaultShelves = new JSONObject();
         final JSONObject defaultWarehouse = new JSONObject();
         final JSONObject defaultItems = new JSONObject();
