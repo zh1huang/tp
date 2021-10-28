@@ -13,7 +13,7 @@ for /f "tokens=*" %%a in (
 )
 
 del /f ..\..\text-ui-test\data\Data.txt
-copy ..\..\text-ui-test\sampledata\Data.txt ..\..\text-ui-test\data
+copy ..\..\text-ui-test\sampledata\Data.txt ..\..\text-ui-test\data\Data.txt
 java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUAL.TXT
 
 cd ..\..\text-ui-test

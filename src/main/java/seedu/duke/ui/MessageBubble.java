@@ -1,6 +1,6 @@
 package seedu.duke.ui;
 
-//@@author yuejunfeng0909-reused
+//@@author yuejunfeng0909
 public class MessageBubble {
 
     static final String EDGE_HORIZONTAL_SYMBOL = ".";

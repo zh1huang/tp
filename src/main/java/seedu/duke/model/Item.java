@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author yuejunfeng0909
 /**
  * Represents an item that can be stored in an Shelf.
  * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
