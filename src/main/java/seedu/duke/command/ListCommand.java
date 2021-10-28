@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private String shelfName = null;
     private final boolean toPrintAll;
-    private static final String ITEM_INFO = "%o. %s (Cost: %s, Price: %s)\n";
+    private static final String ITEM_INFO = "%d. %s (Cost: %s, Price: %s)\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";

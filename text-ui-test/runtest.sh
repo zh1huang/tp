@@ -8,6 +8,8 @@ cd ..
 
 cd text-ui-test
 
+rm -r data/Data.txt
+cp sampledata/Data.txt data
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT

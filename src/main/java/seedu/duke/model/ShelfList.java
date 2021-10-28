@@ -50,8 +50,8 @@ public class ShelfList {
      * Creates a new Shelf with the specified name in the ShelfList.
      *
      * @param name The name of the new Shelf
-     * @throws IllegalArgumentException        if name does not follow the format
-     * @throws DuplicateShelfException if there already exist a Shelf with this name
+     * @throws IllegalArgumentException if name does not follow the format
+     * @throws DuplicateShelfException  if there already exist a Shelf with this name
      */
     public Shelf addShelf(String name) throws IllegalArgumentException, DuplicateShelfException {
         if (existShelf(name)) {
