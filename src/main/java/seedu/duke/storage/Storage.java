@@ -130,7 +130,7 @@ public class Storage {
                             itemJson.getString("cost"),
                             itemJson.getString("price"),
                             itemJson.getString("remarks"),
-                            LocalDateTime.parse(itemJson.get("saleTime").toString())
+                            LocalDateTime.parse(itemJson.getString("saleTime"))
                     );
                 }
                 currentShelf.addItem(item);
