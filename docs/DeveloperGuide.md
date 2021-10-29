@@ -137,7 +137,7 @@ The `Logic` component consists of `Parser` and `Command` components.
    
 ![](diagrams/ParserClassDiagram.png)
 
-3. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
@@ -241,7 +241,9 @@ ___
 |v2.0|user|mark an item as sold|remove item from inventory list and add to revenue|
 |v2.0|user|add the total cost of all the items|know the total cost and deduct from revenue to find profit|
 |v2.0|user|view the monthly sales report|know if I am making a profit|
-
+|v2.0|user|create a shelf|store items into the shelf|
+|v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
+|v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
 ___
 ## Non-Functional Requirements
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
@@ -296,6 +298,14 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
       Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
 
 ### Removing a shelf
+1. To remove a shelf with a unique name that exist in the shelf list.
+   1. Pre-requisites shelf name `Book1` previously exist. The user may check by doing a `list`.
+      1. Test case 1: `remove shlv/Book1`
+         Expected: Shelf name** `Book1` will be removed. 
+   2. Test case 2: remove a shelf that has already been removed. `remove shlv/Book1` again
+      Expected: Shows output message that shelf does not exist.
+   3. Test case 3: User inputs with the incorrect format such as `remove`, `remove shlv/`, `remove sh`, `remove shlv/Book2 shlv/Pencil1`
+      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
 
 ### Adding an item
 
@@ -334,10 +344,18 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
       Expected: Shows a message none of the items have been sold to generate the items report
 
 4. Getting a sales report but the user input format is wrong
-   1. Test case with wrong input formats 
-      1. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
-      2. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
-      3. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
-      Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
+
+   Test case with wrong input formats 
+   
+   2. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
+   3. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
+   4. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
+   
+   Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
 
 ### Selling an item
+1. 
+
+### Markup price of an item
+
+
