@@ -169,9 +169,13 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 The storage component consists of `Storage` class. 
 It handles the saving of user data by the command component and also loading data on program start up.
 
-The diagram below shows the implementation of `loadData()`.
+The diagram below shows the implementation of `saveData()`.
 
-![](diagrams/seedu_duke_storage_storeData.svg)
+![](diagrams/seedu_duke_storage_saveData.svg)
+
+The diagram below shows the implementation of `loadData()`
+
+![](diagrams/seedu_duke_storage_loadData.svg)
 
 
 
