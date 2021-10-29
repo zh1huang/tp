@@ -1,0 +1,68 @@
+@startuml
+
+participant CLIverShelf as app
+participant ":Storage" as storage
+participant "shelfList:ShelfList" as shelfList
+participant "currentShelf: Shelf" as currentShelf
+participant "storedData: JSONObject" as storedData
+participant "shelfInfo: JSONObject" as shelfInfo
+participant "itemInfo: JSONObject" as itemInfo
+participant ":FileWriter" as FileWriter
+
+app -> storage:saveData()
+activate storage
+storage -> shelfList:getAllShelvesName()
+activate shelfList
+shelfList -> storage: nameOfAllShelves
+deactivate shelfList
+alt nameOfAllShelves.isBlank()
+
+    storage -> storage: sampleData()
+    activate storage
+    storage -> storage: storedData
+    deactivate storage
+
+else
+
+    storage -> storedData **
+    loop for each nameOfShelf in nameOfAllShelves
+
+        storage -> shelfInfo **
+        activate shelfInfo
+        shelfInfo -> storage: shelfInfo
+        deactivate shelfInfo
+        storage -> shelfList:getShelf(nameOfShelf)
+        loop for each itemName in currentShelf
+
+            storage -> itemInfo **
+            storage -> currentShelf: getItem(itemName)
+            storage -> itemInfo: put name, cost, price and remark
+
+            opt item is SoldItem
+                storage -> itemInfo: put saleTime
+                end
+
+            storage -> shelfInfo: get("items").put(itemName, itemInfo)
+            destroy itemInfo
+            end
+        storage -> storedData: put(nameOfShelf, shelfInfo)
+        destroy shelfInfo
+        end
+
+    end
+storage -> FileWriter **: new FileWriter(STORAGE_PATH)
+storage -> FileWriter: write data
+activate FileWriter
+FileWriter -> storedData: toString()
+activate storedData
+storedData -> FileWriter
+deactivate storedData
+storage -> FileWriter !! : close()
+storage -> app
+deactivate storage
+destroy shelfList
+destroy currentShelf
+destroy storedData
+
+
+@enduml
