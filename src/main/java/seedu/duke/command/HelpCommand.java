@@ -27,7 +27,6 @@ public class HelpCommand extends Command {
      * Executes help command.
      */
     public String execute() {
-        System.out.println(COMMAND_LIST);
         return COMMAND_LIST;
     }
 }

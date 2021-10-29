@@ -1,6 +1,6 @@
 {
-    "sample1": {"items": {}},
-    "sample2": {"items": {
+    "sampleShelf1": {"items": {}},
+    "sampleShelf2": {"items": {
         "0": {
             "cost": "25.90",
             "price": "30.90",
@@ -20,7 +20,7 @@
             "remarks": " "
         }
     }},
-    "warehouse": {
+    "sampleShelf3": {
         "items": {"0": {
             "cost": "12.25",
             "price": "25",

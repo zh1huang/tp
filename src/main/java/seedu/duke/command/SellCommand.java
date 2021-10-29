@@ -30,7 +30,6 @@ public class SellCommand extends Command {
                     .getShelf(shelfName)
                     .getItem(index);
             SalesManager.getSalesManager().sell(selectedItem);
-            System.out.println(SELL_COMPLETE_MESSAGE);
             return SELL_COMPLETE_MESSAGE;
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             throw new ShelfNotExistException(e.getMessage());
