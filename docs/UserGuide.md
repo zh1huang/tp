@@ -15,7 +15,7 @@
   8. [`sell` - Sell an item](#sell-an-item)
   9. [`create` - Create a shelf](#create-a-shelf)
   10. [`remove` - Remove a shelf](#remove-a-shelf)
-  11. [`markup` - Markup of an item](#markup-of-an-item)
+  11. [`markup` - Markup price of an item](#markup-price-of-an-item)
   12. [`bye` - Exit command](#exit-program)
   13. [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
 - [FAQ](#faq)
@@ -282,9 +282,9 @@ Expected outcome:
 
 ```
 
-### Markup of an item
+### Markup price of an item
 
-Checks the current markup of an item and calculates user estimated markup percent with the corresponding price change.
+Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
 If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 10. 
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
