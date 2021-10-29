@@ -12,8 +12,12 @@
   5. [`get` - Retrieve information of an item](#get-information-about-an-item)
   6. [`edit` - Update an item](#edit-an-item)
   7. [`report` - Generate sales report](#generate-sales-report)
-  8. [`bye` - Exit command](#exit-program)
-  9. [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
+  8. [`sell` - Sell an item](#sell-an-item)
+  9. [`create` - Create a shelf](#create-a-shelf)
+  10. [`remove` - Remove a shelf](#remove-a-shelf)
+  11. [`markup` - Markup of an item](#markup-of-an-item)
+  12. [`bye` - Exit command](#exit-program)
+  13. [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -30,10 +34,10 @@ business, where they can view these information in a user-friendly manner.
 4. {placeholder: show a screenshot when the app first start up}
 5. Type `help` to see the basic commands available, you may try to using the example commands below:
    * `add  n/Geronimo shlv/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
-   * `delete n/Narnia` - Deletes the Book "Narnia" from the shelf
+   * `delete shlv/book2 i/3` - Deletes item of `index 3` from the shelf `book2`
    * `list shlv/book1` - list the items from shelf name "book1"
-   * `get n/Pilot pen` - get information about an item "Pilot pen"
-   * `report c/stats` - Show a report summary of the sales statistics
+   * `get shlv/book1 i/2` - get information about an item of `index 2` in shelf `book1`
+   * `report t/stats ym/2021-10` - Show a report summary of the sales statistics in year 2021 month Oct
    * `bye` - exit the app
 6. Refer to the [Features](#features) below for details of each command.
 ## Usage
@@ -83,9 +87,9 @@ Adds a new item to the inventory, specifying its name, category, purchase cost, 
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
-Example: **Add 5 books titled "Harry Potter" with a purchase cost of $27 and selling price of $37**
+Example: **Add 5 books titled "Harry Potter" with a purchase cost of $27 and selling price of $37 to shelf `book1`.**
 ```
-add n/Harry Potter c/book p/27 s/37 q/5 
+add n/Harry Potter shlv/book1 p/27 s/37 q/5 
 ```
 
 Expected outcome
@@ -95,9 +99,10 @@ list
 1. Harry Potter (purchase cost: 27, selling price: 37)
 ```
 
-Example: **Add 100 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50. Also added additional remarks**
+Example: **Add 100 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`. 
+Also added additional remarks**
 ```
-add n/Pilot P100 c/stationary p/1 s/1.5 q/100 r/Not many people bought this. Can consider a 50% discount.
+add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/100 r/Not many people bought this. Can consider a 50% discount.
 ```
 
 Expected outcome:
@@ -112,11 +117,11 @@ list
 
 Deletes item from the inventory with the matching name.
 
-Format: `delete n/NAME`
+Format: `delete shlv/SHELF_NAME i/INDEX`
 
-Example: **Delete item named "Alice in Wonderland"**
+Example: **Delete item of `index 1` in shelf `book2`**
 ```
-delete n/Alice in Wonderland
+delete shlv/book2 i/1
 ```
 Expected outcome:
 ```
@@ -135,7 +140,7 @@ list
 
 Shows a list of all items in the inventory list.
 
-Format: `list [shlv/SHELF_NAME] [c/CATEGORY]`
+Format: `list [shlv/SHELF_NAME]`
 
 Example: **Listing all items in all categories**
 ```
@@ -146,47 +151,40 @@ Expected outcome:
 
 ```
 
-Example: **Listing all items under stationary category**
+Example: **Listing all items under stationary shelf**
 ```
-list c/stationary
+list shlv/stationary
 ```
 Expected outcome:
 ```
 ```
-
-
 
 ### Get information about an item
 
 Retrieves information of an item. 
 
-Format: `get n/NAME [p/PROPERTY]`
+Format: `get shlv/SHELF_NAME i/INDEX`
 
-Example: **Retrieves all the information of "Lord of the Rings"**
+Example: **Retrieves all the information of item `index 1` in shelf `book2`**
 ```
-get n/Lord of the Rings
+get shlv/book2 i/1
 ```
 Expected outcome:
 ```
 
 ```
 
-Example: **Retrieves the price of "Apples Never Fall"**
-```
-get n/Apples Never Fall p/quantity
-```
-Expected outcome:
-```
-```
 ### Edit an item
 
 Updates the properties of an item.
 
-Format: `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]`
+Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
+
+&#128221; Only 2 `PROPERTY` can be specified, either `p/cost` to specify the cost of the item or `p/price` to specify the item price. 
 
 Example: **Update "Lord of the Rings"'s selling price as $30**
 ```
-edit n/Lord of the Rings p/sellingPrice v/30
+edit shlv/book1 i/1 p/price v/30
 ```
 
 Expected outcome:
@@ -196,7 +194,7 @@ Expected outcome:
 ```
 Example:
 ```
-edit n/Apples Never Fall p/quantity v/100 s/false
+edit shlv/book1 i/1 p/cost v/23.5 
 ```
 
 Expected outcome:
@@ -217,15 +215,93 @@ list
 
 Generates the sales report for given month.
 
-Format: `report c/CONTENT_TYPE [ym/YEAR-MONTH]`
+Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
 
-&#128221; Only 2 `CONTENT_TYPE` can be specified either `c/stats` to view statistics of sold items or `c/items` to view the list of all items
+&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view the list of all items
 
 &#128221; `YEAR-MONTH` need to follow the format `YYYY-MM`
 
-Example: **Generate sales report for the month of June 2020**
+&#128221; If only 1 `ym/YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
+If 2 `ym/YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
+
+Example: **Generate sales report for the month of Oct 2021**
 ```
-report c/stats
+report t/stats ym/2021-10
+```
+
+Expected outcome:
+```
+
+```
+
+### Sell an item
+
+Mark an item as sold.
+
+Format: `sell shlv/SHELF_NAME i/INDEX`
+
+Example: **Mark an item of index 1 in shelf `book1` as sold**
+```
+sell shlv/book1 i/1
+```
+
+Expected outcome:
+```
+
+```
+
+### Create a shelf
+
+Create a shelf.
+
+Format: `create shlv/SHELF_NAME`
+
+Example: **Create shelf named `book2`**
+```
+create shlv/book2
+```
+
+Expected outcome:
+```
+
+```
+
+### Remove a shelf
+
+Remove a shelf. 
+
+Format: `remove shlv/SHELF_NAME`
+
+Example: **Remove shelf `book4`**
+```
+remove shlv/book4
+```
+
+Expected outcome:
+```
+
+```
+
+### Markup of an item
+
+Checks the current markup of an item and calculates user estimated markup percent with the corresponding price change.
+If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 10. 
+
+Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
+
+Example: **Check the markup percent estimates of the item `index 1` in shelf `book1`**
+```
+markup shlv/book1 i/1 
+```
+
+Expected outcome:
+```
+
+```
+
+Example: **Check the 5% markup of the item `index 1` in shelf `book1`**
+```
+markup shlv/book1 i/1 %/5
 ```
 
 Expected outcome:
@@ -268,12 +344,16 @@ You can simply restart the program and your last updated data will be loaded.
 |Commands    |Format, Examples                                                                                                                 |
 | ----       | ----                                                                                                                            |
 |**Help**    | `help`                                                                                                                          |
-|**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter c/book p/27 s/37 q/5`|
-|**Delete**  | `delete n/NAME` <br> eg: `delete n/Alice in wonderland`                                                                         |
-|**List**    | `list [c/CATEGORY]` <br> eg: `list c/stationary`                                                                                |
-|**Get**     | `get n/NAME [p/PROPERTY]` <br> eg: `get n/Apples Never Fall p/quantity`                                                         |
-|**Edit**    | `edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]` <br> eg: `edit n/Apples Never Fall p/quantity v/100 s/false`                      |
-|**Report**  | `report c/CONTENT_TYPE [ym/YEAR-MONTH]` <br> eg: `report c/stats`                                                                                    |
+|**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter shlv/book1 p/27 s/37 q/5`|
+|**Delete**  | `delete shlv/SHELF_NAME i/INDEX` <br> eg: `delete shlv/book2 i/1`                                                                         |
+|**List**    | `list [shlv/SHELF_NAME]` <br> eg: `list shlv/stationary`                                                                                |
+|**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
+|**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
+|**Report**  | `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
+|**Sell**    | `sell shlv/SHELF_NAME i/INDEX` <br> eg: `sell shlv/book1 i/1`                                                                                    |
+|**Create**  | `create shlv/SHELF_NAME` <br> eg: `create shlv/book1`                                                                                    |
+|**Remove**  | `remove shlv/SHELF_NAME` <br> eg: `remove shlv/book4`                                                                                    |
+|**Markup**  | `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` <br> eg: `markup shlv/book1 i/1 %/5`                                                                                    |
 |**Bye**     | `bye`                                                                                                                           |
 
 
