@@ -89,12 +89,12 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 ### General Program Flow
 
 1. User runs the programs & input user commands
-2. `Main` calls `Parser` to `parseCommand()`
-3. `Parser` returns a `Command` object when parsed successful
-4. `Main` calls `Command` object to `execute()`, and returning a `resultString`
-5. `Main` instantiates `UI` component to print the `resultString`
+2. `CLIverShelf` calls `Parser` to `parseCommand()`
+3. `Parser` creates and returns a `Command` object when parsed successful
+4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
+5. `CLIverShelf` instantiates `UI` component to print the `result`
 
-![](diagrams/GeneralProgramFlowSequenceDiagram.png)
+![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
 
 ### UI component
 
@@ -145,8 +145,6 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 ### Model component
 
-![](diagrams/seedu_duke_model.drawio.svg)
-
 **API**:
 
 1. [Item.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/Item.java)
@@ -173,11 +171,11 @@ It handles the saving of user data by the command component and also loading dat
 
 The diagram below shows the implementation of `saveData()`.
 
-![](diagrams/seedu_duke_storage_saveData.svg)
+![](http://www.plantuml.com/plantuml/svg/XLJBRjim4BppApOvoO6R3z2XIFfE4SH5PQ37OYkj7JOKIP2qW_vz9TfQQIC5EMd5cU5mo2LlOiAG3grHodU5hhL7c-3Z_TsHGlL8PWSO0RqNy6LP9HTmJvSz6a-rPCHUUwzZAgkXocGUb_Jw40BPbBabv4-cJyUbedUbvXCcBE5xjNdO_FbBzTc3eOKrtTcTcoaOaGATg5ta3u2abr-qeL-X0qDcZRzAeVVmxlsmLsN48_KBB5OAwwIFc8ZtyVpDTDx5FQLRO_fzE59ym9Q4aZULgwaPs8w_sOrwrT225asQCQzr_63GFdLk2W26ASNi4LjlXZGzQPReLIKVLAOqD5CgCf7crgo3gwiC6kSyx5m0mlhndEBKljhEusU9d7DiWM5AaOHHXdX49f8y6MeEldRKUUd59CQA9I9fRiI-6_gOugumNzfaWKWvfyYxkATqrscAmMdrrimb-CEfaTPGkvZMu8Ek2T0s4AZ5y2GNvtpAMj0HAcUQteq9R_f4DBJLBSqKP1lfitJMELwHxtcyN5rt4tBEDHl9n0t55Dm_HjLBqw5UxDUywEd1hdanxCCUec5agbnC7CQdfZlO4YmzJuQAQhlvUVlry-yVjzjlgsLP2S_z5nfCo0_B15TZ-J9HSbKAskx5YyIu6alfA1uXIP-7khY04chZ8XKY07gl5fuDti3XKl68k2HC6-sLkY7R75hp7m00)
 
 The diagram below shows the implementation of `loadData()`
 
-![](diagrams/seedu_duke_storage_loadData.svg)
+![](http://www.plantuml.com/plantuml/svg/bLNDJkCm4BxdAOQUaaZm03uWf5qXWH0SSjYpIQQjTvquigSKtdux3cucLkYobyRZxsScuubx5qXxElIsACRJmhHcr0F1ZwU7D_JD7kqMT00zZWjuenfoNkzmmsYOral6rbXKzyPE58wMUCH-UKFe8sCEbpmsn-wd9gqUcvVdbzVVs59Kp4YcuAgVJ23LfDN4Jz6ItXwynu4YLq5yHBhSNrKy4FOA-5VoELvFu6mtINWbPH8j2ZsErxUVBLNMwVY6PLNebioR9Zot-_C9rxUnlNLTk97Y4WP7WE_ygW006L6r7ZNXCnwvvsKLESazCdY75omH1mDrFIF9BEX-jCWrNdPAV9W54UpmEwaL7FbPpkBggoAlhbHhNS1ooKXT-oed3btUKGKUTTUGDyFkvBRKPBuA2D-fo9o5enZNkbOmu17cUIvPN4cs781xx_h7u8PojbWP1-lS25ldGLixpVgpxX7C83BV_C6F1gciyhcOlndTTGq7vTbYUQmpbRVdY5ta9rFN6Ivx9OdPYUJ-QmrKi4CItPjBlLa26qFOXqsrVE-KIZZolWWNnR87cuUyqamk3o29kF-PmUMtEl5F5hqcumRGh-v0G7kC5d0qj8U1JPFZsL1RcZWcn8zVGqWNIg9aUSLrLTU29DeZA98WzsMZJCxhyA8Lse2fwEyNt33jtqKtQsuI-__YSyjuPQmMAlzGT1T59IUeScbswoGNSOr8L8-ZH3eCvDr7l6XI86Uok3kv7thx5m00)
 
 
 
