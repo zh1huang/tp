@@ -164,7 +164,9 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](diagrams/seedu_duke_model_newshelf.drawio.svg)
+![](http://www.plantuml.com/plantuml/svg/NOwn3i8m34HtVuML2IfrOCt0mih65rX9K2srQKIiVZ-AawQ5nJfRx-wSw2FiE54KDFQnBWj5Rv0okgeXdOcuRc4UR_OrXVcjM2xg5zBJaxDKhAW3BHj02yVnNg_3O57XorvXha1EU2C9hKDdTsW-alVL9XFdVuTMTTMTuCFE7Pdj8Okj_Wnz0G00)
+![](http://www.plantuml.com/plantuml/svg/ZS-x3eGW40NGdg-OKAc9XIt5DhRRxHTC0ECaYcIP-FsRoCDdiTqDEVS27hzCcZmw1gdwPPxH6GaOGCSi_564qKx3cmAhJquRBkTdxfRLJcqNyGv5seRsjJSLe34Rh79FrW8rqufi3pUKLEfDSt7HdEVBEeyK_XmMncRtD0dfdJUMHz8_7-4F)
+
 ### Storage component
 The storage component consists of `Storage` class. 
 It handles the saving of user data by the command component and also loading data on program start up.
