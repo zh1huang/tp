@@ -57,7 +57,7 @@ public class AddCommand extends Command {
      * Executes the operation of adding the item to the list.
      *
      * @throws IllegalArgumentException if the input argument is wrong
-     * @throws DuplicateItemException if exactly the same item is added to the list
+     * @throws DuplicateItemException   if exactly the same item is added to the list
      */
     @Override
     public String execute() throws IllegalArgumentException, DuplicateItemException,

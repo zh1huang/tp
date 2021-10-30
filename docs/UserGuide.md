@@ -113,23 +113,30 @@ create shlv/book2
 
 Expected outcome:
 ```
-
+                                          ...................................
+                                          : Shelf "book2" has been created. :
+                                          ......................................
 ```
 
 ### Remove a shelf
 
-Remove a shelf.
+Removes a shelf.
+
+&#9888; **Only can remove an empty shelf. Cannot remove a shelf with existing items.**
+
 
 Format: `remove shlv/SHELF_NAME`
 
-Example: **Remove shelf `book4`**
+Example: **Remove shelf `book2`**
 ```
-remove shlv/book4
+remove shlv/book2
 ```
 
 Expected outcome:
 ```
-
+                                       ......................................
+                                       : This shelf book2 has been deleted. :
+                                       .........................................
 ```
 
 ### Add new item
@@ -147,9 +154,7 @@ add n/Harry Potter shlv/book1 p/27 s/37 q/5
 
 Expected outcome
 ```
-This item has been added to the list.
-list
-1. Harry Potter (purchase cost: 27, selling price: 37)
+//todo
 ```
 
 Example: **Add 100 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`. 
@@ -160,10 +165,7 @@ add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/100 r/Not many people bought this.
 
 Expected outcome:
 ```
-This item has been added to the list.
-list
-1. Harry Potter (purchase cost: 27, selling price: 37)
-2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+//todo
 ```
 
 ### Delete an item
@@ -178,15 +180,7 @@ delete shlv/book2 i/1
 ```
 Expected outcome:
 ```
-list
-1. Harry Potter (purchase cost: 27, selling price: 37)
-2. Pilot P100 (purchase cost: 1, selling price: 1.5)
-3. Alice in wonderland (purchase cost: 27, selling price: 37)
-delete n/Alice in wonderland
-This item has been removed from the list.
-list
-1. Harry Potter (purchase cost: 27, selling price: 37)
-2. Pilot P100 (purchase cost: 1, selling price: 1.5)
+//todo
 ```
 
 ### Listing all items 
@@ -195,21 +189,22 @@ Shows a list of all items in the inventory list.
 
 Format: `list [shlv/SHELF_NAME]`
 
-Example: **Listing all items in all categories**
+Example: **Listing all items in all shelves**
 ```
 list 
 ```
 Expected outcome:
 ```
-
+//todo
 ```
 
-Example: **Listing all items under stationary shelf**
+Example: **Listing all items under `stationary1` shelf**
 ```
-list shlv/stationary
+list shlv/stationary1
 ```
 Expected outcome:
 ```
+//todo
 ```
 
 ### Get information about an item
@@ -224,7 +219,7 @@ get shlv/book2 i/1
 ```
 Expected outcome:
 ```
-
+//todo
 ```
 
 ### Edit an item
@@ -235,7 +230,7 @@ Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
 &#128221; Only 2 `PROPERTY` can be specified, either `p/cost` to specify the cost of the item or `p/price` to specify the item price. 
 
-Example: **Update "Lord of the Rings"'s selling price as $30**
+Example: **Update selling price of item with `index 1` as $30**
 ```
 edit shlv/book1 i/1 p/price v/30
 ```
@@ -243,25 +238,16 @@ edit shlv/book1 i/1 p/price v/30
 Expected outcome:
 
 ```
-
+//todo
 ```
-Example:
+Example: **Update purchase cost of item with `index 2` as $23.50**
 ```
-edit shlv/book1 i/1 p/cost v/23.5 
+edit shlv/book1 i/2 p/cost v/23.5 
 ```
 
 Expected outcome:
 ```
-list
-1. Harry Potter (purchase cost: 27, selling price: 37)
-2. Pilot P100 (purchase cost: 1, selling price: 1.5)
-3. Lord of the Rings (purchase cost: 27, selling price: 37)
-edit n/Lord of the Rings p/sellingPrice v/30
-This item has been updated.
-list
-1. Harry Potter (purchase cost: 27, selling price: 37)
-2. Pilot P100 (purchase cost: 1, selling price: 1.5)
-3. Lord of the Rings (purchase cost: 27, selling price: 30)
+//todo
 ```
 
 ### Sell an item
@@ -277,7 +263,7 @@ sell shlv/book1 i/1
 
 Expected outcome:
 ```
-
+//todo
 ```
 
 
@@ -288,24 +274,40 @@ If no user markup percent is specified, CLIvershelf will calculate the percent m
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 
-Example: **Check the markup percent estimates of the item `index 1` in shelf `book1`**
+Example: **Check the markup percent estimates of the item `index 2` in shelf `book1`**
 ```
-markup shlv/book1 i/1 
-```
-
-Expected outcome:
-```
-
-```
-
-Example: **Check the 5% markup of the item `index 1` in shelf `book1`**
-```
-markup shlv/book1 i/1 %/5
+markup shlv/book1 i/2
 ```
 
 Expected outcome:
 ```
+                      .......................................................
+                      : Item: Three Little Pigs                             :
+                      : Cost: 10.90, Price: 12.99                           :
+                      : Amount Difference: 2.09                             :
+                      : Current Mark Up: 19%                                :
+                      : markup: 0%, increase: $0.00, Final price: $10.90    :
+                      : markup: 10%, increase: $1.09, Final price: $11.99   :
+                      : markup: 20%, increase: $2.18, Final price: $13.08   :
+                      : markup: 30%, increase: $3.27, Final price: $14.17   :
+                      : markup: 40%, increase: $4.36, Final price: $15.26   :
+                      : markup: 50%, increase: $5.45, Final price: $16.35   :
+                      : markup: 60%, increase: $6.54, Final price: $17.44   :
+                      : markup: 70%, increase: $7.63, Final price: $18.53   :
+                      : markup: 80%, increase: $8.72, Final price: $19.62   :
+                      : markup: 90%, increase: $9.81, Final price: $20.71   :
+                      : markup: 100%, increase: $10.90, Final price: $21.80 :
+                      ..........................................................
+```
 
+Example: **Check the 5% markup of the item `index 2` in shelf `book1`**
+```
+markup shlv/book1 i/2 %/5
+```
+
+Expected outcome:
+```
+//todo
 ```
 
 ### Generate sales report
@@ -328,7 +330,7 @@ report t/stats ym/2021-10
 
 Expected outcome:
 ```
-
+//todo
 ```
 
 ### Exit program
@@ -339,7 +341,9 @@ Format: `bye`
 
 Expected outcome:
 ```
-Bye! Hope to see you again!
+                                                        .....................
+                                                        : See you next time :
+                                                        ........................
 ```
 
 ### Add customer rating & review for each item `[coming in v3.0]`

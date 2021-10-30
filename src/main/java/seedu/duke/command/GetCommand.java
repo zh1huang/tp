@@ -37,7 +37,7 @@ public class GetCommand extends Command {
      *
      * @return Message string to be passed to UI
      * @throws ShelfNotExistException If the Shelf is not in the ShelfList
-     * @throws ItemNotExistException If empty does not exist in the shelf
+     * @throws ItemNotExistException  If empty does not exist in the shelf
      */
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         String output = "";
