@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,9 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CreateShelfCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.EditCommand;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.exception.CommandException;
@@ -22,7 +25,7 @@ import seedu.duke.parser.exception.IllegalFormatException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.duke.command.AddCommand.ADD_STRING;
 import static seedu.duke.command.DeleteCommand.DELETE_STRING;
 import static seedu.duke.command.EditCommand.EDIT_STRING;
@@ -72,10 +75,8 @@ public class ParserTest {
         }
     }
 
-    @Test
-    public void parse_EmptyInput_throwsIllegalFormatException() {
-        final String emptyInput = "";
-        assertThrows(IllegalFormatException.class, () -> parser.parseCommand(emptyInput));
+    @AfterEach
+    public void tearDown(){
         Command removeShelf1Command = new RemoveShelfCommand(SHELF_NAME_EXAMPLE_1);
         Command removeShelf2Command = new RemoveShelfCommand(SHELF_NAME_EXAMPLE_2);
         try {
@@ -89,9 +90,61 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_EmptyInput_throwsIllegalFormatException() {
+        final String[] emptyInputs = {"", "\n", " ", "\n \n" };
+        for(String emptyInput: emptyInputs) {
+            assertThrows(IllegalFormatException.class, () -> parser.parseCommand(emptyInput));
+        }
+    }
+
+    @Test
     public void parse_NotProgramCommand_throwsIllegalFormatException() {
         final String notProgramCommandInput = "blahdsdsh";
         assertThrows(IllegalFormatException.class, () -> parser.parseCommand(notProgramCommandInput));
+    }
+
+    /*
+     * Tests for 0 argument commands =========================================================
+     */
+
+    @Test
+    public void parse_helpCommand_parsedCorrectly() throws ItemNotExistException,
+        NoPropertyFoundException, IllegalFormatException {
+        final String input = "help";
+        assertEquals(HelpCommand.class, parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void parse_ExitCommand_parsedCorrectly() throws ItemNotExistException,
+        NoPropertyFoundException, IllegalFormatException {
+        final String input = "bye";
+        assertEquals(ExitCommand.class, parser.parseCommand(input).getClass());
+    }
+
+    /*
+     * Tests for create command ===============================================================
+     */
+    @Test
+    public void parse_createCommandInvalidArgs_throwsIllegalFormatException() {
+        
+    }
+
+    @Test
+    public void parse_createCommandValidArgs_returnCreateShelfCommand() {
+
+    }
+
+    /*
+     * Tests for remove command ===============================================================
+     */
+
+    @Test
+    public void parse_removeCommandInvalidArgs_throwsIllegalFormatException() {
+
+    }
+    @Test
+    public void parse_removeCommandValidArgs_returnRemoveShelfCommand() {
+
     }
 
     /*
@@ -275,6 +328,44 @@ public class ParserTest {
         Command expectedCommand2 = new EditCommand(SHELF_NAME_EXAMPLE_2, INDEX_1_STRING,
             SELLING_PRICE_PROPERTY_STRING, VALUE_EXAMPLE_2);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
+    }
+
+    /*
+     * Tests for report command ===============================================================
+     */
+
+    public void parse_reportCommandInvalidArgs_throwsIllegalFormatException() {
+
+    }
+    @Test
+    public void parse_reportCommandValidArgs_returnReportCommand() {
+
+    }
+
+    /*
+     * Tests for sell command ===============================================================
+     */
+    @Test
+    public void parse_sellCommandInvalidArgs_throwsIllegalFormatException() {
+
+    }
+
+    @Test
+    public void parse_sellCommandValidArgs_returnSellCommand() {
+
+    }
+
+    /*
+     * Tests for markup command ===============================================================
+     */
+    @Test
+    public void parse_markupCommandInvalidArgs_throwsIllegalFormatException() {
+
+    }
+
+    @Test
+    public void parse_markupCommandValidArgs_returnMarkupCommand() {
+
     }
 
 
