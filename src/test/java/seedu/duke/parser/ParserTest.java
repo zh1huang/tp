@@ -15,6 +15,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.exception.CommandException;
+import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
@@ -126,12 +127,23 @@ public class ParserTest {
      */
     @Test
     public void parse_createCommandInvalidArgs_throwsIllegalFormatException() {
-        
+        final String[] inputs = {
+            "create",
+            "create shelf/nonexistentshelf",
+            "create shlv/book1 shlv/book1",
+        };
+
+        for(String input: inputs){
+            assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
+        }
     }
 
     @Test
-    public void parse_createCommandValidArgs_returnCreateShelfCommand() {
-
+    public void parse_createCommandValidArgs_returnCreateShelfCommand() throws ItemNotExistException,
+        NoPropertyFoundException, IllegalFormatException {
+        String input = "create shlv/book2";
+        Command createShelfCommand = new CreateShelfCommand("book2");
+        assertEquals(createShelfCommand, parser.parseCommand(input));
     }
 
     /*
@@ -140,11 +152,24 @@ public class ParserTest {
 
     @Test
     public void parse_removeCommandInvalidArgs_throwsIllegalFormatException() {
+        final String[] inputs = {
+            "remove",
+            "remove shelf/existentshelf",
+            "remove shlv/book1 shlv/book1",
+        };
 
+        for(String input: inputs){
+            assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
+        }
     }
-    @Test
-    public void parse_removeCommandValidArgs_returnRemoveShelfCommand() {
 
+    @Test
+    public void parse_removeCommandValidArgs_returnRemoveShelfCommand() throws ItemNotExistException,
+        NoPropertyFoundException, IllegalFormatException {
+        addExtraShelves();
+        String input = "remove shlv/book2";
+        Command removeShelfCommand = new RemoveShelfCommand("book2");
+        assertEquals(removeShelfCommand, parser.parseCommand(input));
     }
 
     /*
@@ -375,7 +400,16 @@ public class ParserTest {
 
     // create shelf //todo
 
-
+    private void addExtraShelves(){
+        Command createShelfCommand = new CreateShelfCommand("book2");
+        try {
+            createShelfCommand.execute();
+        } catch (CommandException e) {
+            e.printStackTrace();
+        } catch (ShelfNotExistException e) {
+            e.printStackTrace();
+        }
+    }
     // add items to shelf
     private void addSomeExampleItemsToShelf() {
         Command addCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1,
