@@ -76,28 +76,67 @@ Format: `help`
 Expected outcome:
 ```
 help
-_______________________________________________________
-Here are the performable actions:
-Words in UPPER_CASE are the parameters to be supplied by the user.
-Items in square brackets [ ] are optional.
-____________________________________________________________________________________________
-Description: Command format
-____________________________________________________________________________________________
-1. Get help : help
-2. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]
-3. Delete item: delete n/NAME
-4. List items: list [shlv/SHELF_NAME] [c/CATEGORY]
-5. Get information of item : get n/NAME [p/PROPERTY]
-6. Edit an item: edit n/NAME p/PROPERTY v/VALUE [s/SHOWRESULT]
-7. Generate sales report: report t/PERIOD
-8. Exit program: bye
-____________________________________________________________________________________________
+        ...................................................................................................
+        : Here are the performable actions:                                                               :
+        : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
+        : Items in square brackets [ ] are optional.                                                      :
+        : ____________________________________________________________________________________________    :
+        : Description: Command format                                                                     :
+        : ____________________________________________________________________________________________    :
+        : 1. Get help : help                                                                              :
+        : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
+        : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
+        : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
+        : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
+        : 6. List items: list [shlv/SHELF_NAME]                                                           :
+        : 7. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
+        : 8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
+        : 9. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                   :
+        : 10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
+        : 11. Generate sales report: report t/TYPE [ym/YEAR-MONTH]                                        :
+        : 12. Exit program: bye                                                                           :
+        : ____________________________________________________________________________________________    :
+        ......................................................................................................
+```
+### Create a shelf
+
+Creates a shelf to store items.
+
+&#9888; **Note that shelf has to first created before [item can be added](#add-new-item).**
+
+Format: `create shlv/SHELF_NAME`
+
+Example: **Create shelf named `book2`**
+```
+create shlv/book2
 ```
 
+Expected outcome:
+```
+
+```
+
+### Remove a shelf
+
+Remove a shelf.
+
+Format: `remove shlv/SHELF_NAME`
+
+Example: **Remove shelf `book4`**
+```
+remove shlv/book4
+```
+
+Expected outcome:
+```
+
+```
 
 ### Add new item
 
 Adds a new item to the inventory, specifying its name, category, purchase cost, selling price, quantity (and remarks if any).
+
+&#9888; **Note that [shelf has to first created](#create-a-shelf) before item can be added**
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
@@ -225,29 +264,6 @@ list
 3. Lord of the Rings (purchase cost: 27, selling price: 30)
 ```
 
-### Generate sales report
-
-Generates the sales report for given month.
-
-Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
-
-&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view the list of all items
-
-&#128221; `YEAR-MONTH` need to follow the format `YYYY-MM`
-
-&#128221; If only 1 `ym/YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
-If 2 `ym/YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
-
-Example: **Generate sales report for the month of Oct 2021**
-```
-report t/stats ym/2021-10
-```
-
-Expected outcome:
-```
-
-```
-
 ### Sell an item
 
 Mark an item as sold.
@@ -264,37 +280,6 @@ Expected outcome:
 
 ```
 
-### Create a shelf
-
-Create a shelf.
-
-Format: `create shlv/SHELF_NAME`
-
-Example: **Create shelf named `book2`**
-```
-create shlv/book2
-```
-
-Expected outcome:
-```
-
-```
-
-### Remove a shelf
-
-Remove a shelf. 
-
-Format: `remove shlv/SHELF_NAME`
-
-Example: **Remove shelf `book4`**
-```
-remove shlv/book4
-```
-
-Expected outcome:
-```
-
-```
 
 ### Markup price of an item
 
@@ -323,6 +308,29 @@ Expected outcome:
 
 ```
 
+### Generate sales report
+
+Generates the sales report for given month.
+
+Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
+
+&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view the list of all items
+
+&#128221; `YEAR-MONTH` need to follow the format `YYYY-MM`
+
+&#128221; If only 1 `ym/YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
+If 2 `ym/YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
+
+Example: **Generate sales report for the month of Oct 2021**
+```
+report t/stats ym/2021-10
+```
+
+Expected outcome:
+```
+
+```
+
 ### Exit program
 
 Exits from CLIvershelf.
@@ -342,7 +350,7 @@ Users would be able to record the customer ratings and review of each item sold 
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Copy the save file `data/output.txt` on your current computer into the other computer that you wish to use. Launch the program again and the saved data should load.
+**A**: Copy the save file `data/Data.txt` on your current computer into the other computer that you wish to use. Launch the program again and the saved data should load.
 
 **Q**: What happens if my app crashes half-way?
 
@@ -358,16 +366,16 @@ You can simply restart the program and your last updated data will be loaded.
 |Commands    |Format, Examples                                                                                                                 |
 | ----       | ----                                                                                                                            |
 |**Help**    | `help`                                                                                                                          |
+|**Create**  | `create shlv/SHELF_NAME` <br> eg: `create shlv/book1`                                                                                    |
+|**Remove**  | `remove shlv/SHELF_NAME` <br> eg: `remove shlv/book4`                                                                                    |
 |**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter shlv/book1 p/27 s/37 q/5`|
 |**Delete**  | `delete shlv/SHELF_NAME i/INDEX` <br> eg: `delete shlv/book2 i/1`                                                                         |
 |**List**    | `list [shlv/SHELF_NAME]` <br> eg: `list shlv/stationary`                                                                                |
 |**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
 |**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
-|**Report**  | `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
 |**Sell**    | `sell shlv/SHELF_NAME i/INDEX` <br> eg: `sell shlv/book1 i/1`                                                                                    |
-|**Create**  | `create shlv/SHELF_NAME` <br> eg: `create shlv/book1`                                                                                    |
-|**Remove**  | `remove shlv/SHELF_NAME` <br> eg: `remove shlv/book4`                                                                                    |
 |**Markup**  | `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` <br> eg: `markup shlv/book1 i/1 %/5`                                                                                    |
+|**Report**  | `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
 |**Bye**     | `bye`                                                                                                                           |
 
 

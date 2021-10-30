@@ -9,11 +9,11 @@ import seedu.duke.model.exception.ShelfNotExistException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
+
 
 public class ListCommand extends Command {
 
-    public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "List [shlv/SHELF_NAME]";
+    public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [shlv/SHELF_NAME]";
     public static final String LIST_STRING = "list";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private String shelfName = null;
@@ -63,8 +63,8 @@ public class ListCommand extends Command {
                 output = getList(selectedShelf);
 
             } catch (seedu.duke.model.exception.ShelfNotExistException e) {
-                logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
-                throw new ShelfNotExistException(e.getMessage());
+                logger.log(Level.WARNING, "ListCommand failed to execute because shelf does not exist");
+                throw new ShelfNotExistException(shelfName);
             }
         } else {
             ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();

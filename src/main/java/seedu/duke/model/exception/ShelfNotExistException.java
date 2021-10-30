@@ -2,7 +2,7 @@ package seedu.duke.model.exception;
 
 public class ShelfNotExistException extends Exception {
 
-    public static final String MESSAGE_ITEM_NOT_EXIST = "The item container %s does not exist";
+    public static final String MESSAGE_ITEM_NOT_EXIST = "The shelf \"%s\" does not exist. Please create a new shelf first.";
 
     public ShelfNotExistException(String itemContainerName) {
         super(String.format(MESSAGE_ITEM_NOT_EXIST, itemContainerName));
