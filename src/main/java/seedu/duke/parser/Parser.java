@@ -300,8 +300,7 @@ public class Parser {
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
 
-        Command editCommand = new EditCommand(shelfName, indexInShelf,
-            selectedProperty, newValue);
+        Command editCommand = new EditCommand(shelfName, indexInShelf, selectedProperty, newValue);
         assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
         return editCommand;
