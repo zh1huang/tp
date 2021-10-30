@@ -5,19 +5,19 @@
 - [Quick Start](#quick-start)
 - [Usage](#usage)
 - [Features](#features)
-  1. [`help` - Show help](#display-help-message)
-  2. [`add` - Add new items](#add-new-item)  
-  3. [`delete` - Delete item from list](#delete-an-item)
-  4. [`list` - List all items](#listing-all-items)
-  5. [`get` - Retrieve information of an item](#get-information-about-an-item)
-  6. [`edit` - Update an item](#edit-an-item)
-  7. [`report` - Generate sales report](#generate-sales-report)
-  8. [`sell` - Sell an item](#sell-an-item)
-  9. [`create` - Create a shelf](#create-a-shelf)
-  10. [`remove` - Remove a shelf](#remove-a-shelf)
-  11. [`markup` - Markup price of an item](#markup-price-of-an-item)
-  12. [`bye` - Exit command](#exit-program)
-  13. [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
+  * [`help` - Show help](#display-help-message)
+  * [`create` - Create a shelf](#create-a-shelf)
+  * [`remove` - Remove a shelf](#remove-a-shelf)
+  * [`add` - Add new items](#add-new-item)  
+  * [`delete` - Delete item from list](#delete-an-item)
+  * [`list` - List all items](#listing-all-items)
+  * [`get` - Retrieve information of an item](#get-information-about-an-item)
+  * [`edit` - Update an item](#edit-an-item)
+  * [`sell` - Sell an item](#sell-an-item)
+  * [`markup` - Markup price of an item](#markup-price-of-an-item)
+  * [`report` - Generate sales report](#generate-sales-report)
+  * [`bye` - Exit command](#exit-program)
+  * [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -29,17 +29,32 @@ business, where they can view these information in a user-friendly manner.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download &#11015; the latest version of `Duke` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
-3. Run `cd (path to the folder containing duke.jar)` and `duke -jar duke.jar` to start using CLIvershelf.
-4. {placeholder: show a screenshot when the app first start up}
-5. Type `help` to see the basic commands available, you may try to using the example commands below:
+2. Download &#11015; the latest version of `CliverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+3. Run `cd (path to the folder containing CliverShelf.jar)` and `java -jar CliverShelf.jar` to start using CLIvershelf.
+4. You should see the following:
+```
+                .............................................................
+                : Hello from                                                :
+                :   _____ _      _____              _____ _          _  __  :
+                :  / ____| |    |_   _|            / ____| |        | |/ _| :
+                : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
+                : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
+                : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
+                :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
+                : What can I do for you?                                    :
+                ................................................................
+                          ...................................................
+                          : Enter 'help' for the list of available commands :
+                          ......................................................
+```
+5. Type `help` to see all the commands available. You may try some example commands below:
    * `add  n/Geronimo shlv/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
    * `delete shlv/book2 i/3` - Deletes item of `index 3` from the shelf `book2`
    * `list shlv/book1` - list the items from shelf name "book1"
    * `get shlv/book1 i/2` - get information about an item of `index 2` in shelf `book1`
    * `report t/stats ym/2021-10` - Show a report summary of the sales statistics in year 2021 month Oct
    * `bye` - exit the app
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of all available commands.
 ## Usage
 
 Notes about the command format:
@@ -49,7 +64,6 @@ Notes about the command format:
 * Items in square brackets are optional and can only be specified **once** for that command. E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
 * &#9888; Commands that do not take in extra unspecified parameters from user guide will be flagged as **invalid** command formats.
 
-{give detailed instructions on how to use the command here}
 
 ## Features
 
