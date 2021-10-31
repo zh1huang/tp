@@ -346,7 +346,7 @@ public class Parser {
         final Matcher matcher = REPORT_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            logger.log(Level.WARNING, "Does not match List Command Format");
+            logger.log(Level.WARNING, "Does not match Report Command Format");
             throw new IllegalFormatException(String.format(
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, ReportCommand.REPORT_DATA_ARGS_FORMAT_STRING));
         }
