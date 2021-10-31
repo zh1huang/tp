@@ -137,7 +137,7 @@ remove shlv/book2
 Expected outcome:
 ```
                                        ......................................
-                                       : This shelf book2 has been deleted. :
+                                       : Shelf "book2" has been deleted. :
                                        .........................................
 ```
 
