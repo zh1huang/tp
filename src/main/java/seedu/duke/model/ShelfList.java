@@ -72,7 +72,7 @@ public class ShelfList {
      * @param shelf The Shelf to be removed
      * @throws ShelfNotExistException If the Shelf is not in the ShelfList
      */
-    public void deleteShelf(Shelf shelf) throws ShelfNotExistException {
+    protected void deleteShelf(Shelf shelf) throws ShelfNotExistException {
         if (!shelves.remove(shelf)) {
             throw new ShelfNotExistException(shelf.getName());
         }
