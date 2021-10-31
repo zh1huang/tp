@@ -10,7 +10,7 @@ public class RemoveShelfCommand extends Command {
     public static final String REMOVE_STRING = "remove";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private static final String REMOVE_COMPLETE_MESSAGE =
-            "This shelf %s has been deleted.";
+            "Shelf \"%s\" has been deleted.";
     private final String shelfName;
 
     public RemoveShelfCommand(String shelfName) {

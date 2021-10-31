@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class GetCommand extends Command {
 
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
-    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nRemarks:%s";
+    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String GET_STRING = "get";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
@@ -37,7 +37,7 @@ public class GetCommand extends Command {
      *
      * @return Message string to be passed to UI
      * @throws ShelfNotExistException If the Shelf is not in the ShelfList
-     * @throws ItemNotExistException If empty does not exist in the shelf
+     * @throws ItemNotExistException  If empty does not exist in the shelf
      */
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         String output = "";
