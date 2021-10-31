@@ -104,6 +104,8 @@ Creates a shelf to store items.
 
 &#9888; **Note that shelf has to first created before [item can be added](#add-new-item).**
 
+&#9888; **Note `SHELF_NAME` should only consist of alphabets and integers (Eg: `book1`)**
+
 Format: `create shlv/SHELF_NAME`
 
 Example: **Create shelf named `book2`**
