@@ -23,6 +23,7 @@ public class Item {
     private BigDecimal purchaseCost;
     private BigDecimal sellingPrice;
     private String remark;
+    private String quantity;
 
     /**
      * Constructor for Item class.
@@ -40,6 +41,7 @@ public class Item {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
+        //setQuantity(quantity);
         setRemarks(remarks);
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
@@ -98,8 +100,18 @@ public class Item {
         logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), price));
     }
 
+
+
     public String getRemarks() {
         return remark;
+    }
+
+    public void setQuantity(String qty) {
+        quantity = qty;
+    }
+
+    public String getQuantity() {
+        return quantity;
     }
 
     public void setRemarks(String newRemark) {

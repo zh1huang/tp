@@ -145,7 +145,13 @@ Expected outcome:
 
 Adds a new item to the inventory, specifying its name, category, purchase cost, selling price, quantity (and remarks if any).
 
-&#9888; **Note that [shelf has to first created](#create-a-shelf) before item can be added**
+**Important notes:**
+
+&#9888; **[Shelf has to first created](#create-a-shelf) before item can be added.**
+
+&#9888; **Length of item should not be too long (Should not exceed 52 characters).**
+
+&#9888; **Price and cost should only go up to a maximum of 2 d.p (decimal points).**
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 

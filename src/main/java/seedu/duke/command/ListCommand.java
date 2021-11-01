@@ -18,10 +18,15 @@ public class ListCommand extends Command {
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private String shelfName = null;
     private final boolean toPrintAll;
-    private static final String ITEM_INFO = "%d. %s (Cost: %s, Price: %s)\n";
+    private static final String ITEM_INFO = " %d  | %s%s| %s%s| %s%s|%s|        %s        \n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
+    private static final int ITEM_TABLE_LENGTH = 51;
+    private static final int COST_TABLE_LENGTH = 6;
+    private static final int PRICE_TABLE_LENGTH = 6;
+    private static final int QTY_TABLE_LENGTH = 3;
+
 
     /**
      * Constructor if ListCommand takes in shelfName as parameter.
@@ -70,7 +75,7 @@ public class ListCommand extends Command {
             ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();
             for (Shelf shelf: shelves) {
                 String shelfName = shelf.getName();
-                output += "-----[" + shelfName + "]-----:\n" + getList(shelf);
+                output += "[" + shelfName + "]:\n" + getList(shelf);
             }
         }
         return LIST_COMPLETE_MESSAGE + output;
@@ -83,14 +88,32 @@ public class ListCommand extends Command {
      */
     private String getList(Shelf shelf) {
         StringBuilder output = new StringBuilder();
+        output.append(" No |                        Item                        | Cost  | Price | Qty | Contains remarks\n" +
+                "-------------------------------------------------------------------------------------------------\n");
         for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
             int index = i + 1;
             String name = selectedItem.getName();
             String cost = selectedItem.getPurchaseCost();
             String price = selectedItem.getSellingPrice();
+            String remarks = selectedItem.getRemarks();
 
-            output.append(String.format(ITEM_INFO, index, name, cost, price));
+            int nameSpacesWidth = ITEM_TABLE_LENGTH - name.length();
+            String nameSpace = String.format("%" + nameSpacesWidth + "s", "");
+
+            int costSpacesWidth = COST_TABLE_LENGTH - cost.length();
+            String costSpace =String.format("%" + costSpacesWidth + "s", "");
+
+            int priceSpacesWidth = PRICE_TABLE_LENGTH - cost.length();
+            String priceSpace =String.format("%" + priceSpacesWidth + "s", "");
+
+            //int quantitySpacesWidth = QTY_TABLE_LENGTH -
+
+            String quantity = "     ";
+            String remarkStatus = remarks.equals(" ") ? "o" : "x";
+            System.out.println(remarks);
+
+            output.append(String.format(ITEM_INFO, index, name, nameSpace, cost, costSpace, price, priceSpace, quantity, remarkStatus));
             logger.log(Level.INFO, "ListCommand successfully executed");
         }
         return output.toString();
