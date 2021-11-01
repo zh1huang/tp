@@ -15,6 +15,8 @@ sell shlv/book1 i/2
 list
 sell shlv/book1 i/2
 list
+list shlv/book1
+get shlv/book1 i/1
 report t/stats ym/2021-10
 markup shlv/book1 i/2
 markup shlv/book1 i/2 %/40.50

@@ -34,8 +34,8 @@ public class ListCommandTest {
         String expected = "Here is the list of items:\n"
                 + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
                 + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | HarryPotter                                         | 16.1      | 25.12     | 1   |   o   \n"
-                + " 2   | LOTR                                                | 10.2      | 15.7      | 1   |   o   \n";
+                + " 1   | HarryPotter                                         | 16.1      | 25.12     | 1   |   x   \n"
+                + " 2   | LOTR                                                | 10.2      | 15.7      | 1   |   x   \n";
         assertEquals(expected, testCommand.execute());
     }
 
@@ -48,7 +48,7 @@ public class ListCommandTest {
         String expected = "Here is the list of items:\n"
                 + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
                 + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | Harry                                               | 9999.99   | 9999.99   | 5   |   x   \n";
+                + " 1   | Harry                                               | 9999.99   | 9999.99   | 5   |   o   \n";
 
         assertEquals(expected, testCommand.execute());
     }
@@ -70,13 +70,13 @@ public class ListCommandTest {
                 + "[test]:\n"
                 + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
                 + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | Harry                                               | 9999.99   | 9999.99   | 5   |   x   \n"
-                + " 2   | LOTR                                                | 10.2      | 15.7      | 1   |   o   \n"
+                + " 1   | Harry                                               | 9999.99   | 9999.99   | 5   |   o   \n"
+                + " 2   | LOTR                                                | 10.2      | 15.7      | 1   |   x   \n"
                 + "[test1]:\n"
                 + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
                 + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | Geronimo                                            | 12.31     | 25.23     | 1   |   x   \n"
-                + " 2   | HarryPotter                                         | 16.1      | 25.12     | 10  |   o   \n";
+                + " 1   | Geronimo                                            | 12.31     | 25.23     | 1   |   o   \n"
+                + " 2   | HarryPotter                                         | 16.1      | 25.12     | 10  |   x   \n";
         assertEquals(expected, testCommand1.execute());
     }
 
