@@ -4,9 +4,11 @@ import seedu.duke.command.exception.EmptyListException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,15 +20,19 @@ public class ListCommand extends Command {
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private String shelfName = null;
     private final boolean toPrintAll;
-    private static final String ITEM_INFO = " %d  | %s%s| %s%s| %s%s|%s|        %s        \n";
+    private static final String ITEM_INFO = "%s| %s| %s| %s| %s|   %s   \n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
-    private static final int ITEM_TABLE_LENGTH = 51;
-    private static final int COST_TABLE_LENGTH = 6;
-    private static final int PRICE_TABLE_LENGTH = 6;
-    private static final int QTY_TABLE_LENGTH = 3;
-
+    private static final String HEADER = " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n" +
+            "-------------------------------------------------------------------------------------------------\n";
+    private static final int INDEX_TABLE_LENGTH = 5;
+    private static final int ITEM_TABLE_LENGTH = 52;
+    private static final int COST_TABLE_LENGTH = 10;
+    private static final int PRICE_TABLE_LENGTH = 10;
+    private static final int QTY_TABLE_LENGTH = 4;
+    private final ArrayList<Item> itemList;
+    private final ArrayList<Integer> quantityList;
 
     /**
      * Constructor if ListCommand takes in shelfName as parameter.
@@ -37,6 +43,8 @@ public class ListCommand extends Command {
     public ListCommand(String shelfName) {
         this.shelfName = shelfName;
         this.toPrintAll = false;
+        this.itemList = new ArrayList<>();
+        this.quantityList = new ArrayList<>();
     }
 
     /**
@@ -44,6 +52,8 @@ public class ListCommand extends Command {
      */
     public ListCommand() {
         this.toPrintAll = true;
+        this.itemList = new ArrayList<>();
+        this.quantityList = new ArrayList<>();
     }
 
     /**
@@ -53,7 +63,7 @@ public class ListCommand extends Command {
      * @throws ShelfNotExistException If the Shelf is not in the ShelfList
      * @throws EmptyListException     If list is empty
      */
-    public String execute() throws ShelfNotExistException, EmptyListException {
+    public String execute() throws ShelfNotExistException, EmptyListException, IllegalArgumentException {
         String output = "";
         if (!toPrintAll) { //optional parameter entered so print that particular shelf
             try {
@@ -66,7 +76,6 @@ public class ListCommand extends Command {
                 }
 
                 output = getList(selectedShelf);
-
             } catch (seedu.duke.model.exception.ShelfNotExistException e) {
                 logger.log(Level.WARNING, "ListCommand failed to execute because shelf does not exist");
                 throw new ShelfNotExistException(shelfName);
@@ -74,8 +83,11 @@ public class ListCommand extends Command {
         } else {
             ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();
             for (Shelf shelf: shelves) {
-                String shelfName = shelf.getName();
-                output += "[" + shelfName + "]:\n" + getList(shelf);
+                if (!Objects.equals(shelf.getName(), "soldItems")) { // soldItems will be in Sales Report
+                    String shelfName = shelf.getName();
+                    output += "[" + shelfName + "]:\n" + getList(shelf);
+
+                }
             }
         }
         return LIST_COMPLETE_MESSAGE + output;
@@ -88,34 +100,14 @@ public class ListCommand extends Command {
      */
     private String getList(Shelf shelf) {
         StringBuilder output = new StringBuilder();
-        output.append(" No |                        Item                        | Cost  | Price | Qty | Contains remarks\n" +
-                "-------------------------------------------------------------------------------------------------\n");
+        output.append(HEADER);
+
         for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
-            int index = i + 1;
-            String name = selectedItem.getName();
-            String cost = selectedItem.getPurchaseCost();
-            String price = selectedItem.getSellingPrice();
-            String remarks = selectedItem.getRemarks();
-
-            int nameSpacesWidth = ITEM_TABLE_LENGTH - name.length();
-            String nameSpace = String.format("%" + nameSpacesWidth + "s", "");
-
-            int costSpacesWidth = COST_TABLE_LENGTH - cost.length();
-            String costSpace =String.format("%" + costSpacesWidth + "s", "");
-
-            int priceSpacesWidth = PRICE_TABLE_LENGTH - cost.length();
-            String priceSpace =String.format("%" + priceSpacesWidth + "s", "");
-
-            //int quantitySpacesWidth = QTY_TABLE_LENGTH -
-
-            String quantity = "     ";
-            String remarkStatus = remarks.equals(" ") ? "o" : "x";
-            System.out.println(remarks);
-
-            output.append(String.format(ITEM_INFO, index, name, nameSpace, cost, costSpace, price, priceSpace, quantity, remarkStatus));
-            logger.log(Level.INFO, "ListCommand successfully executed");
+            updateQuantity(selectedItem);
         }
+        output.append(createOutput());
+
         return output.toString();
     }
 
@@ -128,5 +120,60 @@ public class ListCommand extends Command {
             return false;
         }
         return other instanceof ListCommand;
+    }
+
+    private boolean isEqual(Item item1, Item item2) {
+        return item1.getName().equals(item2.getName())
+                && item1.getPurchaseCost().equals(item2.getPurchaseCost())
+                && item1.getSellingPrice().equals(item2.getSellingPrice())
+                && item1.getRemarks().equals(item2.getRemarks());
+    }
+
+    private void updateQuantity(Item item) {
+        boolean hasMatch = false;
+        for (Item temp: itemList) {
+            if (isEqual(temp, item)) {
+                hasMatch = true;
+                int index = itemList.indexOf(temp);
+                int newQuantity = quantityList.get(index) + 1;
+                quantityList.set(index, newQuantity);
+                break;
+            }
+        }
+        if (!hasMatch) {
+            itemList.add(item);
+            quantityList.add(1);
+        }
+    }
+
+    private String lineEntry(int length, String input) {
+        int spacesWidth;
+        String spaces;
+        spacesWidth = length - input.length();
+        spaces = String.format("%" + spacesWidth + "s", "");
+        return input + spaces;
+    }
+
+    private String createOutput() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < itemList.size(); i++) {
+            Item selectedItem = itemList.get(i);
+            int index = i + 1;
+            String name = selectedItem.getName();
+            String cost = selectedItem.getPurchaseCost();
+            String price = selectedItem.getSellingPrice();
+            String remarks = selectedItem.getRemarks();
+
+            String indexString = lineEntry(INDEX_TABLE_LENGTH, Integer.toString(index));
+            name = lineEntry(ITEM_TABLE_LENGTH, name);
+            cost = lineEntry(COST_TABLE_LENGTH, cost);
+            price = lineEntry(PRICE_TABLE_LENGTH, price);
+            String quantity = lineEntry(QTY_TABLE_LENGTH, String.valueOf(quantityList.get(i)));
+            String remarkStatus = remarks.equals(" ") ? "o" : "x";
+
+            output.append(String.format(ITEM_INFO, indexString, name, cost, price, quantity, remarkStatus));
+            logger.log(Level.INFO, "ListCommand successfully executed");
+        }
+        return output.toString();
     }
 }
