@@ -20,13 +20,15 @@ public class ListCommand extends Command {
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private String shelfName = null;
     private final boolean toPrintAll;
-    private static final String ITEM_INFO = "%s| %s| %s| %s| %s|   %s   \n";
+    private static final String ITEM_INFO = " %s| %s| %s| %s| %s|   %s   \n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
-    private static final String HEADER = " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n" +
+    private static final String HEADER =
+            " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n";
+    private static final String BORDER =
             "-------------------------------------------------------------------------------------------------\n";
-    private static final int INDEX_TABLE_LENGTH = 5;
+    private static final int INDEX_TABLE_LENGTH = 4;
     private static final int ITEM_TABLE_LENGTH = 52;
     private static final int COST_TABLE_LENGTH = 10;
     private static final int PRICE_TABLE_LENGTH = 10;
@@ -60,8 +62,9 @@ public class ListCommand extends Command {
      * Executes the list operation.
      *
      * @return Message string to be passed to UI
-     * @throws ShelfNotExistException If the Shelf is not in the ShelfList
-     * @throws EmptyListException     If list is empty
+     * @throws ShelfNotExistException   If the Shelf is not in the ShelfList
+     * @throws EmptyListException       If list is empty
+     * @throws IllegalArgumentException If illegal argument is entered
      */
     public String execute() throws ShelfNotExistException, EmptyListException, IllegalArgumentException {
         String output = "";
@@ -82,9 +85,11 @@ public class ListCommand extends Command {
             }
         } else {
             ArrayList<Shelf> shelves = ShelfList.getShelfList().getShelves();
-            for (Shelf shelf: shelves) {
+            for (Shelf shelf : shelves) {
                 if (!Objects.equals(shelf.getName(), "soldItems")) { // soldItems will be in Sales Report
                     String shelfName = shelf.getName();
+                    itemList.clear();
+                    quantityList.clear();
                     output += "[" + shelfName + "]:\n" + getList(shelf);
 
                 }
@@ -100,7 +105,7 @@ public class ListCommand extends Command {
      */
     private String getList(Shelf shelf) {
         StringBuilder output = new StringBuilder();
-        output.append(HEADER);
+        output.append(HEADER + BORDER);
 
         for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
@@ -108,6 +113,92 @@ public class ListCommand extends Command {
         }
         output.append(createOutput());
 
+        return output.toString();
+    }
+
+    /**
+     * Checks if 2 items are equal.
+     *
+     * @param item1 Item 1 to be checked
+     * @param item2 Item 2 to be checked
+     * @return if 2 items compared are exactly equal
+     */
+    private boolean isEqual(Item item1, Item item2) {
+        return item1.getName().equals(item2.getName())
+                && item1.getPurchaseCost().equals(item2.getPurchaseCost())
+                && item1.getSellingPrice().equals(item2.getSellingPrice())
+                && item1.getRemarks().equals(item2.getRemarks());
+    }
+
+    /**
+     * As every item added is a different object, we use isEqual method
+     * to group items of the same attributes as one single entry.
+     *
+     * @param item Item to be checked and grouped if quantity is more than 1
+     */
+    private void updateQuantity(Item item) {
+        boolean hasMatch = false;
+        for (Item temp : itemList) {
+            if (isEqual(temp, item)) {
+                hasMatch = true;
+                int index = itemList.indexOf(temp);
+                int newQuantity = quantityList.get(index) + 1;
+                quantityList.set(index, newQuantity);
+                break;
+            }
+        }
+        if (!hasMatch) {
+            itemList.add(item);
+            quantityList.add(1); //if item not found in list, add as new entry with 1 as quantity
+        }
+    }
+
+    /**
+     * Formats every line such that the delimiters align with header.
+     *
+     * @param length Length of header
+     * @param input  Input to be placed under that header
+     * @return the formatted and aligned String entry
+     */
+    private String lineEntry(int length, String input) {
+        int spacesWidth = length - input.length();
+        String spaces = String.format("%" + spacesWidth + "s", "");
+        ;
+
+        return input + spaces;
+    }
+
+    /**
+     * Creates the print output after calling updateQuantity method.
+     *
+     * @return the print output after grouping same items together
+     */
+    private String createOutput() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < itemList.size(); i++) {
+            Item selectedItem = itemList.get(i);
+
+            int index = i + 1;
+            final String indexString = lineEntry(INDEX_TABLE_LENGTH, Integer.toString(index));
+
+            String name = selectedItem.getName();
+            name = lineEntry(ITEM_TABLE_LENGTH, name);
+
+            String cost = selectedItem.getPurchaseCost();
+            cost = lineEntry(COST_TABLE_LENGTH, cost);
+
+            String price = selectedItem.getSellingPrice();
+            price = lineEntry(PRICE_TABLE_LENGTH, price);
+
+            String quantity = String.valueOf(quantityList.get(i));
+            quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
+
+            String remarks = selectedItem.getRemarks();
+            String remarkStatus = remarks.equals(" ") ? "o" : "x";
+
+            output.append(String.format(ITEM_INFO, indexString, name, cost, price, quantity, remarkStatus));
+            logger.log(Level.INFO, "ListCommand successfully executed");
+        }
         return output.toString();
     }
 
@@ -120,60 +211,5 @@ public class ListCommand extends Command {
             return false;
         }
         return other instanceof ListCommand;
-    }
-
-    private boolean isEqual(Item item1, Item item2) {
-        return item1.getName().equals(item2.getName())
-                && item1.getPurchaseCost().equals(item2.getPurchaseCost())
-                && item1.getSellingPrice().equals(item2.getSellingPrice())
-                && item1.getRemarks().equals(item2.getRemarks());
-    }
-
-    private void updateQuantity(Item item) {
-        boolean hasMatch = false;
-        for (Item temp: itemList) {
-            if (isEqual(temp, item)) {
-                hasMatch = true;
-                int index = itemList.indexOf(temp);
-                int newQuantity = quantityList.get(index) + 1;
-                quantityList.set(index, newQuantity);
-                break;
-            }
-        }
-        if (!hasMatch) {
-            itemList.add(item);
-            quantityList.add(1);
-        }
-    }
-
-    private String lineEntry(int length, String input) {
-        int spacesWidth;
-        String spaces;
-        spacesWidth = length - input.length();
-        spaces = String.format("%" + spacesWidth + "s", "");
-        return input + spaces;
-    }
-
-    private String createOutput() {
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < itemList.size(); i++) {
-            Item selectedItem = itemList.get(i);
-            int index = i + 1;
-            String name = selectedItem.getName();
-            String cost = selectedItem.getPurchaseCost();
-            String price = selectedItem.getSellingPrice();
-            String remarks = selectedItem.getRemarks();
-
-            String indexString = lineEntry(INDEX_TABLE_LENGTH, Integer.toString(index));
-            name = lineEntry(ITEM_TABLE_LENGTH, name);
-            cost = lineEntry(COST_TABLE_LENGTH, cost);
-            price = lineEntry(PRICE_TABLE_LENGTH, price);
-            String quantity = lineEntry(QTY_TABLE_LENGTH, String.valueOf(quantityList.get(i)));
-            String remarkStatus = remarks.equals(" ") ? "o" : "x";
-
-            output.append(String.format(ITEM_INFO, indexString, name, cost, price, quantity, remarkStatus));
-            logger.log(Level.INFO, "ListCommand successfully executed");
-        }
-        return output.toString();
     }
 }
