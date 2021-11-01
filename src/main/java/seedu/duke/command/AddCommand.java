@@ -92,7 +92,7 @@ public class AddCommand extends Command {
                 } else {
                     return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
                 }
-            } else if (quantity == 1){
+            } else if (quantity == 1) {
                 if (hasNegativeProfit) {
                     return ADD_COMPLETE_MESSAGE_SINGLE + PRICE_WARNING;
                 } else {
