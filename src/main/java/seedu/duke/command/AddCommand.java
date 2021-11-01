@@ -26,7 +26,10 @@ public class AddCommand extends Command {
     private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =
             " items have been added to the list.";
     private static final String PRICE_WARNING =
-            "\nYour price of selling is not higher than your purchase cost. "
+            "\nYour selling price is not higher than your purchase cost. "
+                    + "\nMake sure you did not type wrongly";
+    private static final String ZERO_PRICE_WARNING =
+            "Your selling price and/or your purchase cost is 0. "
                     + "\nMake sure you did not type wrongly";
     private final String name;
     private final String purchaseCost;
@@ -76,20 +79,29 @@ public class AddCommand extends Command {
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }
             boolean hasNegativeProfit = (new BigDecimal(sellingPrice).compareTo(new BigDecimal(purchaseCost)) == -1);
+
+            double cost = Double.parseDouble(purchaseCost.trim());
+            double price = Double.parseDouble(sellingPrice.trim());
+            if (cost == 0 || price == 0) {
+                return ZERO_PRICE_WARNING;
+            }
+
             if (quantity > 1) {
                 if (hasNegativeProfit) {
                     return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE + PRICE_WARNING;
                 } else {
                     return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
                 }
-            } else {
+            } else if (quantity == 1){
                 if (hasNegativeProfit) {
                     return ADD_COMPLETE_MESSAGE_SINGLE + PRICE_WARNING;
                 } else {
                     return ADD_COMPLETE_MESSAGE_SINGLE;
                 }
-
+            } else {
+                throw new IllegalArgumentException("Item's quantity cannot be 0");
             }
+
         } catch (seedu.duke.model.exception.IllegalArgumentException e) {
             logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
                     e.getMessage()));
