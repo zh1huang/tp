@@ -1,10 +1,10 @@
 create shlv/book1
 create shlv/book2
 add n/Harry Potter shlv/book1 p/25.90 s/30.90 q/1
-add n/Geronimo shlv/book1 p/17.90 s/20.90 q/1
-add n/The Lord of the Rings shlv/book1 p/15.90 s/23.90 q/1
-add n/Narnia shlv/book1 p/17.40 s/25 q/1
-add n/Three Little Pigs shlv/book1 p/10.90 s/12.99 q/2
+add n/Geronimo shlv/book2 p/17.90 s/20.90 q/1
+add n/Narnia shlv/book1 p/17.40 s/25 q/1 r/good book
+add n/Three Little Pigs shlv/book1 p/10.90 s/12.99 q/99
+add n/expensive book shlv/book2 p/9999.99 s/9000.00 q/2
 list
 delete shlv/book1 i/1
 list
@@ -15,6 +15,8 @@ sell shlv/book1 i/2
 list
 sell shlv/book1 i/2
 list
+list shlv/book1
+get shlv/book1 i/1
 report t/stats ym/2021-10
 markup shlv/book1 i/2
 markup shlv/book1 i/2 %/40.50

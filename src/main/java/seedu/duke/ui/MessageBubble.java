@@ -7,8 +7,9 @@ public class MessageBubble {
     static final String EDGE_VERTICAL_SYMBOL = ":";
     static final String EDGE_TAIL = "...";
     static int MAX_LINES = 1000;
-    static int TERMINAL_WIDTH = 105;
-    static int MAX_BUBBLE_WIDTH = 100;
+    static int TERMINAL_WIDTH = 130;
+    static int MAX_BUBBLE_WIDTH = 125;
+
     static int MAX_MESSAGE_LENGTH = MAX_BUBBLE_WIDTH - EDGE_TAIL.length() - 4;
 
     private final String[] messages;
