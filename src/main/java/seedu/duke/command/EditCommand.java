@@ -11,7 +11,6 @@ import seedu.duke.model.ShelfList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 /**
  * The command that edits a selected item.
@@ -27,7 +26,7 @@ public class EditCommand extends Command {
     private final int index;
     private final String selectedProperty;
     private final String newValue;
-    private final String[] properties = {"cost", "price"};
+    private final String[] properties = {"purchase cost", "selling price", "remarks"};
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
     //to be added to UI part later
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -68,13 +67,15 @@ public class EditCommand extends Command {
                     .getShelf(shelfName);
             int sizeBeforeEditing = selectedShelf.getSize();
             Item selectedItem = selectedShelf.getItem(index);
-            if (selectedProperty.equals("cost")) {
+            if (selectedProperty.equals("purchase cost")) {
                 selectedItem.setPurchaseCost(newValue);
 
-            } else {
-                assert selectedProperty.equals("price") :
-                        "All properties should have been listed";
+            } else if (selectedProperty.equals("selling price")) {
                 selectedItem.setSellingPrice(newValue);
+            } else {
+                assert selectedProperty.equals("remarks") :
+                        "All properties should have been listed";
+                selectedItem.setRemarks(newValue);
             }
             int sizeAfterEditing = selectedShelf.getSize();
             assert sizeBeforeEditing == sizeAfterEditing :

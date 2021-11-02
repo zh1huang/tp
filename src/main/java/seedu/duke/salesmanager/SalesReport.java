@@ -2,9 +2,6 @@ package seedu.duke.salesmanager;
 
 import seedu.duke.salesmanager.exception.EmptyListException;
 import seedu.duke.model.Item;
-import seedu.duke.model.Shelf;
-import seedu.duke.model.ShelfList;
-import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.command.exception.IllegalArgumentException;
 
 import java.math.BigDecimal;

@@ -17,7 +17,8 @@ import java.util.regex.Pattern;
  */
 public class AddCommand extends Command {
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-        "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
+        "add n/NAME shlv/SHELF_NAME p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
+            + "(Purchase cost and selling price must be non-negative numbers. Quantity must be non-negative integers.)";
     public static final String ADD_STRING = "add";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
         + "price: %s\nquantity: %s\nremarks: %s\n";
@@ -27,7 +28,7 @@ public class AddCommand extends Command {
             " items have been added to the list.";
     private static final String PRICE_WARNING =
             "\nYour price of selling is not higher than your purchase cost. "
-                    + "\nMake sure you did not type wrongly";
+                    + "\nMake sure you did not type wrongly.";
     private final String name;
     private final String purchaseCost;
     private final String sellingPrice;
