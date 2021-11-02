@@ -193,7 +193,7 @@ public class ListCommand extends Command {
             quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
 
             String remarks = selectedItem.getRemarks();
-            String remarkStatus = remarks.equals(" ") ? "x" : "o";
+            String remarkStatus = remarks.isBlank() ? "x" : "o";
 
             output.append(String.format(ITEM_INFO, indexString, name, cost, price, quantity, remarkStatus));
             logger.log(Level.INFO, "ListCommand successfully executed");
