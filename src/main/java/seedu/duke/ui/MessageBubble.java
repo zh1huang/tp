@@ -71,7 +71,6 @@ public class MessageBubble {
     }
 
     private void addSingleMessage(String msg) {
-        System.out.println(msg);
         if (msg.length() < MAX_MESSAGE_LENGTH) {
             updateBubbleWidth(msg);
             messages[messagesCount++] = msg;

@@ -25,7 +25,6 @@ public class Wrapping {
                 break;
             }
             for (int i = lineLimit - 1; i >= 0; i--) {
-                System.out.println(temp.length());
                 if (temp.charAt(i) == ' ') {
                     int lastIndexOfSpace = i;
                     lines.add(temp.substring(0, lastIndexOfSpace));

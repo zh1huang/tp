@@ -6,6 +6,7 @@ import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.ui.Wrapping;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -181,7 +182,8 @@ public class ListCommand extends Command {
             final String indexString = lineEntry(INDEX_TABLE_LENGTH, Integer.toString(index));
 
             String name = selectedItem.getName();
-            name = lineEntry(ITEM_TABLE_LENGTH, name);
+//            name = lineEntry(ITEM_TABLE_LENGTH, name);
+            name = Wrapping.restrictMessageLength(name, ITEM_TABLE_LENGTH);
 
             String cost = selectedItem.getPurchaseCost();
             cost = lineEntry(COST_TABLE_LENGTH, cost);
