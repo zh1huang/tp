@@ -5,6 +5,7 @@ import seedu.duke.model.exception.IllegalArgumentException;
 
 import java.time.LocalDateTime;
 
+//@@author yuejunfeng0909
 public class SoldItem extends Item {
 
     private LocalDateTime saleTime;
@@ -19,6 +20,7 @@ public class SoldItem extends Item {
      *              must be non-negative
      * @param price the selling price of the item
      *              must be non-negative
+     *
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
     public SoldItem(String name, String cost, String price, String remarks, LocalDateTime saleTime)
