@@ -89,7 +89,7 @@ public class EditCommand extends Command {
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             throw new ShelfNotExistException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         }
     }
 }
