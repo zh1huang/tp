@@ -18,4 +18,4 @@ cd ..\..\text-ui-test
 
 FC ACTUAL.TXT EXPECTED.TXT >NUL && ECHO Test passed! || Echo Test failed!
 
-del /f ..\..\text-ui-test\data\Data.txt
+del data\Data.txt
