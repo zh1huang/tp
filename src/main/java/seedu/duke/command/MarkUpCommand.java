@@ -8,7 +8,6 @@ import seedu.duke.model.exception.ShelfNotExistException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.regex.Pattern;
 
 public class MarkUpCommand extends Command {
     public static final int INTEGER_ONE_HUNDRED = 100;
@@ -19,17 +18,17 @@ public class MarkUpCommand extends Command {
     public static final int INTEGER_TEN = 10;
     public static final int INTEGER_ELEVEN = 11;
     public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: "
-        + "NOT recommended to set a percentage > 100 to $%s.\n"
-        + "This is to keep the price of the item reasonable";
+            + "NOT recommended to set a percentage > 100 to $%s.\n"
+            + "This is to keep the price of the item reasonable";
     public static final int TWO_DECIMAL_POINTS = 2;
     public static final int FOUR_DECIMAL_POINT = 4;
 
     private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final String ITEM_NAME_MESSAGE_FORMAT = "Item: %s\nCost: %s, Price: %s\n";
     private static final String CURRENT_ITEM_MARKUP_MESSAGE_FORMAT =
-        "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
+            "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
     private static final String ESTIMATED_MARKUP_MESSAGE_FORMAT =
-        "markup: %s%%, increase: $%s, Final price: $%s\n";
+            "markup: %s%%, increase: $%s, Final price: $%s\n";
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     private final String shelfName;
     private final int index;
@@ -41,8 +40,8 @@ public class MarkUpCommand extends Command {
     /**
      * MarkUpCommand constructor. Initialises shelf name, index, user requested percent for markup if not null.
      *
-     * @param shelfName Name of shelf
-     * @param index index in shelf
+     * @param shelfName          Name of shelf
+     * @param index              index in shelf
      * @param userRequestPercent user input percentage for markup
      */
     public MarkUpCommand(String shelfName, String index, String userRequestPercent) {
@@ -85,9 +84,9 @@ public class MarkUpCommand extends Command {
 
     private void getItemDetails() throws ShelfNotExistException {
         Item selectedItem = ShelfList
-            .getShelfList()
-            .getShelf(shelfName)
-            .getItem(index);
+                .getShelfList()
+                .getShelf(shelfName)
+                .getItem(index);
         this.itemName = selectedItem.getName();
         this.cost = cost.add(new BigDecimal(selectedItem.getPurchaseCost()));
         this.price = price.add(new BigDecimal(selectedItem.getSellingPrice()));
@@ -101,12 +100,12 @@ public class MarkUpCommand extends Command {
      */
     private String getUserRequestMarkUpInfo() {
         BigDecimal amountIncrease = userRequestPercent
-            .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
-            .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);
+                .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
+                .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);
         BigDecimal finalPrice = cost.add(amountIncrease);
 
         String stringToAppend = String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT,
-            userRequestPercent, amountIncrease, finalPrice);
+                userRequestPercent, amountIncrease, finalPrice);
 
         if (userRequestPercent.compareTo(ONE_HUNDRED) > 1) {
             String warningString = String.format(WARNING_LARGE_PERCENT_MESSAGE_FORMAT, finalPrice);
@@ -127,13 +126,13 @@ public class MarkUpCommand extends Command {
         for (int i = 0; i < INTEGER_ELEVEN; i++) {
             BigDecimal estimatePercentMarkUp = new BigDecimal(i).multiply(BigDecimal.valueOf(INTEGER_TEN));
             BigDecimal amountIncrease = estimatePercentMarkUp
-                .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
-                .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);
+                    .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
+                    .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);
             BigDecimal finalPrice = cost.add(amountIncrease);
 
             stringToAppend.append(
-                String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT,
-                    estimatePercentMarkUp, amountIncrease, finalPrice));
+                    String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT,
+                            estimatePercentMarkUp, amountIncrease, finalPrice));
         }
         return stringToAppend.toString();
     }
@@ -147,10 +146,10 @@ public class MarkUpCommand extends Command {
         String stringToAppend;
         BigDecimal difference = price.subtract(cost);
         BigDecimal markUpPercent = difference
-            .divide(cost, TWO_DECIMAL_POINTS, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
+                .divide(cost, TWO_DECIMAL_POINTS, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
         stringToAppend = String.format(CURRENT_ITEM_MARKUP_MESSAGE_FORMAT,
-            decimalFormat.format(difference), decimalFormat.format(markUpPercent));
+                decimalFormat.format(difference), decimalFormat.format(markUpPercent));
 
         return stringToAppend;
     }

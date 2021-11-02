@@ -3,8 +3,6 @@ package seedu.duke.command;
 import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.ShelfList;
 
-import java.util.regex.Pattern;
-
 public class RemoveShelfCommand extends Command {
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
     public static final String REMOVE_STRING = "remove";

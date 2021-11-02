@@ -1,24 +1,23 @@
 package seedu.duke.command;
 
-import seedu.duke.command.exception.NoTypeFoundException;
-import seedu.duke.salesmanager.SalesReport;
 import seedu.duke.command.exception.EmptyListException;
 import seedu.duke.command.exception.IllegalArgumentException;
+import seedu.duke.command.exception.NoTypeFoundException;
+import seedu.duke.salesmanager.SalesReport;
 
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 public class ReportCommand extends Command {
     public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]";
     public static final String REPORT_STRING = "report";
     public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\nstart date: %s\nend date: %s\n";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String[] types = {"stats", "items"};
     private final String selectedStartDate;
     private final String selectedEndDate;
     private final String reportType;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public ReportCommand(String selectedStartDate, String selectedEndDate, String reportType) {
         this.selectedStartDate = selectedStartDate;
@@ -35,7 +34,7 @@ public class ReportCommand extends Command {
         try {
             if (reportType.equals("stats")) {
                 assert reportType.equals("stats") :
-                    "All types should have been listed";
+                        "All types should have been listed";
                 SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemStats();

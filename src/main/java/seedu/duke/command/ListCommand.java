@@ -18,12 +18,12 @@ public class ListCommand extends Command {
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [shlv/SHELF_NAME]";
     public static final String LIST_STRING = "list";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
-    private String shelfName = null;
-    private final boolean toPrintAll;
-    private static final String ITEM_INFO = " %s| %s| %s| %s| %s|   %s   \n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
+    private final boolean toPrintAll;
+    private String shelfName = null;
+    private static final String ITEM_INFO = " %s| %s| %s| %s| %s|   %s   \n";
     private static final String HEADER =
             " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n";
     private static final String BORDER =
@@ -91,7 +91,6 @@ public class ListCommand extends Command {
                     itemList.clear();
                     quantityList.clear();
                     output += "[" + shelfName + "]:\n" + getList(shelf);
-
                 }
             }
         }
@@ -194,7 +193,7 @@ public class ListCommand extends Command {
             quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
 
             String remarks = selectedItem.getRemarks();
-            String remarkStatus = remarks.equals(" ") ? "x" : "o";
+            String remarkStatus = remarks.isBlank() ? "x" : "o";
 
             output.append(String.format(ITEM_INFO, indexString, name, cost, price, quantity, remarkStatus));
             logger.log(Level.INFO, "ListCommand successfully executed");

@@ -1,26 +1,25 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.DuplicateItemException;
+import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
-import seedu.duke.command.exception.IllegalArgumentException;
-import seedu.duke.command.exception.DuplicateItemException;
 import seedu.duke.model.ShelfList;
 
 import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 /**
  * The command that adds a new item to the list.
  */
 public class AddCommand extends Command {
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-        "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
+            "add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]";
     public static final String ADD_STRING = "add";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
-        + "price: %s\nquantity: %s\nremarks: %s\n";
+            + "price: %s\nquantity: %s\nremarks: %s\n";
     private static final String ADD_COMPLETE_MESSAGE_SINGLE =
             "This item has been added to the list.";
     private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =
@@ -31,13 +30,13 @@ public class AddCommand extends Command {
     private static final String ZERO_PRICE_WARNING =
             "Your selling price and/or your purchase cost is 0. "
                     + "\nMake sure you did not type wrongly";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String name;
     private final String purchaseCost;
     private final String sellingPrice;
     private final int quantity;
     private final String shelfName;
     private final String remarks;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * AddCommand Constructor.

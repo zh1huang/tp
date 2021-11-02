@@ -1,12 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.ItemNotExistException;
+import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ShelfList;
-import seedu.duke.command.exception.ShelfNotExistException;
-import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.salesmanager.SalesManager;
-
-import java.util.regex.Pattern;
 
 public class SellCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";

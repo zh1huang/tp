@@ -4,11 +4,11 @@ import org.json.JSONObject;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.SoldItem;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
-import seedu.duke.salesmanager.SoldItem;
 import seedu.duke.ui.MessageBubble;
 
 import java.io.File;
@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909

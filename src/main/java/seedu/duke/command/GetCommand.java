@@ -8,7 +8,6 @@ import seedu.duke.model.exception.ShelfNotExistException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 public class GetCommand extends Command {
 
@@ -17,10 +16,10 @@ public class GetCommand extends Command {
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String GET_STRING = "get";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
-    private final int index;
-    private final String shelfName;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
+    private final int index;
+    private final String shelfName;
 
     /**
      * Constructor for GetCommand.

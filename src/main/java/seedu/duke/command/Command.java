@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.command.exception.CommandException;
-import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
