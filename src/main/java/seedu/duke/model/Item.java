@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
-
 /**
  * Represents an item that can be stored in an Shelf.
  * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
@@ -28,12 +27,14 @@ public class Item {
     /**
      * Constructor for Item class.
      *
-     * @param name  the name of the item
-     *              consists of alphabet, number, space, underscore, round bracket and hyphen
-     * @param cost  the cost of the item
-     *              must be non-negative
-     * @param price the selling price of the item
-     *              must be non-negative
+     * @param name    the name of the item
+     *                consists of alphabet, number, space, underscore, round bracket and hyphen
+     * @param cost    the cost of the item
+     *                must be non-negative
+     * @param price   the selling price of the item
+     *                must be non-negative
+     * @param remarks the remark that is tied to the item
+     *
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
 
@@ -46,6 +47,7 @@ public class Item {
     }
 
     public String getName() {
+        assert name != null;
         return name;
     }
 
@@ -54,6 +56,7 @@ public class Item {
      *
      * @param name new name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
+     *
      * @throws IllegalArgumentException if the name contains other characters
      */
     public void setName(String name) throws IllegalArgumentException {
@@ -76,6 +79,7 @@ public class Item {
      *
      * @param cost new cost of the item
      *             must be non-negative
+     *
      * @throws IllegalArgumentException if the new cost is negative
      */
     public void setPurchaseCost(String cost) throws IllegalArgumentException {
@@ -92,6 +96,7 @@ public class Item {
      *
      * @param price new price of the item
      *              must be non-negative
+     *
      * @throws IllegalArgumentException if the new price is negative
      */
     public void setSellingPrice(String price) throws IllegalArgumentException {

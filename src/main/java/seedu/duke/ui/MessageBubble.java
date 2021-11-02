@@ -75,12 +75,12 @@ public class MessageBubble {
             updateBubbleWidth(msg);
             messages[messagesCount++] = msg;
         } else {
-            String extracted = msg.substring(0, MAX_MESSAGE_LENGTH);
-            updateBubbleWidth(extracted);
-            messages[messagesCount++] = extracted;
-
-            String remaining = msg.substring(MAX_MESSAGE_LENGTH);
-            this.addSingleMessage(remaining);
+            Wrapping autoWrap = new Wrapping(msg, MAX_MESSAGE_LENGTH);
+            while (!autoWrap.isEmpty()) {
+                String extracted = autoWrap.nextLine();
+                updateBubbleWidth(extracted);
+                messages[messagesCount++] = extracted;
+            }
         }
     }
 

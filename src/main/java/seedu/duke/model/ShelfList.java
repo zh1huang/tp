@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 //@@author yuejunfeng0909
-
 /**
  * Represents a collection of ItemContainers.
  * Provides methods to better manage ItemContainers.
@@ -55,6 +54,7 @@ public class ShelfList {
      * Creates a new Shelf with the specified name in the ShelfList.
      *
      * @param name The name of the new Shelf
+     *
      * @throws IllegalArgumentException if name does not follow the format
      * @throws DuplicateShelfException  if there already exist a Shelf with this name
      */
@@ -71,6 +71,7 @@ public class ShelfList {
      * Remove the item container from the ShelfList.
      *
      * @param shelf The Shelf to be removed
+     *
      * @throws ShelfNotExistException If the Shelf is not in the ShelfList
      */
     protected void deleteShelf(Shelf shelf) throws ShelfNotExistException {
@@ -84,6 +85,7 @@ public class ShelfList {
      * Remove the Shelf with the specified name from the ShelfList.
      *
      * @param name Name of the Shelf to be removed
+     *
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
      */
     public void deleteShelf(String name) throws ShelfNotExistException {
@@ -94,7 +96,9 @@ public class ShelfList {
      * Returns the Shelf with the specified name.
      *
      * @param name The name of the Shelf
+     *
      * @return The Shelf that matches the specified name
+     *
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
      */
     public Shelf getShelf(String name) throws ShelfNotExistException {
@@ -110,6 +114,7 @@ public class ShelfList {
      * Check if there exists an item container with the specified name.
      *
      * @param name name of the item container
+     *
      * @return true if there exists
      */
     public boolean existShelf(String name) {
@@ -148,7 +153,9 @@ public class ShelfList {
      * Return the Shelf that is storing the specified Item.
      *
      * @param item The target item
+     *
      * @return The Shelf that contains the item
+     *
      * @throws ItemNotExistException If the item does not belong to any Shelf
      */
     public Shelf shelfOfItem(Item item) throws ItemNotExistException {
