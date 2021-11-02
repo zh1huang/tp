@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
+
 /**
  * Represents an item that can be stored in an Shelf.
  * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
@@ -40,7 +41,7 @@ public class Item {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
-        setRemarks(remarks);
+        setRemarks("");
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
@@ -57,7 +58,7 @@ public class Item {
      */
     public void setName(String name) throws IllegalArgumentException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
-            String temp = this.name;
+            String temp = (this.name == null) ? "new item" : this.name;
             this.name = name;
             logger.log(Level.INFO, String.format("Successfully set Item %s's name as %s", temp, name));
         } else {
@@ -104,7 +105,7 @@ public class Item {
 
     public void setRemarks(String newRemark) {
         if (newRemark.isBlank()) {
-            remark = " ";
+            remark = "";
         } else {
             remark = newRemark;
         }

@@ -42,11 +42,11 @@ public class GetCommandTest {
 
     @Test
     public void execute_ItemInList_getsNormally() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12", "Hello"));
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12", ""));
         assertTrue(testList.contains("HarryPotter"));
         //testCommand1.execute();
         String expected = String.format(GET_COMPLETE_MESSAGE + ITEM_DESCRIPTION,
-                "HarryPotter", "16.1", "25.12", "Hello");
+                "HarryPotter", "16.1", "25.12", "");
         assertEquals(expected, testCommand1.execute());
     }
 

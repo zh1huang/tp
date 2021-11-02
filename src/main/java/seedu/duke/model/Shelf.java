@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
+
 /**
  * Represents a container that is able to store items.
  * e.g. A shelf
@@ -40,6 +41,7 @@ public class Shelf {
         }
         setName(name);
         items = new ArrayList<>();
+        setRemark("");
         shelfList.addShelf(this);
         logger.log(Level.INFO, String.format("Shelf %s created", name));
     }
@@ -70,12 +72,12 @@ public class Shelf {
             if (ShelfList.getShelfList().existShelf(newName)) {
                 throw new DuplicateShelfException(newName);
             }
-            String temp = this.getName();
+            String temp = (this.name == null) ? "new shelf" : this.name;
             this.name = newName;
             logger.log(Level.INFO, String.format("Successfully set Shelf %s's name as %s", temp, name));
         } else {
             logger.log(Level.WARNING, String.format(
-                    "Trying to set Shelf %s's name as %s",
+                    "Trying to set Shelf [%s]'s name as %s",
                     this.getName(), newName));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
@@ -198,7 +200,7 @@ public class Shelf {
 
     public void setRemark(String newRemarks) {
         if (newRemarks.isBlank()) {
-            remarks = " ";
+            remarks = "";
         } else {
             remarks = newRemarks;
         }

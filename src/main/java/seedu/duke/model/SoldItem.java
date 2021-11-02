@@ -1,6 +1,6 @@
-package seedu.duke.salesmanager;
+package seedu.duke.model;
 
-import seedu.duke.model.Item;
+import seedu.duke.model.exception.EditSoldItemException;
 import seedu.duke.model.exception.IllegalArgumentException;
 
 import java.time.LocalDateTime;
@@ -26,11 +26,26 @@ public class SoldItem extends Item {
         setSaleTime(saleTime);
     }
 
-    protected void setSaleTime(LocalDateTime newSaleTime) {
-        this.saleTime = newSaleTime;
+    @Override
+    public void setName(String name) throws IllegalArgumentException {
+        throw new EditSoldItemException();
+    }
+
+    @Override
+    public void setPurchaseCost(String cost) throws IllegalArgumentException {
+        throw new EditSoldItemException();
+    }
+
+    @Override
+    public void setSellingPrice(String price) throws IllegalArgumentException {
+        throw new EditSoldItemException();
     }
 
     public LocalDateTime getSaleTime() {
         return saleTime;
+    }
+
+    protected void setSaleTime(LocalDateTime newSaleTime) {
+        this.saleTime = newSaleTime;
     }
 }
