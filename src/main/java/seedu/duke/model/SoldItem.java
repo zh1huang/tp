@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class SoldItem extends Item {
 
     private LocalDateTime saleTime;
+    private boolean soldItemFixed = false;
 
     /**
      * Constructor for SoldItem class.
@@ -24,20 +25,30 @@ public class SoldItem extends Item {
             throws IllegalArgumentException {
         super(name, cost, price, remarks);
         setSaleTime(saleTime);
+        soldItemFixed = true;
     }
 
     @Override
     public void setName(String name) throws IllegalArgumentException {
-        throw new EditSoldItemException();
+        if (soldItemFixed) {
+            throw new EditSoldItemException();
+        }
+        super.setName(name);
     }
 
     @Override
     public void setPurchaseCost(String cost) throws IllegalArgumentException {
+        if (soldItemFixed) {
+            throw new EditSoldItemException();
+        }
         throw new EditSoldItemException();
     }
 
     @Override
     public void setSellingPrice(String price) throws IllegalArgumentException {
+        if (soldItemFixed) {
+            throw new EditSoldItemException();
+        }
         throw new EditSoldItemException();
     }
 
@@ -46,6 +57,9 @@ public class SoldItem extends Item {
     }
 
     protected void setSaleTime(LocalDateTime newSaleTime) {
+        if (soldItemFixed) {
+            throw new EditSoldItemException();
+        }
         this.saleTime = newSaleTime;
     }
 }

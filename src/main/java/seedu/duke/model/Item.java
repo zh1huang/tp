@@ -41,7 +41,7 @@ public class Item {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
-        setRemarks("");
+        setRemarks(remarks);
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
