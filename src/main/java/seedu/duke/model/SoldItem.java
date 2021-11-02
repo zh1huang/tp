@@ -41,7 +41,7 @@ public class SoldItem extends Item {
         if (soldItemFixed) {
             throw new EditSoldItemException();
         }
-        throw new EditSoldItemException();
+        super.setPurchaseCost(cost);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SoldItem extends Item {
         if (soldItemFixed) {
             throw new EditSoldItemException();
         }
-        throw new EditSoldItemException();
+        super.setSellingPrice(price);
     }
 
     public LocalDateTime getSaleTime() {
