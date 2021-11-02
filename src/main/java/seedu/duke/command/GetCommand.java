@@ -61,7 +61,7 @@ public class GetCommand extends Command {
             throw new ShelfNotExistException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because item not in shelf");
-            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         }
 
         logger.log(Level.INFO, "GetCommand successfully executed");

@@ -18,6 +18,10 @@ public class RemoveShelfCommand extends Command {
     @Override
     public String execute() throws ShelfNotExistException {
         try {
+            if (ShelfList.getShelfList().existShelf(shelfName)) {
+                throw new IllegalArgumentException("Cannot remove shelf with existing items");
+            }
+            
             ShelfList.getShelfList().deleteShelf(shelfName);
             return String.format(REMOVE_COMPLETE_MESSAGE, shelfName);
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {

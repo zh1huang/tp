@@ -143,9 +143,17 @@ Expected outcome:
 
 ### Add new item
 
-Adds a new item to the inventory, specifying its name, category, purchase cost, selling price, quantity (and remarks if any).
+Adds a new item to the inventory, specifying its name, shelf, purchase cost, selling price, quantity (and remarks if any).
 
-&#9888; **Note that [shelf has to first created](#create-a-shelf) before item can be added**
+**Important notes:**
+
+&#9888; **[Shelf has to first created](#create-a-shelf) before item can be added.**
+
+&#9888; **Name of item should not be too long (Should not exceed 52 characters).**
+
+&#9888; **Maximum price and cost of any item is $9999.99 (Only allow values with 2 decimal points and below).**
+
+&#9888; **Maximum quantity of any item is 999.**
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
@@ -159,10 +167,10 @@ Expected outcome
 //todo
 ```
 
-Example: **Add 100 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`. 
+Example: **Add 99 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`. 
 Also added additional remarks**
 ```
-add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/100 r/Not many people bought this. Can consider a 50% discount.
+add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/99 r/Not many people bought this. Can consider a 50% discount.
 ```
 
 Expected outcome:
@@ -188,6 +196,10 @@ Expected outcome:
 ### Listing all items 
 
 Shows a list of all items in the inventory list.
+The attributes shown are: Item name, purchase cost, selling price, quantity, and if they have remarks.
+
+Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks.
+Users can use the [`get` function](#get-information-about-an-item) to display the remarks.
 
 Format: `list [shlv/SHELF_NAME]`
 
@@ -197,16 +209,38 @@ list
 ```
 Expected outcome:
 ```
-//todo
+                         ......................................................................................................
+                         : Here is the list of items:                                                                         :
+                         : [book1]:                                                                                           :
+                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
+                         : -------------------------------------------------------------------------------------------------  :
+                         :  1   | Narnia                                              | 17.40     | 25        | 1   |   x     :
+                         :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   o     :
+                         : [book2]:                                                                                           :
+                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
+                         : -------------------------------------------------------------------------------------------------  :
+                         :  1   | Geronimo                                            | 17.90     | 20.90     | 1   |   o     :
+                         :  2   | expensive book                                      | 9999.99   | 9000.00   | 2   |   o     :
+                         : [warehouse]:                                                                                       :
+                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
+                         : -------------------------------------------------------------------------------------------------  :
+                         :  1   | sample item                                         | 12.25     | 25        | 1   |   o     :
+                         .........................................................................................................
 ```
 
-Example: **Listing all items under `stationary1` shelf**
+Example: **Listing all items under `book1` shelf**
 ```
-list shlv/stationary1
+list shlv/book1
 ```
 Expected outcome:
 ```
-//todo
+                         ......................................................................................................
+                         : Here is the list of items:                                                                         :
+                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
+                         : -------------------------------------------------------------------------------------------------  :
+                         :  1   | Narnia                                              | 17.40     | 25        | 1   |   x     :
+                         :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   o     :
+                         .........................................................................................................
 ```
 
 ### Get information about an item
@@ -215,13 +249,29 @@ Retrieves information of an item.
 
 Format: `get shlv/SHELF_NAME i/INDEX`
 
-Example: **Retrieves all the information of item `index 1` in shelf `book2`**
+Example: **Retrieves all the information of item `index 1` in shelf `book1`, including remarks**
 ```
-get shlv/book2 i/1
+get shlv/book1 i/1
 ```
 Expected outcome:
 ```
-//todo
+list shlv/book1
+                         ......................................................................................................
+                         : Here is the list of items:                                                                         :
+                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
+                         : -------------------------------------------------------------------------------------------------  :
+                         :  1   | Narnia                                              | 17.40     | 25        | 1   |   o     :
+                         :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   x     :
+                         .........................................................................................................
+
+get shlv/book1 i/1                                                                                      
+                                                                                      .........................................
+                                                                                      : Here is the information of your item: :
+                                                                                      : Name: Narnia                          :
+                                                                                      : Cost: 17.40                           :
+                                                                                      : Price: 25                             :
+                                                                                      : Remarks: good book                    :
+                                                                                      ............................................
 ```
 
 ### Edit an item
@@ -356,7 +406,8 @@ Users would be able to record the customer ratings and review of each item sold 
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Copy the save file `data/Data.txt` on your current computer into the other computer that you wish to use. Launch the program again and the saved data should load.
+**A**: Copy the save file `data/Data.txt` on your current computer into the other computer that you wish to use. 
+Launch the program again and the saved data should load.
 
 **Q**: What happens if my app crashes half-way?
 
