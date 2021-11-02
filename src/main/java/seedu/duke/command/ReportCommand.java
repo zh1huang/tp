@@ -8,7 +8,6 @@ import seedu.duke.command.exception.IllegalArgumentException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 public class ReportCommand extends Command {
     public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]";
@@ -34,12 +33,12 @@ public class ReportCommand extends Command {
         }
         try {
             if (reportType.equals("stats")) {
-                assert reportType.equals("stats") :
-                    "All types should have been listed";
                 SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemStats();
             } else {
+                assert reportType.equals("stats") :
+                        "All types should have been listed";
                 SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemDetails();

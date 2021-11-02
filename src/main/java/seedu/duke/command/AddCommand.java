@@ -10,7 +10,6 @@ import seedu.duke.model.ShelfList;
 import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 /**
  * The command that adds a new item to the list.
@@ -23,11 +22,11 @@ public class AddCommand extends Command {
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
         + "price: %s\nquantity: %s\nremarks: %s\n";
     private static final String ADD_COMPLETE_MESSAGE_SINGLE =
-            "This item has been added to the list.";
+            "This item has been added to the list. Its unique ID is: \n";
     private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =
-            " items have been added to the list.";
+            " items have been added to the list. Use List command to view their unique IDs.";
     private static final String PRICE_WARNING =
-            "\nYour price of selling is not higher than your purchase cost. "
+            "\nWarning: \nYour price of selling is not higher than your purchase cost. "
                     + "\nMake sure you did not type wrongly.";
     private static final String ZERO_PRICE_WARNING =
             "Your selling price and/or your purchase cost is 0. "
@@ -67,6 +66,7 @@ public class AddCommand extends Command {
     public String execute() throws IllegalArgumentException, DuplicateItemException,
             ShelfNotExistException {
         try {
+            String ID = "";
             Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName);
@@ -77,6 +77,7 @@ public class AddCommand extends Command {
                 int sizeAfterAdding = selectedShelf.getSize();
                 assert sizeBeforeAdding + 1 == sizeAfterAdding :
                         "After adding an item the list size should increase by 1";
+                ID = newItem.getID();
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }
             boolean hasNegativeProfit = (new BigDecimal(sellingPrice).compareTo(new BigDecimal(purchaseCost)) == -1);
@@ -94,10 +95,11 @@ public class AddCommand extends Command {
                     return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
                 }
             } else if (quantity == 1) {
+                assert !ID.equals("") : "An item must have an auto-generated ID!";
                 if (hasNegativeProfit) {
-                    return ADD_COMPLETE_MESSAGE_SINGLE + PRICE_WARNING;
+                    return ADD_COMPLETE_MESSAGE_SINGLE + ID + PRICE_WARNING;
                 } else {
-                    return ADD_COMPLETE_MESSAGE_SINGLE;
+                    return ADD_COMPLETE_MESSAGE_SINGLE + ID;
                 }
             } else {
                 throw new IllegalArgumentException("Item's quantity cannot be 0");

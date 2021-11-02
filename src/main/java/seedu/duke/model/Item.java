@@ -20,6 +20,7 @@ public class Item {
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String name;
+    private String ID;
     private BigDecimal purchaseCost;
     private BigDecimal sellingPrice;
     private String remark;
@@ -64,6 +65,14 @@ public class Item {
             logger.log(Level.WARNING, String.format("Trying to set Item %s's name as %s", this.getName(), name));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
+    }
+
+    public void setID() {
+        this.ID = Integer.toString(this.hashCode());
+    }
+
+    public String getID() {
+        return this.ID;
     }
 
     public String getPurchaseCost() {

@@ -15,26 +15,19 @@ public class SellCommand extends Command {
     public static final String PARSE_SELL_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
     private static final String SELL_COMPLETE_MESSAGE =
             "This item has been sold."; //to be added to UI part later
-    private final String shelfName;
-    private final int index;
+    private final String ID;
 
-    public SellCommand(String shelfName, String index) {
-        this.shelfName = shelfName;
-        this.index = Integer.parseInt(index) - 1;
+    public SellCommand(String ID) {
+        this.ID = ID;
     }
 
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         try {
             Item selectedItem = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName)
-                    .getItem(index);
+                    .getItem(ID);
             SalesManager.getSalesManager().sell(selectedItem);
             return SELL_COMPLETE_MESSAGE;
-        } catch (seedu.duke.model.exception.ShelfNotExistException e) {
-            throw new ShelfNotExistException(e.getMessage());
-        } catch (IndexOutOfBoundsException e) {
-            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             throw new ItemNotExistException(e.getMessage());
         }
