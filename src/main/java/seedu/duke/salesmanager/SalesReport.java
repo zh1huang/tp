@@ -19,6 +19,8 @@ public class SalesReport {
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
     public static final String NEGATIVE_PROFIT_WARNING_MESSAGE =
         "!!! WARNING:\nNegative profit,\nplease ensure that future items are priced more than purchase cost.\n";
+    public static final String NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT = "No sold items in between %s and %s\n";
+    public static final String NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT = "No sold items in the month of %s\n";
     private final String selectedDate;
     private final String selectedEndDate;
 
@@ -36,7 +38,18 @@ public class SalesReport {
     public String generateSoldItemStats()
             throws EmptyListException, IllegalArgumentException {
         SalesManager salesManager = SalesManager.getSalesManager();
+        String stringToReturn = "";
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
+        if(selectedSoldItems.size()!=0){
+            stringToReturn = getSalesStatisticsString(selectedSoldItems);
+        }else {
+            stringToReturn += getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
+        }
+
+        return stringToReturn;
+    }
+
+    private String getSalesStatisticsString(ArrayList<SoldItem> selectedSoldItems) {
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -59,7 +72,6 @@ public class SalesReport {
         if(grossProfitMargin.compareTo(BigDecimal.ZERO) == -1){
             stringToReturn += NEGATIVE_PROFIT_WARNING_MESSAGE;
         }
-
         return stringToReturn;
     }
 
@@ -72,12 +84,30 @@ public class SalesReport {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         StringBuilder info = new StringBuilder();
-        for (int i = 0; i < selectedSoldItems.size(); i++) {
-            Item selectedItem = selectedSoldItems.get(i);
-            int index = i + 1;
-            info.append(String.format(ITEM_INFO, index,
+        if(selectedSoldItems.size() != 0){
+            for (int i = 0; i < selectedSoldItems.size(); i++) {
+                Item selectedItem = selectedSoldItems.get(i);
+                int index = i + 1;
+                info.append(String.format(ITEM_INFO, index,
                     selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
-        } //todo: add remarks
+            } //todo: add remarks
+        }else{
+            String emptySoldItemInMonthMessage = getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
+            info.append(emptySoldItemInMonthMessage);
+        }
+
         return info.toString().trim();
+    }
+
+    private String getEmptySoldItemInMonthMessage(String selectedDate, String selectedEndDate) {
+        String emptySoldItemInPeriodString;
+
+        if(selectedEndDate.equals("")){
+            emptySoldItemInPeriodString = String.format(NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT, selectedDate);
+        }else{
+            emptySoldItemInPeriodString = String.format(
+                NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT, selectedDate, selectedEndDate);
+        }
+        return emptySoldItemInPeriodString;
     }
 }
