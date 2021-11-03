@@ -73,7 +73,7 @@ public class Parser {
 
     public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
-                    + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
+                    + "( %/(?<percent>([0-9]{1,3}([.][0-9]{1,2})?)))?$");
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
             "Input invalid command format.\nCorrect format: \n%s\n";
