@@ -86,7 +86,7 @@ public class SalesManager {
                     selectedEndDate, dateTimeFormatter);
         }
 
-        return filteredSoldItems; //todo: check if can use arraylist here
+        return filteredSoldItems;
     }
 
     /**
@@ -157,6 +157,7 @@ public class SalesManager {
         }
         return filteredSoldItems;
     }
+
 
 
 }

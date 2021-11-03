@@ -464,13 +464,12 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
         String userRequestPercent = matcher.group("percent");
 
-//        Command markUpCommand;
-//        if(userRequestPercent == null){
-//            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, "");
-//        }else{
-//            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
-//        }
-        Command markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
+        Command markUpCommand;
+        if(userRequestPercent == null){
+            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, "");
+        }else{
+            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
+        }
         assert markUpCommand.getClass() == MarkUpCommand.class :
                 "report should return MarkUpCommand\n";
         logger.log(Level.INFO, "MarkUpCommand parse success.");

@@ -29,7 +29,6 @@ import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -62,12 +61,10 @@ public class ParserTest {
     public static final String PURCHASE_COST_EXAMPLE_2 = "0.70";
     public static final String SELLING_PRICE_EXAMPLE_2 = "1.90";
     public static final String VALUE_EXAMPLE_2 = "3.4";
-    public static final String QUANTITY_EXAMPLE_2 = "100";
+    public static final String QUANTITY_EXAMPLE_2 = "2";
     public static final String REMARKS_EXAMPLE_2 = "need restock!";
     public static final String INDEX_1_STRING = "1";
 
-
-    public static final String WHITESPACE = "\\s";
     public static final String REPORT_ITEMS_STRING = "items";
     private static final String REPORT_STATS_STRING = "stats";
     public static final String USER_REQUEST_PERCENT_EXAMPLE = "5.60";
@@ -185,7 +182,6 @@ public class ParserTest {
 
     @Test
     public void parse_addCommandInvalidArgs_throwsIllegalFormatException() {
-        //throws IllegalFormatException in parser package: todo decide whether to merge exceptions into one package
 
         final String[] inputs = {
             "add",
@@ -201,7 +197,6 @@ public class ParserTest {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
         }
     }
-
 
     @Test
     public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
@@ -225,7 +220,6 @@ public class ParserTest {
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
 
-
     /*
      * Tests for delete command ===============================================================
      */
@@ -248,7 +242,6 @@ public class ParserTest {
     public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
 
-        // add items here
         addExampleItemsToShelf();
 
         String input1 = DELETE_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING;
@@ -261,7 +254,6 @@ public class ParserTest {
         Command expectedCommand2 = new DeleteCommand(SHELF_NAME_EXAMPLE_2, INDEX_1_STRING);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
-
 
     /*
      * Tests for list command ===============================================================
@@ -327,7 +319,6 @@ public class ParserTest {
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
 
-
     /*
      * Tests for edit command ===============================================================
      */
@@ -368,7 +359,6 @@ public class ParserTest {
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
 
-
     /*
      * Tests for report command ===============================================================
      */
@@ -405,7 +395,6 @@ public class ParserTest {
             "2021-05", "2021-11", REPORT_STATS_STRING);
         assertEquals(reportCommand2, parser.parseCommand(input2));
     }
-
 
     /*
      * Tests for sell command ===============================================================
@@ -516,9 +505,9 @@ public class ParserTest {
                 REMARKS_EXAMPLE_1, LocalDateTime.now());
             soldItems.addItem(soldItem1);
 
-//            SoldItem soldItem2 = new SoldItem( ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
-//                REMARKS_EXAMPLE_2, LocalDateTime.now());
-//            soldItems.addItem(soldItem2);
+            SoldItem soldItem2 = new SoldItem( ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
+                REMARKS_EXAMPLE_2, LocalDateTime.now());
+            soldItems.addItem(soldItem2);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
