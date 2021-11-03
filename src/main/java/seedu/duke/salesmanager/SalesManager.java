@@ -141,6 +141,12 @@ public class SalesManager {
             throw new IllegalArgumentException("Invalid Year Month");
         }
 
+        if(endYearMonthToSearch.isBefore(startYearMonthToSearch)){
+            throw new IllegalArgumentException(
+                "Invalid argument sequence, 2nd Year Month parameter is earlier than 1st Year Month parameter.\n"
+                + "Parameters are swapped.");
+        }
+
         for (int i = 0; i < soldItems.getSize(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
