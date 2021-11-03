@@ -38,7 +38,6 @@ public class MarkUpCommand extends Command {
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         StringBuilder resultString = new StringBuilder();
         try {
-
             SalesMarkUp salesMarkUp = new SalesMarkUp(shelfName, index, userRequestPercent);
 
             String currentItemInfo = salesMarkUp.getItemToMarkUpInfo();

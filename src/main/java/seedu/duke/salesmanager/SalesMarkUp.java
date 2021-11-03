@@ -49,6 +49,7 @@ public class SalesMarkUp {
     }
 
     public String getItemToMarkUpInfo(){
+        assert itemName != null;
         return String.format(ITEM_NAME_MESSAGE_FORMAT, itemName, cost, price);
     }
 
@@ -66,6 +67,7 @@ public class SalesMarkUp {
         stringToAppend = String.format(CURRENT_ITEM_MARKUP_MESSAGE_FORMAT,
             decimalFormat.format(difference), decimalFormat.format(markUpPercent));
 
+        assert markUpPercent != null;
         logger.log(Level.INFO, String.format(GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE, itemName, cost, price,
             decimalFormat.format(difference),
             decimalFormat.format(markUpPercent)));

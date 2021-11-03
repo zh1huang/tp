@@ -51,6 +51,8 @@ public class SalesReport {
     }
 
     private String getSalesStatisticsString(ArrayList<SoldItem> selectedSoldItems) {
+
+        assert selectedSoldItems.size() != 0;
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -65,6 +67,7 @@ public class SalesReport {
         BigDecimal totalProfits = totalSellingPrice.subtract(totalPurchaseCost);
         BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, 2,
                 RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
+        assert grossProfitMargin != null;
 
         String stringToReturn = String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
             decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
@@ -88,18 +91,27 @@ public class SalesReport {
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         StringBuilder info = new StringBuilder();
         if(selectedSoldItems.size() != 0){
-            for (int i = 0; i < selectedSoldItems.size(); i++) {
-                Item selectedItem = selectedSoldItems.get(i);
-                int index = i + 1;
-                info.append(String.format(ITEM_INFO, index,
-                    selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
-            } //todo: add remarks
+            String soldItemsDetailsToAppend = getSoldItemsDetailsString(selectedSoldItems);
+            info.append(soldItemsDetailsToAppend);
         }else{
+            assert selectedSoldItems.size() == 0;
             String emptySoldItemInMonthMessage = getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
             info.append(emptySoldItemInMonthMessage);
         }
         logger.log(Level.INFO, "Get Sold Item Details success.");
         return info.toString().trim();
+    }
+
+    private String getSoldItemsDetailsString(ArrayList<SoldItem> selectedSoldItems) {
+        String soldItemDetailsString = "";
+        assert selectedSoldItems.size() != 0;
+        for (int i = 0; i < selectedSoldItems.size(); i++) {
+            Item selectedItem = selectedSoldItems.get(i);
+            int index = i + 1;
+            soldItemDetailsString += String.format(ITEM_INFO, index,
+                selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice());
+        } //todo: add remarks
+        return soldItemDetailsString;
     }
 
     private String getEmptySoldItemInMonthMessage(String selectedDate, String selectedEndDate) {
@@ -108,12 +120,10 @@ public class SalesReport {
         if(selectedEndDate.equals("")){
             emptySoldItemInPeriodString = String.format(NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT, selectedDate);
             logger.log(Level.INFO, "Get No Sold Items in month string success.");
-
         }else{
             emptySoldItemInPeriodString = String.format(
                 NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT, selectedDate, selectedEndDate);
             logger.log(Level.INFO, "Get No Sold Items in a period string success.");
-
         }
 
         return emptySoldItemInPeriodString;
