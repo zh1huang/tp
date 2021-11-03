@@ -35,9 +35,9 @@ public class Parser {
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
                     + " shlv/(?<shelfName>[^/]+)"
-                    + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+                    + " p/(?<purchaseCost>([0-9]{1,4}([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+                    + " s/(?<sellingPrice>([0-9]{1,4}([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
                     + " q/(?<quantity>[0-9]+)" // only accepts integers, no decimals
                     + "( r/(?<remarks>[^/]+))?$"); // optional argument
@@ -55,7 +55,7 @@ public class Parser {
             Pattern.compile("shlv/(?<shelfName>[^/]+)"
                     + " i/(?<indexInShelf>[0-9]+)"
                     + " p/(?<property>(cost|price)+)"
-                    + " v/(?<value>([0-9]+([.][0-9]{1,2})?))");
+                    + " v/(?<value>([0-9]{1,4}([.][0-9]{1,2})?))");
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+)");

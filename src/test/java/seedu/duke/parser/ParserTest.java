@@ -194,7 +194,7 @@ public class ParserTest {
             "add n/Harry Potter 3 shlv/book1 s/41.99 q/1",
             "add n/Harry Potter 4 shlv/book1 p/26.99 q/1",
             "add n/Harry Potter 5 shlv/book1 p/26.99 s/41.99",
-            "add n/Harry Potter 5 shlv/book1 p/26.99 s/41.99 r/This is a popular book!"
+            "add n/Harry Potter 5 shlv/book1 p/26000.99 s/41.99 q/6 r/This is a popular book!"
         };
 
         for (String input : inputs) {
