@@ -63,15 +63,17 @@ Notes about the command format:
   which can be used as add n/Pilot Pen.
 * Items in square brackets are optional and can only be specified **once** for that command. 
   E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
+* Commands that require date input `ym/YEAR-MONTH` for report command should follow input `ym/YYYY-MM`.
+  <br>E.g. `ym/2021-11`
+* &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
+  such as "!@#$%^&*[]{}/|\+=`~<>?,."
 * &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
   user guide will be flagged as **invalid** command formats.
-* Index of items always start from `1`
-* Commands that require date input `ym/YEAR-MONTH` for report command should follow the `YYYY-MM`.
-* :exclamation: Program input is **case-sensitive**, please follow the user guide commands carefully.
-* :exclamation: Program only takes in input typed in english character set, does not accept input such as 
-  Chinese characters, Tamil characters.
-* :exclamation: Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols 
-  such as "!@#$%^&*[]{}/|\+=`~<>?,."
+* &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
+  of parameters will be flagged as **invalid** command format
+* &#9888; Program only takes in input typed in english character set, does not accept input of other languages such as 
+  Chinese characters, Japanese characters.
+* &#9888; Index of items always start from `1`.
 
 ## Features
 
