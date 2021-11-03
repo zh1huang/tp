@@ -98,7 +98,12 @@ public class Item {
      * Automatically generate the ID for a new item.
      */
     public void setID() {
-        this.itemID = Integer.toString(this.hashCode());
+        int idLength = 8;
+        int hashCode = this.hashCode();
+        String hashCodeInString = Integer.toHexString(hashCode);
+        String itemId = String.format("%1$" + idLength + "s", hashCodeInString)
+                .replace(' ', '0');
+        this.itemID = itemId;
     }
 
     /**

@@ -64,7 +64,7 @@ public class Parser {
             Pattern.compile("shlv/(?<shelfName>[^/]+)");
 
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("id/(?<ID>[0-9]{9}+)");
+        Pattern.compile("id/(?<ID>[^/]{8}+)");
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
             Pattern.compile("t/(?<type>(stats|items))"

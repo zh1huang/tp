@@ -5,18 +5,21 @@
             "cost": "25.90",
             "price": "30.90",
             "name": "sample book 1",
+            "id": "1111aaaa",
             "remarks": " "
         },
         "1": {
             "cost": "10.90",
             "price": "12.99",
             "name": "sample book 2",
+            "id": "1111bbbb",
             "remarks": " "
         },
         "2": {
             "cost": "10.90",
             "price": "12.99",
             "name": "sample book 3",
+            "id": "1111cccc",
             "remarks": " "
         }
     }},
@@ -25,6 +28,7 @@
             "cost": "12.25",
             "price": "25",
             "name": "sample item",
+            "id": "1111dddd",
             "remarks": " "
         }},
         "remarks": " "
@@ -35,6 +39,7 @@
             "cost": "17.40",
             "price": "25",
             "name": "sampleSoldItem1",
+            "id": "111111115",
             "remarks": " "
         },
         "1": {
@@ -42,6 +47,7 @@
             "cost": "8.88",
             "price": "23.90",
             "name": "sampleSoldItem2",
+            "id": "111111116",
             "remarks": " "
         }
     }}
