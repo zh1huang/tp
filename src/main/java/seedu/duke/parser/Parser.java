@@ -65,7 +65,7 @@ public class Parser {
         Pattern.compile("shlv/(?<shelfName>[^/]+)");
 
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<ID>[0-9]{10}+)");
+        Pattern.compile("id/(?<ID>[0-9]{9}+)");
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
         Pattern.compile("t/(?<type>(stats|items))"
@@ -378,9 +378,9 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, SellCommand.SELL_DATA_ARGS_FORMAT_STRING));
         }
 
-        String ID = matcher.group("ID");
+        String itemID = matcher.group("ID");
 
-        Command sellCommand = new SellCommand(ID);
+        Command sellCommand = new SellCommand(itemID);
         assert sellCommand.getClass() == SellCommand.class :
             "report should return createShelfCommand\n";
         logger.log(Level.INFO, "SellCommand parse success.");

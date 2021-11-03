@@ -195,24 +195,24 @@ public class Shelf {
     /**
      * Search through the Shelf and returns the first Item with the specified name.
      *
-     * @param ID The specified name of Item
+     * @param itemID The specified name of Item
      * @return Item with the specified name
      * @throws ItemNotExistException if no item has the name
      */
-    public Item getItemByID(String ID) throws ItemNotExistException {
+    public Item getItemByID(String itemID) throws ItemNotExistException {
         if (name == null) {
             logger.log(Level.WARNING, String.format("Trying to get Null item from Shelf %s",
                     this.getName()));
             throw new NullPointerException();
         }
         for (Item item : items) {
-            if (item.getID().equals(ID)) {
+            if (item.getID().equals(itemID)) {
                 return item;
             }
         }
         logger.log(Level.WARNING, String.format("Item %s is not fond in the Shelf %s",
                 name, this.getName()));
-        throw new ItemNotExistException("with ID " + ID);
+        throw new ItemNotExistException("with ID " + itemID);
     }
 
     public String getRemarks() {
@@ -258,12 +258,12 @@ public class Shelf {
     /**
      * Returns true if there is an Item in the Shelf with the specified ID.
      *
-     * @param ID ID of the item
+     * @param itemID ID of the item
      * @return True if the item exists
      */
-    public boolean containsGivenID(String ID) {
+    public boolean containsGivenID(String itemID) {
         try {
-            getItemByID(ID);
+            getItemByID(itemID);
         } catch (ItemNotExistException e) {
             return false;
         }

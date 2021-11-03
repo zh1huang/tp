@@ -163,16 +163,16 @@ public class ShelfList {
     /**
      * Get a unique item from the list of shelves.
      *
-     * @param ID The ID of the target item
+     * @param itemID The ID of the target item
      * @return the item if it exists
      * @throws ItemNotExistException if the target item with the given ID does not exist
      */
-    public Item getItem(String ID) throws ItemNotExistException {
+    public Item getItem(String itemID) throws ItemNotExistException {
         for (Shelf shelf : shelves) {
-            if (shelf.containsGivenID(ID)) {
-                return shelf.getItemByID(ID);
+            if (shelf.containsGivenID(itemID)) {
+                return shelf.getItemByID(itemID);
             }
         }
-        throw new ItemNotExistException("with ID: " + ID);
+        throw new ItemNotExistException("with ID: " + itemID);
     }
 }

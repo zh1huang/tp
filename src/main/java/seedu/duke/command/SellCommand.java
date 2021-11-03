@@ -6,7 +6,6 @@ import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.salesmanager.SalesManager;
 
-import java.util.regex.Pattern;
 
 public class SellCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
@@ -15,17 +14,17 @@ public class SellCommand extends Command {
     public static final String PARSE_SELL_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
     private static final String SELL_COMPLETE_MESSAGE =
             "This item has been sold."; //to be added to UI part later
-    private final String ID;
+    private final String itemID;
 
-    public SellCommand(String ID) {
-        this.ID = ID;
+    public SellCommand(String itemID) {
+        this.itemID = itemID;
     }
 
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         try {
             Item selectedItem = ShelfList
                     .getShelfList()
-                    .getItem(ID);
+                    .getItem(itemID);
             SalesManager.getSalesManager().sell(selectedItem);
             return SELL_COMPLETE_MESSAGE;
         } catch (seedu.duke.model.exception.ItemNotExistException e) {

@@ -66,7 +66,7 @@ public class AddCommand extends Command {
     public String execute() throws IllegalArgumentException, DuplicateItemException,
             ShelfNotExistException {
         try {
-            String ID = "";
+            String itemID = "";
             Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName);
@@ -77,7 +77,7 @@ public class AddCommand extends Command {
                 int sizeAfterAdding = selectedShelf.getSize();
                 assert sizeBeforeAdding + 1 == sizeAfterAdding :
                         "After adding an item the list size should increase by 1";
-                ID = newItem.getID();
+                itemID = newItem.getID();
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }
             boolean hasNegativeProfit = (new BigDecimal(sellingPrice).compareTo(new BigDecimal(purchaseCost)) == -1);
@@ -95,11 +95,11 @@ public class AddCommand extends Command {
                     return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE;
                 }
             } else if (quantity == 1) {
-                assert !ID.equals("") : "An item must have an auto-generated ID!";
+                assert !itemID.equals("") : "An item must have an auto-generated ID!";
                 if (hasNegativeProfit) {
-                    return ADD_COMPLETE_MESSAGE_SINGLE + ID + PRICE_WARNING;
+                    return ADD_COMPLETE_MESSAGE_SINGLE + itemID + PRICE_WARNING;
                 } else {
-                    return ADD_COMPLETE_MESSAGE_SINGLE + ID;
+                    return ADD_COMPLETE_MESSAGE_SINGLE + itemID;
                 }
             } else {
                 throw new IllegalArgumentException("Item's quantity cannot be 0");
