@@ -26,14 +26,14 @@ public class ListCommand extends Command {
     private String shelfName = null;
     private static final String ITEM_INFO = " %s| %s| %s| %s| %s|   %s   \n";
     private static final String HEADER =
-            " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n";
+            " No |                        Item                        |   Cost    |   Price   | Qty  | Remark\n";
     private static final String BORDER =
             "-------------------------------------------------------------------------------------------------\n";
-    private static final int INDEX_TABLE_LENGTH = 4;
-    private static final int ITEM_TABLE_LENGTH = 52;
+    private static final int INDEX_TABLE_LENGTH = 3;
+    private static final int ITEM_TABLE_LENGTH = 51;
     private static final int COST_TABLE_LENGTH = 10;
     private static final int PRICE_TABLE_LENGTH = 10;
-    private static final int QTY_TABLE_LENGTH = 4;
+    private static final int QTY_TABLE_LENGTH = 5;
     private final ArrayList<Item> itemList;
     private final ArrayList<Integer> quantityList;
 
@@ -195,7 +195,8 @@ public class ListCommand extends Command {
             price = lineEntry(PRICE_TABLE_LENGTH, price);
 
             String quantity = String.valueOf(quantityList.get(i));
-            quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
+            //quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
+            quantity = Wrapping.restrictMessageLength(quantity, QTY_TABLE_LENGTH);
 
             String remarks = selectedItem.getRemarks();
             String remarkStatus = remarks.isBlank() ? "x" : "o";
