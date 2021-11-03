@@ -14,9 +14,11 @@ import java.util.logging.Logger;
 public class SalesReport {
     public static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: $ %s\n"
-            + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s";
+            + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
+    public static final String NEGATIVE_PROFIT_WARNING_MESSAGE =
+        "!!! WARNING:\nNegative profit,\nplease ensure that future items are priced more than purchase cost.\n";
     private final String selectedDate;
     private final String selectedEndDate;
 
@@ -50,9 +52,15 @@ public class SalesReport {
         BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, 2,
                 RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
-        return String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
-                decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
-                decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
+        String stringToReturn = String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
+            decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
+            decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
+
+        if(grossProfitMargin.compareTo(BigDecimal.ZERO) == -1){
+            stringToReturn += NEGATIVE_PROFIT_WARNING_MESSAGE;
+        }
+
+        return stringToReturn;
     }
 
     /**
