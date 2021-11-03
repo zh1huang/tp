@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.model.Shelf;
-
 public class ExitCommand extends Command {
 
     public static final String BYE_STRING = "bye";

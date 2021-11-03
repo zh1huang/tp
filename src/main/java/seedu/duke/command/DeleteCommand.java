@@ -1,14 +1,13 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
-import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.ShelfList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 /**
  * The command that deletes a selected item.
@@ -20,9 +19,9 @@ public class DeleteCommand extends Command {
             "This item has been removed from the list."; //to be added to UI part later
     public static final String DELETED_ITEM_DETAILS_FORMAT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String shelfName;
     private final int index;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * The DeleteCommand constructor.

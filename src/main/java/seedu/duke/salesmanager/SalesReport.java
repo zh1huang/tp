@@ -1,8 +1,9 @@
 package seedu.duke.salesmanager;
 
-import seedu.duke.salesmanager.exception.EmptyListException;
-import seedu.duke.model.Item;
 import seedu.duke.command.exception.IllegalArgumentException;
+import seedu.duke.model.Item;
+import seedu.duke.model.SoldItem;
+import seedu.duke.salesmanager.exception.EmptyListException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,12 +13,11 @@ import java.util.logging.Logger;
 
 public class SalesReport {
     public static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
-
-    private final String selectedDate;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: $ %s\n"
-        + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s";
+            + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
+    private final String selectedDate;
     private final String selectedEndDate;
 
     public SalesReport(String selectedDate, String selectedEndDate) {
@@ -32,7 +32,7 @@ public class SalesReport {
      * @throws EmptyListException If the soldItems shelf does not contain items
      */
     public String generateSoldItemStats()
-        throws EmptyListException, IllegalArgumentException {
+            throws EmptyListException, IllegalArgumentException {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
@@ -48,11 +48,11 @@ public class SalesReport {
 
         BigDecimal totalProfits = totalSellingPrice.subtract(totalPurchaseCost);
         BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, 2,
-            RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
+                RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
         return String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
-            decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
-            decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
+                decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
+                decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
     }
 
     /**
@@ -68,7 +68,7 @@ public class SalesReport {
             Item selectedItem = selectedSoldItems.get(i);
             int index = i + 1;
             info.append(String.format(ITEM_INFO, index,
-                selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
+                    selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice()));
         } //todo: add remarks
         return info.toString().trim();
     }

@@ -6,6 +6,7 @@ import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.ui.Wrapping;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -18,12 +19,12 @@ public class ListCommand extends Command {
     public static final String LIST_ITEM_DATA_ARGS_FORMAT_STRING = "list [shlv/SHELF_NAME]";
     public static final String LIST_STRING = "list";
     public static final String PARSE_LIST_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
-    private String shelfName = null;
-    private final boolean toPrintAll;
-    private static final String ITEM_INFO = " %s| %s| %s| %s| %s|   %s   \n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String LIST_COMPLETE_MESSAGE = "Here is the list of items:\n";
     private static final String EMPTY_LIST_MESSAGE = "Shelf is empty";
+    private final boolean toPrintAll;
+    private String shelfName = null;
+    private static final String ITEM_INFO = " %s| %s| %s| %s| %s|   %s   \n";
     private static final String HEADER =
             " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n";
     private static final String BORDER =
@@ -62,6 +63,7 @@ public class ListCommand extends Command {
      * Executes the list operation.
      *
      * @return Message string to be passed to UI
+     *
      * @throws ShelfNotExistException   If the Shelf is not in the ShelfList
      * @throws EmptyListException       If list is empty
      * @throws IllegalArgumentException If illegal argument is entered
@@ -91,7 +93,6 @@ public class ListCommand extends Command {
                     itemList.clear();
                     quantityList.clear();
                     output += "[" + shelfName + "]:\n" + getList(shelf);
-
                 }
             }
         }
@@ -121,6 +122,7 @@ public class ListCommand extends Command {
      *
      * @param item1 Item 1 to be checked
      * @param item2 Item 2 to be checked
+     *
      * @return if 2 items compared are exactly equal
      */
     private boolean isEqual(Item item1, Item item2) {
@@ -158,6 +160,7 @@ public class ListCommand extends Command {
      *
      * @param length Length of header
      * @param input  Input to be placed under that header
+     *
      * @return the formatted and aligned String entry
      */
     private String lineEntry(int length, String input) {
@@ -182,7 +185,8 @@ public class ListCommand extends Command {
             final String indexString = lineEntry(INDEX_TABLE_LENGTH, Integer.toString(index));
 
             String name = selectedItem.getName();
-            name = lineEntry(ITEM_TABLE_LENGTH, name);
+            // name = lineEntry(ITEM_TABLE_LENGTH, name);
+            name = Wrapping.restrictMessageLength(name, ITEM_TABLE_LENGTH);
 
             String cost = selectedItem.getPurchaseCost();
             cost = lineEntry(COST_TABLE_LENGTH, cost);
@@ -194,7 +198,7 @@ public class ListCommand extends Command {
             quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
 
             String remarks = selectedItem.getRemarks();
-            String remarkStatus = remarks.equals(" ") ? "x" : "o";
+            String remarkStatus = remarks.isBlank() ? "x" : "o";
 
             output.append(String.format(ITEM_INFO, indexString, name, cost, price, quantity, remarkStatus));
             logger.log(Level.INFO, "ListCommand successfully executed");

@@ -29,12 +29,14 @@ public class Item {
     /**
      * Constructor for Item class.
      *
-     * @param name  the name of the item
-     *              consists of alphabet, number, space, underscore, round bracket and hyphen
-     * @param cost  the cost of the item
-     *              must be non-negative
-     * @param price the selling price of the item
-     *              must be non-negative
+     * @param name    the name of the item
+     *                consists of alphabet, number, space, underscore, round bracket and hyphen
+     * @param cost    the cost of the item
+     *                must be non-negative
+     * @param price   the selling price of the item
+     *                must be non-negative
+     * @param remarks the remark that is tied to the item
+     *
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
 
@@ -69,6 +71,7 @@ public class Item {
     }
 
     public String getName() {
+        assert name != null;
         return name;
     }
 
@@ -77,11 +80,12 @@ public class Item {
      *
      * @param name new name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
+     *
      * @throws IllegalArgumentException if the name contains other characters
      */
     public void setName(String name) throws IllegalArgumentException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
-            String temp = this.name;
+            String temp = (this.name == null) ? "new item" : this.name;
             this.name = name;
             logger.log(Level.INFO, String.format("Successfully set Item %s's name as %s", temp, name));
         } else {
@@ -120,6 +124,7 @@ public class Item {
      *
      * @param cost new cost of the item
      *             must be non-negative
+     *
      * @throws IllegalArgumentException if the new cost is negative
      */
     public void setPurchaseCost(String cost) throws IllegalArgumentException {
@@ -136,6 +141,7 @@ public class Item {
      *
      * @param price new price of the item
      *              must be non-negative
+     *
      * @throws IllegalArgumentException if the new price is negative
      */
     public void setSellingPrice(String price) throws IllegalArgumentException {
@@ -149,7 +155,7 @@ public class Item {
 
     public void setRemarks(String newRemark) {
         if (newRemark.isBlank()) {
-            remark = " ";
+            remark = "";
         } else {
             remark = newRemark;
         }
