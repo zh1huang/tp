@@ -1,15 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.model.Shelf;
-import seedu.duke.model.ShelfList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.DataCorruptionException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.DukePredefinedMessages;
 import seedu.duke.ui.MessageBubble;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
