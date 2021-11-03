@@ -79,7 +79,7 @@ public class SalesManager {
         ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
-        if (selectedEndDate == null) {
+        if (selectedEndDate.equals("")) {
             filteredSoldItems = getFilteredListInSpecificMonth(selectedStartDate, dateTimeFormatter);
         } else {
             filteredSoldItems = getFilteredListWithinAPeriod(selectedStartDate,

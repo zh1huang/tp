@@ -61,9 +61,17 @@ Notes about the command format:
 
 * Words in UPPER_CASE are the parameters to be supplied by the user. E.g. in delete `n/NAME`, `NAME` is the parameter
   which can be used as add n/Pilot Pen.
-* Items in square brackets are optional and can only be specified **once** for that command. E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
-* &#9888; Commands that do not take in extra unspecified parameters from user guide will be flagged as **invalid** command formats.
-
+* Items in square brackets are optional and can only be specified **once** for that command. 
+  E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
+* &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
+  user guide will be flagged as **invalid** command formats.
+* Index of items always start from `1`
+* Commands that require date input `ym/YEAR-MONTH` for report command should follow the `YYYY-MM`.
+* :exclamation: Program input is **case-sensitive**, please follow the user guide commands carefully.
+* :exclamation: Program only takes in input typed in english character set, does not accept input such as 
+  Chinese characters, Tamil characters.
+* :exclamation: Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols 
+  such as "!@#$%^&*[]{}/|\+=`~<>?,."
 
 ## Features
 

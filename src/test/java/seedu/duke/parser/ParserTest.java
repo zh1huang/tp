@@ -13,7 +13,9 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.MarkUpCommand;
 import seedu.duke.command.RemoveShelfCommand;
+import seedu.duke.command.ReportCommand;
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
@@ -27,6 +29,7 @@ import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,6 +39,8 @@ import static seedu.duke.command.DeleteCommand.DELETE_STRING;
 import static seedu.duke.command.EditCommand.EDIT_STRING;
 import static seedu.duke.command.GetCommand.GET_STRING;
 import static seedu.duke.command.ListCommand.LIST_STRING;
+import static seedu.duke.command.ReportCommand.REPORT_STRING;
+import static seedu.duke.command.MarkUpCommand.MARKUP_STRING;
 
 // Parser Test class adapted from
 // https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
@@ -61,7 +66,11 @@ public class ParserTest {
     public static final String REMARKS_EXAMPLE_2 = "need restock!";
     public static final String INDEX_1_STRING = "1";
 
+
     public static final String WHITESPACE = "\\s";
+    public static final String REPORT_ITEMS_STRING = "items";
+    private static final String REPORT_STATS_STRING = "stats";
+    public static final String USER_REQUEST_PERCENT_EXAMPLE = "5.60";
     private Parser parser;
     private Shelf soldItems;
 
@@ -193,7 +202,7 @@ public class ParserTest {
         }
     }
 
-    /**
+
     @Test
     public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
         NoPropertyFoundException, IllegalFormatException {
@@ -202,19 +211,20 @@ public class ParserTest {
             + PURCHASE_COST_EXAMPLE_1 + " s/" + SELLING_PRICE_EXAMPLE_1 + " q/" + QUANTITY_EXAMPLE_1;
 
         AddCommand expectedCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1,
-            SELLING_PRICE_EXAMPLE_1, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_1, null);
+            SELLING_PRICE_EXAMPLE_1, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_1, "");
 
         assertEquals(expectedCommand1, parser.parseCommand(input1));
 
         String input2 = ADD_STRING + " n/" + ITEM_NAME_EXAMPLE_2 + " shlv/" + SHELF_NAME_EXAMPLE_2 + " p/"
-            + PURCHASE_COST_EXAMPLE_2 + " s/" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_2;
+            + PURCHASE_COST_EXAMPLE_2 + " s/" + SELLING_PRICE_EXAMPLE_2 + " q/" + QUANTITY_EXAMPLE_1
+            + " r/" + REMARKS_EXAMPLE_2;
 
         AddCommand expectedCommand2 = new AddCommand(ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2,
-            SELLING_PRICE_EXAMPLE_2, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_2, null);
+            SELLING_PRICE_EXAMPLE_2, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_2, REMARKS_EXAMPLE_2);
 
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
-    */
+
 
     /*
      * Tests for delete command ===============================================================
@@ -233,7 +243,7 @@ public class ParserTest {
         }
     }
 
-    /**
+
     @Test
     public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
@@ -251,7 +261,7 @@ public class ParserTest {
         Command expectedCommand2 = new DeleteCommand(SHELF_NAME_EXAMPLE_2, INDEX_1_STRING);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
-    */
+
 
     /*
      * Tests for list command ===============================================================
@@ -300,8 +310,6 @@ public class ParserTest {
         }
     }
 
-
-    /**
     @Test
     public void parse_getCommandValidArgs_returnsGetCommand() throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
@@ -318,7 +326,7 @@ public class ParserTest {
         Command expectedCommand2 = new GetCommand(SHELF_NAME_EXAMPLE_2, INDEX_1_STRING);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
-    */
+
 
     /*
      * Tests for edit command ===============================================================
@@ -339,7 +347,7 @@ public class ParserTest {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
         }
     }
-    /**
+
     @Test
     public void parse_editCommandValidArgs_returnsEditCommand() throws
         ItemNotExistException, NoPropertyFoundException, IllegalFormatException{
@@ -359,7 +367,7 @@ public class ParserTest {
             SELLING_PRICE_PROPERTY_STRING, VALUE_EXAMPLE_2);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
-    */
+
 
     /*
      * Tests for report command ===============================================================
@@ -383,21 +391,21 @@ public class ParserTest {
 
     }
 
-    /**
     @Test
-    public void parse_reportCommandValidArgs_returnReportCommand() {
-        addExampleItemsToSoldItemsShelf();
+    public void parse_reportCommandValidArgs_returnReportCommand() throws
+        ItemNotExistException, NoPropertyFoundException, IllegalFormatException {
 
-        final String[] inputs = {
-            "report t/stats ym/2021-10",
-            "report t/items ym/2021-10",
-            "report t/stats ym/2021-10 ym/2021-1O",
-            "report t/items ym/2021-10 ym/2021-1O"
-        };
+        String input1 = REPORT_STRING + " t/" + REPORT_ITEMS_STRING + " ym/" + "2021-10";
+        ReportCommand reportCommand1 = new ReportCommand(
+            "2021-10", "", REPORT_ITEMS_STRING);
+        assertEquals(reportCommand1, parser.parseCommand(input1));
 
-        
+        String input2 = REPORT_STRING + " t/" + REPORT_STATS_STRING + " ym/" + "2021-05" + " ym/" + "2021-11";
+        ReportCommand reportCommand2 = new ReportCommand(
+            "2021-05", "2021-11", REPORT_STATS_STRING);
+        assertEquals(reportCommand2, parser.parseCommand(input2));
     }
-    */
+
 
     /*
      * Tests for sell command ===============================================================
@@ -442,10 +450,22 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_markupCommandValidArgs_returnMarkupCommand() {
-        
-    }
+    public void parse_markupCommandValidArgs_returnMarkupCommand() throws
+        ItemNotExistException, NoPropertyFoundException, IllegalFormatException {
 
+        addExampleItemsToShelf();
+        String input1 =  MARKUP_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING;
+
+        Command expectedCommand1 = new MarkUpCommand(SHELF_NAME_EXAMPLE_1, INDEX_1_STRING, "");
+        assertEquals(expectedCommand1, parser.parseCommand(input1));
+
+        String input2 =  MARKUP_STRING + " shlv/" + SHELF_NAME_EXAMPLE_2 + " i/" + INDEX_1_STRING + " %/"
+            + USER_REQUEST_PERCENT_EXAMPLE;
+
+        Command expectedCommand2 = new MarkUpCommand(
+            SHELF_NAME_EXAMPLE_2, INDEX_1_STRING, USER_REQUEST_PERCENT_EXAMPLE);
+        assertEquals(expectedCommand2, parser.parseCommand(input2));
+    }
 
     /*
      * Utility methods ===============================================================
@@ -466,9 +486,9 @@ public class ParserTest {
 
     private void addExampleItemsToShelf() {
         Command addCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1,
-            SELLING_PRICE_EXAMPLE_1, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_1, null);
+            SELLING_PRICE_EXAMPLE_1, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_1, "");
         Command addCommand2 = new AddCommand(ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2,
-            SELLING_PRICE_EXAMPLE_2, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_2, null);
+            SELLING_PRICE_EXAMPLE_2, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_2, "");
 
         try {
             addCommand1.execute();
@@ -483,18 +503,27 @@ public class ParserTest {
     }
     private void addExampleItemsToSoldItemsShelf() {
 
+        // todo move to the report unit test
+//        LocalDateTime itemSoldTime1 = LocalDateTime.of(2020,
+//            Month.AUGUST, 8, 8, 8, 8);
+//        LocalDateTime itemSoldTime2 = LocalDateTime.of(2021,
+//            Month.SEPTEMBER, 9, 9, 9, 9);
+//        LocalDateTime itemSoldTime3 = LocalDateTime.of(2021,
+//            Month.OCTOBER, 10, 10, 10, 10);
+
         try {
             SoldItem soldItem1 = new SoldItem( ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1,
                 REMARKS_EXAMPLE_1, LocalDateTime.now());
             soldItems.addItem(soldItem1);
-            SoldItem soldItem2 = new SoldItem( ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
-                REMARKS_EXAMPLE_2, LocalDateTime.now());
-            soldItems.addItem(soldItem2);
+
+//            SoldItem soldItem2 = new SoldItem( ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
+//                REMARKS_EXAMPLE_2, LocalDateTime.now());
+//            soldItems.addItem(soldItem2);
+
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (DuplicateItemException e) {
             e.printStackTrace();
         }
-
     }
 }

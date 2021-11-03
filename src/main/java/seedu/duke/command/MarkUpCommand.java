@@ -107,7 +107,7 @@ public class MarkUpCommand extends Command {
         String stringToAppend = String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT,
                 userRequestPercent, amountIncrease, finalPrice);
 
-        if (userRequestPercent.compareTo(ONE_HUNDRED) > 1) {
+        if (userRequestPercent.compareTo(ONE_HUNDRED) == 1) {
             String warningString = String.format(WARNING_LARGE_PERCENT_MESSAGE_FORMAT, finalPrice);
             stringToAppend += warningString;
         }
@@ -153,4 +153,22 @@ public class MarkUpCommand extends Command {
 
         return stringToAppend;
     }
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof MarkUpCommand)) {
+            return false;
+        }
+
+        MarkUpCommand command = (MarkUpCommand) other;
+        return shelfName.equals(command.shelfName)
+            && index == command.index
+            && userRequestPercent.equals(command.userRequestPercent);
+    }
+
 }

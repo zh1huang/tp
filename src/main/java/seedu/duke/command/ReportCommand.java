@@ -48,4 +48,23 @@ public class ReportCommand extends Command {
         }
 
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof ReportCommand)) {
+            return false;
+        }
+
+        ReportCommand command = (ReportCommand) other;
+        return selectedStartDate.equals(command.selectedStartDate)
+            && selectedEndDate.equals(command.selectedEndDate)
+            && reportType.equals(command.reportType);
+    }
+
 }
