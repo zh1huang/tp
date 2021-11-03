@@ -4,11 +4,18 @@ import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.salesmanager.SalesMarkUp;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MarkUpCommand extends Command {
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
     public static final String MARKUP_STRING = "markup";
-
     private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String MARKUP_COMMAND_SHELF_NOT_EXIST_LOGGING_MESSAGE_FORMAT =
+        "MarkUpCommand can't find an existing shelf named: %s";
+    private static final String MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT =
+        "MarkUpCommand can't find index %s in shelf";
 
     private final String shelfName;
     private final int index;
@@ -48,11 +55,14 @@ public class MarkUpCommand extends Command {
                 resultString.append(getUserRequestMarkUpInfoString);
             }
 
+            logger.log(Level.INFO, "MarkUpCommand successfully executed.");
             return resultString.toString();
 
         } catch (ShelfNotExistException e) {
+            logger.log(Level.WARNING, String.format(MARKUP_COMMAND_SHELF_NOT_EXIST_LOGGING_MESSAGE_FORMAT, shelfName));
             throw new ShelfNotExistException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, String.format(MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT, index));
             throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
         }
     }

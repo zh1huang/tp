@@ -7,8 +7,11 @@ import seedu.duke.model.exception.ShelfNotExistException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SalesMarkUp {
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final int FOUR_DECIMAL_POINT = 4;
     public static final int TWO_DECIMAL_POINTS = 2;
     public static final int INTEGER_ONE_HUNDRED = 100;
@@ -26,6 +29,7 @@ public class SalesMarkUp {
         "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
     private static final String ESTIMATED_MARKUP_MESSAGE_FORMAT =
         "markup: %s%%, increase: $%s, Final price: $%s\n";
+    public static final String GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE = "Got MarkUp Item info. Name: %s, Cost: %s, Price\nDifference: %s, markup %%: %s";
     private BigDecimal cost;
     private BigDecimal price;
     private BigDecimal userRequestPercent;
@@ -62,6 +66,9 @@ public class SalesMarkUp {
         stringToAppend = String.format(CURRENT_ITEM_MARKUP_MESSAGE_FORMAT,
             decimalFormat.format(difference), decimalFormat.format(markUpPercent));
 
+        logger.log(Level.INFO, String.format(GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE, itemName, cost, price,
+            decimalFormat.format(difference),
+            decimalFormat.format(markUpPercent)));
         return stringToAppend;
     }
 
@@ -83,8 +90,10 @@ public class SalesMarkUp {
         if (userRequestPercent.compareTo(ONE_HUNDRED) == 1) {
             String warningString = String.format(WARNING_LARGE_PERCENT_MESSAGE_FORMAT, finalPrice);
             stringToAppend += warningString;
+            logger.log(Level.WARNING, "Not recommended: User request markup percent > 100.");
         }
 
+        logger.log(Level.INFO, "Get User Request MarkUp Information success.");
         return stringToAppend;
     }
 
@@ -107,6 +116,8 @@ public class SalesMarkUp {
                 String.format(ESTIMATED_MARKUP_MESSAGE_FORMAT,
                     estimatePercentMarkUp, amountIncrease, finalPrice));
         }
+
+        logger.log(Level.INFO, "Get Estimated MarkUp Information success.");
         return stringToAppend.toString();
     }
 }

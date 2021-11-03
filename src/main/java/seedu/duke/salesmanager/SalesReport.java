@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SalesReport {
@@ -45,7 +46,7 @@ public class SalesReport {
         }else {
             stringToReturn += getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
         }
-
+        logger.log(Level.INFO, "Generate Sold Items Statistics success.");
         return stringToReturn;
     }
 
@@ -72,6 +73,8 @@ public class SalesReport {
         if(grossProfitMargin.compareTo(BigDecimal.ZERO) == -1){
             stringToReturn += NEGATIVE_PROFIT_WARNING_MESSAGE;
         }
+
+        logger.log(Level.INFO, "Get Sales Statistics success.");
         return stringToReturn;
     }
 
@@ -95,7 +98,7 @@ public class SalesReport {
             String emptySoldItemInMonthMessage = getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
             info.append(emptySoldItemInMonthMessage);
         }
-
+        logger.log(Level.INFO, "Get Sold Item Details success.");
         return info.toString().trim();
     }
 
@@ -104,10 +107,15 @@ public class SalesReport {
 
         if(selectedEndDate.equals("")){
             emptySoldItemInPeriodString = String.format(NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT, selectedDate);
+            logger.log(Level.INFO, "Get No Sold Items in month string success.");
+
         }else{
             emptySoldItemInPeriodString = String.format(
                 NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT, selectedDate, selectedEndDate);
+            logger.log(Level.INFO, "Get No Sold Items in a period string success.");
+
         }
+
         return emptySoldItemInPeriodString;
     }
 }
