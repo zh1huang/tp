@@ -17,12 +17,16 @@ import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
+import seedu.duke.salesmanager.SoldItem;
+
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,6 +63,7 @@ public class ParserTest {
 
     public static final String WHITESPACE = "\\s";
     private Parser parser;
+    private Shelf soldItems;
 
     @BeforeEach
     public void setUp() throws IllegalArgumentException, DuplicateShelfException {
@@ -66,9 +71,11 @@ public class ParserTest {
         ShelfList.getShelfList().resetShelfList();
         Command newShelf1Command = new CreateShelfCommand(SHELF_NAME_EXAMPLE_1);
         Command newShelf2Command = new CreateShelfCommand(SHELF_NAME_EXAMPLE_2);
+        Command newSoldItemsShelfCommand = new CreateShelfCommand("soldItems");
         try {
             newShelf1Command.execute();
             newShelf2Command.execute();
+            newSoldItemsShelfCommand.execute();
         } catch (CommandException e) {
             e.printStackTrace();
         } catch (ShelfNotExistException e) {
@@ -238,7 +245,7 @@ public class ParserTest {
         ItemNotExistException, NoPropertyFoundException {
 
         // add items here
-        addSomeExampleItemsToShelf();
+        addExampleItemsToShelf();
 
         String input1 = DELETE_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING;
 
@@ -302,7 +309,7 @@ public class ParserTest {
     public void parse_getCommandValidArgs_returnsGetCommand() throws IllegalFormatException,
         ItemNotExistException, NoPropertyFoundException {
 
-        addSomeExampleItemsToShelf();
+        addExampleItemsToShelf();
 
         String input1 = GET_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING;
 
@@ -339,7 +346,7 @@ public class ParserTest {
     public void parse_editCommandValidArgs_returnsEditCommand() throws
         ItemNotExistException, NoPropertyFoundException, IllegalFormatException{
 
-        addSomeExampleItemsToShelf();
+        addExampleItemsToShelf();
         // Test edit Purchase Cost
         String input1 = EDIT_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING + " p/"
             + PURCHASE_COST_PROPERTY_STRING + " v/" + VALUE_EXAMPLE_1;
@@ -358,13 +365,37 @@ public class ParserTest {
     /*
      * Tests for report command ===============================================================
      */
-
+    @Test
     public void parse_reportCommandInvalidArgs_throwsIllegalFormatException() {
+        final String[] inputs = {
+            "report ",
+            "report t/stat ym/2021-10",
+            "report t/item ym/2021-10",
+            "report t/stats ym/21-10",
+            "report t/items ym/",
+            "report t/stats ym/2021-10 ym/2021-",
+            "report t/stats ym/2021-10 ym/-10",
+            "report t/stats ym/2021-10 ym/2021-1Oct"
+        };
+
+        for (String input : inputs) {
+            assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
+        }
 
     }
+
     @Test
     public void parse_reportCommandValidArgs_returnReportCommand() {
+        addExampleItemsToSoldItemsShelf();
 
+        final String[] inputs = {
+            "report t/stats ym/2021-10",
+            "report t/items ym/2021-10",
+            "report t/stats ym/2021-10 ym/2021-1O",
+            "report t/items ym/2021-10 ym/2021-1O"
+        };
+
+        
     }
 
     /*
@@ -410,8 +441,8 @@ public class ParserTest {
             e.printStackTrace();
         }
     }
-    // add items to shelf
-    private void addSomeExampleItemsToShelf() {
+
+    private void addExampleItemsToShelf() {
         Command addCommand1 = new AddCommand(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1,
             SELLING_PRICE_EXAMPLE_1, QUANTITY_EXAMPLE_1, SHELF_NAME_EXAMPLE_1, null);
         Command addCommand2 = new AddCommand(ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2,
@@ -425,5 +456,21 @@ public class ParserTest {
         } catch (ShelfNotExistException e) {
             e.printStackTrace();
         }
+    }
+    private void addExampleItemsToSoldItemsShelf() {
+
+        try {
+            SoldItem soldItem1 = new SoldItem( ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1,
+                REMARKS_EXAMPLE_1, LocalDateTime.now());
+            soldItems.addItem(soldItem1);
+            SoldItem soldItem2 = new SoldItem( ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
+                REMARKS_EXAMPLE_2, LocalDateTime.now());
+            soldItems.addItem(soldItem2);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (DuplicateItemException e) {
+            e.printStackTrace();
+        }
+
     }
 }
