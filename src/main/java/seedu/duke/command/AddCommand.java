@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.command.exception.DuplicateItemException;
+import seedu.duke.command.exception.ExceedsShelfSizeLimitException;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
@@ -29,8 +30,9 @@ public class AddCommand extends Command {
             "\nWarning: \nYour price of selling is not higher than your purchase cost. "
                     + "\nMake sure you did not type wrongly.";
     private static final String ZERO_PRICE_WARNING =
-            "Your selling price and/or your purchase cost is 0. "
-                    + "\nMake sure you did not type wrongly";
+            "\nWarning: \nYour selling price and/or your purchase cost is 0. "
+                    + "\nMake sure you did not type wrongly.";
+    private static final int SHELF_SIZE_LIMIT = 999;
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String name;
     private final String purchaseCost;
@@ -64,12 +66,17 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute() throws IllegalArgumentException, DuplicateItemException,
-            ShelfNotExistException {
+            ShelfNotExistException, ExceedsShelfSizeLimitException {
         try {
             String itemID = "";
             Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName);
+            int currentSize = selectedShelf.getItemCount();
+            int expectedSize = currentSize + quantity;
+            if (expectedSize > SHELF_SIZE_LIMIT) {
+                throw new ExceedsShelfSizeLimitException(currentSize);
+            }
             for (int i = 0; i < quantity; i++) {
                 int sizeBeforeAdding = selectedShelf.getSize();
                 Item newItem = new Item(name, purchaseCost, sellingPrice, remarks);
@@ -81,14 +88,13 @@ public class AddCommand extends Command {
                 logger.log(Level.INFO, "AddCommand successfully executed.");
             }
             boolean hasNegativeProfit = (new BigDecimal(sellingPrice).compareTo(new BigDecimal(purchaseCost)) == -1);
-
             double cost = Double.parseDouble(purchaseCost.trim());
             double price = Double.parseDouble(sellingPrice.trim());
-            if (cost == 0 || price == 0) {
-                return ZERO_PRICE_WARNING;
-            }
-
+            boolean hasZeroPriceOrCost = (cost == 0 || price == 0);
             if (quantity > 1) {
+                if (hasZeroPriceOrCost) {
+                    return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE + ZERO_PRICE_WARNING;
+                }
                 if (hasNegativeProfit) {
                     return quantity + ADD_COMPLETE_MESSAGE_MULTIPLE + PRICE_WARNING;
                 } else {
@@ -96,6 +102,9 @@ public class AddCommand extends Command {
                 }
             } else if (quantity == 1) {
                 assert !itemID.equals("") : "An item must have an auto-generated ID!";
+                if(hasZeroPriceOrCost) {
+                    return ADD_COMPLETE_MESSAGE_SINGLE + itemID + ZERO_PRICE_WARNING;
+                }
                 if (hasNegativeProfit) {
                     return ADD_COMPLETE_MESSAGE_SINGLE + itemID + PRICE_WARNING;
                 } else {
@@ -115,6 +124,8 @@ public class AddCommand extends Command {
             throw new DuplicateItemException(e.getMessage());
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             throw new ShelfNotExistException(e.getMessage());
+        } catch (ExceedsShelfSizeLimitException e) {
+            throw new ExceedsShelfSizeLimitException(e.getMessage());
         }
     }
 
