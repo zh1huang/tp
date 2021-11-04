@@ -16,6 +16,7 @@ public class MarkUpCommand extends Command {
         "MarkUpCommand can't find an existing shelf named: %s";
     private static final String MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT =
         "MarkUpCommand can't find index %s in shelf";
+    public static final String MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE = "Operation on SoldItems not permitted";
 
     private final String shelfName;
     private final int index;
@@ -38,8 +39,8 @@ public class MarkUpCommand extends Command {
     public String execute() throws ShelfNotExistException, ItemNotExistException {
         StringBuilder resultString = new StringBuilder();
         try {
-            if(shelfName.equals("soldItems")){
-                return String.valueOf(resultString.append("Operation on SoldItems not permitted"));
+            if (shelfName.equals("soldItems")) {
+                return String.valueOf(resultString.append(MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE));
             }
 
             SalesMarkUp salesMarkUp = new SalesMarkUp(shelfName, index, userRequestPercent);
