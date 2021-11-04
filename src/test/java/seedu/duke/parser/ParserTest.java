@@ -3,7 +3,6 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.CreateShelfCommand;
@@ -19,34 +18,29 @@ import seedu.duke.command.ReportCommand;
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
-import seedu.duke.model.SoldItem;
-import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
-import seedu.duke.parser.exception.NoPropertyFoundException;
 import seedu.duke.parser.exception.IllegalFormatException;
+import seedu.duke.parser.exception.NoPropertyFoundException;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.duke.command.AddCommand.ADD_STRING;
 import static seedu.duke.command.DeleteCommand.DELETE_STRING;
 import static seedu.duke.command.EditCommand.EDIT_STRING;
 import static seedu.duke.command.GetCommand.GET_STRING;
 import static seedu.duke.command.ListCommand.LIST_STRING;
-import static seedu.duke.command.ReportCommand.REPORT_STRING;
 import static seedu.duke.command.MarkUpCommand.MARKUP_STRING;
+import static seedu.duke.command.ReportCommand.REPORT_STRING;
 
 // Parser Test class adapted from
 // https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
 public class ParserTest {
 
-    public static final String PURCHASE_COST_PROPERTY_STRING = "cost";
-    public static final String SELLING_PRICE_PROPERTY_STRING = "price";
+    public static final String PURCHASE_COST_PROPERTY_STRING = "purchase cost";
+    public static final String SELLING_PRICE_PROPERTY_STRING = "selling price";
 
     public static final String ITEM_NAME_EXAMPLE_1 = "Geronimo";
     public static final String SHELF_NAME_EXAMPLE_1 = "book1";
@@ -489,30 +483,4 @@ public class ParserTest {
         }
     }
 
-    private void addExampleItemsToSoldItemsShelf() {
-
-        // todo move to the report unit test
-        /**
-        LocalDateTime itemSoldTime1 = LocalDateTime.of(2020,
-            Month.AUGUST, 8, 8, 8, 8);
-        LocalDateTime itemSoldTime2 = LocalDateTime.of(2021,
-            Month.SEPTEMBER, 9, 9, 9, 9);
-        LocalDateTime itemSoldTime3 = LocalDateTime.of(2021,
-            Month.OCTOBER, 10, 10, 10, 10);
-        */
-        try {
-            SoldItem soldItem1 = new SoldItem(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1,
-                REMARKS_EXAMPLE_1, LocalDateTime.now());
-            soldItems.addItem(soldItem1);
-
-            SoldItem soldItem2 = new SoldItem(ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
-                REMARKS_EXAMPLE_2, LocalDateTime.now());
-            soldItems.addItem(soldItem2);
-
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (DuplicateItemException e) {
-            e.printStackTrace();
-        }
-    }
 }

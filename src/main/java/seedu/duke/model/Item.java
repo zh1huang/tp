@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
+
 /**
  * Represents an item that can be stored in an Shelf.
  * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
@@ -20,6 +21,7 @@ public class Item {
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String name;
+    private String itemID;
     private BigDecimal purchaseCost;
     private BigDecimal sellingPrice;
     private String remark;
@@ -43,6 +45,28 @@ public class Item {
         setPurchaseCost(cost);
         setSellingPrice(price);
         setRemarks(remarks);
+        setID();
+        logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
+    }
+
+    /**
+     * Overloaded constructor (with ID specified) for Item class (used for storage).
+     *
+     * @param name   the name of the item
+     *               consists of alphabet, number, space, underscore, round bracket and hyphen
+     * @param cost   the cost of the item
+     *               must be non-negative
+     * @param price  the selling price of the item
+     *               must be non-negative
+     * @param itemID the ID of the existing item
+     * @throws IllegalArgumentException if any of the inputs does not follow the requirement
+     */
+    public Item(String name, String cost, String price, String remarks, String itemID) throws IllegalArgumentException {
+        setName(name);
+        setPurchaseCost(cost);
+        setSellingPrice(price);
+        setRemarks(remarks);
+        setID(itemID);
         logger.log(Level.INFO, String.format("Item %s created, with cost $%s and price $%s", name, cost, price));
     }
 
@@ -68,6 +92,32 @@ public class Item {
             logger.log(Level.WARNING, String.format("Trying to set Item %s's name as %s", this.getName(), name));
             throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
+    }
+
+    /**
+     * Automatically generate the ID for a new item.
+     */
+    public void setID() {
+        int idLength = 8;
+        int hashCode = this.hashCode();
+        String hashCodeInString = Integer.toHexString(hashCode);
+        String itemId = String.format("%1$" + idLength + "s", hashCodeInString)
+                .replace(' ', '0');
+        this.itemID = itemId;
+    }
+
+    /**
+     * Set the item ID for existing items in backup date file.
+     *
+     * @param itemID the ID of the existing ID
+     */
+    public void setID(String itemID) {
+        this.itemID = itemID;
+    }
+
+
+    public String getID() {
+        return this.itemID;
     }
 
     public String getPurchaseCost() {

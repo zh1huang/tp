@@ -54,8 +54,8 @@ public class Parser {
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
         Pattern.compile("shlv/(?<shelfName>[^/]+)"
             + " i/(?<indexInShelf>[0-9]+)"
-            + " p/(?<property>(cost|price)+)"
-            + " v/(?<value>([0-9]{1,4}([.][0-9]{1,2})?))");
+            + " p/(?<property>(purchase cost|selling price|remarks)+)"
+            + " v/(?<value>(([0-9]+([.][0-9]{1,2})?)|[^/]+))");
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
         Pattern.compile("shlv/(?<shelfName>[^/]+)");
@@ -64,7 +64,7 @@ public class Parser {
         Pattern.compile("shlv/(?<shelfName>[^/]+)");
 
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
-        Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+        Pattern.compile("id/(?<ID>[^/]{8}+)");
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
         Pattern.compile("t/(?<type>(stats|items))"
@@ -379,10 +379,9 @@ public class Parser {
                 CORRECT_COMMAND_MESSAGE_STRING_FORMAT, SellCommand.SELL_DATA_ARGS_FORMAT_STRING));
         }
 
-        String shelfName = matcher.group("shelfName");
-        String indexInShelf = matcher.group("indexInShelf");
+        String itemID = matcher.group("ID");
 
-        Command sellCommand = new SellCommand(shelfName, indexInShelf);
+        Command sellCommand = new SellCommand(itemID);
         assert sellCommand.getClass() == SellCommand.class :
             "report should return createShelfCommand\n";
         logger.log(Level.INFO, "SellCommand parse success.");
