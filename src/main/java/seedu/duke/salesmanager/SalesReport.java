@@ -13,15 +13,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SalesReport {
-    public static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: $ %s\n"
         + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s\n";
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
     public static final String NEGATIVE_PROFIT_WARNING_MESSAGE =
         "!!! WARNING:\nNegative profit,\nplease ensure that future items are priced more than purchase cost.\n";
     public static final String NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT = "No sold items in between %s and %s\n";
     public static final String NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT = "No sold items in the month of %s\n";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final String ITEM_INFO = "%o. %s (purchase cost: %s, selling price: %s)\n";
+
+    private final BigDecimal ONE_HUNDRED = new BigDecimal(100);
+    private final int FOUR_DECIMAL_POINT = 4;
+    private final int INTEGER_VALUE_ONE = 1;
+    private final int INTEGER_VALUE_MINUS_ONE = -1;
+    private final int INTEGER_VALUE_ZERO = 0;
     private final String selectedDate;
     private final String selectedEndDate;
 
@@ -42,7 +47,7 @@ public class SalesReport {
         SalesManager salesManager = SalesManager.getSalesManager();
         String stringToReturn = "";
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
-        if (selectedSoldItems.size() != 0) {
+        if (selectedSoldItems.size() != INTEGER_VALUE_ZERO) {
             stringToReturn = getSalesStatisticsString(selectedSoldItems);
         } else {
             stringToReturn += getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
@@ -53,12 +58,12 @@ public class SalesReport {
 
     private String getSalesStatisticsString(ArrayList<SoldItem> selectedSoldItems) {
 
-        assert selectedSoldItems.size() != 0;
+        assert selectedSoldItems.size() != INTEGER_VALUE_ZERO;
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-        for (int i = 0; i < selectedSoldItems.size(); i++) {
+        for (int i = INTEGER_VALUE_ZERO; i < selectedSoldItems.size(); i++) {
             Item selectedItem = selectedSoldItems.get(i);
 
             totalPurchaseCost = totalPurchaseCost.add(new BigDecimal(selectedItem.getPurchaseCost()));
@@ -66,7 +71,7 @@ public class SalesReport {
         }
 
         BigDecimal totalProfits = totalSellingPrice.subtract(totalPurchaseCost);
-        BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, 2,
+        BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, FOUR_DECIMAL_POINT,
             RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
         assert grossProfitMargin != null;
 
@@ -74,7 +79,7 @@ public class SalesReport {
             decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
             decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
 
-        if (grossProfitMargin.compareTo(BigDecimal.ZERO) == -1) {
+        if (grossProfitMargin.compareTo(BigDecimal.ZERO) == INTEGER_VALUE_MINUS_ONE) {
             stringToReturn += NEGATIVE_PROFIT_WARNING_MESSAGE;
         }
 
@@ -91,11 +96,11 @@ public class SalesReport {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         StringBuilder info = new StringBuilder();
-        if (selectedSoldItems.size() != 0) {
+        if (selectedSoldItems.size() != INTEGER_VALUE_ZERO) {
             String soldItemsDetailsToAppend = getSoldItemsDetailsString(selectedSoldItems);
             info.append(soldItemsDetailsToAppend);
         } else {
-            assert selectedSoldItems.size() == 0;
+            assert selectedSoldItems.size() == INTEGER_VALUE_ZERO;
             String emptySoldItemInMonthMessage = getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
             info.append(emptySoldItemInMonthMessage);
         }
@@ -105,10 +110,10 @@ public class SalesReport {
 
     private String getSoldItemsDetailsString(ArrayList<SoldItem> selectedSoldItems) {
         String soldItemDetailsString = "";
-        assert selectedSoldItems.size() != 0;
-        for (int i = 0; i < selectedSoldItems.size(); i++) {
+        assert selectedSoldItems.size() != INTEGER_VALUE_ZERO;
+        for (int i = INTEGER_VALUE_ZERO; i < selectedSoldItems.size(); i++) {
             Item selectedItem = selectedSoldItems.get(i);
-            int index = i + 1;
+            int index = i + INTEGER_VALUE_ONE;
             soldItemDetailsString += String.format(ITEM_INFO, index,
                 selectedItem.getName(), selectedItem.getPurchaseCost(), selectedItem.getSellingPrice());
         } //todo: add remarks

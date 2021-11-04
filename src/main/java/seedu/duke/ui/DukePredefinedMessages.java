@@ -4,7 +4,7 @@ package seedu.duke.ui;
 public class DukePredefinedMessages {
 
     public static final String GENERAL_INVALID_COMMAND_NOTES_STRING =
-            "_".repeat(111) + "\nCheck the following:\n"
+            "_".repeat(111) + "\nGeneral format usage" + "\nCheck the following:\n"
             + "1. Words in UPPER_CASE are the parameters to be supplied by the user\n"
             + "2. Parameters in [] is optional & can only be specified ONCE.\n"
             + "3. For Report Command that require date input ym/YEAR-MONTH should follow input ym/YYYY-MM\n"
