@@ -16,7 +16,6 @@ list
 list shlv/book1
 get shlv/book1 i/1
 report t/stats ym/2021-10
-report t/stats ym/2021-11
 markup shlv/book1 i/2
 markup shlv/book1 i/2 %/100.50
 bye
