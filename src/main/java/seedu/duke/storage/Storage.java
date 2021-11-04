@@ -4,11 +4,12 @@ import org.json.JSONObject;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.SoldItem;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
-import seedu.duke.salesmanager.SoldItem;
+import seedu.duke.ui.MessageBubble;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,20 +17,35 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
+//@@author yuejunfeng0909
 public class Storage {
 
-    public static String STORAGE_PATH = "data/Data.txt";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private static final int JSON_INDENTATION_LEVEL = 4;
-
+    public static String STORAGE_PATH = "data/Data.txt";
+    private static Storage singleStorageInstance;
     ShelfList shelfList;
 
-    public Storage() {
+    private Storage() {
         shelfList = ShelfList.getShelfList();
     }
 
-    public void saveData() throws ShelfNotExistException, IOException {
+    public static Storage getStorageManager() {
+        if (singleStorageInstance == null) {
+            singleStorageInstance = new Storage();
+        }
+        return singleStorageInstance;
+    }
+
+    /**
+     * Stores all data to STORAGE_PATH.
+     *
+     * @throws IOException if CLIverShelf do not have IO privileges
+     */
+    public void saveData() throws IOException {
         String nameOfAllShelves = shelfList.getAllShelvesName();
         JSONObject storedData = new JSONObject();
 
@@ -37,7 +53,14 @@ public class Storage {
             storedData = sampleData();
         } else {
             for (String nameOfShelf : nameOfAllShelves.split("\n")) {
-                Shelf currentShelf = shelfList.getShelf(nameOfShelf);
+                Shelf currentShelf = null;
+
+                try {
+                    currentShelf = shelfList.getShelf(nameOfShelf);
+                } catch (ShelfNotExistException e) {
+                    e.printStackTrace();
+                }
+
                 JSONObject shelfInfo = new JSONObject();
 
                 shelfInfo.put("remarks", currentShelf.getRemarks());
@@ -46,11 +69,12 @@ public class Storage {
                 for (int i = 0; i < currentShelf.getSize(); i = i + 1) {
                     Item currentItem = currentShelf.getItem(i);
                     JSONObject itemDetail = new JSONObject();
+                    itemDetail.put("id", currentItem.getID());
                     itemDetail.put("name", currentItem.getName());
                     itemDetail.put("cost", currentItem.getPurchaseCost());
                     itemDetail.put("price", currentItem.getSellingPrice());
                     itemDetail.put("remarks", currentItem.getRemarks());
-                    if (currentShelf.getName() == "soldItems") {
+                    if (currentShelf.getName().equals("soldItems")) {
                         itemDetail.put("saleTime", ((SoldItem) currentItem).getSaleTime());
                     }
                     itemsInShelf.put(Integer.toString(i), itemDetail);
@@ -70,52 +94,68 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Load data from STORAGE_PATH back to CLIverShelf.
+     *
+     * @throws IOException             if CLIverShelf do not have IO privileges
+     * @throws DataCorruptionException if the data in STORAGE_PATH is of incorrect format
+     */
     public void loadData()
-            throws IOException, DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
+            throws IOException, DataCorruptionException {
         File file = new File(STORAGE_PATH);
         if (!file.exists()) {
+            // No file found
+            MessageBubble.printMessageBubble("Initializing with sample database.");
             String directory = STORAGE_PATH.substring(0, STORAGE_PATH.lastIndexOf("/"));
             Files.createDirectories(Paths.get(directory));
             file.createNewFile();
-
             FileWriter writer = new FileWriter(STORAGE_PATH);
             writer.write(sampleData().toString(JSON_INDENTATION_LEVEL));
             writer.close();
         }
+
         String text = Files.readString(Paths.get(STORAGE_PATH));
         try {
             JSONObject storedData = new JSONObject(text);
             loadFromJson(storedData);
         } catch (Exception e) {
-            shelfList.resetShelfList();
-            loadFromJson(sampleData());
+            throw new DataCorruptionException();
         }
 
     }
 
-    private void loadFromJson(JSONObject storedData)
-            throws DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
+    protected void loadFromJson(JSONObject storedData)
+            throws DuplicateShelfException, IllegalModelArgumentException, DuplicateItemException {
         for (String shelfName : storedData.keySet()) {
             Shelf currentShelf = shelfList.addShelf(shelfName);
-            currentShelf.setRemark(storedData.getJSONObject(shelfName).getString("remarks"));
+            try {
+                currentShelf.setRemark(storedData.getJSONObject(shelfName).getString("remarks"));
+            } catch (org.json.JSONException e) {
+                currentShelf.setRemark(" ");
+            }
             JSONObject itemsJson = storedData.getJSONObject(shelfName).getJSONObject("items");
             for (String itemName : itemsJson.keySet()) {
+                if (itemName.isBlank()) {
+                    continue;
+                }
                 JSONObject itemJson = itemsJson.getJSONObject(itemName);
                 Item item;
-                if (shelfName != "soldItems") {
+                if (!shelfName.equals("soldItems")) {
                     item = new Item(
-                            itemJson.get("name").toString(),
-                            itemJson.get("cost").toString(),
-                            itemJson.get("price").toString(),
-                            itemJson.getString("remarks")
+                            itemJson.getString("name"),
+                            itemJson.getString("cost"),
+                            itemJson.getString("price"),
+                            itemJson.getString("remarks"),
+                            itemJson.getString("id")
                     );
                 } else {
                     item = new SoldItem(
-                            itemJson.get("name").toString(),
-                            itemJson.get("cost").toString(),
-                            itemJson.get("price").toString(),
+                            itemJson.getString("name"),
+                            itemJson.getString("cost"),
+                            itemJson.getString("price"),
                             itemJson.getString("remarks"),
-                            LocalDateTime.parse(itemJson.get("saleTime").toString())
+                            itemJson.getString("id"),
+                            LocalDateTime.parse(itemJson.getString("saleTime"))
                     );
                 }
                 currentShelf.addItem(item);
@@ -123,7 +163,7 @@ public class Storage {
         }
     }
 
-    private JSONObject sampleData() {
+    protected JSONObject sampleData() {
         final JSONObject defaultShelves = new JSONObject();
         final JSONObject defaultWarehouse = new JSONObject();
         final JSONObject defaultItems = new JSONObject();
@@ -132,6 +172,7 @@ public class Storage {
         sampleItem.put("cost", "12.25");
         sampleItem.put("price", "25");
         sampleItem.put("remarks", " ");
+        sampleItem.put("id", "111111111");
         defaultItems.put("0", sampleItem);
         defaultWarehouse.put("items", defaultItems);
         defaultWarehouse.put("remarks", " ");

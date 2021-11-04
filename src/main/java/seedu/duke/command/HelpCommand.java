@@ -1,10 +1,11 @@
 package seedu.duke.command;
 
+//@@author zh1huang
 public class HelpCommand extends Command {
 
     public static final String HELP_STRING = "help";
     public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
-    private static final String COMMAND_LIST = "Here are the performable actions:\n"
+    public static final String COMMAND_LIST = "Here are the performable actions:\n"
             + "Words in UPPER_CASE are the parameters to be supplied by the user.\n"
             + "Items in square brackets [ ] are optional.\n"
             + "____________________________________________________________________________________________\n"
@@ -19,15 +20,15 @@ public class HelpCommand extends Command {
             + "7. Get information of item : get shlv/SHELF_NAME i/INDEX\n"
             + "8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE \n"
             + "9. Sell an item: sell shlv/SHELF_NAME i/INDEX\n"
-            + "10. Generate sales report: report t/TYPE [ym/YEAR-MONTH]\n"
-            + "11. Exit program: bye\n"
+            + "10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]\n"
+            + "11. Generate sales report: report t/TYPE [ym/YEAR-MONTH]\n"
+            + "12. Exit program: bye\n"
             + "____________________________________________________________________________________________\n";
 
     /**
      * Executes help command.
      */
     public String execute() {
-        System.out.println(COMMAND_LIST);
         return COMMAND_LIST;
     }
 }

@@ -1,14 +1,14 @@
 package seedu.duke.ui;
 
-//@@author yuejunfeng0909-reused
+//@@author yuejunfeng0909
 public class MessageBubble {
 
     static final String EDGE_HORIZONTAL_SYMBOL = ".";
     static final String EDGE_VERTICAL_SYMBOL = ":";
     static final String EDGE_TAIL = "...";
     static int MAX_LINES = 1000;
-    static int TERMINAL_WIDTH = 80;
-    static int MAX_BUBBLE_WIDTH = 70;
+    static int TERMINAL_WIDTH = 130;
+    static int MAX_BUBBLE_WIDTH = 125;
     static int MAX_MESSAGE_LENGTH = MAX_BUBBLE_WIDTH - EDGE_TAIL.length() - 4;
 
     private final String[] messages;
@@ -29,6 +29,26 @@ public class MessageBubble {
     public MessageBubble(String msg) {
         this();
         addMessage(msg);
+    }
+
+    /**
+     * Print a message bubble with the given messages.
+     *
+     * @param msg messages to be printed
+     */
+    public static void printMessageBubble(String msg) {
+        MessageBubble temp = new MessageBubble();
+        temp.addMessage(msg);
+        temp.printMessageBubble();
+    }
+
+    /**
+     * Print the message bubble with all messages inside it.
+     */
+    public void printMessageBubble() {
+        printTopEdge();
+        printMessage(messages);
+        printBottomEdge();
     }
 
     public int getMessagesCount() {
@@ -55,12 +75,12 @@ public class MessageBubble {
             updateBubbleWidth(msg);
             messages[messagesCount++] = msg;
         } else {
-            String extracted = msg.substring(0, MAX_MESSAGE_LENGTH);
-            updateBubbleWidth(extracted);
-            messages[messagesCount++] = extracted;
-
-            String remaining = msg.substring(MAX_MESSAGE_LENGTH);
-            this.addSingleMessage(remaining);
+            Wrapping autoWrap = new Wrapping(msg, MAX_MESSAGE_LENGTH);
+            while (!autoWrap.isEmpty()) {
+                String extracted = autoWrap.nextLine();
+                updateBubbleWidth(extracted);
+                messages[messagesCount++] = extracted;
+            }
         }
     }
 
@@ -73,12 +93,12 @@ public class MessageBubble {
 
     private void printTopEdge() {
         System.out.println(printSpacerBeforeBubble()
-            + EDGE_HORIZONTAL_SYMBOL.repeat(bubbleWidth - EDGE_TAIL.length()));
+                + EDGE_HORIZONTAL_SYMBOL.repeat(bubbleWidth - EDGE_TAIL.length()));
     }
 
     private void printBottomEdge() {
         System.out.println(printSpacerBeforeBubble()
-            + EDGE_HORIZONTAL_SYMBOL.repeat(bubbleWidth - EDGE_TAIL.length()) + EDGE_TAIL);
+                + EDGE_HORIZONTAL_SYMBOL.repeat(bubbleWidth - EDGE_TAIL.length()) + EDGE_TAIL);
     }
 
     private String printSpacerBeforeBubble() {
@@ -92,39 +112,18 @@ public class MessageBubble {
      */
     private void printMessage(String msg) {
         System.out.println(printSpacerBeforeBubble() + EDGE_VERTICAL_SYMBOL + " "
-            + msg
-            + " ".repeat(maxMessageLengthInBubble - msg.length()) + " " + EDGE_VERTICAL_SYMBOL);
+                + msg
+                + " ".repeat(maxMessageLengthInBubble - msg.length()) + " " + EDGE_VERTICAL_SYMBOL);
     }
 
     /**
      * Print the messages each in one line, with indentation.
      *
-     * @param msgs messages to be printed
+     * @param messages messages to be printed
      */
-    public void printMessage(String[] msgs) {
+    public void printMessage(String[] messages) {
         for (int i = 0; i < messagesCount; i++) {
-            printMessage(msgs[i]);
+            printMessage(messages[i]);
         }
     }
-
-    /**
-     * Print the message bubble with all messages inside it.
-     */
-    public void printMessageBubble() {
-        printTopEdge();
-        printMessage(messages);
-        printBottomEdge();
-    }
-
-    /**
-     * Print a message bubble with the given messages.
-     *
-     * @param msg messages to be printed
-     */
-    public static void printMessageBubble(String msg) {
-        MessageBubble temp = new MessageBubble();
-        temp.addMessage(msg);
-        temp.printMessageBubble();
-    }
-
 }

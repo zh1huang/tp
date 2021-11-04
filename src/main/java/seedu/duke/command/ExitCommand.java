@@ -1,18 +1,16 @@
 package seedu.duke.command;
 
-import seedu.duke.model.Shelf;
-
+//@@author zh1huang
 public class ExitCommand extends Command {
 
     public static final String BYE_STRING = "bye";
     public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
-    private static final String BYE_MESSAGE = "See you next time";
+    public static final String BYE_MESSAGE = "See you next time";
 
     /**
      * Override superclass Command to not perform any actions.
      */
     public String execute() {
-        // System.out.println(BYE_MESSAGE);
         return BYE_MESSAGE;
     }
 

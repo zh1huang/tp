@@ -89,12 +89,12 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 ### General Program Flow
 
 1. User runs the programs & input user commands
-2. `Main` calls `Parser` to `parseCommand()`
-3. `Parser` returns a `Command` object when parsed successful
-4. `Main` calls `Command` object to `execute()`, and returning a `resultString`
-5. `Main` instantiates `UI` component to print the `resultString`
+2. `CLIverShelf` calls `Parser` to `parseCommand()`
+3. `Parser` creates and returns a `Command` object when parsed successful
+4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
+5. `CLIverShelf` instantiates `UI` component to print the `result`
 
-![](diagrams/GeneralProgramFlowSequenceDiagram.png)
+![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
 
 ### UI component
 
@@ -137,15 +137,13 @@ The `Logic` component consists of `Parser` and `Command` components.
    
 ![](diagrams/ParserClassDiagram.png)
 
-3. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
 ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
 
 ### Model component
-
-![](diagrams/seedu_duke_model.drawio.svg)
 
 **API**:
 
@@ -164,9 +162,23 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](diagrams/seedu_duke_model_newshelf.drawio.svg)
+![](http://www.plantuml.com/plantuml/svg/NOwn3i8m34HtVuML2IfrOCt0mih65rX9K2srQKIiVZ-AawQ5nJfRx-wSw2FiE54KDFQnBWj5Rv0okgeXdOcuRc4UR_OrXVcjM2xg5zBJaxDKhAW3BHj02yVnNg_3O57XorvXha1EU2C9hKDdTsW-alVL9XFdVuTMTTMTuCFE7Pdj8Okj_Wnz0G00)
+![](http://www.plantuml.com/plantuml/svg/ZS-x3eGW40NGdg-OKAc9XIt5DhRRxHTC0ECaYcIP-FsRoCDdiTqDEVS27hzCcZmw1gdwPPxH6GaOGCSi_564qKx3cmAhJquRBkTdxfRLJcqNyGv5seRsjJSLe34Rh79FrW8rqufi3pUKLEfDSt7HdEVBEeyK_XmMncRtD0dfdJUMHz8_7-4F)
+
 ### Storage component
-The storage component consists of `Storage` class. It handles the saving of user data by the command component and also loading data on program start up.
+The storage component consists of `Storage` class. 
+It handles the saving of user data by the command component and also loading data on program start up.
+
+The diagram below shows the implementation of `saveData()`.
+
+![](http://www.plantuml.com/plantuml/svg/XLJBRjim4BppApOvoO6R3z2XIFfE4SH5PQ37OYkj7JOKIP2qW_vz9TfQQIC5EMd5cU5mo2LlOiAG3grHodU5hhL7c-3Z_TsHGlL8PWSO0RqNy6LP9HTmJvSz6a-rPCHUUwzZAgkXocGUb_Jw40BPbBabv4-cJyUbedUbvXCcBE5xjNdO_FbBzTc3eOKrtTcTcoaOaGATg5ta3u2abr-qeL-X0qDcZRzAeVVmxlsmLsN48_KBB5OAwwIFc8ZtyVpDTDx5FQLRO_fzE59ym9Q4aZULgwaPs8w_sOrwrT225asQCQzr_63GFdLk2W26ASNi4LjlXZGzQPReLIKVLAOqD5CgCf7crgo3gwiC6kSyx5m0mlhndEBKljhEusU9d7DiWM5AaOHHXdX49f8y6MeEldRKUUd59CQA9I9fRiI-6_gOugumNzfaWKWvfyYxkATqrscAmMdrrimb-CEfaTPGkvZMu8Ek2T0s4AZ5y2GNvtpAMj0HAcUQteq9R_f4DBJLBSqKP1lfitJMELwHxtcyN5rt4tBEDHl9n0t55Dm_HjLBqw5UxDUywEd1hdanxCCUec5agbnC7CQdfZlO4YmzJuQAQhlvUVlry-yVjzjlgsLP2S_z5nfCo0_B15TZ-J9HSbKAskx5YyIu6alfA1uXIP-7khY04chZ8XKY07gl5fuDti3XKl68k2HC6-sLkY7R75hp7m00)
+
+The diagram below shows the implementation of `loadData()`
+
+![](http://www.plantuml.com/plantuml/svg/bLNDJkCm4BxdAOQUaaZm03uWf5qXWH0SSjYpIQQjTvquigSKtdux3cucLkYobyRZxsScuubx5qXxElIsACRJmhHcr0F1ZwU7D_JD7kqMT00zZWjuenfoNkzmmsYOral6rbXKzyPE58wMUCH-UKFe8sCEbpmsn-wd9gqUcvVdbzVVs59Kp4YcuAgVJ23LfDN4Jz6ItXwynu4YLq5yHBhSNrKy4FOA-5VoELvFu6mtINWbPH8j2ZsErxUVBLNMwVY6PLNebioR9Zot-_C9rxUnlNLTk97Y4WP7WE_ygW006L6r7ZNXCnwvvsKLESazCdY75omH1mDrFIF9BEX-jCWrNdPAV9W54UpmEwaL7FbPpkBggoAlhbHhNS1ooKXT-oed3btUKGKUTTUGDyFkvBRKPBuA2D-fo9o5enZNkbOmu17cUIvPN4cs781xx_h7u8PojbWP1-lS25ldGLixpVgpxX7C83BV_C6F1gciyhcOlndTTGq7vTbYUQmpbRVdY5ta9rFN6Ivx9OdPYUJ-QmrKi4CItPjBlLa26qFOXqsrVE-KIZZolWWNnR87cuUyqamk3o29kF-PmUMtEl5F5hqcumRGh-v0G7kC5d0qj8U1JPFZsL1RcZWcn8zVGqWNIg9aUSLrLTU29DeZA98WzsMZJCxhyA8Lse2fwEyNt33jtqKtQsuI-__YSyjuPQmMAlzGT1T59IUeScbswoGNSOr8L8-ZH3eCvDr7l6XI86Uok3kv7thx5m00)
+
+
+
 ___
 ## Implementation
 
@@ -241,7 +253,9 @@ ___
 |v2.0|user|mark an item as sold|remove item from inventory list and add to revenue|
 |v2.0|user|add the total cost of all the items|know the total cost and deduct from revenue to find profit|
 |v2.0|user|view the monthly sales report|know if I am making a profit|
-
+|v2.0|user|create a shelf|store items into the shelf|
+|v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
+|v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
 ___
 ## Non-Functional Requirements
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
@@ -296,6 +310,14 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
       Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
 
 ### Removing a shelf
+1. To remove a shelf with a unique name that exist in the shelf list.
+   1. Pre-requisites shelf name `Book1` previously exist. The user may check by doing a `list`.
+      1. Test case 1: `remove shlv/Book1`
+         Expected: Shelf name** `Book1` will be removed. 
+   2. Test case 2: remove a shelf that has already been removed. `remove shlv/Book1` again
+      Expected: Shows output message that shelf does not exist.
+   3. Test case 3: User inputs with the incorrect format such as `remove`, `remove shlv/`, `remove sh`, `remove shlv/Book2 shlv/Pencil1`
+      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
 
 ### Adding an item
 
@@ -334,10 +356,18 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
       Expected: Shows a message none of the items have been sold to generate the items report
 
 4. Getting a sales report but the user input format is wrong
-   1. Test case with wrong input formats 
-      1. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
-      2. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
-      3. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
-      Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
+
+   Test case with wrong input formats 
+   
+   2. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
+   3. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
+   4. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
+   
+   Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
 
 ### Selling an item
+1. 
+
+### Markup price of an item
+
+

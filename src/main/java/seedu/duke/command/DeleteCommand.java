@@ -1,14 +1,13 @@
 package seedu.duke.command;
 
+import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
-import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.ShelfList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 /**
  * The command that deletes a selected item.
@@ -16,13 +15,13 @@ import java.util.regex.Pattern;
 public class DeleteCommand extends Command {
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
     public static final String DELETE_STRING = "delete";
-    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
+    public static final String DELETED_ITEM_DETAILS_FORMAT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String shelfName;
     private final int index;
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * The DeleteCommand constructor.
@@ -52,9 +51,14 @@ public class DeleteCommand extends Command {
             int sizeAfterDeleting = selectedShelf.getSize();
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
                     "After deleting an item the list size should decrease by 1";
-            System.out.println(DELETE_COMPLETE_MESSAGE);
             logger.log(Level.INFO, "DeleteCommand successfully executed.");
-            return DELETE_COMPLETE_MESSAGE;
+            String name = selectedItem.getName();
+            String cost = selectedItem.getPurchaseCost();
+            String price = selectedItem.getSellingPrice();
+            String remarks = selectedItem.getRemarks();
+            String deletedItemDetails = "\n"
+                    + String.format(DELETED_ITEM_DETAILS_FORMAT, name, cost, price, remarks);
+            return DELETE_COMPLETE_MESSAGE + deletedItemDetails;
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             logger.log(Level.WARNING, String.format("DeleteCommand failed to execute with error message %s",
                     e.getMessage()));
@@ -62,7 +66,7 @@ public class DeleteCommand extends Command {
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             throw new ShelfNotExistException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         }
     }
 

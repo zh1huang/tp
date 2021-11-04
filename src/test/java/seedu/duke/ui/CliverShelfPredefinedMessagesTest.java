@@ -2,7 +2,7 @@ package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
 
-class DukePredefinedMessagesTest {
+class CliverShelfPredefinedMessagesTest {
 
     @Test
     void printWelcomeMessage() {

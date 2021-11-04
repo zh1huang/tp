@@ -1,12 +1,12 @@
 package seedu.duke.salesmanager;
 
+import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
-import seedu.duke.model.exception.DuplicateShelfException;
+import seedu.duke.model.SoldItem;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
-import seedu.duke.command.exception.IllegalArgumentException;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
@@ -49,7 +49,9 @@ public class SalesManager {
      * This moves the item from its ItemContainer to the ItemContainer "soldItems"
      *
      * @param item The item to be marked as sold
+     *
      * @return The SoldItem object that is stored in the ItemContainer "soldItems"
+     *
      * @throws ItemNotExistException If the item does not belong to any ItemContainer
      */
     public SoldItem sell(Item item) throws ItemNotExistException {
@@ -59,7 +61,7 @@ public class SalesManager {
         LocalDateTime saleTime = LocalDateTime.now();
         try {
             temp = new SoldItem(item.getName(), item.getPurchaseCost(), item.getSellingPrice(),
-                item.getRemarks(), saleTime);
+                    item.getRemarks(), item.getID(), saleTime);
             soldItems.addItem(temp);
             return temp;
         } catch (Exception e) {
@@ -72,10 +74,11 @@ public class SalesManager {
      * Filter out soldItems that are not sold within the input date.
      *
      * @param selectedStartDate the target date
+     *
      * @return an ArrayList of SoldItems
      */
     public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate)
-        throws IllegalArgumentException {
+            throws IllegalArgumentException {
         ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
@@ -83,7 +86,7 @@ public class SalesManager {
             filteredSoldItems = getFilteredListInSpecificMonth(selectedStartDate, dateTimeFormatter);
         } else {
             filteredSoldItems = getFilteredListWithinAPeriod(selectedStartDate,
-                selectedEndDate, dateTimeFormatter);
+                    selectedEndDate, dateTimeFormatter);
         }
 
         return filteredSoldItems; //todo: check if can use arraylist here
@@ -94,10 +97,12 @@ public class SalesManager {
      *
      * @param selectedStartDate Starting year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
+     *
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
-        DateTimeFormatter dateTimeFormatter) throws IllegalArgumentException {
+                                                               DateTimeFormatter dateTimeFormatter)
+            throws IllegalArgumentException {
         YearMonth yearMonthToSearch;
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
         try {
@@ -123,11 +128,13 @@ public class SalesManager {
      * @param selectedStartDate Starting year-month string
      * @param selectedEndDate   Ending year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
+     *
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
-        String selectedEndDate, DateTimeFormatter dateTimeFormatter)
-        throws IllegalArgumentException {
+                                                             String selectedEndDate,
+                                                             DateTimeFormatter dateTimeFormatter)
+            throws IllegalArgumentException {
         YearMonth startYearMonthToSearch;
         YearMonth endYearMonthToSearch;
 
@@ -143,7 +150,7 @@ public class SalesManager {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (!itemSoldYearMonth.isBefore(startYearMonthToSearch)
-                && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
+                    && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
                 filteredSoldItems.add(selectedSoldItem);
             }
         }
