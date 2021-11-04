@@ -39,7 +39,7 @@ public class Parser {
             //only accepts numbers or decimals in 1 or 2 d.p.
             + " s/(?<sellingPrice>([0-9]{1,4}([.][0-9]{1,2})?))"
             //only accepts numbers or decimals in 1 or 2 d.p.
-            + " q/(?<quantity>[0-9]+)" // only accepts integers, no decimals
+            + " q/(?<quantity>[0-9]{1,3})" // only accepts integers, between 1 to 3 digits
             + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
