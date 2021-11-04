@@ -29,7 +29,7 @@ public class ListCommand extends Command {
             " No |                        Item                        |   Cost    |   Price   | Qty  | Remark\n";
     private static final String BORDER =
             "-------------------------------------------------------------------------------------------------\n";
-    private static final int INDEX_TABLE_LENGTH = 3;
+    private static final int INDEX_TABLE_LENGTH = 8;
     private static final int ITEM_TABLE_LENGTH = 51;
     private static final int COST_TABLE_LENGTH = 10;
     private static final int PRICE_TABLE_LENGTH = 10;
@@ -110,7 +110,7 @@ public class ListCommand extends Command {
 
         for (int i = 0; i < shelf.getSize(); i++) {
             Item selectedItem = shelf.getItem(i);
-            updateQuantity(selectedItem);
+            compileQuantity(selectedItem);
         }
         output.append(createOutput());
 
@@ -138,7 +138,7 @@ public class ListCommand extends Command {
      *
      * @param item Item to be checked and grouped if quantity is more than 1
      */
-    private void updateQuantity(Item item) {
+    private void compileQuantity(Item item) {
         boolean hasMatch = false;
         for (Item temp : itemList) {
             if (isEqual(temp, item)) {
@@ -166,7 +166,6 @@ public class ListCommand extends Command {
     private String lineEntry(int length, String input) {
         int spacesWidth = length - input.length();
         String spaces = String.format("%" + spacesWidth + "s", "");
-        ;
 
         return input + spaces;
     }
@@ -178,14 +177,12 @@ public class ListCommand extends Command {
      */
     private String createOutput() {
         StringBuilder output = new StringBuilder();
+        int count = 1;
+
         for (int i = 0; i < itemList.size(); i++) {
             Item selectedItem = itemList.get(i);
 
-            int index = i + 1;
-            final String indexString = lineEntry(INDEX_TABLE_LENGTH, Integer.toString(index));
-
             String name = selectedItem.getName();
-            // name = lineEntry(ITEM_TABLE_LENGTH, name);
             name = Wrapping.restrictMessageLength(name, ITEM_TABLE_LENGTH);
 
             String cost = selectedItem.getPurchaseCost();
@@ -195,8 +192,27 @@ public class ListCommand extends Command {
             price = lineEntry(PRICE_TABLE_LENGTH, price);
 
             String quantity = String.valueOf(quantityList.get(i));
-            //quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
             quantity = Wrapping.restrictMessageLength(quantity, QTY_TABLE_LENGTH);
+
+            String index;
+
+            int quantityCount = quantityList.get(i);
+
+            if (quantityCount != 1) {
+                int end = count + quantityCount - 1;
+                String startIndex;
+                String endIndex;
+                startIndex = padIndexString(count);
+                endIndex = padIndexString(end);
+
+                index = startIndex + "-" + endIndex;
+            } else {
+                index = padIndexString(count);
+            }
+
+            String indexString = lineEntry(INDEX_TABLE_LENGTH, index);
+
+            count += quantityCount;
 
             String remarks = selectedItem.getRemarks();
             String remarkStatus = remarks.isBlank() ? "x" : "o";
@@ -205,6 +221,25 @@ public class ListCommand extends Command {
             logger.log(Level.INFO, "ListCommand successfully executed");
         }
         return output.toString();
+    }
+
+    /**
+     * Pads the index so that they are always 3 digits
+     * for consistency and clarity.
+     *
+     * @param count current count of itemList
+     * @return padded index string of index
+     */
+    public String padIndexString(int count) {
+        String indexString;
+        if (count < 10) {
+            indexString = "00" + count;
+        } else if (count < 100){
+            indexString = "0" + count;
+        } else {
+            indexString = String.valueOf(count);
+        }
+        return indexString;
     }
 
     @Override
