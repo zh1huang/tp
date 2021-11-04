@@ -354,13 +354,7 @@ public class Parser {
      * Parses report command arguments.
      *
      * @param arguments The additional arguments after command word.
-<<<<<<< HEAD
-     * @return Report object
-=======
-     *
-     * @return TotalCostAndIncomeCommand object
-     *
->>>>>>> master
+     * @return ReportCommand object
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareReport(String arguments) throws IllegalFormatException {
