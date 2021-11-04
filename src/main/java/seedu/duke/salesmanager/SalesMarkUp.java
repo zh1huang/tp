@@ -18,8 +18,8 @@ public class SalesMarkUp {
     public static final BigDecimal ONE_HUNDRED = new BigDecimal(INTEGER_ONE_HUNDRED);
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     public static final String PARSE_MARKUP_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\npercent: %s\n";
-    public static final int INTEGER_TEN = 10;
-    public static final int INTEGER_ELEVEN = 11;
+    public static final int INTEGER_TWENTY = 20;
+    public static final int INTEGER_SIX = 6;
     public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: "
         + "NOT recommended to set a percentage > 100 to $%s.\n"
         + "This is to keep the price of the item reasonable";
@@ -29,7 +29,8 @@ public class SalesMarkUp {
         "Amount Difference: %s\nCurrent Mark Up: %s%%\n";
     private static final String ESTIMATED_MARKUP_MESSAGE_FORMAT =
         "markup: %s%%, increase: $%s, Final price: $%s\n";
-    public static final String GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE = "Got MarkUp Item info. Name: %s, Cost: %s, Price\nDifference: %s, markup %%: %s";
+    public static final String GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE = "Got MarkUp Item info. Name: %s, Cost: %s, Price"
+        + "\nDifference: %s, markup %%: %s";
     private BigDecimal cost;
     private BigDecimal price;
     private BigDecimal userRequestPercent;
@@ -43,12 +44,12 @@ public class SalesMarkUp {
         this.itemName = selectedItem.getName();
         this.cost = new BigDecimal(selectedItem.getPurchaseCost());
         this.price = new BigDecimal(selectedItem.getSellingPrice());
-        if(!userRequestPercent.equals("")){
+        if (!userRequestPercent.equals("")) {
             this.userRequestPercent = new BigDecimal(userRequestPercent);
         }
     }
 
-    public String getItemToMarkUpInfo(){
+    public String getItemToMarkUpInfo() {
         assert itemName != null;
         return String.format(ITEM_NAME_MESSAGE_FORMAT, itemName, cost, price);
     }
@@ -107,8 +108,8 @@ public class SalesMarkUp {
      */
     public String getEstimatedMarkUpInfo() {
         StringBuilder stringToAppend = new StringBuilder();
-        for (int i = 0; i < INTEGER_ELEVEN; i++) {
-            BigDecimal estimatePercentMarkUp = new BigDecimal(i).multiply(BigDecimal.valueOf(INTEGER_TEN));
+        for (int i = 0; i < INTEGER_SIX; i++) {
+            BigDecimal estimatePercentMarkUp = new BigDecimal(i).multiply(BigDecimal.valueOf(INTEGER_TWENTY));
             BigDecimal amountIncrease = estimatePercentMarkUp
                 .divide(ONE_HUNDRED, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP)
                 .multiply(cost).setScale(TWO_DECIMAL_POINTS, RoundingMode.HALF_UP);

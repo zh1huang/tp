@@ -61,7 +61,7 @@ public class SalesManager {
         LocalDateTime saleTime = LocalDateTime.now();
         try {
             temp = new SoldItem(item.getName(), item.getPurchaseCost(), item.getSellingPrice(),
-                    item.getRemarks(), saleTime);
+                item.getRemarks(), saleTime);
             soldItems.addItem(temp);
             return temp;
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class SalesManager {
      * @return an ArrayList of SoldItems
      */
     public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate)
-            throws IllegalArgumentException {
+        throws IllegalArgumentException {
         ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
@@ -87,7 +87,7 @@ public class SalesManager {
 
         } else {
             filteredSoldItems = getFilteredListWithinAPeriod(selectedStartDate,
-                    selectedEndDate, dateTimeFormatter);
+                selectedEndDate, dateTimeFormatter);
             logger.log(Level.INFO, "Get Filtered List within a period success.");
         }
 
@@ -103,7 +103,7 @@ public class SalesManager {
      */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
                                                                DateTimeFormatter dateTimeFormatter)
-            throws IllegalArgumentException {
+        throws IllegalArgumentException {
         YearMonth yearMonthToSearch;
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
         try {
@@ -137,7 +137,7 @@ public class SalesManager {
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
                                                              String selectedEndDate,
                                                              DateTimeFormatter dateTimeFormatter)
-            throws IllegalArgumentException {
+        throws IllegalArgumentException {
         YearMonth startYearMonthToSearch;
         YearMonth endYearMonthToSearch;
 
@@ -151,18 +151,18 @@ public class SalesManager {
             throw new IllegalArgumentException("Invalid Year Month");
         }
 
-        if(endYearMonthToSearch.isBefore(startYearMonthToSearch)){
+        if (endYearMonthToSearch.isBefore(startYearMonthToSearch)) {
             logger.log(Level.WARNING, "YearMonth parameters are swapped, Start YearMonth is after End YearMonth.");
             throw new IllegalArgumentException(
                 "Invalid argument sequence, 2nd Year Month parameter is earlier than 1st Year Month parameter.\n"
-                + "Parameters are swapped.");
+                    + "Parameters are swapped.");
         }
 
         for (int i = 0; i < soldItems.getSize(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (!itemSoldYearMonth.isBefore(startYearMonthToSearch)
-                    && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
+                && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
                 filteredSoldItems.add(selectedSoldItem);
             }
         }
@@ -170,7 +170,6 @@ public class SalesManager {
         logger.log(Level.INFO, "Get filtered list within a period success.");
         return filteredSoldItems;
     }
-
 
 
 }

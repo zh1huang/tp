@@ -90,14 +90,14 @@ public class ParserTest {
     }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
 
     }
 
     @Test
     public void parse_EmptyInput_throwsIllegalFormatException() {
-        final String[] emptyInputs = {"", "\n", " ", "\n \n" };
-        for(String emptyInput: emptyInputs) {
+        final String[] emptyInputs = {"", "\n", " ", "\n \n"};
+        for (String emptyInput : emptyInputs) {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(emptyInput));
         }
     }
@@ -137,7 +137,7 @@ public class ParserTest {
             "create shlv/book1 shlv/book1",
         };
 
-        for(String input: inputs){
+        for (String input : inputs) {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
         }
     }
@@ -162,7 +162,7 @@ public class ParserTest {
             "remove shlv/book1 shlv/book1",
         };
 
-        for(String input: inputs){
+        for (String input : inputs) {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
         }
     }
@@ -236,7 +236,6 @@ public class ParserTest {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
         }
     }
-
 
     @Test
     public void parse_deleteCommandValidArgs_returnsDeleteCommand() throws IllegalFormatException,
@@ -341,7 +340,7 @@ public class ParserTest {
 
     @Test
     public void parse_editCommandValidArgs_returnsEditCommand() throws
-        ItemNotExistException, NoPropertyFoundException, IllegalFormatException{
+        ItemNotExistException, NoPropertyFoundException, IllegalFormatException {
 
         addExampleItemsToShelf();
         // Test edit Purchase Cost
@@ -349,7 +348,7 @@ public class ParserTest {
             + PURCHASE_COST_PROPERTY_STRING + " v/" + VALUE_EXAMPLE_1;
         Command expectedCommand1 = new EditCommand(SHELF_NAME_EXAMPLE_1, INDEX_1_STRING,
             PURCHASE_COST_PROPERTY_STRING, VALUE_EXAMPLE_1);
-        assertEquals(expectedCommand1,  parser.parseCommand(input1));
+        assertEquals(expectedCommand1, parser.parseCommand(input1));
 
         // Test edit Selling Price
         String input2 = EDIT_STRING + " shlv/" + SHELF_NAME_EXAMPLE_2 + " i/" + INDEX_1_STRING + " p/"
@@ -378,7 +377,6 @@ public class ParserTest {
         for (String input : inputs) {
             assertThrows(IllegalFormatException.class, () -> parser.parseCommand(input));
         }
-
     }
 
     @Test
@@ -443,12 +441,12 @@ public class ParserTest {
         ItemNotExistException, NoPropertyFoundException, IllegalFormatException {
 
         addExampleItemsToShelf();
-        String input1 =  MARKUP_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING;
+        String input1 = MARKUP_STRING + " shlv/" + SHELF_NAME_EXAMPLE_1 + " i/" + INDEX_1_STRING;
 
         Command expectedCommand1 = new MarkUpCommand(SHELF_NAME_EXAMPLE_1, INDEX_1_STRING, "");
         assertEquals(expectedCommand1, parser.parseCommand(input1));
 
-        String input2 =  MARKUP_STRING + " shlv/" + SHELF_NAME_EXAMPLE_2 + " i/" + INDEX_1_STRING + " %/"
+        String input2 = MARKUP_STRING + " shlv/" + SHELF_NAME_EXAMPLE_2 + " i/" + INDEX_1_STRING + " %/"
             + USER_REQUEST_PERCENT_EXAMPLE;
 
         Command expectedCommand2 = new MarkUpCommand(
@@ -460,7 +458,7 @@ public class ParserTest {
      * Utility methods ===============================================================
      */
 
-    private void addExtraShelves(){
+    private void addExtraShelves() {
         Command createShelfCommand = new CreateShelfCommand("book2");
         try {
             createShelfCommand.execute();
@@ -490,22 +488,24 @@ public class ParserTest {
             e.printStackTrace();
         }
     }
+
     private void addExampleItemsToSoldItemsShelf() {
 
         // todo move to the report unit test
-//        LocalDateTime itemSoldTime1 = LocalDateTime.of(2020,
-//            Month.AUGUST, 8, 8, 8, 8);
-//        LocalDateTime itemSoldTime2 = LocalDateTime.of(2021,
-//            Month.SEPTEMBER, 9, 9, 9, 9);
-//        LocalDateTime itemSoldTime3 = LocalDateTime.of(2021,
-//            Month.OCTOBER, 10, 10, 10, 10);
-
+        /**
+        LocalDateTime itemSoldTime1 = LocalDateTime.of(2020,
+            Month.AUGUST, 8, 8, 8, 8);
+        LocalDateTime itemSoldTime2 = LocalDateTime.of(2021,
+            Month.SEPTEMBER, 9, 9, 9, 9);
+        LocalDateTime itemSoldTime3 = LocalDateTime.of(2021,
+            Month.OCTOBER, 10, 10, 10, 10);
+        */
         try {
-            SoldItem soldItem1 = new SoldItem( ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1,
+            SoldItem soldItem1 = new SoldItem(ITEM_NAME_EXAMPLE_1, PURCHASE_COST_EXAMPLE_1, SELLING_PRICE_EXAMPLE_1,
                 REMARKS_EXAMPLE_1, LocalDateTime.now());
             soldItems.addItem(soldItem1);
 
-            SoldItem soldItem2 = new SoldItem( ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
+            SoldItem soldItem2 = new SoldItem(ITEM_NAME_EXAMPLE_2, PURCHASE_COST_EXAMPLE_2, SELLING_PRICE_EXAMPLE_2,
                 REMARKS_EXAMPLE_2, LocalDateTime.now());
             soldItems.addItem(soldItem2);
 
