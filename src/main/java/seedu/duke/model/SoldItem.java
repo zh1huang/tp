@@ -23,9 +23,9 @@ public class SoldItem extends Item {
      *
      * @throws IllegalArgumentException if any of the inputs does not follow the requirement
      */
-    public SoldItem(String name, String cost, String price, String remarks, LocalDateTime saleTime)
+    public SoldItem(String name, String cost, String price, String remarks, String itemId, LocalDateTime saleTime)
             throws IllegalArgumentException {
-        super(name, cost, price, remarks);
+        super(name, cost, price, remarks, itemId);
         setSaleTime(saleTime);
         soldItemFixed = true;
     }

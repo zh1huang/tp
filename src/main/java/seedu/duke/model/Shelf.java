@@ -202,6 +202,29 @@ public class Shelf {
         return items.get(index);
     }
 
+    /**
+     * Search through the Shelf and returns the first Item with the specified name.
+     *
+     * @param itemID The specified name of Item
+     * @return Item with the specified name
+     * @throws ItemNotExistException if no item has the name
+     */
+    public Item getItemByID(String itemID) throws ItemNotExistException {
+        if (name == null) {
+            logger.log(Level.WARNING, String.format("Trying to get Null item from Shelf %s",
+                    this.getName()));
+            throw new NullPointerException();
+        }
+        for (Item item : items) {
+            if (item.getID().equals(itemID)) {
+                return item;
+            }
+        }
+        logger.log(Level.WARNING, String.format("Item %s is not fond in the Shelf %s",
+                name, this.getName()));
+        throw new ItemNotExistException("with ID " + itemID);
+    }
+
     public String getRemarks() {
         return remarks;
     }
@@ -242,6 +265,21 @@ public class Shelf {
             throw new NullPointerException();
         }
         return items.contains(item);
+    }
+
+    /**
+     * Returns true if there is an Item in the Shelf with the specified ID.
+     *
+     * @param itemID ID of the item
+     * @return True if the item exists
+     */
+    public boolean containsGivenID(String itemID) {
+        try {
+            getItemByID(itemID);
+        } catch (ItemNotExistException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

@@ -166,4 +166,21 @@ public class ShelfList {
         }
         throw new ItemNotExistException(item.getName());
     }
+
+
+    /**
+     * Get a unique item from the list of shelves.
+     *
+     * @param itemID The ID of the target item
+     * @return the item if it exists
+     * @throws ItemNotExistException if the target item with the given ID does not exist
+     */
+    public Item getItem(String itemID) throws ItemNotExistException {
+        for (Shelf shelf : shelves) {
+            if (shelf.containsGivenID(itemID)) {
+                return shelf.getItemByID(itemID);
+            }
+        }
+        throw new ItemNotExistException("with ID: " + itemID);
+    }
 }
