@@ -56,7 +56,7 @@ public class Storage {
                 Shelf currentShelf = null;
 
                 try {
-                    currentShelf = shelfList.getShelf(nameOfShelf);
+                    currentShelf = shelfList.getShelf(nameOfShelf, false);
                 } catch (ShelfNotExistException e) {
                     e.printStackTrace();
                 }

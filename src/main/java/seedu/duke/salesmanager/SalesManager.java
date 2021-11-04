@@ -22,7 +22,7 @@ public class SalesManager {
     private SalesManager() {
         ShelfList shelfList = ShelfList.getShelfList();
         try {
-            soldItems = shelfList.getShelf("soldItems");
+            soldItems = shelfList.getShelf("soldItems", false);
         } catch (ShelfNotExistException e) {
             try {
                 soldItems = shelfList.addShelf("soldItems");

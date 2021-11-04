@@ -43,7 +43,7 @@ public class GetCommand extends Command {
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
+                    .getShelf(shelfName, true);
             int initialSize = selectedShelf.getSize();
             Item selectedItem = selectedShelf.getItem(index);
             assert initialSize == selectedShelf.getSize()

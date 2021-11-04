@@ -89,7 +89,7 @@ public class ShelfList {
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
      */
     public void deleteShelf(String name) throws ShelfNotExistException {
-        shelves.remove(getShelf(name));
+        shelves.remove(getShelf(name, true));
     }
 
     /**
@@ -101,7 +101,10 @@ public class ShelfList {
      *
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
      */
-    public Shelf getShelf(String name) throws ShelfNotExistException {
+    public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistException {
+        if (name.equals("soldItems") && isSoldItemHidden) {
+            throw new ShelfNotExistException(name);
+        }
         for (Shelf container : shelves) {
             if (container.getName().equals(name)) {
                 return container;
@@ -119,7 +122,7 @@ public class ShelfList {
      */
     public boolean existShelf(String name) {
         try {
-            getShelf(name);
+            getShelf(name, true);
         } catch (ShelfNotExistException e) {
             return false;
         }

@@ -65,7 +65,7 @@ public class EditCommand extends Command {
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
+                    .getShelf(shelfName, true);
             int sizeBeforeEditing = selectedShelf.getSize();
             Item selectedItem = selectedShelf.getItem(index);
             if (selectedProperty.equals("purchase cost")) {

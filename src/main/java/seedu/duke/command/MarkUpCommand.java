@@ -85,7 +85,7 @@ public class MarkUpCommand extends Command {
     private void getItemDetails() throws ShelfNotExistException {
         Item selectedItem = ShelfList
                 .getShelfList()
-                .getShelf(shelfName)
+                .getShelf(shelfName, true)
                 .getItem(index);
         this.itemName = selectedItem.getName();
         this.cost = cost.add(new BigDecimal(selectedItem.getPurchaseCost()));

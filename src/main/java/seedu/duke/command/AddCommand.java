@@ -71,7 +71,7 @@ public class AddCommand extends Command {
             String itemID = "";
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
+                    .getShelf(shelfName, true);
             int currentSize = selectedShelf.getItemCount();
             int expectedSize = currentSize + quantity;
             if (expectedSize > SHELF_SIZE_LIMIT) {
