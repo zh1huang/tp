@@ -3,3 +3,6 @@ skinparam backgroundColor white
 skinparam box white
 !define PARSER_COLOR #aqua
 !define MAIN_COLOR #orange
+!define LOGIC_COLOR #ffbf00
+!define LOGIC_COLOR_T1 #ffff00
+!define LOGIC_COLOR_T2 #bfff00
