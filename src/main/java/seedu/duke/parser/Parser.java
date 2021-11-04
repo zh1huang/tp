@@ -80,19 +80,6 @@ public class Parser {
 
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
     public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
-    public static final String GENERAL_INVALID_COMMAND_NOTES_STRING = "Check the following:\n"
-            + "1. Words in UPPER_CASE are the parameters to be supplied by the user\n"
-            + "2. Parameters in [] is optional & can only be specified ONCE.\n"
-            + "3. For Report Command that require date input ym/YEAR-MONTH should follow input ym/YYYY-MM\n"
-            + "E.g. Jan 2021 is represented as ym/2021-01.\n"
-            + "4. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\\\n"
-            + "5. Do not add extra parameters to commands unless specified in user guide.\n"
-            + "6. Do not leave trailing spaces at the end of the command.\n"
-            + "7. Program input is case-sensitive, and parameter input sequence cannot be reordered.\n"
-            + "8. Program only takes in input from english character set (US-ASCII), "
-            + "no input of other languages are accepted.\n"
-            + "9. INDEX always starts from 1\n"
-            + "For more details refer to User Guide, under Usage Section\n";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -122,7 +109,6 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        Command command;
 
         switch (commandWord) {
         case AddCommand.ADD_STRING:
@@ -179,8 +165,7 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Add Command Format");
-            throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT,
+            throw new IllegalFormatException(String.format(CORRECT_COMMAND_MESSAGE_STRING_FORMAT,
                     AddCommand.ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
