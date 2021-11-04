@@ -14,24 +14,189 @@
                                                                             ...................................................
                                                                             : Enter 'help' for the list of available commands :
                                                                             ......................................................
-                            ...................................................................................................
-                            : Here are the performable actions:                                                               :
-                            : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
-                            : Items in square brackets [ ] are optional.                                                      :
-                            : ____________________________________________________________________________________________    :
-                            : Description: Command format                                                                     :
-                            : ____________________________________________________________________________________________    :
-                            : 1. Get help : help                                                                              :
-                            : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
-                            : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
-                            : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
-                            : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
-                            : 6. List items: list [shlv/SHELF_NAME]                                                           :
-                            : 7. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
-                            : 8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
-                            : 9. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                   :
-                            : 10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
-                            : 11. Generate sales report: report t/TYPE [ym/YEAR-MONTH]                                        :
-                            : 12. Exit program: bye                                                                           :
-                            : ____________________________________________________________________________________________    :
-                            ......................................................................................................
+                                                                                            ...................................
+                                                                                            : Shelf "book1" has been created. :
+                                                                                            ......................................
+                                                                                            ...................................
+                                                                                            : Shelf "book2" has been created. :
+                                                                                            ......................................
+                                                                   ............................................................
+                                                                   : This item has been added to the list. Its unique ID is:  :
+                                                                   : 09660f4e                                                 :
+                                                                   ...............................................................
+                                                                   ............................................................
+                                                                   : This item has been added to the list. Its unique ID is:  :
+                                                                   : 396f6598                                                 :
+                                                                   ...............................................................
+                                                                   ............................................................
+                                                                   : This item has been added to the list. Its unique ID is:  :
+                                                                   : 394e1a0f                                                 :
+                                                                   ...............................................................
+                                           ....................................................................................
+                                           : 99 items have been added to the list. Use List command to view their unique IDs. :
+                                           .......................................................................................
+                                            ...................................................................................
+                                            : 2 items have been added to the list. Use List command to view their unique IDs. :
+                                            : Warning:                                                                        :
+                                            : Your price of selling is not higher than your purchase cost.                    :
+                                            : Make sure you did not type wrongly.                                             :
+                                            ......................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      : [book1]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Harry Potter                                       | 25.90     | 30.90     | 1    |   x    :
+                      :  002     | Narnia                                             | 17.40     | 25        | 1    |   o    :
+                      :  003-101 | Three Little Pigs                                  | 10.90     | 12.99     | 99   |   x    :
+                      : [book2]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Geronimo                                           | 17.90     | 20.90     | 1    |   x    :
+                      :  002-003 | expensive book                                     | 9999.99   | 9000.00   | 2    |   x    :
+                      : [warehouse]:                                                                                          :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
+                      ............................................................................................................
+                                                                                  .............................................
+                                                                                  : This item has been removed from the list. :
+                                                                                  : Name: Harry Potter                        :
+                                                                                  : Cost: 25.90                               :
+                                                                                  : Price: 30.90                              :
+                                                                                  : Remarks:                                  :
+                                                                                  ................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      : [book1]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Narnia                                             | 17.40     | 25        | 1    |   o    :
+                      :  002-100 | Three Little Pigs                                  | 10.90     | 12.99     | 99   |   x    :
+                      : [book2]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Geronimo                                           | 17.90     | 20.90     | 1    |   x    :
+                      :  002-003 | expensive book                                     | 9999.99   | 9000.00   | 2    |   x    :
+                      : [warehouse]:                                                                                          :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
+                      ............................................................................................................
+                                                                                      .........................................
+                                                                                      : Here is the information of your item: :
+                                                                                      : Name: Three Little Pigs               :
+                                                                                      : Cost: 10.90                           :
+                                                                                      : Price: 12.99                          :
+                                                                                      : Remarks:                              :
+                                                                                      ............................................
+            ...................................................................................................................
+            : Input invalid command format.                                                                                   :
+            : Correct format:                                                                                                 :
+            : edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                                                 :
+            : _______________________________________________________________________________________________________________ :
+            : Check the following:                                                                                            :
+            : 1. Words in UPPER_CASE are the parameters to be supplied by the user                                            :
+            : 2. Parameters in [] is optional & can only be specified ONCE.                                                   :
+            : 3. For Report Command that require date input ym/YEAR-MONTH should follow input ym/YYYY-MM                      :
+            : E.g. Jan 2021 is represented as ym/2021-01.                                                                     :
+            : 4. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\                  :
+            : 5. Do not add extra parameters to commands unless specified in user guide.                                      :
+            : 6. Do not leave trailing spaces at the end of the command.                                                      :
+            : 7. Program input is case-sensitive, and parameter input sequence cannot be reordered.                           :
+            : 8. Program only takes in input from english character set (US-ASCII), no input of other languages are accepted. :
+            : 9. INDEX always starts from 1                                                                                   :
+            : For more details refer to User Guide, under Usage Section                                                       :
+            ......................................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      : [book1]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Narnia                                             | 17.40     | 25        | 1    |   o    :
+                      :  002-100 | Three Little Pigs                                  | 10.90     | 12.99     | 99   |   x    :
+                      : [book2]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Geronimo                                           | 17.90     | 20.90     | 1    |   x    :
+                      :  002-003 | expensive book                                     | 9999.99   | 9000.00   | 2    |   x    :
+                      : [warehouse]:                                                                                          :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
+                      ............................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      : [book1]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Narnia                                             | 17.40     | 25        | 1    |   o    :
+                      :  002-100 | Three Little Pigs                                  | 10.90     | 12.99     | 99   |   x    :
+                      : [book2]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Geronimo                                           | 17.90     | 20.90     | 1    |   x    :
+                      :  002-003 | expensive book                                     | 9999.99   | 9000.00   | 2    |   x    :
+                      : [warehouse]:                                                                                          :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
+                      ............................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      : [book1]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Narnia                                             | 17.40     | 25        | 1    |   o    :
+                      :  002-100 | Three Little Pigs                                  | 10.90     | 12.99     | 99   |   x    :
+                      : [book2]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Geronimo                                           | 17.90     | 20.90     | 1    |   x    :
+                      :  002-003 | expensive book                                     | 9999.99   | 9000.00   | 2    |   x    :
+                      : [warehouse]:                                                                                          :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
+                      ............................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Narnia                                             | 17.40     | 25        | 1    |   o    :
+                      :  002-100 | Three Little Pigs                                  | 10.90     | 12.99     | 99   |   x    :
+                      ............................................................................................................
+                                                                                      .........................................
+                                                                                      : Here is the information of your item: :
+                                                                                      : Name: Narnia                          :
+                                                                                      : Cost: 17.40                           :
+                                                                                      : Price: 25                             :
+                                                                                      : Remarks: good book                    :
+                                                                                      ............................................
+                                                                                      .........................................
+                                                                                      : No sold items in the month of 2021-10 :
+                                                                                      ............................................
+                                                                        .......................................................
+                                                                        : Item: Three Little Pigs                             :
+                                                                        : Cost: 10.90, Price: 12.99                           :
+                                                                        : Amount Difference: 2.09                             :
+                                                                        : Current Mark Up: 19%                                :
+                                                                        : markup: 0%, increase: $0.00, Final price: $10.90    :
+                                                                        : markup: 20%, increase: $2.18, Final price: $13.08   :
+                                                                        : markup: 40%, increase: $4.36, Final price: $15.26   :
+                                                                        : markup: 60%, increase: $6.54, Final price: $17.44   :
+                                                                        : markup: 80%, increase: $8.72, Final price: $19.62   :
+                                                                        : markup: 100%, increase: $10.90, Final price: $21.80 :
+                                                                        ..........................................................
+                                                           ....................................................................
+                                                           : Item: Three Little Pigs                                          :
+                                                           : Cost: 10.90, Price: 12.99                                        :
+                                                           : Amount Difference: 2.09                                          :
+                                                           : Current Mark Up: 19%                                             :
+                                                           : markup: 100.50%, increase: $10.95, Final price: $21.85           :
+                                                           : !!!WARNING: NOT recommended to set a percentage > 100 to $21.85. :
+                                                           : This is to keep the price of the item reasonable                 :
+                                                           .......................................................................
+                                                                                                          .....................
+                                                                                                          : See you next time :
+                                                                                                          ........................
