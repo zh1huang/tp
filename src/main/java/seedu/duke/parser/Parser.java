@@ -10,6 +10,7 @@ import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.MarkUpCommand;
+import seedu.duke.command.PrintDummyIdCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.ReportCommand;
 import seedu.duke.command.SellCommand;
@@ -148,6 +149,9 @@ public class Parser {
 
         case MarkUpCommand.MARKUP_STRING:
             return prepareMarkUp(arguments);
+
+        case PrintDummyIdCommand.DUMMY_ID_STRING:
+            return new PrintDummyIdCommand();
 
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
@@ -354,7 +358,9 @@ public class Parser {
      * Parses report command arguments.
      *
      * @param arguments The additional arguments after command word.
+     *
      * @return ReportCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareReport(String arguments) throws IllegalFormatException {

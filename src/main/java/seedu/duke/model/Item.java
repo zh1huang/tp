@@ -18,6 +18,8 @@ public class Item {
     public static final String MESSAGE_INVALID_NEGATIVE_PRICE = "Price cannot be negative";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static boolean printDummyId = false;
+    private static final String DUMMY_ID = "11111111";
 
     private String name;
     private String itemID;
@@ -95,6 +97,10 @@ public class Item {
         }
     }
 
+    public static void printDummyID(boolean printDummyId) {
+        Item.printDummyId = printDummyId;
+    }
+
     /**
      * Automatically generate the ID for a new item.
      */
@@ -118,6 +124,9 @@ public class Item {
 
 
     public String getID() {
+        if (printDummyId) {
+            return DUMMY_ID;
+        }
         return this.itemID;
     }
 

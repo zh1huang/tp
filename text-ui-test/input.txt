@@ -1,3 +1,4 @@
+dummyid
 create shlv/book1
 create shlv/book2
 add n/Harry Potter shlv/book1 p/25.90 s/30.90 q/1
