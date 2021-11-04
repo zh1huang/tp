@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
+                    .getShelf(shelfName, true);
             int sizeBeforeDeleting = selectedShelf.getSize();
             Item selectedItem = selectedShelf.getItem(index);
             selectedShelf.deleteItem(selectedItem);

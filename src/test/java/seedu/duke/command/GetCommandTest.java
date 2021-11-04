@@ -30,10 +30,11 @@ public class GetCommandTest {
 
     @Test
     public void execute_ItemInList_getsNormally() throws Exception {
-        testList.addItem(new Item("HarryPotter", "16.1", "25.12", "Hello"));
+        Item.setPrintDummyID(true);
+        testList.addItem(new Item("HarryPotter", "16.1", "25.12", "Hello", Item.DUMMY_ID));
         assertTrue(testList.contains("HarryPotter"));
-        String expected = String.format(GET_COMPLETE_MESSAGE + ITEM_DESCRIPTION,
-                "HarryPotter", "16.1", "25.12", "Hello");
+        String expected = String.format(GetCommand.GET_COMPLETE_MESSAGE + GetCommand.GET_OUTPUT,
+                "HarryPotter", "16.1", "25.12", Item.DUMMY_ID, "Hello");
         assertEquals(expected, testCommand1.execute());
     }
 

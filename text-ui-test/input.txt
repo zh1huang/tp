@@ -1,3 +1,4 @@
+dummyid
 create shlv/book1
 create shlv/book2
 add n/Harry Potter shlv/book1 p/25.90 s/30.90 q/1
@@ -11,14 +12,11 @@ list
 get shlv/book1 i/4
 edit shlv/book1 i/3 p/cost v/8.88
 list
-sell shlv/book1 i/2
 list
-sell shlv/book1 i/2
 list
 list shlv/book1
 get shlv/book1 i/1
 report t/stats ym/2021-10
 markup shlv/book1 i/2
-markup shlv/book1 i/2 %/40.50
+markup shlv/book1 i/2 %/100.50
 bye
-
