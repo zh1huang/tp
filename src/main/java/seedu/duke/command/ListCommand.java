@@ -73,7 +73,7 @@ public class ListCommand extends Command {
             try {
                 Shelf selectedShelf = ShelfList
                         .getShelfList()
-                        .getShelf(shelfName);
+                        .getShelf(shelfName, true);
                 if (selectedShelf.getSize() == 0) {
                     logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
                     throw new EmptyListException(EMPTY_LIST_MESSAGE);

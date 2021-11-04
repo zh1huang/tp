@@ -23,6 +23,7 @@ public class EditCommand extends Command {
     public static final String EDIT_STRING = "edit";
     public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
             "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
+    public static final String EDIT_ITEM_DETAILS_FORMAT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
     //to be added to UI part later
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -66,7 +67,7 @@ public class EditCommand extends Command {
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
+                    .getShelf(shelfName, true);
             int sizeBeforeEditing = selectedShelf.getSize();
             Item selectedItem = selectedShelf.getItem(index);
             if (selectedProperty.equals("purchase cost")) {
@@ -83,7 +84,13 @@ public class EditCommand extends Command {
             assert sizeBeforeEditing == sizeAfterEditing :
                     "After editing an item the list size should remain unchanged";
             logger.log(Level.INFO, "EditCommand successfully executed.");
-            return UPDATE_COMPLETE_MESSAGE;
+            String name = selectedItem.getName();
+            String cost = selectedItem.getPurchaseCost();
+            String price = selectedItem.getSellingPrice();
+            String remarks = selectedItem.getRemarks();
+            String deletedItemDetails = "\n"
+                    + String.format(EDIT_ITEM_DETAILS_FORMAT, name, cost, price, remarks);
+            return UPDATE_COMPLETE_MESSAGE + deletedItemDetails;
         } catch (IllegalModelArgumentException e) {
             logger.log(Level.WARNING, String.format("EditCommand failed to execute with error message %s",
                     e.getMessage()));
