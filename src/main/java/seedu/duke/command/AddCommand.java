@@ -135,6 +135,9 @@ public class AddCommand extends Command {
         AddCommand command = (AddCommand) other;
         return name.equals(command.name)
                 && purchaseCost.equals(command.purchaseCost)
-                && sellingPrice.equals(command.sellingPrice);
+                && sellingPrice.equals(command.sellingPrice)
+                && quantity == command.quantity
+                && shelfName.equals(command.shelfName)
+                && remarks.equals(command.remarks);
     }
 }

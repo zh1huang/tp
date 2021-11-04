@@ -94,4 +94,21 @@ public class EditCommand extends Command {
             throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof EditCommand)) {
+            return false;
+        }
+
+        EditCommand command = (EditCommand) other;
+        return shelfName.equals(command.shelfName) && index == command.index
+            && selectedProperty.equals(command.selectedProperty) && newValue.equals(command.newValue);
+    }
 }
