@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     private static final String ADD_COMPLETE_MESSAGE_SINGLE =
             "This item has been added to the list. Its unique ID is: \n";
     private static final String ADD_COMPLETE_MESSAGE_MULTIPLE =
-            " items have been added to the list. Use List command to view their unique IDs.";
+            " items have been added to the list. Use Get command to view their unique IDs.";
     private static final String PRICE_WARNING =
             "\nWarning: \nYour price of selling is not higher than your purchase cost. "
                     + "\nMake sure you did not type wrongly.";
