@@ -8,7 +8,7 @@
   * [`help` - Show help](#display-help-message)
   * [`create` - Create a shelf](#create-a-shelf)
   * [`remove` - Remove a shelf](#remove-a-shelf)
-  * [`add` - Add new items](#add-new-item)  
+  * [`add` - Add new items](#add-new-items)  
   * [`delete` - Delete item from list](#delete-an-item)
   * [`list` - List all items](#listing-all-items)
   * [`get` - Retrieve information of an item](#get-information-about-an-item)
@@ -141,7 +141,7 @@ Expected outcome:
                                        .........................................
 ```
 
-### Add new item
+### Add new items
 
 Adds a new item to the inventory, specifying its name, shelf, purchase cost, selling price, quantity (and remarks if any).
 
@@ -155,32 +155,40 @@ Adds a new item to the inventory, specifying its name, shelf, purchase cost, sel
 
 &#9888; **Maximum quantity of any item is 999.**
 
+&#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item.**
+
+As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from the label, and use this ID to sell the item. Please make sure that you label the ID clearly as you can only use ID to sell items (refer to "Sell an item" section).
+
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
-Example: **Add 5 books titled "Harry Potter" with a purchase cost of $27 and selling price of $37 to shelf `book1`.**
+Example: **Add 1 book titled "Harry Potter" with a purchase cost of $27 and selling price of $37 to shelf `book1`. Also added additional remarks**
 ```
-add n/Harry Potter shlv/book1 p/27 s/37 q/5 
+add n/Harry Potter shlv/book1 p/27 s/37 q/1 r/50% discount
 ```
 
 Expected outcome
 ```
-//todo
+                                                                   ............................................................
+                                                                   : This item has been added to the list. Its unique ID is:  :
+                                                                   : 76a3e297                                                 :
+                                                                   ...............................................................
 ```
 
-Example: **Add 99 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`. 
-Also added additional remarks**
+Example: **Add 99 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`.**
 ```
-add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/99 r/Not many people bought this. Can consider a 50% discount.
+add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/99
 ```
 
 Expected outcome:
 ```
-//todo
+                                            ...................................................................................
+                                            : 99 items have been added to the list. Use Get command to view their unique IDs. :
+                                            ......................................................................................
 ```
 
 ### Delete an item
 
-Deletes item from the inventory with the matching name.
+Deletes item from the inventory by specifying its shelf name and its index in the shelf.
 
 Format: `delete shlv/SHELF_NAME i/INDEX`
 
@@ -190,7 +198,13 @@ delete shlv/book2 i/1
 ```
 Expected outcome:
 ```
-//todo
+                                                                                  .............................................
+                                                                                  : This item has been removed from the list. :
+                                                                                  : Name: Geronimo                            :
+                                                                                  : Cost: 17.90                               :
+                                                                                  : Price: 20.90                              :
+                                                                                  : Remarks:                                  :
+                                                                                  ................................................
 ```
 
 ### Listing all items 
@@ -276,46 +290,66 @@ get shlv/book1 i/1
 
 ### Edit an item
 
-Updates the properties of an item.
+Updates the properties of an item. You need to specify which item to edit using its shelf name and index number in that shelf, and you also need to specify which property you want to edit and what the new value will be.
 
 Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
-&#128221; Only 2 `PROPERTY` can be specified, either `p/cost` to specify the cost of the item or `p/price` to specify the item price. 
+&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit. 
 
 Example: **Update selling price of item with `index 1` as $30**
 ```
-edit shlv/book1 i/1 p/price v/30
+edit shlv/book1 i/1 p/selling price v/30
 ```
 
 Expected outcome:
 
 ```
-//todo
+                                                                                                ...............................
+                                                                                                : This item has been updated. :
+                                                                                                : Name: Harry Potter          :
+                                                                                                : Cost: 20                    :
+                                                                                                : Price: 30                   :
+                                                                                                : Remarks: new book           :
+                                                                                                ..................................
+
 ```
 Example: **Update purchase cost of item with `index 2` as $23.50**
 ```
-edit shlv/book1 i/2 p/cost v/23.5 
+edit shlv/book1 i/2 p/purchase cost v/23.5 
 ```
 
 Expected outcome:
 ```
-//todo
+                                                                                                ...............................
+                                                                                                : This item has been updated. :
+                                                                                                : Name: Harry Potter          :
+                                                                                                : Cost: 23.5                  :
+                                                                                                : Price: 30.90                :
+                                                                                                : Remarks:                    :
+                                                                                                ..................................
 ```
 
 ### Sell an item
 
-Mark an item as sold.
+Mark an item as sold. The item will be removed from the shelf and will be added to your sales report.
 
-Format: `sell shlv/SHELF_NAME i/INDEX`
+Format: `sell id/ITEM_ID
+&#128221; the ID of an item is the 8 alphanumeric characthers printed out after you have added the item to a shelf.   
 
-Example: **Mark an item of index 1 in shelf `book1` as sold**
+Example: **Sell the book "Harry Potter" which was previously added in "Add new items" section. Its ID is 76a3e297.**
 ```
-sell shlv/book1 i/1
+sell id/76a3e297
 ```
 
 Expected outcome:
 ```
-//todo
+                                                                                                   ............................
+                                                                                                   : This item has been sold. :
+                                                                                                   : Name: Harry Potter       :
+                                                                                                   : Cost: 27                 :
+                                                                                                   : Price: 37                :
+                                                                                                   : Remarks: 50% discount    :
+                                                                                                   ...............................
 ```
 
 
