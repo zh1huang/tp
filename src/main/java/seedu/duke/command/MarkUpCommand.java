@@ -66,8 +66,8 @@ public class MarkUpCommand extends Command {
             logger.log(Level.WARNING, String.format(MARKUP_COMMAND_SHELF_NOT_EXIST_LOGGING_MESSAGE_FORMAT, shelfName));
             throw new ShelfNotExistException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, String.format(MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT, index));
-            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
+            logger.log(Level.WARNING, String.format(MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT, index + 1));
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         }
     }
 
