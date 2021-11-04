@@ -102,7 +102,7 @@ public class AddCommand extends Command {
                 }
             } else if (quantity == 1) {
                 assert !itemID.equals("") : "An item must have an auto-generated ID!";
-                if(hasZeroPriceOrCost) {
+                if (hasZeroPriceOrCost) {
                     return ADD_COMPLETE_MESSAGE_SINGLE + itemID + ZERO_PRICE_WARNING;
                 }
                 if (hasNegativeProfit) {

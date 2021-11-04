@@ -166,8 +166,6 @@ public class ListCommand extends Command {
     private String lineEntry(int length, String input) {
         int spacesWidth = length - input.length();
         String spaces = String.format("%" + spacesWidth + "s", "");
-        ;
-
         return input + spaces;
     }
 
