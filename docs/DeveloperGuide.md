@@ -200,6 +200,13 @@ ___
 ### Editing an item
 
 #### Design considerations:
+* Aspect: How to change a cerntain property precisely
+   * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
+      * Pros: Only need to change one property. 
+      * Cons: Need one additional step to check which property is selected by the user.
+   * Alternative 2: Let the user specify the new values for each property.
+      * Pros: The user can change multiple properties at once using only one Edit command.
+      * Cons: Longer input is needed from the user even if he/she just wants to change one property.
 
 ### Listing all items
 
@@ -212,6 +219,13 @@ ___
 ### Selling an item
 
 #### Design considerations:
+* Aspect: How to determine the sale time
+   * Alternative 1 (current choice): Use the system time when the user sold the item.
+      * Pros: Does not need one additional parameter (sale time) from the user. Shorter command for the user.
+      * Cons: Does not allow the user to manually set the sale time. Not very flexible for the user if he/she forgot to sell an item and wants to make up for it later on.
+   * Alternative 2: Requires the user to specify the sale time.
+      * Pros: More flexibility for the user to add on sale records that he/she forgot to add.
+      * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
 
