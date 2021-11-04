@@ -2,8 +2,8 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.DuplicateItemException;
+import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 

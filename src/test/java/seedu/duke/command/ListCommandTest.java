@@ -2,14 +2,13 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import seedu.duke.model.exception.ShelfNotExistException;
-import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.ShelfNotExistException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 

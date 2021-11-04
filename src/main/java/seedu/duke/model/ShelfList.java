@@ -56,7 +56,7 @@ public class ShelfList {
      * @param name The name of the new Shelf
      *
      * @throws IllegalModelArgumentException if name does not follow the format
-     * @throws DuplicateShelfException  if there already exist a Shelf with this name
+     * @throws DuplicateShelfException       if there already exist a Shelf with this name
      */
     public Shelf addShelf(String name) throws IllegalModelArgumentException, DuplicateShelfException {
         if (existShelf(name)) {
@@ -172,7 +172,9 @@ public class ShelfList {
      * Get a unique item from the list of shelves.
      *
      * @param itemID The ID of the target item
+     *
      * @return the item if it exists
+     *
      * @throws ItemNotExistException if the target item with the given ID does not exist
      */
     public Item getItem(String itemID) throws ItemNotExistException {

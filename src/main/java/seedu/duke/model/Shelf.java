@@ -206,7 +206,9 @@ public class Shelf {
      * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param itemID The specified name of Item
+     *
      * @return Item with the specified name
+     *
      * @throws ItemNotExistException if no item has the name
      */
     public Item getItemByID(String itemID) throws ItemNotExistException {
@@ -271,6 +273,7 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified ID.
      *
      * @param itemID ID of the item
+     *
      * @return True if the item exists
      */
     public boolean containsGivenID(String itemID) {
