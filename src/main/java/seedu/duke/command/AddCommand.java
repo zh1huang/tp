@@ -6,6 +6,7 @@ import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -105,7 +106,7 @@ public class AddCommand extends Command {
                 throw new IllegalArgumentException("Item's quantity cannot be 0");
             }
 
-        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+        } catch (IllegalModelArgumentException e) {
             logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
                     e.getMessage()));
             throw new IllegalArgumentException(e.getMessage());

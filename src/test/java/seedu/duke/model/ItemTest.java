@@ -2,7 +2,7 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,12 +14,12 @@ class ItemTest {
     Item testItem;
 
     @BeforeEach
-    void setup() throws IllegalArgumentException {
+    void setup() throws IllegalModelArgumentException {
         testItem = new Item("Dune", "1.00", "2.00", "");
     }
 
     @Test
-    void setName_correctInputFormat_setNormally() throws IllegalArgumentException {
+    void setName_correctInputFormat_setNormally() throws IllegalModelArgumentException {
         String[] correctInputs =
             new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
         for (String input : correctInputs) {
@@ -32,7 +32,7 @@ class ItemTest {
     void setName_wrongInputFormat_throwsInvalidFormatException() {
         String[] wrongInputs = new String[]{"", " ", "\t", "\n", " \r", "1984+", "Bazinga!", "something~"};
         for (String input : wrongInputs) {
-            assertThrows(IllegalArgumentException.class, () -> testItem.setName(input));
+            assertThrows(IllegalModelArgumentException.class, () -> testItem.setName(input));
         }
     }
 
@@ -42,7 +42,7 @@ class ItemTest {
     }
 
     @Test
-    void setPurchaseCost_correctInputFormat_setNormally() throws IllegalArgumentException {
+    void setPurchaseCost_correctInputFormat_setNormally() throws IllegalModelArgumentException {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
         for (String input : correctInput) {
             testItem.setPurchaseCost(input);
@@ -78,13 +78,13 @@ class ItemTest {
     }
 
     @Test
-    void getPurchaseCost() throws IllegalArgumentException {
+    void getPurchaseCost() throws IllegalModelArgumentException {
         testItem.setPurchaseCost("10.001");
         assertEquals("10.001", testItem.getPurchaseCost());
     }
 
     @Test
-    void setSellingPrice_correctInputFormat_setNormally() throws IllegalArgumentException {
+    void setSellingPrice_correctInputFormat_setNormally() throws IllegalModelArgumentException {
         String[] correctInput = new String[]{"0.01", "1000", "-0.00", "0.0", ".1"};
         for (String input : correctInput) {
             testItem.setSellingPrice(input);
@@ -120,7 +120,7 @@ class ItemTest {
     }
 
     @Test
-    void getSellingPrice() throws IllegalArgumentException {
+    void getSellingPrice() throws IllegalModelArgumentException {
         testItem.setSellingPrice("10.001");
         assertEquals("10.001", testItem.getSellingPrice());
     }

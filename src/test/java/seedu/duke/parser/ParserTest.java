@@ -3,22 +3,11 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.EditCommand;
-import seedu.duke.command.GetCommand;
-import seedu.duke.command.ListCommand;
 import seedu.duke.model.ShelfList;
-import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.IllegalArgumentException;
-import seedu.duke.model.exception.ItemNotExistException;
-import seedu.duke.parser.exception.NoPropertyFoundException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.parser.exception.IllegalFormatException;
-import seedu.duke.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +47,7 @@ public class ParserTest {
     private Shelf testShelf;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException, DuplicateShelfException {
+    public void setUp() throws IllegalModelArgumentException, DuplicateShelfException {
         parser = new Parser();
         ShelfList.getShelfList().resetShelfList();
         testShelf = new Shelf("test");

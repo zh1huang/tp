@@ -3,7 +3,7 @@ package seedu.duke.storage;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 public class DataCorruptionException extends Exception {
     DataCorruptionException() {
@@ -14,7 +14,7 @@ public class DataCorruptionException extends Exception {
         shelfList.resetShelfList();
         try {
             storage.loadFromJson(storage.sampleData());
-        } catch (DuplicateShelfException | DuplicateItemException | IllegalArgumentException ex) {
+        } catch (DuplicateShelfException | DuplicateItemException | IllegalModelArgumentException ex) {
             ex.printStackTrace();
         }
     }

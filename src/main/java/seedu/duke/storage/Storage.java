@@ -7,7 +7,7 @@ import seedu.duke.model.ShelfList;
 import seedu.duke.model.SoldItem;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.ui.MessageBubble;
 
@@ -125,7 +125,7 @@ public class Storage {
     }
 
     protected void loadFromJson(JSONObject storedData)
-            throws DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
+            throws DuplicateShelfException, IllegalModelArgumentException, DuplicateItemException {
         for (String shelfName : storedData.keySet()) {
             Shelf currentShelf = shelfList.addShelf(shelfName);
             try {
