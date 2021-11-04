@@ -46,7 +46,7 @@ public class ShelfList {
      */
     protected void addShelf(Shelf shelf) {
         shelves.add(shelf);
-        Comparator<Shelf> byName = (Shelf o1, Shelf o2) -> o1.getName().compareTo(o2.getName());
+        Comparator<Shelf> byName = Comparator.comparing((Shelf o) -> o.getName().toLowerCase());
         shelves.sort(byName);
     }
 
