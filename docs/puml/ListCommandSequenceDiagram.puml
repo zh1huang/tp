@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant CLIverShelf as app
+participant ":Parser" as parser
+participant ":newCommand: "
+
+app -> parser: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+hide footbox
+@enduml
