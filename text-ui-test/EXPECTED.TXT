@@ -125,24 +125,6 @@
                       : ----------------------------------------------------------------------------------------------------- :
                       :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
                       ............................................................................................................
-            ...................................................................................................................
-            : Input invalid command format.                                                                                   :
-            : Correct format:                                                                                                 :
-            : Sell id/itemID                                                                                                  :
-            : _______________________________________________________________________________________________________________ :
-            : Check the following:                                                                                            :
-            : 1. Words in UPPER_CASE are the parameters to be supplied by the user                                            :
-            : 2. Parameters in [] is optional & can only be specified ONCE.                                                   :
-            : 3. For Report Command that require date input ym/YEAR-MONTH should follow input ym/YYYY-MM                      :
-            : E.g. Jan 2021 is represented as ym/2021-01.                                                                     :
-            : 4. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\                  :
-            : 5. Do not add extra parameters to commands unless specified in user guide.                                      :
-            : 6. Do not leave trailing spaces at the end of the command.                                                      :
-            : 7. Program input is case-sensitive, and parameter input sequence cannot be reordered.                           :
-            : 8. Program only takes in input from english character set (US-ASCII), no input of other languages are accepted. :
-            : 9. INDEX always starts from 1                                                                                   :
-            : For more details refer to User Guide, under Usage Section                                                       :
-            ......................................................................................................................
                       .........................................................................................................
                       : Here is the list of items:                                                                            :
                       : [book1]:                                                                                              :
@@ -160,24 +142,6 @@
                       : ----------------------------------------------------------------------------------------------------- :
                       :  001     | sample item                                        | 12.25     | 25        | 1    |   x    :
                       ............................................................................................................
-            ...................................................................................................................
-            : Input invalid command format.                                                                                   :
-            : Correct format:                                                                                                 :
-            : Sell id/itemID                                                                                                  :
-            : _______________________________________________________________________________________________________________ :
-            : Check the following:                                                                                            :
-            : 1. Words in UPPER_CASE are the parameters to be supplied by the user                                            :
-            : 2. Parameters in [] is optional & can only be specified ONCE.                                                   :
-            : 3. For Report Command that require date input ym/YEAR-MONTH should follow input ym/YYYY-MM                      :
-            : E.g. Jan 2021 is represented as ym/2021-01.                                                                     :
-            : 4. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\                  :
-            : 5. Do not add extra parameters to commands unless specified in user guide.                                      :
-            : 6. Do not leave trailing spaces at the end of the command.                                                      :
-            : 7. Program input is case-sensitive, and parameter input sequence cannot be reordered.                           :
-            : 8. Program only takes in input from english character set (US-ASCII), no input of other languages are accepted. :
-            : 9. INDEX always starts from 1                                                                                   :
-            : For more details refer to User Guide, under Usage Section                                                       :
-            ......................................................................................................................
                       .........................................................................................................
                       : Here is the list of items:                                                                            :
                       : [book1]:                                                                                              :

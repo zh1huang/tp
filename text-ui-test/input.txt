@@ -11,9 +11,7 @@ list
 get shlv/book1 i/4
 edit shlv/book1 i/3 p/cost v/8.88
 list
-sell shlv/book1 i/2
 list
-sell shlv/book1 i/2
 list
 list shlv/book1
 get shlv/book1 i/1
