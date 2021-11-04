@@ -10,7 +10,7 @@ public class PrintDummyIdCommand extends Command {
 
     @Override
     public String execute() throws CommandException, ShelfNotExistException, IllegalModelArgumentException {
-        Item.printDummyID(true);
+        Item.setPrintDummyID(true);
         return "Dummy ID will be printed instead of actual ID";
     }
 }
