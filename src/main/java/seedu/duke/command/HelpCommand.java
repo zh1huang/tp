@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author zh1huang
 public class HelpCommand extends Command {
 
     public static final String HELP_STRING = "help";

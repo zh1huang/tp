@@ -9,6 +9,7 @@ import seedu.duke.model.exception.ShelfNotExistException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author zh1huang
 public class GetCommand extends Command {
 
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
@@ -81,6 +82,7 @@ public class GetCommand extends Command {
         }
 
         GetCommand command = (GetCommand) other;
-        return shelfName.equals(command.shelfName);
+        return shelfName.equals(command.shelfName)
+                && index == command.index;
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+//@@author zh1huang
 public class ExitCommand extends Command {
 
     public static final String BYE_STRING = "bye";
