@@ -51,7 +51,9 @@ public class SalesManager {
      * This moves the item from its ItemContainer to the ItemContainer "soldItems"
      *
      * @param item The item to be marked as sold
+     *
      * @return The SoldItem object that is stored in the ItemContainer "soldItems"
+     *
      * @throws ItemNotExistException If the item does not belong to any ItemContainer
      */
     public SoldItem sell(Item item) throws ItemNotExistException {
@@ -74,6 +76,7 @@ public class SalesManager {
      * Filter out soldItems that are not sold within the input date.
      *
      * @param selectedStartDate the target date
+     *
      * @return an ArrayList of SoldItems
      */
     public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate)
@@ -99,6 +102,7 @@ public class SalesManager {
      *
      * @param selectedStartDate Starting year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
+     *
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
@@ -132,6 +136,7 @@ public class SalesManager {
      * @param selectedStartDate Starting year-month string
      * @param selectedEndDate   Ending year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
+     *
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,

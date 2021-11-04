@@ -4,11 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.command.exception.ItemNotExistException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
-import seedu.duke.model.exception.IllegalArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,7 +28,7 @@ class MarkUpCommandTest {
 
     @Test
     public void execute_ItemInList_executesNormally()
-        throws ShelfNotExistException, CommandException, IllegalArgumentException {
+            throws ShelfNotExistException, CommandException, IllegalArgumentException, IllegalModelArgumentException {
 
         testCommand = new MarkUpCommand("test", "1", "");
         String expectedOutput1 = "Item: Harry Potter\nCost: 16.1, Price: 25.12\nAmount Difference: 9.02\n"
@@ -47,7 +47,7 @@ class MarkUpCommandTest {
 
     @Test
     public void execute_ItemInListButUserRequestMarkUpPercentMoreThanOneHundred_executesNormallyWithWarningMessage()
-        throws ShelfNotExistException, CommandException, IllegalArgumentException {
+            throws ShelfNotExistException, CommandException, IllegalArgumentException, IllegalModelArgumentException {
 
         testCommand = new MarkUpCommand("test", "1", "103.7");
         String expectedOutput2 = "Item: Harry Potter\nCost: 16.1, Price: 25.12\nAmount Difference: 9.02\n"
@@ -59,7 +59,8 @@ class MarkUpCommandTest {
 
     @Test
     public void execute_ItemInSoldItemList_executesNormally()
-        throws CommandException, IllegalArgumentException, seedu.duke.model.exception.ShelfNotExistException {
+            throws CommandException, IllegalArgumentException, seedu.duke.model.exception.ShelfNotExistException,
+            IllegalModelArgumentException {
         testCommand = new MarkUpCommand("soldItems", "1", "");
         assertEquals(MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE, testCommand.execute());
     }

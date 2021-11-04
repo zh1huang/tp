@@ -19,7 +19,7 @@ import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.parser.exception.IllegalFormatException;
@@ -34,6 +34,7 @@ import static seedu.duke.command.GetCommand.GET_STRING;
 import static seedu.duke.command.ListCommand.LIST_STRING;
 import static seedu.duke.command.MarkUpCommand.MARKUP_STRING;
 import static seedu.duke.command.ReportCommand.REPORT_STRING;
+
 
 // Parser Test class adapted from
 // https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
@@ -66,7 +67,7 @@ public class ParserTest {
     private Shelf soldItems;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException, DuplicateShelfException {
+    public void setUp() throws IllegalModelArgumentException, DuplicateShelfException {
         parser = new Parser();
         ShelfList.getShelfList().resetShelfList();
         Command newShelf1Command = new CreateShelfCommand(SHELF_NAME_EXAMPLE_1);
@@ -192,6 +193,7 @@ public class ParserTest {
         }
     }
 
+
     @Test
     public void parse_addCommandValidArgs_returnsAddCommand() throws ItemNotExistException,
         NoPropertyFoundException, IllegalFormatException {
@@ -247,6 +249,7 @@ public class ParserTest {
         Command expectedCommand2 = new DeleteCommand(SHELF_NAME_EXAMPLE_2, INDEX_1_STRING);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
+
 
     /*
      * Tests for list command ===============================================================
@@ -311,6 +314,7 @@ public class ParserTest {
         Command expectedCommand2 = new GetCommand(SHELF_NAME_EXAMPLE_2, INDEX_1_STRING);
         assertEquals(expectedCommand2, parser.parseCommand(input2));
     }
+
 
     /*
      * Tests for edit command ===============================================================
@@ -462,6 +466,8 @@ public class ParserTest {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+        } catch (IllegalModelArgumentException e) {
+            e.printStackTrace();
         }
     }
 
@@ -479,6 +485,8 @@ public class ParserTest {
         } catch (ShelfNotExistException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalModelArgumentException e) {
             e.printStackTrace();
         }
     }

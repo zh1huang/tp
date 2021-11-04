@@ -6,6 +6,7 @@ import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -16,8 +17,9 @@ import java.util.logging.Logger;
  */
 public class AddCommand extends Command {
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
-        "add n/NAME shlv/SHELF_NAME p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
-            + "(Purchase cost and selling price must be non-negative numbers. Quantity must be non-negative integers.)";
+            "add n/NAME shlv/SHELF_NAME p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
+                    + "(Purchase cost and selling price must be non-negative numbers. "
+                    + "Quantity must be non-negative integers.)";
     public static final String ADD_STRING = "add";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
             + "price: %s\nquantity: %s\nremarks: %s\n";
@@ -105,7 +107,7 @@ public class AddCommand extends Command {
                 throw new IllegalArgumentException("Item's quantity cannot be 0");
             }
 
-        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+        } catch (IllegalModelArgumentException e) {
             logger.log(Level.WARNING, String.format("AddCommand failed to execute with error message %s",
                     e.getMessage()));
             throw new IllegalArgumentException(e.getMessage());

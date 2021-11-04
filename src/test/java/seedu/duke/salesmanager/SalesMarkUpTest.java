@@ -7,7 +7,7 @@ import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +21,8 @@ class SalesMarkUpTest {
     private Shelf testShelf;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException, DuplicateShelfException, DuplicateItemException {
+    public void setUp() throws IllegalArgumentException, DuplicateShelfException, DuplicateItemException,
+            IllegalModelArgumentException {
         ShelfList.getShelfList().resetShelfList();
         testShelf = new Shelf(TEST_SHELF_NAME);
         testShelf.addItem(new Item("Harry Potter", "16.1", "25.12", ""));

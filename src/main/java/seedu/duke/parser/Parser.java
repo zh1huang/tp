@@ -90,7 +90,9 @@ public class Parser {
      * respective cases depending on the command word.
      *
      * @param userInputLine The user input Line
+     *
      * @return Command object depending on the command type
+     *
      * @throws IllegalFormatException   If user input line does not match the respective command format
      * @throws ItemNotExistException    If item name not found in the container
      * @throws NoPropertyFoundException If edit command operation cannot find the associated property specified
@@ -157,7 +159,9 @@ public class Parser {
      * Parses add command arguments.
      *
      * @param arguments The additional arguments after command word
+     *
      * @return AddCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareAdd(String arguments) throws IllegalFormatException {
@@ -192,7 +196,9 @@ public class Parser {
      * Parses delete command arguments.
      *
      * @param arguments The additional arguments after command word
+     *
      * @return DeleteCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareDelete(String arguments) throws IllegalFormatException {
@@ -217,7 +223,9 @@ public class Parser {
      * Parses list command arguments.
      *
      * @param arguments The additional arguments after command word
+     *
      * @return ListCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareList(String arguments) throws IllegalFormatException {
@@ -247,7 +255,9 @@ public class Parser {
      * Parses get command arguments.
      *
      * @param arguments The additional arguments after command word
+     *
      * @return GetCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareGet(String arguments) throws IllegalFormatException {
@@ -272,7 +282,9 @@ public class Parser {
      * Parses edit command arguments.
      *
      * @param arguments The additional arguments after command word
+     *
      * @return EditCommand object
+     *
      * @throws IllegalFormatException   If the input format is wrong
      * @throws ItemNotExistException    If the item cannot be found from the container
      * @throws NoPropertyFoundException If the associated item property cannot be found
@@ -310,7 +322,9 @@ public class Parser {
      * Parses help command.
      *
      * @param arguments The additional arguments after command word, should be none
+     *
      * @return HelpCommand object
+     *
      * @throws IllegalFormatException if exists extra argument after bye
      */
     private Command prepareHelp(String arguments) throws IllegalFormatException {
@@ -324,7 +338,9 @@ public class Parser {
      * Parses bye command.
      *
      * @param arguments The additional arguments after command word, should be none
+     *
      * @return ByeCommand object
+     *
      * @throws IllegalFormatException if exists extra argument after bye
      */
     private Command prepareBye(String arguments) throws IllegalFormatException {
@@ -338,7 +354,13 @@ public class Parser {
      * Parses report command arguments.
      *
      * @param arguments The additional arguments after command word.
+<<<<<<< HEAD
      * @return Report object
+=======
+     *
+     * @return TotalCostAndIncomeCommand object
+     *
+>>>>>>> master
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareReport(String arguments) throws IllegalFormatException {
@@ -372,7 +394,9 @@ public class Parser {
      * Parses sell command arguments.
      *
      * @param arguments The additional arguments after command word.
+     *
      * @return SellCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareSell(String arguments) throws IllegalFormatException {
@@ -397,7 +421,9 @@ public class Parser {
      * Parses create shelf command arguments.
      *
      * @param arguments The additional arguments after command word.
+     *
      * @return CreateShelfCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareCreateShelf(String arguments) throws IllegalFormatException {
@@ -422,7 +448,9 @@ public class Parser {
      * Parses remove shelf command arguments.
      *
      * @param arguments The additional arguments after command word.
+     *
      * @return RemoveShelfCommand object
+     *
      * @throws IllegalFormatException If the input format is wrong
      */
     private Command prepareRemoveShelf(String arguments) throws IllegalFormatException {
@@ -447,7 +475,9 @@ public class Parser {
      * Parses mark up command arguments.
      *
      * @param arguments The additional arguments after command word.
+     *
      * @return MarkUpCommand object
+     *
      * @throws IllegalFormatException If arguments do not follow input format specified
      */
     private Command prepareMarkUp(String arguments) throws IllegalFormatException {

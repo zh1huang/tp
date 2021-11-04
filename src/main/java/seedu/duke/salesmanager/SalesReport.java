@@ -34,6 +34,7 @@ public class SalesReport {
      * Generate a string to contain all sold item statistics.
      *
      * @return A String containing the sold items statistics
+     *
      * @throws EmptyListException If the soldItems shelf does not contain items
      */
     public String generateSoldItemStats()
