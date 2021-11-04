@@ -167,15 +167,10 @@
                                                                         : Amount Difference: 2.09                             :
                                                                         : Current Mark Up: 19%                                :
                                                                         : markup: 0%, increase: $0.00, Final price: $10.90    :
-                                                                        : markup: 10%, increase: $1.09, Final price: $11.99   :
                                                                         : markup: 20%, increase: $2.18, Final price: $13.08   :
-                                                                        : markup: 30%, increase: $3.27, Final price: $14.17   :
                                                                         : markup: 40%, increase: $4.36, Final price: $15.26   :
-                                                                        : markup: 50%, increase: $5.45, Final price: $16.35   :
                                                                         : markup: 60%, increase: $6.54, Final price: $17.44   :
-                                                                        : markup: 70%, increase: $7.63, Final price: $18.53   :
                                                                         : markup: 80%, increase: $8.72, Final price: $19.62   :
-                                                                        : markup: 90%, increase: $9.81, Final price: $20.71   :
                                                                         : markup: 100%, increase: $10.90, Final price: $21.80 :
                                                                         ..........................................................
                                                            ....................................................................
