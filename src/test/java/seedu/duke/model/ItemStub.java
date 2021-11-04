@@ -2,6 +2,7 @@ package seedu.duke.model;
 
 import seedu.duke.model.exception.IllegalModelArgumentException;
 
+//@@author yuejunfeng0909
 public class ItemStub extends Item {
 
     private final String nameStub;

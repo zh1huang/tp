@@ -5,6 +5,7 @@ import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
 import seedu.duke.model.exception.IllegalModelArgumentException;
 
+//@@author yuejunfeng0909
 public class DataCorruptionException extends Exception {
     DataCorruptionException() {
         super("Data was corrupted.");
