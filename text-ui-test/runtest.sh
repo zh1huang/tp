@@ -14,8 +14,6 @@ cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT
 diff EXPECTED-UNIX.TXT ACTUAL.TXT
 
-rm data/Data.txt
-
 if [ $? -eq 0 ]
 then
     echo "Test passed!"

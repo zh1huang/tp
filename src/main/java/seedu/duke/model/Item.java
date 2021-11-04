@@ -58,9 +58,11 @@ public class Item {
      * @param price  the selling price of the item
      *               must be non-negative
      * @param itemID the ID of the existing item
+     *
      * @throws IllegalModelArgumentException if any of the inputs does not follow the requirement
      */
-    public Item(String name, String cost, String price, String remarks, String itemID) throws IllegalModelArgumentException {
+    public Item(String name, String cost, String price, String remarks, String itemID) throws
+            IllegalModelArgumentException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);

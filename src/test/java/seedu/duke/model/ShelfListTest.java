@@ -53,7 +53,8 @@ class ShelfListTest {
     }
 
     @Test
-    void addShelf_correctName_throwIllegalArgumentException() throws DuplicateShelfException, IllegalModelArgumentException {
+    void addShelf_correctName_throwIllegalArgumentException() throws DuplicateShelfException,
+            IllegalModelArgumentException {
         shelfList.addShelf("basdAKLDJFL91203_ 3(sda)-sdf");
         assertTrue(shelfList.existShelf("basdAKLDJFL91203_ 3(sda)-sdf"));
     }
