@@ -19,7 +19,7 @@ public class Item {
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static boolean printDummyId = false;
-    public static String DUMMY_ID;
+    public static String DUMMY_ID = "11111111";
 
     private String name;
     private String itemID;
@@ -161,7 +161,7 @@ public class Item {
      */
     public void setSellingPrice(String price) throws IllegalModelArgumentException {
         sellingPrice = convert2BD_NonNegative(price);
-        logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), price));
+        logger.log(Level.INFO, String.format("Successfully set %s's selling price as %s", this.getName(), price));
     }
 
     public String getRemarks() {
