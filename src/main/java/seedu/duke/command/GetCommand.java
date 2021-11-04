@@ -35,6 +35,7 @@ public class GetCommand extends Command {
      * Executes the get command.
      *
      * @return Message string to be passed to UI
+     *
      * @throws ShelfNotExistException If the Shelf is not in the ShelfList
      * @throws ItemNotExistException  If empty does not exist in the shelf
      */
