@@ -47,13 +47,13 @@ public class Storage {
      * @throws IOException if CLIverShelf do not have IO privileges
      */
     public void saveData() throws IOException {
-        String nameOfAllShelves = shelfList.getAllShelvesName();
+        ArrayList<String> nameOfAllShelves = shelfList.getAllShelvesName();
         JSONObject storedData = new JSONObject();
 
-        if (nameOfAllShelves.isBlank()) {
+        if (nameOfAllShelves.isEmpty()) {
             storedData = sampleData();
         } else {
-            for (String nameOfShelf : nameOfAllShelves.split("\n")) {
+            for (String nameOfShelf : nameOfAllShelves) {
                 Shelf currentShelf = null;
 
                 try {
