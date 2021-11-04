@@ -92,6 +92,8 @@ public class ShelfList {
         shelves.remove(getShelf(name, true));
     }
 
+
+
     /**
      * Returns the Shelf with the specified name.
      *
@@ -100,6 +102,22 @@ public class ShelfList {
      * @return The Shelf that matches the specified name
      *
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
+     */
+    public Shelf getShelf(String name) throws ShelfNotExistException {
+        for (Shelf container : shelves) {
+            if (container.getName().equals(name)) {
+                return container;
+            }
+        }
+        throw new ShelfNotExistException(name);
+    }
+
+    /**
+     * OverLoaded getShelf method that can hide the soldItem shelf.
+     * @param name the name of the target shelf
+     * @param isSoldItemHidden whether to hide the soldItem shelf
+     * @return the target shelf
+     * @throws ShelfNotExistException if no such shelf exists.
      */
     public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistException {
         if (name.equals("soldItems") && isSoldItemHidden) {
