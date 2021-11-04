@@ -28,9 +28,9 @@ public class EditCommandTest {
         testCommand = new EditCommand("test", "1", "selling price", "20");
         assertTrue(testList.contains("HarryPotter"));
         assertEquals("25.12", testList.getItem("HarryPotter").getSellingPrice());
-        int numberOfItemsBeforeEditing = testList.getSize();
+        int numberOfItemsBeforeEditing = testList.getItemCount();
         testCommand.execute();
-        int numberOfItemAfterEditing = testList.getSize();
+        int numberOfItemAfterEditing = testList.getItemCount();
         assertEquals(numberOfItemAfterEditing, numberOfItemsBeforeEditing);
         assertTrue(testList.contains("HarryPotter"));
         assertEquals("20", testList.getItem("HarryPotter").getSellingPrice());

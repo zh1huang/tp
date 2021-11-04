@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
@@ -66,7 +67,7 @@ public class Storage {
                 shelfInfo.put("remarks", currentShelf.getRemarks());
 
                 JSONObject itemsInShelf = new JSONObject();
-                for (int i = 0; i < currentShelf.getSize(); i = i + 1) {
+                for (int i = 0; i < currentShelf.getItemCount(); i = i + 1) {
                     Item currentItem = currentShelf.getItem(i);
                     JSONObject itemDetail = new JSONObject();
                     itemDetail.put("id", currentItem.getID());

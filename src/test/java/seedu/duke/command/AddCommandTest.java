@@ -30,10 +30,10 @@ public class AddCommandTest {
     public void execute_emptyList_addsNormally() throws CommandException, ShelfNotExistException,
             IllegalModelArgumentException {
         testCommand1 = new AddCommand("HarryPotter", "16.1", "25.12", "1", "test", "");
-        int numberOfItemsBeforeAdding = testList.getSize();
+        int numberOfItemsBeforeAdding = testList.getItemCount();
         testCommand1.execute();
         assertTrue(testList.contains("HarryPotter"));
-        int numberOfItemAfterAdding = testList.getSize();
+        int numberOfItemAfterAdding = testList.getItemCount();
         assertEquals(numberOfItemAfterAdding, numberOfItemsBeforeAdding + 1);
     }
 
@@ -41,10 +41,10 @@ public class AddCommandTest {
     public void execute_itemsWithSameNameInList_addsNormally() throws CommandException,
             ShelfNotExistException, IllegalModelArgumentException {
         testCommand1 = new AddCommand("HarryPotter", "16.1", "25.12", "1", "test", "");
-        int numberOfItemsBeforeAdding = testList.getSize();
+        int numberOfItemsBeforeAdding = testList.getItemCount();
         testCommand1.execute();
         assertTrue(testList.contains("HarryPotter"));
-        int numberOfItemAfterAdding = testList.getSize();
+        int numberOfItemAfterAdding = testList.getItemCount();
         assertEquals(numberOfItemAfterAdding, numberOfItemsBeforeAdding + 1);
     }
 

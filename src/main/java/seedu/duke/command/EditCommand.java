@@ -68,7 +68,7 @@ public class EditCommand extends Command {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName, true);
-            int sizeBeforeEditing = selectedShelf.getSize();
+            int sizeBeforeEditing = selectedShelf.getItemCount();
             Item selectedItem = selectedShelf.getItem(index);
             if (selectedProperty.equals("purchase cost")) {
                 selectedItem.setPurchaseCost(newValue);
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
                         "All properties should have been listed";
                 selectedItem.setRemarks(newValue);
             }
-            int sizeAfterEditing = selectedShelf.getSize();
+            int sizeAfterEditing = selectedShelf.getItemCount();
             assert sizeBeforeEditing == sizeAfterEditing :
                     "After editing an item the list size should remain unchanged";
             logger.log(Level.INFO, "EditCommand successfully executed.");
