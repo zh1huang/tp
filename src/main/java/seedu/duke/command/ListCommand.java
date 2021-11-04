@@ -190,7 +190,7 @@ public class ListCommand extends Command {
             Item selectedItem = itemList.get(i);
 
             String name = selectedItem.getName();
-            name = Wrapping.restrictMessageLength(name, ITEM_TABLE_LENGTH);
+            name = Wrapping.restrictMessageLength(name, ITEM_TABLE_LENGTH); //only name is padded
 
             String cost = selectedItem.getPurchaseCost();
             cost = lineEntry(COST_TABLE_LENGTH, cost);
@@ -199,7 +199,7 @@ public class ListCommand extends Command {
             price = lineEntry(PRICE_TABLE_LENGTH, price);
 
             String quantity = String.valueOf(quantityList.get(i));
-            quantity = Wrapping.restrictMessageLength(quantity, QTY_TABLE_LENGTH);
+            quantity = lineEntry(QTY_TABLE_LENGTH, quantity);
 
             int quantityCount = quantityList.get(i);
             String paddedIndex = padIndexString(quantityCount, count);
