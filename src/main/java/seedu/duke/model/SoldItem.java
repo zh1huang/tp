@@ -1,7 +1,7 @@
 package seedu.duke.model;
 
 import seedu.duke.model.exception.EditSoldItemException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 import java.time.LocalDateTime;
 
@@ -21,17 +21,17 @@ public class SoldItem extends Item {
      * @param price the selling price of the item
      *              must be non-negative
      *
-     * @throws IllegalArgumentException if any of the inputs does not follow the requirement
+     * @throws IllegalModelArgumentException if any of the inputs does not follow the requirement
      */
-    public SoldItem(String name, String cost, String price, String remarks, LocalDateTime saleTime)
-            throws IllegalArgumentException {
-        super(name, cost, price, remarks);
+    public SoldItem(String name, String cost, String price, String remarks, String itemId, LocalDateTime saleTime)
+            throws IllegalModelArgumentException {
+        super(name, cost, price, remarks, itemId);
         setSaleTime(saleTime);
         soldItemFixed = true;
     }
 
     @Override
-    public void setName(String name) throws IllegalArgumentException {
+    public void setName(String name) throws IllegalModelArgumentException {
         if (soldItemFixed) {
             throw new EditSoldItemException();
         }
@@ -39,7 +39,7 @@ public class SoldItem extends Item {
     }
 
     @Override
-    public void setPurchaseCost(String cost) throws IllegalArgumentException {
+    public void setPurchaseCost(String cost) throws IllegalModelArgumentException {
         if (soldItemFixed) {
             throw new EditSoldItemException();
         }
@@ -47,7 +47,7 @@ public class SoldItem extends Item {
     }
 
     @Override
-    public void setSellingPrice(String price) throws IllegalArgumentException {
+    public void setSellingPrice(String price) throws IllegalModelArgumentException {
         if (soldItemFixed) {
             throw new EditSoldItemException();
         }

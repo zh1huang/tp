@@ -33,12 +33,12 @@ public class ReportCommand extends Command {
         }
         try {
             if (reportType.equals("stats")) {
-                assert reportType.equals("stats") :
-                        "All types should have been listed";
                 SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemStats();
             } else {
+                assert reportType.equals("items") :
+                        "All types should have been listed";
                 SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemDetails();

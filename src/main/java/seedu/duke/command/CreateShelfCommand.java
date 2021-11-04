@@ -4,6 +4,7 @@ import seedu.duke.command.exception.CommandException;
 import seedu.duke.command.exception.DuplicateShelfException;
 import seedu.duke.command.exception.IllegalArgumentException;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 public class CreateShelfCommand extends Command {
     public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
@@ -24,7 +25,7 @@ public class CreateShelfCommand extends Command {
             return String.format(CREATE_COMPLETE_MESSAGE, shelfName);
         } catch (seedu.duke.model.exception.DuplicateShelfException e) {
             throw new DuplicateShelfException(e.getMessage());
-        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+        } catch (IllegalModelArgumentException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
