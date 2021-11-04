@@ -14,3 +14,24 @@
                                                                             ...................................................
                                                                             : Enter 'help' for the list of available commands :
                                                                             ......................................................
+                            ...................................................................................................
+                            : Here are the performable actions:                                                               :
+                            : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
+                            : Items in square brackets [ ] are optional.                                                      :
+                            : ____________________________________________________________________________________________    :
+                            : Description: Command format                                                                     :
+                            : ____________________________________________________________________________________________    :
+                            : 1. Get help : help                                                                              :
+                            : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
+                            : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
+                            : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
+                            : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
+                            : 6. List items: list [shlv/SHELF_NAME]                                                           :
+                            : 7. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
+                            : 8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
+                            : 9. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                   :
+                            : 10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
+                            : 11. Generate sales report: report t/TYPE [ym/YEAR-MONTH]                                        :
+                            : 12. Exit program: bye                                                                           :
+                            : ____________________________________________________________________________________________    :
+                            ......................................................................................................
