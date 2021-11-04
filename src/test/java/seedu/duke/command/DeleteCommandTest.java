@@ -2,21 +2,20 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import seedu.duke.command.exception.CommandException;
-import seedu.duke.model.ShelfList;
+import seedu.duke.command.exception.ItemNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
-import seedu.duke.command.exception.ItemNotExistException;
-import seedu.duke.model.exception.DuplicateShelfException;
+import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.DuplicateShelfException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeleteCommandTest {
 
@@ -27,7 +26,7 @@ public class DeleteCommandTest {
     private Item testItem2;
 
     @BeforeEach
-    public void setUp() throws IllegalArgumentException, DuplicateShelfException {
+    public void setUp() throws IllegalModelArgumentException, DuplicateShelfException {
         ShelfList.getShelfList().resetShelfList();
         testList = new Shelf("test");
         testItem1 = new Item("HarryPotter", "16.1", "25.12", "");
@@ -38,7 +37,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_oneItemAlreadyInList_deletesNormally()
-        throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalArgumentException {
+            throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalModelArgumentException {
 
         testList.addItem(testItem1);
         int numberOfItemsBeforeDeleting = testList.getSize();
@@ -56,7 +55,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_itemsWithSameNameInList_deletesNormally()
-        throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalArgumentException {
+            throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalModelArgumentException {
 
         testList.addItem(testItem1);
         testList.addItem(testItem2);

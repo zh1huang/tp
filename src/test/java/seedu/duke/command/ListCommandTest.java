@@ -3,19 +3,24 @@ package seedu.duke.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.model.exception.ShelfNotExistException;
-import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.ShelfNotExistException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 public class ListCommandTest {
     private Command testCommand;
     private Command testCommand1;
+    private static final String LINE =
+            "-----------------------------------------------------------------------------------------------------\n";
+    private static final String HEADER =
+            "   No    |                        Item                        |   Cost    |   Price   | Qty  | Remark\n";
+    private static final String LIST_MESSAGE = "Here is the list of items:\n";
+    private static final String TAB = "   \n";
 
     @BeforeEach
     public void setUp() {
@@ -32,10 +37,11 @@ public class ListCommandTest {
         assertTrue(testShelf.contains("HarryPotter"));
         assertTrue(testShelf.contains("LOTR"));
         String expected = "Here is the list of items:\n"
-                + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
-                + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | HarryPotter                                         | 16.1      | 25.12     | 1   |   x   \n"
-                + " 2   | LOTR                                                | 10.2      | 15.7      | 1   |   x   \n";
+                + HEADER + LINE
+                + " 001     | HarryPotter                                        | 16.1      | 25.12     | 1    |   x"
+                + TAB
+                + " 002     | LOTR                                               | 10.2      | 15.7      | 1    |   x"
+                + TAB;
         assertEquals(expected, testCommand.execute());
     }
 
@@ -45,10 +51,9 @@ public class ListCommandTest {
         for (int i = 0; i < 5; i++) {
             testShelf1.addItem(new Item("Harry", "9999.99", "9999.99", "expensive"));
         }
-        String expected = "Here is the list of items:\n"
-                + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
-                + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | Harry                                               | 9999.99   | 9999.99   | 5   |   o   \n";
+        String expected = LIST_MESSAGE + HEADER + LINE
+                + " 001-005 | Harry                                              | 9999.99   | 9999.99   | 5    |   o"
+                + TAB;
 
         assertEquals(expected, testCommand.execute());
     }
@@ -66,17 +71,19 @@ public class ListCommandTest {
             testShelf1.addItem(new Item("HarryPotter", "16.1", "25.12", ""));
         }
         testShelf1.addItem(new Item("Geronimo", "12.31", "25.23", "favourite"));
-        String expected = "Here is the list of items:\n"
+        String expected = LIST_MESSAGE
                 + "[test]:\n"
-                + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
-                + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | Harry                                               | 9999.99   | 9999.99   | 5   |   o   \n"
-                + " 2   | LOTR                                                | 10.2      | 15.7      | 1   |   x   \n"
+                + HEADER + LINE
+                + " 001-005 | Harry                                              | 9999.99   | 9999.99   | 5    |   o"
+                + TAB
+                + " 006     | LOTR                                               | 10.2      | 15.7      | 1    |   x"
+                + TAB
                 + "[test1]:\n"
-                + " No  |                        Item                         |   Cost    |   Price   | Qty | Remarks\n"
-                + "-------------------------------------------------------------------------------------------------\n"
-                + " 1   | Geronimo                                            | 12.31     | 25.23     | 1   |   o   \n"
-                + " 2   | HarryPotter                                         | 16.1      | 25.12     | 10  |   x   \n";
+                + HEADER + LINE
+                + " 001     | Geronimo                                           | 12.31     | 25.23     | 1    |   o"
+                + TAB
+                + " 002-011 | HarryPotter                                        | 16.1      | 25.12     | 10   |   x"
+                + TAB;
         assertEquals(expected, testCommand1.execute());
     }
 

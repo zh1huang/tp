@@ -2,7 +2,7 @@ package seedu.duke.model;
 
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
@@ -32,9 +32,9 @@ public class Shelf {
      * @param name new name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      *
-     * @throws IllegalArgumentException if the name contains other characters
+     * @throws IllegalModelArgumentException if the name contains other characters
      */
-    public Shelf(String name) throws IllegalArgumentException, DuplicateShelfException {
+    public Shelf(String name) throws IllegalModelArgumentException, DuplicateShelfException {
         ShelfList shelfList = ShelfList.getShelfList();
         if (shelfList.existShelf(name)) {
             throw new DuplicateShelfException(name);
@@ -65,9 +65,9 @@ public class Shelf {
      * @param name New name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
      *
-     * @throws IllegalArgumentException if the name contains other characters
+     * @throws IllegalModelArgumentException if the name contains other characters
      */
-    public void setName(String name) throws IllegalArgumentException, DuplicateShelfException {
+    public void setName(String name) throws IllegalModelArgumentException, DuplicateShelfException {
         String originalShelfName = (this.name == null) ? "new shelf" : this.name;
         String newName = name.trim();
         if (newName.matches("[a-zA-Z0-9 _()-]+") && !newName.isBlank()) {
@@ -80,7 +80,7 @@ public class Shelf {
             logger.log(Level.WARNING, String.format(
                     "Trying to set Shelf %s's name as %s",
                     originalShelfName, newName));
-            throw new IllegalArgumentException(MESSAGE_INVALID_NAME_FORMAT);
+            throw new IllegalModelArgumentException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -206,7 +206,9 @@ public class Shelf {
      * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param itemID The specified name of Item
+     *
      * @return Item with the specified name
+     *
      * @throws ItemNotExistException if no item has the name
      */
     public Item getItemByID(String itemID) throws ItemNotExistException {
@@ -271,6 +273,7 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified ID.
      *
      * @param itemID ID of the item
+     *
      * @return True if the item exists
      */
     public boolean containsGivenID(String itemID) {
