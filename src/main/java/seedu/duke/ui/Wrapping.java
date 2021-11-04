@@ -2,6 +2,7 @@ package seedu.duke.ui;
 
 import java.util.ArrayList;
 
+//@@author yuejunfeng0909
 public class Wrapping {
     private final String originalMessage;
     private final int lineLimit;
@@ -16,7 +17,6 @@ public class Wrapping {
 
     public void autoWrap() {
         String temp = originalMessage;
-        String extracted = temp.substring(0, lineLimit);
         outerLoop:
         while (!temp.isBlank()) {
             // check if longer than line limit
@@ -26,10 +26,9 @@ public class Wrapping {
             }
             for (int i = lineLimit - 1; i >= 0; i--) {
                 if (temp.charAt(i) == ' ') {
-                    int lastIndexOfSpace = i;
-                    lines.add(temp.substring(0, lastIndexOfSpace));
+                    lines.add(temp.substring(0, i));
                     try {
-                        temp = temp.substring(lastIndexOfSpace + 1);
+                        temp = temp.substring(i + 1);
                     } catch (IndexOutOfBoundsException e) {
                         temp = "";
                     }

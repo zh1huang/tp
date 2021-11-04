@@ -7,6 +7,7 @@ import seedu.duke.command.exception.ShelfNotExistException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -29,7 +30,7 @@ public class EditCommand extends Command {
     private final int index;
     private final String selectedProperty;
     private final String newValue;
-    private final String[] properties = {"cost", "price"};
+    private final String[] properties = {"purchase cost", "selling price", "remarks"};
 
 
     /**
@@ -68,20 +69,22 @@ public class EditCommand extends Command {
                     .getShelf(shelfName);
             int sizeBeforeEditing = selectedShelf.getSize();
             Item selectedItem = selectedShelf.getItem(index);
-            if (selectedProperty.equals("cost")) {
+            if (selectedProperty.equals("purchase cost")) {
                 selectedItem.setPurchaseCost(newValue);
 
-            } else {
-                assert selectedProperty.equals("price") :
-                        "All properties should have been listed";
+            } else if (selectedProperty.equals("selling price")) {
                 selectedItem.setSellingPrice(newValue);
+            } else {
+                assert selectedProperty.equals("remarks") :
+                        "All properties should have been listed";
+                selectedItem.setRemarks(newValue);
             }
             int sizeAfterEditing = selectedShelf.getSize();
             assert sizeBeforeEditing == sizeAfterEditing :
                     "After editing an item the list size should remain unchanged";
             logger.log(Level.INFO, "EditCommand successfully executed.");
             return UPDATE_COMPLETE_MESSAGE;
-        } catch (seedu.duke.model.exception.IllegalArgumentException e) {
+        } catch (IllegalModelArgumentException e) {
             logger.log(Level.WARNING, String.format("EditCommand failed to execute with error message %s",
                     e.getMessage()));
             throw new IllegalArgumentException(e.getMessage());

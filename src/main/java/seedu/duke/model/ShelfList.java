@@ -1,7 +1,7 @@
 package seedu.duke.model;
 
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.model.exception.ShelfNotExistException;
 
@@ -55,10 +55,10 @@ public class ShelfList {
      *
      * @param name The name of the new Shelf
      *
-     * @throws IllegalArgumentException if name does not follow the format
-     * @throws DuplicateShelfException  if there already exist a Shelf with this name
+     * @throws IllegalModelArgumentException if name does not follow the format
+     * @throws DuplicateShelfException       if there already exist a Shelf with this name
      */
-    public Shelf addShelf(String name) throws IllegalArgumentException, DuplicateShelfException {
+    public Shelf addShelf(String name) throws IllegalModelArgumentException, DuplicateShelfException {
         if (existShelf(name)) {
             throw new DuplicateShelfException(name);
         }
@@ -165,5 +165,24 @@ public class ShelfList {
             }
         }
         throw new ItemNotExistException(item.getName());
+    }
+
+
+    /**
+     * Get a unique item from the list of shelves.
+     *
+     * @param itemID The ID of the target item
+     *
+     * @return the item if it exists
+     *
+     * @throws ItemNotExistException if the target item with the given ID does not exist
+     */
+    public Item getItem(String itemID) throws ItemNotExistException {
+        for (Shelf shelf : shelves) {
+            if (shelf.containsGivenID(itemID)) {
+                return shelf.getItemByID(itemID);
+            }
+        }
+        throw new ItemNotExistException("with ID: " + itemID);
     }
 }

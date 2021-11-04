@@ -15,10 +15,10 @@ import java.util.logging.Logger;
 public class DeleteCommand extends Command {
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
     public static final String DELETE_STRING = "delete";
-    public static final String PARSE_DELETE_SUCCESS_MESSAGE_FORMAT = "name: %s\nindex: %s\n";
-    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final String DELETE_COMPLETE_MESSAGE =
             "This item has been removed from the list."; //to be added to UI part later
+    public static final String DELETED_ITEM_DETAILS_FORMAT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
+    public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String shelfName;
     private final int index;
@@ -52,7 +52,13 @@ public class DeleteCommand extends Command {
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
                     "After deleting an item the list size should decrease by 1";
             logger.log(Level.INFO, "DeleteCommand successfully executed.");
-            return DELETE_COMPLETE_MESSAGE;
+            String name = selectedItem.getName();
+            String cost = selectedItem.getPurchaseCost();
+            String price = selectedItem.getSellingPrice();
+            String remarks = selectedItem.getRemarks();
+            String deletedItemDetails = "\n"
+                    + String.format(DELETED_ITEM_DETAILS_FORMAT, name, cost, price, remarks);
+            return DELETE_COMPLETE_MESSAGE + deletedItemDetails;
         } catch (seedu.duke.model.exception.ItemNotExistException e) {
             logger.log(Level.WARNING, String.format("DeleteCommand failed to execute with error message %s",
                     e.getMessage()));

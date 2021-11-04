@@ -19,7 +19,7 @@ public class CliverShelf {
      */
     public static void main(String[] args) throws Exception {
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.SEVERE);
 
         Storage storage = Storage.getStorageManager();
         try {

@@ -7,7 +7,7 @@ import seedu.duke.model.ShelfList;
 import seedu.duke.model.SoldItem;
 import seedu.duke.model.exception.DuplicateItemException;
 import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalArgumentException;
+import seedu.duke.model.exception.IllegalModelArgumentException;
 import seedu.duke.model.exception.ShelfNotExistException;
 import seedu.duke.ui.MessageBubble;
 
@@ -69,6 +69,7 @@ public class Storage {
                 for (int i = 0; i < currentShelf.getSize(); i = i + 1) {
                     Item currentItem = currentShelf.getItem(i);
                     JSONObject itemDetail = new JSONObject();
+                    itemDetail.put("id", currentItem.getID());
                     itemDetail.put("name", currentItem.getName());
                     itemDetail.put("cost", currentItem.getPurchaseCost());
                     itemDetail.put("price", currentItem.getSellingPrice());
@@ -124,7 +125,7 @@ public class Storage {
     }
 
     protected void loadFromJson(JSONObject storedData)
-            throws DuplicateShelfException, IllegalArgumentException, DuplicateItemException {
+            throws DuplicateShelfException, IllegalModelArgumentException, DuplicateItemException {
         for (String shelfName : storedData.keySet()) {
             Shelf currentShelf = shelfList.addShelf(shelfName);
             try {
@@ -144,7 +145,8 @@ public class Storage {
                             itemJson.getString("name"),
                             itemJson.getString("cost"),
                             itemJson.getString("price"),
-                            itemJson.getString("remarks")
+                            itemJson.getString("remarks"),
+                            itemJson.getString("id")
                     );
                 } else {
                     item = new SoldItem(
@@ -152,6 +154,7 @@ public class Storage {
                             itemJson.getString("cost"),
                             itemJson.getString("price"),
                             itemJson.getString("remarks"),
+                            itemJson.getString("id"),
                             LocalDateTime.parse(itemJson.getString("saleTime"))
                     );
                 }
@@ -169,6 +172,7 @@ public class Storage {
         sampleItem.put("cost", "12.25");
         sampleItem.put("price", "25");
         sampleItem.put("remarks", " ");
+        sampleItem.put("id", "111111111");
         defaultItems.put("0", sampleItem);
         defaultWarehouse.put("items", defaultItems);
         defaultWarehouse.put("remarks", " ");

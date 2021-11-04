@@ -1,14 +1,14 @@
 package seedu.duke.command;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import seedu.duke.command.exception.ItemNotExistException;
-import seedu.duke.model.ShelfList;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
+import seedu.duke.model.ShelfList;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GetCommandTest {
