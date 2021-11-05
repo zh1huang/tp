@@ -20,6 +20,11 @@ public class SearchCommand extends Command {
             "    ID   |                   Item                   |   Cost    |   Price   |          Remark        \n";
     private static final String BORDER =
             "-----------------------------------------------------------------------------------------------------\n";
+    private static final int ID_LENGTH = 8;
+    private static final int NAME_LENGTH = 41;
+    private static final int COST_LENGTH = 10;
+    private static final int PRICE_LENGTH = 10;
+    private static final int REMARK_LENGTH = 22;
 
     private static final String SEARCH_ID_HEADER = "Here are the items that has matching ID\n";
     private static final String SEARCH_MATCH_RESULT_FORMAT = " %s| %s| %s| %s| %s \n";
@@ -96,10 +101,10 @@ public class SearchCommand extends Command {
 
     private String convertToResult(Item item) {
         return String.format(SEARCH_MATCH_RESULT_FORMAT,
-                Wrapping.restrictMessageLength(item.getID(), 8),
-                Wrapping.restrictMessageLength(item.getName(), 41),
-                Wrapping.restrictMessageLength(item.getPurchaseCost(), 10),
-                Wrapping.restrictMessageLength(item.getSellingPrice(), 10),
-                Wrapping.restrictMessageLength(item.getRemarks(), 22));
+                Wrapping.restrictMessageLength(item.getID(), ID_LENGTH),
+                Wrapping.restrictMessageLength(item.getName(), NAME_LENGTH),
+                Wrapping.restrictMessageLength(item.getPurchaseCost(), COST_LENGTH),
+                Wrapping.restrictMessageLength(item.getSellingPrice(), PRICE_LENGTH),
+                Wrapping.restrictMessageLength(item.getRemarks(), REMARK_LENGTH));
     }
 }
