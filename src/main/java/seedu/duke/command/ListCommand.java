@@ -192,10 +192,10 @@ public class ListCommand extends Command {
             String name = selectedItem.getName();
             name = Wrapping.restrictMessageLength(name, ITEM_TABLE_LENGTH); //only name is padded
 
-            String cost = selectedItem.getPurchaseCost();
+            String cost = String.format("%.2f", Double.parseDouble(selectedItem.getPurchaseCost()));
             cost = lineEntry(COST_TABLE_LENGTH, cost);
 
-            String price = selectedItem.getSellingPrice();
+            String price = String.format("%.2f", Double.parseDouble(selectedItem.getSellingPrice()));
             price = lineEntry(PRICE_TABLE_LENGTH, price);
 
             String quantity = String.valueOf(quantityList.get(i));
