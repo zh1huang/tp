@@ -15,9 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SalesReport {
-    public static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: $ %s\n"
-        + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s\n";
+            + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s\n";
+    public static final String NEGATIVE_PROFIT_WARNING_MESSAGE =
+            "!!! WARNING:\nNegative profit,\nplease ensure that future items are priced more than purchase cost.\n";
+    public static final String NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT = "No sold items in between %s and %s\n";
+    public static final String NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT = "No sold items in the month of %s\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String HEADER =
             "  No  |                    Item                 |  Cost   |  Price  |  Profit |      Sold Time    \n";
@@ -29,10 +32,12 @@ public class SalesReport {
     private static final int PRICE_TABLE_LENGTH = 8;
     private static final int PROFIT_TABLE_LENGTH = 8;
     private static final String ITEM_INFO = "%s| %s| %s| %s| %s|%s\n";
-    public static final String NEGATIVE_PROFIT_WARNING_MESSAGE =
-        "!!! WARNING:\nNegative profit,\nplease ensure that future items are priced more than purchase cost.\n";
-    public static final String NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT = "No sold items in between %s and %s\n";
-    public static final String NO_SOLD_ITEMS_IN_THE_MONTH_MESSAGE_FORMAT = "No sold items in the month of %s\n";
+
+    private static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
+    private static final int FOUR_DECIMAL_POINT = 4;
+    private static final int INTEGER_VALUE_ONE = 1;
+    private static final int INTEGER_VALUE_MINUS_ONE = -1;
+    private static final int INTEGER_VALUE_ZERO = 0;
     private final String selectedDate;
     private final String selectedEndDate;
 
@@ -45,15 +50,14 @@ public class SalesReport {
      * Generate a string to contain all sold item statistics.
      *
      * @return A String containing the sold items statistics
-     *
      * @throws EmptyListException If the soldItems shelf does not contain items
      */
     public String generateSoldItemStats()
-        throws EmptyListException, IllegalArgumentException {
+            throws EmptyListException, IllegalArgumentException {
         SalesManager salesManager = SalesManager.getSalesManager();
         String stringToReturn = "";
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
-        if (selectedSoldItems.size() != 0) {
+        if (selectedSoldItems.size() != INTEGER_VALUE_ZERO) {
             stringToReturn = getSalesStatisticsString(selectedSoldItems);
         } else {
             stringToReturn += getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
@@ -64,26 +68,28 @@ public class SalesReport {
 
     private String getSalesStatisticsString(ArrayList<SoldItem> selectedSoldItems) {
 
-        assert selectedSoldItems.size() != 0;
+        assert selectedSoldItems.size() != INTEGER_VALUE_ZERO;
         BigDecimal totalPurchaseCost = BigDecimal.ZERO;
         BigDecimal totalSellingPrice = BigDecimal.ZERO;
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
         for (int i = 0; i < selectedSoldItems.size(); i++) {
+
             Item selectedItem = selectedSoldItems.get(i);
             totalPurchaseCost = totalPurchaseCost.add(new BigDecimal(selectedItem.getPurchaseCost()));
             totalSellingPrice = totalSellingPrice.add(new BigDecimal(selectedItem.getSellingPrice()));
         }
 
         BigDecimal totalProfits = totalSellingPrice.subtract(totalPurchaseCost);
-        BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, 2,
-            RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
+        BigDecimal grossProfitMargin = totalProfits.divide(totalSellingPrice, FOUR_DECIMAL_POINT,
+                RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
         assert grossProfitMargin != null;
 
         String stringToReturn = String.format(TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT,
-            decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
-            decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
+                decimalFormat.format(totalPurchaseCost), decimalFormat.format(totalSellingPrice),
+                decimalFormat.format(totalProfits), decimalFormat.format(grossProfitMargin));
 
-        if (grossProfitMargin.compareTo(BigDecimal.ZERO) == -1) {
+        if (grossProfitMargin.compareTo(BigDecimal.ZERO) == INTEGER_VALUE_MINUS_ONE) {
             stringToReturn += NEGATIVE_PROFIT_WARNING_MESSAGE;
         }
 
@@ -100,10 +106,11 @@ public class SalesReport {
         SalesManager salesManager = SalesManager.getSalesManager();
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
         StringBuilder info = new StringBuilder();
-        if (selectedSoldItems.size() != 0) {
+        if (selectedSoldItems.size() != INTEGER_VALUE_ZERO) {
             String soldItemsDetailsToAppend = getSoldItemsDetailsString(selectedSoldItems);
             info.append(soldItemsDetailsToAppend);
         } else {
+
             assert selectedSoldItems.size() == 0 : "Should have no selected SoldItems";
             String emptySoldItemInMonthMessage = getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
             info.append(emptySoldItemInMonthMessage);
@@ -113,6 +120,7 @@ public class SalesReport {
     }
 
     private String getSoldItemsDetailsString(ArrayList<SoldItem> selectedSoldItems) {
+
         assert selectedSoldItems.size() != 0;
         StringBuilder details = new StringBuilder();
         details.append(HEADER);
@@ -146,7 +154,7 @@ public class SalesReport {
             logger.log(Level.INFO, "Get No Sold Items in month string success.");
         } else {
             emptySoldItemInPeriodString = String.format(
-                NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT, selectedDate, selectedEndDate);
+                    NO_SOLD_ITEMS_BETWEEN_MONTHS_MESSAGE_FORMAT, selectedDate, selectedEndDate);
             logger.log(Level.INFO, "Get No Sold Items in a period string success.");
         }
 

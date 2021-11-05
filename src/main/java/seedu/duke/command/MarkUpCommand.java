@@ -8,7 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MarkUpCommand extends Command {
-    public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]";
+    public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]\n"
+            + "Maximum percent: 999.99 (up to 2 dp)\n"
+            + "Invalid percent e.g. \"5.\", \"-5\", \"5.000\", \"5000\"\n"
+            + "Valid percent e.g. \"5.05\", \"5.6\", \"0.5\", \"50.50\"";
     public static final String MARKUP_STRING = "markup";
     private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -66,8 +69,8 @@ public class MarkUpCommand extends Command {
             logger.log(Level.WARNING, String.format(MARKUP_COMMAND_SHELF_NOT_EXIST_LOGGING_MESSAGE_FORMAT, shelfName));
             throw new ShelfNotExistException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, String.format(MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT, index));
-            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index));
+            logger.log(Level.WARNING, String.format(MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT, index + 1));
+            throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
         }
     }
 
