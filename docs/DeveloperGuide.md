@@ -8,8 +8,10 @@
    1. [Architecture](#architecture)
    2. [UI Component](#ui-component)
    3. [Logic Component](#logic-component)
+      1. [SubComponent Parser](#subcomponent-parser)
+      2. [Subcomponent Command](#subcomponent-command)
+         1. [Subcomponent Sales](#subcomponent-sales)
    4. [Model Component](#model-component)
-   5. [SalesManager Component](#salesmanager-component)
    6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
    1. [Adding an item](#adding-an-item)
@@ -92,7 +94,6 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `Model`: Holds the data of the App in memory
 5. `Storage`: Reads data from, and writes data to, the hard disk.
 
-
 ### General Program Flow
 
 1. User runs the programs & input user commands
@@ -131,6 +132,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 ![](diagrams/seedu_duke_logic.drawio.svg)
 
+#### Subcomponent Parser 
+
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
@@ -144,11 +147,43 @@ The `Logic` component consists of `Parser` and `Command` components.
    
 ![](diagrams/ParserClassDiagram.png)
 
+#### Subcomponent Command 
+
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
 ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+
+##### Subcomponent Sales
+
+This section describes how the subcomponent Sales interacts with the sales related commands.
+After the command input is parsed, depending on the Command type, different types uses different sales API.
+
+**API**:
+
+1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
+   * Supports Both SellCommand & ReportCommand & Handles Sales actions
+     * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+     * When program invokes `ReportCommand#execute`
+       1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()` or `SalesReport#generateSoldItemDetails()` is called
+       2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+
+2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesReport.java)
+    * Supports ReportCommand & Handles generation of sales report
+      * When program invokes `ReportCommand#execute`, a `SalesReport` object is created & `SalesReport#generateSoldItemStats()` 
+      or `SalesReport#generateSoldItemDetails()` will be called to get the filterd solditems list for processing into strings before 
+      returning the String for printing.
+
+3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
+    * Supports MarkUpCommand & Handles Estimation of price markup of an item
+      1. When program invokes `MarkUpCommand#execute`,   a `SalesMarkUp` object is created  
+      2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current details of the selected item
+      3. Then, if user markup percent is specified `SalesMarkUp#getUserRequestMarkUpInfo()` is invoked, to calculate the user requested markup information & final price
+      4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the general markup estimation in intervals of 20.
+      
+![](diagrams/SalesSubComponentClassDiagram.svg)
+
 
 ### Model component
 
@@ -171,14 +206,6 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 
 ![](https://www.plantuml.com/plantuml/svg/LOwz3i8m38JtF8NL2IfrOCs0Ah6oyGIcSLLB-Qc8M_7ubCH5T8akv-zyxhFWIvRWpSIEO4n9dkbjvitaWMUC0eszfH0mkWOmmr3raOXf9TzTx6CYFnOiVzKHAjQTisoOAaNrPumkX-vQtRQrKE3JNj6S3Gx2AmffHtareVi1dQincJWV4rhrKz3jKUDe1-kuZFGa2th0FzLJT4lm7m00)
 ![](https://www.plantuml.com/plantuml/svg/XT2_2i8m40RmFKyHEccXWsi7ARYw-GHdSwK7-LFCjVZuIjjBY0fk7-7tVHpf8iE3PsVLI0Rr40BVmrDDxqVgQGBFkcelmJdmfj8GTR_bKiGHxN2boErDqehJUybzMD0sfmrdgFPjtPnpizLWp0eFqgkE2dgc1HYpKocbUbr_kCsKyscTHuh_XgMf30gKpVBc_T8l9pFoZJzbXzxCphu0)
-
-### SalesManager component
-
-**API**:
-
-1. [SalesManager.java]()
-2. [SalesReport.java]()
-3. [SalesMarkUp.java]()
 
 ### Storage component
 The storage component consists of `Storage` class. 
