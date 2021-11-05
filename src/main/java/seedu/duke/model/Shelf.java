@@ -212,11 +212,6 @@ public class Shelf {
      * @throws ItemNotExistException if no item has the name
      */
     public Item getItemByID(String itemID) throws ItemNotExistException {
-        if (name == null) {
-            logger.log(Level.WARNING, String.format("Trying to get Null item from Shelf %s",
-                    this.getName()));
-            throw new NullPointerException();
-        }
         for (Item item : items) {
             if (item.getID().equals(itemID)) {
                 return item;

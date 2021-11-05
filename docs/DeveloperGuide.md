@@ -51,20 +51,26 @@ ___
 4. Import the project
    1. Click `File` > `Open Project`
    2. Select the project directory, and click `OK` to accept the default settings
-5. Verify the setup: After the importing is complete, locate `Duke.java` file, right-click it and `Run 'Duke.main()'`. If the setup is correct, you should see something like this:
+5. Verify the setup: After the importing is complete, locate `CliverShelf.java` file, right-click it and `Run 'CliverShelf.main()'`. If the setup is correct, you should see something like this:
 ```
 > Task :compileJava UP-TO-DATE
 > Task :processResources NO-SOURCE
 > Task :classes UP-TO-DATE
 
-> Task :Duke.main()
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-What is your name?
+> Task :CliverShelf.main()
+                                                                  .............................................................
+                                                                  : Hello from                                                :
+                                                                  :   _____ _      _____              _____ _          _  __  :
+                                                                  :  / ____| |    |_   _|            / ____| |        | |/ _| :
+                                                                  : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
+                                                                  : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
+                                                                  : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
+                                                                  :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
+                                                                  : What can I do for you?                                    :
+                                                                  ................................................................
+                                                                            ...................................................
+                                                                            : Enter 'help' for the list of available commands :
+                                                                            ......................................................
 ```
 ___
 ## Acknowledgements
@@ -80,7 +86,7 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 ![](diagrams/seedu_duke_architecture.svg)
 The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
-1. `Main` Responsible for initializing the various components and connecting them up with one another at app launch.  
+1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app launch.  
 2. `UI`: Handles the interactions with the user. 
 3. `Logic`: Parses and executes the user input commands.
 4. `Model`: Holds the data of the App in memory
@@ -90,10 +96,10 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 ### General Program Flow
 
 1. User runs the programs & input user commands
-2. `CLIverShelf` calls `Parser` to `parseCommand()`
+2. `CliverShelf` calls `Parser` to `parseCommand()`
 3. `Parser` creates and returns a `Command` object when parsed successful
-4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
-5. `CLIverShelf` instantiates `UI` component to print the `result`
+4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
+5. `CliverShelf` instantiates `UI` component to print the `result`
 
 ![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
 
@@ -129,12 +135,12 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
    
-   1. When user enters a command into the terminal, upon submission, the `Main` program receives the input line and calls the `Parser` to `parseCommand()`
+   1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls the `Parser` to `parseCommand()`
    2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`, `DELETE_STRING` shown in the diagram below.
    4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute the `prepare{commandWord}()` function of the `Parser`
       1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-   5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` to the `Main` component
+   5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `CliverShelf` component
    
 ![](diagrams/ParserClassDiagram.png)
 
@@ -210,12 +216,33 @@ ___
 #### Design considerations:
 
 ### Listing all items
+The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
+
+![](https://www.plantuml.com/plantuml/svg/bLFDpjem4BplKso_InCau9v3HSMf4cehzGdSP05B_d7zayBRrpzHC84YSKYytftPsSagE-UPzK4A-7psthXkkpM2gPJPz5fk7Vq9f7fQ3voTB9C0hFVQOd1amKGgxxc9UDmVleraVvr9794vPCRWNVsZ-ybi97sagidX4g3exrvBoTJGuO4xFrqoGzpk293KSVqbgNJ8bGa-ZSL7vYdb83wfN6IwSaxi9iFR6J-1e1mt5aQQfHXJ6gLXzXGagPV4UiRL2WPQGkTxXOIQjPxbeQBNy5ckk7yYCfclIHtIXVhWgMa1da_1XCTFndBblme1Y5XNb-OwF97_eSgNSMdbtvcaDjEUTd_ezz1G1v-sc83_CKx2KMcajS6ZjaWZsIjcVUGg1oEvZ7dRm2OcaeccBJPUMddBpWjBkKufoA-gjDplaZcGyrPVxt8HdcZbrwnugGsS-K1urDh_rXVOHRaWnJy0)
+A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
+* If user wishes to list out all items within a **specific** shelf:
+  1. He keys in `list shlv/[SHELF_NAME]`
+  2. This invokes `Parser#parseCommand()`, and since the command argument is `list`, it will further invoke `Parser#prepareList()`.
+  3. It will then construct a command `ListCommand` using `ListCommand(shelf: String)`, returning it back to `CliverShelf`.
+  4. Back in `CliverShelf`, `ListCommand#execute()` is invoked and since `ListCommand(shelf: String)` is constructed, condition for `toPrintAll` is set to `false` and not satisfied. This invokes `ListCommand#getOneList()`
+  5. The string result output is then passed back to `CliverShelf`.
+  
+
+* If user wishes to list out all the items in the bookstore:
+  1. He keys in: `list`.
+  2. This invokes `Parser#parseCommand()`, and since the input is `list` it will further invoke `Parser#prepareList()`.
+  3. It will then construct a command `ListCommand` using `ListCommand()`, returning it back to `CliverShelf`.
+  4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
+  5. The string result output is then passed back to `CliverShelf`.
 
 #### Design considerations:
-
-### Getting an item
-
-#### Design considerations:
+* Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
+  * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being printed as a range. (e.g First entry of 5 identical items on the list will be grouped as index "001-005", instead of "1")
+    * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items together (e.g If there are 5 identical items, but you only want to change 1 of them because perhaps they are damaged, and you want to add a remark) 
+    * Cons: Looks less user-friendly
+  * Alternative 2: The indexes of the list are printed in single sequential order.
+    * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
+    * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
 
@@ -225,9 +252,6 @@ ___
 
 #### Design considerations:
 
-### Getting help
-
-### Exiting the program
 
 
 ___
@@ -480,3 +504,4 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
 
+---
