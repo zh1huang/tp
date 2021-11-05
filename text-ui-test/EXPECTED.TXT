@@ -99,6 +99,7 @@
             : Correct format:                                                                                                 :
             : edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                                                 :
             : _______________________________________________________________________________________________________________ :
+            : General format usage                                                                                            :
             : Check the following:                                                                                            :
             : 1. Words in UPPER_CASE are the parameters to be supplied by the user                                            :
             : 2. Parameters in [] is optional & can only be specified ONCE.                                                   :
