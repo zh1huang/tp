@@ -347,7 +347,17 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
 ### Selling an item
-1. 
+
+* Format: `sell id/ITEM_ID`
+* Pre-requisite: There must be items added to a shelf first. And user needs to know the `ITEM_ID` through `get` or `list` command.
+  * Note: replace the id in first test case with an id that exist in ur program run, as the id is can change depending on the local machine that the program is being executed on.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Sell item (id exists) | `sell id/76e9d234` | Shows item sold |
+| Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
+| Missing information | `sell id/` | Error message (invalid format) |
+| Missing Parameters | `sell` | Error message (invalid format) |
 
 ### Markup price of an item
 
