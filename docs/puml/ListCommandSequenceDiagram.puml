@@ -14,9 +14,10 @@ activate parser
 parser -> parser : prepareList(argument)
 activate parser
 parser -> listCommand **
+deactivate parser
 activate listCommand
 listCommand --> parser
-deactivate parser
+
 deactivate listCommand
 parser --> app
 deactivate parser
