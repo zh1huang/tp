@@ -55,7 +55,7 @@ public class Parser {
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+)"
                     + " i/(?<indexInShelf>[0-9]+)"
-                    + "((( p/(?<property>(purchase cost|selling price)) v/(?<value>(([0-9]+([.][0-9]{1,2})?)))))|"
+                    + "((( p/(?<property>(purchase cost|selling price)) v/(?<value>(([0-9]{1,4}([.][0-9]{1,2})?)))))|"
                     + "(( p/(?<remarksProperty>(remarks)) v/(?<remarksValue>[^/]+))))$"); //for remarks property
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =

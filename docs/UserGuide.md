@@ -64,8 +64,6 @@ Notes about the command format:
   which can be used as add n/Pilot Pen.
 * Items in square brackets are optional and can only be specified **once** for that command. 
   E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
-* Commands that require date input `ym/YEAR-MONTH` for report command should follow input `ym/YYYY-MM`.
-  <br>E.g. `ym/2021-11`
 * &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
   such as "!@#$%^&*[]{}/|\+=`~<>?,."
 * &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
@@ -376,14 +374,15 @@ Expected outcome:
 
 Generates the sales report for given month.
 
-Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
+Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 
 &#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view the list of all items
 
-&#128221; `YEAR-MONTH` need to follow the format `YYYY-MM`
+&#128221; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
+<br> e.g. Jan 2020 is represented as `ym/2020-01` or Dec 2021 is `ym/2021-12`
 
-&#128221; If only 1 `ym/YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
-If 2 `ym/YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
+&#128221; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
+If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
 
 Example: **Generate sales report for the month of Oct 2021**
 ```

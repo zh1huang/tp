@@ -21,7 +21,7 @@ public class HelpCommand extends Command {
             + "8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE \n"
             + "9. Sell an item: sell shlv/SHELF_NAME i/INDEX\n"
             + "10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]\n"
-            + "11. Generate sales report: report t/TYPE [ym/YEAR-MONTH]\n"
+            + "11. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]\n"
             + "12. Exit program: bye\n"
             + "____________________________________________________________________________________________\n";
 

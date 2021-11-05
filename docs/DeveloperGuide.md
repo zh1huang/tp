@@ -430,10 +430,10 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 ### Getting a Report
 
-* Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
+* Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 * Pre-requisite: Some items must be sold first to view the report with data.
 * Note: There are only 2 content type: 
-  * `t/stats` which will give the statistics of the Finances  
+  * `t/stats` which will give the statistics of the Sales  
   * `t/items` which will give the items sold.
 
 | Test Case  | Command | Expected Result|

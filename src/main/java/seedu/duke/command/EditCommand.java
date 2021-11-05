@@ -19,7 +19,15 @@ import java.util.logging.Logger;
 public class EditCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
-            "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE";
+            "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE\n"
+                    + "Only 3 types of p/PROPERTY\n"
+                    + "1. \"p/purchase cost\" - to edit purchase cost\n"
+                    + "2. \"p/selling price\" - to edit selling price\n"
+                    + "   Valid cost/price input e.g \"5.4\", \"5.00\", \"12.00\"\n"
+                    + "   Invalid unreasonable wrong price input e.g. \"5.\", \"-5.0\", \"10000.000\"\n"
+                    + "   Max cost/price: 9999.99 (up to 2 dp)\n"
+                    + "3. \"p/remarks\" - to edit remarks\n"
+                    + "   Remarks property accepts any alphanumeric input";
     public static final String EDIT_STRING = "edit";
     public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
             "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
