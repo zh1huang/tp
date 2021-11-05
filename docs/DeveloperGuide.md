@@ -50,20 +50,26 @@ ___
 4. Import the project
    1. Click `File` > `Open Project`
    2. Select the project directory, and click `OK` to accept the default settings
-5. Verify the setup: After the importing is complete, locate `Duke.java` file, right-click it and `Run 'Duke.main()'`. If the setup is correct, you should see something like this:
+5. Verify the setup: After the importing is complete, locate `CliverShelf.java` file, right-click it and `Run 'CliverShelf.main()'`. If the setup is correct, you should see something like this:
 ```
 > Task :compileJava UP-TO-DATE
 > Task :processResources NO-SOURCE
 > Task :classes UP-TO-DATE
 
-> Task :Duke.main()
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-What is your name?
+> Task :CliverShelf.main()
+                                                                  .............................................................
+                                                                  : Hello from                                                :
+                                                                  :   _____ _      _____              _____ _          _  __  :
+                                                                  :  / ____| |    |_   _|            / ____| |        | |/ _| :
+                                                                  : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
+                                                                  : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
+                                                                  : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
+                                                                  :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
+                                                                  : What can I do for you?                                    :
+                                                                  ................................................................
+                                                                            ...................................................
+                                                                            : Enter 'help' for the list of available commands :
+                                                                            ......................................................
 ```
 ___
 ## Acknowledgements
@@ -79,7 +85,7 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 ![](diagrams/seedu_duke_architecture.svg)
 The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
-1. `Main` Responsible for initializing the various components and connecting them up with one another at app launch.  
+1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app launch.  
 2. `UI`: Handles the interactions with the user. 
 3. `Logic`: Parses and executes the user input commands.
 4. `Model`: Holds the data of the App in memory
@@ -89,10 +95,10 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 ### General Program Flow
 
 1. User runs the programs & input user commands
-2. `CLIverShelf` calls `Parser` to `parseCommand()`
+2. `CliverShelf` calls `Parser` to `parseCommand()`
 3. `Parser` creates and returns a `Command` object when parsed successful
-4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
-5. `CLIverShelf` instantiates `UI` component to print the `result`
+4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
+5. `CliverShelf` instantiates `UI` component to print the `result`
 
 ![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
 
@@ -128,12 +134,12 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
    
-   1. When user enters a command into the terminal, upon submission, the `Main` program receives the input line and calls the `Parser` to `parseCommand()`
+   1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls the `Parser` to `parseCommand()`
    2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`, `DELETE_STRING` shown in the diagram below.
    4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute the `prepare{commandWord}()` function of the `Parser`
       1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-   5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `Main` component
+   5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `CliverShelf` component
    
 ![](diagrams/ParserClassDiagram.png)
 
@@ -162,8 +168,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](http://www.plantuml.com/plantuml/svg/NOwn3i8m34HtVuML2IfrOCt0mih65rX9K2srQKIiVZ-AawQ5nJfRx-wSw2FiE54KDFQnBWj5Rv0okgeXdOcuRc4UR_OrXVcjM2xg5zBJaxDKhAW3BHj02yVnNg_3O57XorvXha1EU2C9hKDdTsW-alVL9XFdVuTMTTMTuCFE7Pdj8Okj_Wnz0G00)
-![](http://www.plantuml.com/plantuml/svg/ZS-x3eGW40NGdg-OKAc9XIt5DhRRxHTC0ECaYcIP-FsRoCDdiTqDEVS27hzCcZmw1gdwPPxH6GaOGCSi_564qKx3cmAhJquRBkTdxfRLJcqNyGv5seRsjJSLe34Rh79FrW8rqufi3pUKLEfDSt7HdEVBEeyK_XmMncRtD0dfdJUMHz8_7-4F)
+![](https://www.plantuml.com/plantuml/svg/LOwz3i8m38JtF8NL2IfrOCs0Ah6oyGIcSLLB-Qc8M_7ubCH5T8akv-zyxhFWIvRWpSIEO4n9dkbjvitaWMUC0eszfH0mkWOmmr3raOXf9TzTx6CYFnOiVzKHAjQTisoOAaNrPumkX-vQtRQrKE3JNj6S3Gx2AmffHtareVi1dQincJWV4rhrKz3jKUDe1-kuZFGa2th0FzLJT4lm7m00)
+![](https://www.plantuml.com/plantuml/svg/XT2_2i8m40RmFKyHEccXWsi7ARYw-GHdSwK7-LFCjVZuIjjBY0fk7-7tVHpf8iE3PsVLI0Rr40BVmrDDxqVgQGBFkcelmJdmfj8GTR_bKiGHxN2boErDqehJUybzMD0sfmrdgFPjtPnpizLWp0eFqgkE2dgc1HYpKocbUbr_kCsKyscTHuh_XgMf30gKpVBc_T8l9pFoZJzbXzxCphu0)
 
 ### Storage component
 The storage component consists of `Storage` class. 
@@ -171,11 +177,11 @@ It handles the saving of user data by the command component and also loading dat
 
 The diagram below shows the implementation of `saveData()`.
 
-![](http://www.plantuml.com/plantuml/svg/XLJBRjim4BppApOvoO6R3z2XIFfE4SH5PQ37OYkj7JOKIP2qW_vz9TfQQIC5EMd5cU5mo2LlOiAG3grHodU5hhL7c-3Z_TsHGlL8PWSO0RqNy6LP9HTmJvSz6a-rPCHUUwzZAgkXocGUb_Jw40BPbBabv4-cJyUbedUbvXCcBE5xjNdO_FbBzTc3eOKrtTcTcoaOaGATg5ta3u2abr-qeL-X0qDcZRzAeVVmxlsmLsN48_KBB5OAwwIFc8ZtyVpDTDx5FQLRO_fzE59ym9Q4aZULgwaPs8w_sOrwrT225asQCQzr_63GFdLk2W26ASNi4LjlXZGzQPReLIKVLAOqD5CgCf7crgo3gwiC6kSyx5m0mlhndEBKljhEusU9d7DiWM5AaOHHXdX49f8y6MeEldRKUUd59CQA9I9fRiI-6_gOugumNzfaWKWvfyYxkATqrscAmMdrrimb-CEfaTPGkvZMu8Ek2T0s4AZ5y2GNvtpAMj0HAcUQteq9R_f4DBJLBSqKP1lfitJMELwHxtcyN5rt4tBEDHl9n0t55Dm_HjLBqw5UxDUywEd1hdanxCCUec5agbnC7CQdfZlO4YmzJuQAQhlvUVlry-yVjzjlgsLP2S_z5nfCo0_B15TZ-J9HSbKAskx5YyIu6alfA1uXIP-7khY04chZ8XKY07gl5fuDti3XKl68k2HC6-sLkY7R75hp7m00)
+![](https://www.plantuml.com/plantuml/svg/XLJBRjim4BppApO-oO6T3z2XYFjs4SH5PQ37Wf7MDXkA94ZQQV--4csljA6Ad4npPdPso1NlGvG-7bij3gf1s5aRd-mVuRfDLIidJOGF3-iJ-kg0UWSoW7IEmREoYjRBFSvwD9pNd15wxOCAiQokgqIcVKwlZzwZYObRGlf9zF4-L_Iks7oKKPRmhTeyRfv-Ottn86YYfxNPsKn121UeYEqaFm4PlVoiDFxq7UWJQ_WhX7GEbk-kPrK6USA-mM8kP1tLIKQaSxpy9ZgTuXxZIkl-74uO7cMBJ4c7IYjOZjp0T8BDRYWW6fmGInqpvfqAxxKqpvsT000ODKVLWsoTliRfILaafcHIkgh4QJ2J2jG1Ss_ImUrj0hMr3dRM0yhwS8bn7c1byln9mciEGt0joQ8GIj30vv4uaQVAmV_TTkgz6EMOauH5JRFO3mGempyNudER9E0nCmh_7FSOrvsck3hDtwfSWZkUHsa1jGrn0Swh6a6Q1ZosqZ_pvgoBIGigG6LrqxiHuKsV83LkLOkP0at3VQOkEyKhqgSUPlExhY3bN90HJznWYDx-9LIyDftoeu5DJOylTa7Da0zvy85XgT9Yv32yDjt5bc3mPRHLLDlDZzMNJx--hxPVvzEo4bxwNsXabFIsZ70nB5ydYhQANfazUvG85yCIbioIlKESdwUwkO4IQcq35fGWrPFEYOcNWuvmA7oFfZcs-Xy0)
 
 The diagram below shows the implementation of `loadData()`
 
-![](http://www.plantuml.com/plantuml/svg/bLNDJkCm4BxdAOQUaaZm03uWf5qXWH0SSjYpIQQjTvquigSKtdux3cucLkYobyRZxsScuubx5qXxElIsACRJmhHcr0F1ZwU7D_JD7kqMT00zZWjuenfoNkzmmsYOral6rbXKzyPE58wMUCH-UKFe8sCEbpmsn-wd9gqUcvVdbzVVs59Kp4YcuAgVJ23LfDN4Jz6ItXwynu4YLq5yHBhSNrKy4FOA-5VoELvFu6mtINWbPH8j2ZsErxUVBLNMwVY6PLNebioR9Zot-_C9rxUnlNLTk97Y4WP7WE_ygW006L6r7ZNXCnwvvsKLESazCdY75omH1mDrFIF9BEX-jCWrNdPAV9W54UpmEwaL7FbPpkBggoAlhbHhNS1ooKXT-oed3btUKGKUTTUGDyFkvBRKPBuA2D-fo9o5enZNkbOmu17cUIvPN4cs781xx_h7u8PojbWP1-lS25ldGLixpVgpxX7C83BV_C6F1gciyhcOlndTTGq7vTbYUQmpbRVdY5ta9rFN6Ivx9OdPYUJ-QmrKi4CItPjBlLa26qFOXqsrVE-KIZZolWWNnR87cuUyqamk3o29kF-PmUMtEl5F5hqcumRGh-v0G7kC5d0qj8U1JPFZsL1RcZWcn8zVGqWNIg9aUSLrLTU29DeZA98WzsMZJCxhyA8Lse2fwEyNt33jtqKtQsuI-__YSyjuPQmMAlzGT1T59IUeScbswoGNSOr8L8-ZH3eCvDr7l6XI86Uok3kv7thx5m00)
+![](https://www.plantuml.com/plantuml/svg/dLNFJkGy3B_tASoSEfNW0N90IDyd9122Gmzx3gs7oMxQL8c7WRVVEYN4gGf2Uw5nVd_iE1bp4qXxEWssEfeUuU0SFRktQfetJMScFHByzt3tYhuzeZs03g2dgO1tgYNdzGlk60tBkcGSZ4LrQ-n2uQZ48_RB6q8V6JaiUMoE_V-QjBfldnwVddzZHr6HaPM2gtumWLIRLWi_HIMzEtcF8qMkWlY9TBc_gRWZ71JmNyddU3k1i_qYuPMKIRIgz3HTNd-qL5cdumdhVQKxCg-QyBFT7r-ul8xjRPhAJHINC3e2VEEZ0W2iYAhpg0aVySmzdvsPazmZWtTumH9nCT0q1HBDWXucYx76xvsI0B8YeZt-9BU2Ct_hBDv_LUN5XUgi2tmocJsruSkaEFRhdYhmgFkMl1bVPhjIipPMGFX6rSfQM8eNspGAHZn3Vj8rY_UIBT_0hNV3VN1ZdIqsNeHrReA3yw2jNPxxenuGp2WoN_t1znRfepaYNVxPwBvlEQW_BSgRpLJUpX6xo5zDqvHusIp9NDz9cM2pWmfUa4JxSgrN9R0pX4FOxSk3frJ2aVT5M5RB9kmULgMkzSKL916OSMNm_R5c_cmnQ39k1FtiJWHqn6W1PqD76DaqENuQQaiBnuGu0JI4D5KIfSmhPrRJ29BeZw18WjmlEcNMn1w_zK8RC5NzyufvNFwWwdRBJMB_K7tXcUR6TgNY_uhkewZc1FjIMewUObJbx0Mifqb2FGRoxft7JGx4kxoPxK-3_Gi0)
 
 
 
@@ -202,12 +208,33 @@ ___
 #### Design considerations:
 
 ### Listing all items
+The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
+
+![](https://www.plantuml.com/plantuml/svg/bLFDpjem4BplKso_InCau9v3HSMf4cehzGdSP05B_d7zayBRrpzHC84YSKYytftPsSagE-UPzK4A-7psthXkkpM2gPJPz5fk7Vq9f7fQ3voTB9C0hFVQOd1amKGgxxc9UDmVleraVvr9794vPCRWNVsZ-ybi97sagidX4g3exrvBoTJGuO4xFrqoGzpk293KSVqbgNJ8bGa-ZSL7vYdb83wfN6IwSaxi9iFR6J-1e1mt5aQQfHXJ6gLXzXGagPV4UiRL2WPQGkTxXOIQjPxbeQBNy5ckk7yYCfclIHtIXVhWgMa1da_1XCTFndBblme1Y5XNb-OwF97_eSgNSMdbtvcaDjEUTd_ezz1G1v-sc83_CKx2KMcajS6ZjaWZsIjcVUGg1oEvZ7dRm2OcaeccBJPUMddBpWjBkKufoA-gjDplaZcGyrPVxt8HdcZbrwnugGsS-K1urDh_rXVOHRaWnJy0)
+A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
+* If user wishes to list out all items within a **specific** shelf:
+  1. He keys in `list shlv/[SHELF_NAME]`
+  2. This invokes `Parser#parseCommand()`, and since the command argument is `list`, it will further invoke `Parser#prepareList()`.
+  3. It will then construct a command `ListCommand` using `ListCommand(shelf: String)`, returning it back to `CliverShelf`.
+  4. Back in `CliverShelf`, `ListCommand#execute()` is invoked and since `ListCommand(shelf: String)` is constructed, condition for `toPrintAll` is set to `false` and not satisfied. This invokes `ListCommand#getOneList()`
+  5. The string result output is then passed back to `CliverShelf`.
+  
+
+* If user wishes to list out all the items in the bookstore:
+  1. He keys in: `list`.
+  2. This invokes `Parser#parseCommand()`, and since the input is `list` it will further invoke `Parser#prepareList()`.
+  3. It will then construct a command `ListCommand` using `ListCommand()`, returning it back to `CliverShelf`.
+  4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
+  5. The string result output is then passed back to `CliverShelf`.
 
 #### Design considerations:
-
-### Getting an item
-
-#### Design considerations:
+* Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
+  * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being printed as a range. (e.g First entry of 5 identical items on the list will be grouped as index "001-005", instead of "1")
+    * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items together (e.g If there are 5 identical items, but you only want to change 1 of them because perhaps they are damaged, and you want to add a remark) 
+    * Cons: Looks less user-friendly
+  * Alternative 2: The indexes of the list are printed in single sequential order.
+    * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
+    * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
 
@@ -217,9 +244,6 @@ ___
 
 #### Design considerations:
 
-### Getting help
-
-### Exiting the program
 
 
 ___
@@ -321,13 +345,29 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 ### Adding an item
 
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
+
 ### Deleting an item
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
 
 ### Getting information of an item
 
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
+
 ### Listing the items
 
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
+
+
 ### Editing an item
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
 
 ### Getting a Report
 1. Getting a sales statistic report when there are already items sold
@@ -366,8 +406,12 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
    Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
 
 ### Selling an item
-1. 
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
 
 ### Markup price of an item
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:------------|:-------------------|
 
 

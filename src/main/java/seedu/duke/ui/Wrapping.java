@@ -53,7 +53,7 @@ public class Wrapping {
     }
 
     public static String restrictMessageLength(String message, int length) {
-        if (message.length() < length) {
+        if (message.length() <= length) {
             return message + " ".repeat(length - message.length());
         }
         return message.substring(0, length - 3) + "...";

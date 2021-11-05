@@ -13,6 +13,7 @@ import seedu.duke.command.MarkUpCommand;
 import seedu.duke.command.PrintDummyIdCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.ReportCommand;
+import seedu.duke.command.SearchCommand;
 import seedu.duke.command.SellCommand;
 import seedu.duke.model.exception.ItemNotExistException;
 import seedu.duke.parser.exception.IllegalFormatException;
@@ -48,6 +49,9 @@ public class Parser {
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
+
+    public static final Pattern SEARCH_ITEM_DATA_ARGS_FORMAT =
+            Pattern.compile("\\S+");
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
@@ -122,6 +126,9 @@ public class Parser {
 
         case ListCommand.LIST_STRING:
             return prepareList(arguments);
+
+        case SearchCommand.SEARCH_STRING:
+            return prepareSearch(arguments);
 
         case GetCommand.GET_STRING:
             return prepareGet(arguments);
@@ -253,6 +260,21 @@ public class Parser {
         assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
         logger.log(Level.INFO, "ListCommand parse success.");
         return listCommand;
+    }
+
+    private Command prepareSearch(String arguments) throws IllegalFormatException {
+        final Matcher matcher = SEARCH_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Does not match Search Command Format");
+            throw new IllegalFormatException(String.format(
+                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, SearchCommand.SEARCH_ITEM_DATA_ARGS_FORMAT));
+        }
+
+        String keyword = matcher.group();
+        SearchCommand searchCommand = new SearchCommand(keyword);
+
+        logger.log(Level.INFO, "SearchCommand parse success.");
+        return searchCommand;
     }
 
     /**
