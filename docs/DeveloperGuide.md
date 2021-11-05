@@ -298,26 +298,27 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 1. To get help information, type `help`.
 
 ### Creating a shelf
-1. To create a shelf with a unique name that does not exit before in the shelf list.
-   1. Pre-requisites shelf name `Book1` does not previously exist. The user may check by doing a `list`.
-   2. Test case 1: `create shlv/Book1`
-      Expected: Shelf name `Book1` will be created.
 
-   3. Test case 2: `create shlv/Book1`
-      Expected: DuplicateShelfException thrown, details will be shown in the output. No shelf name `Book1` is created again, since the shelf name already exists. 
+* Format: `create shlv/SHELF_NAME`
+* Pre-requisite: Shelf name to be created must not exist.
 
-   4. Test case 3: User inputs with the incorrect format such as `create`, `create shlv/`, `create sh`, `create shlv/Book2 shlv/Pencil1` 
-      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Create shelf | `create shlv/book1` | Shows shelf created message |
+| Create shelf that exists | `create shlv/SHELF_NAME` | Error message (Shelf name already exists) |
+| Create shelf name with special characters | `create shlv/invest$$booksshelf` | Error message (shelf name cannot contain special characters) |
+| Missing parameters | `create` | Error message (invalid format) |
 
 ### Removing a shelf
-1. To remove a shelf with a unique name that exist in the shelf list.
-   1. Pre-requisites shelf name `Book1` previously exist. The user may check by doing a `list`.
-      1. Test case 1: `remove shlv/Book1`
-         Expected: Shelf name** `Book1` will be removed. 
-   2. Test case 2: remove a shelf that has already been removed. `remove shlv/Book1` again
-      Expected: Shows output message that shelf does not exist.
-   3. Test case 3: User inputs with the incorrect format such as `remove`, `remove shlv/`, `remove sh`, `remove shlv/Book2 shlv/Pencil1`
-      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
+
+* Format: `remove shlv/SHELF_NAME`
+* Pre-requisite: Shelf name to be removed needs to be created first.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Remove shelf | `remove shlv/book1` | Shows shelf removed message |
+| Remove non-existent shelf | `remove shlv/nonexistentshelf` | Error message (shelf does not exist) |
+| Missing parameters | `remove` | Error message (invalid format) |
 
 ### Adding an item
 
@@ -328,6 +329,8 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 ### Listing the items
 
 ### Editing an item
+
+
 
 ### Getting a Report
 
