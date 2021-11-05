@@ -44,11 +44,11 @@ public class DeleteCommand extends Command {
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
-            int sizeBeforeDeleting = selectedShelf.getSize();
+                    .getShelf(shelfName, true);
+            int sizeBeforeDeleting = selectedShelf.getItemCount();
             Item selectedItem = selectedShelf.getItem(index);
             selectedShelf.deleteItem(selectedItem);
-            int sizeAfterDeleting = selectedShelf.getSize();
+            int sizeAfterDeleting = selectedShelf.getItemCount();
             assert sizeBeforeDeleting - 1 == sizeAfterDeleting :
                     "After deleting an item the list size should decrease by 1";
             logger.log(Level.INFO, "DeleteCommand successfully executed.");

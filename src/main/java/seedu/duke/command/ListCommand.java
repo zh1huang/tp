@@ -73,8 +73,8 @@ public class ListCommand extends Command {
             try {
                 Shelf selectedShelf = ShelfList
                         .getShelfList()
-                        .getShelf(shelfName);
-                if (selectedShelf.getSize() == 0) {
+                        .getShelf(shelfName, true);
+                if (selectedShelf.getItemCount() == 0) {
                     logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
                     throw new EmptyListException(EMPTY_LIST_MESSAGE);
                 }
@@ -118,7 +118,7 @@ public class ListCommand extends Command {
         StringBuilder output = new StringBuilder();
         output.append(HEADER + BORDER);
 
-        for (int i = 0; i < shelf.getSize(); i++) {
+        for (int i = 0; i < shelf.getItemCount(); i++) {
             Item selectedItem = shelf.getItem(i);
             compileQuantity(selectedItem);
         }

@@ -24,7 +24,7 @@ public class SalesManager {
     private SalesManager() {
         ShelfList shelfList = ShelfList.getShelfList();
         try {
-            soldItems = shelfList.getShelf("soldItems");
+            soldItems = shelfList.getShelf("soldItems", false);
         } catch (ShelfNotExistException e) {
             try {
                 soldItems = shelfList.addShelf("soldItems");
@@ -118,7 +118,7 @@ public class SalesManager {
             throw new IllegalArgumentException("Invalid Year Month");
         }
 
-        for (int i = 0; i < soldItems.getSize(); i++) {
+        for (int i = 0; i < soldItems.getItemCount(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (itemSoldYearMonth.equals(yearMonthToSearch)) {
@@ -163,7 +163,7 @@ public class SalesManager {
                     + "Parameters are swapped.");
         }
 
-        for (int i = 0; i < soldItems.getSize(); i++) {
+        for (int i = 0; i < soldItems.getItemCount(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (!itemSoldYearMonth.isBefore(startYearMonthToSearch)
