@@ -28,4 +28,20 @@ public class RemoveShelfCommand extends Command {
             throw new ShelfNotExistException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof RemoveShelfCommand)) {
+            return false;
+        }
+
+        RemoveShelfCommand command = (RemoveShelfCommand) other;
+        return shelfName.equals(command.shelfName);
+    }
 }

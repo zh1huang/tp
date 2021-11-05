@@ -13,12 +13,12 @@ import java.util.logging.Logger;
 public class GetCommand extends Command {
 
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %s does not exist";
-    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
+    public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nID: %s\nRemarks: %s";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String GET_STRING = "get";
     public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
+    public static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
     private final int index;
     private final String shelfName;
 
@@ -45,18 +45,19 @@ public class GetCommand extends Command {
         try {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
-                    .getShelf(shelfName);
-            int initialSize = selectedShelf.getSize();
+                    .getShelf(shelfName, true);
+            int initialSize = selectedShelf.getItemCount();
             Item selectedItem = selectedShelf.getItem(index);
-            assert initialSize == selectedShelf.getSize()
+            assert initialSize == selectedShelf.getItemCount()
                     : "After getting the list size should remain constant";
 
             String name = selectedItem.getName();
             String cost = selectedItem.getPurchaseCost();
             String price = selectedItem.getSellingPrice();
             String remarks = selectedItem.getRemarks();
+            String id = selectedItem.getID();
 
-            output = String.format(GET_OUTPUT, name, cost, price, remarks);
+            output = String.format(GET_OUTPUT, name, cost, price, id, remarks);
             logger.log(Level.INFO, "GetCommand successfully executed");
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");

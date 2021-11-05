@@ -29,4 +29,20 @@ public class CreateShelfCommand extends Command {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof CreateShelfCommand)) {
+            return false;
+        }
+
+        CreateShelfCommand command = (CreateShelfCommand) other;
+        return shelfName.equals(command.shelfName);
+    }
 }
