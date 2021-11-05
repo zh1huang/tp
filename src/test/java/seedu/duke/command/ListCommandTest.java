@@ -38,9 +38,9 @@ public class ListCommandTest {
         assertTrue(testShelf.contains("LOTR"));
         String expected = "Here is the list of items:\n"
                 + HEADER + LINE
-                + " 001     | HarryPotter                                        | 16.1      | 25.12     | 1    |   x"
+                + " 001     | HarryPotter                                        | 16.10     | 25.12     | 1    |   x"
                 + TAB
-                + " 002     | LOTR                                               | 10.2      | 15.7      | 1    |   x"
+                + " 002     | LOTR                                               | 10.20     | 15.70     | 1    |   x"
                 + TAB;
         assertEquals(expected, testCommand.execute());
     }
@@ -76,13 +76,13 @@ public class ListCommandTest {
                 + HEADER + LINE
                 + " 001-005 | Harry                                              | 9999.99   | 9999.99   | 5    |   o"
                 + TAB
-                + " 006     | LOTR                                               | 10.2      | 15.7      | 1    |   x"
+                + " 006     | LOTR                                               | 10.20     | 15.70     | 1    |   x"
                 + TAB
                 + "[test1]:\n"
                 + HEADER + LINE
                 + " 001     | Geronimo                                           | 12.31     | 25.23     | 1    |   o"
                 + TAB
-                + " 002-011 | HarryPotter                                        | 16.1      | 25.12     | 10   |   x"
+                + " 002-011 | HarryPotter                                        | 16.10     | 25.12     | 10   |   x"
                 + TAB;
         assertEquals(expected, testCommand1.execute());
     }
