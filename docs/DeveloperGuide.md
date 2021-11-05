@@ -322,20 +322,72 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 ### Adding an item
 
+* Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
+* Pre-requisite: A shelf must first exist for any item to be added to a shelf.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
+
 ### Deleting an item
+
+* Format: `delete shlv/SHELF_NAME i/INDEX`
+* Pre-requisite: A shelf must first contain the item to be deleted. 
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `delete shlv/book1` | Error message (invalid format) |
 
 ### Getting information of an item
 
+* Format: `get shlv/SHELF_NAME i/INDEX`
+* Pre-requisite: A shelf must first contain the item which the user wants to know more about.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `get shlv/book1` | Error message (invalid format) |
+
 ### Listing the items
+
+* Format: `list [shlv/SHELF_NAME]`
+* Pre-requisite: None
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `list shlv/` | Error message (invalid format) |
 
 ### Editing an item
 
+* Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
+* Pre-requisite: At least one item has to be added to any shelf.
 
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
 
 ### Getting a Report
 
 * Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
 * Pre-requisite: Some items must be sold first to view the report with data.
+* Note: There are only 2 content type: 
+  * `t/stats` which will give the statistics of the Finances  
+  * `t/items` which will give the items sold.
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
@@ -359,7 +411,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Sell item (id exists) | `sell id/76e9d234` | Shows item sold |
 | Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
-| Missing information | `sell id/` | Error message (invalid format) |
 | Missing Parameters | `sell` | Error message (invalid format) |
 
 ### Markup price of an item
@@ -376,6 +427,5 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Non-existent shelf | `markup shlv/notexistshelf i/1 %/12.34` | Error message (shelf does not exist) |
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
 | Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
-| Missing information | `markup shlv/book1 i/1 %/` | Error message (invalid format) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
 
