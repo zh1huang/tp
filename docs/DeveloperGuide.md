@@ -100,7 +100,7 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/GeneralProgramFlowSequenceDiagram.puml)
 
 ### UI component
 
@@ -168,8 +168,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](https://www.plantuml.com/plantuml/svg/LOwz3i8m38JtF8NL2IfrOCs0Ah6oyGIcSLLB-Qc8M_7ubCH5T8akv-zyxhFWIvRWpSIEO4n9dkbjvitaWMUC0eszfH0mkWOmmr3raOXf9TzTx6CYFnOiVzKHAjQTisoOAaNrPumkX-vQtRQrKE3JNj6S3Gx2AmffHtareVi1dQincJWV4rhrKz3jKUDe1-kuZFGa2th0FzLJT4lm7m00)
-![](https://www.plantuml.com/plantuml/svg/XT2_2i8m40RmFKyHEccXWsi7ARYw-GHdSwK7-LFCjVZuIjjBY0fk7-7tVHpf8iE3PsVLI0Rr40BVmrDDxqVgQGBFkcelmJdmfj8GTR_bKiGHxN2boErDqehJUybzMD0sfmrdgFPjtPnpizLWp0eFqgkE2dgc1HYpKocbUbr_kCsKyscTHuh_XgMf30gKpVBc_T8l9pFoZJzbXzxCphu0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_newShelf.puml)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_addShelf.puml)
 
 ### SalesManager component
 
@@ -185,11 +185,11 @@ It handles the saving of user data by the command component and also loading dat
 
 The diagram below shows the implementation of `saveData()`.
 
-![](https://www.plantuml.com/plantuml/svg/XLJBRjim4BppApO-oO6T3z2XYFjs4SH5PQ37Wf7MDXkA94ZQQV--4csljA6Ad4npPdPso1NlGvG-7bij3gf1s5aRd-mVuRfDLIidJOGF3-iJ-kg0UWSoW7IEmREoYjRBFSvwD9pNd15wxOCAiQokgqIcVKwlZzwZYObRGlf9zF4-L_Iks7oKKPRmhTeyRfv-Ottn86YYfxNPsKn121UeYEqaFm4PlVoiDFxq7UWJQ_WhX7GEbk-kPrK6USA-mM8kP1tLIKQaSxpy9ZgTuXxZIkl-74uO7cMBJ4c7IYjOZjp0T8BDRYWW6fmGInqpvfqAxxKqpvsT000ODKVLWsoTliRfILaafcHIkgh4QJ2J2jG1Ss_ImUrj0hMr3dRM0yhwS8bn7c1byln9mciEGt0joQ8GIj30vv4uaQVAmV_TTkgz6EMOauH5JRFO3mGempyNudER9E0nCmh_7FSOrvsck3hDtwfSWZkUHsa1jGrn0Swh6a6Q1ZosqZ_pvgoBIGigG6LrqxiHuKsV83LkLOkP0at3VQOkEyKhqgSUPlExhY3bN90HJznWYDx-9LIyDftoeu5DJOylTa7Da0zvy85XgT9Yv32yDjt5bc3mPRHLLDlDZzMNJx--hxPVvzEo4bxwNsXabFIsZ70nB5ydYhQANfazUvG85yCIbioIlKESdwUwkO4IQcq35fGWrPFEYOcNWuvmA7oFfZcs-Xy0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_saveData.puml)
 
 The diagram below shows the implementation of `loadData()`
 
-![](https://www.plantuml.com/plantuml/svg/dLNFJkGy3B_tASoSEfNW0N90IDyd9122Gmzx3gs7oMxQL8c7WRVVEYN4gGf2Uw5nVd_iE1bp4qXxEWssEfeUuU0SFRktQfetJMScFHByzt3tYhuzeZs03g2dgO1tgYNdzGlk60tBkcGSZ4LrQ-n2uQZ48_RB6q8V6JaiUMoE_V-QjBfldnwVddzZHr6HaPM2gtumWLIRLWi_HIMzEtcF8qMkWlY9TBc_gRWZ71JmNyddU3k1i_qYuPMKIRIgz3HTNd-qL5cdumdhVQKxCg-QyBFT7r-ul8xjRPhAJHINC3e2VEEZ0W2iYAhpg0aVySmzdvsPazmZWtTumH9nCT0q1HBDWXucYx76xvsI0B8YeZt-9BU2Ct_hBDv_LUN5XUgi2tmocJsruSkaEFRhdYhmgFkMl1bVPhjIipPMGFX6rSfQM8eNspGAHZn3Vj8rY_UIBT_0hNV3VN1ZdIqsNeHrReA3yw2jNPxxenuGp2WoN_t1znRfepaYNVxPwBvlEQW_BSgRpLJUpX6xo5zDqvHusIp9NDz9cM2pWmfUa4JxSgrN9R0pX4FOxSk3frJ2aVT5M5RB9kmULgMkzSKL916OSMNm_R5c_cmnQ39k1FtiJWHqn6W1PqD76DaqENuQQaiBnuGu0JI4D5KIfSmhPrRJ29BeZw18WjmlEcNMn1w_zK8RC5NzyufvNFwWwdRBJMB_K7tXcUR6TgNY_uhkewZc1FjIMewUObJbx0Mifqb2FGRoxft7JGx4kxoPxK-3_Gi0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_loadData.puml)
 
 ## Implementation
 
