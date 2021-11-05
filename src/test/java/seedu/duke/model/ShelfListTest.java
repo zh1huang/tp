@@ -109,7 +109,8 @@ class ShelfListTest {
     }
 
     @Test
-    void shelfOfItem_itemExist_returnNormally() throws IllegalModelArgumentException, ShelfNotExistException, DuplicateItemException,
+    void shelfOfItem_itemExist_returnNormally() throws IllegalModelArgumentException, ShelfNotExistException,
+            DuplicateItemException,
             ItemNotExistException, DuplicateShelfException {
         ItemStub testItem = new ItemStub("randomName");
         shelfList.addShelf("somerandomshelf1");
@@ -124,7 +125,7 @@ class ShelfListTest {
     }
 
     @Test
-    void getItem_IDExist_returnNormally() throws IllegalModelArgumentException, ItemNotExistException,
+    void getItem_IdExist_returnNormally() throws IllegalModelArgumentException, ItemNotExistException,
             ShelfNotExistException, DuplicateItemException, DuplicateShelfException {
         ItemStub testItem = new ItemStub("randomName");
         shelfList.addShelf("somerandomshelf1");
@@ -133,7 +134,7 @@ class ShelfListTest {
     }
 
     @Test
-    void getItem_IDNotExist_throwItemNotExistException() {
+    void getItem_IdNotExist_throwItemNotExistException() {
         assertThrows(ItemNotExistException.class, () -> shelfList.getItem("11111111"));
     }
 }
