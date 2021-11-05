@@ -83,7 +83,8 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 
 ### Architecture
-![](diagrams/seedu_duke_architecture.svg)
+![](http://www.plantuml.com/plantuml/svg/AyxEp2j8B4hCLKZEpot8pqlDAmakgSn9LIXAJIv9p4lFIUMABYrEBOfLq4t9By_JjLE8TlRnB4ij2iv8pKcBvKBX8TJuvATd9WDb8JH2t3S_9JK7A1vSab-Kc9uAb44MHJMhA3CzemGa7Ug98PUJcWQMWfa30000)
+
 The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
 1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app launch.  

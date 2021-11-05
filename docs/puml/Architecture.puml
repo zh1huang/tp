@@ -1,0 +1,9 @@
+@startuml
+skinparam componentStyle rectangle
+[user] -down-> [CLIverShelf]
+[CLIverShelf] -down-> [Logic]
+[Logic] -down-> [Model]
+[Storage] --> [Model]
+[CLIverShelf] -right-> [UI]
+[CLIverShelf] -left-> [Storage]
+@enduml
