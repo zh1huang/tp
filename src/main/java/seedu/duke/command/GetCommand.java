@@ -61,7 +61,7 @@ public class GetCommand extends Command {
             logger.log(Level.INFO, "GetCommand successfully executed");
         } catch (seedu.duke.model.exception.ShelfNotExistException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
-            throw new ShelfNotExistException(e.getMessage());
+            throw new ShelfNotExistException(shelfName);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because item not in shelf");
             throw new ItemNotExistException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));

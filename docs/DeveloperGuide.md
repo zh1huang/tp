@@ -322,7 +322,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 * [Getting information of an item](#getting-information-of-an-item)
 * [Listing the items](#listing-the-items)
 * [Editing an item](#editing-an-item)
-* [Getting a Report](#getting-a-report)
+* [Generating a Report](#generating-a-report)
 * [Selling an item](#selling-an-item)
 * [Markup price of an item](#markup-price-of-an-item)
 
@@ -416,9 +416,12 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Getting item within list | `get shlv/book1 i/2` | Show information of item |
+| Getting item within list | `get shlv/book1 i/002` | Show information of item |
+| Index of item not within list | `get shlv/book1 i/12313123` | Error message showing item with index not in list |
+| Getting item from non-existent shelf | `get shlv/nonexistentshelf i/2` | Error message showing shelf does not exist |
+| Invalid parameters | `get shlv/book1 i/hello` | Error message (invalid format) |
+| Missing flag| `get shlv/book1 2` | Error message (invalid format) |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
 ---
@@ -430,9 +433,11 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Listing out for existent shelf| `list shlv/existentshelf` | List of all items in that shelf |
+| Listing out for every shelf | `list` | Listing of all items in every shelf bookstore |
+| Non-existent shelf | `list shlv/nonexistshelf` | Error message prompting to create shelf first |
+| Missing flag | `list book1` | Error message (invalid format) |
+| Invalid parameters | `list shlv/&` | Error message (invalid format) |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
 
 ---
@@ -452,7 +457,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 ---
 
-### Getting a Report
+### Generating a Report
 
 * Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 * Pre-requisite: Some items must be sold first to view the report with data.

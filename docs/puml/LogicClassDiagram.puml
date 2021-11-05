@@ -17,6 +17,7 @@ package "Logic Component" <<Rectangle>> {
         class ListCommand
         class SearchCommand
         class ExitCommand
+        class HelpCommand
     }
     class Parser
 
@@ -26,7 +27,7 @@ package "Logic Component" <<Rectangle>> {
         class MarkupCommand
     }
 
-    class SalesManager
+    class Sales
 
     abstract class "{abstract}\n Command" as command
 
@@ -45,6 +46,7 @@ Parser --> SearchCommand
 Parser --> ExitCommand
 Parser --> ReportCommand
 Parser --> MarkupCommand
+Parser --> HelpCommand
 
 CreateShelfCommand --|> command
 RemoveShelfCommand --|> command
@@ -56,9 +58,9 @@ ListCommand --|> command
 SearchCommand --|> command
 ExitCommand --|> command
 SellCommand --|> command
-SellCommand --> SalesManager
+SellCommand --> Sales
 ReportCommand --|> command
-ReportCommand --> SalesManager
+ReportCommand --> Sales
 MarkupCommand --|> command
-MarkupCommand --> SalesManager
+MarkupCommand --> Sales
 @enduml
