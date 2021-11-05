@@ -18,7 +18,7 @@ public class RemoveShelfCommand extends Command {
     @Override
     public String execute() throws ShelfNotExistException {
         try {
-            if (ShelfList.getShelfList().getShelf(shelfName).getSize() != 0) {
+            if (ShelfList.getShelfList().getShelf(shelfName).getItemCount() != 0) {
                 throw new IllegalArgumentException("Cannot remove shelf with existing items");
             }
 
