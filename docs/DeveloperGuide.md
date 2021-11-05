@@ -26,8 +26,6 @@
 9. [Glossary](#glossary)
 10. [Instructions for manual testing](#instructions-for-manual-testing)
 
-___
-
 ## Introduction
 **Welcome to CLIver Shelf!**
 
@@ -37,7 +35,6 @@ With **CLIver Shelf**, owners can easily keep track of their items in their shel
 This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is to get developers 
 and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
 
-___
 ## Setting up
 **Pre-requisites**
 1. JDK 11
@@ -72,11 +69,11 @@ ___
                                                                             : Enter 'help' for the list of available commands :
                                                                             ......................................................
 ```
-___
+
 ## Acknowledgements
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
 2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
-___
+
 ## Design
 
 All UML diagrams in this guide are stored in `docs/diagrams` directory.
@@ -193,8 +190,6 @@ The diagram below shows the implementation of `loadData()`
 
 ![](https://www.plantuml.com/plantuml/svg/dLNFJkGy3B_tASoSEfNW0N90IDyd9122Gmzx3gs7oMxQL8c7WRVVEYN4gGf2Uw5nVd_iE1bp4qXxEWssEfeUuU0SFRktQfetJMScFHByzt3tYhuzeZs03g2dgO1tgYNdzGlk60tBkcGSZ4LrQ-n2uQZ48_RB6q8V6JaiUMoE_V-QjBfldnwVddzZHr6HaPM2gtumWLIRLWi_HIMzEtcF8qMkWlY9TBc_gRWZ71JmNyddU3k1i_qYuPMKIRIgz3HTNd-qL5cdumdhVQKxCg-QyBFT7r-ul8xjRPhAJHINC3e2VEEZ0W2iYAhpg0aVySmzdvsPazmZWtTumH9nCT0q1HBDWXucYx76xvsI0B8YeZt-9BU2Ct_hBDv_LUN5XUgi2tmocJsruSkaEFRhdYhmgFkMl1bVPhjIipPMGFX6rSfQM8eNspGAHZn3Vj8rY_UIBT_0hNV3VN1ZdIqsNeHrReA3yw2jNPxxenuGp2WoN_t1znRfepaYNVxPwBvlEQW_BSgRpLJUpX6xo5zDqvHusIp9NDz9cM2pWmfUa4JxSgrN9R0pX4FOxSk3frJ2aVT5M5RB9kmULgMkzSKL916OSMNm_R5c_cmnQ39k1FtiJWHqn6W1PqD76DaqENuQQaiBnuGu0JI4D5KIfSmhPrRJ29BeZw18WjmlEcNMn1w_zK8RC5NzyufvNFwWwdRBJMB_K7tXcUR6TgNY_uhkewZc1FjIMewUObJbx0Mifqb2FGRoxft7JGx4kxoPxK-3_Gi0)
 
-___
-
 ## Implementation
 
 ### Adding an item
@@ -253,9 +248,6 @@ A user can choose to either list out all the items in the bookstore (i.e every s
 
 #### Design considerations:
 
-
-
-___
 ## Product scope
 
 ### Target user profile
@@ -270,8 +262,6 @@ ___
 ### Value proposition
 
 Allows efficient and simplified management of inventory and finances of the store
-
-___
 
 ## User Stories
 
@@ -291,8 +281,6 @@ ___
 |v2.0|user|create a shelf|store items into the shelf|
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
-
-___
 
 ## Non-Functional Requirements
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
@@ -327,9 +315,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 * [Selling an item](#selling-an-item)
 * [Markup price of an item](#markup-price-of-an-item)
 
-
----
-
 ### Launch and shut down
 
 #### Initial launch
@@ -348,12 +333,8 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 2. Data will be automatically saved into the data file.
 3. The data is expected to still be saved normally even if program crashes.
 
----
-
 ### Getting help
 1. To get help information, type `help`.
-
----
 
 ### Creating a shelf
 
@@ -367,8 +348,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Create shelf name with special characters | `create shlv/invest$$booksshelf` | Error message (shelf name cannot contain special characters) |
 | Missing parameters | `create` | Error message (invalid format) |
 
----
-
 ### Removing a shelf
 
 * Format: `remove shlv/SHELF_NAME`
@@ -379,8 +358,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Remove shelf | `remove shlv/book1` | Shows shelf removed message |
 | Remove non-existent shelf | `remove shlv/nonexistentshelf` | Error message (shelf does not exist) |
 | Missing parameters | `remove` | Error message (invalid format) |
-
----
 
 ### Adding an item
 
@@ -394,8 +371,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
 
----
-
 ### Deleting an item
 
 * Format: `delete shlv/SHELF_NAME i/INDEX`
@@ -407,8 +382,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | ------------- | ------------- | ------------- |
 | Missing parameters | `delete shlv/book1` | Error message (invalid format) |
-
----
 
 ### Getting information of an item
 
@@ -422,8 +395,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
----
-
 ### Listing the items
 
 * Format: `list [shlv/SHELF_NAME]`
@@ -435,8 +406,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | ------------- | ------------- | ------------- |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
-
----
 
 ### Editing an item
 
@@ -450,8 +419,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | ------------- | ------------- | ------------- |
 | Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
-
----
 
 ### Getting a Report
 
@@ -473,8 +440,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Missing parameters  | `report t/items` | Error message (invalid format) |
 | Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
----
-
 ### Selling an item
 
 * Format: `sell id/ITEM_ID`
@@ -486,8 +451,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Sell item (id exists) | `sell id/76e9d234` | Shows item sold |
 | Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
 | Missing Parameters | `sell` | Error message (invalid format) |
-
----
 
 ### Markup price of an item
 
@@ -504,5 +467,3 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
 | Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
-
----
