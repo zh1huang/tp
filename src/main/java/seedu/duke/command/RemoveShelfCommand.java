@@ -8,7 +8,7 @@ public class RemoveShelfCommand extends Command {
     public static final String REMOVE_STRING = "remove";
     public static final String PARSE_REMOVE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";
     private static final String REMOVE_COMPLETE_MESSAGE =
-            "Shelf \"%s\" has been deleted.";
+            "Shelf \"%s\" has been removed.";
     private final String shelfName;
 
     public RemoveShelfCommand(String shelfName) {
@@ -18,8 +18,8 @@ public class RemoveShelfCommand extends Command {
     @Override
     public String execute() throws ShelfNotExistException {
         try {
-            if (ShelfList.getShelfList().existShelf(shelfName)) {
-                throw new IllegalArgumentException("Cannot remove shelf with existing items");
+            if (ShelfList.getShelfList().getShelf(shelfName, true).getItemCount() != 0) {
+                throw new IllegalArgumentException("Cannot remove shelf with items inside.");
             }
 
             ShelfList.getShelfList().deleteShelf(shelfName);
