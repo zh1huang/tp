@@ -18,7 +18,7 @@
    4. [Getting an item](#getting-an-item)
    5. [Selling an item](#selling-an-item)
    6. [Generating sales report](#generating-sales-report)
-   7. [Getting help](#getting-help)
+   7. [Generating item markup price](#generating-item-markup-price)
    8. [Exiting the program](#editing-an-item)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
@@ -252,7 +252,34 @@ A user can choose to either list out all the items in the bookstore (i.e every s
 
 #### Design considerations:
 
+### Generating item markup price 
 
+This sequence diagram shows how MarkUpCommand is being implemented.
+
+![](diagrams/MarkUpSequenceDiagram.svg)
+
+A user may choose to check the estimated marked up price of an item, given a specific mark up percentage. 
+
+1. After user input is parsed, a `MarkUpCommand` object is created & returned to `CLIvershelf`
+2. CLIvershelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
+   1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
+   2. Else, continues by constructing `SalesMarkUp` Object
+      Then `SalesMarkUp#getItemToMarkUpInfo()`, `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence
+      get the relevant information about the selected item
+       2. `MarkUpCommand#execute()` then checks if the user has specified an input for markup percentage
+           1. If not specified, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` which get the markup in percentage intervals of 20, returned as a string
+           2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up information, returned as a string
+   3. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf` as a `resultString` for printing.
+
+#### Design considerations:
+
+**Alternate implementation**
+
+SalesMarkUp functions can be integrated with SalesManager class which would result in lesser code.
+However, having more methods in the same class 
+
+1. Reduces cohesiveness 
+2. Increases testing efforts as testing become more complicated
 
 ___
 ## Product scope
