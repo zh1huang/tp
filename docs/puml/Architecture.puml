@@ -1,5 +1,6 @@
 @startuml
 skinparam componentStyle rectangle
+actor user
 user -down-> [CLIverShelf]
 [CLIverShelf] -down-> [Logic]
 [Logic] -down-> [Model]
