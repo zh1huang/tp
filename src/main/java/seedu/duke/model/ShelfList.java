@@ -46,7 +46,7 @@ public class ShelfList {
      */
     protected void addShelf(Shelf shelf) {
         shelves.add(shelf);
-        Comparator<Shelf> byName = (Shelf o1, Shelf o2) -> o1.getName().compareTo(o2.getName());
+        Comparator<Shelf> byName = Comparator.comparing((Shelf o) -> o.getName().toLowerCase());
         shelves.sort(byName);
     }
 
@@ -89,8 +89,10 @@ public class ShelfList {
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
      */
     public void deleteShelf(String name) throws ShelfNotExistException {
-        shelves.remove(getShelf(name));
+        shelves.remove(getShelf(name, true));
     }
+
+
 
     /**
      * Returns the Shelf with the specified name.
@@ -111,6 +113,25 @@ public class ShelfList {
     }
 
     /**
+     * OverLoaded getShelf method that can hide the soldItem shelf.
+     * @param name the name of the target shelf
+     * @param isSoldItemHidden whether to hide the soldItem shelf
+     * @return the target shelf
+     * @throws ShelfNotExistException if no such shelf exists.
+     */
+    public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistException {
+        if (name.equals("soldItems") && isSoldItemHidden) {
+            throw new ShelfNotExistException(name);
+        }
+        for (Shelf container : shelves) {
+            if (container.getName().equals(name)) {
+                return container;
+            }
+        }
+        throw new ShelfNotExistException(name);
+    }
+
+    /**
      * Check if there exists an item container with the specified name.
      *
      * @param name name of the item container
@@ -119,7 +140,7 @@ public class ShelfList {
      */
     public boolean existShelf(String name) {
         try {
-            getShelf(name);
+            getShelf(name, true);
         } catch (ShelfNotExistException e) {
             return false;
         }

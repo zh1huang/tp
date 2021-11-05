@@ -63,7 +63,6 @@ public class ListCommand extends Command {
      * Executes the list operation.
      *
      * @return Message string to be passed to UI
-     *
      * @throws ShelfNotExistException        If the Shelf is not in the ShelfList
      * @throws EmptyListException            If list is empty
      * @throws IllegalModelArgumentException If illegal argument is entered
@@ -74,7 +73,7 @@ public class ListCommand extends Command {
             try {
                 Shelf selectedShelf = ShelfList
                         .getShelfList()
-                        .getShelf(shelfName);
+                        .getShelf(shelfName, true);
                 if (selectedShelf.getSize() == 0) {
                     logger.log(Level.WARNING, "ListCommand failed to execute because shelf is empty");
                     throw new EmptyListException(EMPTY_LIST_MESSAGE);
@@ -267,8 +266,13 @@ public class ListCommand extends Command {
             return false;
         }
         ListCommand command = (ListCommand) other;
-        return shelfName.equals(command.shelfName)
-                && toPrintAll == command.toPrintAll
+        if (shelfName != null) {
+            return shelfName.equals(command.shelfName)
+                    && toPrintAll == command.toPrintAll
+                    && itemList.equals(command.itemList)
+                    && quantityList.equals(command.quantityList);
+        }
+        return toPrintAll == command.toPrintAll
                 && itemList.equals(command.itemList)
                 && quantityList.equals(command.quantityList);
     }

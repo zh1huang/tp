@@ -10,6 +10,7 @@ import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.MarkUpCommand;
+import seedu.duke.command.PrintDummyIdCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.ReportCommand;
 import seedu.duke.command.SellCommand;
@@ -35,11 +36,11 @@ public class Parser {
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
                     + " shlv/(?<shelfName>[^/]+)"
-                    + " p/(?<purchaseCost>([0-9]+([.][0-9]{1,2})?))"
+                    + " p/(?<purchaseCost>([0-9]{1,4}([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " s/(?<sellingPrice>([0-9]+([.][0-9]{1,2})?))"
+                    + " s/(?<sellingPrice>([0-9]{1,4}([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
-                    + " q/(?<quantity>[0-9]+)" // only accepts integers, no decimals
+                    + " q/(?<quantity>[0-9]{1,3})" // only accepts integers, between 1 to 3 digits
                     + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
@@ -54,8 +55,8 @@ public class Parser {
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+)"
                     + " i/(?<indexInShelf>[0-9]+)"
-                    + " p/(?<property>(purchase cost|selling price|remarks)+)"
-                    + " v/(?<value>(([0-9]+([.][0-9]{1,2})?)|[^/]+))");
+                    + "((( p/(?<property>(purchase cost|selling price)) v/(?<value>(([0-9]+([.][0-9]{1,2})?)))))|"
+                    + "(( p/(?<remarksProperty>(remarks)) v/(?<remarksValue>[^/]+))))$");
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+)");
@@ -73,7 +74,7 @@ public class Parser {
 
     public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
-                    + "( %/(?<percent>([0-9]+([.][0-9]{1,2})?)))?$");
+                    + "( %/(?<percent>([0-9]{1,3}([.][0-9]{1,2})?)))?$");
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
             "Input invalid command format.\nCorrect format: \n%s\n";
@@ -111,32 +112,25 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        Command command;
 
         switch (commandWord) {
         case AddCommand.ADD_STRING:
-            command = prepareAdd(arguments);
-            break;
+            return prepareAdd(arguments);
 
         case DeleteCommand.DELETE_STRING:
-            command = prepareDelete(arguments);
-            break;
+            return prepareDelete(arguments);
 
         case ListCommand.LIST_STRING:
-            command = prepareList(arguments);
-            break;
+            return prepareList(arguments);
 
         case GetCommand.GET_STRING:
-            command = prepareGet(arguments);
-            break;
+            return prepareGet(arguments);
 
         case EditCommand.EDIT_STRING:
-            command = prepareEdit(arguments);
-            break;
+            return prepareEdit(arguments);
 
         case HelpCommand.HELP_STRING:
-            command = prepareHelp(arguments);
-            break;
+            return prepareHelp(arguments);
 
         case ExitCommand.BYE_STRING:
             return prepareBye(arguments);
@@ -156,11 +150,13 @@ public class Parser {
         case MarkUpCommand.MARKUP_STRING:
             return prepareMarkUp(arguments);
 
+        case PrintDummyIdCommand.DUMMY_ID_STRING:
+            return new PrintDummyIdCommand();
+
         default:
             throw new IllegalFormatException(INVALID_COMMAND_MESSAGE_STRING);
         }
 
-        return command;
     }
 
     /**
@@ -177,8 +173,8 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Does not match Add Command Format");
-            throw new IllegalFormatException(String.format(
-                    CORRECT_COMMAND_MESSAGE_STRING_FORMAT, AddCommand.ADD_ITEM_DATA_ARGS_FORMAT_STRING));
+            throw new IllegalFormatException(String.format(CORRECT_COMMAND_MESSAGE_STRING_FORMAT,
+                    AddCommand.ADD_ITEM_DATA_ARGS_FORMAT_STRING));
         }
         String itemName = matcher.group("itemName");
         String shelfName = matcher.group("shelfName");
@@ -311,8 +307,16 @@ public class Parser {
         String selectedProperty = matcher.group("property");
         String newValue = matcher.group("value");
 
-        Command editCommand = new EditCommand(shelfName, indexInShelf,
-                selectedProperty, newValue);
+        String selectedRemarksProperty = matcher.group("remarksProperty");
+        String newRemarksValue = matcher.group("remarksValue");
+
+        Command editCommand;
+        if (selectedProperty == null) {
+            editCommand = new EditCommand(shelfName, indexInShelf, selectedRemarksProperty, newRemarksValue);
+        } else {
+            editCommand = new EditCommand(shelfName, indexInShelf, selectedProperty, newValue);
+        }
+
         assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
         return editCommand;
@@ -355,7 +359,7 @@ public class Parser {
      *
      * @param arguments The additional arguments after command word.
      *
-     * @return TotalCostAndIncomeCommand object
+     * @return ReportCommand object
      *
      * @throws IllegalFormatException If the input format is wrong
      */
@@ -372,10 +376,17 @@ public class Parser {
         String startYearMonth = matcher.group("startYearMonth");
         String endYearMonth = matcher.group("endYearMonth");
 
-        Command reportCommand = new ReportCommand(startYearMonth, endYearMonth, type);
+        Command reportCommand;
+
+        if (endYearMonth == null) {
+            reportCommand = new ReportCommand(startYearMonth, "", type);
+        } else {
+            reportCommand = new ReportCommand(startYearMonth, endYearMonth, type);
+        }
+
         assert reportCommand.getClass() == ReportCommand.class :
                 "report should return reportCommand\n";
-        logger.log(Level.INFO, "TotalCostAndIncomeCommand parse success.");
+        logger.log(Level.INFO, "ReportCommand parse success.");
         return reportCommand;
     }
 
@@ -482,7 +493,12 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
         String userRequestPercent = matcher.group("percent");
 
-        Command markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
+        Command markUpCommand;
+        if (userRequestPercent == null) {
+            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, "");
+        } else {
+            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
+        }
         assert markUpCommand.getClass() == MarkUpCommand.class :
                 "report should return MarkUpCommand\n";
         logger.log(Level.INFO, "MarkUpCommand parse success.");
