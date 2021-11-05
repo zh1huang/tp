@@ -109,11 +109,32 @@ class ShelfListTest {
     }
 
     @Test
-    void shelfOfItem() throws IllegalModelArgumentException, ShelfNotExistException, DuplicateItemException,
+    void shelfOfItem_itemExist_returnNormally() throws IllegalModelArgumentException, ShelfNotExistException,
+            DuplicateItemException,
             ItemNotExistException, DuplicateShelfException {
         ItemStub testItem = new ItemStub("randomName");
         shelfList.addShelf("somerandomshelf1");
         shelfList.getShelf("somerandomshelf1", true).addItem(testItem);
         assertEquals(shelfList.getShelf("somerandomshelf1", true), shelfList.shelfOfItem(testItem));
+    }
+
+    @Test
+    void shelfOfItem_itemNotExist_throwItemNotExistException() throws IllegalModelArgumentException {
+        ItemStub testItem = new ItemStub("randomName");
+        assertThrows(ItemNotExistException.class, () -> shelfList.shelfOfItem(testItem));
+    }
+
+    @Test
+    void getItem_IdExist_returnNormally() throws IllegalModelArgumentException, ItemNotExistException,
+            ShelfNotExistException, DuplicateItemException, DuplicateShelfException {
+        ItemStub testItem = new ItemStub("randomName");
+        shelfList.addShelf("somerandomshelf1");
+        shelfList.getShelf("somerandomshelf1").addItem(testItem);
+        assertEquals(testItem, shelfList.getItem(ItemStub.dummyID));
+    }
+
+    @Test
+    void getItem_IdNotExist_throwItemNotExistException() {
+        assertThrows(ItemNotExistException.class, () -> shelfList.getItem("11111111"));
     }
 }

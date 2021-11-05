@@ -173,4 +173,16 @@ class ShelfTest {
         String expectedResult = "1. " + testItem1.getName() + "\n" + "2. " + testItem2.getName();
         assertEquals(expectedResult, testShelf.toString());
     }
+
+    @Test
+    void containsGivenID() throws DuplicateItemException {
+        assertFalse(testShelf.containsGivenID("randomid"));
+        testShelf.addItem(testItem1);
+        assertTrue(testShelf.containsGivenID(ItemStub.dummyID));
+    }
+
+    @Test
+    void getItemByID_itemNotFound_throwItemNotExistException() {
+        assertThrows(ItemNotExistException.class, () -> testShelf.getItemByID("randomid"));
+    }
 }
