@@ -293,7 +293,7 @@ public class Shelf {
     }
 
     private void sortItems() {
-        Comparator<Item> byName = (Item o1, Item o2) -> o1.getName().compareTo(o2.getName());
+        Comparator<Item> byName = Comparator.comparing((Item o) -> o.getName().toLowerCase());
         items.sort(byName);
     }
 
@@ -311,14 +311,5 @@ public class Shelf {
             output.append((i + 1) + ". " + items.get(i).getName() + "\n");
         }
         return output.toString().trim();
-    }
-
-    /**
-     * Get the number of items in this container.
-     *
-     * @return the number of items in this container
-     */
-    public int getSize() {
-        return items.size();
     }
 }

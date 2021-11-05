@@ -13,16 +13,18 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SalesManager {
-
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static SalesManager salesManager;
     private Shelf soldItems;
 
     private SalesManager() {
         ShelfList shelfList = ShelfList.getShelfList();
         try {
-            soldItems = shelfList.getShelf("soldItems");
+            soldItems = shelfList.getShelf("soldItems", false);
         } catch (ShelfNotExistException e) {
             try {
                 soldItems = shelfList.addShelf("soldItems");
@@ -78,18 +80,21 @@ public class SalesManager {
      * @return an ArrayList of SoldItems
      */
     public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate)
-            throws IllegalArgumentException {
+        throws IllegalArgumentException {
         ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
-        if (selectedEndDate == null) {
+        if (selectedEndDate.equals("")) {
             filteredSoldItems = getFilteredListInSpecificMonth(selectedStartDate, dateTimeFormatter);
+            logger.log(Level.INFO, "Get Filtered List in a specific month of year success.");
+
         } else {
             filteredSoldItems = getFilteredListWithinAPeriod(selectedStartDate,
-                    selectedEndDate, dateTimeFormatter);
+                selectedEndDate, dateTimeFormatter);
+            logger.log(Level.INFO, "Get Filtered List within a period success.");
         }
 
-        return filteredSoldItems; //todo: check if can use arraylist here
+        return filteredSoldItems;
     }
 
     /**
@@ -102,22 +107,25 @@ public class SalesManager {
      */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
                                                                DateTimeFormatter dateTimeFormatter)
-            throws IllegalArgumentException {
+        throws IllegalArgumentException {
         YearMonth yearMonthToSearch;
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
         try {
             yearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
+            logger.log(Level.INFO, "Parse YearMonth success.");
         } catch (DateTimeParseException e) {
+            logger.log(Level.WARNING, "Error parsing YearMonth.");
             throw new IllegalArgumentException("Invalid Year Month");
         }
 
-        for (int i = 0; i < soldItems.getSize(); i++) {
+        for (int i = 0; i < soldItems.getItemCount(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (itemSoldYearMonth.equals(yearMonthToSearch)) {
                 filteredSoldItems.add(selectedSoldItem);
             }
         }
+        logger.log(Level.INFO, "Get filtered list in a specific month success.");
         return filteredSoldItems;
     }
 
@@ -134,7 +142,7 @@ public class SalesManager {
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
                                                              String selectedEndDate,
                                                              DateTimeFormatter dateTimeFormatter)
-            throws IllegalArgumentException {
+        throws IllegalArgumentException {
         YearMonth startYearMonthToSearch;
         YearMonth endYearMonthToSearch;
 
@@ -142,18 +150,29 @@ public class SalesManager {
         try {
             startYearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
             endYearMonthToSearch = YearMonth.parse(selectedEndDate, dateTimeFormatter);
+            logger.log(Level.INFO, "Parse Start & End YearMonth success.");
         } catch (DateTimeParseException e) {
+            logger.log(Level.WARNING, "Error parsing Start & End YearMonth.");
             throw new IllegalArgumentException("Invalid Year Month");
         }
 
-        for (int i = 0; i < soldItems.getSize(); i++) {
+        if (endYearMonthToSearch.isBefore(startYearMonthToSearch)) {
+            logger.log(Level.WARNING, "YearMonth parameters are swapped, Start YearMonth is after End YearMonth.");
+            throw new IllegalArgumentException(
+                "Invalid argument sequence, 2nd Year Month parameter is earlier than 1st Year Month parameter.\n"
+                    + "Parameters are swapped.");
+        }
+
+        for (int i = 0; i < soldItems.getItemCount(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (!itemSoldYearMonth.isBefore(startYearMonthToSearch)
-                    && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
+                && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
                 filteredSoldItems.add(selectedSoldItem);
             }
         }
+
+        logger.log(Level.INFO, "Get filtered list within a period success.");
         return filteredSoldItems;
     }
 
