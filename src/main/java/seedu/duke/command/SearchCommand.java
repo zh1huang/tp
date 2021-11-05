@@ -37,42 +37,42 @@ public class SearchCommand extends Command {
 
     @Override
     public String execute() throws CommandException, ShelfNotExistException, IllegalModelArgumentException {
-        ArrayList<Item> searchResult_matchID = new ArrayList<>();
-        ArrayList<Item> searchResult_matchName = new ArrayList<>();
-        ArrayList<Item> searchResult_matchRemark = new ArrayList<>();
-        ArrayList<Item> searchResult_matchPrice = new ArrayList<>();
+        ArrayList<Item> searchResultMatchID = new ArrayList<>();
+        ArrayList<Item> searchResultMatchName = new ArrayList<>();
+        ArrayList<Item> searchResultMatchRemark = new ArrayList<>();
+        ArrayList<Item> searchResultMatchPrice = new ArrayList<>();
         ShelfList shelfList = ShelfList.getShelfList();
         for (String shelfName : shelfList.getAllShelvesName()) {
             Shelf currentShelf = shelfList.getShelf(shelfName);
             for (int i = 0; i < currentShelf.getItemCount(); i++) {
                 Item currentItem = currentShelf.getItem(i);
                 if (currentItem.getID().toLowerCase().contains(keyword)) {
-                    searchResult_matchID.add(currentItem);
+                    searchResultMatchID.add(currentItem);
                 }
                 if (currentItem.getName().toLowerCase().contains(keyword)) {
-                    searchResult_matchName.add(currentItem);
+                    searchResultMatchName.add(currentItem);
                 }
                 if (currentItem.getRemarks().toLowerCase().contains(keyword)) {
-                    searchResult_matchRemark.add(currentItem);
+                    searchResultMatchRemark.add(currentItem);
                 }
                 if (currentItem.getPurchaseCost().contains(keyword)
                         || currentItem.getSellingPrice().contains(keyword)) {
-                    searchResult_matchPrice.add(currentItem);
+                    searchResultMatchPrice.add(currentItem);
                 }
             }
         }
 
-        if (searchResult_matchID.isEmpty() && searchResult_matchName.isEmpty()
-                && searchResult_matchPrice.isEmpty() && searchResult_matchRemark.isEmpty()) {
+        if (searchResultMatchID.isEmpty() && searchResultMatchName.isEmpty()
+                && searchResultMatchPrice.isEmpty() && searchResultMatchRemark.isEmpty()) {
             return NO_RESULT_FOUND;
         }
 
         StringBuilder searchResults = new StringBuilder();
 
-        addToResult(searchResult_matchID, SEARCH_ID_HEADER, searchResults);
-        addToResult(searchResult_matchName, SEARCH_NAME_HEADER, searchResults);
-        addToResult(searchResult_matchRemark, SEARCH_REMARK_HEADER, searchResults);
-        addToResult(searchResult_matchPrice, SEARCH_PRICE_HEADER, searchResults);
+        addToResult(searchResultMatchID, SEARCH_ID_HEADER, searchResults);
+        addToResult(searchResultMatchName, SEARCH_NAME_HEADER, searchResults);
+        addToResult(searchResultMatchRemark, SEARCH_REMARK_HEADER, searchResults);
+        addToResult(searchResultMatchPrice, SEARCH_PRICE_HEADER, searchResults);
 
         return searchResults.toString();
     }
