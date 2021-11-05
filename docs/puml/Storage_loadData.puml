@@ -1,0 +1,68 @@
+@startuml
+hide footbox
+participant CLIverShelf as app
+participant ":Storage" as storage
+participant "file:File" as file
+participant ":FileWriter" as FileWriter
+participant "storedData:JSONObject" as storedData
+participant "shelfList:ShelfList" as shelfList
+participant "currentShelf: Shelf" as currentShelf
+participant "currentItem: Item" as currentItem
+participant "currentSoldItem: SoldItem" as currentSoldItem
+
+app->storage:loadData()
+activate storage
+storage -> file**
+opt file not exist
+    storage -> file:createNewFile()
+    activate file
+    file -> FileWriter **
+    file -> file:sampleData()
+    activate file
+    file --> file: sampleData
+    deactivate file
+    file -> FileWriter: write(sampleData)
+    file -> FileWriter !!:close()
+    file --> storage
+    deactivate file
+    end
+storage -> file: readString()
+activate file
+file --> storage: text
+deactivate file
+storage -> storedData**: new JSONObject(text)
+storage -> storage:loadFromJson(storedData)
+activate storage
+loop for all shelfName in storedData.keySet()
+    storage -> shelfList:addShelf(shelfName)
+    activate shelfList
+    shelfList -> currentShelf**
+    shelfList --> storage: currentShelf
+    deactivate shelfList
+    storage -> storedData: getJSONObject(shelfName).getJSONObject("items").keySet()
+    activate storedData
+    storedData --> storage: itemNames
+    deactivate storedData
+    loop for all itemName in itemNames
+        storage -> storedData: get information about the item with name itemName
+        alt item is not a soldItem
+            storage -> currentItem**
+            activate currentItem
+            currentItem --> storage:item
+            deactivate currentItem
+        else item is a soldItem
+            storage -> currentSoldItem**
+            activate currentSoldItem
+            currentSoldItem --> storage:item
+            deactivate currentSoldItem
+        end
+        storage -> currentShelf: addItem(item)
+        end
+    end
+storage --> storage
+deactivate
+storage --> app
+deactivate
+destroy file
+destroy storedData
+@enduml

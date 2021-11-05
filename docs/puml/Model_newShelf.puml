@@ -1,0 +1,15 @@
+@startuml
+hide footbox
+participant ":Command" as command
+participant "novel-1:Shelf" as shelf
+participant "shelfList:ShelfList" as shelfList
+
+command -> shelf**: Shelf("novel-1")
+activate shelf
+shelf -> shelfList: addShelf(this)
+activate shelfList
+shelfList --> shelf
+deactivate
+shelf --> command: novel-1
+deactivate
+@enduml
