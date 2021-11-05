@@ -104,7 +104,8 @@ class ShelfListTest {
     void getAllShelvesName() throws DuplicateShelfException, IllegalModelArgumentException {
         shelfList.addShelf("somerandomshelf1");
         shelfList.addShelf("somerandomshelf2");
-        assertEquals("somerandomshelf1\nsomerandomshelf2", shelfList.getAllShelvesName());
+        assertEquals("somerandomshelf1", shelfList.getAllShelvesName().get(0));
+        assertEquals("somerandomshelf2", shelfList.getAllShelvesName().get(1));
     }
 
     @Test

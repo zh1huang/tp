@@ -80,10 +80,10 @@ public class AddCommand extends Command {
                 throw new ExceedsShelfSizeLimitException(currentSize);
             }
             for (int i = 0; i < quantity; i++) {
-                int sizeBeforeAdding = selectedShelf.getSize();
+                int sizeBeforeAdding = selectedShelf.getItemCount();
                 Item newItem = new Item(name, purchaseCost, sellingPrice, remarks);
                 selectedShelf.addItem(newItem);
-                int sizeAfterAdding = selectedShelf.getSize();
+                int sizeAfterAdding = selectedShelf.getItemCount();
                 assert sizeBeforeAdding + 1 == sizeAfterAdding :
                         "After adding an item the list size should increase by 1";
                 itemID = newItem.getID();

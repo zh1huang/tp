@@ -40,10 +40,10 @@ public class DeleteCommandTest {
             throws CommandException, DuplicateItemException, ShelfNotExistException, IllegalModelArgumentException {
 
         testList.addItem(testItem1);
-        int numberOfItemsBeforeDeleting = testList.getSize();
+        int numberOfItemsBeforeDeleting = testList.getItemCount();
         assertTrue(testList.contains("HarryPotter"));
         testCommand1.execute();
-        int numberOfItemAfterDeleting = testList.getSize();
+        int numberOfItemAfterDeleting = testList.getItemCount();
         assertEquals(numberOfItemAfterDeleting, numberOfItemsBeforeDeleting - 1);
         assertFalse(testList.contains("HarryPotter"));
     }
@@ -59,9 +59,9 @@ public class DeleteCommandTest {
 
         testList.addItem(testItem1);
         testList.addItem(testItem2);
-        int numberOfItemsBeforeDeleting = testList.getSize();
+        int numberOfItemsBeforeDeleting = testList.getItemCount();
         testCommand1.execute();
-        int numberOfItemAfterDeleting = testList.getSize();
+        int numberOfItemAfterDeleting = testList.getItemCount();
         assertEquals(numberOfItemAfterDeleting, numberOfItemsBeforeDeleting - 1);
     }
 

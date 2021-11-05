@@ -46,9 +46,9 @@ public class GetCommand extends Command {
             Shelf selectedShelf = ShelfList
                     .getShelfList()
                     .getShelf(shelfName, true);
-            int initialSize = selectedShelf.getSize();
+            int initialSize = selectedShelf.getItemCount();
             Item selectedItem = selectedShelf.getItem(index);
-            assert initialSize == selectedShelf.getSize()
+            assert initialSize == selectedShelf.getItemCount()
                     : "After getting the list size should remain constant";
 
             String name = selectedItem.getName();

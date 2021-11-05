@@ -93,7 +93,6 @@ public class ShelfList {
     }
 
 
-
     /**
      * Returns the Shelf with the specified name.
      *
@@ -114,9 +113,12 @@ public class ShelfList {
 
     /**
      * OverLoaded getShelf method that can hide the soldItem shelf.
-     * @param name the name of the target shelf
+     *
+     * @param name             the name of the target shelf
      * @param isSoldItemHidden whether to hide the soldItem shelf
+     *
      * @return the target shelf
+     *
      * @throws ShelfNotExistException if no such shelf exists.
      */
     public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistException {
@@ -161,13 +163,12 @@ public class ShelfList {
      *
      * @return name of all Shelf, separated by "\n"
      */
-    public String getAllShelvesName() {
-        StringBuilder temp = new StringBuilder();
+    public ArrayList<String> getAllShelvesName() {
+        ArrayList<String> shelvesNames = new ArrayList<>();
         for (Shelf container : shelves) {
-            temp.append(container.getName());
-            temp.append("\n");
+            shelvesNames.add(container.getName());
         }
-        return temp.toString().trim();
+        return shelvesNames;
     }
 
     /**
