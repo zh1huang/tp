@@ -81,7 +81,7 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 ### Architecture
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/docs/puml/Architecture.txt)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Architecture.puml)
 
 The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
