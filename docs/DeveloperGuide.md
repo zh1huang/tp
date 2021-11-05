@@ -330,44 +330,39 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 ### Editing an item
 
 ### Getting a Report
-1. Getting a sales statistic report when there are already items sold
-   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
-   2. Test case: `report t/stats` 
-      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales from the beginning of time.
-   3. Test case: `report t/stats ym/2021-09`
-      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales in the months of september in year 2021.
-   4. Test case: `report t/stats ym/0000-26`
-      Expected: Shows an exception message where the time range is not correct. 
-   
-2. Getting a sales items report when there are already items sold
-   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
-   2. Test case: `report t/items`
-      Expected: Shows a report of the items detail of the sales from the beginning of time.
-   3. Test case: `report t/items ym/2021-07`
-      Expected: Shows a report of the items detail of the sales in the months of July in year 2021.
-   4. Test case: `report t/stats ym/0600-33`
-      Expected: Shows an exception message where the time range is not correct.
 
-3. Getting a report when none of the items are sold
-   1. Pre-requisite: `list shlv/soldItems` to check that there does **not** exist a shelf name sold items
-   2. Test case: `report t/stats` 
-      Expected: Shows a message none of the items have been sold to generate the statistics report
-   3. Test case: `report t/items`
-      Expected: Shows a message none of the items have been sold to generate the items report
+* Format: `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]`
+* Pre-requisite: Some items must be sold first to view the report with data.
 
-4. Getting a sales report but the user input format is wrong
-
-   Test case with wrong input formats 
-   
-   2. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
-   3. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
-   4. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
-   
-   Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Statistics report  | `report t/stats ym/2021-10`  | shows statistics for Oct 2021 |
+| Items report  | `report t/items ym/2021-10`  | shows items sold for Oct 2021 |
+| Items report in between time period | `report t/items ym/2021-10 ym/2021-11` | shows items sold between Oct 2021 and Nov 2021 inclusive |
+| Report in invalid year-month | `report t/items ym/0000-10`  | shows invalid year error |
+| Report in year-month that does not have items sold | `report t/items ym/2010-10`  | Shows no items sold in Oct 2010 |
+| Report in between a time period that does not have items sold | `report t/items ym/1970-01 ym/2010-10` | Shows no items sold in between Jan 1970 and Oct 2010 |
+| Time YearMonth not in chronological order | `report t/items ym/2021-11 ym/2021-01` | Shows error time parameters are swapped |
+| Missing parameters  | `report t/items` | Error message (invalid format) |
+| Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
 ### Selling an item
 1. 
 
 ### Markup price of an item
 
+* Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` 
+* Pre-requisite: There must be items added to a shelf first.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Percent Markup not specified | `markup shlv/book1 i/1` | shows estimated user markup in multiples of 20 till max of 100% |
+| Normal percent markup less than 999.99 | `markup shlv/book1 i/1 %/5` | Shows current item markup & the final estimated price after user markup percent |
+| Percent markup more than 2 dp | `markup shlv/book1 i/1 %/5.001` | Error message (invalid format) |
+| Percent markup more than 1000 dp | `markup shlv/book1 i/1 %/1234.67` | Error message (invalid format) |
+| Non-existent shelf | `markup shlv/notexistshelf i/1 %/12.34` | Error message (shelf does not exist) |
+| Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
+| Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
+| Missing information | `markup shlv/book1 i/1 %/` | Error message (invalid format) |
+| Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
 
