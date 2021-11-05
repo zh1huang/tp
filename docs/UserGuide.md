@@ -11,6 +11,7 @@
   * [`add` - Add new items](#add-new-item)  
   * [`delete` - Delete item from list](#delete-an-item)
   * [`list` - List all items](#listing-all-items)
+  * [`search` - Search for item](#search-for-item)
   * [`get` - Retrieve information of an item](#get-information-about-an-item)
   * [`edit` - Update an item](#edit-an-item)
   * [`sell` - Sell an item](#sell-an-item)
@@ -84,28 +85,27 @@ Format: `help`
 
 Expected outcome:
 ```
-help
-        ...................................................................................................
-        : Here are the performable actions:                                                               :
-        : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
-        : Items in square brackets [ ] are optional.                                                      :
-        : ____________________________________________________________________________________________    :
-        : Description: Command format                                                                     :
-        : ____________________________________________________________________________________________    :
-        : 1. Get help : help                                                                              :
-        : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
-        : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
-        : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
-        : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
-        : 6. List items: list [shlv/SHELF_NAME]                                                           :
-        : 7. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
-        : 8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
-        : 9. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                   :
-        : 10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
-        : 11. Generate sales report: report t/TYPE [ym/YEAR-MONTH]                                        :
-        : 12. Exit program: bye                                                                           :
-        : ____________________________________________________________________________________________    :
-        ......................................................................................................
+                            ...................................................................................................
+                            : Here are the performable actions:                                                               :
+                            : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
+                            : Items in square brackets [ ] are optional.                                                      :
+                            : ____________________________________________________________________________________________    :
+                            : Description: Command format                                                                     :
+                            : ____________________________________________________________________________________________    :
+                            : 1. Get help : help                                                                              :
+                            : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
+                            : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
+                            : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
+                            : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
+                            : 6. List items: list [shlv/SHELF_NAME]                                                           :
+                            : 7. Search item: search KEYWORD                                                                  :
+                            : 8. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
+                            : 9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
+                            : 10. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                  :
+                            : 11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
+                            : 12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
+                            : 13. Exit program: bye                                                                           :
+                            ......................................................................................................
 ```
 ### Create a shelf
 
@@ -250,6 +250,48 @@ Expected outcome:
                          :  1   | Narnia                                              | 17.40     | 25        | 1   |   x     :
                          :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   o     :
                          .........................................................................................................
+```
+
+### Search for item
+
+Search for any item that has ID, name, remark or pricing that contains the specified keyword.
+Shows a list of all items in the inventory list.
+The attributes shown are: Item ID, Item name, purchase cost, selling price, quantity, and remark.
+
+Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
+
+Format: `search KEYWORD`
+
+Example: **Search for "potter"**
+```
+search potter
+```
+Expected outcome:
+```
+                      .........................................................................................................
+                      : Here are the items that has matching name                                                             :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  68bbe345| Harry Potter                             | 16.1      | 25.12     |                         :
+                      :  1f36e637| Harry Potter                             | 16.1      | 25.12     | Cover is dirty          :
+                      :  32709393| Harry Potter                             | 16.1      | 25.12     | Good condition          :
+                      ............................................................................................................
+```
+
+Example: **Search for "dirty"**
+```
+search dirty
+```
+Expected outcome:
+```
+                      .........................................................................................................
+                      : Here are the items that has matching remark                                                           :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  1f36e637| Harry Potter                             | 16.1      | 25.12     | Cover is dirty          :
+                      ............................................................................................................
 ```
 
 ### Get information about an item

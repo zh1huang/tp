@@ -290,6 +290,7 @@ ___
 |v2.0|user|create a shelf|store items into the shelf|
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
+|v2.0|user|search for an item with very little information about it|find an 
 
 ___
 
