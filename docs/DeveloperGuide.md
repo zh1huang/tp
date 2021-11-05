@@ -210,7 +210,7 @@ ___
 ### Listing all items
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
-![](puml/ListCommandSequenceDiagram.puml)
+![](https://www.plantuml.com/plantuml/svg/bLBBRi8m4BpxAxPScY01znmgAawLK5kfN-0c2rZomxNNAVnzRGUH458a3f2rPsPdn_RQ4tSKb6JF1oBhgzNAIgxJph8sQkNn9w2kST48ldTSCSPhCWw2HyTib8fQsCY7pVQjHVTrGBa3xe5RUmNFga_kecQMG9jB614q_cwCKbmt5Mo5f_CYAsI_PYmayU8bULGWj0sKXX8j9yo-yPVWpgNglcTnaUbbp-z8hFlqAeWoXx76D4d1tJuer7U5Wn5XFk-9mz67dCN5Z3KuRjlWbFxYreMVqANies4gm2FMWR0e6PiUYqk29-k4fbSf6G0CqN6s2lP87xex69_k-vqhBBDigljjlvk69b2wn4Jy9pXAZncNnbZO6GVOeZj1zezl81Sj-invEC0oRgGGHTd5k1lbeJXt8cKSKv7_1j3uViVA1ZqvSxhQY_Gi2wFNazgmWsWm7fgXRtDawsWNbFm3)
 
 A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
 * If user wishes to list out all items within a **specific** shelf:
