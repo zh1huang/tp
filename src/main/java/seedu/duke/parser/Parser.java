@@ -59,8 +59,8 @@ public class Parser {
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+)"
                     + " i/(?<indexInShelf>[0-9]+)"
-                    + "((( p/(?<property>(purchase cost|selling price)) v/(?<value>(([0-9]+([.][0-9]{1,2})?)))))|"
-                    + "(( p/(?<remarksProperty>(remarks)) v/(?<remarksValue>[^/]+))))$");
+                    + "((( p/(?<property>(purchase cost|selling price)) v/(?<value>(([0-9]{1,4}([.][0-9]{1,2})?)))))|"
+                    + "(( p/(?<remarksProperty>(remarks)) v/(?<remarksValue>[^/]+))))$"); //for remarks property
 
     public static final Pattern CREATE_SHELF_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[^/]+)");
@@ -84,7 +84,8 @@ public class Parser {
             "Input invalid command format.\nCorrect format: \n%s\n";
 
     public static final String PARSE_SUCCESS_MESSAGE_STRING = "Parsed successful.\n";
-    public static final String INVALID_COMMAND_MESSAGE_STRING = "Invalid command, please try again.";
+    public static final String INVALID_COMMAND_MESSAGE_STRING =
+            "Invalid command, please try again.\nType \"help\" for commands available.\n";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
