@@ -163,7 +163,7 @@ After the command input is parsed, depending on the Command type, different type
 **API**:
 
 1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
-   * Supports Both SellCommand & ReportCommand & Handles Sales actions
+   * Supports Both SellCommand & ReportCommand & Handles some Sales behaivour
      * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
      * When program invokes `ReportCommand#execute`
        1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()` or `SalesReport#generateSoldItemDetails()` is called
@@ -287,7 +287,7 @@ This sequence diagram shows how MarkUpCommand is being implemented.
 
 A user may choose to check the estimated marked up price of an item, given a specific mark up percentage. 
 
-1. After user input is parsed, a `MarkUpCommand` object is created & returned to `CLIvershelf`
+1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
 2. CLIvershelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
    1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
    2. Else, continues by constructing `SalesMarkUp` Object
@@ -300,14 +300,16 @@ A user may choose to check the estimated marked up price of an item, given a spe
 
 #### Design considerations:
 
-**Alternate implementation**
+Aspect: How markup executes:
 
-SalesMarkUp functions can be integrated with SalesManager class which would result in lesser code.
-However, having more methods in the same class 
+  * Alternative 1 (current choice): SalesMarkup is a separate class from SalesManager.
+    * Pros: Increases cohesiveness. Easier testing efforts.
+    * Cons: More code written.
 
-1. Reduces cohesiveness 
-2. Increases testing efforts as testing become more complicated
-
+  * Alternate 2: SalesMarkUp functions can be integrated with SalesManager class.
+  However, having more methods in the same class
+    * Pros: All methods in the same class, lesser additional code.
+    * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could be more complicated.
 ___
 ## Product scope
 
