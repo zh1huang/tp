@@ -105,7 +105,7 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](diagrams/GeneralProgramFlowSequenceDiagram.svg)
+![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
@@ -114,7 +114,7 @@ command executions, error messages and also user interactions by prompting for t
 
 The class diagram below shows the associations between classes of the UI components
 
-![](diagrams/seedu_duke_ui.svg)
+![](diagrams/UI_ClassDiagram.svg)
 
 The `UI` component is made up of 2 classes:
 
