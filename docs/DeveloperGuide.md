@@ -235,11 +235,11 @@ methods are used.
 The storage component consists of `Storage` class. It handles the saving of user data by the command component and also
 loading data on program start up.
 
-The diagram below shows the implementation of `saveData()`.
+The diagram below shows how `Storage` interacts with [`model`](#model-component) during `saveData()`.
 
 ![](diagrams/Storage_saveData.svg)
 
-The diagram below shows the implementation of `loadData()`
+The diagram below shows how `Storage` interacts with [`model`](#model-component) during `loadData()`
 
 ![](diagrams/Storage_loadData.svg)
 
