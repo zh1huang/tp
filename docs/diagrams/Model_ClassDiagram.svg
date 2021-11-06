@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="553px" preserveAspectRatio="none" style="width:335px;height:553px;background:#FFFFFF;" version="1.1" viewBox="0 0 335 553" width="335px" zoomAndPan="magnify"><defs/><g><!--MD5=[6b3b63f06880235782478054486f0107]
+class ShelfList--><rect codeLine="5" fill="#FEFECE" height="133.8921" id="ShelfList" style="stroke:#A80036;stroke-width:1.5;" width="185" x="68" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="66" x="127.5" y="25.752">«Singleton»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="136.5" y="42.1406">ShelfList</text><line style="stroke:#A80036;stroke-width:1.5;" x1="69" x2="252" y1="49.7773" y2="49.7773"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="90" x="74" y="66.3833">-ShelfList shelfList</text><line style="stroke:#A80036;stroke-width:1.5;" x1="69" x2="252" y1="72.8003" y2="72.8003"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="116" x="74" y="89.4063">+ShelfList getShelfList()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="162" x="74" y="104.4292">+void addShelf(String shelfName)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="164" x="74" y="119.4521">+Shelf getShelf(String shelfName)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="173" x="74" y="134.4751">+void deleteShelf(String shelfName)</text><!--MD5=[47ccbbcd9e46084c93562a335102da55]
+class Shelf--><rect codeLine="12" fill="#FEFECE" height="147.5493" id="Shelf" style="stroke:#A80036;stroke-width:1.5;" width="262" x="29.5" y="202"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="146.5" y="220.752">Shelf</text><line style="stroke:#A80036;stroke-width:1.5;" x1="30.5" x2="290.5" y1="228.3887" y2="228.3887"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="35.5" y="244.9946">-String name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="35.5" y="260.0176">-String remark</text><line style="stroke:#A80036;stroke-width:1.5;" x1="30.5" x2="290.5" y1="266.4346" y2="266.4346"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="35.5" y="283.0405">+void addItem(Item item)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="126" x="35.5" y="298.0635">+void deleteItem(Item item)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="250" x="35.5" y="313.0864">+void updateItem(Item originalItem, Item updatedItem)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="147" x="35.5" y="328.1094">+Item getItem(String itemName)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="149" x="35.5" y="343.1323">+Item getItemById(String itemId)</text><!--MD5=[44a1b4afaef76c16e6c9ec4990ad0c8d]
+class Item--><rect codeLine="21" fill="#FEFECE" height="117.5034" id="Item" style="stroke:#A80036;stroke-width:1.5;" width="139" x="7" y="429"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="64.5" y="447.752">Item</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="145" y1="455.3887" y2="455.3887"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="13" y="471.9946">-String name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="13" y="487.0176">-String itemID</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="127" x="13" y="502.0405">-BigDecimal purchaseCost</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="113" x="13" y="517.0635">-BigDecimal sellingPrice</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="13" y="532.0864">-String remark</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="145" y1="538.5034" y2="538.5034"/><!--MD5=[d23d691649e9cf9acb9b1aa6ebb359f5]
+class SoldItems--><rect codeLine="28" fill="#FEFECE" height="57.4116" id="SoldItems" style="stroke:#A80036;stroke-width:1.5;" width="127" x="181" y="459.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="216.5" y="478.252">SoldItems</text><line style="stroke:#A80036;stroke-width:1.5;" x1="182" x2="307" y1="485.8887" y2="485.8887"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="187" y="502.4946">LocalDateTime saleTime</text><line style="stroke:#A80036;stroke-width:1.5;" x1="182" x2="307" y1="508.9116" y2="508.9116"/><!--MD5=[8e41a68aaac85288a24f3baa33c31e08]
+link ShelfList to Shelf--><path codeLine="32" d="M160.5,141.04 C160.5,160.5 160.5,181.9 160.5,201.78 " fill="none" id="ShelfList-Shelf" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="105.8188" y="191.2096">shelves *</text><!--MD5=[c5842a04987174e80d1de3924d242287]
+link Shelf to Item--><path codeLine="33" d="M131.24,350.15 C120.92,375.96 109.46,404.6 99.71,428.98 " fill="none" id="Shelf-Item" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="41" x="59.0572" y="418.3071">items *</text><!--MD5=[d138a2f6964435691da74cb2efe0e06e]
+reverse link Item to SoldItems--><path codeLine="34" d="M166.07,488 C170.94,488 175.8,488 180.67,488 " fill="none" id="Item-backto-SoldItems" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="166.06,495,146.06,488,166.06,481,166.06,495" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f35c160f382f1b82523735ece84aefec]
+link Shelf to SoldItems--><path codeLine="35" d="M189.76,350.15 C204.87,387.91 222.4,431.74 233.47,459.42 " fill="none" id="Shelf-SoldItems" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119" x="208.5" y="395.8979">Shelf SoldItems only</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="41" x="185.1787" y="448.7828">items *</text><!--MD5=[9993bb620e25b96d35b85b5d9a32e1e9]
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+
+
+class ShelfList <<Singleton>> {
+{static} - ShelfList shelfList
+{static} + ShelfList getShelfList()
++ void addShelf(String shelfName)
++ Shelf getShelf(String shelfName)
++ void deleteShelf(String shelfName)
+}
+class Shelf{
+- String name
+- String remark
++ void addItem(Item item)
++ void deleteItem(Item item)
++ void updateItem(Item originalItem, Item updatedItem)
++ Item getItem(String itemName)
++ Item getItemById(String itemId)
+}
+class Item{
+- String name
+- String itemID
+- BigDecimal purchaseCost
+- BigDecimal sellingPrice
+- String remark
+}
+class SoldItems{
+LocalDateTime saleTime
+}
+
+ShelfList -down- "shelves *" Shelf
+Shelf -down- "items *" Item
+SoldItems -left-|> Item
+Shelf -down- "items *" SoldItems : "Shelf SoldItems only"
+
+@enduml
+
+@startuml
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam box white
+skinparam classAttributeIconSize 0
+
+
+class ShelfList <<Singleton>> {
+{static} - ShelfList shelfList
+{static} + ShelfList getShelfList()
++ void addShelf(String shelfName)
++ Shelf getShelf(String shelfName)
++ void deleteShelf(String shelfName)
+}
+class Shelf{
+- String name
+- String remark
++ void addItem(Item item)
++ void deleteItem(Item item)
++ void updateItem(Item originalItem, Item updatedItem)
++ Item getItem(String itemName)
++ Item getItemById(String itemId)
+}
+class Item{
+- String name
+- String itemID
+- BigDecimal purchaseCost
+- BigDecimal sellingPrice
+- String remark
+}
+class SoldItems{
+LocalDateTime saleTime
+}
+
+ShelfList -down- "shelves *" Shelf
+Shelf -down- "items *" Item
+SoldItems -left-|> Item
+Shelf -down- "items *" SoldItems : "Shelf SoldItems only"
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 CST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

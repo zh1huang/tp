@@ -1,16 +1,19 @@
 # Developer Guide
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 2. [Setting up](#setting-up)
 3. [Acknowledgements](#acknowledgements)
 4. [Design](#design)
-   1. [Architecture](#architecture)
-   2. [UI Component](#ui-component)
-   3. [Logic Component](#logic-component)
-   4. [Model Component](#model-component)
-   5. [SalesManager Component](#salesmanager-component)
-   6. [Storage Component](#storage-component)
+    1. [Architecture](#architecture)
+    2. [UI Component](#ui-component)
+    3. [Logic Component](#logic-component)
+        1. [SubComponent Parser](#subcomponent-parser)
+        2. [Subcomponent Command](#subcomponent-command)
+            1. [Subcomponent Sales](#subcomponent-sales)
+    4. [Model Component](#model-component)
+    6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
    1. [Adding an item](#adding-an-item)
    2. [Editing an item](#editing-an-item)
@@ -23,38 +26,37 @@
 9. [Glossary](#glossary)
 10. [Instructions for manual testing](#instructions-for-manual-testing)
 
-___
-
 ## Introduction
-**Welcome to CLIver Shelf!**
 
-**CLIver Shelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. 
-With **CLIver Shelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that they know how well their business is going. 
+**Welcome to CLIverShelf!**
 
-This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is to get developers 
-and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
+**CLIverShelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. With
+**CLIverShelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that
+they know how well their business is going.
 
-___
+This guide describes the design, implementation and architecture of **CLIverShelf**. The aim of this developer guide is
+to get developers and potential contributors to get familiarised with the implementation of **CLIverShelf**.
+
 ## Setting up
+
 **Pre-requisites**
+
 1. JDK 11
 2. IntelliJ IDEA IDE
 
 **Setting up the Project in Your Computer**
+
 1. Fork [this repository](https://github.com/AY2122S1-CS2113T-F11-4/tp), and clone the fork to your computer.
 2. Open up IntelliJ. If you are not at the welcome screen, click `File` > `Close Project` to close any existing project
 3. Set up the correct JDK version for Gradle
-   1. Click `File` > `New Project Setup` > `Structure`, and ensure `Project SDK` is using `JDK 11`. Click `OK`
+    1. Click `File` > `New Project Setup` > `Structure`, and ensure `Project SDK` is using `JDK 11`. Click `OK`
 4. Import the project
-   1. Click `File` > `Open Project`
-   2. Select the project directory, and click `OK` to accept the default settings
-5. Verify the setup: After the importing is complete, locate `CliverShelf.java` file, right-click it and `Run 'CliverShelf.main()'`. If the setup is correct, you should see something like this:
-```
-> Task :compileJava UP-TO-DATE
-> Task :processResources NO-SOURCE
-> Task :classes UP-TO-DATE
+    1. Click `File` > `Open Project`
+    2. Select the project directory, and click `OK` to accept the default settings
+5. Verify the setup: After the importing is complete, locate `CliverShelf.java` file, right-click it
+   and `Run 'CliverShelf.main()'`. If the setup is correct, you should see something like this:
 
-> Task :CliverShelf.main()
+```
                                                                   .............................................................
                                                                   : Hello from                                                :
                                                                   :   _____ _      _____              _____ _          _  __  :
@@ -69,26 +71,28 @@ ___
                                                                             : Enter 'help' for the list of available commands :
                                                                             ......................................................
 ```
-___
+
 ## Acknowledgements
+
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
-2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
-___
+2. [Adapted Parser code: AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java)
+
 ## Design
 
 All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
-
 ### Architecture
-![](diagrams/seedu_duke_architecture.svg)
-The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
-1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app launch.  
-2. `UI`: Handles the interactions with the user. 
+![](diagrams/Architecture.svg)
+
+The architecture diagram above describes the design of CLIverShelf. The main components are:
+
+1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app
+   launch.
+2. `UI`: Handles the interactions with the user.
 3. `Logic`: Parses and executes the user input commands.
 4. `Model`: Holds the data of the App in memory
 5. `Storage`: Reads data from, and writes data to, the hard disk.
-
 
 ### General Program Flow
 
@@ -98,17 +102,19 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
+![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
-The `UI` component is responsible for all the user inputs and system outputs. It is in charge of the display of success command executions, error messages and also user interactions by prompting for the next command.
+The `UI` component is responsible for all the user inputs and system outputs. It is in charge of the display of success
+command executions, error messages and also user interactions by prompting for the next command.
 
 The class diagram below shows the associations between classes of the UI components
 
-![](diagrams/seedu_duke_ui.svg)
+![](diagrams/UI_ClassDiagram.svg)
 
 The `UI` component is made up of 2 classes:
+
 * `MessageBubble`: Responsible for the display of messages
 * `PredefinedMessages`: Holds the messages required for MessageBubble to print to console.
 
@@ -116,149 +122,262 @@ The `UI` component is made up of 2 classes:
 
 The class diagram below shows the associations between the classes that make up the `Logic` component.
 
-![](diagrams/seedu_duke_logic_component.svg)
+![](http://www.plantuml.com/plantuml/svg/fP91ZzCm48Nl_XLME73g5gve5UrgGGLfGMXpvJArXyRgs8dioGee_UzaqxGCna58wqkazysBHy_l9Z547Zofborpdzwirpr1U5AkJEVNXY2bbNMmY-1Lwonguw8XL6dlGW-ZggUPM-RejWFZ1zE5nlr0_UeqZhxdxzgZts9CIat3-exS8yQcHVggL0zc3plKrNstSqRVTRxl0WQkzFNr0ng6i2EiQtrGUZoNwKzTM2KWJ3eY0QDzSde8DkN65-G2Nbb8BTg3qlEPDua8ZDCcipqRU43VFVvhuDRQCdYBX8nbziuwBfCDBe1xbnP8Wn1Dkt3HjwMBtYFraXpLR_OPOiAe_WoyUNRO3H8jfTntaSli8yJzaAqgTftMEWcmJHp1y4ogmrauVWddXIiDIPlvP-gebEYYhinKXrIjLhMkNbUN84vVFSgbnWXQg8kWeYj2bKMHGBP4oXiigR8VGfRba40sGyho9IJ8da40MIJrTphZpC_wahZCfyJ7X8gwp2X3KqebiC6oFYPL1ZAh38cqSW_HVu1wxgcCDpD892qo-CmYaRJSOB23fry0)
 
-The `Logic` component consists of `Parser` and `Command` components. 
+
+The `Logic` component consists of `Parser`, `Command` and `Sales` components.
+
 1. After user enters input, `UI` fetches and passes it to Parser for parsing.
 2. Parser then returns a `Command` object, which is then executed.
 3. The command execution directly affects the objects in the `Model` component.
-4. After execution, `Command` instructs the `UI` component to print out relevant output messages (e.g successful command execution or error messages)
+4. After execution, `Command` instructs the `UI` component to print out relevant output messages (e.g successful command
+   execution or error messages)
 5. `Command` then checks the `ExitCommand` on whether the program should exit.
 6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
-![](http://www.plantuml.com/plantuml/svg/fP91ZzCm48Nl_XLME73g5gve5UrgGGLfGMXpvJArXyRgs8dioGee_UzaqxGCna58wqkazysBHy_l9Z547Zofborpdzwirpr1U5AkJEVNXY2bbNMmY-1Lwonguw8XL6dlGW-ZggUPM-RejWFZ1zE5nlr0_UeqZhxdxzgZts9CIat3-exS8yQcHVggL0zc3plKrNstSqRVTRxl0WQkzFNr0ng6i2EiQtrGUZoNwKzTM2KWJ3eY0QDzSde8DkN65-G2Nbb8BTg3qlEPDua8ZDCcipqRU43VFVvhuDRQCdYBX8nbziuwBfCDBe1xbnP8Wn1Dkt3HjwMBtYFraXpLR_OPOiAe_WoyUNRO3H8jfTntaSli8yJzaAqgTftMEWcmJHp1y4ogmrauVWddXIiDIPlvP-gebEYYhinKXrIjLhMkNbUN84vVFSgbnWXQg8kWeYj2bKMHGBP4oXiigR8VGfRba40sGyho9IJ8da40MIJrTphZpC_wahZCfyJ7X8gwp2X3KqebiC6oFYPL1ZAh38cqSW_HVu1wxgcCDpD892qo-CmYaRJSOB23fry0)
 
+#### Subcomponent Parser
 
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
-   
-   1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls the `Parser` to `parseCommand()`
-   2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
-   3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`, `DELETE_STRING` shown in the diagram below.
-   4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute the `prepare{commandWord}()` function of the `Parser`
-      1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-   5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `CliverShelf` component
-   
+    1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
+       the `Parser` to `parseCommand()`
+    2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
+    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`
+       , `DELETE_STRING` shown in the diagram below.
+    4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
+       the `prepare{commandWord}()` function of the `Parser`
+        1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
+    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` to the `CliverShelf`
+       component
+
+#### Subcomponent Command
 
 
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
-    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
-    3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
-![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be
+       instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then
+       executed in the main class.
+    3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other
+       components of the system.
+       ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+
+##### Subcomponent Sales
+
+This section describes how the subcomponent Sales interacts with the sales related commands. After the command input is
+parsed, depending on the Command type, different types uses different sales API.
+
+**API**:
+
+1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
+    * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
+        * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be
+          called to mark an item as sold
+        * When program invokes `ReportCommand#execute`
+            1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()`
+               or `SalesReport#generateSoldItemDetails()` is called
+            2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+
+2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesReport.java)
+    * Supports ReportCommand & Handles generation of sales report
+        * When program invokes `ReportCommand#execute`, a `SalesReport` object is created
+          & `SalesReport#generateSoldItemStats()`
+          or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
+          into strings before returning the String for printing.
+
+3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
+    * Supports MarkUpCommand & Handles Estimation of price markup of an item
+        1. When program invokes `MarkUpCommand#execute`, a `SalesMarkUp` object is created
+        2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current
+           details of the selected item
+        3. Then, if user markup percent is specified `SalesMarkUp#getUserRequestMarkUpInfo()` is invoked, to calculate
+           the user requested markup information & final price
+        4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the
+           general markup estimation in intervals of 20.
+
+![](diagrams/SalesSubComponentClassDiagram.svg)
 
 ### Model component
 
 **API**:
 
 1. [Item.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/Item.java)
-   1. A `Item` object stores the information about a product in the bookstore:
-      1. `name` of the product, consists of alphabet, number, whitespace, underscore and round bracket. e.g., Time Magazine.
-      2. `purchaseCost`, the non-negative price the bookstore owner paid for the product. 
-      3. `sellingPrice`, the non-negative amount a buyer pays for the product.
+    1. A `Item` object stores the information about a product in the bookstore:
+        1. `name` of the product, consists of alphabet, number, whitespace, underscore and round bracket. e.g., Time
+           Magazine.
+        2. `purchaseCost`, the non-negative price the bookstore owner paid for the product.
+        3. `sellingPrice`, the non-negative amount a buyer pays for the product.
 2. [Shelf.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/Shelf.java)
     1. A `Shelf` object stores `Item` objects.
     2. All `Item` are stored in one and only one of the `Shelf` objects.
-    3. A `Shelf` object can be instantiated using the constructor `new Shelf(name: String)` or `ShelfList.getShelfList().addShelf(name: String)`
+    3. A `Shelf` object can be instantiated using the constructor `new Shelf(name: String)`
+       or `ShelfList.getShelfList().addShelf(name: String)`
+    4. All `Shelf` objets are automatically recorded by `ShelfList` at instantiation.
 3. [ShelfList.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/ShelfList.java)
-    1. The `ShelfList` stores all the shelves data i.e., all `Shelf` objects
-    2. `ShelfList` is implemented using Singleton Pattern. The single instance can be obtained using `ShelfList.getShelfList()`
+    1. The `ShelfList` stores all the shelves' data i.e., all `Shelf` objects
+    2. `ShelfList` is implemented using Singleton Pattern. The single instance can be obtained
+       using `ShelfList.getShelfList()`
 
-The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
+The Class Diagram below illustrates how the model components interacts with each other.
 
-![](https://www.plantuml.com/plantuml/svg/LOwz3i8m38JtF8NL2IfrOCs0Ah6oyGIcSLLB-Qc8M_7ubCH5T8akv-zyxhFWIvRWpSIEO4n9dkbjvitaWMUC0eszfH0mkWOmmr3raOXf9TzTx6CYFnOiVzKHAjQTisoOAaNrPumkX-vQtRQrKE3JNj6S3Gx2AmffHtareVi1dQincJWV4rhrKz3jKUDe1-kuZFGa2th0FzLJT4lm7m00)
-![](https://www.plantuml.com/plantuml/svg/XT2_2i8m40RmFKyHEccXWsi7ARYw-GHdSwK7-LFCjVZuIjjBY0fk7-7tVHpf8iE3PsVLI0Rr40BVmrDDxqVgQGBFkcelmJdmfj8GTR_bKiGHxN2boErDqehJUybzMD0sfmrdgFPjtPnpizLWp0eFqgkE2dgc1HYpKocbUbr_kCsKyscTHuh_XgMf30gKpVBc_T8l9pFoZJzbXzxCphu0)
+![](diagrams/Model_ClassDiagram.svg)
 
-### SalesManager component
+The Object Diagram below illustrates a sample state of the components.
 
-**API**:
+![](diagrams/Model_ObjectDiagram.svg)
 
-1. [SalesManager.java]()
-2. [SalesReport.java]()
-3. [SalesMarkUp.java]()
+The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation
+methods are used.
+
+![](diagrams/Model_newShelf.svg)
+![](diagrams/Model_addShelf.svg)
 
 ### Storage component
-The storage component consists of `Storage` class. 
-It handles the saving of user data by the command component and also loading data on program start up.
 
-The diagram below shows the implementation of `saveData()`.
+The storage component consists of `Storage` class. It handles the saving of user data by the command component and also
+loading data on program start up.
 
-![](https://www.plantuml.com/plantuml/svg/XLJBRjim4BppApO-oO6T3z2XYFjs4SH5PQ37Wf7MDXkA94ZQQV--4csljA6Ad4npPdPso1NlGvG-7bij3gf1s5aRd-mVuRfDLIidJOGF3-iJ-kg0UWSoW7IEmREoYjRBFSvwD9pNd15wxOCAiQokgqIcVKwlZzwZYObRGlf9zF4-L_Iks7oKKPRmhTeyRfv-Ottn86YYfxNPsKn121UeYEqaFm4PlVoiDFxq7UWJQ_WhX7GEbk-kPrK6USA-mM8kP1tLIKQaSxpy9ZgTuXxZIkl-74uO7cMBJ4c7IYjOZjp0T8BDRYWW6fmGInqpvfqAxxKqpvsT000ODKVLWsoTliRfILaafcHIkgh4QJ2J2jG1Ss_ImUrj0hMr3dRM0yhwS8bn7c1byln9mciEGt0joQ8GIj30vv4uaQVAmV_TTkgz6EMOauH5JRFO3mGempyNudER9E0nCmh_7FSOrvsck3hDtwfSWZkUHsa1jGrn0Swh6a6Q1ZosqZ_pvgoBIGigG6LrqxiHuKsV83LkLOkP0at3VQOkEyKhqgSUPlExhY3bN90HJznWYDx-9LIyDftoeu5DJOylTa7Da0zvy85XgT9Yv32yDjt5bc3mPRHLLDlDZzMNJx--hxPVvzEo4bxwNsXabFIsZ70nB5ydYhQANfazUvG85yCIbioIlKESdwUwkO4IQcq35fGWrPFEYOcNWuvmA7oFfZcs-Xy0)
+The diagram below shows how `Storage` interacts with [`model`](#model-component) during `saveData()`.
 
-The diagram below shows the implementation of `loadData()`
+![](diagrams/Storage_saveData.svg)
 
-![](https://www.plantuml.com/plantuml/svg/dLNFJkGy3B_tASoSEfNW0N90IDyd9122Gmzx3gs7oMxQL8c7WRVVEYN4gGf2Uw5nVd_iE1bp4qXxEWssEfeUuU0SFRktQfetJMScFHByzt3tYhuzeZs03g2dgO1tgYNdzGlk60tBkcGSZ4LrQ-n2uQZ48_RB6q8V6JaiUMoE_V-QjBfldnwVddzZHr6HaPM2gtumWLIRLWi_HIMzEtcF8qMkWlY9TBc_gRWZ71JmNyddU3k1i_qYuPMKIRIgz3HTNd-qL5cdumdhVQKxCg-QyBFT7r-ul8xjRPhAJHINC3e2VEEZ0W2iYAhpg0aVySmzdvsPazmZWtTumH9nCT0q1HBDWXucYx76xvsI0B8YeZt-9BU2Ct_hBDv_LUN5XUgi2tmocJsruSkaEFRhdYhmgFkMl1bVPhjIipPMGFX6rSfQM8eNspGAHZn3Vj8rY_UIBT_0hNV3VN1ZdIqsNeHrReA3yw2jNPxxenuGp2WoN_t1znRfepaYNVxPwBvlEQW_BSgRpLJUpX6xo5zDqvHusIp9NDz9cM2pWmfUa4JxSgrN9R0pX4FOxSk3frJ2aVT5M5RB9kmULgMkzSKL916OSMNm_R5c_cmnQ39k1FtiJWHqn6W1PqD76DaqENuQQaiBnuGu0JI4D5KIfSmhPrRJ29BeZw18WjmlEcNMn1w_zK8RC5NzyufvNFwWwdRBJMB_K7tXcUR6TgNY_uhkewZc1FjIMewUObJbx0Mifqb2FGRoxft7JGx4kxoPxK-3_Gi0)
+The diagram below shows how `Storage` interacts with [`model`](#model-component) during `loadData()`
 
-___
+![](diagrams/Storage_loadData.svg)
 
 ## Implementation
 
 ### Adding an item
 
-
 #### Design considerations:
+
 * Aspect: Long chain for add command
-   * Alternative 1 (current choice): Long command with chain of flags such `/n` for name and `/q` for quantity.
-      * Pros: Clear demarcation of different parameters that users have to input.
-      * Cons: Susceptible to errors as users might miss out some flags.
-   * Alternative 2: No flags required for each parameter.
-      * Pros: Shorter command length, less prone to errors.
-      * Cons: Increased difficulty in parsing and higher chance to encounter exceptions or errors.
-   * Alternative 3: Prompt for different inputs for each parameter after pressing `enter`
-     * Pros: Even less prone to human errors as the user is prompted what is required as input each time.
-     * Cons: Additional methods and passing of data will be required. 
+    * Alternative 1 (current choice): Long command with chain of flags such `/n` for name and `/q` for quantity.
+        * Pros: Clear demarcation of different parameters that users have to input.
+        * Cons: Susceptible to errors as users might miss out some flags.
+    * Alternative 2: No flags required for each parameter.
+        * Pros: Shorter command length, less prone to errors.
+        * Cons: Increased difficulty in parsing and higher chance to encounter exceptions or errors.
+    * Alternative 3: Prompt for different inputs for each parameter after pressing `enter`
+        * Pros: Even less prone to human errors as the user is prompted what is required as input each time.
+        * Cons: Additional methods and passing of data will be required.
 
 ### Editing an item
 
 #### Design considerations:
 
+* Aspect: How to change a certain property precisely
+    * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
+        * Pros: Only need to change one property.
+        * Cons: Need one additional step to check which property is selected by the user.
+    * Alternative 2: Let the user specify the new values for each property.
+        * Pros: The user can change multiple properties at once using only one Edit command.
+        * Cons: Longer input is needed from the user even if he/she just wants to change one property.
+
 ### Listing all items
+
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
-![](https://www.plantuml.com/plantuml/svg/bLFDpjem4BplKso_InCau9v3HSMf4cehzGdSP05B_d7zayBRrpzHC84YSKYytftPsSagE-UPzK4A-7psthXkkpM2gPJPz5fk7Vq9f7fQ3voTB9C0hFVQOd1amKGgxxc9UDmVleraVvr9794vPCRWNVsZ-ybi97sagidX4g3exrvBoTJGuO4xFrqoGzpk293KSVqbgNJ8bGa-ZSL7vYdb83wfN6IwSaxi9iFR6J-1e1mt5aQQfHXJ6gLXzXGagPV4UiRL2WPQGkTxXOIQjPxbeQBNy5ckk7yYCfclIHtIXVhWgMa1da_1XCTFndBblme1Y5XNb-OwF97_eSgNSMdbtvcaDjEUTd_ezz1G1v-sc83_CKx2KMcajS6ZjaWZsIjcVUGg1oEvZ7dRm2OcaeccBJPUMddBpWjBkKufoA-gjDplaZcGyrPVxt8HdcZbrwnugGsS-K1urDh_rXVOHRaWnJy0)
+![](diagrams/ListCommandSequenceDiagram.svg)
 
-A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
+A user can choose to either list out all the items in the bookstore (i.e. every shelf), or within a specific shelf.
+
 * If user wishes to list out all items within a **specific** shelf:
-  1. He keys in `list shlv/[SHELF_NAME]`
-  2. This invokes `Parser#parseCommand()`, and since the command argument is `list`, it will further invoke `Parser#prepareList()`.
-  3. It will then construct a command `ListCommand` using `ListCommand(shelf: String)`, returning it back to `CliverShelf`.
-  4. Back in `CliverShelf`, `ListCommand#execute()` is invoked and since `ListCommand(shelf: String)` is constructed, condition for `toPrintAll` is set to `false` and not satisfied. This invokes `ListCommand#getOneList()`
-  5. The string result output is then passed back to `CliverShelf`.
-  
+    1. He keys in `list shlv/[SHELF_NAME]`
+    2. This invokes `Parser#parseCommand()`, and since the command argument is `list`, it will further
+       invoke `Parser#prepareList()`.
+    3. It will then construct a command `ListCommand` using `ListCommand(shelf: String)`, returning it back
+       to `CliverShelf`.
+    4. Back in `CliverShelf`, `ListCommand#execute()` is invoked and since `ListCommand(shelf: String)` is constructed,
+       condition for `toPrintAll` is set to `false` and not satisfied. This invokes `ListCommand#getOneList()`
+    5. The string result output is then passed back to `CliverShelf`.
+
 
 * If user wishes to list out all the items in the bookstore:
-  1. He keys in: `list`.
-  2. This invokes `Parser#parseCommand()`, and since the input is `list` it will further invoke `Parser#prepareList()`.
-  3. It will then construct a command `ListCommand` using `ListCommand()`, returning it back to `CliverShelf`.
-  4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
-  5. The string result output is then passed back to `CliverShelf`.
+    1. He keys in: `list`.
+    2. This invokes `Parser#parseCommand()`, and since the input is `list` it will further invoke `Parser#prepareList()`
+       .
+    3. It will then construct a command `ListCommand` using `ListCommand()`, returning it back to `CliverShelf`.
+    4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition
+       for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
+    5. The string result output is then passed back to `CliverShelf`.
 
 The Class Diagram below illustrates how the components work together in `ListCommand`
 
 ![](http://www.plantuml.com/plantuml/svg/VL9DRzD04BtlhnZbGe6Q50u8MIXgLELG2T52hhbirbDxbFqmkxE14FhVyNhZnhKAFgtVU_FUxinS1vQUez7YLSFSXd8-RxMq2Ncdd9ahBKCeAfArbqOqL24eyagZ23kohUnGw3LBPa_Ro7Yhd5tJRuIhaSIw2WEsy6aCUcbt2Vnu9OJS1lPISJQ3sN407c5ZbJD6sce6Ci1DFiDHGFSLi6PFjWRyXIeoNhmMZq9aZoyKUAfkEp4ljIvXwvn6QKzuQ50_V9K6ovFXS_SQURL7VqYMNSIKkxFOC-laSlOQXASeeB3w4QM-k6KqG8pc_IKydJyCwhsZ2fGpBMdy5gLbuiCqKvF5bML_k23BeD7Mt5mE9DasygH0UPICTv4xAfdzltNvLhbdRqVlJ8zArHFuFdhLo80tBl0Bz1grxextdjHBrT_HIByBu_Y-ZwcZJtCB0rAUoKmD_wFeb3c09sZflUodzxbd5eDcZy-2PvjSkU5-r_8yZ__QaLGtNh8YjiMVnR2X4yvJtN2n6BsjX0LuP4-uno3EU56vdxPJpaA-8BoPzMIMGA7nWHETjYQHQLX2Y6kqLJJwBm00)
 
 #### Design considerations:
+
 * Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
-  * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being printed as a range. (e.g First entry of 5 identical items on the list will be grouped as index "001-005", instead of "1")
-    * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items together (e.g If there are 5 identical items, but you only want to change 1 of them because perhaps they are damaged, and you want to add a remark) 
-    * Cons: Looks less user-friendly
-  * Alternative 2: The indexes of the list are printed in single sequential order.
-    * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
-    * Cons: User is unable to `delete` or `edit` a singular item.
+    * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being
+      printed as a range. (e.g. First entry of 5 identical items on the list will be grouped as index "001-005", instead
+      of "1")
+        * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items
+          together (e.g. If there are 5 identical items, but you only want to change 1 of them because perhaps they are
+          damaged, and you want to add a remark)
+        * Cons: Looks less user-friendly
+    * Alternative 2: The indexes of the list are printed in single sequential order.
+        * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
+        * Cons: User is unable to `delete` or `edit` a singular item.
 
 
 ### Selling an item
 
 #### Design considerations:
 
+* Aspect: How to determine the sale time
+    * Alternative 1 (current choice): Use the system time when the user sold the item.
+        * Pros: Does not need one additional parameter (sale time) from the user. Shorter command for the user.
+        * Cons: Does not allow the user to manually set the sale time. Not very flexible for the user if he/she forgot
+          to sell an item and wants to make up for it later on.
+    * Alternative 2: Requires the user to specify the sale time.
+        * Pros: More flexibility for the user to add on sale records that he/she forgot to add.
+        * Cons: Needs one additional parameter from the user. Longer command.
+
 ### Generating sales report
 
 #### Design considerations:
 
+### Generating item markup price
 
+This sequence diagram shows how MarkUpCommand is being implemented.
+
+![](diagrams/MarkUpSequenceDiagram.svg)
+
+A user may choose to check the estimated marked up price of an item, given a specific mark up percentage.
+
+1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
+2. CLIverShelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
+    1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
+    2. Else, continues by constructing `SalesMarkUp` Object Then `SalesMarkUp#getItemToMarkUpInfo()`
+       , `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence get the relevant information about the
+       selected item
+        2. `MarkUpCommand#execute()` then checks if the user has specified an input for markup percentage
+            1. If not specified, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` which get the
+               markup in percentage intervals of 20, returned as a string
+            2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up
+               information, returned as a string
+    3. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf`
+       as a `resultString` for printing.
+
+#### Design considerations:
+
+Aspect: How markup executes:
+
+* Alternative 1 (current choice): SalesMarkup is a separate class from SalesManager.
+    * Pros: Increases cohesiveness. Easier testing efforts.
+    * Cons: More code written.
+
+* Alternate 2: SalesMarkUp functions can be integrated with SalesManager class. However, having more methods in the same
+  class
+    * Pros: All methods in the same class, lesser additional code.
+    * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could
+      be more complicated.
 
 ___
+
 ## Product scope
 
 ### Target user profile
@@ -273,8 +392,6 @@ ___
 ### Value proposition
 
 Allows efficient and simplified management of inventory and finances of the store
-
-___
 
 ## User Stories
 
@@ -295,70 +412,67 @@ ___
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
 
-___
-
 ## Non-Functional Requirements
+
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
 2. Users with fast typing speed should be able to accomplish tasks faster using commands than using the mouse
-3. Users should be able to easily understand the command formats in the User Guide and use the commands to accomplish the tasks.
-4. Users should be able to see improvements in terms of the efficiency and management of the bookstore within a months of using the app.
+3. Users should be able to easily understand the command formats in the User Guide and use the commands to accomplish
+   the tasks.
+4. Users should be able to see improvements in terms of the efficiency and management of the bookstore within a months
+   of using the app.
 
 ## Glossary
 
-* *Mainstream OS* - MacOS, Windows, Linux, Unix
-
+* *Mainstream OS* - macOS, Windows, Linux, Unix
 
 ## Instructions for manual testing
 
 Given below are the instructions to test the app manually.
 
-&#8505; **Note:** These instructions only provide a base of how the app is currently being tested by the 
-developing team. These test cases may and may not cover all possible outcomes. You are welcome to do more exploratory testing. 
-Should there be any bugs, please do contact 
+&#8505; **Note:** These instructions only provide a base of how the app is currently being tested by the developing
+team. These test cases may and may not cover all possible outcomes. You are welcome to do more exploratory testing.
+Should there be any bugs, please do contact
 the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 * [Launch and shut down](#launch-and-shut-down)
-* [Getting help](#getting-help)
-* [Creating a shelf](#creating-a-shelf)
-* [Removing a shelf](#removing-a-shelf)
-* [Adding an item](#adding-an-item)
-* [Deleting an item](#deleting-an-item)
-* [Getting information of an item](#getting-information-of-an-item)
-* [Listing the items](#listing-the-items)
-* [Editing an item](#editing-an-item)
-* [Generating a Report](#generating-a-report)
-* [Selling an item](#selling-an-item)
-* [Markup price of an item](#markup-price-of-an-item)
-
-
----
+* [Getting help test](#getting-help-test)
+* [Creating a shelf test](#creating-a-shelf-test)
+* [Removing a shelf test](#removing-a-shelf-test)
+* [Adding an item test](#adding-an-item-test)
+* [Deleting an item test](#deleting-an-item-test)
+* [Getting information of an item test](#getting-information-of-an-item-test)
+* [Listing the items test](#listing-the-items-test)
+* [Editing an item test](#editing-an-item-test)
+* [Getting a Report test](#getting-a-report-test)
+* [Selling an item test](#selling-an-item-test)
+* [Markup price of an item test](#markup-price-of-an-item-test)
 
 ### Launch and shut down
 
 #### Initial launch
+
 1. Download and save the latest JAR file in a desired file directory.
 2. Open up your terminal and navigate to where that directory is saved.
-3. Run `java -jar Duke.jar` to launch the program. 
+3. Run `java -jar Duke.jar` to launch the program.
 4. A `data` folder containing `output.txt` is expected to appear.
 
 #### Subsequent launch
+
 1. Open up your terminal and navigate to where the directory in which the JAR file is saved under.
 2. Run `java -jar Duke.jar` to launch the program.
 3. Data will be automatically saved into the data file.
 
 #### Shut down
+
 1. To terminate the program, type `bye`.
 2. Data will be automatically saved into the data file.
 3. The data is expected to still be saved normally even if program crashes.
 
----
+### Getting help test
 
-### Getting help
 1. To get help information, type `help`.
 
----
-
-### Creating a shelf
+### Creating a shelf test
 
 * Format: `create shlv/SHELF_NAME`
 * Pre-requisite: Shelf name to be created must not exist.
@@ -370,9 +484,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Create shelf name with special characters | `create shlv/invest$$booksshelf` | Error message (shelf name cannot contain special characters) |
 | Missing parameters | `create` | Error message (invalid format) |
 
----
-
-### Removing a shelf
+### Removing a shelf test
 
 * Format: `remove shlv/SHELF_NAME`
 * Pre-requisite: Shelf name to be removed needs to be created first.
@@ -383,9 +495,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Remove non-existent shelf | `remove shlv/nonexistentshelf` | Error message (shelf does not exist) |
 | Missing parameters | `remove` | Error message (invalid format) |
 
----
-
-### Adding an item
+### Adding an item test
 
 * Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 * Pre-requisite: A shelf must first exist for any item to be added to a shelf.
@@ -397,12 +507,10 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
 
----
-
-### Deleting an item
+### Deleting an item test
 
 * Format: `delete shlv/SHELF_NAME i/INDEX`
-* Pre-requisite: A shelf must first contain the item to be deleted. 
+* Pre-requisite: A shelf must first contain the item to be deleted.
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
@@ -411,9 +519,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `delete shlv/book1` | Error message (invalid format) |
 
----
-
-### Getting information of an item
+### Getting information of an item test
 
 * Format: `get shlv/SHELF_NAME i/INDEX`
 * Pre-requisite: A shelf must first contain the item which the user wants to know more about.
@@ -428,9 +534,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Missing flag| `get shlv/book1 2` | Error message (invalid format) |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
----
-
-### Listing the items
+### Listing the items test
 
 * Format: `list [shlv/SHELF_NAME]`
 * Pre-requisite: None
@@ -444,9 +548,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Invalid parameters | `list shlv/&` | Error message (invalid format) |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
 
----
-
-### Editing an item
+### Editing an item test
 
 * Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 * Pre-requisite: At least one item has to be added to any shelf.
@@ -459,15 +561,14 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
 
----
 
-### Generating a Report
+### Getting a Report test
 
 * Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 * Pre-requisite: Some items must be sold first to view the report with data.
-* Note: There are only 2 content type: 
-  * `t/stats` which will give the statistics of the Sales  
-  * `t/items` which will give the items sold.
+* Note: There are only 2 content type:
+    * `t/stats` which will give the statistics of the Sales
+    * `t/items` which will give the items sold.
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
@@ -481,13 +582,13 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Missing parameters  | `report t/items` | Error message (invalid format) |
 | Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
----
-
-### Selling an item
+### Selling an item test
 
 * Format: `sell id/ITEM_ID`
-* Pre-requisite: There must be items added to a shelf first. And user needs to know the `ITEM_ID` through `get` or `list` command.
-  * Note: replace the id in first test case with an id that exist in ur program run, as the id is can change depending on the local machine that the program is being executed on.
+* Pre-requisite: There must be items added to a shelf first. And user needs to know the `ITEM_ID` through `get`
+  or `list` command.
+    * Note: replace the id in first test case with an id that exist in ur program run, as the id is can change depending
+      on the local machine that the program is being executed on.
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
@@ -495,11 +596,9 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
 | Missing Parameters | `sell` | Error message (invalid format) |
 
----
+### Markup price of an item test
 
-### Markup price of an item
-
-* Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` 
+* Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 * Pre-requisite: There must be items added to a shelf first.
 
 | Test Case  | Command | Expected Result|
@@ -512,5 +611,3 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
 | Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
-
----

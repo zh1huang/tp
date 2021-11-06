@@ -1,10 +1,10 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalModelArgumentException;
-import seedu.duke.model.exception.ItemNotExistException;
-import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.model.exception.DuplicateItemModelException;
+import seedu.duke.model.exception.DuplicateShelfModelException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
+import seedu.duke.model.exception.ItemNotExistModelException;
+import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,13 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
+
 /**
- * Represents a container that is able to store items.
+ * Represents a shelf that is able to store items.
  * e.g. A shelf
  */
 public class Shelf {
 
-    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
+    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid shelf name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -31,13 +32,12 @@ public class Shelf {
      *
      * @param name new name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     *
-     * @throws IllegalModelArgumentException if the name contains other characters
+     * @throws IllegalArgumentModelException if the name contains other characters
      */
-    public Shelf(String name) throws IllegalModelArgumentException, DuplicateShelfException {
+    public Shelf(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
         ShelfList shelfList = ShelfList.getShelfList();
         if (shelfList.existShelf(name)) {
-            throw new DuplicateShelfException(name);
+            throw new DuplicateShelfModelException(name);
         }
         setName(name);
         items = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Shelf {
         logger.log(Level.INFO, String.format("Shelf %s created", name));
     }
 
-    public void deleteShelf() throws ShelfNotExistException {
+    public void deleteShelf() throws ShelfNotExistModelException {
         ShelfList.getShelfList().deleteShelf(this);
     }
 
@@ -64,15 +64,14 @@ public class Shelf {
      *
      * @param name New name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     *
-     * @throws IllegalModelArgumentException if the name contains other characters
+     * @throws IllegalArgumentModelException if the name contains other characters
      */
-    public void setName(String name) throws IllegalModelArgumentException, DuplicateShelfException {
+    public void setName(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
         String originalShelfName = (this.name == null) ? "new shelf" : this.name;
         String newName = name.trim();
         if (newName.matches("[a-zA-Z0-9 _()-]+") && !newName.isBlank()) {
             if (ShelfList.getShelfList().existShelf(newName)) {
-                throw new DuplicateShelfException(newName);
+                throw new DuplicateShelfModelException(newName);
             }
             this.name = newName;
             logger.log(Level.INFO, String.format("Successfully set Shelf %s's name as %s", originalShelfName, name));
@@ -80,7 +79,7 @@ public class Shelf {
             logger.log(Level.WARNING, String.format(
                     "Trying to set Shelf %s's name as %s",
                     originalShelfName, newName));
-            throw new IllegalModelArgumentException(MESSAGE_INVALID_NAME_FORMAT);
+            throw new IllegalArgumentModelException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -88,10 +87,9 @@ public class Shelf {
      * Adds the Item to the Shelf.
      *
      * @param item The item to be added
-     *
-     * @throws DuplicateItemException If the item already exists in the Shelf
+     * @throws DuplicateItemModelException If the item already exists in the Shelf
      */
-    public void addItem(Item item) throws DuplicateItemException {
+    public void addItem(Item item) throws DuplicateItemModelException {
         if (!contains(item)) {
             items.add(item);
             logger.log(Level.INFO, String.format("Successfully added Item %s into Shelf %s",
@@ -99,7 +97,7 @@ public class Shelf {
         } else {
             logger.log(Level.WARNING, String.format("Item %s already exists in Shelf %s",
                     item.getName(), this.getName()));
-            throw new DuplicateItemException(item.getName());
+            throw new DuplicateItemModelException(item.getName());
         }
 
         // sort items alphabetically
@@ -110,10 +108,9 @@ public class Shelf {
      * Remove the reference of the Item from the Shelf.
      *
      * @param item The Item to be removed from the Shelf
-     *
-     * @throws ItemNotExistException If the Item does not exist
+     * @throws ItemNotExistModelException If the Item does not exist
      */
-    public void deleteItem(Item item) throws ItemNotExistException {
+    public void deleteItem(Item item) throws ItemNotExistModelException {
         if (item == null) {
             logger.log(Level.WARNING, String.format("Trying to delete Null item from Shelf %s",
                     this.getName()));
@@ -121,7 +118,7 @@ public class Shelf {
         } else if (!contains(item)) {
             logger.log(Level.WARNING, String.format("Trying to delete Item %s which does not exist in Shelf %s",
                     item.getName(), this.getName()));
-            throw new ItemNotExistException(item.getName());
+            throw new ItemNotExistModelException(item.getName());
         }
         items.remove(item);
     }
@@ -131,12 +128,11 @@ public class Shelf {
      *
      * @param originalItem The Item that is in the Shelf
      * @param updatedItem  The replacement Item
-     *
-     * @throws ItemNotExistException  If the originalItem does not exist in the Shelf
-     * @throws DuplicateItemException if the updatedItem already exist in the Shelf
+     * @throws ItemNotExistModelException  If the originalItem does not exist in the Shelf
+     * @throws DuplicateItemModelException if the updatedItem already exist in the Shelf
      */
     public void updateItem(Item originalItem, Item updatedItem)
-            throws DuplicateItemException, ItemNotExistException {
+            throws DuplicateItemModelException, ItemNotExistModelException {
         int index = items.indexOf(originalItem);
         if (originalItem == null) {
             logger.log(Level.WARNING, String.format("Trying to update Null item from Shelf %s",
@@ -146,12 +142,12 @@ public class Shelf {
             logger.log(Level.WARNING, String.format(
                     "Trying to replace Item %s with %s, which already exists in the Shelf %s",
                     originalItem.getName(), updatedItem.getName(), this.getName()));
-            throw new DuplicateItemException(updatedItem.getName());
+            throw new DuplicateItemModelException(updatedItem.getName());
         } else if (index == -1) {
             logger.log(Level.WARNING, String.format(
                     "Trying to replace Item %s, which does not exist in Shelf %s",
                     originalItem.getName(), this.getName()));
-            throw new ItemNotExistException(originalItem.getName());
+            throw new ItemNotExistModelException(originalItem.getName());
         }
         items.set(index, updatedItem);
 
@@ -168,12 +164,10 @@ public class Shelf {
      * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param name The specified name of Item
-     *
      * @return Item with the specified name
-     *
-     * @throws ItemNotExistException if no item has the name
+     * @throws ItemNotExistModelException if no item has the name
      */
-    public Item getItem(String name) throws ItemNotExistException {
+    public Item getItem(String name) throws ItemNotExistModelException {
         if (name == null) {
             logger.log(Level.WARNING, String.format("Trying to get Null item from Shelf %s",
                     this.getName()));
@@ -186,17 +180,15 @@ public class Shelf {
         }
         logger.log(Level.WARNING, String.format("Item %s is not fond in the Shelf %s",
                 name, this.getName()));
-        throw new ItemNotExistException(name);
+        throw new ItemNotExistModelException(name);
     }
 
     /**
      * Return the Item at the specified index.
      *
      * @param index The index of the Item
-     *
      * @return The Item at the specified index
-     *
-     * @throws IndexOutOfBoundsException if index >= number of items in the item container
+     * @throws IndexOutOfBoundsException if index >= number of items in the shelf
      */
     public Item getItem(int index) {
         return items.get(index);
@@ -206,12 +198,10 @@ public class Shelf {
      * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param itemID The specified name of Item
-     *
      * @return Item with the specified name
-     *
-     * @throws ItemNotExistException if no item has the name
+     * @throws ItemNotExistModelException if no item has the name
      */
-    public Item getItemByID(String itemID) throws ItemNotExistException {
+    public Item getItemByID(String itemID) throws ItemNotExistModelException {
         for (Item item : items) {
             if (item.getID().equals(itemID)) {
                 return item;
@@ -219,7 +209,7 @@ public class Shelf {
         }
         logger.log(Level.WARNING, String.format("Item %s is not fond in the Shelf %s",
                 name, this.getName()));
-        throw new ItemNotExistException("with ID " + itemID);
+        throw new ItemNotExistModelException("with ID " + itemID);
     }
 
     public String getRemarks() {
@@ -238,13 +228,12 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified name.
      *
      * @param name Name of the item
-     *
      * @return True if the item exists
      */
     public boolean contains(String name) {
         try {
             getItem(name);
-        } catch (ItemNotExistException e) {
+        } catch (ItemNotExistModelException e) {
             return false;
         }
         return true;
@@ -254,7 +243,6 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified name.
      *
      * @param item the specified item
-     *
      * @return True if the item exists
      */
     public boolean contains(Item item) {
@@ -268,20 +256,19 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified ID.
      *
      * @param itemID ID of the item
-     *
      * @return True if the item exists
      */
     public boolean containsGivenID(String itemID) {
         try {
             getItemByID(itemID);
-        } catch (ItemNotExistException e) {
+        } catch (ItemNotExistModelException e) {
             return false;
         }
         return true;
     }
 
     /**
-     * Returns the number if items in the item container.
+     * Returns the number if items in the shelf.
      */
     public int getItemCount() {
         return items.size();
