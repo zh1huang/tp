@@ -98,18 +98,25 @@
             : Input invalid command format.                                                                                   :
             : Correct format:                                                                                                 :
             : edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                                                 :
+            : Only 3 types of p/PROPERTY                                                                                      :
+            : 1. "p/purchase cost" - to edit purchase cost                                                                    :
+            : 2. "p/selling price" - to edit selling price                                                                    :
+            :    Valid cost/price input e.g "5.4", "5.00", "12.00"                                                            :
+            :    Invalid unreasonable wrong price input e.g. "5.", "-5.0", "10000.000"                                        :
+            :    Max cost/price: 9999.99 (up to 2 dp)                                                                         :
+            : 3. "p/remarks" - to edit remarks                                                                                :
+            :    Remarks property accepts any alphanumeric input                                                              :
             : _______________________________________________________________________________________________________________ :
+            : General format usage                                                                                            :
             : Check the following:                                                                                            :
             : 1. Words in UPPER_CASE are the parameters to be supplied by the user                                            :
             : 2. Parameters in [] is optional & can only be specified ONCE.                                                   :
-            : 3. For Report Command that require date input ym/YEAR-MONTH should follow input ym/YYYY-MM                      :
-            : E.g. Jan 2021 is represented as ym/2021-01.                                                                     :
-            : 4. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\                  :
-            : 5. Do not add extra parameters to commands unless specified in user guide.                                      :
-            : 6. Do not leave trailing spaces at the end of the command.                                                      :
-            : 7. Program input is case-sensitive, and parameter input sequence cannot be reordered.                           :
-            : 8. Program only takes in input from english character set (US-ASCII), no input of other languages are accepted. :
-            : 9. INDEX always starts from 1                                                                                   :
+            : 3. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\                  :
+            : 4. Do not add extra parameters to commands unless specified in user guide.                                      :
+            : 5. Do not leave trailing spaces at the end of the command.                                                      :
+            : 6. Program input is case-sensitive, and parameter input sequence cannot be reordered.                           :
+            : 7. Program only takes in input from english character set (US-ASCII), no input of other languages are accepted. :
+            : 8. INDEX always starts from 1                                                                                   :
             : For more details refer to User Guide, under Usage Section                                                       :
             ......................................................................................................................
                       .........................................................................................................
