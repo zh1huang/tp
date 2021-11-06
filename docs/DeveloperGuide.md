@@ -173,7 +173,7 @@ parsed, depending on the Command type, different types uses different sales API.
 **API**:
 
 1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
-    * Supports Both SellCommand & ReportCommand & Handles some Sales behaivour
+    * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
         * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be
           called to mark an item as sold
         * When program invokes `ReportCommand#execute`
@@ -185,7 +185,7 @@ parsed, depending on the Command type, different types uses different sales API.
     * Supports ReportCommand & Handles generation of sales report
         * When program invokes `ReportCommand#execute`, a `SalesReport` object is created
           & `SalesReport#generateSoldItemStats()`
-          or `SalesReport#generateSoldItemDetails()` will be called to get the filterd solditems list for processing
+          or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
           into strings before returning the String for printing.
 
 3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
@@ -269,7 +269,7 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
 
 #### Design considerations:
 
-* Aspect: How to change a cerntain property precisely
+* Aspect: How to change a certain property precisely
     * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
         * Pros: Only need to change one property.
         * Cons: Need one additional step to check which property is selected by the user.
@@ -282,7 +282,7 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
 ![](diagrams/ListCommandSequenceDiagram.svg)
-A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
+A user can choose to either list out all the items in the bookstore (i.e. every shelf), or within a specific shelf.
 
 * If user wishes to list out all items within a **specific** shelf:
     1. He keys in `list shlv/[SHELF_NAME]`
@@ -308,10 +308,10 @@ A user can choose to either list out all the items in the bookstore (i.e every s
 
 * Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
     * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being
-      printed as a range. (e.g First entry of 5 identical items on the list will be grouped as index "001-005", instead
+      printed as a range. (e.g. First entry of 5 identical items on the list will be grouped as index "001-005", instead
       of "1")
         * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items
-          together (e.g If there are 5 identical items, but you only want to change 1 of them because perhaps they are
+          together (e.g. If there are 5 identical items, but you only want to change 1 of them because perhaps they are
           damaged, and you want to add a remark)
         * Cons: Looks less user-friendly
     * Alternative 2: The indexes of the list are printed in single sequential order.
@@ -344,7 +344,7 @@ This sequence diagram shows how MarkUpCommand is being implemented.
 A user may choose to check the estimated marked up price of an item, given a specific mark up percentage.
 
 1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
-2. CLIvershelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
+2. CLIverShelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
     1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
     2. Else, continues by constructing `SalesMarkUp` Object Then `SalesMarkUp#getItemToMarkUpInfo()`
        , `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence get the relevant information about the
@@ -418,7 +418,7 @@ Allows efficient and simplified management of inventory and finances of the stor
 
 ## Glossary
 
-* *Mainstream OS* - MacOS, Windows, Linux, Unix
+* *Mainstream OS* - macOS, Windows, Linux, Unix
 
 ## Instructions for manual testing
 
