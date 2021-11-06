@@ -33,7 +33,7 @@
 
 **Welcome to CLIverShelf!**
 
-**CLIverShelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. With 
+**CLIverShelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. With
 **CLIverShelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that
 they know how well their business is going.
 
@@ -86,7 +86,7 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 ### Architecture
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Architecture.puml)
+![](diagrams/Architecture.svg)
 
 The architecture diagram above describes the design of CLIverShelf. The main components are:
 
@@ -105,7 +105,7 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/GeneralProgramFlowSequenceDiagram.svg)
+![](diagrams/GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
@@ -227,8 +227,8 @@ parsed, depending on the Command type, different types uses different sales API.
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation
 methods are used.
 
-![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Model_newShelf.svg)
-![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Model_addShelf.svg)
+![](diagrams/Model_newShelf.svg)
+![](diagrams/Model_addShelf.svg)
 
 ### Storage component
 
@@ -237,11 +237,11 @@ loading data on program start up.
 
 The diagram below shows the implementation of `saveData()`.
 
-![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Storage_saveData.svg)
+![](diagrams/Storage_saveData.svg)
 
 The diagram below shows the implementation of `loadData()`
 
-![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Storage_loadData.svg)
+![](diagrams/Storage_loadData.svg)
 
 ## Implementation
 
@@ -276,7 +276,7 @@ The diagram below shows the implementation of `loadData()`
 
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
-![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/ListCommandSequenceDiagram.svg)
+![](diagrams/ListCommandSequenceDiagram.svg)
 A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
 
 * If user wishes to list out all items within a **specific** shelf:
