@@ -63,8 +63,8 @@ public class ListCommand extends Command {
      * Executes the list operation.
      *
      * @return Message string to be passed to UI
-     * @throws ShelfNotExistModelException        If the Shelf is not in the ShelfList
-     * @throws EmptyListCommandException            If list is empty
+     * @throws ShelfNotExistModelException   If the Shelf is not in the ShelfList
+     * @throws EmptyListCommandException     If list is empty
      * @throws IllegalArgumentModelException If illegal argument is entered
      */
     public String execute() throws ShelfNotExistModelException,

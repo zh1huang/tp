@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  * The command that edits a selected item.
  */
 public class EditCommand extends Command {
+
     public static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     public static final String EDIT_ITEM_DATA_ARGS_FORMAT_STRING =
             "edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE\n"
@@ -62,7 +63,7 @@ public class EditCommand extends Command {
      * Executes the update operation.
      *
      * @throws ItemNotExistCommandException    when cannot find any item with the name
-     * @throws NullPointerException     when the name specified is null
+     * @throws NullPointerException            when the name specified is null
      * @throws IllegalArgumentCommandException when the argument is invalid
      */
     public String execute() throws ItemNotExistCommandException,
@@ -125,6 +126,6 @@ public class EditCommand extends Command {
 
         EditCommand command = (EditCommand) other;
         return shelfName.equals(command.shelfName) && index == command.index
-            && selectedProperty.equals(command.selectedProperty) && newValue.equals(command.newValue);
+                && selectedProperty.equals(command.selectedProperty) && newValue.equals(command.newValue);
     }
 }

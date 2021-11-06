@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MarkUpCommand extends Command {
+
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]\n"
             + "Maximum percent: 999.99 (up to 2 dp)\n"
             + "Invalid percent e.g. \"5.\", \"-5\", \"5.000\", \"5000\"\n"
@@ -16,9 +17,9 @@ public class MarkUpCommand extends Command {
     private static final String MESSAGE_ITEM_NOT_EXIST = "Item with index %d does not exist";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String MARKUP_COMMAND_SHELF_NOT_EXIST_LOGGING_MESSAGE_FORMAT =
-        "MarkUpCommand can't find an existing shelf named: %s";
+            "MarkUpCommand can't find an existing shelf named: %s";
     private static final String MARKUP_COMMAND_INVALID_INDEX_LOGGING_MESSAGE_FORMAT =
-        "MarkUpCommand can't find index %s in shelf";
+            "MarkUpCommand can't find index %s in shelf";
     public static final String MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE = "Operation on SoldItems not permitted";
 
     private final String shelfName;
@@ -88,8 +89,8 @@ public class MarkUpCommand extends Command {
 
         MarkUpCommand command = (MarkUpCommand) other;
         return shelfName.equals(command.shelfName)
-            && index == command.index
-            && userRequestPercent.equals(command.userRequestPercent);
+                && index == command.index
+                && userRequestPercent.equals(command.userRequestPercent);
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ReportCommand extends Command {
+
     public static final String REPORT_DATA_ARGS_FORMAT_STRING =
             "report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]\n"
                     + "Only 2 report types:\n"
@@ -71,8 +72,8 @@ public class ReportCommand extends Command {
 
         ReportCommand command = (ReportCommand) other;
         return selectedStartDate.equals(command.selectedStartDate)
-            && selectedEndDate.equals(command.selectedEndDate)
-            && reportType.equals(command.reportType);
+                && selectedEndDate.equals(command.selectedEndDate)
+                && reportType.equals(command.reportType);
     }
 
 }

@@ -20,7 +20,6 @@ public class SoldItem extends Item {
      *              must be non-negative
      * @param price the selling price of the item
      *              must be non-negative
-     *
      * @throws IllegalArgumentModelException if any of the inputs does not follow the requirement
      */
     public SoldItem(String name, String cost, String price, String remarks, String itemId, LocalDateTime saleTime)

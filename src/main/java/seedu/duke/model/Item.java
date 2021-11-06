@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
+
 /**
  * Represents an item that can be stored in an Shelf.
  * e.g. You can store 10 Items named "Dune" in an Shelf named "Shelf_Sci-fi_1"
@@ -37,7 +38,6 @@ public class Item {
      * @param price   the selling price of the item
      *                must be non-negative
      * @param remarks the remark that is tied to the item
-     *
      * @throws IllegalArgumentModelException if any of the inputs does not follow the requirement
      */
 
@@ -60,7 +60,6 @@ public class Item {
      * @param price  the selling price of the item
      *               must be non-negative
      * @param itemID the ID of the existing item
-     *
      * @throws IllegalArgumentModelException if any of the inputs does not follow the requirement
      */
     public Item(String name, String cost, String price, String remarks, String itemID) throws
@@ -83,7 +82,6 @@ public class Item {
      *
      * @param name new name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     *
      * @throws IllegalArgumentModelException if the name contains other characters
      */
     public void setName(String name) throws IllegalArgumentModelException {
@@ -139,7 +137,6 @@ public class Item {
      *
      * @param cost new cost of the item
      *             must be non-negative
-     *
      * @throws IllegalArgumentModelException if the new cost is negative
      */
     public void setPurchaseCost(String cost) throws IllegalArgumentModelException {
@@ -156,7 +153,6 @@ public class Item {
      *
      * @param price new price of the item
      *              must be non-negative
-     *
      * @throws IllegalArgumentModelException if the new price is negative
      */
     public void setSellingPrice(String price) throws IllegalArgumentModelException {

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SalesReport {
+
     public static final String TOTAL_MONETARY_SUMMARY_MESSAGE_FORMAT = "Total Purchase Cost: $ %s\n"
             + "Total Selling Price: $ %s\nTotal Profits: $ %s\nGross Profit Margin (in percent): %s\n";
     public static final String NEGATIVE_PROFIT_WARNING_MESSAGE =

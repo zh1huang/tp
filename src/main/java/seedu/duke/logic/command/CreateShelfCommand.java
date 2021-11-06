@@ -8,6 +8,7 @@ import seedu.duke.model.exception.DuplicateShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 
 public class CreateShelfCommand extends Command {
+
     public static final String CREATE_DATA_ARGS_FORMAT_STRING = "create shlv/SHELF_NAME";
     public static final String CREATE_STRING = "create";
     public static final String PARSE_CREATE_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\n";

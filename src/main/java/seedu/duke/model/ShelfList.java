@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 //@@author yuejunfeng0909
+
 /**
  * Represents a collection of Shelfs.
  * Provides methods to better manage Shelf items.
@@ -54,9 +55,8 @@ public class ShelfList {
      * Creates a new Shelf with the specified name in the ShelfList.
      *
      * @param name The name of the new Shelf
-     *
      * @throws IllegalArgumentModelException if name does not follow the format
-     * @throws DuplicateShelfModelException       if there already exist a Shelf with this name
+     * @throws DuplicateShelfModelException  if there already exist a Shelf with this name
      */
     public Shelf addShelf(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
         if (existShelf(name)) {
@@ -71,7 +71,6 @@ public class ShelfList {
      * Remove the specified Shelf from the ShelfList.
      *
      * @param shelf The Shelf to be removed
-     *
      * @throws ShelfNotExistModelException If the Shelf is not in the ShelfList
      */
     protected void deleteShelf(Shelf shelf) throws ShelfNotExistModelException {
@@ -85,7 +84,6 @@ public class ShelfList {
      * Remove the Shelf with the specified name from the ShelfList.
      *
      * @param name Name of the Shelf to be removed
-     *
      * @throws ShelfNotExistModelException If no Shelf in the ShelfList has the specified name
      */
     public void deleteShelf(String name) throws ShelfNotExistModelException {
@@ -97,9 +95,7 @@ public class ShelfList {
      * Returns the Shelf with the specified name.
      *
      * @param name The name of the Shelf
-     *
      * @return The Shelf that matches the specified name
-     *
      * @throws ShelfNotExistModelException If no Shelf in the ShelfList has the specified name
      */
     public Shelf getShelf(String name) throws ShelfNotExistModelException {
@@ -116,9 +112,7 @@ public class ShelfList {
      *
      * @param name             the name of the target shelf
      * @param isSoldItemHidden whether to hide the soldItem shelf
-     *
      * @return the target shelf
-     *
      * @throws ShelfNotExistModelException if no such shelf exists.
      */
     public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistModelException {
@@ -137,7 +131,6 @@ public class ShelfList {
      * Check if there exists a Shelf with the specified name.
      *
      * @param name name of the Shelf
-     *
      * @return true if there exists
      */
     public boolean existShelf(String name) {
@@ -175,9 +168,7 @@ public class ShelfList {
      * Return the Shelf that is storing the specified Item.
      *
      * @param item The target item
-     *
      * @return The Shelf that contains the item
-     *
      * @throws ItemNotExistModelException If the item does not belong to any Shelf
      */
     public Shelf shelfOfItem(Item item) throws ItemNotExistModelException {
@@ -194,9 +185,7 @@ public class ShelfList {
      * Get a unique item from the list of shelves.
      *
      * @param itemID The ID of the target item
-     *
      * @return the item if it exists
-     *
      * @throws ItemNotExistModelException if the target item with the given ID does not exist
      */
     public Item getItem(String itemID) throws ItemNotExistModelException {
