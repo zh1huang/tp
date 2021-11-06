@@ -15,11 +15,8 @@
    1. [Adding an item](#adding-an-item)
    2. [Editing an item](#editing-an-item)
    3. [Listing all items](#listing-all-items)
-   4. [Getting an item](#getting-an-item)
-   5. [Selling an item](#selling-an-item)
-   6. [Generating sales report](#generating-sales-report)
-   7. [Getting help](#getting-help)
-   8. [Exiting the program](#editing-an-item)
+   4. [Selling an item](#selling-an-item)
+   5. [Generating sales report](#generating-sales-report)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
@@ -129,7 +126,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 5. `Command` then checks the `ExitCommand` on whether the program should exit.
 6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
-![](diagrams/seedu_duke_logic.drawio.svg)
+![](http://www.plantuml.com/plantuml/svg/fP91ZzCm48Nl_XLME73g5gve5UrgGGLfGMXpvJArXyRgs8dioGee_UzaqxGCna58wqkazysBHy_l9Z547Zofborpdzwirpr1U5AkJEVNXY2bbNMmY-1Lwonguw8XL6dlGW-ZggUPM-RejWFZ1zE5nlr0_UeqZhxdxzgZts9CIat3-exS8yQcHVggL0zc3plKrNstSqRVTRxl0WQkzFNr0ng6i2EiQtrGUZoNwKzTM2KWJ3eY0QDzSde8DkN65-G2Nbb8BTg3qlEPDua8ZDCcipqRU43VFVvhuDRQCdYBX8nbziuwBfCDBe1xbnP8Wn1Dkt3HjwMBtYFraXpLR_OPOiAe_WoyUNRO3H8jfTntaSli8yJzaAqgTftMEWcmJHp1y4ogmrauVWddXIiDIPlvP-gebEYYhinKXrIjLhMkNbUN84vVFSgbnWXQg8kWeYj2bKMHGBP4oXiigR8VGfRba40sGyho9IJ8da40MIJrTphZpC_wahZCfyJ7X8gwp2X3KqebiC6oFYPL1ZAh38cqSW_HVu1wxgcCDpD892qo-CmYaRJSOB23fry0)
+
 
 **API**:
 
@@ -142,7 +140,7 @@ The `Logic` component consists of `Parser` and `Command` components.
       1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
    5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `CliverShelf` component
    
-![](diagrams/ParserClassDiagram.png)
+
 
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
@@ -219,6 +217,7 @@ ___
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
 ![](https://www.plantuml.com/plantuml/svg/bLFDpjem4BplKso_InCau9v3HSMf4cehzGdSP05B_d7zayBRrpzHC84YSKYytftPsSagE-UPzK4A-7psthXkkpM2gPJPz5fk7Vq9f7fQ3voTB9C0hFVQOd1amKGgxxc9UDmVleraVvr9794vPCRWNVsZ-ybi97sagidX4g3exrvBoTJGuO4xFrqoGzpk293KSVqbgNJ8bGa-ZSL7vYdb83wfN6IwSaxi9iFR6J-1e1mt5aQQfHXJ6gLXzXGagPV4UiRL2WPQGkTxXOIQjPxbeQBNy5ckk7yYCfclIHtIXVhWgMa1da_1XCTFndBblme1Y5XNb-OwF97_eSgNSMdbtvcaDjEUTd_ezz1G1v-sc83_CKx2KMcajS6ZjaWZsIjcVUGg1oEvZ7dRm2OcaeccBJPUMddBpWjBkKufoA-gjDplaZcGyrPVxt8HdcZbrwnugGsS-K1urDh_rXVOHRaWnJy0)
+
 A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
 * If user wishes to list out all items within a **specific** shelf:
   1. He keys in `list shlv/[SHELF_NAME]`
@@ -235,6 +234,10 @@ A user can choose to either list out all the items in the bookstore (i.e every s
   4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
   5. The string result output is then passed back to `CliverShelf`.
 
+The Class Diagram below illustrates how the components work together in `ListCommand`
+
+![](http://www.plantuml.com/plantuml/svg/VL9DRzD04BtlhnZbGe6Q50u8MIXgLELG2T52hhbirbDxbFqmkxE14FhVyNhZnhKAFgtVU_FUxinS1vQUez7YLSFSXd8-RxMq2Ncdd9ahBKCeAfArbqOqL24eyagZ23kohUnGw3LBPa_Ro7Yhd5tJRuIhaSIw2WEsy6aCUcbt2Vnu9OJS1lPISJQ3sN407c5ZbJD6sce6Ci1DFiDHGFSLi6PFjWRyXIeoNhmMZq9aZoyKUAfkEp4ljIvXwvn6QKzuQ50_V9K6ovFXS_SQURL7VqYMNSIKkxFOC-laSlOQXASeeB3w4QM-k6KqG8pc_IKydJyCwhsZ2fGpBMdy5gLbuiCqKvF5bML_k23BeD7Mt5mE9DasygH0UPICTv4xAfdzltNvLhbdRqVlJ8zArHFuFdhLo80tBl0Bz1grxextdjHBrT_HIByBu_Y-ZwcZJtCB0rAUoKmD_wFeb3c09sZflUodzxbd5eDcZy-2PvjSkU5-r_8yZ__QaLGtNh8YjiMVnR2X4yvJtN2n6BsjX0LuP4-uno3EU56vdxPJpaA-8BoPzMIMGA7nWHETjYQHQLX2Y6kqLJJwBm00)
+
 #### Design considerations:
 * Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
   * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being printed as a range. (e.g First entry of 5 identical items on the list will be grouped as index "001-005", instead of "1")
@@ -243,6 +246,7 @@ A user can choose to either list out all the items in the bookstore (i.e every s
   * Alternative 2: The indexes of the list are printed in single sequential order.
     * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
     * Cons: User is unable to `delete` or `edit` a singular item.
+
 
 ### Selling an item
 

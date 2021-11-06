@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+skinparam nodesep 80
+skinparam ranksep 60
+
+abstract class "{abstract} \ncommand" as Command {
+    - String execute()
+}
+
+class ListCommand {
+    - printAll: boolean
+    - shelfName: String
+    - String getEveryList()
+    - String getOneList(Shelf shelfName)
+    - boolean isEqual(Item item1, Item item2)
+    - void compileQuantity()
+    - String lineEntry(int length, String input)
+    - String createOutput()
+    - String execute()
+}
+
+class Item {
+    + String getName()
+    + String getPurchaseCost()
+    + String getSellingPrice()
+    + String getRemarks()
+}
+
+class ShelfList {
+    - shelfList: ShelfList
+    - ShelfList()
+    + getShelfList
+    + ArrayList<Shelf> getShelves()
+}
+
+class "\tShelf\t" as Shelf {
+    - shelfName: String
+}
+
+ListCommand -up-|> Command
+
+ListCommand -right-> ShelfList : > retrieves
+ShelfList -down-> "shelves *"Shelf
+Shelf -left-> "items *"Item
+
+
+@enduml
