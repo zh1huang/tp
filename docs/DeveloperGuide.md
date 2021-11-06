@@ -74,7 +74,7 @@ and potential contributors to get familiarised with the implementation of **CLIv
 
 ## Acknowledgements
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
-2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
+2. [Adapted Parser code: AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java)
 
 ## Design
 
@@ -378,17 +378,17 @@ Should there be any bugs, please do contact
 the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 * [Launch and shut down](#launch-and-shut-down)
-* [Getting help](#getting-help)
-* [Creating a shelf](#creating-a-shelf)
-* [Removing a shelf](#removing-a-shelf)
-* [Adding an item](#adding-an-item)
-* [Deleting an item](#deleting-an-item)
-* [Getting information of an item](#getting-information-of-an-item)
-* [Listing the items](#listing-the-items)
-* [Editing an item](#editing-an-item)
-* [Getting a Report](#getting-a-report)
-* [Selling an item](#selling-an-item)
-* [Markup price of an item](#markup-price-of-an-item)
+* [Getting help test](#getting-help-test)
+* [Creating a shelf test](#creating-a-shelf-test)
+* [Removing a shelf test](#removing-a-shelf-test)
+* [Adding an item test](#adding-an-item-test)
+* [Deleting an item test](#deleting-an-item-test)
+* [Getting information of an item test](#getting-information-of-an-item-test)
+* [Listing the items test](#listing-the-items-test)
+* [Editing an item test](#editing-an-item-test)
+* [Getting a Report test](#getting-a-report-test)
+* [Selling an item test](#selling-an-item-test)
+* [Markup price of an item test](#markup-price-of-an-item-test)
 
 ### Launch and shut down
 
@@ -408,10 +408,10 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 2. Data will be automatically saved into the data file.
 3. The data is expected to still be saved normally even if program crashes.
 
-### Getting help
+### Getting help test
 1. To get help information, type `help`.
 
-### Creating a shelf
+### Creating a shelf test
 
 * Format: `create shlv/SHELF_NAME`
 * Pre-requisite: Shelf name to be created must not exist.
@@ -423,7 +423,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Create shelf name with special characters | `create shlv/invest$$booksshelf` | Error message (shelf name cannot contain special characters) |
 | Missing parameters | `create` | Error message (invalid format) |
 
-### Removing a shelf
+### Removing a shelf test
 
 * Format: `remove shlv/SHELF_NAME`
 * Pre-requisite: Shelf name to be removed needs to be created first.
@@ -434,7 +434,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Remove non-existent shelf | `remove shlv/nonexistentshelf` | Error message (shelf does not exist) |
 | Missing parameters | `remove` | Error message (invalid format) |
 
-### Adding an item
+### Adding an item test
 
 * Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 * Pre-requisite: A shelf must first exist for any item to be added to a shelf.
@@ -446,7 +446,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
 
-### Deleting an item
+### Deleting an item test
 
 * Format: `delete shlv/SHELF_NAME i/INDEX`
 * Pre-requisite: A shelf must first contain the item to be deleted. 
@@ -458,7 +458,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `delete shlv/book1` | Error message (invalid format) |
 
-### Getting information of an item
+### Getting information of an item test
 
 * Format: `get shlv/SHELF_NAME i/INDEX`
 * Pre-requisite: A shelf must first contain the item which the user wants to know more about.
@@ -470,7 +470,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
-### Listing the items
+### Listing the items test
 
 * Format: `list [shlv/SHELF_NAME]`
 * Pre-requisite: None
@@ -482,7 +482,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
 
-### Editing an item
+### Editing an item test
 
 * Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 * Pre-requisite: At least one item has to be added to any shelf.
@@ -495,7 +495,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
 
-### Getting a Report
+### Getting a Report test
 
 * Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 * Pre-requisite: Some items must be sold first to view the report with data.
@@ -515,7 +515,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Missing parameters  | `report t/items` | Error message (invalid format) |
 | Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
-### Selling an item
+### Selling an item test
 
 * Format: `sell id/ITEM_ID`
 * Pre-requisite: There must be items added to a shelf first. And user needs to know the `ITEM_ID` through `get` or `list` command.
@@ -527,7 +527,7 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
 | Missing Parameters | `sell` | Error message (invalid format) |
 
-### Markup price of an item
+### Markup price of an item test
 
 * Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` 
 * Pre-requisite: There must be items added to a shelf first.
