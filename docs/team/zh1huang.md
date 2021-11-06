@@ -11,7 +11,8 @@ Given below are my contributions to the project.
   * `GetCommand`: The user is able to retrieve information about an item on the list, detailing Name, Cost, Price, ID, and remarks if any.
   * `HelpCommand`: A new user is able to type `help` to check the allowed formatting of the instructions. Other users may also use it should they forget the commands.
   * `ExitCommand`: Allows for a way to exit the program elegantly.
-  * Assisted in the integration and interaction within the different classes such as `CliverShelf`, `Parser`, `UI`, `Command` and `Model`.
+  * Implementation of over-ridden `equals` method for `test`, reused for all the `Commands`
+  * Integration of main class `CliverShelf` with other components `Logic`, `UI`, `Storage` and `Model`.
 * Contributions to the UG:
   * Table of contents, Quick Start, FAQ and Command Summary
   * Features (Format, example inputs and expected outputs)
@@ -20,7 +21,11 @@ Given below are my contributions to the project.
   * Overall design of `Logic` component (with class diagram)
   * Implementation for `Listing all items` (with sequence diagram and object diagram)
   * Manual testing instructions for `list` and `get`
-* Review/mentoring contributions: Actively participated in giving feedbacks and suggestions to teammates, both during online meetings/group chats and PR reviews.
+* Contributions to team-based task:
+  * Regularly report bugs/issues and assign tasks to teammates
+  * Fix preliminary bugs from PE-D
+  * Updating both UG/DG that are not specific to my feature (as described above)
+* Review/mentoring contributions: Actively gave feedbacks and suggestions to teammates, both during online meetings/group chats and PR reviews.
 * Contributions beyond the project team: 
   * [PED link](https://github.com/zh1huang/ped/issues)
   * Gave tips and tricks to teammates on how to use plantUML more effectively
