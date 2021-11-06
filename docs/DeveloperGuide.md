@@ -105,7 +105,7 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/GeneralProgramFlowSequenceDiagram.puml)
+![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
