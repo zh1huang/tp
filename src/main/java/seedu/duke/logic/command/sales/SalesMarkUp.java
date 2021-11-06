@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SalesMarkUp {
+
     public static final String PARSE_MARKUP_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\npercent: %s\n";
     public static final String WARNING_LARGE_PERCENT_MESSAGE_FORMAT = "!!!WARNING: "
             + "NOT recommended to set a percentage > 100 to $%s.\n"

@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  * The command that adds a new item to the list.
  */
 public class AddCommand extends Command {
+
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
             "add n/NAME shlv/SHELF_NAME p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
                     + "(Purchase cost and selling price must be non-negative numbers. "
@@ -53,12 +54,12 @@ public class AddCommand extends Command {
     /**
      * The AddCommand constructor.
      *
-     * @param name the name of the item
+     * @param name         the name of the item
      * @param purchaseCost the purchase cost of the item
      * @param sellingPrice the selling price of the item
-     * @param quantity number of the identical items to be added
-     * @param shelfName the name of the shelf to be added to
-     * @param remarks additional remarks for the item
+     * @param quantity     number of the identical items to be added
+     * @param shelfName    the name of the shelf to be added to
+     * @param remarks      additional remarks for the item
      */
     public AddCommand(String name, String purchaseCost, String sellingPrice, String quantity,
                       String shelfName, String remarks) {

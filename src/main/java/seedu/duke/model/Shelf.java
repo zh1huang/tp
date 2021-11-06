@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
+
 /**
  * Represents a shelf that is able to store items.
  * e.g. A shelf
@@ -31,7 +32,6 @@ public class Shelf {
      *
      * @param name new name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     *
      * @throws IllegalArgumentModelException if the name contains other characters
      */
     public Shelf(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
@@ -64,7 +64,6 @@ public class Shelf {
      *
      * @param name New name for the Shelf
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     *
      * @throws IllegalArgumentModelException if the name contains other characters
      */
     public void setName(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
@@ -88,7 +87,6 @@ public class Shelf {
      * Adds the Item to the Shelf.
      *
      * @param item The item to be added
-     *
      * @throws DuplicateItemModelException If the item already exists in the Shelf
      */
     public void addItem(Item item) throws DuplicateItemModelException {
@@ -110,7 +108,6 @@ public class Shelf {
      * Remove the reference of the Item from the Shelf.
      *
      * @param item The Item to be removed from the Shelf
-     *
      * @throws ItemNotExistModelException If the Item does not exist
      */
     public void deleteItem(Item item) throws ItemNotExistModelException {
@@ -131,7 +128,6 @@ public class Shelf {
      *
      * @param originalItem The Item that is in the Shelf
      * @param updatedItem  The replacement Item
-     *
      * @throws ItemNotExistModelException  If the originalItem does not exist in the Shelf
      * @throws DuplicateItemModelException if the updatedItem already exist in the Shelf
      */
@@ -168,9 +164,7 @@ public class Shelf {
      * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param name The specified name of Item
-     *
      * @return Item with the specified name
-     *
      * @throws ItemNotExistModelException if no item has the name
      */
     public Item getItem(String name) throws ItemNotExistModelException {
@@ -193,9 +187,7 @@ public class Shelf {
      * Return the Item at the specified index.
      *
      * @param index The index of the Item
-     *
      * @return The Item at the specified index
-     *
      * @throws IndexOutOfBoundsException if index >= number of items in the shelf
      */
     public Item getItem(int index) {
@@ -206,9 +198,7 @@ public class Shelf {
      * Search through the Shelf and returns the first Item with the specified name.
      *
      * @param itemID The specified name of Item
-     *
      * @return Item with the specified name
-     *
      * @throws ItemNotExistModelException if no item has the name
      */
     public Item getItemByID(String itemID) throws ItemNotExistModelException {
@@ -238,7 +228,6 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified name.
      *
      * @param name Name of the item
-     *
      * @return True if the item exists
      */
     public boolean contains(String name) {
@@ -254,7 +243,6 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified name.
      *
      * @param item the specified item
-     *
      * @return True if the item exists
      */
     public boolean contains(Item item) {
@@ -268,7 +256,6 @@ public class Shelf {
      * Returns true if there is an Item in the Shelf with the specified ID.
      *
      * @param itemID ID of the item
-     *
      * @return True if the item exists
      */
     public boolean containsGivenID(String itemID) {

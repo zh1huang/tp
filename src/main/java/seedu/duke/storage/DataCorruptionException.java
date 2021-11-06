@@ -7,6 +7,7 @@ import seedu.duke.model.exception.IllegalArgumentModelException;
 
 //@@author yuejunfeng0909
 public class DataCorruptionException extends Exception {
+
     DataCorruptionException() {
         super("Data was corrupted.");
         // load sample data

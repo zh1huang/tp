@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  * The command that deletes a selected item.
  */
 public class DeleteCommand extends Command {
+
     public static final String DELETE_ITEM_DATA_ARGS_FORMAT_STRING = "delete shlv/SHELF_NAME i/INDEX";
     public static final String DELETE_STRING = "delete";
     private static final String DELETE_COMPLETE_MESSAGE =

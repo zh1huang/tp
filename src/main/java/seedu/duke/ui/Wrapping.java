@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 //@@author yuejunfeng0909
 public class Wrapping {
+
     private final String originalMessage;
     private final int lineLimit;
     private ArrayList<String> lines;

@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SalesManager {
+
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static SalesManager salesManager;
     private Shelf soldItems;
@@ -51,9 +52,7 @@ public class SalesManager {
      * This moves the item from its ItemContainer to the ItemContainer "soldItems"
      *
      * @param item The item to be marked as sold
-     *
      * @return The SoldItem object that is stored in the ItemContainer "soldItems"
-     *
      * @throws ItemNotExistModelException If the item does not belong to any ItemContainer
      */
     public SoldItem sell(Item item) throws ItemNotExistModelException {
@@ -76,11 +75,10 @@ public class SalesManager {
      * Filter out soldItems that are not sold within the input date.
      *
      * @param selectedStartDate the target date
-     *
      * @return an ArrayList of SoldItems
      */
     public ArrayList<SoldItem> filterSoldItems(String selectedStartDate, String selectedEndDate)
-        throws IllegalArgumentCommandException {
+            throws IllegalArgumentCommandException {
         ArrayList<SoldItem> filteredSoldItems;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
@@ -90,7 +88,7 @@ public class SalesManager {
 
         } else {
             filteredSoldItems = getFilteredListWithinAPeriod(selectedStartDate,
-                selectedEndDate, dateTimeFormatter);
+                    selectedEndDate, dateTimeFormatter);
             logger.log(Level.INFO, "Get Filtered List within a period success.");
         }
 
@@ -102,12 +100,11 @@ public class SalesManager {
      *
      * @param selectedStartDate Starting year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
-     *
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
                                                                DateTimeFormatter dateTimeFormatter)
-        throws IllegalArgumentCommandException {
+            throws IllegalArgumentCommandException {
         YearMonth yearMonthToSearch;
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
         try {
@@ -136,13 +133,12 @@ public class SalesManager {
      * @param selectedStartDate Starting year-month string
      * @param selectedEndDate   Ending year-month string
      * @param dateTimeFormatter Defines DateTimeFormat to parse
-     *
      * @return Arraylist of filtered sold items
      */
     private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
                                                              String selectedEndDate,
                                                              DateTimeFormatter dateTimeFormatter)
-        throws IllegalArgumentCommandException {
+            throws IllegalArgumentCommandException {
         YearMonth startYearMonthToSearch;
         YearMonth endYearMonthToSearch;
 
@@ -159,15 +155,15 @@ public class SalesManager {
         if (endYearMonthToSearch.isBefore(startYearMonthToSearch)) {
             logger.log(Level.WARNING, "YearMonth parameters are swapped, Start YearMonth is after End YearMonth.");
             throw new IllegalArgumentCommandException(
-                "Invalid argument sequence, 2nd Year Month parameter is earlier than 1st Year Month parameter.\n"
-                    + "Parameters are swapped.");
+                    "Invalid argument sequence, 2nd Year Month parameter is earlier than 1st Year Month parameter.\n"
+                            + "Parameters are swapped.");
         }
 
         for (int i = 0; i < soldItems.getItemCount(); i++) {
             SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (!itemSoldYearMonth.isBefore(startYearMonthToSearch)
-                && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
+                    && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {
                 filteredSoldItems.add(selectedSoldItem);
             }
         }
