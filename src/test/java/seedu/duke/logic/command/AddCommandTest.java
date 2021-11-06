@@ -277,7 +277,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         testCommand = new AddCommand("HarryPotter", "16.1",
                 "25.12", "10", "test", "");
         Command anotherCommand = new SellCommand("XXXXXXXX");

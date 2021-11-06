@@ -1,5 +1,6 @@
 package seedu.duke.logic.command;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +31,13 @@ public class ReportCommandTest {
         soldItems = new Shelf("soldItems");
     }
 
+    @AfterEach
+    public void cleanUp() {
+        ShelfList.getShelfList().resetShelfList();
+    }
+
     @Test
-    public void execute_invalidType_throws() {
+    public void execute_invalidType_throwsNoTypeFoundCommandException() {
         testCommand = new ReportCommand("2021-11", "2021-12", "inValidType");
         assertThrows(NoTypeFoundCommandException.class, () -> testCommand.execute());
     }
@@ -61,7 +67,7 @@ public class ReportCommandTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime testItemDateTime1 = LocalDateTime.parse(str, formatter);
         SoldItem soldItem1 = new SoldItem("soldItem1", "11", "12", "",
-                "XXXXXXX", testItemDateTime1);
+                "XXXXXXXX", testItemDateTime1);
         soldItems.addItem(soldItem1);
         testCommand = new ReportCommand("2021-11", "2021-12", "stats");
         String expectedOutput = "Total Purchase Cost: $ 11.00\n"
@@ -117,7 +123,7 @@ public class ReportCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         testCommand = new ReportCommand("2021-11", "2021-12", "items");
         Command anotherCommand = new SellCommand("XXXXXXXX");
         assertFalse(testCommand.equals(anotherCommand));

@@ -1,10 +1,12 @@
 package seedu.duke.logic.command;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.logic.command.exception.CommandException;
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
+import seedu.duke.logic.command.sales.SalesReport;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.ModelException;
@@ -33,21 +35,25 @@ public class SellCommandTest {
         itemID = extractedID;
     }
 
+    @AfterEach
+    public void cleanUp() {
+        ShelfList.getShelfList().resetShelfList();
+    }
     /**
     public void execute_itemWithInputIdExists_sellsNormally() throws CommandException, ModelException {
         assertTrue(testList.contains("HarryPotter"));
         testCommand = new SellCommand(itemID);
         int numberOfItemsBeforeSelling = testList.getItemCount();
         testCommand.execute();
+        assertTrue(ShelfList.getShelfList().getShelf("soldItems").contains("HarryPotter"));
         int numberOfItemAfterSelling = testList.getItemCount();
         assertEquals(numberOfItemAfterSelling, numberOfItemsBeforeSelling - 1);
         assertFalse(testList.contains("HarryPotter"));
-        assertTrue(ShelfList.getShelfList().getShelf("soldItems").contains("HarryPotter"));
     }
-     */
+    */
 
     @Test
-    public void execute_itemWithInputIdDoesNotExist_throwsItemNotExistException() {
+    public void execute_itemWithInputIdDoesNotExist_throwsItemNotExistCommandException() {
         itemID = "XXXXXXXX";
         testCommand = new SellCommand(itemID);
         assertThrows(ItemNotExistCommandException.class, () -> testCommand.execute());
@@ -77,7 +83,7 @@ public class SellCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         itemID = "XXXXXXXX";
         testCommand = new SellCommand(itemID);
         Command anotherCommand = new CreateShelfCommand("randomName");

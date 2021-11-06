@@ -71,7 +71,7 @@ public class EditCommandTest {
 
 
     @Test
-    public void execute_emptyList_throwsItemNotExistException() {
+    public void execute_emptyList_throwsItemNotExistCommandException() {
         testCommand = new EditCommand("test", "1",
                 "selling price", "20");
         assertThrows(ItemNotExistCommandException.class, () -> testCommand.execute());
@@ -130,7 +130,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         testCommand = new EditCommand("test", "1",
                 "selling price", "20");
         Command anotherCommand = new SellCommand("XXXXXXXX");

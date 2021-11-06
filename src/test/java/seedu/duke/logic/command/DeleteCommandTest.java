@@ -104,7 +104,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         testCommand = new DeleteCommand("test", "1");
         Command anotherCommand = new SellCommand("XXXXXXXX");
         assertFalse(testCommand.equals(anotherCommand));
