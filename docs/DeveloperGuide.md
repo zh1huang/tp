@@ -8,8 +8,10 @@
    1. [Architecture](#architecture)
    2. [UI Component](#ui-component)
    3. [Logic Component](#logic-component)
+      1. [SubComponent Parser](#subcomponent-parser)
+      2. [Subcomponent Command](#subcomponent-command)
+         1. [Subcomponent Sales](#subcomponent-sales)
    4. [Model Component](#model-component)
-   5. [SalesManager Component](#salesmanager-component)
    6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
    1. [Adding an item](#adding-an-item)
@@ -18,7 +20,7 @@
    4. [Getting an item](#getting-an-item)
    5. [Selling an item](#selling-an-item)
    6. [Generating sales report](#generating-sales-report)
-   7. [Getting help](#getting-help)
+   7. [Generating item markup price](#generating-item-markup-price)
    8. [Exiting the program](#editing-an-item)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
@@ -91,7 +93,6 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `Model`: Holds the data of the App in memory
 5. `Storage`: Reads data from, and writes data to, the hard disk.
 
-
 ### General Program Flow
 
 1. User runs the programs & input user commands
@@ -130,6 +131,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 ![](diagrams/seedu_duke_logic.drawio.svg)
 
+#### Subcomponent Parser 
+
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
@@ -143,11 +146,43 @@ The `Logic` component consists of `Parser` and `Command` components.
    
 ![](diagrams/ParserClassDiagram.png)
 
+#### Subcomponent Command 
+
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
 ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+
+##### Subcomponent Sales
+
+This section describes how the subcomponent Sales interacts with the sales related commands.
+After the command input is parsed, depending on the Command type, different types uses different sales API.
+
+**API**:
+
+1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
+   * Supports Both SellCommand & ReportCommand & Handles some Sales behaivour
+     * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+     * When program invokes `ReportCommand#execute`
+       1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()` or `SalesReport#generateSoldItemDetails()` is called
+       2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+
+2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesReport.java)
+    * Supports ReportCommand & Handles generation of sales report
+      * When program invokes `ReportCommand#execute`, a `SalesReport` object is created & `SalesReport#generateSoldItemStats()` 
+      or `SalesReport#generateSoldItemDetails()` will be called to get the filterd solditems list for processing into strings before 
+      returning the String for printing.
+
+3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
+    * Supports MarkUpCommand & Handles Estimation of price markup of an item
+      1. When program invokes `MarkUpCommand#execute`,   a `SalesMarkUp` object is created  
+      2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current details of the selected item
+      3. Then, if user markup percent is specified `SalesMarkUp#getUserRequestMarkUpInfo()` is invoked, to calculate the user requested markup information & final price
+      4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the general markup estimation in intervals of 20.
+      
+![](diagrams/SalesSubComponentClassDiagram.svg)
+
 
 ### Model component
 
@@ -170,14 +205,6 @@ The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts whe
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_newShelf.puml)
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_addShelf.puml)
-
-### SalesManager component
-
-**API**:
-
-1. [SalesManager.java]()
-2. [SalesReport.java]()
-3. [SalesMarkUp.java]()
 
 ### Storage component
 The storage component consists of `Storage` class. 
@@ -262,6 +289,39 @@ A user can choose to either list out all the items in the bookstore (i.e every s
 ### Generating sales report
 
 #### Design considerations:
+
+### Generating item markup price 
+
+This sequence diagram shows how MarkUpCommand is being implemented.
+
+![](diagrams/MarkUpSequenceDiagram.svg)
+
+A user may choose to check the estimated marked up price of an item, given a specific mark up percentage. 
+
+1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
+2. CLIvershelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
+   1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
+   2. Else, continues by constructing `SalesMarkUp` Object
+      Then `SalesMarkUp#getItemToMarkUpInfo()`, `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence
+      get the relevant information about the selected item
+       2. `MarkUpCommand#execute()` then checks if the user has specified an input for markup percentage
+           1. If not specified, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` which get the markup in percentage intervals of 20, returned as a string
+           2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up information, returned as a string
+   3. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf` as a `resultString` for printing.
+
+#### Design considerations:
+
+Aspect: How markup executes:
+
+  * Alternative 1 (current choice): SalesMarkup is a separate class from SalesManager.
+    * Pros: Increases cohesiveness. Easier testing efforts.
+    * Cons: More code written.
+
+  * Alternate 2: SalesMarkUp functions can be integrated with SalesManager class.
+  However, having more methods in the same class
+    * Pros: All methods in the same class, lesser additional code.
+    * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could be more complicated.
+___
 
 ## Product scope
 
