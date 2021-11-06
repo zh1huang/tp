@@ -15,6 +15,7 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.MarkUpCommand;
 import seedu.duke.command.RemoveShelfCommand;
 import seedu.duke.command.ReportCommand;
+import seedu.duke.command.SellCommand;
 import seedu.duke.command.exception.CommandException;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
@@ -34,6 +35,7 @@ import static seedu.duke.command.GetCommand.GET_STRING;
 import static seedu.duke.command.ListCommand.LIST_STRING;
 import static seedu.duke.command.MarkUpCommand.MARKUP_STRING;
 import static seedu.duke.command.ReportCommand.REPORT_STRING;
+import static seedu.duke.command.SellCommand.SELL_STRING;
 
 
 // Parser Test class adapted from
@@ -399,10 +401,8 @@ public class ParserTest {
     public void parse_sellCommandInvalidArgs_throwsIllegalFormatException() {
         final String[] inputs = {
             "sell ",
-            "sell i/1",
-            "sell shlv/book1",
-            "sell shlv/book1/ i/1",
-            "sell shlv/book1/ i/1/2"
+            "sell id/1",
+            "sell id/1234567",
         };
 
         for (String input : inputs) {
@@ -412,8 +412,11 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_sellCommandValidArgs_returnSellCommand() {
-
+    public void parse_sellCommandValidArgs_returnSellCommand() throws
+            ItemNotExistException, NoPropertyFoundException, IllegalFormatException {
+        String input = SELL_STRING + " id/" + "12345abc";
+        SellCommand sellCommand = new SellCommand("12345abc");
+        assertEquals(sellCommand, parser.parseCommand(input));
     }
 
     /*

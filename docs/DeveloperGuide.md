@@ -8,8 +8,11 @@
    1. [Architecture](#architecture)
    2. [UI Component](#ui-component)
    3. [Logic Component](#logic-component)
+      1. [SubComponent Parser](#subcomponent-parser)
+      2. [Subcomponent Command](#subcomponent-command)
+         1. [Subcomponent Sales](#subcomponent-sales)
    4. [Model Component](#model-component)
-   5. [Storage Component](#storage-component)
+   6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
    1. [Adding an item](#adding-an-item)
    2. [Editing an item](#editing-an-item)
@@ -17,15 +20,13 @@
    4. [Getting an item](#getting-an-item)
    5. [Selling an item](#selling-an-item)
    6. [Generating sales report](#generating-sales-report)
-   7. [Getting help](#getting-help)
+   7. [Generating item markup price](#generating-item-markup-price)
    8. [Exiting the program](#editing-an-item)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
 9. [Glossary](#glossary)
 10. [Instructions for manual testing](#instructions-for-manual-testing)
-
-___
 
 ## Introduction
 **Welcome to CLIver Shelf!**
@@ -36,7 +37,6 @@ With **CLIver Shelf**, owners can easily keep track of their items in their shel
 This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is to get developers 
 and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
 
-___
 ## Setting up
 **Pre-requisites**
 1. JDK 11
@@ -71,18 +71,20 @@ ___
                                                                             : Enter 'help' for the list of available commands :
                                                                             ......................................................
 ```
-___
+
 ## Acknowledgements
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
 2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
-___
+
 ## Design
 
 All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 
 ### Architecture
-![](diagrams/seedu_duke_architecture.svg)
+
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Architecture.puml)
+
 The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
 1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app launch.  
@@ -90,7 +92,6 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 3. `Logic`: Parses and executes the user input commands.
 4. `Model`: Holds the data of the App in memory
 5. `Storage`: Reads data from, and writes data to, the hard disk.
-
 
 ### General Program Flow
 
@@ -100,7 +101,7 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/GeneralProgramFlowSequenceDiagram.puml)
 
 ### UI component
 
@@ -130,6 +131,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 ![](diagrams/seedu_duke_logic.drawio.svg)
 
+#### Subcomponent Parser 
+
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
@@ -143,11 +146,43 @@ The `Logic` component consists of `Parser` and `Command` components.
    
 ![](diagrams/ParserClassDiagram.png)
 
+#### Subcomponent Command 
+
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then executed in the main class.
     3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other components of the system.
 ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+
+##### Subcomponent Sales
+
+This section describes how the subcomponent Sales interacts with the sales related commands.
+After the command input is parsed, depending on the Command type, different types uses different sales API.
+
+**API**:
+
+1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
+   * Supports Both SellCommand & ReportCommand & Handles some Sales behaivour
+     * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+     * When program invokes `ReportCommand#execute`
+       1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()` or `SalesReport#generateSoldItemDetails()` is called
+       2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+
+2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesReport.java)
+    * Supports ReportCommand & Handles generation of sales report
+      * When program invokes `ReportCommand#execute`, a `SalesReport` object is created & `SalesReport#generateSoldItemStats()` 
+      or `SalesReport#generateSoldItemDetails()` will be called to get the filterd solditems list for processing into strings before 
+      returning the String for printing.
+
+3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
+    * Supports MarkUpCommand & Handles Estimation of price markup of an item
+      1. When program invokes `MarkUpCommand#execute`,   a `SalesMarkUp` object is created  
+      2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current details of the selected item
+      3. Then, if user markup percent is specified `SalesMarkUp#getUserRequestMarkUpInfo()` is invoked, to calculate the user requested markup information & final price
+      4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the general markup estimation in intervals of 20.
+      
+![](diagrams/SalesSubComponentClassDiagram.svg)
+
 
 ### Model component
 
@@ -168,8 +203,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](https://www.plantuml.com/plantuml/svg/LOwz3i8m38JtF8NL2IfrOCs0Ah6oyGIcSLLB-Qc8M_7ubCH5T8akv-zyxhFWIvRWpSIEO4n9dkbjvitaWMUC0eszfH0mkWOmmr3raOXf9TzTx6CYFnOiVzKHAjQTisoOAaNrPumkX-vQtRQrKE3JNj6S3Gx2AmffHtareVi1dQincJWV4rhrKz3jKUDe1-kuZFGa2th0FzLJT4lm7m00)
-![](https://www.plantuml.com/plantuml/svg/XT2_2i8m40RmFKyHEccXWsi7ARYw-GHdSwK7-LFCjVZuIjjBY0fk7-7tVHpf8iE3PsVLI0Rr40BVmrDDxqVgQGBFkcelmJdmfj8GTR_bKiGHxN2boErDqehJUybzMD0sfmrdgFPjtPnpizLWp0eFqgkE2dgc1HYpKocbUbr_kCsKyscTHuh_XgMf30gKpVBc_T8l9pFoZJzbXzxCphu0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_newShelf.puml)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_addShelf.puml)
 
 ### Storage component
 The storage component consists of `Storage` class. 
@@ -177,15 +212,12 @@ It handles the saving of user data by the command component and also loading dat
 
 The diagram below shows the implementation of `saveData()`.
 
-![](https://www.plantuml.com/plantuml/svg/XLJBRjim4BppApO-oO6T3z2XYFjs4SH5PQ37Wf7MDXkA94ZQQV--4csljA6Ad4npPdPso1NlGvG-7bij3gf1s5aRd-mVuRfDLIidJOGF3-iJ-kg0UWSoW7IEmREoYjRBFSvwD9pNd15wxOCAiQokgqIcVKwlZzwZYObRGlf9zF4-L_Iks7oKKPRmhTeyRfv-Ottn86YYfxNPsKn121UeYEqaFm4PlVoiDFxq7UWJQ_WhX7GEbk-kPrK6USA-mM8kP1tLIKQaSxpy9ZgTuXxZIkl-74uO7cMBJ4c7IYjOZjp0T8BDRYWW6fmGInqpvfqAxxKqpvsT000ODKVLWsoTliRfILaafcHIkgh4QJ2J2jG1Ss_ImUrj0hMr3dRM0yhwS8bn7c1byln9mciEGt0joQ8GIj30vv4uaQVAmV_TTkgz6EMOauH5JRFO3mGempyNudER9E0nCmh_7FSOrvsck3hDtwfSWZkUHsa1jGrn0Swh6a6Q1ZosqZ_pvgoBIGigG6LrqxiHuKsV83LkLOkP0at3VQOkEyKhqgSUPlExhY3bN90HJznWYDx-9LIyDftoeu5DJOylTa7Da0zvy85XgT9Yv32yDjt5bc3mPRHLLDlDZzMNJx--hxPVvzEo4bxwNsXabFIsZ70nB5ydYhQANfazUvG85yCIbioIlKESdwUwkO4IQcq35fGWrPFEYOcNWuvmA7oFfZcs-Xy0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_saveData.puml)
 
 The diagram below shows the implementation of `loadData()`
 
-![](https://www.plantuml.com/plantuml/svg/dLNFJkGy3B_tASoSEfNW0N90IDyd9122Gmzx3gs7oMxQL8c7WRVVEYN4gGf2Uw5nVd_iE1bp4qXxEWssEfeUuU0SFRktQfetJMScFHByzt3tYhuzeZs03g2dgO1tgYNdzGlk60tBkcGSZ4LrQ-n2uQZ48_RB6q8V6JaiUMoE_V-QjBfldnwVddzZHr6HaPM2gtumWLIRLWi_HIMzEtcF8qMkWlY9TBc_gRWZ71JmNyddU3k1i_qYuPMKIRIgz3HTNd-qL5cdumdhVQKxCg-QyBFT7r-ul8xjRPhAJHINC3e2VEEZ0W2iYAhpg0aVySmzdvsPazmZWtTumH9nCT0q1HBDWXucYx76xvsI0B8YeZt-9BU2Ct_hBDv_LUN5XUgi2tmocJsruSkaEFRhdYhmgFkMl1bVPhjIipPMGFX6rSfQM8eNspGAHZn3Vj8rY_UIBT_0hNV3VN1ZdIqsNeHrReA3yw2jNPxxenuGp2WoN_t1znRfepaYNVxPwBvlEQW_BSgRpLJUpX6xo5zDqvHusIp9NDz9cM2pWmfUa4JxSgrN9R0pX4FOxSk3frJ2aVT5M5RB9kmULgMkzSKL916OSMNm_R5c_cmnQ39k1FtiJWHqn6W1PqD76DaqENuQQaiBnuGu0JI4D5KIfSmhPrRJ29BeZw18WjmlEcNMn1w_zK8RC5NzyufvNFwWwdRBJMB_K7tXcUR6TgNY_uhkewZc1FjIMewUObJbx0Mifqb2FGRoxft7JGx4kxoPxK-3_Gi0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_loadData.puml)
 
-
-
-___
 ## Implementation
 
 ### Adding an item
@@ -206,6 +238,13 @@ ___
 ### Editing an item
 
 #### Design considerations:
+* Aspect: How to change a cerntain property precisely
+   * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
+      * Pros: Only need to change one property. 
+      * Cons: Need one additional step to check which property is selected by the user.
+   * Alternative 2: Let the user specify the new values for each property.
+      * Pros: The user can change multiple properties at once using only one Edit command.
+      * Cons: Longer input is needed from the user even if he/she just wants to change one property.
 
 ### Listing all items
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
@@ -239,14 +278,51 @@ A user can choose to either list out all the items in the bookstore (i.e every s
 ### Selling an item
 
 #### Design considerations:
+* Aspect: How to determine the sale time
+   * Alternative 1 (current choice): Use the system time when the user sold the item.
+      * Pros: Does not need one additional parameter (sale time) from the user. Shorter command for the user.
+      * Cons: Does not allow the user to manually set the sale time. Not very flexible for the user if he/she forgot to sell an item and wants to make up for it later on.
+   * Alternative 2: Requires the user to specify the sale time.
+      * Pros: More flexibility for the user to add on sale records that he/she forgot to add.
+      * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
 
 #### Design considerations:
 
+### Generating item markup price 
 
+This sequence diagram shows how MarkUpCommand is being implemented.
 
+![](diagrams/MarkUpSequenceDiagram.svg)
+
+A user may choose to check the estimated marked up price of an item, given a specific mark up percentage. 
+
+1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
+2. CLIvershelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
+   1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
+   2. Else, continues by constructing `SalesMarkUp` Object
+      Then `SalesMarkUp#getItemToMarkUpInfo()`, `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence
+      get the relevant information about the selected item
+       2. `MarkUpCommand#execute()` then checks if the user has specified an input for markup percentage
+           1. If not specified, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` which get the markup in percentage intervals of 20, returned as a string
+           2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up information, returned as a string
+   3. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf` as a `resultString` for printing.
+
+#### Design considerations:
+
+Aspect: How markup executes:
+
+  * Alternative 1 (current choice): SalesMarkup is a separate class from SalesManager.
+    * Pros: Increases cohesiveness. Easier testing efforts.
+    * Cons: More code written.
+
+  * Alternate 2: SalesMarkUp functions can be integrated with SalesManager class.
+  However, having more methods in the same class
+    * Pros: All methods in the same class, lesser additional code.
+    * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could be more complicated.
 ___
+
 ## Product scope
 
 ### Target user profile
@@ -261,7 +337,7 @@ ___
 ### Value proposition
 
 Allows efficient and simplified management of inventory and finances of the store
-___
+
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -280,7 +356,7 @@ ___
 |v2.0|user|create a shelf|store items into the shelf|
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
-___
+
 ## Non-Functional Requirements
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
 2. Users with fast typing speed should be able to accomplish tasks faster using commands than using the mouse
@@ -291,14 +367,28 @@ ___
 
 * *Mainstream OS* - MacOS, Windows, Linux, Unix
 
+
 ## Instructions for manual testing
 
 Given below are the instructions to test the app manually.
 
-:information_source: **Note:** These instructions only provide a base of how the app is currently being tested by the 
+&#8505; **Note:** These instructions only provide a base of how the app is currently being tested by the 
 developing team. These test cases may and may not cover all possible outcomes. You are welcome to do more exploratory testing. 
 Should there be any bugs, please do contact 
 the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
+
+* [Launch and shut down](#launch-and-shut-down)
+* [Getting help](#getting-help)
+* [Creating a shelf](#creating-a-shelf)
+* [Removing a shelf](#removing-a-shelf)
+* [Adding an item](#adding-an-item)
+* [Deleting an item](#deleting-an-item)
+* [Getting information of an item](#getting-information-of-an-item)
+* [Listing the items](#listing-the-items)
+* [Editing an item](#editing-an-item)
+* [Getting a Report](#getting-a-report)
+* [Selling an item](#selling-an-item)
+* [Markup price of an item](#markup-price-of-an-item)
 
 ### Launch and shut down
 
@@ -322,96 +412,133 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 1. To get help information, type `help`.
 
 ### Creating a shelf
-1. To create a shelf with a unique name that does not exit before in the shelf list.
-   1. Pre-requisites shelf name `Book1` does not previously exist. The user may check by doing a `list`.
-   2. Test case 1: `create shlv/Book1`
-      Expected: Shelf name `Book1` will be created.
 
-   3. Test case 2: `create shlv/Book1`
-      Expected: DuplicateShelfException thrown, details will be shown in the output. No shelf name `Book1` is created again, since the shelf name already exists. 
+* Format: `create shlv/SHELF_NAME`
+* Pre-requisite: Shelf name to be created must not exist.
 
-   4. Test case 3: User inputs with the incorrect format such as `create`, `create shlv/`, `create sh`, `create shlv/Book2 shlv/Pencil1` 
-      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Create shelf | `create shlv/book1` | Shows shelf created message |
+| Create shelf that exists | `create shlv/SHELF_NAME` | Error message (Shelf name already exists) |
+| Create shelf name with special characters | `create shlv/invest$$booksshelf` | Error message (shelf name cannot contain special characters) |
+| Missing parameters | `create` | Error message (invalid format) |
 
 ### Removing a shelf
-1. To remove a shelf with a unique name that exist in the shelf list.
-   1. Pre-requisites shelf name `Book1` previously exist. The user may check by doing a `list`.
-      1. Test case 1: `remove shlv/Book1`
-         Expected: Shelf name** `Book1` will be removed. 
-   2. Test case 2: remove a shelf that has already been removed. `remove shlv/Book1` again
-      Expected: Shows output message that shelf does not exist.
-   3. Test case 3: User inputs with the incorrect format such as `remove`, `remove shlv/`, `remove sh`, `remove shlv/Book2 shlv/Pencil1`
-      Expected: IllegalFormatException thrown, details of the correct format would be shown to help the user to correct the input line.
+
+* Format: `remove shlv/SHELF_NAME`
+* Pre-requisite: Shelf name to be removed needs to be created first.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Remove shelf | `remove shlv/book1` | Shows shelf removed message |
+| Remove non-existent shelf | `remove shlv/nonexistentshelf` | Error message (shelf does not exist) |
+| Missing parameters | `remove` | Error message (invalid format) |
 
 ### Adding an item
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+* Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
+* Pre-requisite: A shelf must first exist for any item to be added to a shelf.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
 
 ### Deleting an item
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+* Format: `delete shlv/SHELF_NAME i/INDEX`
+* Pre-requisite: A shelf must first contain the item to be deleted. 
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `delete shlv/book1` | Error message (invalid format) |
 
 ### Getting information of an item
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+* Format: `get shlv/SHELF_NAME i/INDEX`
+* Pre-requisite: A shelf must first contain the item which the user wants to know more about.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
 ### Listing the items
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+* Format: `list [shlv/SHELF_NAME]`
+* Pre-requisite: None
 
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `list shlv/` | Error message (invalid format) |
 
 ### Editing an item
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+* Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
+* Pre-requisite: At least one item has to be added to any shelf.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- |
+| Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
 
 ### Getting a Report
-1. Getting a sales statistic report when there are already items sold
-   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
-   2. Test case: `report t/stats` 
-      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales from the beginning of time.
-   3. Test case: `report t/stats ym/2021-09`
-      Expected: Shows a report of the statistics (total cost, total income, total profit) of the sales in the months of september in year 2021.
-   4. Test case: `report t/stats ym/0000-26`
-      Expected: Shows an exception message where the time range is not correct. 
-   
-2. Getting a sales items report when there are already items sold
-   1. Pre-requisite: `list shlv/soldItems` to check that there exist a shelf name sold items, which contains sold item records.
-   2. Test case: `report t/items`
-      Expected: Shows a report of the items detail of the sales from the beginning of time.
-   3. Test case: `report t/items ym/2021-07`
-      Expected: Shows a report of the items detail of the sales in the months of July in year 2021.
-   4. Test case: `report t/stats ym/0600-33`
-      Expected: Shows an exception message where the time range is not correct.
 
-3. Getting a report when none of the items are sold
-   1. Pre-requisite: `list shlv/soldItems` to check that there does **not** exist a shelf name sold items
-   2. Test case: `report t/stats` 
-      Expected: Shows a message none of the items have been sold to generate the statistics report
-   3. Test case: `report t/items`
-      Expected: Shows a message none of the items have been sold to generate the items report
+* Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
+* Pre-requisite: Some items must be sold first to view the report with data.
+* Note: There are only 2 content type: 
+  * `t/stats` which will give the statistics of the Sales  
+  * `t/items` which will give the items sold.
 
-4. Getting a sales report but the user input format is wrong
-
-   Test case with wrong input formats 
-   
-   2. `report`,`report t/`,`report t/ ym/` where the input format is incomplete
-   3. `report t/income`, `report t/allitems`, `report t/statistics` where the content type does not match either `stats` or `items` exactly.
-   4. `report t/stats ym/12-12-2020`, `report t/stats ym/20-12-21`, `report t/stats ym/12:12:2021` where the date does not match the input date format.
-   
-   Expected: Throws IllegalFormatException, shows message about invalid input format. Correct format for the command will be shown.
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Statistics report  | `report t/stats ym/2021-10`  | shows statistics for Oct 2021 |
+| Items report  | `report t/items ym/2021-10`  | shows items sold for Oct 2021 |
+| Items report in between time period | `report t/items ym/2021-10 ym/2021-11` | shows items sold between Oct 2021 and Nov 2021 inclusive |
+| Report in invalid year-month | `report t/items ym/0000-10`  | shows invalid year error |
+| Report in year-month that does not have items sold | `report t/items ym/2010-10`  | Shows no items sold in Oct 2010 |
+| Report in between a time period that does not have items sold | `report t/items ym/1970-01 ym/2010-10` | Shows no items sold in between Jan 1970 and Oct 2010 |
+| Time YearMonth not in chronological order | `report t/items ym/2021-11 ym/2021-01` | Shows error time parameters are swapped |
+| Missing parameters  | `report t/items` | Error message (invalid format) |
+| Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
 ### Selling an item
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+
+* Format: `sell id/ITEM_ID`
+* Pre-requisite: There must be items added to a shelf first. And user needs to know the `ITEM_ID` through `get` or `list` command.
+  * Note: replace the id in first test case with an id that exist in ur program run, as the id is can change depending on the local machine that the program is being executed on.
+
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Sell item (id exists) | `sell id/76e9d234` | Shows item sold |
+| Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
+| Missing Parameters | `sell` | Error message (invalid format) |
 
 ### Markup price of an item
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:------------|:-------------------|
+* Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` 
+* Pre-requisite: There must be items added to a shelf first.
 
-
+| Test Case  | Command | Expected Result|
+| ------------- | ------------- | ------------- |
+| Percent Markup not specified | `markup shlv/book1 i/1` | shows estimated user markup in multiples of 20 till max of 100% |
+| Normal percent markup less than 999.99 | `markup shlv/book1 i/1 %/5` | Shows current item markup & the final estimated price after user markup percent |
+| Percent markup more than 2 dp | `markup shlv/book1 i/1 %/5.001` | Error message (invalid format) |
+| Percent markup more than 1000 dp | `markup shlv/book1 i/1 %/1234.67` | Error message (invalid format) |
+| Non-existent shelf | `markup shlv/notexistshelf i/1 %/12.34` | Error message (shelf does not exist) |
+| Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
+| Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
+| Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |

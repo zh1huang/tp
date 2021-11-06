@@ -10,8 +10,8 @@ import java.util.Comparator;
 
 //@@author yuejunfeng0909
 /**
- * Represents a collection of ItemContainers.
- * Provides methods to better manage ItemContainers.
+ * Represents a collection of Shelfs.
+ * Provides methods to better manage Shelf items.
  * Implemented using Singleton pattern.
  */
 public class ShelfList {
@@ -68,7 +68,7 @@ public class ShelfList {
     }
 
     /**
-     * Remove the item container from the ShelfList.
+     * Remove the specified Shelf from the ShelfList.
      *
      * @param shelf The Shelf to be removed
      *
@@ -103,9 +103,9 @@ public class ShelfList {
      * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
      */
     public Shelf getShelf(String name) throws ShelfNotExistException {
-        for (Shelf container : shelves) {
-            if (container.getName().equals(name)) {
-                return container;
+        for (Shelf shelf : shelves) {
+            if (shelf.getName().equals(name)) {
+                return shelf;
             }
         }
         throw new ShelfNotExistException(name);
@@ -125,18 +125,18 @@ public class ShelfList {
         if (name.equals("soldItems") && isSoldItemHidden) {
             throw new ShelfNotExistException(name);
         }
-        for (Shelf container : shelves) {
-            if (container.getName().equals(name)) {
-                return container;
+        for (Shelf shelf : shelves) {
+            if (shelf.getName().equals(name)) {
+                return shelf;
             }
         }
         throw new ShelfNotExistException(name);
     }
 
     /**
-     * Check if there exists an item container with the specified name.
+     * Check if there exists a Shelf with the specified name.
      *
-     * @param name name of the item container
+     * @param name name of the Shelf
      *
      * @return true if there exists
      */
@@ -165,8 +165,8 @@ public class ShelfList {
      */
     public ArrayList<String> getAllShelvesName() {
         ArrayList<String> shelvesNames = new ArrayList<>();
-        for (Shelf container : shelves) {
-            shelvesNames.add(container.getName());
+        for (Shelf shelf : shelves) {
+            shelvesNames.add(shelf.getName());
         }
         return shelvesNames;
     }

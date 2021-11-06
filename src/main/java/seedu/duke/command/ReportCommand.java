@@ -10,7 +10,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ReportCommand extends Command {
-    public static final String REPORT_DATA_ARGS_FORMAT_STRING = "report t/TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]";
+    public static final String REPORT_DATA_ARGS_FORMAT_STRING =
+            "report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]\n"
+                    + "Only 2 report types:\n"
+                    + "1. \"t/stats\" - to show sales statistics\n"
+                    + "2. \"t/items\" - to show items sold\n"
+                    + "ym/YEAR-MONTH should follow input ym/YYYY-MM\n"
+                    + "E.g. Jan 2021 is represented as ym/2021-01.\n";
     public static final String REPORT_STRING = "report";
     public static final String PARSE_REPORT_SUCCESS_MESSAGE_FORMAT = "type: %s\nstart date: %s\nend date: %s\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);

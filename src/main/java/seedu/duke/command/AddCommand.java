@@ -20,7 +20,11 @@ public class AddCommand extends Command {
     public static final String ADD_ITEM_DATA_ARGS_FORMAT_STRING =
             "add n/NAME shlv/SHELF_NAME p/PURCHASE_COST s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
                     + "(Purchase cost and selling price must be non-negative numbers. "
-                    + "Quantity must be non-negative integers.)";
+                    + "Quantity must be non-negative integers.)\n"
+                    + "Valid cost/price input e.g \"5.4\", \"5.00\", \"12.00\"\n"
+                    + "Invalid cost/price input e.g. \"5.\", \"45.\", \"-5.0\", \"10000.000\"\n"
+                    + "Max cost/price: 9999.99 (up to 2 dp)\n"
+                    + "Max quantity: 999";
     public static final String ADD_STRING = "add";
     public static final String PARSE_ADD_SUCCESS_MESSAGE_FORMAT = "name: %s\nshelfname: %s\ncost: $%s\n"
             + "price: %s\nquantity: %s\nremarks: %s\n";
