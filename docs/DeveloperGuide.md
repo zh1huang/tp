@@ -52,11 +52,6 @@ and potential contributors to get familiarised with the implementation of **CLIv
    2. Select the project directory, and click `OK` to accept the default settings
 5. Verify the setup: After the importing is complete, locate `CliverShelf.java` file, right-click it and `Run 'CliverShelf.main()'`. If the setup is correct, you should see something like this:
 ```
-> Task :compileJava UP-TO-DATE
-> Task :processResources NO-SOURCE
-> Task :classes UP-TO-DATE
-
-> Task :CliverShelf.main()
                                                                   .............................................................
                                                                   : Hello from                                                :
                                                                   :   _____ _      _____              _____ _          _  __  :
