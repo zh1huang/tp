@@ -1,4 +1,5 @@
 package seedu.duke.logic.command.sales;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,13 +10,23 @@ import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.SoldItem;
-import seedu.duke.model.exception.*;
+import seedu.duke.model.exception.DuplicateItemModelException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
+import seedu.duke.model.exception.ItemNotExistModelException;
+import seedu.duke.model.exception.ShelfNotExistModelException;
+import seedu.duke.model.exception.ModelException;
+import seedu.duke.model.exception.DuplicateShelfModelException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 public class SalesManagerTest {
     private Shelf testList;
@@ -63,15 +74,15 @@ public class SalesManagerTest {
     }
 
     @Test
-    public void filterSoldItems_iLLegalArgumentsAndWithinSpecificMonth_throwsIllegalArgumentException(){
+    public void filterSoldItems_iLLegalArgumentsAndWithinSpecificMonth_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentCommandException.class,
-                () -> SalesManager.getSalesManager().filterSoldItems("2021-1", ""));
+            () -> SalesManager.getSalesManager().filterSoldItems("2021-1", ""));
     }
 
     @Test
     public void filterSoldItems_iLLegalArgumentsAndWithinAPeriod_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentCommandException.class,
-                () -> SalesManager.getSalesManager().filterSoldItems("2021-1", "2021-2"));
+            () -> SalesManager.getSalesManager().filterSoldItems("2021-1", "2021-2"));
     }
 
 }
