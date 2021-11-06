@@ -35,4 +35,20 @@ public class SellCommand extends Command {
             throw new ItemNotExistException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof SellCommand)) {
+            return false;
+        }
+
+        SellCommand command = (SellCommand) other;
+        return itemID.equals(command.itemID);
+    }
 }
