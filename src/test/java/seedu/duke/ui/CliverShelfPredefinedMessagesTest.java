@@ -6,7 +6,7 @@ class CliverShelfPredefinedMessagesTest {
 
     @Test
     void printWelcomeMessage() {
-        DukePredefinedMessages.printWelcomeMessage();
+        PredefinedMessages.printWelcomeMessage();
     }
 
     @Test

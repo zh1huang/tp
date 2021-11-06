@@ -4,8 +4,8 @@
 
 
 class ShelfList <<Singleton>> {
-{abstract} - ShelfList shelfList
-{abstract} + ShelfList getShelfList()
+{static} - ShelfList shelfList
+{static} + ShelfList getShelfList()
 + void addShelf(String shelfName)
 + Shelf getShelf(String shelfName)
 + void deleteShelf(String shelfName)
