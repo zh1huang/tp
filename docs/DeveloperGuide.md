@@ -26,8 +26,6 @@
 9. [Glossary](#glossary)
 10. [Instructions for manual testing](#instructions-for-manual-testing)
 
-___
-
 ## Introduction
 **Welcome to CLIver Shelf!**
 
@@ -37,7 +35,6 @@ With **CLIver Shelf**, owners can easily keep track of their items in their shel
 This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is to get developers 
 and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
 
-___
 ## Setting up
 **Pre-requisites**
 1. JDK 11
@@ -72,18 +69,20 @@ ___
                                                                             : Enter 'help' for the list of available commands :
                                                                             ......................................................
 ```
-___
+
 ## Acknowledgements
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
 2. Adapted Parser code: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
-___
+
 ## Design
 
 All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 
 ### Architecture
-![](diagrams/seedu_duke_architecture.svg)
+
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Architecture.puml)
+
 The architecture diagram above describes the design of CLIver Shelf. The main components are:
 
 1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app launch.  
@@ -101,7 +100,7 @@ The architecture diagram above describes the design of CLIver Shelf. The main co
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](http://www.plantuml.com/plantuml/svg/RP3HIiGm44NV-nLXdzg5_O4WihXF2mg2-06pwQY1D1qcCul-lIHfhDPzwdJkoRsNEIO15fr21qvcDfgGEm8Mxpn157DwF5-HNpuml1b81eZ-o3lx39oGTrcaCcxqqpnD4CS2k3flYDTp4MSLKkcwNC4SxdEKDJxc7JZnLn0iyK2KvHfcwtS9wGi-hFpQg9gs1llzoYoh1jqTVZOZDYY7PgKoMs7rjGO_qQbWF_mBQ1uDPKmQv8PNFOGrn3xA4wO4x_YWbql0lhuPEbsQ0j5lWn6JyFpL8jf_E-qHuwXJ-0O0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/GeneralProgramFlowSequenceDiagram.puml)
 
 ### UI component
 
@@ -169,8 +168,8 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation methods are used.
 
-![](https://www.plantuml.com/plantuml/svg/LOwz3i8m38JtF8NL2IfrOCs0Ah6oyGIcSLLB-Qc8M_7ubCH5T8akv-zyxhFWIvRWpSIEO4n9dkbjvitaWMUC0eszfH0mkWOmmr3raOXf9TzTx6CYFnOiVzKHAjQTisoOAaNrPumkX-vQtRQrKE3JNj6S3Gx2AmffHtareVi1dQincJWV4rhrKz3jKUDe1-kuZFGa2th0FzLJT4lm7m00)
-![](https://www.plantuml.com/plantuml/svg/XT2_2i8m40RmFKyHEccXWsi7ARYw-GHdSwK7-LFCjVZuIjjBY0fk7-7tVHpf8iE3PsVLI0Rr40BVmrDDxqVgQGBFkcelmJdmfj8GTR_bKiGHxN2boErDqehJUybzMD0sfmrdgFPjtPnpizLWp0eFqgkE2dgc1HYpKocbUbr_kCsKyscTHuh_XgMf30gKpVBc_T8l9pFoZJzbXzxCphu0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_newShelf.puml)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_addShelf.puml)
 
 ### SalesManager component
 
@@ -186,13 +185,11 @@ It handles the saving of user data by the command component and also loading dat
 
 The diagram below shows the implementation of `saveData()`.
 
-![](https://www.plantuml.com/plantuml/svg/XLJBRjim4BppApO-oO6T3z2XYFjs4SH5PQ37Wf7MDXkA94ZQQV--4csljA6Ad4npPdPso1NlGvG-7bij3gf1s5aRd-mVuRfDLIidJOGF3-iJ-kg0UWSoW7IEmREoYjRBFSvwD9pNd15wxOCAiQokgqIcVKwlZzwZYObRGlf9zF4-L_Iks7oKKPRmhTeyRfv-Ottn86YYfxNPsKn121UeYEqaFm4PlVoiDFxq7UWJQ_WhX7GEbk-kPrK6USA-mM8kP1tLIKQaSxpy9ZgTuXxZIkl-74uO7cMBJ4c7IYjOZjp0T8BDRYWW6fmGInqpvfqAxxKqpvsT000ODKVLWsoTliRfILaafcHIkgh4QJ2J2jG1Ss_ImUrj0hMr3dRM0yhwS8bn7c1byln9mciEGt0joQ8GIj30vv4uaQVAmV_TTkgz6EMOauH5JRFO3mGempyNudER9E0nCmh_7FSOrvsck3hDtwfSWZkUHsa1jGrn0Swh6a6Q1ZosqZ_pvgoBIGigG6LrqxiHuKsV83LkLOkP0at3VQOkEyKhqgSUPlExhY3bN90HJznWYDx-9LIyDftoeu5DJOylTa7Da0zvy85XgT9Yv32yDjt5bc3mPRHLLDlDZzMNJx--hxPVvzEo4bxwNsXabFIsZ70nB5ydYhQANfazUvG85yCIbioIlKESdwUwkO4IQcq35fGWrPFEYOcNWuvmA7oFfZcs-Xy0)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_saveData.puml)
 
 The diagram below shows the implementation of `loadData()`
 
-![](https://www.plantuml.com/plantuml/svg/dLNFJkGy3B_tASoSEfNW0N90IDyd9122Gmzx3gs7oMxQL8c7WRVVEYN4gGf2Uw5nVd_iE1bp4qXxEWssEfeUuU0SFRktQfetJMScFHByzt3tYhuzeZs03g2dgO1tgYNdzGlk60tBkcGSZ4LrQ-n2uQZ48_RB6q8V6JaiUMoE_V-QjBfldnwVddzZHr6HaPM2gtumWLIRLWi_HIMzEtcF8qMkWlY9TBc_gRWZ71JmNyddU3k1i_qYuPMKIRIgz3HTNd-qL5cdumdhVQKxCg-QyBFT7r-ul8xjRPhAJHINC3e2VEEZ0W2iYAhpg0aVySmzdvsPazmZWtTumH9nCT0q1HBDWXucYx76xvsI0B8YeZt-9BU2Ct_hBDv_LUN5XUgi2tmocJsruSkaEFRhdYhmgFkMl1bVPhjIipPMGFX6rSfQM8eNspGAHZn3Vj8rY_UIBT_0hNV3VN1ZdIqsNeHrReA3yw2jNPxxenuGp2WoN_t1znRfepaYNVxPwBvlEQW_BSgRpLJUpX6xo5zDqvHusIp9NDz9cM2pWmfUa4JxSgrN9R0pX4FOxSk3frJ2aVT5M5RB9kmULgMkzSKL916OSMNm_R5c_cmnQ39k1FtiJWHqn6W1PqD76DaqENuQQaiBnuGu0JI4D5KIfSmhPrRJ29BeZw18WjmlEcNMn1w_zK8RC5NzyufvNFwWwdRBJMB_K7tXcUR6TgNY_uhkewZc1FjIMewUObJbx0Mifqb2FGRoxft7JGx4kxoPxK-3_Gi0)
-
-___
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_loadData.puml)
 
 ## Implementation
 
@@ -214,6 +211,13 @@ ___
 ### Editing an item
 
 #### Design considerations:
+* Aspect: How to change a cerntain property precisely
+   * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
+      * Pros: Only need to change one property. 
+      * Cons: Need one additional step to check which property is selected by the user.
+   * Alternative 2: Let the user specify the new values for each property.
+      * Pros: The user can change multiple properties at once using only one Edit command.
+      * Cons: Longer input is needed from the user even if he/she just wants to change one property.
 
 ### Listing all items
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
@@ -247,14 +251,18 @@ A user can choose to either list out all the items in the bookstore (i.e every s
 ### Selling an item
 
 #### Design considerations:
+* Aspect: How to determine the sale time
+   * Alternative 1 (current choice): Use the system time when the user sold the item.
+      * Pros: Does not need one additional parameter (sale time) from the user. Shorter command for the user.
+      * Cons: Does not allow the user to manually set the sale time. Not very flexible for the user if he/she forgot to sell an item and wants to make up for it later on.
+   * Alternative 2: Requires the user to specify the sale time.
+      * Pros: More flexibility for the user to add on sale records that he/she forgot to add.
+      * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
 
 #### Design considerations:
 
-
-
-___
 ## Product scope
 
 ### Target user profile
@@ -269,8 +277,6 @@ ___
 ### Value proposition
 
 Allows efficient and simplified management of inventory and finances of the store
-
-___
 
 ## User Stories
 
@@ -290,8 +296,6 @@ ___
 |v2.0|user|create a shelf|store items into the shelf|
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
-
-___
 
 ## Non-Functional Requirements
 1. Should work on mainstream OS such as Windows and Linux as long as it has Java 11 or above installed.
@@ -326,9 +330,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 * [Selling an item](#selling-an-item)
 * [Markup price of an item](#markup-price-of-an-item)
 
-
----
-
 ### Launch and shut down
 
 #### Initial launch
@@ -347,12 +348,8 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 2. Data will be automatically saved into the data file.
 3. The data is expected to still be saved normally even if program crashes.
 
----
-
 ### Getting help
 1. To get help information, type `help`.
-
----
 
 ### Creating a shelf
 
@@ -366,8 +363,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Create shelf name with special characters | `create shlv/invest$$booksshelf` | Error message (shelf name cannot contain special characters) |
 | Missing parameters | `create` | Error message (invalid format) |
 
----
-
 ### Removing a shelf
 
 * Format: `remove shlv/SHELF_NAME`
@@ -378,8 +373,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Remove shelf | `remove shlv/book1` | Shows shelf removed message |
 | Remove non-existent shelf | `remove shlv/nonexistentshelf` | Error message (shelf does not exist) |
 | Missing parameters | `remove` | Error message (invalid format) |
-
----
 
 ### Adding an item
 
@@ -393,8 +386,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
 
----
-
 ### Deleting an item
 
 * Format: `delete shlv/SHELF_NAME i/INDEX`
@@ -406,8 +397,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | ------------- | ------------- | ------------- |
 | Missing parameters | `delete shlv/book1` | Error message (invalid format) |
-
----
 
 ### Getting information of an item
 
@@ -421,8 +410,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
----
-
 ### Listing the items
 
 * Format: `list [shlv/SHELF_NAME]`
@@ -434,8 +421,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | ------------- | ------------- | ------------- |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
-
----
 
 ### Editing an item
 
@@ -449,8 +434,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | ------------- | ------------- | ------------- |
 | ------------- | ------------- | ------------- |
 | Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
-
----
 
 ### Getting a Report
 
@@ -472,8 +455,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Missing parameters  | `report t/items` | Error message (invalid format) |
 | Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
----
-
 ### Selling an item
 
 * Format: `sell id/ITEM_ID`
@@ -485,8 +466,6 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Sell item (id exists) | `sell id/76e9d234` | Shows item sold |
 | Sell item (id does not exists) | `sell id/ffffffff` | Error message (can't find item with that id) |
 | Missing Parameters | `sell` | Error message (invalid format) |
-
----
 
 ### Markup price of an item
 
@@ -503,5 +482,3 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
 | Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
-
----
