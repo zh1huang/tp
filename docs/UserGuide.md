@@ -23,29 +23,29 @@
 
 ## Introduction
 
-CLIvershelf allows bookstore owners to create a management system of inventories and finances to better manage their
+Clivershelf allows bookstore owners to create a management system of inventories and finances to better manage their
 business, where they can view these information in a user-friendly manner.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Download &#11015; the latest version of `CliverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
-3. Run `cd (path to the folder containing CliverShelf.jar)` and `java -jar CliverShelf.jar` to start using CLIvershelf.
+3. Run `cd (path to the folder containing CliverShelf.jar)` and `java -jar CliverShelf.jar` to start using Clivershelf.
 4. You should see the following:
 ```
-                .............................................................
-                : Hello from                                                :
-                :   _____ _      _____              _____ _          _  __  :
-                :  / ____| |    |_   _|            / ____| |        | |/ _| :
-                : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
-                : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
-                : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
-                :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
-                : What can I do for you?                                    :
-                ................................................................
-                          ...................................................
-                          : Enter 'help' for the list of available commands :
-                          ......................................................
+                                                                  .............................................................
+                                                                  : Hello from                                                :
+                                                                  :   _____ _      _____              _____ _          _  __  :
+                                                                  :  / ____| |    |_   _|            / ____| |        | |/ _| :
+                                                                  : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
+                                                                  : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
+                                                                  : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
+                                                                  :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
+                                                                  : What can I do for you?                                    :
+                                                                  ................................................................
+                                                                            ...................................................
+                                                                            : Enter 'help' for the list of available commands :
+                                                                            ......................................................
 ```
 5. Type `help` to see all the commands available. You may try some example commands below:
    * `create shlv/book1` - creates a new shelf named `book1`
@@ -124,9 +124,9 @@ create shlv/book2
 
 Expected outcome:
 ```
-                                          ...................................
-                                          : Shelf "book2" has been created. :
-                                          ......................................
+                                                                                            ...................................
+                                                                                            : Shelf "book2" has been created. :
+                                                                                            ......................................
 ```
 
 ### Remove a shelf
@@ -145,9 +145,9 @@ remove shlv/book2
 
 Expected outcome:
 ```
-                                       ......................................
-                                       : Shelf "book2" has been deleted. :
-                                       .........................................
+                                                                                            ...................................
+                                                                                            : Shelf "book2" has been removed. :
+                                                                                            ......................................
 ```
 
 ### Add new items
@@ -179,7 +179,7 @@ Expected outcome
 ```
                                                                    ............................................................
                                                                    : This item has been added to the list. Its unique ID is:  :
-                                                                   : 76a3e297                                                 :
+                                                                   : 6ddf90b0                                                 :
                                                                    ...............................................................
 ```
 
@@ -222,7 +222,7 @@ Shows a list of all items in the inventory list.
 The attributes shown are: Item name, purchase cost, selling price, quantity, and if they have remarks.
 
 Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks.
-Users can use the [`get` function](#get-information-about-an-item) to display the remarks.
+Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
 
 Format: `list [shlv/SHELF_NAME]`
 
@@ -232,23 +232,18 @@ list
 ```
 Expected outcome:
 ```
-                         ......................................................................................................
-                         : Here is the list of items:                                                                         :
-                         : [book1]:                                                                                           :
-                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
-                         : -------------------------------------------------------------------------------------------------  :
-                         :  1   | Narnia                                              | 17.40     | 25        | 1   |   x     :
-                         :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   o     :
-                         : [book2]:                                                                                           :
-                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
-                         : -------------------------------------------------------------------------------------------------  :
-                         :  1   | Geronimo                                            | 17.90     | 20.90     | 1   |   o     :
-                         :  2   | expensive book                                      | 9999.99   | 9000.00   | 2   |   o     :
-                         : [warehouse]:                                                                                       :
-                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
-                         : -------------------------------------------------------------------------------------------------  :
-                         :  1   | sample item                                         | 12.25     | 25        | 1   |   o     :
-                         .........................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      : [book1]:                                                                                              :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
+                      :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
+                      : [warehouse]:                                                                                          :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | sample item                                        | 12.25     | 25.00     | 1    |   x    :
+                      ............................................................................................................
 ```
 
 Example: **Listing all items under `book1` shelf**
@@ -257,13 +252,13 @@ list shlv/book1
 ```
 Expected outcome:
 ```
-                         ......................................................................................................
-                         : Here is the list of items:                                                                         :
-                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
-                         : -------------------------------------------------------------------------------------------------  :
-                         :  1   | Narnia                                              | 17.40     | 25        | 1   |   x     :
-                         :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   o     :
-                         .........................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
+                      :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
+                      ............................................................................................................
 ```
 
 ### Get information about an item
@@ -272,28 +267,29 @@ Retrieves information of an item.
 
 Format: `get shlv/SHELF_NAME i/INDEX`
 
-Example: **Retrieves all the information of item `index 1` in shelf `book1`, including remarks**
+Example: **Retrieves all the information of item `index 1` in shelf `book1`, including its unique and remarks**
 ```
 get shlv/book1 i/1
 ```
 Expected outcome:
 ```
 list shlv/book1
-                         ......................................................................................................
-                         : Here is the list of items:                                                                         :
-                         :  No  |                        Item                         |   Cost    |   Price   | Qty | Remarks :
-                         : -------------------------------------------------------------------------------------------------  :
-                         :  1   | Narnia                                              | 17.40     | 25        | 1   |   o     :
-                         :  2   | Three Little Pigs                                   | 10.90     | 12.99     | 97  |   x     :
-                         .........................................................................................................
+                      .........................................................................................................
+                      : Here is the list of items:                                                                            :
+                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+                      : ----------------------------------------------------------------------------------------------------- :
+                      :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
+                      :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
+                      ............................................................................................................
 
 get shlv/book1 i/1                                                                                      
                                                                                       .........................................
                                                                                       : Here is the information of your item: :
-                                                                                      : Name: Narnia                          :
-                                                                                      : Cost: 17.40                           :
-                                                                                      : Price: 25                             :
-                                                                                      : Remarks: good book                    :
+                                                                                      : Name: Harry Potter                    :
+                                                                                      : Cost: 27                              :
+                                                                                      : Price: 37                             :
+                                                                                      : ID: 6ddf90b0                          :
+                                                                                      : Remarks: 50% discount                 :
                                                                                       ............................................
 ```
 
@@ -367,7 +363,7 @@ Expected outcome:
 ### Markup price of an item
 
 Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
-If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20. 
+If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20. 
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 
@@ -380,18 +376,18 @@ markup shlv/book1 i/2
 
 Expected outcome:
 ```
-                                                                        .......................................................
-                                                                        : Item: Three Little Pigs                             :
-                                                                        : Cost: 10.90, Price: 12.99                           :
-                                                                        : Amount Difference: 2.09                             :
-                                                                        : Current Mark Up: 19%                                :
-                                                                        : markup: 0%, increase: $0.00, Final price: $10.90    :
-                                                                        : markup: 20%, increase: $2.18, Final price: $13.08   :
-                                                                        : markup: 40%, increase: $4.36, Final price: $15.26   :
-                                                                        : markup: 60%, increase: $6.54, Final price: $17.44   :
-                                                                        : markup: 80%, increase: $8.72, Final price: $19.62   :
-                                                                        : markup: 100%, increase: $10.90, Final price: $21.80 :
-                                                                        ..........................................................
+                                                                          .....................................................
+                                                                          : Item: Pilot P100                                  :
+                                                                          : Cost: 1, Price: 1.5                               :
+                                                                          : Amount Difference: 0.5                            :
+                                                                          : Current Mark Up: 50%                              :
+                                                                          : markup: 0%, increase: $0.00, Final price: $1.00   :
+                                                                          : markup: 20%, increase: $0.20, Final price: $1.20  :
+                                                                          : markup: 40%, increase: $0.40, Final price: $1.40  :
+                                                                          : markup: 60%, increase: $0.60, Final price: $1.60  :
+                                                                          : markup: 80%, increase: $0.80, Final price: $1.80  :
+                                                                          : markup: 100%, increase: $1.00, Final price: $2.00 :
+                                                                          ........................................................
 ```
 
 Example: **Check the 5% markup of the item `index 2` in shelf `book1`**
@@ -401,7 +397,14 @@ markup shlv/book1 i/2 %/5
 
 Expected outcome:
 ```
-//todo
+markup shlv/book1 i/2 %/5
+                                                                            ...................................................
+                                                                            : Item: Pilot P100                                :
+                                                                            : Cost: 1, Price: 1.5                             :
+                                                                            : Amount Difference: 0.5                          :
+                                                                            : Current Mark Up: 50%                            :
+                                                                            : markup: 5%, increase: $0.05, Final price: $1.05 :
+                                                                            ......................................................
 ```
 
 ### Generate sales report
@@ -418,14 +421,19 @@ Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 &#128221; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
 If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
 
-Example: **Generate sales report for the month of Oct 2021**
+Example: **Generate sales report for the month of Nov 2021**
 ```
-report t/stats ym/2021-10
+report t/stats ym/2021-11
 ```
 
 Expected outcome:
 ```
-//todo
+                                                                                    ...........................................
+                                                                                    : Total Purchase Cost: $ 28.00            :
+                                                                                    : Total Selling Price: $ 31.50            :
+                                                                                    : Total Profits: $ 3.50                   :
+                                                                                    : Gross Profit Margin (in percent): 11.11 :
+                                                                                    ..............................................
 ```
 Example: **Generate sales report in between Oct 2021 and Nov 2021 inclusive**
 ```
@@ -434,20 +442,25 @@ report t/items ym/2021-10 ym/2021-11
 
 Expected outcome:
 ```
-//todo
+                          .....................................................................................................
+                          : No  |                    Item                 |  Cost   |  Price  |  Profit |      Sold Time      :
+                          : ------------------------------------------------------------------------------------------------- :
+                          : 1   | Harry Potter                            | 27      | 30      | 3       |2021-11-07 01:51:47  :
+                          : 2   | Pilot P100                              | 1       | 1.5     | 0.5     |2021-11-07 01:51:22  :
+                          ........................................................................................................
 ```
 
 ### Exit program
 
-Exits from CLIvershelf.
+Exits from Clivershelf.
 
 Format: `bye`
 
 Expected outcome:
 ```
-                                                        .....................
-                                                        : See you next time :
-                                                        ........................
+                                                                                                          .....................
+                                                                                                          : See you next time :
+                                                                                                          ........................
 ```
 
 ### Add customer rating & review for each item `[coming in v3.0]`
