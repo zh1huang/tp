@@ -36,7 +36,7 @@ public class Parser {
 
     public static final Pattern ADD_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("n/(?<itemName>[^/]+)"
-                    + " shlv/(?<shelfName>[^/]+)"
+                    + " shlv/(?<shelfName>[a-zA-Z0-9 _()-]+)"
                     + " p/(?<purchaseCost>([0-9]{1,4}([.][0-9]{1,2})?))"
                     //only accepts numbers or decimals in 1 or 2 d.p.
                     + " s/(?<sellingPrice>([0-9]{1,4}([.][0-9]{1,2})?))"
@@ -45,19 +45,19 @@ public class Parser {
                     + "( r/(?<remarks>[^/]+))?$"); // optional argument
 
     public static final Pattern DELETE_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+            Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+) i/(?<indexInShelf>[0-9]+)");
 
     public static final Pattern LIST_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("(shlv/(?<shelfName>[^/]+))?$"); // optional argument shelfName
+            Pattern.compile("(shlv/(?<shelfName>[a-zA-Z0-9 _()-]+))?$"); // optional argument shelfName
 
     public static final Pattern SEARCH_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("\\S+");
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)");
+            Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+) i/(?<indexInShelf>[0-9]+)");
 
     public static final Pattern EDIT_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("shlv/(?<shelfName>[^/]+)"
+            Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+)"
                     + " i/(?<indexInShelf>[0-9]+)"
                     + "((( p/(?<property>(purchase cost|selling price)) v/(?<value>(([0-9]{1,4}([.][0-9]{1,2})?)))))|"
                     + "(( p/(?<remarksProperty>(remarks)) v/(?<remarksValue>[^/]+))))$"); //for remarks property
@@ -66,7 +66,7 @@ public class Parser {
             Pattern.compile("shlv/(?<shelfName>[^/]+)");
 
     public static final Pattern REMOVE_SHELF_DATA_ARGS_FORMAT =
-            Pattern.compile("shlv/(?<shelfName>[^/]+)");
+            Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+)");
 
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("id/(?<ID>[^/]{8}+)");
@@ -77,7 +77,7 @@ public class Parser {
                     + "( ym/(?<endYearMonth>[0-9]{4}-[0-9]{2}))?$"); // optional argument category
 
     public static final Pattern MARKUP_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("shlv/(?<shelfName>[^/]+) i/(?<indexInShelf>[0-9]+)"
+            Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+) i/(?<indexInShelf>[0-9]+)"
                     + "( %/(?<percent>([0-9]{1,3}([.][0-9]{1,2})?)))?$");
 
     public static final String CORRECT_COMMAND_MESSAGE_STRING_FORMAT =
