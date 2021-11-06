@@ -31,14 +31,14 @@
 
 ## Introduction
 
-**Welcome to CLIver Shelf!**
+**Welcome to CLIverShelf!**
 
-**CLIver Shelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. With **
-CLIver Shelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that
+**CLIverShelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. With 
+**CLIverShelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that
 they know how well their business is going.
 
-This guide describes the design, implementation and architecture of **CLIver Shelf**. The aim of this developer guide is
-to get developers and potential contributors to get familiarised with the implementation of **CLIver Shelf**.
+This guide describes the design, implementation and architecture of **CLIverShelf**. The aim of this developer guide is
+to get developers and potential contributors to get familiarised with the implementation of **CLIverShelf**.
 
 ## Setting up
 
@@ -88,7 +88,7 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Architecture.puml)
 
-The architecture diagram above describes the design of CLIver Shelf. The main components are:
+The architecture diagram above describes the design of CLIverShelf. The main components are:
 
 1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app
    launch.
@@ -227,8 +227,8 @@ parsed, depending on the Command type, different types uses different sales API.
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation
 methods are used.
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_newShelf.puml)
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Model_addShelf.puml)
+![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Model_newShelf.svg)
+![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Model_addShelf.svg)
 
 ### Storage component
 
@@ -237,11 +237,11 @@ loading data on program start up.
 
 The diagram below shows the implementation of `saveData()`.
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_saveData.puml)
+![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Storage_saveData.svg)
 
 The diagram below shows the implementation of `loadData()`
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S1-CS2113T-F11-4/tp/master/docs/puml/Storage_loadData.puml)
+![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/Storage_loadData.svg)
 
 ## Implementation
 
@@ -276,7 +276,7 @@ The diagram below shows the implementation of `loadData()`
 
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
-![](https://www.plantuml.com/plantuml/svg/bLFDpjem4BplKso_InCau9v3HSMf4cehzGdSP05B_d7zayBRrpzHC84YSKYytftPsSagE-UPzK4A-7psthXkkpM2gPJPz5fk7Vq9f7fQ3voTB9C0hFVQOd1amKGgxxc9UDmVleraVvr9794vPCRWNVsZ-ybi97sagidX4g3exrvBoTJGuO4xFrqoGzpk293KSVqbgNJ8bGa-ZSL7vYdb83wfN6IwSaxi9iFR6J-1e1mt5aQQfHXJ6gLXzXGagPV4UiRL2WPQGkTxXOIQjPxbeQBNy5ckk7yYCfclIHtIXVhWgMa1da_1XCTFndBblme1Y5XNb-OwF97_eSgNSMdbtvcaDjEUTd_ezz1G1v-sc83_CKx2KMcajS6ZjaWZsIjcVUGg1oEvZ7dRm2OcaeccBJPUMddBpWjBkKufoA-gjDplaZcGyrPVxt8HdcZbrwnugGsS-K1urDh_rXVOHRaWnJy0)
+![](/Users/yuejunfeng/Desktop/CS2113T/tp/docs/diagrams/ListCommandSequenceDiagram.svg)
 A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
 
 * If user wishes to list out all items within a **specific** shelf:
