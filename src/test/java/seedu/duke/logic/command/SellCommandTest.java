@@ -39,7 +39,8 @@ public class SellCommandTest {
     public void cleanUp() {
         ShelfList.getShelfList().resetShelfList();
     }
-    /**
+
+    @Test
     public void execute_itemWithInputIdExists_sellsNormally() throws CommandException, ModelException {
         assertTrue(testList.contains("HarryPotter"));
         testCommand = new SellCommand(itemID);
@@ -50,7 +51,7 @@ public class SellCommandTest {
         assertEquals(numberOfItemAfterSelling, numberOfItemsBeforeSelling - 1);
         assertFalse(testList.contains("HarryPotter"));
     }
-    */
+
 
     @Test
     public void execute_itemWithInputIdDoesNotExist_throwsItemNotExistCommandException() {
