@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/object-diagram
+!include Style.puml
+
+package UI {
+    class MessageBubble {
+    - messages:String[]
+    {static} + printMessageBubble(msg:String):void
+    + addMessage(msg:String):void
+    + printMessageBubble():void
+    }
+    class PredefinedMessages {
+    {static} + printWelcomeMessage():void
+    {static} + printByeMessage():void
+    }
+    class Wrapping {
+    - originalMessage:String
+    - lineLimit:int
+    - lines:ArrayList<String>
+    + Wrapping(message:String, lineLimit:int)
+    + nextLine():String
+    + isEmpty():boolean
+    + {static} restrictMessageLength(message:String, length:int):String
+    }
+}
+
+MessageBubble -right- Wrapping:use >
+PredefinedMessages -up- MessageBubble:use >
+@enduml
