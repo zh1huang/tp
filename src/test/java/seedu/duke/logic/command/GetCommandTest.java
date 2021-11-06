@@ -6,6 +6,7 @@ import seedu.duke.logic.command.exception.ItemNotExistCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,8 +17,7 @@ public class GetCommandTest {
     private Shelf testList;
     private Command testCommand1;
     private Command testCommand2;
-    public static final String ITEM_DESCRIPTION = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
-    public static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
+    private Command testCommand3;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -25,6 +25,7 @@ public class GetCommandTest {
         testList = new Shelf("test");
         testCommand1 = new GetCommand("test", "1");
         testCommand2 = new GetCommand("test", "3");
+        testCommand3 = new GetCommand("test","001");
     }
 
 
@@ -36,11 +37,18 @@ public class GetCommandTest {
         String expected = String.format(GetCommand.GET_COMPLETE_MESSAGE + GetCommand.GET_OUTPUT,
                 "HarryPotter", "16.1", "25.12", Item.DUMMY_ID, "Hello");
         assertEquals(expected, testCommand1.execute());
+        assertEquals(expected, testCommand3.execute());
     }
 
     @Test
     public void execute_emptyList_throwsItemNotExistException() {
         assertThrows(ItemNotExistCommandException.class, () -> testCommand2.execute());
+    }
+
+    @Test
+    public void execute_nonExistentShelf_throwsShelfNotExistException() {
+        Command testCommand5 = new GetCommand("non","1");
+        assertThrows(ShelfNotExistModelException.class, testCommand5::execute);
     }
 
     @Test
