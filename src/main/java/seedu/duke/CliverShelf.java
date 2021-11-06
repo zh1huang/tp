@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.command.Command;
-import seedu.duke.parser.Parser;
+import seedu.duke.logic.command.Command;
+import seedu.duke.logic.parser.Parser;
 import seedu.duke.storage.DataCorruptionException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.DukePredefinedMessages;

@@ -1,9 +1,9 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalModelArgumentException;
-import seedu.duke.model.exception.ItemNotExistException;
-import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.model.exception.DuplicateShelfModelException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
+import seedu.duke.model.exception.ItemNotExistModelException;
+import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -55,12 +55,12 @@ public class ShelfList {
      *
      * @param name The name of the new Shelf
      *
-     * @throws IllegalModelArgumentException if name does not follow the format
-     * @throws DuplicateShelfException       if there already exist a Shelf with this name
+     * @throws IllegalArgumentModelException if name does not follow the format
+     * @throws DuplicateShelfModelException       if there already exist a Shelf with this name
      */
-    public Shelf addShelf(String name) throws IllegalModelArgumentException, DuplicateShelfException {
+    public Shelf addShelf(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
         if (existShelf(name)) {
-            throw new DuplicateShelfException(name);
+            throw new DuplicateShelfModelException(name);
         }
 
         Shelf temp = new Shelf(name);
@@ -72,11 +72,11 @@ public class ShelfList {
      *
      * @param shelf The Shelf to be removed
      *
-     * @throws ShelfNotExistException If the Shelf is not in the ShelfList
+     * @throws ShelfNotExistModelException If the Shelf is not in the ShelfList
      */
-    protected void deleteShelf(Shelf shelf) throws ShelfNotExistException {
+    protected void deleteShelf(Shelf shelf) throws ShelfNotExistModelException {
         if (!shelves.remove(shelf)) {
-            throw new ShelfNotExistException(shelf.getName());
+            throw new ShelfNotExistModelException(shelf.getName());
         }
         assert !shelves.contains(shelf);
     }
@@ -86,9 +86,9 @@ public class ShelfList {
      *
      * @param name Name of the Shelf to be removed
      *
-     * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
+     * @throws ShelfNotExistModelException If no Shelf in the ShelfList has the specified name
      */
-    public void deleteShelf(String name) throws ShelfNotExistException {
+    public void deleteShelf(String name) throws ShelfNotExistModelException {
         shelves.remove(getShelf(name, true));
     }
 
@@ -100,15 +100,15 @@ public class ShelfList {
      *
      * @return The Shelf that matches the specified name
      *
-     * @throws ShelfNotExistException If no Shelf in the ShelfList has the specified name
+     * @throws ShelfNotExistModelException If no Shelf in the ShelfList has the specified name
      */
-    public Shelf getShelf(String name) throws ShelfNotExistException {
+    public Shelf getShelf(String name) throws ShelfNotExistModelException {
         for (Shelf shelf : shelves) {
             if (shelf.getName().equals(name)) {
                 return shelf;
             }
         }
-        throw new ShelfNotExistException(name);
+        throw new ShelfNotExistModelException(name);
     }
 
     /**
@@ -119,18 +119,18 @@ public class ShelfList {
      *
      * @return the target shelf
      *
-     * @throws ShelfNotExistException if no such shelf exists.
+     * @throws ShelfNotExistModelException if no such shelf exists.
      */
-    public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistException {
+    public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistModelException {
         if (name.equals("soldItems") && isSoldItemHidden) {
-            throw new ShelfNotExistException(name);
+            throw new ShelfNotExistModelException(name);
         }
         for (Shelf shelf : shelves) {
             if (shelf.getName().equals(name)) {
                 return shelf;
             }
         }
-        throw new ShelfNotExistException(name);
+        throw new ShelfNotExistModelException(name);
     }
 
     /**
@@ -143,7 +143,7 @@ public class ShelfList {
     public boolean existShelf(String name) {
         try {
             getShelf(name, true);
-        } catch (ShelfNotExistException e) {
+        } catch (ShelfNotExistModelException e) {
             return false;
         }
         return true;
@@ -178,15 +178,15 @@ public class ShelfList {
      *
      * @return The Shelf that contains the item
      *
-     * @throws ItemNotExistException If the item does not belong to any Shelf
+     * @throws ItemNotExistModelException If the item does not belong to any Shelf
      */
-    public Shelf shelfOfItem(Item item) throws ItemNotExistException {
+    public Shelf shelfOfItem(Item item) throws ItemNotExistModelException {
         for (Shelf shelf : shelves) {
             if (shelf.contains(item)) {
                 return shelf;
             }
         }
-        throw new ItemNotExistException(item.getName());
+        throw new ItemNotExistModelException(item.getName());
     }
 
 
@@ -197,14 +197,14 @@ public class ShelfList {
      *
      * @return the item if it exists
      *
-     * @throws ItemNotExistException if the target item with the given ID does not exist
+     * @throws ItemNotExistModelException if the target item with the given ID does not exist
      */
-    public Item getItem(String itemID) throws ItemNotExistException {
+    public Item getItem(String itemID) throws ItemNotExistModelException {
         for (Shelf shelf : shelves) {
             if (shelf.containsGivenID(itemID)) {
                 return shelf.getItemByID(itemID);
             }
         }
-        throw new ItemNotExistException("with ID: " + itemID);
+        throw new ItemNotExistModelException("with ID: " + itemID);
     }
 }
