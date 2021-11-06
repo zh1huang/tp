@@ -137,8 +137,6 @@ The `Logic` component consists of `Parser` and `Command` components.
 5. `Command` then checks the `ExitCommand` on whether the program should exit.
 6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
-![](diagrams/seedu_duke_logic.drawio.svg)
-
 #### Subcomponent Parser
 
 **API**:
@@ -153,10 +151,8 @@ The `Logic` component consists of `Parser` and `Command` components.
     4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
        the `prepare{commandWord}()` function of the `Parser`
         1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-    5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `CliverShelf`
+    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` to the `CliverShelf`
        component
-
-![](diagrams/ParserClassDiagram.png)
 
 #### Subcomponent Command
 
