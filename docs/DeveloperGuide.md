@@ -219,10 +219,19 @@ parsed, depending on the Command type, different types uses different sales API.
     2. All `Item` are stored in one and only one of the `Shelf` objects.
     3. A `Shelf` object can be instantiated using the constructor `new Shelf(name: String)`
        or `ShelfList.getShelfList().addShelf(name: String)`
+    4. All `Shelf` objets are automatically recorded by `ShelfList` at instantiation.
 3. [ShelfList.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/model/ShelfList.java)
-    1. The `ShelfList` stores all the shelves data i.e., all `Shelf` objects
+    1. The `ShelfList` stores all the shelves' data i.e., all `Shelf` objects
     2. `ShelfList` is implemented using Singleton Pattern. The single instance can be obtained
        using `ShelfList.getShelfList()`
+
+The Class Diagram below illustrates how the model components interacts with each other.
+
+![](diagrams/Model_ClassDiagram.svg)
+
+The Object Diagram below illustrates a sample state of the components.
+
+![](diagrams/Model_ObjectDiagram.svg)
 
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation
 methods are used.

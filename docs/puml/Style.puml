@@ -1,6 +1,7 @@
 skinparam style strictuml
 skinparam backgroundColor white
 skinparam box white
+skinparam classAttributeIconSize 0
 !define PARSER_COLOR #aqua
 !define MAIN_COLOR #orange
 !define LOGIC_COLOR #ffbf00
