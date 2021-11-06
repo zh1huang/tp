@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object "shelfList:ShelfList" as shelfList
+object "fiction:Shelf" as fiction {
+name = fiction
+remark = restock every Tuesday
+}
+object "education:Shelf" as education {
+name = education
+remark = restock every Friday
+}
+object ":Item" as item1 {
+name = Harry Potter
+}
+object ":Item" as item2 {
+name = Jane Eyre
+remark = cover is damaged
+}
+object ":Item" as item3 {
+name = O Level Chemistry TYS
+}
+object ":Item" as item4 {
+name = A Level Computing Practice
+remark = reserved for John Doe
+}
+shelfList -down-> fiction
+fiction -down-> item1
+fiction -down-> item2
+shelfList -down-> education
+education -down-> item3
+education -down-> item4
+
+@enduml
