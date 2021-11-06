@@ -7,9 +7,10 @@ import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
-
 /**
  * Represents a collection of Shelfs.
  * Provides methods to better manage Shelf items.
@@ -46,6 +47,8 @@ public class ShelfList {
      * @param shelf The Shelf to be added
      */
     protected void addShelf(Shelf shelf) {
+        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME)
+                .log(Level.INFO, String.format("%s added to shelfList", shelf.getName()));
         shelves.add(shelf);
         Comparator<Shelf> byName = Comparator.comparing((Shelf o) -> o.getName().toLowerCase());
         shelves.sort(byName);
