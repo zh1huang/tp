@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+actor user
+participant Main
+participant ":Parser" as Parser
+participant "newCommand: \nAddCommand" as AddCommand
+participant "newItem: \nItem" as Item
+participant "specifiedShelf: \nShelf" as Shelf
+user -> Main: Run program & Input commands
+activate Main
+Main -> Parser: parseCommand(input)
+activate Parser
+Parser -> Parser: prepareAdd(input)
+activate Parser
+Parser -> AddCommand **: new AddCommand(arguments)
+deactivate Parser
+activate AddCommand
+AddCommand --> Parser: new AddCommand
+deactivate AddCommand
+Parser --> Main: new AddCommand
+deactivate Parser
+
+Main -> AddCommand: execute()
+activate AddCommand
+AddCommand -> Item **
+activate Item
+Item --> AddCommand
+deactivate Item
+AddCommand -> Shelf: addItem(newItem)
+activate Shelf
+Shelf --> AddCommand
+deactivate Shelf
+AddCommand --> Main
+deactivate AddCommand
+Main --> user
+deactivate Main
+
+
+@enduml
