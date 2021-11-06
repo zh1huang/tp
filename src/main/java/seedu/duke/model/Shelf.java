@@ -13,12 +13,12 @@ import java.util.logging.Logger;
 
 //@@author yuejunfeng0909
 /**
- * Represents a container that is able to store items.
+ * Represents a shelf that is able to store items.
  * e.g. A shelf
  */
 public class Shelf {
 
-    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
+    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid shelf name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -196,7 +196,7 @@ public class Shelf {
      *
      * @return The Item at the specified index
      *
-     * @throws IndexOutOfBoundsException if index >= number of items in the item container
+     * @throws IndexOutOfBoundsException if index >= number of items in the shelf
      */
     public Item getItem(int index) {
         return items.get(index);
@@ -281,7 +281,7 @@ public class Shelf {
     }
 
     /**
-     * Returns the number if items in the item container.
+     * Returns the number if items in the shelf.
      */
     public int getItemCount() {
         return items.size();
