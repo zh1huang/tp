@@ -224,6 +224,10 @@ parsed, depending on the Command type, different types uses different sales API.
     2. `ShelfList` is implemented using Singleton Pattern. The single instance can be obtained
        using `ShelfList.getShelfList()`
 
+The Class Diagram below illustrates how the model components interacts with each other.
+
+![](diagrams/Model_ClassDiagram.svg)
+
 The Sequence Diagram below illustrates how `Shelf` and `ShelfList` interacts when different `Shelf` instantiation
 methods are used.
 
