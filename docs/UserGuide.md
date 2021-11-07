@@ -538,7 +538,7 @@ You can simply restart the program and your last updated data will be loaded.
 |**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter shlv/book1 p/27 s/37 q/5`|
 |**Delete**  | `delete shlv/SHELF_NAME i/INDEX` <br> eg: `delete shlv/book2 i/1`                                                                         |
 |**List**    | `list [shlv/SHELF_NAME]` <br> eg: `list shlv/stationary`                                                                                |
-|**Search**  | //todo | |
+|**Search**  | `search k/KEYWORD` <br> eg: `search k/sample item`
 |**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
 |**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
 |**Sell**    | `sell shlv/SHELF_NAME i/INDEX` <br> eg: `sell shlv/book1 i/1`                                                                                    |
