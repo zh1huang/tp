@@ -1,9 +1,11 @@
 package seedu.duke.logic.command;
 
+import seedu.duke.logic.command.exception.DeniedAccessToShelfCommandException;
 import seedu.duke.logic.command.exception.EmptyListCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 import seedu.duke.ui.Wrapping;
@@ -67,8 +69,8 @@ public class ListCommand extends Command {
      * @throws EmptyListCommandException     If list is empty
      * @throws IllegalArgumentModelException If illegal argument is entered
      */
-    public String execute() throws ShelfNotExistModelException,
-            EmptyListCommandException, IllegalArgumentModelException {
+    public String execute() throws ShelfNotExistModelException, EmptyListCommandException,
+            IllegalArgumentModelException, DeniedAccessToShelfCommandException {
         String output = "";
         if (!toPrintAll) { //optional parameter entered so print that particular shelf
             try {
@@ -84,6 +86,8 @@ public class ListCommand extends Command {
             } catch (ShelfNotExistModelException e) {
                 logger.log(Level.WARNING, "ListCommand failed to execute because shelf does not exist");
                 throw new ShelfNotExistModelException(shelfName);
+            } catch (DeniedAccessToShelfModelException e) {
+                throw new DeniedAccessToShelfCommandException(e.getMessage());
             }
         } else {
             output = getEveryList();

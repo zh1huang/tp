@@ -7,6 +7,7 @@ import seedu.duke.model.exception.DuplicateShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 import seedu.duke.model.exception.ItemNotExistModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,7 +26,8 @@ class ShelfListTest {
     }
 
     @Test
-    void resetShelfList() throws DuplicateShelfModelException, IllegalArgumentModelException {
+    void resetShelfList() throws DuplicateShelfModelException, IllegalArgumentModelException,
+            DeniedAccessToShelfModelException {
         shelfList.addShelf("somerandomshelf1");
         shelfList.addShelf("somerandomshelf2");
         shelfList.resetShelfList();
@@ -39,7 +41,7 @@ class ShelfListTest {
 
     @Test
     void addShelf_duplicateName_throwsDuplicateShelfException()
-            throws DuplicateShelfModelException, IllegalArgumentModelException {
+            throws DuplicateShelfModelException, IllegalArgumentModelException, DeniedAccessToShelfModelException {
         shelfList.addShelf("someRandomShelf");
         assertThrows(DuplicateShelfModelException.class, () -> shelfList.addShelf("someRandomShelf"));
         assertThrows(DuplicateShelfModelException.class, () -> shelfList.addShelf("someRandomShelf "));
@@ -54,7 +56,7 @@ class ShelfListTest {
 
     @Test
     void addShelf_correctName_throwIllegalArgumentException() throws DuplicateShelfModelException,
-            IllegalArgumentModelException {
+            IllegalArgumentModelException, DeniedAccessToShelfModelException {
         shelfList.addShelf("basdAKLDJFL91203_ 3(sda)-sdf");
         assertTrue(shelfList.existShelf("basdAKLDJFL91203_ 3(sda)-sdf"));
     }
@@ -73,7 +75,8 @@ class ShelfListTest {
 
     @Test
     void deleteShelf_existShelf_deleteNormally()
-            throws DuplicateShelfModelException, IllegalArgumentModelException, ShelfNotExistModelException {
+            throws DuplicateShelfModelException, IllegalArgumentModelException, ShelfNotExistModelException,
+            DeniedAccessToShelfModelException {
         shelfList.addShelf("correctShelf");
         shelfList.deleteShelf("correctShelf");
         assertFalse(shelfList.existShelf("correctShelf"));
@@ -82,18 +85,21 @@ class ShelfListTest {
     @Test
     void getShelf_shelfNotExist_throwShelfNotExistException() {
         shelfList.resetShelfList();
-        assertThrows(ShelfNotExistModelException.class, () -> shelfList.getShelf("shelfNotExist", true));
+        assertThrows(ShelfNotExistModelException.class, () -> shelfList.getShelf("shelfNotExist",
+                true));
     }
 
     @Test
     void getShelf_shelfExist_returnNormally()
-            throws ShelfNotExistModelException, DuplicateShelfModelException, IllegalArgumentModelException {
+            throws ShelfNotExistModelException, DuplicateShelfModelException, IllegalArgumentModelException,
+            DeniedAccessToShelfModelException {
         Shelf addedShelf = shelfList.addShelf("theShelfThatExists");
         assertEquals(addedShelf, shelfList.getShelf("theShelfThatExists", true));
     }
 
     @Test
-    void existShelf() throws DuplicateShelfModelException, IllegalArgumentModelException {
+    void existShelf() throws DuplicateShelfModelException, IllegalArgumentModelException,
+            DeniedAccessToShelfModelException {
         shelfList.addShelf("somerandomshelf1");
         shelfList.addShelf("somerandomshelf2");
         assertTrue(shelfList.existShelf("somerandomshelf1"));
@@ -101,7 +107,8 @@ class ShelfListTest {
     }
 
     @Test
-    void getAllShelvesName() throws DuplicateShelfModelException, IllegalArgumentModelException {
+    void getAllShelvesName() throws DuplicateShelfModelException, IllegalArgumentModelException,
+            DeniedAccessToShelfModelException {
         shelfList.addShelf("somerandomshelf1");
         shelfList.addShelf("somerandomshelf2");
         assertEquals("somerandomshelf1", shelfList.getAllShelvesName().get(0));
@@ -111,7 +118,7 @@ class ShelfListTest {
     @Test
     void shelfOfItem_itemExist_returnNormally() throws IllegalArgumentModelException, ShelfNotExistModelException,
             DuplicateItemModelException,
-            ItemNotExistModelException, DuplicateShelfModelException {
+            ItemNotExistModelException, DuplicateShelfModelException, DeniedAccessToShelfModelException {
         ItemStub testItem = new ItemStub("randomName");
         shelfList.addShelf("somerandomshelf1");
         shelfList.getShelf("somerandomshelf1", true).addItem(testItem);
@@ -126,7 +133,8 @@ class ShelfListTest {
 
     @Test
     void getItem_IdExist_returnNormally() throws IllegalArgumentModelException, ItemNotExistModelException,
-            ShelfNotExistModelException, DuplicateItemModelException, DuplicateShelfModelException {
+            ShelfNotExistModelException, DuplicateItemModelException, DuplicateShelfModelException,
+            DeniedAccessToShelfModelException {
         ItemStub testItem = new ItemStub("randomName");
         shelfList.addShelf("somerandomshelf1");
         shelfList.getShelf("somerandomshelf1").addItem(testItem);

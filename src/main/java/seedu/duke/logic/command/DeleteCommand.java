@@ -5,6 +5,7 @@ import seedu.duke.logic.command.exception.ShelfNotExistCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ItemNotExistModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
@@ -66,7 +67,7 @@ public class DeleteCommand extends Command {
             logger.log(Level.WARNING, String.format("DeleteCommand failed to execute with error message %s",
                     e.getMessage()));
             throw new ItemNotExistCommandException(e.getMessage());
-        } catch (ShelfNotExistModelException e) {
+        } catch (ShelfNotExistModelException | DeniedAccessToShelfModelException e) {
             throw new ShelfNotExistCommandException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             throw new ItemNotExistCommandException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
