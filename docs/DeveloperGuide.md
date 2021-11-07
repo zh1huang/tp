@@ -15,14 +15,12 @@
     4. [Model Component](#model-component)
     6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
-    1. [Adding an item](#adding-an-item)
-    2. [Editing an item](#editing-an-item)
-    3. [Listing all items](#listing-all-items)
-    4. [Getting an item](#getting-an-item)
-    5. [Selling an item](#selling-an-item)
-    6. [Generating sales report](#generating-sales-report)
-    7. [Generating item markup price](#generating-item-markup-price)
-    8. [Exiting the program](#editing-an-item)
+   1. [Adding an item](#adding-an-item)
+   2. [Editing an item](#editing-an-item)
+   3. [Listing all items](#listing-all-items)
+   4. [Selling an item](#selling-an-item)
+   5. [Generating sales report](#generating-sales-report)
+   6. [Generating item markup price](#generating-item-markup-price)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
@@ -125,9 +123,9 @@ The `UI` component is made up of 2 classes:
 
 The class diagram below shows the associations between the classes that make up the `Logic` component.
 
-![](diagrams/seedu_duke_logic_component.svg)
+![](diagrams/Logic_ClassDiagram.svg)
 
-The `Logic` component consists of `Parser` and `Command` components.
+The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 
 1. After user enters input, `UI` fetches and passes it to Parser for parsing.
 2. Parser then returns a `Command` object, which is then executed.
@@ -292,6 +290,7 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
 ![](diagrams/ListCommandSequenceDiagram.svg)
+
 A user can choose to either list out all the items in the bookstore (i.e. every shelf), or within a specific shelf.
 
 * If user wishes to list out all items within a **specific** shelf:
@@ -313,6 +312,10 @@ A user can choose to either list out all the items in the bookstore (i.e. every 
     4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition
        for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
     5. The string result output is then passed back to `CliverShelf`.
+
+The Class Diagram below illustrates how the components work together in `ListCommand`
+
+![](diagrams/Logic_ListCommandClassDiagram.svg)
 
 #### Design considerations:
 
@@ -380,8 +383,6 @@ Aspect: How markup executes:
     * Pros: All methods in the same class, lesser additional code.
     * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could
       be more complicated.
-
-___
 
 ## Product scope
 
@@ -534,9 +535,12 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Getting item within list | `get shlv/book1 i/2` | Show information of item |
+| Getting item within list | `get shlv/book1 i/002` | Show information of item |
+| Index of item not within list | `get shlv/book1 i/12313123` | Error message showing item with index not in list |
+| Getting item from non-existent shelf | `get shlv/nonexistentshelf i/2` | Error message showing shelf does not exist |
+| Invalid parameters | `get shlv/book1 i/hello` | Error message (invalid format) |
+| Missing flag| `get shlv/book1 2` | Error message (invalid format) |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
 ### Listing the items test
@@ -546,9 +550,11 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Listing out for existent shelf| `list shlv/existentshelf` | List of all items in that shelf |
+| Listing out for every shelf | `list` | Listing of all items in every shelf bookstore |
+| Non-existent shelf | `list shlv/nonexistshelf` | Error message prompting to create shelf first |
+| Missing flag | `list book1` | Error message (invalid format) |
+| Invalid parameters | `list shlv/&` | Error message (invalid format) |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
 
 ### Editing an item test
