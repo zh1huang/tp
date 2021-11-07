@@ -2,6 +2,7 @@ package seedu.duke.logic.command.sales;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import java.math.BigDecimal;
@@ -50,7 +51,8 @@ public class SalesMarkUp {
      * @param userRequestPercent User Requested Markup Percentage
      * @throws ShelfNotExistModelException If Shelf name does not exist in the ShelfList
      */
-    public SalesMarkUp(String shelfName, int index, String userRequestPercent) throws ShelfNotExistModelException {
+    public SalesMarkUp(String shelfName, int index, String userRequestPercent)
+            throws ShelfNotExistModelException, DeniedAccessToShelfModelException {
         Item selectedItem = ShelfList
                 .getShelfList()
                 .getShelf(shelfName, true)

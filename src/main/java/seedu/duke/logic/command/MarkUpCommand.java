@@ -1,6 +1,7 @@
 package seedu.duke.logic.command;
 
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 import seedu.duke.logic.command.sales.SalesMarkUp;
 
@@ -47,11 +48,12 @@ public class MarkUpCommand extends Command {
      * Executes the markup operation.
      *
      * @return A result string that contains all the markup information of a selected item
-     * @throws ShelfNotExistModelException
-     * @throws ItemNotExistCommandException
+     * @throws ShelfNotExistModelException If Shelf does not
+     * @throws ItemNotExistCommandException If Item at index does not exist
      */
     @Override
-    public String execute() throws ShelfNotExistModelException, ItemNotExistCommandException {
+    public String execute() throws ShelfNotExistModelException,
+            ItemNotExistCommandException, DeniedAccessToShelfModelException {
         StringBuilder resultString = new StringBuilder();
         try {
 

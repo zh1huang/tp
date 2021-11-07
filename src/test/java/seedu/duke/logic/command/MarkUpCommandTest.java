@@ -7,12 +7,12 @@ import seedu.duke.logic.command.exception.ItemNotExistCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.duke.logic.command.MarkUpCommand.MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE;
 
 class MarkUpCommandTest {
 
@@ -58,10 +58,10 @@ class MarkUpCommandTest {
     }
 
     @Test
-    public void execute_ItemInSoldItemList_executesNormally()
-            throws CommandException, IllegalArgumentException, ModelException {
+    public void execute_ItemInSoldItemList_throwsDeniedAccessToShelfModelException()
+            throws IllegalArgumentException {
         testCommand = new MarkUpCommand("soldItems", "1", "");
-        assertEquals(MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE, testCommand.execute());
+        assertThrows(DeniedAccessToShelfModelException.class, () -> testCommand.execute());
     }
 
     @Test
