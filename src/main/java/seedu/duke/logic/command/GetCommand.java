@@ -16,7 +16,6 @@ public class GetCommand extends Command {
     public static final String GET_OUTPUT = "Name: %s\nCost: %s\nPrice: %s\nID: %s\nRemarks: %s";
     public static final String GET_ITEM_DATA_ARGS_FORMAT_STRING = "get shlv/SHELF_NAME i/INDEX";
     public static final String GET_STRING = "get";
-    public static final String PARSE_GET_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\n";
     public static final String GET_COMPLETE_MESSAGE = "Here is the information of your item:\n";
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final int index;
@@ -49,14 +48,7 @@ public class GetCommand extends Command {
             Item selectedItem = selectedShelf.getItem(index);
             assert initialSize == selectedShelf.getItemCount()
                     : "After getting the list size should remain constant";
-
-            String name = selectedItem.getName();
-            String cost = selectedItem.getPurchaseCost();
-            String price = selectedItem.getSellingPrice();
-            String remarks = selectedItem.getRemarks();
-            String id = selectedItem.getID();
-
-            output = String.format(GET_OUTPUT, name, cost, price, id, remarks);
+            output = getInfo(selectedItem);
             logger.log(Level.INFO, "GetCommand successfully executed");
         } catch (ShelfNotExistModelException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because shelf does not exist");
@@ -68,6 +60,21 @@ public class GetCommand extends Command {
 
         logger.log(Level.INFO, "GetCommand successfully executed");
         return GET_COMPLETE_MESSAGE + output;
+    }
+
+    /**
+     * Gets the information of selected item.
+     *
+     * @param selectedItem item that information is to be retrieved
+     * @return String of information of selected item
+     */
+    private String getInfo(Item selectedItem) {
+        String name = selectedItem.getName();
+        String cost = selectedItem.getPurchaseCost();
+        String price = selectedItem.getSellingPrice();
+        String remarks = selectedItem.getRemarks();
+        String id = selectedItem.getID();
+        return String.format(GET_OUTPUT, name, cost, price, id, remarks);
     }
 
     @Override
