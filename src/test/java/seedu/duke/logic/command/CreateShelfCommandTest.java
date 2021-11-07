@@ -67,7 +67,7 @@ public class CreateShelfCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         testCommand = new CreateShelfCommand("test");
         Command anotherCommand = new SellCommand("XXXXXXXX");
         assertFalse(testCommand.equals(anotherCommand));

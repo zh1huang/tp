@@ -11,7 +11,6 @@ import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DuplicateShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 import seedu.duke.model.exception.ModelException;
-import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -189,7 +188,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_addMutipleItemsToEmptyList_addsNormally() throws CommandException, ModelException {
+    public void execute_addMultipleItemsToEmptyList_addsNormally() throws CommandException, ModelException {
         testCommand = new AddCommand("HarryPotter", "16.1", "25.12",
                 "10", "test", "");
         int numberOfItemsBeforeAdding = testList.getItemCount();
@@ -278,7 +277,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void equals_notTestCommand_returnsFalse() {
+    public void equals_notSameTypeWithTestCommand_returnsFalse() {
         testCommand = new AddCommand("HarryPotter", "16.1",
                 "25.12", "10", "test", "");
         Command anotherCommand = new SellCommand("XXXXXXXX");
