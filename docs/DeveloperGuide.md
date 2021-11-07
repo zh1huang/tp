@@ -406,6 +406,9 @@ Allows efficient and simplified management of inventory and finances of the stor
 |v2.0|user|create a shelf|store items into the shelf|
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
+|v2.0|user|search for an item with very little information about it|find an item even if I can only remember very little information about it
+|v2.0|user|search for an item with incomplete information|know which book an broken ID tag belongs to
+|v2.0|user|search for all items that contains the same remark information|know all the books that has the same remark, for example, damaged
 
 ## Non-Functional Requirements
 
