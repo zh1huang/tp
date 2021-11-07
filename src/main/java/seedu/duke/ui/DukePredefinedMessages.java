@@ -5,8 +5,10 @@ public class DukePredefinedMessages {
 
     public static final String GENERAL_INVALID_COMMAND_NOTES_STRING =
             "_".repeat(111) + "\nCheck the following:\n"
-            + "1. Please strictly adhere to the input formats of each command. You can refer to the User Guide for more details.\n"
-            + "2. Words in UPPER_CASE are the parameters to be supplied by the user. Only US-ASCII characters are allowed.\n"
+            + "1. Please strictly adhere to the input formats of each command. "
+            + "You can refer to the User Guide for more details.\n"
+            + "2. Words in UPPER_CASE are the parameters to be supplied by the user. "
+            + "Only US-ASCII characters are allowed.\n"
             + "3. Parameters in [] are optional & can only be specified ONCE.\n"
             + "4. Command input is case-sensitive.\n"
             + "5. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\\\n";
