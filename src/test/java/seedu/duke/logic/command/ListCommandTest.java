@@ -88,7 +88,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_addItemsToNonExistentShelf_throwsShelfNotExistException() {
+    public void execute_addItemsToNonExistentShelf_ShelfNotExistModelException() {
         assertThrows(ShelfNotExistModelException.class, () -> testCommand.execute());
     }
 }

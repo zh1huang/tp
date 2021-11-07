@@ -20,20 +20,6 @@ public class SalesManager {
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static SalesManager salesManager;
-    private Shelf soldItems;
-
-    private SalesManager() {
-        ShelfList shelfList = ShelfList.getShelfList();
-        try {
-            soldItems = shelfList.getShelf("soldItems", false);
-        } catch (ShelfNotExistModelException e) {
-            try {
-                soldItems = shelfList.addShelf("soldItems");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
 
     /**
      * Retrieves the global SalesManager.
@@ -46,6 +32,21 @@ public class SalesManager {
         }
         return salesManager;
     }
+
+    private Shelf getSoldItemsShelf() {
+        try {
+            return ShelfList.getShelfList().getShelf("soldItems");
+        } catch (ShelfNotExistModelException e) {
+            logger.log(Level.INFO, "Initialize soldItems shelf");
+            try {
+                return ShelfList.getShelfList().addShelf("soldItems");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Mark an item as sold.
@@ -63,7 +64,7 @@ public class SalesManager {
         try {
             temp = new SoldItem(item.getName(), item.getPurchaseCost(), item.getSellingPrice(),
                     item.getRemarks(), item.getID(), saleTime);
-            soldItems.addItem(temp);
+            getSoldItemsShelf().addItem(temp);
             return temp;
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,8 +116,8 @@ public class SalesManager {
             throw new IllegalArgumentCommandException("Invalid Year Month");
         }
 
-        for (int i = 0; i < soldItems.getItemCount(); i++) {
-            SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
+        for (int i = 0; i < getSoldItemsShelf().getItemCount(); i++) {
+            SoldItem selectedSoldItem = (SoldItem) getSoldItemsShelf().getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (itemSoldYearMonth.equals(yearMonthToSearch)) {
                 filteredSoldItems.add(selectedSoldItem);
@@ -159,8 +160,8 @@ public class SalesManager {
                             + "Parameters are swapped.");
         }
 
-        for (int i = 0; i < soldItems.getItemCount(); i++) {
-            SoldItem selectedSoldItem = (SoldItem) soldItems.getItem(i);
+        for (int i = 0; i < getSoldItemsShelf().getItemCount(); i++) {
+            SoldItem selectedSoldItem = (SoldItem) getSoldItemsShelf().getItem(i);
             YearMonth itemSoldYearMonth = YearMonth.from(selectedSoldItem.getSaleTime());
             if (!itemSoldYearMonth.isBefore(startYearMonthToSearch)
                     && !itemSoldYearMonth.isAfter(endYearMonthToSearch)) {

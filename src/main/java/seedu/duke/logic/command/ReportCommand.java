@@ -4,6 +4,7 @@ import seedu.duke.logic.command.exception.EmptyListCommandException;
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.logic.command.exception.NoTypeFoundCommandException;
 import seedu.duke.logic.command.sales.SalesReport;
+import seedu.duke.logic.command.sales.exception.EmptyListException;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -51,7 +52,7 @@ public class ReportCommand extends Command {
                 logger.log(Level.INFO, "ReportCommand successfully executed.");
                 return newSalesReport.generateSoldItemDetails();
             }
-        } catch (seedu.duke.logic.command.sales.exception.EmptyListException e) {
+        } catch (EmptyListException e) {
             throw new EmptyListCommandException(e.getMessage());
         }
 
