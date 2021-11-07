@@ -339,6 +339,8 @@ A user can choose to either list out all the items in the bookstore (i.e every s
         * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
+The sequence diagram below shows how selling items is implemented.
+![](diagrams/Implementation_SellItems.svg)
 
 #### Design considerations:
 

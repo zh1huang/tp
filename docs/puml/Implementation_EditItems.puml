@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+actor user
+participant ":CLIverShelf" as Main
+participant ":Parser" as Parser
+participant "newCommand: \nEditCommand" as Command
+participant "selectedItem: \nItem" as Item
+participant ":ShelfList" as ShelfList
+participant "specifiedShelf: \nShelf" as Shelf
+user -> Main: Run program & Input commands
+activate Main
+Main -> Parser: parseCommand(input)
+activate Parser
+Parser -> Parser: prepareEdit(input)
+activate Parser
+Parser -> Command **: new EditCommand(arguments)
+deactivate Parser
+activate Command
+Command --> Parser
+deactivate Command
+Parser --> Main: new EditCommand
+deactivate Parser
+
+Main -> Command: execute()
+activate Command
+
+Command -> ShelfList: getShelf(shelfName)
+activate ShelfList
+ShelfList --> Command: specifiedShelf
+deactivate ShelfList
+Command -> Shelf: getItem(index)
+activate Shelf
+Shelf --> Command: selectedItem
+deactivate Shelf
+Command -> Item: setProperty()
+activate Item
+Item --> Command
+deactivate Item
+Command --> Main: finishedMessage
+deactivate Command
+Main --> user
+deactivate Main
+destroy Command
+
+
+@enduml

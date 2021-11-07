@@ -3,11 +3,11 @@
 !include Style.puml
 
 actor user
-participant "CLIverShelf" as Main
+participant ":CLIverShelf" as Main
 participant ":Parser" as Parser
 participant "newCommand: \nAddCommand" as AddCommand
 participant "newItem: \nItem" as Item
-participant ShelfList
+participant ":ShelfList" as ShelfList
 participant "specifiedShelf: \nShelf" as Shelf
 user -> Main: Run program & Input commands
 activate Main
@@ -18,7 +18,7 @@ activate Parser
 Parser -> AddCommand **: new AddCommand(arguments)
 deactivate Parser
 activate AddCommand
-AddCommand --> Parser: new AddCommand
+AddCommand --> Parser
 deactivate AddCommand
 Parser --> Main: new AddCommand
 deactivate Parser
@@ -30,7 +30,9 @@ activate Item
 Item --> AddCommand
 deactivate Item
 AddCommand -> ShelfList: getShelf(shelfName)
+activate ShelfList
 ShelfList --> AddCommand: specifiedShelf
+deactivate ShelfList
 AddCommand -> Shelf: addItem(newItem)
 activate Shelf
 Shelf --> AddCommand
@@ -39,6 +41,7 @@ AddCommand --> Main: finishedMessage
 deactivate AddCommand
 Main --> user
 deactivate Main
+destroy AddCommand
 
 
 @enduml
