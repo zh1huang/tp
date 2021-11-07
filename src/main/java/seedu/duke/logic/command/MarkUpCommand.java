@@ -7,6 +7,7 @@ import seedu.duke.logic.command.sales.SalesMarkUp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author t-l-xin
 public class MarkUpCommand extends Command {
 
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]\n"
