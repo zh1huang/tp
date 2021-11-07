@@ -24,14 +24,14 @@
 
 ## Introduction
 
-Clivershelf allows bookstore owners to create a management system of inventories and finances to better manage their
-business, where they can view these information in a user-friendly manner.
+CLIverShelf allows bookstore owners to create a management system of inventories and finances to better manage their
+business, where they can view this information in a user-friendly manner.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download &#11015; the latest version of `CliverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
-3. Run `cd (path to the folder containing CliverShelf.jar)` and `java -jar CliverShelf.jar` to start using Clivershelf.
+2. Download &#11015; the latest version of `CLIverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+3. Run `cd (path to the folder containing CLIverShelf.jar)` and `java -jar CLIverShelf.jar` to start using CLIvershelf.
 4. You should see the following:
 ```
                                                                   .............................................................
@@ -405,7 +405,7 @@ Expected outcome:
 ### Markup price of an item
 
 Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
-If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20. 
+If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20. 
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 
@@ -494,7 +494,7 @@ Expected outcome:
 
 ### Exit program
 
-Exits from Clivershelf.
+Exits from CLIvershelf.
 
 Format: `bye`
 
