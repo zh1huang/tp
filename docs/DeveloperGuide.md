@@ -15,12 +15,12 @@
     4. [Model Component](#model-component)
     6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
-   1. [Adding an item](#adding-an-item)
-   2. [Editing an item](#editing-an-item)
-   3. [Listing all items](#listing-all-items)
-   4. [Selling an item](#selling-an-item)
-   5. [Generating sales report](#generating-sales-report)
-   6. [Generating item markup price](#generating-item-markup-price)
+    1. [Adding an item](#adding-an-item)
+    2. [Editing an item](#editing-an-item)
+    3. [Listing all items](#listing-all-items)
+    4. [Selling an item](#selling-an-item)
+    5. [Generating sales report](#generating-sales-report)
+    6. [Generating item markup price](#generating-item-markup-price)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
@@ -157,14 +157,14 @@ The `Logic` component consists of `Parser`, `Command` and `Sales` components.
     1. `Command` is an abstract class and has an abstract method `execute()`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
        responsible for one function of the application, such as adding new items or deleting items.
-    3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser 
+    3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser
        and is then returned to the CLIverShelf after they are instantiated.
-    4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function. 
-    5. The following sequence diagram illustrates how a general `Command` object interacts with other
-       components of the system.
-    6. More details about specific commands will be covered in the Implementation section. 
-       
-    ![](diagrams/Logic_Command_SequenceDiagram.svg)
+    4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function.
+    5. The following sequence diagram illustrates how a general `Command` object interacts with other components of the
+       system.
+    6. More details about specific commands will be covered in the Implementation section.
+
+   ![](diagrams/Logic_Command_SequenceDiagram.svg)
 
 ##### Subcomponent Sales
 
@@ -252,43 +252,60 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
 ## Implementation
 
 ### Adding an item
-The sequence diagram below shows the interactions of different subcomponents of the system when adding an item to the shelf.
+
+The sequence diagram below shows the interactions of different subcomponents of the system when adding an item to the
+shelf.
+
 ![](diagrams/Implementation_AddItems.svg)
 
-The user can add new items to a shelf by specifying the number of items, item details and the name of shelf to add to. 
-    
-1. After the user keys in the command to `CLIverShelf`, the `parseCommand(input: String)` method of `Parser` is invoked. 
-The `Parser` then parses the input and instantiates new `AddCommand` object using its `prepareAdd(arguments: String)` 
-   method. The new `AddCommand` object is then returned to the `CLIverShelf`.
-   
-2. The `CLIverShelf` then invokes the `execute()` method of the `AddCommand` object. 
+The user can add new items to a shelf by specifying the number of items, item details and the name of shelf to add to.
+
+1. As mentioned in the "Design" section, the `Parser` parses user input and returns the new `AddCommand` object to the
+   'CLIverShelf'.
+2. The `CLIverShelf` then invokes the `execute()` method of the `AddCommand` object.
 3. The `AddCommand` object instantiates a new `item` object. It also invokes the `getShelf(shelfName: String)` method of
-the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `addItem(newItem: Item)` method of 
+   the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `addItem(newItem: Item)` method of
    the `Shelf` object to add the new `item` to this specific `Shelf`.
+4. If the specified shelf does not exist, then the user cannot add new items. A new shelf should be first created
+   using `CreateShelfCommand`.
+
 #### Design considerations:
 
-* Aspect: Long chain for add command
-    * Alternative 1 (current choice): Long command with chain of flags such `/n` for name and `/q` for quantity.
-        * Pros: Clear demarcation of different parameters that users have to input.
-        * Cons: Susceptible to errors as users might miss out some flags.
-    * Alternative 2: No flags required for each parameter.
-        * Pros: Shorter command length, less prone to errors.
-        * Cons: Increased difficulty in parsing and higher chance to encounter exceptions or errors.
-    * Alternative 3: Prompt for different inputs for each parameter after pressing `enter`
-        * Pros: Even less prone to human errors as the user is prompted what is required as input each time.
-        * Cons: Additional methods and passing of data will be required.
+* Aspect: How to set up the shelf to add to
+    * Alternative 1 (current choice): User needs to ensure that the shelf exists before adding new items, or the
+      addition will not be successful. No automatic creation of shelves is allowed.
+        * Pros: Better control of the shelves.
+        * Cons: User needs to create a shelf first.
+    * Alternative 2: If the shelf does not exist, the shelf with the name specified by the user will be automatically
+      added.
+        * Pros: More convenient as creation of shelf is automatic.
+        * Cons: Can result in accidental addition of shelves of unwanted names (if the user typed in wrongly).
 
 ### Editing an item
+
 ![](diagrams/Implementation_EditItems.svg)
+
+The user can edit the property of an item in a shelf by specifying shelf name, item index, property to edit and new
+value.
+
+1. The `CLIverShelf` invokes the `execute()` method of the `EditCommand` object.
+2. The `EditCommand` object calls the `getShelf(shelfName: String)` method of the global `ShelfList` to get the
+   specified shelf.
+3. If the shelf exists, the `EditCommand` object will invoke the `getItem(index: int)` method to get the selected item
+   to update from the shelf. Then, the `EditCommand` object will call the `setPurchaseCost(newValue: String)`
+   or `setSellingPrice(newValue: String)` or `setRemarks(newValue: String)` of the `Item` object to to set the purchase
+   cost, selling price or remarks of the item.
+4. If the specified shelf does not exist, the editing operation will fail.
 
 #### Design considerations:
 
 * Aspect: How to change a certain property precisely
-    * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
+    * Alternative 1 (current choice): Let the user specify which property to edit, and have setProperty methods for each
+      property in the code.
         * Pros: Only need to change one property.
         * Cons: Need one additional step to check which property is selected by the user.
-    * Alternative 2: Let the user specify the new values for each property.
-        * Pros: The user can change multiple properties at once using only one Edit command.
+    * Alternative 2: Let the user specify the new values for all properties just like adding a new item.
+        * Pros: The user can change multiple properties at once using only one EditCommand.
         * Cons: Longer input is needed from the user even if he/she just wants to change one property.
 
 ### Listing all items
@@ -338,6 +355,7 @@ The Class Diagram below illustrates how the components work together in `ListCom
         * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
+
 The sequence diagram below shows how selling items is implemented.
 ![](diagrams/Implementation_SellItems.svg)
 
@@ -353,8 +371,10 @@ The sequence diagram below shows how selling items is implemented.
         * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
+
 ![](diagrams/Implementation_GenerateReports.svg)
 ![](diagrams/Implementation_SalesReport.svg)
+
 #### Design considerations:
 
 ### Generating item markup price
@@ -520,9 +540,10 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Add an item to an existing shelf|`add n/Harry Potter I shlv/book1 p/11 s/22 q/1`|Shows item added message and item ID|
+| Add multiple items to an existing shelf|`add n/Harry Potter I shlv/book1 p/11 s/22 q/10`|Shows item added message|
+| Add an item to an non-existent shelf|`add n/Harry Potter I shlv/non_existent p/11 s/22 q/1`|Error message (shelf does not exist)|
+| Add an item with invalid properties to an existing shelf |`add n/Harry Potter I shlv/non_existent p/-11 s/22 q/1`| Error message (invalid format) |
 | Missing parameters | `add n/aaaa shlv/book1 p/15 s/17` | Error message (invalid format) |
 
 ### Deleting an item test
@@ -532,9 +553,9 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Delete an item from an existing shelf | `delete shlv/book1 i/1`| Shows item deleted message with details of the deleted item|
+| Delete an item from an non-existent shelf | `delete shlv/non_existent i/1`| Error message (shelf does not exist)|
+| Delete a non-existent item from a shelf | `delete shlv/book1 i/5` (book1 only has 4 items)| Error message (item does not exit)|
 | Missing parameters | `delete shlv/book1` | Error message (invalid format) |
 
 ### Getting information of an item test
@@ -544,8 +565,8 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| Getting item within list | `get shlv/book1 i/2` | Show information of item |
-| Getting item within list | `get shlv/book1 i/002` | Show information of item |
+| Getting item within list | `get shlv/book1 i/2` | Shows information of item |
+| Getting item within list | `get shlv/book1 i/002` | Shows information of item |
 | Index of item not within list | `get shlv/book1 i/12313123` | Error message showing item with index not in list |
 | Getting item from non-existent shelf | `get shlv/nonexistentshelf i/2` | Error message showing shelf does not exist |
 | Invalid parameters | `get shlv/book1 i/hello` | Error message (invalid format) |
@@ -573,10 +594,12 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Edit the purchase cost of an item|`edit shlv/stationary1 i/1 p/purchase cost v/1`| Shows item updated message |
+| Edit the selling price of an item|`edit shlv/stationary1 i/1 p/selling price v/1`| Shows item updated message |
+| Edit the remarks of an item|`edit shlv/stationary1 i/1 p/remarks v/good pen`| Shows item updated message |
+| Edit the selling cost of an item in a non-existent shelf|`edit shlv/non_existent i/1 p/purchase cost v/1`|Error message (shelf does not exist)|
+| Edit the selling cost of a non-existent item|`edit shlv/stationary1 i/10 p/purchase cost v/1` (stationary1 only has 5 items)|Error message (item does not exist|
+| Edit a non-existent property of an item|`edit shlv/non_existent i/1 p/weight v/1`|Error message (invalid format)|
 | Missing parameters | `edit shlv/book1 i/1 v/0.2` | Error message (invalid format) |
 
 ### Getting a Report test
