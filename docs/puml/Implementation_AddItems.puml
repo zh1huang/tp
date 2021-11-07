@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+
+participant ":CLIverShelf" as Main
+participant "newCommand: \nAddCommand" as AddCommand
+participant "newItem: \nItem" as Item
+participant ":ShelfList" as ShelfList
+participant "specifiedShelf: \nShelf" as Shelf
+
+activate Main
+
+
+Main -> AddCommand: execute()
+activate AddCommand
+AddCommand -> Item **
+activate Item
+Item --> AddCommand
+deactivate Item
+AddCommand -> ShelfList: getShelf(shelfName)
+activate ShelfList
+ShelfList --> AddCommand: specifiedShelf
+deactivate ShelfList
+AddCommand -> Shelf: addItem(newItem)
+activate Shelf
+Shelf --> AddCommand
+deactivate Shelf
+AddCommand --> Main: finishedMessage
+deactivate AddCommand
+
+deactivate Main
+destroy AddCommand
+
+
+@enduml

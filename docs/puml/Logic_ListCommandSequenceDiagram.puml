@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+actor user
+participant CLIverShelf as app LOGIC_COLOR
+participant ":Parser" as parser LOGIC_COLOR_T1
+participant ":newCommand: ListCommand" as listCommand LOGIC_COLOR_T2
+
+user -> app: input
+activate app
+app -> parser: parseCommand(input)
+activate parser
+parser -> parser : prepareList(argument)
+activate parser
+parser -> listCommand **
+deactivate parser
+activate listCommand
+listCommand --> parser
+
+deactivate listCommand
+parser --> app
+deactivate parser
+
+app -> listCommand: execute()
+
+
+activate listCommand
+alt !printAll
+    listCommand -> listCommand : getOneList(shelfName)
+    activate listCommand
+    listCommand --> listCommand : output
+    deactivate listCommand
+else
+    loop for every shelf in shelves
+        listCommand -> listCommand : getOneList(shelf.getName())
+        activate listCommand
+        listCommand --> listCommand : output
+        deactivate listCommand
+
+    end
+
+end
+
+listCommand --> app
+deactivate listCommand
+destroy listCommand
+app --> user
+deactivate app
+
+hide footbox
+@enduml

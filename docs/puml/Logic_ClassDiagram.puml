@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+
+class CLIverShelf
+
+package "Logic Component" <<Rectangle>> {
+    package "Non-sales related Commands" <<Rectangle>> #line.dashed{
+        class CreateShelfCommand
+        class RemoveShelfCommand
+        class AddCommand
+        class DeleteCommand
+        class EditCommand
+        class GetCommand
+        class ListCommand
+        class SearchCommand
+        class ExitCommand
+        class HelpCommand
+    }
+    class Parser
+
+    package "Sales related Commands" <<Rectangle>> #line.dashed{
+        class SellCommand
+        class ReportCommand
+        class MarkupCommand
+    }
+
+    class Sales
+
+    abstract class "{abstract}\n Command" as command
+
+}
+
+CLIverShelf "creates"--> "1" Parser
+
+Parser --> CreateShelfCommand
+Parser --> RemoveShelfCommand
+Parser --> AddCommand
+Parser --> DeleteCommand
+Parser --> EditCommand
+Parser --> GetCommand
+Parser --> ListCommand
+Parser --> SearchCommand
+Parser --> ExitCommand
+Parser --> ReportCommand
+Parser --> MarkupCommand
+Parser --> HelpCommand
+
+CreateShelfCommand --|> command
+RemoveShelfCommand --|> command
+AddCommand --|> command
+DeleteCommand --|> command
+EditCommand --|> command
+GetCommand --|> command
+ListCommand --|> command
+SearchCommand --|> command
+ExitCommand --|> command
+SellCommand --|> command
+SellCommand --> Sales
+ReportCommand --|> command
+ReportCommand --> Sales
+MarkupCommand --|> command
+MarkupCommand --> Sales
+@enduml

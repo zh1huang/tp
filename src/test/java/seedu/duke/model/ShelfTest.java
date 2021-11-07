@@ -2,10 +2,10 @@ package seedu.duke.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalModelArgumentException;
-import seedu.duke.model.exception.ItemNotExistException;
+import seedu.duke.model.exception.DuplicateItemModelException;
+import seedu.duke.model.exception.DuplicateShelfModelException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
+import seedu.duke.model.exception.ItemNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,7 +21,7 @@ class ShelfTest {
     ItemStub testItem3;
 
     @BeforeEach
-    void setup() throws IllegalModelArgumentException, DuplicateShelfException {
+    void setup() throws IllegalArgumentModelException, DuplicateShelfModelException {
         ShelfList.getShelfList().resetShelfList();
         testShelf = new Shelf("testShelf");
         testItem1 = new ItemStub("Item1");
@@ -31,11 +31,11 @@ class ShelfTest {
 
     @Test
     void shelfConstructor_instantiateDuplicateShelves_throwsDuplicateShelfException() {
-        assertThrows(DuplicateShelfException.class, () -> new Shelf("testShelf"));
+        assertThrows(DuplicateShelfModelException.class, () -> new Shelf("testShelf"));
     }
 
     @Test
-    void setName_correctInputFormat_setNormally() throws IllegalModelArgumentException, DuplicateShelfException {
+    void setName_correctInputFormat_setNormally() throws IllegalArgumentModelException, DuplicateShelfModelException {
         String[] correctInputs =
                 new String[]{"The Lord of the Rings", "1984_someone", "A LEVEL H2 PHYSICS (TOPICAL) 2011-2020"};
         for (String input : correctInputs) {
@@ -48,7 +48,7 @@ class ShelfTest {
     void setName_wrongInputFormat_throwsInvalidFormatException() {
         String[] wrongInputs = new String[]{"", " ", "\t", "\n", " \r", "1984+", "Bazinga!", "something~"};
         for (String input : wrongInputs) {
-            assertThrows(IllegalModelArgumentException.class, () -> testShelf.setName(input));
+            assertThrows(IllegalArgumentModelException.class, () -> testShelf.setName(input));
         }
     }
 
@@ -63,39 +63,39 @@ class ShelfTest {
     }
 
     @Test
-    void addItem_repeatedInput_throwsDuplicateItemException() throws DuplicateItemException {
+    void addItem_repeatedInput_throwsDuplicateItemException() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
-        assertThrows(DuplicateItemException.class, () -> testShelf.addItem(testItem1));
+        assertThrows(DuplicateItemModelException.class, () -> testShelf.addItem(testItem1));
     }
 
     @Test
-    void addItem_normalInput_addNormally() throws DuplicateItemException {
+    void addItem_normalInput_addNormally() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         assertEquals(1, testShelf.getItemCount());
         assertEquals(testItem1, testShelf.getItem(0));
     }
 
     @Test
-    void deleteItem_nullInput_throwsNullPointerException() throws DuplicateItemException {
+    void deleteItem_nullInput_throwsNullPointerException() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         assertThrows(NullPointerException.class, () -> testShelf.deleteItem(null));
     }
 
     @Test
-    void deleteItem_itemNotExist_throwsItemNotExistException() throws DuplicateItemException {
+    void deleteItem_itemNotExist_throwsItemNotExistException() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
-        assertThrows(ItemNotExistException.class, () -> testShelf.deleteItem(testItem2));
+        assertThrows(ItemNotExistModelException.class, () -> testShelf.deleteItem(testItem2));
     }
 
     @Test
-    void deleteItem_itemExists_deleteNormally() throws DuplicateItemException, ItemNotExistException {
+    void deleteItem_itemExists_deleteNormally() throws DuplicateItemModelException, ItemNotExistModelException {
         testShelf.addItem(testItem1);
         testShelf.deleteItem(testItem1);
         assertEquals(0, testShelf.getItemCount());
     }
 
     @Test
-    void updateItem_nullInput_throwsNullPointerException() throws DuplicateItemException {
+    void updateItem_nullInput_throwsNullPointerException() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         assertThrows(NullPointerException.class, () -> testShelf.updateItem(null, null));
         assertThrows(NullPointerException.class, () -> testShelf.updateItem(testItem1, null));
@@ -105,23 +105,23 @@ class ShelfTest {
     }
 
     @Test
-    void updateItem_originalItemNotExist_throwsItemNotExistException() throws DuplicateItemException {
+    void updateItem_originalItemNotExist_throwsItemNotExistException() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
-        assertThrows(ItemNotExistException.class, () -> testShelf.updateItem(testItem2, testItem2));
-        assertThrows(ItemNotExistException.class, () -> testShelf.updateItem(testItem2, testItem3));
+        assertThrows(ItemNotExistModelException.class, () -> testShelf.updateItem(testItem2, testItem2));
+        assertThrows(ItemNotExistModelException.class, () -> testShelf.updateItem(testItem2, testItem3));
     }
 
     @Test
-    void updateItem_updatedItemExist_throwsDuplicateItemException() throws DuplicateItemException {
+    void updateItem_updatedItemExist_throwsDuplicateItemException() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         testShelf.addItem(testItem2);
-        assertThrows(DuplicateItemException.class, () -> testShelf.updateItem(testItem1, testItem2));
-        assertThrows(DuplicateItemException.class, () -> testShelf.updateItem(testItem2, testItem1));
+        assertThrows(DuplicateItemModelException.class, () -> testShelf.updateItem(testItem1, testItem2));
+        assertThrows(DuplicateItemModelException.class, () -> testShelf.updateItem(testItem2, testItem1));
     }
 
     @Test
-    void updateItem_originalExistUpdatedNotExist_updateNormally() throws DuplicateItemException,
-            ItemNotExistException, IllegalModelArgumentException {
+    void updateItem_originalExistUpdatedNotExist_updateNormally() throws DuplicateItemModelException,
+            ItemNotExistModelException, IllegalArgumentModelException {
         testShelf.addItem(testItem1);
         testShelf.updateItem(testItem1, testItem2);
         assertEquals(1, testShelf.getItemCount());
@@ -129,7 +129,7 @@ class ShelfTest {
     }
 
     @Test
-    void getItem_wrongIndex_throwsIndexOutOfBoundsException() throws DuplicateItemException {
+    void getItem_wrongIndex_throwsIndexOutOfBoundsException() throws DuplicateItemModelException {
         assertThrows(IndexOutOfBoundsException.class, () -> testShelf.getItem(0));
         assertThrows(IndexOutOfBoundsException.class, () -> testShelf.getItem(1));
         testShelf.addItem(testItem1);
@@ -143,7 +143,7 @@ class ShelfTest {
     }
 
     @Test
-    void getItem_correctIndex_returnNormally() throws DuplicateItemException {
+    void getItem_correctIndex_returnNormally() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         testShelf.addItem(testItem2);
         assertEquals(testItem1, testShelf.getItem(0));
@@ -151,7 +151,7 @@ class ShelfTest {
     }
 
     @Test
-    void contains_normalInput_returnNormally() throws DuplicateItemException {
+    void contains_normalInput_returnNormally() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         assertTrue(testShelf.contains(testItem1.getName()));
         assertFalse(testShelf.contains(testItem2.getName()));
@@ -167,10 +167,22 @@ class ShelfTest {
     }
 
     @Test
-    void toStringTest() throws DuplicateItemException {
+    void toStringTest() throws DuplicateItemModelException {
         testShelf.addItem(testItem1);
         testShelf.addItem(testItem2);
         String expectedResult = "1. " + testItem1.getName() + "\n" + "2. " + testItem2.getName();
         assertEquals(expectedResult, testShelf.toString());
+    }
+
+    @Test
+    void containsGivenID() throws DuplicateItemModelException {
+        assertFalse(testShelf.containsGivenID("randomid"));
+        testShelf.addItem(testItem1);
+        assertTrue(testShelf.containsGivenID(ItemStub.dummyID));
+    }
+
+    @Test
+    void getItemByID_itemNotFound_throwItemNotExistException() {
+        assertThrows(ItemNotExistModelException.class, () -> testShelf.getItemByID("randomid"));
     }
 }

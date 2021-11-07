@@ -1,6 +1,6 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.IllegalModelArgumentException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
 
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -37,11 +37,10 @@ public class Item {
      * @param price   the selling price of the item
      *                must be non-negative
      * @param remarks the remark that is tied to the item
-     *
-     * @throws IllegalModelArgumentException if any of the inputs does not follow the requirement
+     * @throws IllegalArgumentModelException if any of the inputs does not follow the requirement
      */
 
-    public Item(String name, String cost, String price, String remarks) throws IllegalModelArgumentException {
+    public Item(String name, String cost, String price, String remarks) throws IllegalArgumentModelException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
@@ -60,11 +59,10 @@ public class Item {
      * @param price  the selling price of the item
      *               must be non-negative
      * @param itemID the ID of the existing item
-     *
-     * @throws IllegalModelArgumentException if any of the inputs does not follow the requirement
+     * @throws IllegalArgumentModelException if any of the inputs does not follow the requirement
      */
     public Item(String name, String cost, String price, String remarks, String itemID) throws
-            IllegalModelArgumentException {
+            IllegalArgumentModelException {
         setName(name);
         setPurchaseCost(cost);
         setSellingPrice(price);
@@ -83,17 +81,16 @@ public class Item {
      *
      * @param name new name
      *             consists of alphabet, number, space, underscore, round bracket and hyphen
-     *
-     * @throws IllegalModelArgumentException if the name contains other characters
+     * @throws IllegalArgumentModelException if the name contains other characters
      */
-    public void setName(String name) throws IllegalModelArgumentException {
+    public void setName(String name) throws IllegalArgumentModelException {
         if (name.matches("[a-zA-Z0-9 _()-]+") && !name.isBlank()) {
             String temp = (this.name == null) ? "new item" : this.name;
             this.name = name;
             logger.log(Level.INFO, String.format("Successfully set Item %s's name as %s", temp, name));
         } else {
             logger.log(Level.WARNING, String.format("Trying to set Item %s's name as %s", this.getName(), name));
-            throw new IllegalModelArgumentException(MESSAGE_INVALID_NAME_FORMAT);
+            throw new IllegalArgumentModelException(MESSAGE_INVALID_NAME_FORMAT);
         }
     }
 
@@ -139,10 +136,9 @@ public class Item {
      *
      * @param cost new cost of the item
      *             must be non-negative
-     *
-     * @throws IllegalModelArgumentException if the new cost is negative
+     * @throws IllegalArgumentModelException if the new cost is negative
      */
-    public void setPurchaseCost(String cost) throws IllegalModelArgumentException {
+    public void setPurchaseCost(String cost) throws IllegalArgumentModelException {
         purchaseCost = convert2BD_NonNegative(cost);
         logger.log(Level.INFO, String.format("Successfully set %s's purchase cost as %s", this.getName(), cost));
     }
@@ -156,10 +152,9 @@ public class Item {
      *
      * @param price new price of the item
      *              must be non-negative
-     *
-     * @throws IllegalModelArgumentException if the new price is negative
+     * @throws IllegalArgumentModelException if the new price is negative
      */
-    public void setSellingPrice(String price) throws IllegalModelArgumentException {
+    public void setSellingPrice(String price) throws IllegalArgumentModelException {
         sellingPrice = convert2BD_NonNegative(price);
         logger.log(Level.INFO, String.format("Successfully set %s's selling price as %s", this.getName(), price));
     }
@@ -176,15 +171,15 @@ public class Item {
         }
     }
 
-    private BigDecimal convert2BD_NonNegative(String value) throws IllegalModelArgumentException {
+    private BigDecimal convert2BD_NonNegative(String value) throws IllegalArgumentModelException {
         try {
             BigDecimal newValue = new BigDecimal(value);
             if (newValue.compareTo(new BigDecimal("0")) < 0) {
-                throw new IllegalModelArgumentException(MESSAGE_INVALID_NEGATIVE_PRICE);
+                throw new IllegalArgumentModelException(MESSAGE_INVALID_NEGATIVE_PRICE);
             }
             return newValue;
         } catch (NumberFormatException e) {
-            throw new IllegalModelArgumentException(MESSAGE_INVALID_PRICE_FORMAT);
+            throw new IllegalArgumentModelException(MESSAGE_INVALID_PRICE_FORMAT);
         }
 
     }

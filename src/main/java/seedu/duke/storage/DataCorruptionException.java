@@ -1,12 +1,14 @@
 package seedu.duke.storage;
 
 import seedu.duke.model.ShelfList;
-import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalModelArgumentException;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
+import seedu.duke.model.exception.DuplicateItemModelException;
+import seedu.duke.model.exception.DuplicateShelfModelException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
 
 //@@author yuejunfeng0909
 public class DataCorruptionException extends Exception {
+
     DataCorruptionException() {
         super("Data was corrupted.");
         // load sample data
@@ -15,7 +17,8 @@ public class DataCorruptionException extends Exception {
         shelfList.resetShelfList();
         try {
             storage.loadFromJson(storage.sampleData());
-        } catch (DuplicateShelfException | DuplicateItemException | IllegalModelArgumentException ex) {
+        } catch (DuplicateShelfModelException | DuplicateItemModelException | IllegalArgumentModelException
+                | DeniedAccessToShelfModelException ex) {
             ex.printStackTrace();
         }
     }

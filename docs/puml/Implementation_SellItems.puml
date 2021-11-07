@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":CLIverShelf" as Main
+
+participant "newCommand: \nSellCommand" as Command
+participant ":ShelfList" as ShelfList
+participant ":SalesManager" as SalesManager
+participant "originalShelf: \nShelf" as OriginalShelf
+participant "newSoldItem: \nSoldItem" as SoldItem
+participant "soldItemShelf: \nShelf" as SoldItemShelf
+
+
+activate Main
+
+Main -> Command: execute()
+activate Command
+Command -> ShelfList: getItem(itemID)
+activate ShelfList
+ShelfList --> Command: specifiedItem
+deactivate ShelfList
+Command -> SalesManager: sell(item)
+activate SalesManager
+SalesManager -> ShelfList: shelfOfItem(item)
+activate ShelfList
+ShelfList --> SalesManager: originalShelf
+deactivate ShelfList
+SalesManager -> OriginalShelf: deleteItem(item)
+activate OriginalShelf
+OriginalShelf --> SalesManager
+deactivate OriginalShelf
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList --> SalesManager: soldItemShelf
+deactivate ShelfList
+SalesManager -> SoldItem **: new SoldItem(itemDetails)
+activate SoldItem
+SoldItem --> SalesManager
+deactivate SoldItem
+SalesManager -> SoldItemShelf: addItem(newSoldItem)
+activate SoldItemShelf
+SoldItemShelf --> SalesManager
+deactivate SoldItemShelf
+SalesManager --> Command: finishedMessage
+deactivate SalesManager
+
+Command --> Main: finishedMessage
+deactivate Command
+deactivate Main
+destroy Command
+
+
+@enduml

@@ -5,10 +5,11 @@ import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
 import seedu.duke.model.SoldItem;
-import seedu.duke.model.exception.DuplicateItemException;
-import seedu.duke.model.exception.DuplicateShelfException;
-import seedu.duke.model.exception.IllegalModelArgumentException;
-import seedu.duke.model.exception.ShelfNotExistException;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
+import seedu.duke.model.exception.DuplicateShelfModelException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
+import seedu.duke.model.exception.ShelfNotExistModelException;
+import seedu.duke.model.exception.DuplicateItemModelException;
 import seedu.duke.ui.MessageBubble;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public class Storage {
 
                 try {
                     currentShelf = shelfList.getShelf(nameOfShelf, false);
-                } catch (ShelfNotExistException e) {
+                } catch (ShelfNotExistModelException | DeniedAccessToShelfModelException e) {
                     e.printStackTrace();
                 }
 
@@ -126,7 +127,8 @@ public class Storage {
     }
 
     protected void loadFromJson(JSONObject storedData)
-            throws DuplicateShelfException, IllegalModelArgumentException, DuplicateItemException {
+            throws DuplicateShelfModelException, IllegalArgumentModelException, DuplicateItemModelException,
+            DeniedAccessToShelfModelException {
         for (String shelfName : storedData.keySet()) {
             Shelf currentShelf = shelfList.addShelf(shelfName);
             try {

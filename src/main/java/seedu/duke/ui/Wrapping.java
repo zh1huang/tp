@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 //@@author yuejunfeng0909
 public class Wrapping {
+
     private final String originalMessage;
     private final int lineLimit;
     private ArrayList<String> lines;
@@ -15,7 +16,7 @@ public class Wrapping {
         autoWrap();
     }
 
-    public void autoWrap() {
+    private void autoWrap() {
         String temp = originalMessage;
         outerLoop:
         while (!temp.isBlank()) {
@@ -24,14 +25,10 @@ public class Wrapping {
                 lines.add(temp);
                 break;
             }
-            for (int i = lineLimit - 1; i >= 0; i--) {
+            for (int i = lineLimit; i >= 0; i--) {
                 if (temp.charAt(i) == ' ') {
                     lines.add(temp.substring(0, i));
-                    try {
-                        temp = temp.substring(i + 1);
-                    } catch (IndexOutOfBoundsException e) {
-                        temp = "";
-                    }
+                    temp = temp.substring(i + 1);
                     continue outerLoop;
                 }
             }
