@@ -141,7 +141,7 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 **API**:
 
-1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
+1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/parser/Parser.java)
 
     1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
        the `Parser` to `parseCommand()`
@@ -156,7 +156,7 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 #### Subcomponent Command
 
-2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
     2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be
        instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then
@@ -172,7 +172,7 @@ parsed, depending on the Command type, different types uses different sales API.
 
 **API**:
 
-1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
+1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesManager.java)
     * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
         * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be
           called to mark an item as sold
@@ -181,14 +181,14 @@ parsed, depending on the Command type, different types uses different sales API.
                or `SalesReport#generateSoldItemDetails()` is called
             2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
 
-2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesReport.java)
+2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesReport.java)
     * Supports ReportCommand & Handles generation of sales report
         * When program invokes `ReportCommand#execute`, a `SalesReport` object is created
           & `SalesReport#generateSoldItemStats()`
           or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
           into strings before returning the String for printing.
 
-3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
+3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesMarkUp.java)
     * Supports MarkUpCommand & Handles Estimation of price markup of an item
         1. When program invokes `MarkUpCommand#execute`, a `SalesMarkUp` object is created
         2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current
