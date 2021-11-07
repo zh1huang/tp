@@ -179,12 +179,15 @@ parsed, depending on the Command type, different types uses different sales API.
         * When program invokes `SellCommand#execute`, 
           * `SalesManager` object is constructed 
           * `SalesManager#sell()` is then invoked to mark an item as sold
-        * When program invokes `ReportCommand#execute`
+        ![](diagrams/SellCommandSequenceDiagram.svg)
+          
+        * When program invokes `ReportCommand#execute` shown below in the `SalesReport` API
             1. A `SalesReport` object is constructed
             2. When a function of `SalesReport` is invoked,
                1. A `SalesManager` object is constructed
                2. & `SalesManager` functions will filter the soldItems 
                3. returning the list of filtered items to be printed
+
 
 2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesReport.java)
     * Supports ReportCommand & Handles generation of sales report
@@ -192,6 +195,8 @@ parsed, depending on the Command type, different types uses different sales API.
           & `SalesReport#generateSoldItemStats()`
           or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
           into strings before returning the String for printing.
+
+![](diagrams/ReportCommandSequenceDiagram.svg)
 
 3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesMarkUp.java)
     * Supports MarkUpCommand & Handles Estimation of price markup of an item
@@ -203,7 +208,7 @@ parsed, depending on the Command type, different types uses different sales API.
         4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the
            general markup estimation in intervals of 20.
 
-![](diagrams/SalesSubComponentClassDiagram.svg)
+![](diagrams/MarkUpCommandSequenceDiagram.svg)
 
 ### Model component
 
@@ -606,5 +611,4 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Percent markup more than 1000 dp | `markup shlv/book1 i/1 %/1234.67` | Error message (invalid format) |
 | Non-existent shelf | `markup shlv/notexistshelf i/1 %/12.34` | Error message (shelf does not exist) |
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
-| Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
