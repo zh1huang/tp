@@ -287,7 +287,7 @@ Expected outcome:
     ............................................................................................................
 ```
 
-Example: **Search for "dirty"**
+Example: **Search for "cover"**
 ```
 search cover
 ```
