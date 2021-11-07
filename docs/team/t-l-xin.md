@@ -21,14 +21,14 @@ enables better decision-making and more efficient management.
        reduce the amount functional code checking, so that we just need to focus on the accepted command regex format. 
      * Credits: Adapted and reused Parser code from [AddressBook-2](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java)
 
-  3. **Features**
+  2. **Features**
      <br> MarkUpCommand [#112](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/112)
         * What it does: Allows users to view current item markup and calculate the markup pricing estimates.
         * Justification: This feature allows better decision-making for the user, where the user does not need to have very good 
           math knowledge to calculate what is a good price to sell the item at. It allows the user to check current and estimated markup prices easily
           without the need to use an additional device such as a calculator.
         
-  4. **Enhancement to existing features**
+  3. **Enhancement to existing features**
      * Improvement to `ReportCommand` : [#112](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/112) 
        * Added calculation methods to display sales statistics 
        * Improved function to view the statistics and items by between 2 time periods
@@ -37,7 +37,7 @@ enables better decision-making and more efficient management.
      * Added customised error messages for `add`, `edit`, `report`, `markup` commands [#213](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/213)     
      * Fixed bugs found ([#197](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/197), [#233](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/233))
   
-  5. **Documentation**
+  4. **Documentation**
      <br> User Guide
         * Updated user command input formats ([#95](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/95), [#118](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/118/files))
      
@@ -48,7 +48,7 @@ enables better decision-making and more efficient management.
         * Non-functional requirements [#88](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/88)
         * Manual Testing: `create`, `remove`, `report`, `sell`, `markup` [#106](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/106), [#213](https://github.com/AY2122S1-CS2113T-F11-4/tp/pull/213/files)
   
-  6. **Community**
+  5. **Community**
        * Reviewed another group's Developer's Guide [Team T09-1](https://github.com/nus-cs2113-AY2122S1/tp/pull/24/files/8bd5717831702e3014d4063d6020024a87587447)
        * Bugs in other team projects <br>
         [PED link](https://github.com/t-l-xin/ped/issues)
