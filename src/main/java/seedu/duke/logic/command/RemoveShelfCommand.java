@@ -1,8 +1,10 @@
 package seedu.duke.logic.command;
 
+import seedu.duke.logic.command.exception.DeniedAccessToShelfCommandException;
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.logic.command.exception.ShelfNotExistCommandException;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 public class RemoveShelfCommand extends Command {
@@ -21,7 +23,8 @@ public class RemoveShelfCommand extends Command {
     }
 
     @Override
-    public String execute() throws ShelfNotExistCommandException, IllegalArgumentCommandException {
+    public String execute() throws ShelfNotExistCommandException, IllegalArgumentCommandException,
+            DeniedAccessToShelfCommandException {
         try {
             if (ShelfList.getShelfList().getShelf(shelfName, true).getItemCount() != 0) {
                 throw new IllegalArgumentCommandException(REMOVE_NON_EMPTY_SHELF_ERROR_MESSAGE);
@@ -33,6 +36,8 @@ public class RemoveShelfCommand extends Command {
             throw new ShelfNotExistCommandException(e.getMessage());
         } catch (IllegalArgumentCommandException e) {
             throw new IllegalArgumentCommandException(e.getMessage());
+        } catch (DeniedAccessToShelfModelException e) {
+            throw new DeniedAccessToShelfCommandException(e.getMessage());
         }
     }
 

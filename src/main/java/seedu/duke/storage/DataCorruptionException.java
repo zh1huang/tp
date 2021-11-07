@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.DuplicateItemModelException;
 import seedu.duke.model.exception.DuplicateShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
@@ -16,7 +17,8 @@ public class DataCorruptionException extends Exception {
         shelfList.resetShelfList();
         try {
             storage.loadFromJson(storage.sampleData());
-        } catch (DuplicateShelfModelException | DuplicateItemModelException | IllegalArgumentModelException ex) {
+        } catch (DuplicateShelfModelException | DuplicateItemModelException | IllegalArgumentModelException
+                | DeniedAccessToShelfModelException ex) {
             ex.printStackTrace();
         }
     }

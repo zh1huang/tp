@@ -14,10 +14,12 @@ activate Parser
 Parser -> Parser: prepareCommand(input)
 activate Parser
 Parser -> Command **: new Command(arguments)
-deactivate Parser
+
 activate Command
 Command --> Parser
 deactivate Command
+Parser --> Parser: new Command
+deactivate Parser
 Parser --> Main: new Command
 deactivate Parser
 
