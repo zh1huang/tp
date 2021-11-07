@@ -162,7 +162,7 @@ Adds a new item to the inventory, specifying its name, shelf, purchase cost, sel
 
 &#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
 
-&#9888; As a bookstore owner, you are **strongly encouraged to use this ID to label your item** before placing it on the shelf. When the customer wishes to purchase an item, you will need the ID from the label of that item to sell. Alternatively, you can use [get function](#get-information-about-an-item) to retrieve the ID of an item.
+&#9888; As a bookstore owner, you are **strongly encouraged to use this ID to label your item** before placing it on the shelf. When the customer wishes to purchase an item, you will need the ID from the label of that item to sell. Alternatively, you can use [`get` function](#get-information-about-an-item) to retrieve the ID of an item.
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
