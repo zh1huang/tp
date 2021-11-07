@@ -34,19 +34,19 @@ business, where they can view this information in a user-friendly manner.
 3. Run `cd (path to the folder containing CLIverShelf.jar)` and `java -jar CLIverShelf.jar` to start using CLIvershelf.
 4. You should see the following:
 ```
-                                                                  .............................................................
-                                                                  : Hello from                                                :
-                                                                  :   _____ _      _____              _____ _          _  __  :
-                                                                  :  / ____| |    |_   _|            / ____| |        | |/ _| :
-                                                                  : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
-                                                                  : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
-                                                                  : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
-                                                                  :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
-                                                                  : What can I do for you?                                    :
-                                                                  ................................................................
-                                                                            ...................................................
-                                                                            : Enter 'help' for the list of available commands :
-                                                                            ......................................................
+      .............................................................
+      : Hello from                                                :
+      :   _____ _      _____              _____ _          _  __  :
+      :  / ____| |    |_   _|            / ____| |        | |/ _| :
+      : | |    | |      | |_   _____ _ _| (___ | |__   ___| | |_  :
+      : | |    | |      | \ \ / / _ \ '__\___ \| '_ \ / _ \ |  _| :
+      : | |____| |____ _| |\ V /  __/ |  ____) | | | |  __/ | |   :
+      :  \_____|______|_____\_/ \___|_| |_____/|_| |_|\___|_|_|   :
+      : What can I do for you?                                    :
+      ................................................................
+                ...................................................
+                : Enter 'help' for the list of available commands :
+                ......................................................
 ```
 5. Type `help` to see all the commands available. You may try some example commands below:
    * `create shlv/book1` - creates a new shelf named `book1`
@@ -85,27 +85,27 @@ Format: `help`
 
 Expected outcome:
 ```
-                            ...................................................................................................
-                            : Here are the performable actions:                                                               :
-                            : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
-                            : Items in square brackets [ ] are optional.                                                      :
-                            : ____________________________________________________________________________________________    :
-                            : Description: Command format                                                                     :
-                            : ____________________________________________________________________________________________    :
-                            : 1. Get help : help                                                                              :
-                            : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
-                            : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
-                            : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
-                            : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
-                            : 6. List items: list [shlv/SHELF_NAME]                                                           :
-                            : 7. Search item: search KEYWORD                                                                  :
-                            : 8. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
-                            : 9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
-                            : 10. Sell an item: sell id/ITEM_ID                                                  :
-                            : 11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
-                            : 12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
-                            : 13. Exit program: bye                                                                           :
-                            ......................................................................................................
+    ...................................................................................................
+    : Here are the performable actions:                                                               :
+    : Words in UPPER_CASE are the parameters to be supplied by the user.                              :
+    : Items in square brackets [ ] are optional.                                                      :
+    : ____________________________________________________________________________________________    :
+    : Description: Command format                                                                     :
+    : ____________________________________________________________________________________________    :
+    : 1. Get help : help                                                                              :
+    : 2. Create new shelf: create shlv/SHELF_NAME                                                     :
+    : 3. Remove existing shelf: remove shlv/SHELF_NAME                                                :
+    : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
+    : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
+    : 6. List items: list [shlv/SHELF_NAME]                                                           :
+    : 7. Search item: search KEYWORD                                                                  :
+    : 8. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
+    : 9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
+    : 10. Sell an item: sell id/ITEM_ID                                                  :
+    : 11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
+    : 12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
+    : 13. Exit program: bye                                                                           :
+    ......................................................................................................
 ```
 ### Create a shelf
 
@@ -124,9 +124,9 @@ create shlv/book2
 
 Expected outcome:
 ```
-                                                                                            ...................................
-                                                                                            : Shelf "book2" has been created. :
-                                                                                            ......................................
+    ...................................
+    : Shelf "book2" has been created. :
+    ......................................
 ```
 
 ### Remove a shelf
@@ -145,9 +145,9 @@ remove shlv/book2
 
 Expected outcome:
 ```
-                                                                                            ...................................
-                                                                                            : Shelf "book2" has been removed. :
-                                                                                            ......................................
+    ...................................
+    : Shelf "book2" has been removed. :
+    ......................................
 ```
 
 ### Add new items
@@ -173,10 +173,10 @@ add n/Harry Potter shlv/book1 p/27 s/37 q/1 r/50% discount
 
 Expected outcome
 ```
-                                                                   ............................................................
-                                                                   : This item has been added to the list. Its unique ID is:  :
-                                                                   : 6ddf90b0                                                 :
-                                                                   ...............................................................
+    ............................................................
+    : This item has been added to the list. Its unique ID is:  :
+    : 6ddf90b0                                                 :
+    ...............................................................
 ```
 
 Example: **Add 99 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`.**
@@ -186,9 +186,9 @@ add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/99
 
 Expected outcome:
 ```
-                                            ...................................................................................
-                                            : 99 items have been added to the list. Use Get command to view their unique IDs. :
-                                            ......................................................................................
+    ...................................................................................
+    : 99 items have been added to the list. Use Get command to view their unique IDs. :
+    ......................................................................................
 ```
 
 ### Delete an item
@@ -206,13 +206,13 @@ delete shlv/book2 i/1
 ```
 Expected outcome:
 ```
-                                                                                  .............................................
-                                                                                  : This item has been removed from the list. :
-                                                                                  : Name: Geronimo                            :
-                                                                                  : Cost: 17.90                               :
-                                                                                  : Price: 20.90                              :
-                                                                                  : Remarks:                                  :
-                                                                                  ................................................
+    .............................................
+    : This item has been removed from the list. :
+    : Name: Geronimo                            :
+    : Cost: 17.90                               :
+    : Price: 20.90                              :
+    : Remarks:                                  :
+    ................................................
 ```
 
 ### Listing all items 
@@ -234,18 +234,18 @@ list
 ```
 Expected outcome:
 ```
-                      .........................................................................................................
-                      : Here is the list of items:                                                                            :
-                      : [book1]:                                                                                              :
-                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
-                      :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
-                      : [warehouse]:                                                                                          :
-                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :  001     | sample item                                        | 12.25     | 25.00     | 1    |   x    :
-                      ............................................................................................................
+    .........................................................................................................
+    : Here is the list of items:                                                                            :
+    : [book1]:                                                                                              :
+    :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
+    :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
+    : [warehouse]:                                                                                          :
+    :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  001     | sample item                                        | 12.25     | 25.00     | 1    |   x    :
+    ............................................................................................................
 ```
 
 Example: **Listing all items under `book1` shelf**
@@ -254,13 +254,13 @@ list shlv/book1
 ```
 Expected outcome:
 ```
-                      .........................................................................................................
-                      : Here is the list of items:                                                                            :
-                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
-                      :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
-                      ............................................................................................................
+    .........................................................................................................
+    : Here is the list of items:                                                                            :
+    :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
+    :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
+    ............................................................................................................
 ```
 
 ### Search for item
@@ -271,38 +271,60 @@ The attributes shown are: Item ID, Item name, purchase cost, selling price, quan
 
 &#8505; Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
 
-Format: `search KEYWORD`
+Format: `search k/KEYWORD`
 
 Example: **Search for "potter"**
 ```
-search potter
+search k/potter
 ```
 Expected outcome:
 ```
-                      .........................................................................................................
-                      : Here are the items that has matching name                                                             :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :  68bbe345| Harry Potter                             | 16.1      | 25.12     |                         :
-                      :  1f36e637| Harry Potter                             | 16.1      | 25.12     | Cover is dirty          :
-                      :  32709393| Harry Potter                             | 16.1      | 25.12     | Good condition          :
-                      ............................................................................................................
+    .........................................................................................................
+    : Here are the items that has matching name                                                             :
+    : ----------------------------------------------------------------------------------------------------- :
+    :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  68bbe345| Harry Potter                             | 16.1      | 25.12     |                         :
+    :  1f36e637| Harry Potter                             | 16.1      | 25.12     | Cover is dirty          :
+    :  32709393| Harry Potter                             | 16.1      | 25.12     | Good condition          :
+    ............................................................................................................
 ```
 
-Example: **Search for "dirty"**
+Example: **Search for "cover"**
 ```
-search dirty
+search cover
 ```
 Expected outcome:
 ```
-                      .........................................................................................................
-                      : Here are the items that has matching remark                                                           :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :  1f36e637| Harry Potter                             | 16.1      | 25.12     | Cover is dirty          :
-                      ............................................................................................................
+    .........................................................................................................
+    : Here are the items that has matching remark                                                           :
+    : ----------------------------------------------------------------------------------------------------- :
+    :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  1f36e637| Harry Potter                             | 16.1      | 25.12     | Cover is dirty          :
+    ............................................................................................................
+```
+
+If there are matching result for many properties, e.g. "potter" matches the name of the book "Harry Potter" and is also
+found in another item's remark, then both results will be printed.
+
+Sample output:
+```
+    .........................................................................................................
+    : Here are the items that has matching name                                                             :
+    : ----------------------------------------------------------------------------------------------------- :
+    :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  27808f31| expensive book                           | 9999.99   | 9000.00   |                         :
+    :  37d31475| expensive book2                          | 9999.99   | 9000.00   |                         :
+    : ----------------------------------------------------------------------------------------------------- :
+    :                                                                                                       :
+    : Here are the items that has matching remark                                                           :
+    : ----------------------------------------------------------------------------------------------------- :
+    :     ID   |                   Item                   |   Cost    |   Price   |          Remark         :
+    : ----------------------------------------------------------------------------------------------------- :
+    :  1e6d1014| Geronimo                                 | 17.90     | 20.90     | expensive               :
+    ............................................................................................................
 ```
 
 ### Get information about an item
@@ -320,23 +342,23 @@ get shlv/book1 i/1
 Expected outcome:
 ```
 list shlv/book1
-                      .........................................................................................................
-                      : Here is the list of items:                                                                            :
-                      :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
-                      : ----------------------------------------------------------------------------------------------------- :
-                      :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
-                      :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
-                      ............................................................................................................
+  .........................................................................................................
+  : Here is the list of items:                                                                            :
+  :    No    |                        Item                        |   Cost    |   Price   | Qty  | Remark :
+  : ----------------------------------------------------------------------------------------------------- :
+  :  001     | Harry Potter                                       | 27.00     | 37.00     | 1    |   o    :
+  :  002-100 | Pilot P100                                         | 1.00      | 1.50      | 99   |   x    :
+  ............................................................................................................
 
 get shlv/book1 i/1                                                                                      
-                                                                                      .........................................
-                                                                                      : Here is the information of your item: :
-                                                                                      : Name: Harry Potter                    :
-                                                                                      : Cost: 27                              :
-                                                                                      : Price: 37                             :
-                                                                                      : ID: 6ddf90b0                          :
-                                                                                      : Remarks: 50% discount                 :
-                                                                                      ............................................
+                                                                  .........................................
+                                                                  : Here is the information of your item: :
+                                                                  : Name: Harry Potter                    :
+                                                                  : Cost: 27                              :
+                                                                  : Price: 37                             :
+                                                                  : ID: 6ddf90b0                          :
+                                                                  : Remarks: 50% discount                 :
+                                                                  ............................................
 ```
 
 ### Edit an item
@@ -360,14 +382,13 @@ edit shlv/book1 i/1 p/selling price v/30
 Expected outcome:
 
 ```
-                                                                                                ...............................
-                                                                                                : This item has been updated. :
-                                                                                                : Name: Harry Potter          :
-                                                                                                : Cost: 20                    :
-                                                                                                : Price: 30                   :
-                                                                                                : Remarks: new book           :
-                                                                                                ..................................
-
+...............................
+: This item has been updated. :
+: Name: Harry Potter          :
+: Cost: 20                    :
+: Price: 30                   :
+: Remarks: new book           :
+..................................
 ```
 Example: **Update purchase cost of item with `index 2` as $23.50**
 ```
@@ -376,13 +397,13 @@ edit shlv/book1 i/2 p/purchase cost v/23.5
 
 Expected outcome:
 ```
-                                                                                                ...............................
-                                                                                                : This item has been updated. :
-                                                                                                : Name: Harry Potter          :
-                                                                                                : Cost: 23.5                  :
-                                                                                                : Price: 30.90                :
-                                                                                                : Remarks:                    :
-                                                                                                ..................................
+    ...............................
+    : This item has been updated. :
+    : Name: Harry Potter          :
+    : Cost: 23.5                  :
+    : Price: 30.90                :
+    : Remarks:                    :
+    ..................................
 ```
 
 ### Sell an item
@@ -400,13 +421,13 @@ sell id/76a3e297
 
 Expected outcome:
 ```
-                                                                                                   ............................
-                                                                                                   : This item has been sold. :
-                                                                                                   : Name: Harry Potter       :
-                                                                                                   : Cost: 27                 :
-                                                                                                   : Price: 37                :
-                                                                                                   : Remarks: 50% discount    :
-                                                                                                   ...............................
+    ............................
+    : This item has been sold. :
+    : Name: Harry Potter       :
+    : Cost: 27                 :
+    : Price: 37                :
+    : Remarks: 50% discount    :
+    ...............................
 ```
 
 
@@ -431,18 +452,18 @@ markup shlv/book1 i/2
 
 Expected outcome:
 ```
-                                                                          .....................................................
-                                                                          : Item: Pilot P100                                  :
-                                                                          : Cost: 1, Price: 1.5                               :
-                                                                          : Amount Difference: 0.5                            :
-                                                                          : Current Mark Up: 50%                              :
-                                                                          : markup: 0%, increase: $0.00, Final price: $1.00   :
-                                                                          : markup: 20%, increase: $0.20, Final price: $1.20  :
-                                                                          : markup: 40%, increase: $0.40, Final price: $1.40  :
-                                                                          : markup: 60%, increase: $0.60, Final price: $1.60  :
-                                                                          : markup: 80%, increase: $0.80, Final price: $1.80  :
-                                                                          : markup: 100%, increase: $1.00, Final price: $2.00 :
-                                                                          ........................................................
+    .....................................................
+    : Item: Pilot P100                                  :
+    : Cost: 1, Price: 1.5                               :
+    : Amount Difference: 0.5                            :
+    : Current Mark Up: 50%                              :
+    : markup: 0%, increase: $0.00, Final price: $1.00   :
+    : markup: 20%, increase: $0.20, Final price: $1.20  :
+    : markup: 40%, increase: $0.40, Final price: $1.40  :
+    : markup: 60%, increase: $0.60, Final price: $1.60  :
+    : markup: 80%, increase: $0.80, Final price: $1.80  :
+    : markup: 100%, increase: $1.00, Final price: $2.00 :
+    ........................................................
 ```
 
 Example: **Check the 5% markup of the item `index 2` in shelf `book1`**
@@ -453,13 +474,13 @@ markup shlv/book1 i/2 %/5
 Expected outcome:
 ```
 markup shlv/book1 i/2 %/5
-                                                                            ...................................................
-                                                                            : Item: Pilot P100                                :
-                                                                            : Cost: 1, Price: 1.5                             :
-                                                                            : Amount Difference: 0.5                          :
-                                                                            : Current Mark Up: 50%                            :
-                                                                            : markup: 5%, increase: $0.05, Final price: $1.05 :
-                                                                            ......................................................
+    ...................................................
+    : Item: Pilot P100                                :
+    : Cost: 1, Price: 1.5                             :
+    : Amount Difference: 0.5                          :
+    : Current Mark Up: 50%                            :
+    : markup: 5%, increase: $0.05, Final price: $1.05 :
+    ......................................................
 ```
 
 ### Generate sales report
@@ -485,12 +506,12 @@ report t/stats ym/2021-11
 
 Expected outcome:
 ```
-                                                                                    ...........................................
-                                                                                    : Total Purchase Cost: $ 28.00            :
-                                                                                    : Total Selling Price: $ 31.50            :
-                                                                                    : Total Profits: $ 3.50                   :
-                                                                                    : Gross Profit Margin (in percent): 11.11 :
-                                                                                    ..............................................
+    ...........................................
+    : Total Purchase Cost: $ 28.00            :
+    : Total Selling Price: $ 31.50            :
+    : Total Profits: $ 3.50                   :
+    : Gross Profit Margin (in percent): 11.11 :
+    ..............................................
 ```
 Example: **Generate sales report in between Oct 2021 and Nov 2021 inclusive**
 ```
@@ -499,12 +520,12 @@ report t/items ym/2021-10 ym/2021-11
 
 Expected outcome:
 ```
-                          .....................................................................................................
-                          : No  |                    Item                 |  Cost   |  Price  |  Profit |      Sold Time      :
-                          : ------------------------------------------------------------------------------------------------- :
-                          : 1   | Harry Potter                            | 27      | 30      | 3       |2021-11-07 01:51:47  :
-                          : 2   | Pilot P100                              | 1       | 1.5     | 0.5     |2021-11-07 01:51:22  :
-                          ........................................................................................................
+    .....................................................................................................
+    : No  |                    Item                 |  Cost   |  Price  |  Profit |      Sold Time      :
+    : ------------------------------------------------------------------------------------------------- :
+    : 1   | Harry Potter                            | 27      | 30      | 3       |2021-11-07 01:51:47  :
+    : 2   | Pilot P100                              | 1       | 1.5     | 0.5     |2021-11-07 01:51:22  :
+    ........................................................................................................
 ```
 
 ### Exit program
@@ -515,9 +536,9 @@ Format: `bye`
 
 Expected outcome:
 ```
-                                                                                                          .....................
-                                                                                                          : See you next time :
-                                                                                                          ........................
+    .....................
+    : See you next time :
+    ........................
 ```
 
 ### Add customer rating & review for each item `[coming in v3.0]`
@@ -550,7 +571,7 @@ You can simply restart the program and your last updated data will be loaded.
 |**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter shlv/book1 p/27 s/37 q/5`|
 |**Delete**  | `delete shlv/SHELF_NAME i/INDEX` <br> eg: `delete shlv/book2 i/1`                                                                         |
 |**List**    | `list [shlv/SHELF_NAME]` <br> eg: `list shlv/stationary`                                                                                |
-|**Search**  | //todo | |
+|**Search**  | `search k/KEYWORD` <br> eg: `search k/sample item`
 |**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
 |**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
 |**Sell**    | `sell id/ITEM_ID` <br> eg: `sell id/76a3e297`                                                                                    |
