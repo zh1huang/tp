@@ -137,24 +137,26 @@ The `Logic` component consists of `Parser` and `Command` components.
 5. `Command` then checks the `ExitCommand` on whether the program should exit.
 6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
-#### Subcomponent Parser
+### Logic: Subcomponent Parser
 
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/parser/Parser.java)
+    
+    This sections will illustrate how the Parser interacts with `CLIvershelf` class and different `Command` classes.
 
     1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
        the `Parser` to `parseCommand()`
     2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
-    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`
-       , `DELETE_STRING` shown in the diagram below.
+    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `add`, `delete` , etc.
     4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
-       the `prepare{commandWord}()` function of the `Parser`
-        1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` to the `CliverShelf`
-       component
+       the `prepare{commandWord}(arguments)` function of the `Parser`
+    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` object to the `CliverShelf`
+       component, for `CLIvershelf` to decide what to do with the `{commandWord}Command` object.
 
-#### Subcomponent Command
+![](diagrams/ParserSequenceDiagram.svg)
+
+### Logic: Subcomponent Command
 
 2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
     1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
@@ -165,7 +167,7 @@ The `Logic` component consists of `Parser` and `Command` components.
        components of the system.
        ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
 
-##### Subcomponent Sales
+### Command: Subcomponent Sales
 
 This section describes how the subcomponent Sales interacts with the sales related commands. After the command input is
 parsed, depending on the Command type, different types uses different sales API.
@@ -174,12 +176,15 @@ parsed, depending on the Command type, different types uses different sales API.
 
 1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesManager.java)
     * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
-        * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be
-          called to mark an item as sold
+        * When program invokes `SellCommand#execute`, 
+          * `SalesManager` object is constructed 
+          * `SalesManager#sell()` is then invoked to mark an item as sold
         * When program invokes `ReportCommand#execute`
-            1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()`
-               or `SalesReport#generateSoldItemDetails()` is called
-            2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
+            1. A `SalesReport` object is constructed
+            2. When a function of `SalesReport` is invoked,
+               1. A `SalesManager` object is constructed
+               2. & `SalesManager` functions will filter the soldItems 
+               3. returning the list of filtered items to be printed
 
 2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesReport.java)
     * Supports ReportCommand & Handles generation of sales report
