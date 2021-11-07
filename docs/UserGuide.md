@@ -66,7 +66,7 @@ Notes about the command format:
 * Items in square brackets are optional and can only be specified **once** for that command. 
   E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
 * &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
-  such as "!@#$%^&*[]{}/|\+=`~<>?,."
+  such as "!@#$%^&*[]{}/|\\+=`~<>?,."
 * &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
   user guide will be flagged as **invalid** command formats.
 * &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
