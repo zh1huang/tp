@@ -40,6 +40,9 @@ to get developers and potential contributors to get familiarised with the implem
 
 ## Setting up
 
+This section describes some pre-requisites and instructions to set up the application on your computer. Do follow the instructions closely
+as any deviations may cause unexpected outcomes or cause application to not startup.
+
 **Pre-requisites**
 
 1. JDK 11
@@ -80,7 +83,7 @@ to get developers and potential contributors to get familiarised with the implem
 
 ## Design
 
-All UML diagrams in this guide are stored in `docs/diagrams` directory.
+This section will briefly describe the overall design and structure of major components in the CLIverShelf.
 
 ### Architecture
 
@@ -96,6 +99,8 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 5. `Storage`: Reads data from, and writes data to, the hard disk.
 
 ### General Program Flow
+
+This section illustrates how the major components interact with each other during program run.
 
 ![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
@@ -191,6 +196,8 @@ The `Sales` subcomponent,
 For more specific details, refer to implementation of [`SellCommand`](#selling-an-item), [`ReportCommand`](#generating-sales-report), and [`MarkUpCommand`](#generating-item-markup-price). 
 
 ### Model component
+
+This sections describes how the classes in model component are structure and how they interact with each other.
 
 **API**:
 
@@ -446,6 +453,8 @@ Aspect: How markup executes:
 
 ## Product scope
 
+This section defined the target users, and the value proposition.
+
 ### Target user profile
 
 * has a need to manage inventories & finances of small scaled book stores
@@ -517,6 +526,8 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 * [Markup price of an item test](#markup-price-of-an-item-test)
 
 ### Launch and shut down
+
+This section describes the steps to run and exit the program.
 
 #### Initial launch
 
