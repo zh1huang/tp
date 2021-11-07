@@ -101,7 +101,7 @@ Expected outcome:
                             : 7. Search item: search KEYWORD                                                                  :
                             : 8. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
                             : 9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
-                            : 10. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                  :
+                            : 10. Sell an item: sell id/ITEM_ID                                                  :
                             : 11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
                             : 12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
                             : 13. Exit program: bye                                                                           :
@@ -386,7 +386,7 @@ Expected outcome:
 
 Mark an item as sold. The item will be removed from the shelf and will be added to your sales report.
 
-Format: `sell id/ITEM_ID
+Format: `sell id/ITEM_ID`
 &#128221; the ID of an item is the 8 alphanumeric characthers printed out after you have added the item to a shelf.   
 
 Example: **Sell the book "Harry Potter" which was previously added in "Add new items" section. Its ID is 76a3e297.**
@@ -524,9 +524,9 @@ You can simply restart the program and your last updated data will be loaded.
 |**List**    | `list [shlv/SHELF_NAME]` <br> eg: `list shlv/stationary`                                                                                |
 |**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
 |**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
-|**Sell**    | `sell shlv/SHELF_NAME i/INDEX` <br> eg: `sell shlv/book1 i/1`                                                                                    |
+|**Sell**    | `sell id/ITEM_ID` <br> eg: `sell id/76a3e297`                                                                                    |
 |**Markup**  | `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` <br> eg: `markup shlv/book1 i/1 %/5`                                                                                    |
-|**Report**  | `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
+|**Report**  | `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
 |**Bye**     | `bye`                                                                                                                           |
 
 
