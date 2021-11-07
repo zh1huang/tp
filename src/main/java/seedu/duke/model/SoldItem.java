@@ -1,7 +1,7 @@
 package seedu.duke.model;
 
-import seedu.duke.model.exception.EditSoldItemException;
-import seedu.duke.model.exception.IllegalModelArgumentException;
+import seedu.duke.model.exception.EditSoldItemCommandException;
+import seedu.duke.model.exception.IllegalArgumentModelException;
 
 import java.time.LocalDateTime;
 
@@ -20,36 +20,35 @@ public class SoldItem extends Item {
      *              must be non-negative
      * @param price the selling price of the item
      *              must be non-negative
-     *
-     * @throws IllegalModelArgumentException if any of the inputs does not follow the requirement
+     * @throws IllegalArgumentModelException if any of the inputs does not follow the requirement
      */
     public SoldItem(String name, String cost, String price, String remarks, String itemId, LocalDateTime saleTime)
-            throws IllegalModelArgumentException {
+            throws IllegalArgumentModelException {
         super(name, cost, price, remarks, itemId);
         setSaleTime(saleTime);
         soldItemFixed = true;
     }
 
     @Override
-    public void setName(String name) throws IllegalModelArgumentException {
+    public void setName(String name) throws IllegalArgumentModelException {
         if (soldItemFixed) {
-            throw new EditSoldItemException();
+            throw new EditSoldItemCommandException();
         }
         super.setName(name);
     }
 
     @Override
-    public void setPurchaseCost(String cost) throws IllegalModelArgumentException {
+    public void setPurchaseCost(String cost) throws IllegalArgumentModelException {
         if (soldItemFixed) {
-            throw new EditSoldItemException();
+            throw new EditSoldItemCommandException();
         }
         super.setPurchaseCost(cost);
     }
 
     @Override
-    public void setSellingPrice(String price) throws IllegalModelArgumentException {
+    public void setSellingPrice(String price) throws IllegalArgumentModelException {
         if (soldItemFixed) {
-            throw new EditSoldItemException();
+            throw new EditSoldItemCommandException();
         }
         super.setSellingPrice(price);
     }
@@ -60,7 +59,7 @@ public class SoldItem extends Item {
 
     protected void setSaleTime(LocalDateTime newSaleTime) {
         if (soldItemFixed) {
-            throw new EditSoldItemException();
+            throw new EditSoldItemCommandException();
         }
         this.saleTime = newSaleTime;
     }

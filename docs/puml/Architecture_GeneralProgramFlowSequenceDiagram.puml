@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+actor user
+participant CLIverShelf as main MAIN_COLOR
+participant Logic as logic
+participant Model as model
+participant UI as ui
+participant Storage as storage
+
+user -> main: input commands
+activate main
+main -> logic: parse commands
+activate logic
+logic -> model: execute commands
+logic --> main: execution result
+deactivate
+main -> ui: print result
+main -> storage: save data
+main --> user
+deactivate
+
+@enduml

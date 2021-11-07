@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+
+
+class ShelfList <<Singleton>> {
+{static} - ShelfList shelfList
+{static} + ShelfList getShelfList()
++ void addShelf(String shelfName)
++ Shelf getShelf(String shelfName)
++ void deleteShelf(String shelfName)
+}
+class Shelf{
+- String name
+- String remark
++ void addItem(Item item)
++ void deleteItem(Item item)
++ void updateItem(Item originalItem, Item updatedItem)
++ Item getItem(String itemName)
++ Item getItemById(String itemId)
+}
+class Item{
+- String name
+- String itemID
+- BigDecimal purchaseCost
+- BigDecimal sellingPrice
+- String remark
+}
+class SoldItems{
+LocalDateTime saleTime
+}
+
+ShelfList -down- "shelves *" Shelf
+Shelf -down- "items *" Item
+SoldItems -left-|> Item
+Shelf -down- "items *" SoldItems : "Shelf SoldItems only"
+
+@enduml

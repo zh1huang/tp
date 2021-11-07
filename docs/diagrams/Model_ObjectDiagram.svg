@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="288px" preserveAspectRatio="none" style="width:718px;height:288px;background:#FFFFFF;" version="1.1" viewBox="0 0 718 288" width="718px" zoomAndPan="magnify"><defs><filter height="300%" id="fr01s1h9uv2t8" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="36.3887" style="stroke:#A80036;stroke-width:1.5;" width="112" x="255" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="98" x="262" y="22.752">shelfList:ShelfList</text><line style="stroke:#A80036;stroke-width:1.5;" x1="256" x2="366" y1="27.3887" y2="27.3887"/><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="55.7031" style="stroke:#A80036;stroke-width:1.5;" width="158" x="138" y="103"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="63" x="185.5" y="118.752">fiction:Shelf</text><line style="stroke:#A80036;stroke-width:1.5;" x1="139" x2="295" y1="123.3887" y2="123.3887"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="69" x="144" y="138.8486">name = fiction</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="146" x="144" y="152.5059">remark = restock every Tuesday</text><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="55.7031" style="stroke:#A80036;stroke-width:1.5;" width="147" x="331.5" y="103"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85" x="362.5" y="118.752">education:Shelf</text><line style="stroke:#A80036;stroke-width:1.5;" x1="332.5" x2="477.5" y1="123.3887" y2="123.3887"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="87" x="337.5" y="138.8486">name = education</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="135" x="337.5" y="152.5059">remark = restock every Friday</text><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="42.0459" style="stroke:#A80036;stroke-width:1.5;" width="106" x="7" y="226"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="46.5" y="241.752">:Item</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="112" y1="246.3887" y2="246.3887"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="94" x="13" y="261.8486">name = Harry Potter</text><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="55.7031" style="stroke:#A80036;stroke-width:1.5;" width="139" x="148.5" y="219"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="204.5" y="234.752">:Item</text><line style="stroke:#A80036;stroke-width:1.5;" x1="149.5" x2="286.5" y1="239.3887" y2="239.3887"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="86" x="154.5" y="254.8486">name = Jane Eyre</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="127" x="154.5" y="268.5059">remark = cover is damaged</text><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="42.0459" style="stroke:#A80036;stroke-width:1.5;" width="161" x="323.5" y="226"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="390.5" y="241.752">:Item</text><line style="stroke:#A80036;stroke-width:1.5;" x1="324.5" x2="483.5" y1="246.3887" y2="246.3887"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="149" x="329.5" y="261.8486">name = O Level Chemistry TYS</text><rect fill="#FEFECE" filter="url(#fr01s1h9uv2t8)" height="55.7031" style="stroke:#A80036;stroke-width:1.5;" width="185" x="519.5" y="219"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="598.5" y="234.752">:Item</text><line style="stroke:#A80036;stroke-width:1.5;" x1="520.5" x2="703.5" y1="239.3887" y2="239.3887"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="173" x="525.5" y="254.8486">name = A Level Computing Practice</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="145" x="525.5" y="268.5059">remark = reserved for John Doe</text><!--MD5=[8287e556e7183e23d99adae1514d87f9]
+link shelfList to fiction--><path codeLine="26" d="M295.48,43.17 C281.9,58.19 261.85,80.38 245.41,98.57 " fill="none" id="shelfList-to-fiction" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="241.74,102.62,250.75,98.6426,245.0998,98.9171,244.8253,93.2669,241.74,102.62" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[43f0386299da476ed4c62e2c4772d760]
+link fiction to item1--><path codeLine="27" d="M179.79,159.02 C153.05,178.44 117.37,204.35 91.92,222.83 " fill="none" id="fiction-to-item1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="87.61,225.96,97.2404,223.8974,91.6524,223.0174,92.5324,217.4294,87.61,225.96" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7ec9dcdabc875c8091445b0f3ee8a2cd]
+link fiction to item2--><path codeLine="28" d="M217.24,159.02 C217.38,175.37 217.56,196.32 217.72,213.56 " fill="none" id="fiction-to-item2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="217.76,218.78,221.6827,209.746,217.7171,213.7802,213.683,209.8146,217.76,218.78" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[50dffc2139112d4ae296a5fd5d68d9b0]
+link shelfList to education--><path codeLine="29" d="M326.52,43.17 C340.1,58.19 360.15,80.38 376.59,98.57 " fill="none" id="shelfList-to-education" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="380.26,102.62,377.1747,93.2669,376.9002,98.9171,371.25,98.6426,380.26,102.62" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[717b0ca2ee0a5d285463a06a30fdd93a]
+link education to item3--><path codeLine="30" d="M404.76,159.02 C404.6,177.63 404.38,202.22 404.22,220.5 " fill="none" id="education-to-item3" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="404.18,225.96,408.257,216.9946,404.2229,220.9602,400.2573,216.926,404.18,225.96" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2851648b92a300a8c822fd9dd7fe4230]
+link education to item4--><path codeLine="31" d="M454.06,159.02 C485.39,176.27 526.04,198.66 558.25,216.4 " fill="none" id="education-to-item4" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="562.94,218.98,556.9955,211.1274,558.5632,216.5627,553.1279,218.1304,562.94,218.98" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5f331650700e4c6e924f4f5b9e377013]
+@startuml
+'https://plantuml.com/object-diagram
+
+object "shelfList:ShelfList" as shelfList
+object "fiction:Shelf" as fiction {
+name = fiction
+remark = restock every Tuesday
+}
+object "education:Shelf" as education {
+name = education
+remark = restock every Friday
+}
+object ":Item" as item1 {
+name = Harry Potter
+}
+object ":Item" as item2 {
+name = Jane Eyre
+remark = cover is damaged
+}
+object ":Item" as item3 {
+name = O Level Chemistry TYS
+}
+object ":Item" as item4 {
+name = A Level Computing Practice
+remark = reserved for John Doe
+}
+shelfList -down-> fiction
+fiction -down-> item1
+fiction -down-> item2
+shelfList -down-> education
+education -down-> item3
+education -down-> item4
+
+@enduml
+
+@startuml
+
+object "shelfList:ShelfList" as shelfList
+object "fiction:Shelf" as fiction {
+name = fiction
+remark = restock every Tuesday
+}
+object "education:Shelf" as education {
+name = education
+remark = restock every Friday
+}
+object ":Item" as item1 {
+name = Harry Potter
+}
+object ":Item" as item2 {
+name = Jane Eyre
+remark = cover is damaged
+}
+object ":Item" as item3 {
+name = O Level Chemistry TYS
+}
+object ":Item" as item4 {
+name = A Level Computing Practice
+remark = reserved for John Doe
+}
+shelfList -down-> fiction
+fiction -down-> item1
+fiction -down-> item2
+shelfList -down-> education
+education -down-> item3
+education -down-> item4
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 CST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>
