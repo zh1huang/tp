@@ -324,7 +324,9 @@ The Class Diagram below illustrates how the components work together in `ListCom
         * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
-The sequence diagram below shows how selling items is implemented.
+
+The sequence diagram below shows how the feature of selling an item (SellCommand) is implemented.
+
 ![](diagrams/Implementation_SellItems.svg)
 
 1. When program invokes `SellCommand#execute()`, `SellCommand` object validates the itemID from user input by trying to 
@@ -338,7 +340,7 @@ The sequence diagram below shows how selling items is implemented.
          to store the records of all soldItems.
       * Also, details of Item to be sold will be constructed as a new `SoldItem` object, represented by `newSoldItem`
    4. The `newSoldItem` will then be added to the `soldItemsShelf` via `Shelf#addItem(newSoldItem)`.
-3. Once the above steps are done, SalesManager will return a `finishedMessage`, which will then be passed back to 
+3. Once the above steps are done, `SalesManager` will return a `finishedMessage`, which will then be passed back to 
    `CLIverShelf` for printing.
 
 #### Design considerations:
@@ -354,29 +356,60 @@ The sequence diagram below shows how selling items is implemented.
 
 ### Generating sales report
 
-This section will describe how the report feature is implemented.
+This section will describe how the feature generating a sales report (ReportCommand) is implemented.
 
 ![](diagrams/Implementation_GenerateReports.svg)
 
-* When program invokes `ReportCommand#execute`, a `SalesReport` object is created
-  & `SalesReport#generateSoldItemStats()`
-  or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
-  into strings before returning the String for printing.
+The simplified overview of report implementation is as follows: 
+
+1. `CLIverShelf` invokes `ReportCommand#execute()`
+2. A `SalesReport` object which is named `newSalesReport` is created
+3. If the type specified in user input is `stats`, `SalesReport#generateSoldItemStats()` is called to get a string of
+   sold item statistics represented by `statsReport` in the diagram.
+4. Else, `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list in the form of a string 
+   before returning the String to `CLIverShelf` for printing.
+
+The below diagram shows a more in-depth implementation of report feature. 
 
 ![](diagrams/Implementation_SalesReport.svg)
 
-* When program invokes `ReportCommand#execute` shown below in the `SalesReport` API
-  1. A `SalesReport` object is constructed
-  2. When a function of `SalesReport` is invoked,
-  1. A `SalesManager` object is constructed
-  2. & `SalesManager` functions will filter the soldItems
-  3. returning the list of filtered items to be printed
+The more detailed inner workings of the report implementation is as follows:
+
+* Case 1: user specifies `stats` for type.
+  1. `ReportCommand#generateSoldItemStats()` is executed.
+  2. `SalesManager#filterSoldItems(timeSpan)` is called.
+  3. `SalesManager` will call `ShelfList#getShelf("soldItems")`, which returns a `soldItemShelf`.
+  4. `SalesManager` filters the items from `soldItemShelf` according to the `timeSpan`, 
+     & returns the list named `filteredSoldItems` which represents the list of `soldItems` named from that `timeSpan`.
+  5. `SalesReport` will then self invoke `SalesReport#getSalesStatisticsString(filteredSoltItems)` to calculate the 
+     relevant statistical information needed, and returns a formatted string `salesStats`.
+  6. `SalesReport` will return `salesStats` to `ReportCommand`.
+
+* Case 2: user specifies `items` for type
+  1. `ReportCommand#generateSoldItemDetails()` is executed.
+  2. Same as step 2 of case 1
+  3. Same as step 3 of case 1
+  4. Same as step 4 of case 1
+  5. `SalesReport` will then self invoke `SalesReport#getSoldItemsDetailsString(filteredSoldItems)` to 
+     get the formatted string `soldItemDetails` containing information about `SoldItem` details from `filteredSoldItems`.
+  6. `SalesReport` will return `soldItemDetails` to `ReportCommand`.
 
 #### Design considerations:
 
+* Aspect how to show the report stats or items within a time period
+  * Alternative 1 (current choice): Convert YEAR-MONTH input string to YearMonth object to check valid year and month 
+    * Pros: Able to use pre-written YearMonth class methods, to simplify verification of year & month input 
+      And also simple check if the YearMonth input is in correct order
+    * Cons: Have to implement valid year restriction since, the max year accepted is a very large integer.
+  * Alternative 2: check the and the input manually by extracting the year and the month from the string, 
+    then converting to integer for validity checking
+      * Pros: Able to have flexibility in terms of more restrictions for valid year e.g. starting from year 1970
+      * Cons: More lines of code due to more factors to consider for checking if the year and month are valid
+        This makes code messier, increases debugging efforts & number of unit test cases. 
+
 ### Generating item markup price
 
-This section will describe how markup feature is being implemented.
+This section will illustrate how the marking up of an item price (MarkUpCommand) is being implemented.
 
 ![](diagrams/MarkUpSequenceDiagram.svg)
 
