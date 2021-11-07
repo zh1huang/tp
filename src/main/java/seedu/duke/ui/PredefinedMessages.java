@@ -1,7 +1,7 @@
 package seedu.duke.ui;
 
 //@@author yuejunfeng0909
-public class DukePredefinedMessages {
+public class PredefinedMessages {
 
     public static final String GENERAL_INVALID_COMMAND_NOTES_STRING =
             "_".repeat(111) + "\nGeneral format usage" + "\nCheck the following:\n"

@@ -15,14 +15,12 @@
     4. [Model Component](#model-component)
     6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
-    1. [Adding an item](#adding-an-item)
-    2. [Editing an item](#editing-an-item)
-    3. [Listing all items](#listing-all-items)
-    4. [Getting an item](#getting-an-item)
-    5. [Selling an item](#selling-an-item)
-    6. [Generating sales report](#generating-sales-report)
-    7. [Generating item markup price](#generating-item-markup-price)
-    8. [Exiting the program](#editing-an-item)
+   1. [Adding an item](#adding-an-item)
+   2. [Editing an item](#editing-an-item)
+   3. [Listing all items](#listing-all-items)
+   4. [Selling an item](#selling-an-item)
+   5. [Generating sales report](#generating-sales-report)
+   6. [Generating item markup price](#generating-item-markup-price)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
@@ -105,7 +103,7 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CliverShelf` instantiates `UI` component to print the `result`
 
-![](diagrams/GeneralProgramFlowSequenceDiagram.svg)
+![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
@@ -114,7 +112,7 @@ command executions, error messages and also user interactions by prompting for t
 
 The class diagram below shows the associations between classes of the UI components
 
-![](diagrams/seedu_duke_ui.svg)
+![](diagrams/UI_ClassDiagram.svg)
 
 The `UI` component is made up of 2 classes:
 
@@ -125,9 +123,9 @@ The `UI` component is made up of 2 classes:
 
 The class diagram below shows the associations between the classes that make up the `Logic` component.
 
-![](diagrams/seedu_duke_logic_component.svg)
+![](diagrams/Logic_ClassDiagram.svg)
 
-The `Logic` component consists of `Parser` and `Command` components.
+The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 
 1. After user enters input, `UI` fetches and passes it to Parser for parsing.
 2. Parser then returns a `Command` object, which is then executed.
@@ -137,14 +135,11 @@ The `Logic` component consists of `Parser` and `Command` components.
 5. `Command` then checks the `ExitCommand` on whether the program should exit.
 6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
-![](diagrams/seedu_duke_logic.drawio.svg)
-
 #### Subcomponent Parser
 
 **API**:
 
 1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
-
     1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
        the `Parser` to `parseCommand()`
     2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
@@ -153,10 +148,8 @@ The `Logic` component consists of `Parser` and `Command` components.
     4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
        the `prepare{commandWord}()` function of the `Parser`
         1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-    5. Lastly, when the Parsing is complete, the PArser will return the `{commandWord}Command` to the `CliverShelf`
+    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` to the `CliverShelf`
        component
-
-![](diagrams/ParserClassDiagram.png)
 
 #### Subcomponent Command
 
@@ -181,7 +174,7 @@ parsed, depending on the Command type, different types uses different sales API.
 **API**:
 
 1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
-    * Supports Both SellCommand & ReportCommand & Handles some Sales behaivour
+    * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
         * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be
           called to mark an item as sold
         * When program invokes `ReportCommand#execute`
@@ -193,7 +186,7 @@ parsed, depending on the Command type, different types uses different sales API.
     * Supports ReportCommand & Handles generation of sales report
         * When program invokes `ReportCommand#execute`, a `SalesReport` object is created
           & `SalesReport#generateSoldItemStats()`
-          or `SalesReport#generateSoldItemDetails()` will be called to get the filterd solditems list for processing
+          or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
           into strings before returning the String for printing.
 
 3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
@@ -290,7 +283,7 @@ the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `
 
 #### Design considerations:
 
-* Aspect: How to change a cerntain property precisely
+* Aspect: How to change a certain property precisely
     * Alternative 1 (current choice): Let the user specify which property to edit using `/p` flag.
         * Pros: Only need to change one property.
         * Cons: Need one additional step to check which property is selected by the user.
@@ -303,7 +296,8 @@ the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
 ![](diagrams/ListCommandSequenceDiagram.svg)
-A user can choose to either list out all the items in the bookstore (i.e every shelf), or within a specific shelf.
+
+A user can choose to either list out all the items in the bookstore (i.e. every shelf), or within a specific shelf.
 
 * If user wishes to list out all items within a **specific** shelf:
     1. He keys in `list shlv/[SHELF_NAME]`
@@ -325,14 +319,18 @@ A user can choose to either list out all the items in the bookstore (i.e every s
        for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
     5. The string result output is then passed back to `CliverShelf`.
 
+The Class Diagram below illustrates how the components work together in `ListCommand`
+
+![](diagrams/Logic_ListCommandClassDiagram.svg)
+
 #### Design considerations:
 
 * Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
     * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being
-      printed as a range. (e.g First entry of 5 identical items on the list will be grouped as index "001-005", instead
+      printed as a range. (e.g. First entry of 5 identical items on the list will be grouped as index "001-005", instead
       of "1")
         * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items
-          together (e.g If there are 5 identical items, but you only want to change 1 of them because perhaps they are
+          together (e.g. If there are 5 identical items, but you only want to change 1 of them because perhaps they are
           damaged, and you want to add a remark)
         * Cons: Looks less user-friendly
     * Alternative 2: The indexes of the list are printed in single sequential order.
@@ -368,7 +366,7 @@ This sequence diagram shows how MarkUpCommand is being implemented.
 A user may choose to check the estimated marked up price of an item, given a specific mark up percentage.
 
 1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
-2. CLIvershelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
+2. CLIverShelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
     1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
     2. Else, continues by constructing `SalesMarkUp` Object Then `SalesMarkUp#getItemToMarkUpInfo()`
        , `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence get the relevant information about the
@@ -394,8 +392,6 @@ Aspect: How markup executes:
     * Pros: All methods in the same class, lesser additional code.
     * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could
       be more complicated.
-
-___
 
 ## Product scope
 
@@ -430,6 +426,9 @@ Allows efficient and simplified management of inventory and finances of the stor
 |v2.0|user|create a shelf|store items into the shelf|
 |v2.0|user|remove a shelf|remove the shelf if the shelf is empty|
 |v2.0|user|view the estimated markup price for an item|know the percentage returns i can get from the markup|
+|v2.0|user|search for an item with very little information about it|find an item even if I can only remember very little information about it
+|v2.0|user|search for an item with incomplete information|know which book an broken ID tag belongs to
+|v2.0|user|search for all items that contains the same remark information|know all the books that has the same remark, for example, damaged
 
 ## Non-Functional Requirements
 
@@ -442,7 +441,7 @@ Allows efficient and simplified management of inventory and finances of the stor
 
 ## Glossary
 
-* *Mainstream OS* - MacOS, Windows, Linux, Unix
+* *Mainstream OS* - macOS, Windows, Linux, Unix
 
 ## Instructions for manual testing
 
@@ -545,9 +544,12 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Getting item within list | `get shlv/book1 i/2` | Show information of item |
+| Getting item within list | `get shlv/book1 i/002` | Show information of item |
+| Index of item not within list | `get shlv/book1 i/12313123` | Error message showing item with index not in list |
+| Getting item from non-existent shelf | `get shlv/nonexistentshelf i/2` | Error message showing shelf does not exist |
+| Invalid parameters | `get shlv/book1 i/hello` | Error message (invalid format) |
+| Missing flag| `get shlv/book1 2` | Error message (invalid format) |
 | Missing parameters | `get shlv/book1` | Error message (invalid format) |
 
 ### Listing the items test
@@ -557,9 +559,11 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
-| ------------- | ------------- | ------------- |
+| Listing out for existent shelf| `list shlv/existentshelf` | List of all items in that shelf |
+| Listing out for every shelf | `list` | Listing of all items in every shelf bookstore |
+| Non-existent shelf | `list shlv/nonexistshelf` | Error message prompting to create shelf first |
+| Missing flag | `list book1` | Error message (invalid format) |
+| Invalid parameters | `list shlv/&` | Error message (invalid format) |
 | Missing parameters | `list shlv/` | Error message (invalid format) |
 
 ### Editing an item test
