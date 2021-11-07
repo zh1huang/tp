@@ -47,7 +47,6 @@ public class SalesManager {
         return null;
     }
 
-
     /**
      * Mark an item as sold.
      * This moves the item from its ItemContainer to the ItemContainer "soldItems"

@@ -8,6 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author t-l-xin
+/**
+ * The command that gets the markup information for a selected item.
+ */
 public class MarkUpCommand extends Command {
 
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]\n"
@@ -40,6 +43,13 @@ public class MarkUpCommand extends Command {
         this.userRequestPercent = userRequestPercent;
     }
 
+    /**
+     * Executes the markup operation.
+     *
+     * @return A result string that contains all the markup information of a selected item
+     * @throws ShelfNotExistModelException
+     * @throws ItemNotExistCommandException
+     */
     @Override
     public String execute() throws ShelfNotExistModelException, ItemNotExistCommandException {
         StringBuilder resultString = new StringBuilder();
