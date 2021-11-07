@@ -17,13 +17,13 @@ public class HelpCommand extends Command {
             + "4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
             + "5. Delete item: delete shlv/SHELF_NAME i/INDEX\n"
             + "6. List items: list [shlv/SHELF_NAME]\n"
-            + "7. Get information of item : get shlv/SHELF_NAME i/INDEX\n"
-            + "8. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE \n"
-            + "9. Sell an item: sell shlv/SHELF_NAME i/INDEX\n"
-            + "10. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]\n"
-            + "11. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]\n"
-            + "12. Exit program: bye\n"
-            + "____________________________________________________________________________________________\n";
+            + "7. Search item: search KEYWORD\n"
+            + "8. Get information of item : get shlv/SHELF_NAME i/INDEX\n"
+            + "9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE \n"
+            + "10. Sell an item: sell shlv/SHELF_NAME i/INDEX\n"
+            + "11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]\n"
+            + "12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]\n"
+            + "13. Exit program: bye\n";
 
     /**
      * Executes help command.
