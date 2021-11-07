@@ -7,7 +7,7 @@ CLIverShelf is a desktop application used for inventory management and quick dat
 Given below are my contributions to the project.
 * Code contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=zh1huang)
 * Enhancements implemented:
-  * `ListCommand`: Gives user the choice to either list out every item in a specified shelf, or from every shelf within the bookstore. This feature is further reused other commands such as `ReportCommand` and `FindCommand`.
+  * `ListCommand`: Gives user the choice to either list out every item in a specified shelf, or from every shelf within the bookstore. This feature is further reused in other commands such as `ReportCommand` and `FindCommand`.
   * `GetCommand`: The user is able to retrieve information about an item on the list, detailing Name, Cost, Price, ID, and remarks if any. 
   * `HelpCommand`: A new user is able to type `help` to check the allowed formatting of the available commands. Other users may also use it should they forget the command formats.
   * `ExitCommand`: Allows for a way to exit the program elegantly.
