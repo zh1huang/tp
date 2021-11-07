@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="388px" preserveAspectRatio="none" style="width:498px;height:388px;background:#FFFFFF;" version="1.1" viewBox="0 0 498 388" width="498px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="295.5439" style="stroke:#A80036;stroke-width:1.0;" width="10" x="45.5" y="68.2402"/><rect fill="#FFFFFF" height="271.7896" style="stroke:#A80036;stroke-width:1.0;" width="10" x="161.5" y="91.9946"/><rect fill="#FFFFFF" height="35.4858" style="stroke:#A80036;stroke-width:1.0;" width="10" x="414" y="133.749"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="414" y="227.7666"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="414" y="293.2754"/><rect fill="#FFFFFF" height="148.7949" style="stroke:#000000;stroke-width:2.0;" width="395.5" x="96" y="184.2349"/><rect fill="#FFFFFF" height="65.5088" style="stroke:none;stroke-width:1.0;" width="395.5" x="96" y="267.521"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="50" x2="50" y1="58.2402" y2="381.7842"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="166" x2="166" y1="58.2402" y2="381.7842"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="418.5" x2="418.5" y1="141.6147" y2="381.7842"/><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="91" x="5" y="24.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="12" y="47.1641">:CLIverShelf</text><rect fill="#FEFECE" height="52.2402" style="stroke:#A80036;stroke-width:1.5;" width="121" x="106" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="118" y="28.0439">newCommand:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="113" y="47.1641">ReportCommand</text><rect fill="#FFFFFF" height="295.5439" style="stroke:#A80036;stroke-width:1.0;" width="10" x="45.5" y="68.2402"/><rect fill="#FFFFFF" height="271.7896" style="stroke:#A80036;stroke-width:1.0;" width="10" x="161.5" y="91.9946"/><rect fill="#FFFFFF" height="35.4858" style="stroke:#A80036;stroke-width:1.0;" width="10" x="414" y="133.749"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="414" y="227.7666"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="414" y="293.2754"/><polygon fill="#A80036" points="149.5,87.9946,159.5,91.9946,149.5,95.9946" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="55.5" x2="155.5" y1="91.9946" y2="91.9946"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="62.5" y="87.1382">execute()</text><polygon fill="#A80036" points="344.5,119.749,354.5,123.749,344.5,127.749" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="171.5" x2="350.5" y1="123.749" y2="123.749"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="161" x="178.5" y="118.8926">new SalesReport(timeSpan)</text><rect fill="#FEFECE" height="52.2402" style="stroke:#A80036;stroke-width:1.5;" width="125" x="356.5" y="99.9946"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="363.5" y="123.0386">newSalesReport:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="380" y="142.1587">SalesReport</text><polygon fill="#A80036" points="182.5,165.2349,172.5,169.2349,182.5,173.2349" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="176.5" x2="418" y1="169.2349" y2="169.2349"/><path d="M96,184.2349 L157,184.2349 L157,193.2349 L147,203.2349 L96,203.2349 L96,184.2349 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="148.7949" style="stroke:#000000;stroke-width:2.0;" width="395.5" x="96" y="184.2349"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="16" x="111" y="200.1328">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="118" x="172" y="198.8408">[type.equals("stats")]</text><polygon fill="#A80036" points="402,223.7666,412,227.7666,402,231.7666" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="171.5" x2="408" y1="227.7666" y2="227.7666"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140" x="178.5" y="222.9102">generateSoldItemStats()</text><polygon fill="#A80036" points="182.5,255.521,172.5,259.521,182.5,263.521" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="176.5" x2="418" y1="259.521" y2="259.521"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="188.5" y="254.6646">statsReport</text><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="96" x2="491.5" y1="268.521" y2="268.521"/><polygon fill="#A80036" points="402,289.2754,412,293.2754,402,297.2754" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="171.5" x2="408" y1="293.2754" y2="293.2754"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="149" x="178.5" y="288.4189">generateSoldItemDetails()</text><polygon fill="#A80036" points="182.5,321.0298,172.5,325.0298,182.5,329.0298" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="176.5" x2="418" y1="325.0298" y2="325.0298"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="188.5" y="320.1733">detailsReport</text><polygon fill="#A80036" points="61.5,359.7842,51.5,363.7842,61.5,367.7842" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="55.5" x2="165.5" y1="363.7842" y2="363.7842"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="33" x="67.5" y="358.9277">report</text><line style="stroke:#A80036;stroke-width:2.0;" x1="410" x2="428" y1="354.7842" y2="372.7842"/><line style="stroke:#A80036;stroke-width:2.0;" x1="410" x2="428" y1="372.7842" y2="354.7842"/><line style="stroke:#A80036;stroke-width:2.0;" x1="157.5" x2="175.5" y1="354.7842" y2="372.7842"/><line style="stroke:#A80036;stroke-width:2.0;" x1="157.5" x2="175.5" y1="372.7842" y2="354.7842"/><!--MD5=[9eab145acedf5d50fdc9ca248d5058e5]
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":CLIverShelf" as Main
+
+participant "newCommand: \nReportCommand" as Command
+participant "newSalesReport: \nSalesReport" as SalesReport
+
+activate Main
+
+
+Main -> Command: execute()
+activate Command
+Command -> SalesReport **: new SalesReport(timeSpan)
+activate SalesReport
+SalesReport - -> Command
+deactivate SalesReport
+alt type.equals("stats")
+    Command -> SalesReport: generateSoldItemStats()
+    activate SalesReport
+    SalesReport - -> Command: statsReport
+    deactivate SalesReport
+else
+    Command -> SalesReport: generateSoldItemDetails()
+    activate SalesReport
+    SalesReport - -> Command: detailsReport
+    deactivate SalesReport
+end
+Command - -> Main: report
+deactivate Command
+deactivate Main
+destroy SalesReport
+destroy Command
+
+
+@enduml
+
+@startuml
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam box white
+skinparam classAttributeIconSize 0
+
+participant ":CLIverShelf" as Main
+
+participant "newCommand: \nReportCommand" as Command
+participant "newSalesReport: \nSalesReport" as SalesReport
+
+activate Main
+
+
+Main -> Command: execute()
+activate Command
+Command -> SalesReport **: new SalesReport(timeSpan)
+activate SalesReport
+SalesReport - -> Command
+deactivate SalesReport
+alt type.equals("stats")
+    Command -> SalesReport: generateSoldItemStats()
+    activate SalesReport
+    SalesReport - -> Command: statsReport
+    deactivate SalesReport
+else
+    Command -> SalesReport: generateSoldItemDetails()
+    activate SalesReport
+    SalesReport - -> Command: detailsReport
+    deactivate SalesReport
+end
+Command - -> Main: report
+deactivate Command
+deactivate Main
+destroy SalesReport
+destroy Command
+
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: GBK
+Language: en
+Country: SG
+--></g></svg>

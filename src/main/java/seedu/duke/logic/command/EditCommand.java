@@ -1,12 +1,15 @@
 package seedu.duke.logic.command;
 
+
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
 import seedu.duke.logic.command.exception.NoPropertyFoundCommandException;
 import seedu.duke.logic.command.exception.ShelfNotExistCommandException;
+import seedu.duke.logic.command.exception.DeniedAccessToShelfCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
@@ -68,7 +71,7 @@ public class EditCommand extends Command {
      */
     public String execute() throws ItemNotExistCommandException,
             NullPointerException, IllegalArgumentCommandException,
-            NoPropertyFoundCommandException, ShelfNotExistCommandException {
+            NoPropertyFoundCommandException, ShelfNotExistCommandException, DeniedAccessToShelfCommandException {
         boolean isProperty = Arrays.asList(properties).contains(selectedProperty);
         if (!isProperty) {
             logger.log(Level.WARNING, "EditCommand can't find item property.");
@@ -109,6 +112,8 @@ public class EditCommand extends Command {
             throw new ShelfNotExistCommandException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             throw new ItemNotExistCommandException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
+        } catch (DeniedAccessToShelfModelException e) {
+            throw new DeniedAccessToShelfCommandException(e.getMessage());
         }
     }
 

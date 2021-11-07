@@ -13,7 +13,7 @@ import java.util.ArrayList;
 //@@author yuejunfeng0909
 public class SearchCommand extends Command {
 
-    public static final String SEARCH_ITEM_DATA_ARGS_FORMAT = "search KEYWORD";
+    public static final String SEARCH_ITEM_DATA_ARGS_FORMAT = "search k/KEYWORD";
     public static final String SEARCH_STRING = "search";
 
     private static final String HEADER =

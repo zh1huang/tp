@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="645px" preserveAspectRatio="none" style="width:703px;height:645px;background:#FFFFFF;" version="1.1" viewBox="0 0 703 645" width="703px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="248.2808" style="stroke:#A80036;stroke-width:1.0;" width="10" x="235.5" y="91.9946"/><rect fill="#FFFFFF" height="42.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="240.5" y="258.7666"/><rect fill="#FFFFFF" height="248.2808" style="stroke:#A80036;stroke-width:1.0;" width="10" x="235.5" y="372.0298"/><rect fill="#FFFFFF" height="42.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="240.5" y="538.8018"/><rect fill="#FFFFFF" height="95.2632" style="stroke:#A80036;stroke-width:1.0;" width="10" x="513.5" y="123.749"/><rect fill="#FFFFFF" height="95.2632" style="stroke:#A80036;stroke-width:1.0;" width="10" x="513.5" y="403.7842"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="656.5" y="155.5034"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="656.5" y="435.5386"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="67" x2="67" y1="58.2402" y2="638.3105"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="240" x2="240" y1="58.2402" y2="638.3105"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="518" x2="518" y1="58.2402" y2="638.3105"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="661.5" x2="661.5" y1="58.2402" y2="638.3105"/><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="125" x="5" y="24.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="12" y="47.1641">:ReportCommand</text><rect fill="#FEFECE" height="52.2402" style="stroke:#A80036;stroke-width:1.5;" width="125" x="178" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="185" y="28.0439">newSalesReport:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="201.5" y="47.1641">SalesReport</text><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="109" x="464" y="24.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="471" y="47.1641">:SalesManager</text><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="72" x="625.5" y="24.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="632.5" y="47.1641">:ShelfList</text><rect fill="#FFFFFF" height="248.2808" style="stroke:#A80036;stroke-width:1.0;" width="10" x="235.5" y="91.9946"/><rect fill="#FFFFFF" height="42.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="240.5" y="258.7666"/><rect fill="#FFFFFF" height="248.2808" style="stroke:#A80036;stroke-width:1.0;" width="10" x="235.5" y="372.0298"/><rect fill="#FFFFFF" height="42.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="240.5" y="538.8018"/><rect fill="#FFFFFF" height="95.2632" style="stroke:#A80036;stroke-width:1.0;" width="10" x="513.5" y="123.749"/><rect fill="#FFFFFF" height="95.2632" style="stroke:#A80036;stroke-width:1.0;" width="10" x="513.5" y="403.7842"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="656.5" y="155.5034"/><rect fill="#FFFFFF" height="31.7544" style="stroke:#A80036;stroke-width:1.0;" width="10" x="656.5" y="435.5386"/><polygon fill="#A80036" points="223.5,87.9946,233.5,91.9946,223.5,95.9946" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="67.5" x2="229.5" y1="91.9946" y2="91.9946"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140" x="74.5" y="87.1382">generateSoldItemStats()</text><polygon fill="#A80036" points="501.5,119.749,511.5,123.749,501.5,127.749" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="245.5" x2="507.5" y1="123.749" y2="123.749"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="145" x="252.5" y="118.8926">filterSoldItems(timeSpan)</text><polygon fill="#A80036" points="644.5,151.5034,654.5,155.5034,644.5,159.5034" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="523.5" x2="650.5" y1="155.5034" y2="155.5034"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114" x="530.5" y="150.647">getShelf("soldItem")</text><polygon fill="#A80036" points="534.5,183.2578,524.5,187.2578,534.5,191.2578" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="528.5" x2="660.5" y1="187.2578" y2="187.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="540.5" y="182.4014">soldItemShelf</text><polygon fill="#A80036" points="256.5,215.0122,246.5,219.0122,256.5,223.0122" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="250.5" x2="517.5" y1="219.0122" y2="219.0122"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="96" x="262.5" y="214.1558">filteredSoldItems</text><line style="stroke:#A80036;stroke-width:1.0;" x1="245.5" x2="292.5" y1="245.7666" y2="245.7666"/><line style="stroke:#A80036;stroke-width:1.0;" x1="292.5" x2="292.5" y1="245.7666" y2="258.7666"/><line style="stroke:#A80036;stroke-width:1.0;" x1="251.5" x2="292.5" y1="258.7666" y2="258.7666"/><polygon fill="#A80036" points="261.5,254.7666,251.5,258.7666,261.5,262.7666" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="244" x="257.5" y="240.9102">getSalesStatisticsString(filteredSoldItems)</text><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="250.5" x2="292.5" y1="300.521" y2="300.521"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="292.5" x2="292.5" y1="300.521" y2="313.521"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="245.5" x2="292.5" y1="313.521" y2="313.521"/><polygon fill="#A80036" points="255.5,309.521,245.5,313.521,255.5,317.521" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="62" x="257.5" y="295.6646">salesStats</text><polygon fill="#A80036" points="78.5,336.2754,68.5,340.2754,78.5,344.2754" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="72.5" x2="239.5" y1="340.2754" y2="340.2754"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="62" x="84.5" y="335.4189">salesStats</text><polygon fill="#A80036" points="223.5,368.0298,233.5,372.0298,223.5,376.0298" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="67.5" x2="229.5" y1="372.0298" y2="372.0298"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="149" x="74.5" y="367.1733">generateSoldItemDetails()</text><polygon fill="#A80036" points="501.5,399.7842,511.5,403.7842,501.5,407.7842" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="245.5" x2="507.5" y1="403.7842" y2="403.7842"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="145" x="252.5" y="398.9277">filterSoldItems(timeSpan)</text><polygon fill="#A80036" points="644.5,431.5386,654.5,435.5386,644.5,439.5386" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="523.5" x2="650.5" y1="435.5386" y2="435.5386"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114" x="530.5" y="430.6821">getShelf("soldItem")</text><polygon fill="#A80036" points="534.5,463.293,524.5,467.293,534.5,471.293" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="528.5" x2="660.5" y1="467.293" y2="467.293"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="540.5" y="462.4365">soldItemShelf</text><polygon fill="#A80036" points="256.5,495.0474,246.5,499.0474,256.5,503.0474" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="250.5" x2="517.5" y1="499.0474" y2="499.0474"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="96" x="262.5" y="494.1909">filteredSoldItems</text><line style="stroke:#A80036;stroke-width:1.0;" x1="245.5" x2="292.5" y1="525.8018" y2="525.8018"/><line style="stroke:#A80036;stroke-width:1.0;" x1="292.5" x2="292.5" y1="525.8018" y2="538.8018"/><line style="stroke:#A80036;stroke-width:1.0;" x1="251.5" x2="292.5" y1="538.8018" y2="538.8018"/><polygon fill="#A80036" points="261.5,534.8018,251.5,538.8018,261.5,542.8018" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="254" x="257.5" y="520.9453">getSoldItemsDetailsString(filteredSoldItems)</text><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="250.5" x2="292.5" y1="580.5562" y2="580.5562"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="292.5" x2="292.5" y1="580.5562" y2="593.5562"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="245.5" x2="292.5" y1="593.5562" y2="593.5562"/><polygon fill="#A80036" points="255.5,589.5562,245.5,593.5562,255.5,597.5562" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="89" x="257.5" y="575.6997">soldItemDetails</text><polygon fill="#A80036" points="78.5,616.3105,68.5,620.3105,78.5,624.3105" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="72.5" x2="239.5" y1="620.3105" y2="620.3105"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="89" x="84.5" y="615.4541">soldItemDetails</text><line style="stroke:#A80036;stroke-width:2.0;" x1="231.5" x2="249.5" y1="611.3105" y2="629.3105"/><line style="stroke:#A80036;stroke-width:2.0;" x1="231.5" x2="249.5" y1="629.3105" y2="611.3105"/><!--MD5=[92182e33fa8e5aeef855479d1d11bda2]
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":ReportCommand" as ReportCommand
+participant "newSalesReport: \nSalesReport" as SalesReport
+participant ":SalesManager" as SalesManager
+participant ":ShelfList" as ShelfList
+
+
+ReportCommand -> SalesReport: generateSoldItemStats()
+activate SalesReport
+SalesReport -> SalesManager: filterSoldItems(timeSpan)
+activate SalesManager
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList - -> SalesManager: soldItemShelf
+deactivate ShelfList
+SalesManager - -> SalesReport: filteredSoldItems
+deactivate SalesManager
+SalesReport -> SalesReport: getSalesStatisticsString(filteredSoldItems)
+activate SalesReport
+SalesReport - -> SalesReport: salesStats
+deactivate SalesReport
+
+SalesReport - -> ReportCommand: salesStats
+deactivate SalesReport
+
+
+ReportCommand -> SalesReport: generateSoldItemDetails()
+activate SalesReport
+SalesReport -> SalesManager: filterSoldItems(timeSpan)
+activate SalesManager
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList - -> SalesManager: soldItemShelf
+deactivate ShelfList
+SalesManager - -> SalesReport: filteredSoldItems
+deactivate SalesManager
+SalesReport -> SalesReport: getSoldItemsDetailsString(filteredSoldItems)
+activate SalesReport
+SalesReport - -> SalesReport: soldItemDetails
+deactivate SalesReport
+
+SalesReport - -> ReportCommand: soldItemDetails
+deactivate SalesReport
+destroy SalesReport
+@enduml
+
+@startuml
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam box white
+skinparam classAttributeIconSize 0
+
+participant ":ReportCommand" as ReportCommand
+participant "newSalesReport: \nSalesReport" as SalesReport
+participant ":SalesManager" as SalesManager
+participant ":ShelfList" as ShelfList
+
+
+ReportCommand -> SalesReport: generateSoldItemStats()
+activate SalesReport
+SalesReport -> SalesManager: filterSoldItems(timeSpan)
+activate SalesManager
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList - -> SalesManager: soldItemShelf
+deactivate ShelfList
+SalesManager - -> SalesReport: filteredSoldItems
+deactivate SalesManager
+SalesReport -> SalesReport: getSalesStatisticsString(filteredSoldItems)
+activate SalesReport
+SalesReport - -> SalesReport: salesStats
+deactivate SalesReport
+
+SalesReport - -> ReportCommand: salesStats
+deactivate SalesReport
+
+
+ReportCommand -> SalesReport: generateSoldItemDetails()
+activate SalesReport
+SalesReport -> SalesManager: filterSoldItems(timeSpan)
+activate SalesManager
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList - -> SalesManager: soldItemShelf
+deactivate ShelfList
+SalesManager - -> SalesReport: filteredSoldItems
+deactivate SalesManager
+SalesReport -> SalesReport: getSoldItemsDetailsString(filteredSoldItems)
+activate SalesReport
+SalesReport - -> SalesReport: soldItemDetails
+deactivate SalesReport
+
+SalesReport - -> ReportCommand: soldItemDetails
+deactivate SalesReport
+destroy SalesReport
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: GBK
+Language: en
+Country: SG
+--></g></svg>
