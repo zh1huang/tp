@@ -74,7 +74,7 @@ public class SalesManagerTest {
     }
 
     @Test
-    public void filterSoldItems_iLLegalArgumentsAndWithinSpecificMonth_throwsIllegalArgumentException() {
+    public void filterSoldItems_iLLegalArgumentsAndWithinSpecificMonth_throwsIllegalArgumentCommandException() {
         assertThrows(IllegalArgumentCommandException.class,
             () -> SalesManager.getSalesManager().filterSoldItems("2021-1", ""));
     }
