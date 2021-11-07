@@ -11,7 +11,8 @@ public class PredefinedMessages {
                     + "Only US-ASCII characters are allowed.\n"
                     + "3. Parameters in [] are optional & can only be specified ONCE.\n"
                     + "4. Command input is case-sensitive.\n"
-                    + "5. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\\\n";
+                    + "5. SHELF_NAME & NAME parameters cannot contain special characters "
+                    + "e.g.!@#$%^&*[]{}+=`~<>?,./|\\\n";
 
     /**
      * Print the welcome message with Duke LOGO in a message bubble.
