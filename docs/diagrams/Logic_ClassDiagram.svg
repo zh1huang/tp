@@ -1,52 +1,49 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="336px" preserveAspectRatio="none" style="width:1828px;height:336px;background:#FFFFFF;" version="1.1" viewBox="0 0 1828 336" width="1828px" zoomAndPan="magnify"><defs><filter height="300%" id="fa41963uaq0v" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[6ddbcb130bda8649a0495094cf420d43]
-cluster Logic Component--><rect fill="#FFFFFF" filter="url(#fa41963uaq0v)" height="269" style="stroke:#000000;stroke-width:1.5;" width="1809" x="7" y="55"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="123" x="850" y="73.0439">Logic Component</text><!--MD5=[a5c4d62ad43347332154fab560b1b84a]
-cluster Non-sales related Commands--><rect fill="#FFFFFF" filter="url(#fa41963uaq0v)" height="80" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="1341" x="31" y="141"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="205" x="599" y="159.0439">Non-sales related Commands</text><!--MD5=[4944dd12d465d5e969754a779036bbe2]
-cluster Sales related Commands--><rect fill="#FFFFFF" filter="url(#fa41963uaq0v)" height="80" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="396" x="1396" y="141"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="173" x="1507.5" y="159.0439">Sales related Commands</text><!--MD5=[628cc5a2753cca06eb1ffef55c386535]
-class Parser--><rect codeLine="21" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="Parser" style="stroke:#A80036;stroke-width:1.5;" width="43" x="812.5" y="93"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="815.5" y="111.752">Parser</text><!--MD5=[b6587b47cb08bf742060086bd1cd0b7e]
-class Sales--><rect codeLine="29" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="Sales" style="stroke:#A80036;stroke-width:1.5;" width="38" x="1573" y="273.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="32" x="1576" y="292.252">Sales</text><!--MD5=[e6280f8904688f60355da485760ab5a6]
-class command--><rect codeLine="31" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="42.7773" id="command" style="stroke:#A80036;stroke-width:1.5;" width="68" x="941" y="265"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="52" x="949" y="283.752">{abstract}</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="59" x="947" y="300.1406">Command</text><!--MD5=[01ba6f98b685d1fe2cc392b52f140ec2]
-class CreateShelfCommand--><rect codeLine="10" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="CreateShelfCommand" style="stroke:#A80036;stroke-width:1.5;" width="130" x="986" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="124" x="989" y="197.752">CreateShelfCommand</text><!--MD5=[6e351dde7d50f569bee352123d192af3]
-class RemoveShelfCommand--><rect codeLine="11" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="RemoveShelfCommand" style="stroke:#A80036;stroke-width:1.5;" width="139" x="305.5" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="133" x="308.5" y="197.752">RemoveShelfCommand</text><!--MD5=[74ffcafef969057a048a931ccc96bb27]
-class AddCommand--><rect codeLine="12" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="AddCommand" style="stroke:#A80036;stroke-width:1.5;" width="86" x="184" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="187" y="197.752">AddCommand</text><!--MD5=[522bcce41d81f20cd1f9638a73c3e08a]
-class DeleteCommand--><rect codeLine="13" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="DeleteCommand" style="stroke:#A80036;stroke-width:1.5;" width="101" x="47.5" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="95" x="50.5" y="197.752">DeleteCommand</text><!--MD5=[babc7e0b8c8ea36d42dbd33de1315af9]
-class EditCommand--><rect codeLine="14" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="EditCommand" style="stroke:#A80036;stroke-width:1.5;" width="86" x="480" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="483" y="197.752">EditCommand</text><!--MD5=[01a293c3a0e3b6775450a54cdca956c5]
-class GetCommand--><rect codeLine="15" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="GetCommand" style="stroke:#A80036;stroke-width:1.5;" width="84" x="1272" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="1275" y="197.752">GetCommand</text><!--MD5=[93d215428fe434de70eb2509d954b1e5]
-class ListCommand--><rect codeLine="16" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="ListCommand" style="stroke:#A80036;stroke-width:1.5;" width="85" x="1151.5" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="79" x="1154.5" y="197.752">ListCommand</text><!--MD5=[6af536f0137110c462023bd8f7f1c95d]
-class SearchCommand--><rect codeLine="17" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="SearchCommand" style="stroke:#A80036;stroke-width:1.5;" width="104" x="847" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="98" x="850" y="197.752">SearchCommand</text><!--MD5=[e40388dd56f3eba72af3e3cbb6f3c87a]
-class ExitCommand--><rect codeLine="18" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="ExitCommand" style="stroke:#A80036;stroke-width:1.5;" width="84" x="728" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="731" y="197.752">ExitCommand</text><!--MD5=[2da30295f32c4049cb863910634fa3f4]
-class HelpCommand--><rect codeLine="19" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="HelpCommand" style="stroke:#A80036;stroke-width:1.5;" width="91" x="601.5" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85" x="604.5" y="197.752">HelpCommand</text><!--MD5=[114918039f41c3fe658f8cf1cba4717d]
-class SellCommand--><rect codeLine="24" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="SellCommand" style="stroke:#A80036;stroke-width:1.5;" width="86" x="1549" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="1552" y="197.752">SellCommand</text><!--MD5=[f97d9cdbbad848d6467e4cf8becab05b]
-class ReportCommand--><rect codeLine="25" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="ReportCommand" style="stroke:#A80036;stroke-width:1.5;" width="102" x="1412" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96" x="1415" y="197.752">ReportCommand</text><!--MD5=[bc26ea9ee85864750347985f4057cbbc]
-class MarkupCommand--><rect codeLine="26" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="MarkupCommand" style="stroke:#A80036;stroke-width:1.5;" width="105" x="1670.5" y="179"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="99" x="1673.5" y="197.752">MarkupCommand</text><!--MD5=[cbbc2731b9f44e58649810226c96c33b]
-class CliverShelf--><rect codeLine="6" fill="#FEFECE" filter="url(#fa41963uaq0v)" height="26.3887" id="CliverShelf" style="stroke:#A80036;stroke-width:1.5;" width="65" x="801.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="59" x="804.5" y="25.752">CliverShelf</text><!--MD5=[17c2f23369cb68ba72dd4fbf93dc9785]
-link CliverShelf to Parser--><path codeLine="35" d="M834,33.04 C834,47.38 834,71.46 834,87.78 " fill="none" id="CliverShelf-to-Parser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="834,92.99,838,83.99,834,87.99,830,83.99,834,92.99" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="43" x="782.8031" y="56.2198">creates</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="825.5563" y="82.0905">1</text><!--MD5=[fc43850550c96713f63d53a7e63d8f5c]
-link Parser to CreateShelfCommand--><path codeLine="37" d="M855.87,108.36 C883.28,110.7 931.23,116.9 969,133 C993.7,143.53 1018.34,162.37 1034.07,175.72 " fill="none" id="Parser-to-CreateShelfCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1037.87,178.98,1033.6564,170.078,1034.0798,175.719,1028.4388,176.1423,1037.87,178.98" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a74fc5ac21347153332445763b0f7259]
-link Parser to RemoveShelfCommand--><path codeLine="38" d="M812.12,107.08 C742.72,107.58 528.29,110.9 463,133 C436,142.14 409.27,161.64 392.48,175.5 " fill="none" id="Parser-to-RemoveShelfCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="388.43,178.89,397.8948,176.1666,392.2594,175.675,392.7509,170.0396,388.43,178.89" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c799bb39aa916aa4ae33e0b444948701]
-link Parser to AddCommand--><path codeLine="39" d="M812.19,107.14 C716.55,107.89 336.76,112.16 288,133 C267.54,141.74 249.84,160.6 238.86,174.45 " fill="none" id="Parser-to-AddCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="235.67,178.57,244.3377,173.8933,238.7268,174.6133,238.0069,169.0024,235.67,178.57" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[077ca4136064215266ad179e6d58930e]
-link Parser to DeleteCommand--><path codeLine="40" d="M812.27,107.01 C704.29,107.19 228.27,109.31 167,133 C144.59,141.67 124.23,160.81 111.54,174.74 " fill="none" id="Parser-to-DeleteCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="108.16,178.51,117.1376,174.4599,111.4898,174.7801,111.1697,169.1323,108.16,178.51" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a36a19772482d2b9c7a226847958bb2e]
-link Parser to EditCommand--><path codeLine="41" d="M812.25,107.48 C759.17,108.92 624.42,114.37 584,133 C563.79,142.31 546.05,161.06 534.98,174.73 " fill="none" id="Parser-to-EditCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="531.76,178.79,540.4834,174.218,534.8642,174.8704,534.2119,169.2512,531.76,178.79" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2e03998de0ba66ef7fad0b2e4251d2c6]
-link Parser to GetCommand--><path codeLine="42" d="M855.77,107.47 C936.69,109.33 1217.44,116.89 1254,133 C1274.18,141.9 1291.58,160.73 1302.37,174.53 " fill="none" id="Parser-to-GetCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1305.5,178.63,1303.2014,169.0531,1302.459,174.661,1296.8511,173.9187,1305.5,178.63" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2d1d1703c4b1347121f3cbe4e55afb78]
-link Parser to ListCommand--><path codeLine="43" d="M855.6,107.02 C915.79,107.35 1084.28,110.35 1134,133 C1154.07,142.14 1171.49,160.93 1182.31,174.65 " fill="none" id="Parser-to-ListCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1185.46,178.73,1183.1448,169.1571,1182.4121,174.7663,1176.8029,174.0337,1185.46,178.73" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[37c79abc24979a5d4d85dd92a3ed1e62]
-link Parser to SearchCommand--><path codeLine="44" d="M843.31,119.04 C854.61,133.63 873.7,158.3 886.33,174.62 " fill="none" id="Parser-to-SearchCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="889.7,178.99,887.3631,169.4224,886.6432,175.0333,881.0323,174.3133,889.7,178.99" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5cff93fbfae2c97893a3045b66a7d4c9]
-link Parser to ExitCommand--><path codeLine="45" d="M824.83,119.04 C813.71,133.63 794.91,158.3 782.48,174.62 " fill="none" id="Parser-to-ExitCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="779.15,178.99,787.7882,174.259,782.1819,175.0142,781.4268,169.4079,779.15,178.99" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4c2ddd603862042ae5724dfca22df36f]
-link Parser to ReportCommand--><path codeLine="46" d="M855.72,107.39 C950.12,109.18 1322.26,117.18 1372,133 C1399.82,141.84 1427.48,161.41 1444.87,175.36 " fill="none" id="Parser-to-ReportCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1449.07,178.78,1444.6232,169.9922,1445.1951,175.62,1439.5673,176.192,1449.07,178.78" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0d89c02a364a21586ed50b2f7b7044f1]
-link Parser to MarkupCommand--><path codeLine="47" d="M855.66,106.85 C977.68,106.13 1576.58,104.08 1653,133 C1675.94,141.68 1696.82,161.19 1709.69,175.19 " fill="none" id="Parser-to-MarkupCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1713.1,178.98,1710.0525,169.6145,1709.7552,175.2635,1704.1061,174.9662,1713.1,178.98" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ea1e015a8ea8a13a697a051d384f9491]
-link Parser to HelpCommand--><path codeLine="48" d="M812.42,108.15 C786.93,110.26 743.85,116.22 711,133 C690.91,143.26 672.33,161.49 660.42,174.78 " fill="none" id="Parser-to-HelpCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="656.95,178.73,665.8946,174.6076,660.2496,174.9733,659.8839,169.3283,656.95,178.73" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a5ee4330a899a9afdd857a1175418802]
-link CreateShelfCommand to command--><path codeLine="50" d="M1041.06,205.09 C1031.81,216.36 1017.53,233.74 1004.61,249.46 " fill="none" id="CreateShelfCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1010.02,253.91,991.91,264.92,999.2,245.02,1010.02,253.91" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5e2e6d35dda1758436c202e138248e0c]
-link RemoveShelfCommand to command--><path codeLine="51" d="M399.41,205.14 C416.73,213.22 440.76,223.34 463,229 C626.22,270.52 826.39,281.53 920.8,284.45 " fill="none" id="RemoveShelfCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="921.07,277.45,940.87,284.99,920.69,291.45,921.07,277.45" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b0b35b96af89c01bb45a93421b25474c]
-link AddCommand to command--><path codeLine="52" d="M242.87,205.09 C254.65,213.36 271.48,223.75 288,229 C405.59,266.36 779.43,280.19 920.46,284.16 " fill="none" id="AddCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="920.84,277.17,940.64,284.7,920.46,291.16,920.84,277.17" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7a2a3c56016e4d389fb2716a87b4c6c7]
-link DeleteCommand to command--><path codeLine="53" d="M116.16,205.13 C129.6,213.43 148.67,223.82 167,229 C309.33,269.21 763.31,281.49 920.67,284.59 " fill="none" id="DeleteCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="920.98,277.59,940.85,284.97,920.72,291.59,920.98,277.59" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0804c3fc7bd4d0c06bc806ea812366e2]
-link EditCommand to command--><path codeLine="54" d="M539.47,205.13 C551.28,213.2 567.88,223.33 584,229 C699.22,269.54 843.36,281.02 920.41,284.25 " fill="none" id="EditCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="921,277.27,940.74,284.97,920.5,291.26,921,277.27" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[673534671d750ac83530bdc28ce5d2a9]
-link GetCommand to command--><path codeLine="55" d="M1297.47,205.03 C1285.84,212.95 1269.63,222.94 1254,229 C1179.03,258.09 1086.65,273.02 1029.28,280.05 " fill="none" id="GetCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1029.78,287.04,1009.11,282.36,1028.18,273.13,1029.78,287.04" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e1499f449148cd63176eca2ca22439b2]
-link ListCommand to command--><path codeLine="56" d="M1176.14,205 C1164.47,212.52 1148.72,222.05 1134,229 C1099.88,245.1 1059.85,259.3 1028.49,269.44 " fill="none" id="ListCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1030.46,276.16,1009.28,275.49,1026.25,262.8,1030.46,276.16" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3c83c3e9e563e0ddfaf56f39836e41a6]
-link SearchCommand to command--><path codeLine="57" d="M908.94,205.09 C918.19,216.36 932.47,233.74 945.39,249.46 " fill="none" id="SearchCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="950.8,245.02,958.09,264.92,939.98,253.91,950.8,245.02" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[99919c4691c1ab946808d5d1982f5c75]
-link ExitCommand to command--><path codeLine="58" d="M788.2,205.02 C799.87,212.45 815.49,221.89 830,229 C859.67,243.55 894.09,257.1 921.94,267.27 " fill="none" id="ExitCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="924.43,260.73,940.91,274.06,919.72,273.91,924.43,260.73" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[50f1b8d3c6ea24b41c7f614478e3e217]
-link SellCommand to command--><path codeLine="59" d="M1576.15,205.17 C1564.57,213.37 1548.14,223.64 1532,229 C1439.64,259.68 1150.94,276.94 1029.59,282.99 " fill="none" id="SellCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1029.61,290,1009.29,283.98,1028.93,276.02,1029.61,290" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3bf96aba2d2b2665118dab567b263e8c]
-link SellCommand to Sales--><path codeLine="60" d="M1592,205.09 C1592,221.16 1592,249.65 1592,268.04 " fill="none" id="SellCommand-to-Sales" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1592,273.4,1596,264.4,1592,268.4,1588,264.4,1592,273.4" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3c83a777bd4e0773c3f99fa981d72d61]
-link ReportCommand to command--><path codeLine="61" d="M1437.27,205.07 C1419.34,213 1394.66,222.99 1372,229 C1252.15,260.76 1106.93,275.67 1029.63,281.81 " fill="none" id="ReportCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1029.73,288.82,1009.26,283.35,1028.68,274.86,1029.73,288.82" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[084e6c117ab0d05395e002e6961250c2]
-link ReportCommand to Sales--><path codeLine="62" d="M1479.86,205.09 C1503.24,221.85 1545.46,252.13 1570.89,270.36 " fill="none" id="ReportCommand-to-Sales" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1575.13,273.4,1570.1539,264.9007,1571.0691,270.483,1565.4867,271.3981,1575.13,273.4" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c229ad9f7b476dc3d512b72d8fdecacf]
-link MarkupCommand to command--><path codeLine="63" d="M1704.53,205.05 C1690.88,213.31 1671.52,223.69 1653,229 C1536.19,262.47 1169.21,278.64 1029.63,283.69 " fill="none" id="MarkupCommand-to-command" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1029.48,290.7,1009.25,284.41,1028.99,276.71,1029.48,290.7" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[947e493598ba90b0a43369ceeadc0555]
-link MarkupCommand to Sales--><path codeLine="64" d="M1705.87,205.09 C1682.14,221.85 1639.26,252.13 1613.43,270.36 " fill="none" id="MarkupCommand-to-Sales" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1609.13,273.4,1618.7934,271.4976,1613.2208,270.525,1614.1934,264.9524,1609.13,273.4" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[dc23faa07d5910ff3297e0a8666ce7bf]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="195.5px" preserveAspectRatio="none" style="width:854px;height:195px;background:#FFFFFF;" version="1.1" viewBox="0 0 854 195" width="854.5px" zoomAndPan="magnify"><defs><filter height="300%" id="f15junqbgqgz5w" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="1.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="2.0" dy="2.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[6ddbcb130bda8649a0495094cf420d43]
+cluster Logic Component--><rect fill="#FFFFFF" filter="url(#f15junqbgqgz5w)" height="161.5" style="stroke:#000000;stroke-width:0.75;" width="845" x="3.5" y="28"/><text fill="#000000" font-family="sans-serif" font-size="7" font-weight="bold" lengthAdjust="spacing" textLength="61.5" x="395.25" y="36.2666">Logic Component</text><!--MD5=[a5c4d62ad43347332154fab560b1b84a]
+cluster Non-sales related Commands--><rect fill="#FFFFFF" filter="url(#f15junqbgqgz5w)" height="38.5" style="stroke:#000000;stroke-width:0.5;stroke-dasharray:7.0,7.0;" width="611" x="15.5" y="101"/><text fill="#000000" font-family="sans-serif" font-size="7" font-weight="bold" lengthAdjust="spacing" textLength="102.5" x="269.75" y="109.2666">Non-sales related Commands</text><!--MD5=[4944dd12d465d5e969754a779036bbe2]
+cluster Sales related Commands--><rect fill="#FFFFFF" filter="url(#f15junqbgqgz5w)" height="38.5" style="stroke:#000000;stroke-width:0.5;stroke-dasharray:7.0,7.0;" width="198" x="638.5" y="101"/><text fill="#000000" font-family="sans-serif" font-size="7" font-weight="bold" lengthAdjust="spacing" textLength="86.5" x="694.25" y="109.2666">Sales related Commands</text><!--MD5=[628cc5a2753cca06eb1ffef55c386535]
+class Parser--><rect codeLine="20" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="Parser" style="stroke:#A80036;stroke-width:0.75;" width="21.5" x="393.25" y="46"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="18.5" x="394.75" y="54.7285">Parser</text><!--MD5=[b6587b47cb08bf742060086bd1cd0b7e]
+class Sales--><rect codeLine="28" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="Sales" style="stroke:#A80036;stroke-width:0.75;" width="19" x="727" y="165.25"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="16" x="728.5" y="173.9785">Sales</text><!--MD5=[e6280f8904688f60355da485760ab5a6]
+class command--><rect codeLine="29" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="20.0938" id="command" style="stroke:#A80036;stroke-width:0.75;" width="34" x="387" y="161.5"/><text fill="#000000" font-family="sans-serif" font-size="6" font-style="italic" lengthAdjust="spacing" textLength="26" x="391" y="170.2285">{abstract}</text><text fill="#000000" font-family="sans-serif" font-size="6" font-style="italic" lengthAdjust="spacing" textLength="29.5" x="390" y="177.7754">Command</text><!--MD5=[01ba6f98b685d1fe2cc392b52f140ec2]
+class CreateShelfCommand--><rect codeLine="10" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="CreateShelfCommand" style="stroke:#A80036;stroke-width:0.75;" width="65" x="23.5" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="62" x="25" y="127.7285">CreateShelfCommand</text><!--MD5=[6e351dde7d50f569bee352123d192af3]
+class RemoveShelfCommand--><rect codeLine="11" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="RemoveShelfCommand" style="stroke:#A80036;stroke-width:0.75;" width="69.5" x="106.25" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="66.5" x="107.75" y="127.7285">RemoveShelfCommand</text><!--MD5=[74ffcafef969057a048a931ccc96bb27]
+class AddCommand--><rect codeLine="12" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="AddCommand" style="stroke:#A80036;stroke-width:0.75;" width="43" x="193.5" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="40" x="195" y="127.7285">AddCommand</text><!--MD5=[522bcce41d81f20cd1f9638a73c3e08a]
+class DeleteCommand--><rect codeLine="13" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="DeleteCommand" style="stroke:#A80036;stroke-width:0.75;" width="50.5" x="254.25" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="47.5" x="255.75" y="127.7285">DeleteCommand</text><!--MD5=[babc7e0b8c8ea36d42dbd33de1315af9]
+class EditCommand--><rect codeLine="14" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="EditCommand" style="stroke:#A80036;stroke-width:0.75;" width="43" x="322.5" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="40" x="324" y="127.7285">EditCommand</text><!--MD5=[01a293c3a0e3b6775450a54cdca956c5]
+class GetCommand--><rect codeLine="15" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="GetCommand" style="stroke:#A80036;stroke-width:0.75;" width="42" x="383" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="39" x="384.5" y="127.7285">GetCommand</text><!--MD5=[93d215428fe434de70eb2509d954b1e5]
+class ListCommand--><rect codeLine="16" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="ListCommand" style="stroke:#A80036;stroke-width:0.75;" width="42.5" x="442.75" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="39.5" x="444.25" y="127.7285">ListCommand</text><!--MD5=[6af536f0137110c462023bd8f7f1c95d]
+class SearchCommand--><rect codeLine="17" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="SearchCommand" style="stroke:#A80036;stroke-width:0.75;" width="52" x="503" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="49" x="504.5" y="127.7285">SearchCommand</text><!--MD5=[2da30295f32c4049cb863910634fa3f4]
+class HelpCommand--><rect codeLine="18" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="HelpCommand" style="stroke:#A80036;stroke-width:0.75;" width="45.5" x="572.75" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="42.5" x="574.25" y="127.7285">HelpCommand</text><!--MD5=[114918039f41c3fe658f8cf1cba4717d]
+class SellCommand--><rect codeLine="23" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="SellCommand" style="stroke:#A80036;stroke-width:0.75;" width="43" x="715" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="40" x="716.5" y="127.7285">SellCommand</text><!--MD5=[f97d9cdbbad848d6467e4cf8becab05b]
+class ReportCommand--><rect codeLine="24" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="ReportCommand" style="stroke:#A80036;stroke-width:0.75;" width="51" x="646.5" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="48" x="648" y="127.7285">ReportCommand</text><!--MD5=[bc26ea9ee85864750347985f4057cbbc]
+class MarkupCommand--><rect codeLine="25" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="MarkupCommand" style="stroke:#A80036;stroke-width:0.75;" width="52.5" x="775.75" y="119"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="49.5" x="777.25" y="127.7285">MarkupCommand</text><!--MD5=[cbbc2731b9f44e58649810226c96c33b]
+class CliverShelf--><rect codeLine="6" fill="#FEFECE" filter="url(#f15junqbgqgz5w)" height="12.5469" id="CliverShelf" style="stroke:#A80036;stroke-width:0.75;" width="32.5" x="387.75" y="3.5"/><text fill="#000000" font-family="sans-serif" font-size="6" lengthAdjust="spacing" textLength="29.5" x="389.25" y="12.2285">CliverShelf</text><!--MD5=[17c2f23369cb68ba72dd4fbf93dc9785]
+link CliverShelf to Parser--><path codeLine="33" d="M404,16.02 C404,23.105 404,35.175 404,43.3 " fill="none" id="CliverShelf-to-Parser" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="404,45.895,406,41.395,404,43.395,402,41.395,404,45.895" style="stroke:#A80036;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="6.5" lengthAdjust="spacing" textLength="21.5" x="378.2672" y="26.8367">creates</text><text fill="#000000" font-family="sans-serif" font-size="6.5" lengthAdjust="spacing" textLength="3.5" x="399.8109" y="40.5907">1</text><!--MD5=[fc43850550c96713f63d53a7e63d8f5c]
+link Parser to CreateShelfCommand--><path codeLine="35" d="M393.12,52.61 C352.58,52.44 207.05,54.965 97.5,97 C85.15,101.74 72.77,110.695 64.79,117.15 " fill="none" id="Parser-to-CreateShelfCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="62.66,118.9,67.4056,117.585,64.5904,117.3115,64.864,114.4963,62.66,118.9" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[a74fc5ac21347153332445763b0f7259]
+link Parser to RemoveShelfCommand--><path codeLine="36" d="M393.12,53.55 C360.485,56.24 260.975,66.565 185,97 C172.17,102.14 158.955,111.05 150.4,117.39 " fill="none" id="Parser-to-RemoveShelfCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="148.33,118.94,153.13,117.84,150.33,117.44,150.73,114.64,148.33,118.94" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[c799bb39aa916aa4ae33e0b444948701]
+link Parser to AddCommand--><path codeLine="37" d="M393.155,54.02 C366.525,57.495 296.375,68.86 245.5,97 C236.19,102.15 227.41,110.675 221.68,116.915 " fill="none" id="Parser-to-AddCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="220.005,118.775,224.5019,116.7681,221.6774,116.9168,221.5288,114.0922,220.005,118.775" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[077ca4136064215266ad179e6d58930e]
+link Parser to DeleteCommand--><path codeLine="38" d="M393.2,57.14 C375.88,64.375 341.095,79.74 314,97 C304.48,103.065 294.535,111.3 287.78,117.22 " fill="none" id="Parser-to-DeleteCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="285.79,118.98,290.4849,117.4941,287.6617,117.3226,287.8331,114.4994,285.79,118.98" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[a36a19772482d2b9c7a226847958bb2e]
+link Parser to EditCommand--><path codeLine="39" d="M399.09,58.64 C388.315,71.575 362.585,102.445 350.49,116.96 " fill="none" id="Parser-to-EditCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="348.81,118.98,353.2265,116.8018,350.4098,117.0589,350.1527,114.2421,348.81,118.98" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[2e03998de0ba66ef7fad0b2e4251d2c6]
+link Parser to GetCommand--><path codeLine="40" d="M404,58.64 C404,71.415 404,101.69 404,116.415 " fill="none" id="Parser-to-GetCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="404,118.98,406,114.48,404,116.48,402,114.48,404,118.98" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[2d1d1703c4b1347121f3cbe4e55afb78]
+link Parser to ListCommand--><path codeLine="41" d="M408.91,58.64 C419.685,71.575 445.415,102.445 457.51,116.96 " fill="none" id="Parser-to-ListCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="459.19,118.98,457.8473,114.2421,457.5902,117.0589,454.7735,116.8018,459.19,118.98" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[37c79abc24979a5d4d85dd92a3ed1e62]
+link Parser to SearchCommand--><path codeLine="42" d="M414.785,57.16 C432.085,64.43 466.845,79.835 494,97 C503.625,103.085 513.72,111.315 520.58,117.23 " fill="none" id="Parser-to-SearchCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="522.605,118.99,520.5162,114.5305,520.7165,117.3519,517.8952,117.5522,522.605,118.99" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[4c2ddd603862042ae5724dfca22df36f]
+link Parser to ReportCommand--><path codeLine="44" d="M414.795,53.55 C447.65,56.27 548.9,66.725 626.5,97 C639.69,102.145 653.37,111.055 662.24,117.39 " fill="none" id="Parser-to-ReportCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="664.39,118.94,661.9118,114.6846,662.3629,117.4768,659.5707,117.9279,664.39,118.94" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[0d89c02a364a21586ed50b2f7b7044f1]
+link Parser to MarkupCommand--><path codeLine="45" d="M414.885,53.28 C468.065,56 700.735,69.31 767,97 C777.895,101.55 788.21,110.505 794.78,117.015 " fill="none" id="Parser-to-MarkupCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="796.695,118.95,794.9458,114.3467,794.9344,117.1751,792.106,117.1637,796.695,118.95" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[ea1e015a8ea8a13a697a051d384f9491]
+link Parser to HelpCommand--><path codeLine="46" d="M414.92,54.05 C441.74,57.59 512.42,69.09 564,97 C573.525,102.155 582.61,110.68 588.55,116.92 " fill="none" id="Parser-to-HelpCommand" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="590.29,118.78,588.6719,114.129,588.5804,116.9559,585.7534,116.8644,590.29,118.78" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[a5ee4330a899a9afdd857a1175418802]
+link CreateShelfCommand to command--><path codeLine="50" d="M66.94,131.555 C75.12,135.615 86.71,140.78 97.5,143.5 C198.19,168.87 322.66,171.57 376.76,171.395 " fill="none" id="CreateShelfCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="376.885,167.895,386.91,171.33,376.935,174.895,376.885,167.895" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[5e2e6d35dda1758436c202e138248e0c]
+link RemoveShelfCommand to command--><path codeLine="51" d="M152.855,131.51 C161.555,135.49 173.76,140.58 185,143.5 C252.655,161.075 335.085,167.565 376.885,169.845 " fill="none" id="RemoveShelfCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="377.15,166.355,386.96,170.355,376.795,173.345,377.15,166.355" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[b0b35b96af89c01bb45a93421b25474c]
+link AddCommand to command--><path codeLine="52" d="M223.15,131.57 C229.075,135.53 237.44,140.565 245.5,143.5 C289.82,159.65 344.655,166.46 376.835,169.225 " fill="none" id="AddCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="377.14,165.74,386.835,170.015,376.59,172.715,377.14,165.74" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[7a2a3c56016e4d389fb2716a87b4c6c7]
+link DeleteCommand to command--><path codeLine="53" d="M289.54,131.52 C296.305,135.26 305.515,140.05 314,143.5 C334.735,151.925 359.055,159.205 377.18,164.16 " fill="none" id="DeleteCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="378.175,160.8,386.935,166.76,376.37,167.565,378.175,160.8" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[0804c3fc7bd4d0c06bc806ea812366e2]
+link EditCommand to command--><path codeLine="54" d="M351.845,131.665 C359.805,137.67 372.465,147.215 383.32,155.405 " fill="none" id="EditCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="385.46,152.635,391.335,161.45,381.245,158.22,385.46,152.635" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[673534671d750ac83530bdc28ce5d2a9]
+link GetCommand to command--><path codeLine="55" d="M404,131.665 C404,136.695 404,144.205 404,151.325 " fill="none" id="GetCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="407.5,151.45,404,161.45,400.5,151.45,407.5,151.45" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[e1499f449148cd63176eca2ca22439b2]
+link ListCommand to command--><path codeLine="56" d="M456.155,131.665 C448.195,137.67 435.535,147.215 424.68,155.405 " fill="none" id="ListCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="426.755,158.22,416.665,161.45,422.54,152.635,426.755,158.22" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[3c83c3e9e563e0ddfaf56f39836e41a6]
+link SearchCommand to command--><path codeLine="57" d="M518.805,131.51 C511.935,135.245 502.595,140.04 494,143.5 C473.24,151.865 448.925,159.15 430.805,164.12 " fill="none" id="SearchCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="431.62,167.525,421.055,166.735,429.805,160.765,431.62,167.525" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[50f1b8d3c6ea24b41c7f614478e3e217]
+link SellCommand to command--><path codeLine="59" d="M728.815,131.605 C723.015,135.685 714.675,140.86 706.5,143.5 C655.625,159.935 495.565,167.59 431.2,170.06 " fill="none" id="SellCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="431.15,173.565,421.03,170.435,430.89,166.57,431.15,173.565" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[3bf96aba2d2b2665118dab567b263e8c]
+link SellCommand to Sales--><path codeLine="60" d="M736.5,131.665 C736.5,139.57 736.5,153.615 736.5,162.61 " fill="none" id="SellCommand-to-Sales" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="736.5,165.225,738.5,160.725,736.5,162.725,734.5,160.725,736.5,165.225" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[3c83a777bd4e0773c3f99fa981d72d61]
+link ReportCommand to command--><path codeLine="61" d="M659.72,131.505 C650.715,135.485 638.09,140.57 626.5,143.5 C557.415,160.955 473.36,167.505 431.07,169.825 " fill="none" id="ReportCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="431.175,173.325,421.01,170.34,430.82,166.335,431.175,173.325" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[084e6c117ab0d05395e002e6961250c2]
+link ReportCommand to Sales--><path codeLine="62" d="M680.3,131.575 C692.01,139.785 713.36,154.77 726.11,163.71 " fill="none" id="ReportCommand-to-Sales" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="728.23,165.2,725.6914,160.9804,726.1823,163.7659,723.3968,164.2568,728.23,165.2" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[c229ad9f7b476dc3d512b72d8fdecacf]
+link MarkupCommand to command--><path codeLine="63" d="M793.045,131.54 C786.205,135.645 776.385,140.88 767,143.5 C703.755,161.175 503.995,168.275 431.025,170.32 " fill="none" id="MarkupCommand-to-command" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="none" points="431.11,173.82,421.02,170.595,430.92,166.825,431.11,173.82" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[947e493598ba90b0a43369ceeadc0555]
+link MarkupCommand to Sales--><path codeLine="64" d="M793.57,131.575 C781.68,139.785 759.995,154.77 747.05,163.71 " fill="none" id="MarkupCommand-to-Sales" style="stroke:#A80036;stroke-width:0.5;"/><polygon fill="#A80036" points="744.895,165.2,749.7341,164.2873,746.9518,163.7788,747.4602,160.9965,744.895,165.2" style="stroke:#A80036;stroke-width:0.5;"/><!--MD5=[acd21b300e68231af163d50a1db3855d]
 @startuml
 'https://plantuml.com/class-diagram
 hide circle
@@ -65,7 +62,6 @@ package "Logic Component" <<Rectangle>> {
         class GetCommand
         class ListCommand
         class SearchCommand
-        class ExitCommand
         class HelpCommand
     }
     class Parser
@@ -77,7 +73,6 @@ package "Logic Component" <<Rectangle>> {
     }
 
     class Sales
-
     abstract class "{abstract}\n Command" as command
 
 }
@@ -85,17 +80,19 @@ package "Logic Component" <<Rectangle>> {
 CliverShelf "creates"- -> "1" Parser
 
 Parser - -> CreateShelfCommand
-Parser - -> RemoveShelfCommand
-Parser - -> AddCommand
-Parser - -> DeleteCommand
-Parser - -> EditCommand
-Parser - -> GetCommand
-Parser - -> ListCommand
-Parser - -> SearchCommand
-Parser - -> ExitCommand
-Parser - -> ReportCommand
-Parser - -> MarkupCommand
-Parser - -> HelpCommand
+Parser - - -> RemoveShelfCommand
+Parser - - -> AddCommand
+Parser - - -> DeleteCommand
+Parser - - -> EditCommand
+Parser - - -> GetCommand
+Parser - - -> ListCommand
+Parser - - -> SearchCommand
+
+Parser - - -> ReportCommand
+Parser - - -> MarkupCommand
+Parser - - -> HelpCommand
+
+
 
 CreateShelfCommand - -|> command
 RemoveShelfCommand - -|> command
@@ -105,7 +102,7 @@ EditCommand - -|> command
 GetCommand - -|> command
 ListCommand - -|> command
 SearchCommand - -|> command
-ExitCommand - -|> command
+
 SellCommand - -|> command
 SellCommand - -> Sales
 ReportCommand - -|> command
@@ -131,7 +128,6 @@ package "Logic Component" <<Rectangle>> {
         class GetCommand
         class ListCommand
         class SearchCommand
-        class ExitCommand
         class HelpCommand
     }
     class Parser
@@ -143,7 +139,6 @@ package "Logic Component" <<Rectangle>> {
     }
 
     class Sales
-
     abstract class "{abstract}\n Command" as command
 
 }
@@ -151,17 +146,19 @@ package "Logic Component" <<Rectangle>> {
 CliverShelf "creates"- -> "1" Parser
 
 Parser - -> CreateShelfCommand
-Parser - -> RemoveShelfCommand
-Parser - -> AddCommand
-Parser - -> DeleteCommand
-Parser - -> EditCommand
-Parser - -> GetCommand
-Parser - -> ListCommand
-Parser - -> SearchCommand
-Parser - -> ExitCommand
-Parser - -> ReportCommand
-Parser - -> MarkupCommand
-Parser - -> HelpCommand
+Parser - - -> RemoveShelfCommand
+Parser - - -> AddCommand
+Parser - - -> DeleteCommand
+Parser - - -> EditCommand
+Parser - - -> GetCommand
+Parser - - -> ListCommand
+Parser - - -> SearchCommand
+
+Parser - - -> ReportCommand
+Parser - - -> MarkupCommand
+Parser - - -> HelpCommand
+
+
 
 CreateShelfCommand - -|> command
 RemoveShelfCommand - -|> command
@@ -171,7 +168,7 @@ EditCommand - -|> command
 GetCommand - -|> command
 ListCommand - -|> command
 SearchCommand - -|> command
-ExitCommand - -|> command
+
 SellCommand - -|> command
 SellCommand - -> Sales
 ReportCommand - -|> command
@@ -180,11 +177,11 @@ MarkupCommand - -|> command
 MarkupCommand - -> Sales
 @enduml
 
-PlantUML version 1.2021.11(Sat Oct 02 21:26:11 CST 2021)
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: GBK
-Language: zh
-Country: CN
+Default Encoding: Cp1252
+Language: en
+Country: US
 --></g></svg>
