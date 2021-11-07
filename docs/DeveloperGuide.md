@@ -97,13 +97,14 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 
 ### General Program Flow
 
+![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
+
 1. User runs the programs & input user commands
 2. `CLIverShelf` calls `Parser` to `parseCommand()`
 3. `Parser` creates and returns a `Command` object when parsed successful
 4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CLIverShelf` instantiates `UI` component to print the `result`
 
-![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
@@ -137,55 +138,57 @@ The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 
 ### Logic: Subcomponent Parser
 
-**API**:
+This section will illustrate how the Parser interacts with `CLIvershelf` class and different `Command` classes.
 
-1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/parser/Parser.java)
-    
-    This sections will illustrate how the Parser interacts with `CLIvershelf` class and different `Command` classes.
-
-    1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
-       the `Parser` to `parseCommand()`
-    2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
-    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `add`, `delete` , etc.
-    4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
-       the `prepare{commandWord}(arguments)` function of the `Parser`
-    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` object to the `CliverShelf`
-       component, for `CLIvershelf` to decide what to do with the `{commandWord}Command` object.
+**API**: [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/parser/Parser.java)
 
 ![](diagrams/ParserSequenceDiagram.svg)
+
+1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
+   the `Parser` to `parseCommand()`
+2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
+3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `add`, `delete` , etc.
+4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
+   the `prepare{commandWord}(arguments)` function of the `Parser`
+5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` object to the `CliverShelf`
+   component, for `CLIvershelf` to decide what to do with the `{commandWord}Command` object.
 
 
 ### Logic: Subcomponent Command
 
-1. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
-    1. `Command` is an abstract class and has an abstract method `execute()`.
-    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
-       responsible for one function of the application, such as adding new items or deleting items.
-    3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser 
-       and is then returned to the CLIverShelf after they are instantiated.
-    4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function. 
-    5. The following sequence diagram illustrates how a general `Command` object interacts with other
-       components of the system.
-    6. More details about specific commands will be covered in the Implementation section. 
-       
-    ![](diagrams/Logic_Command_SequenceDiagram.svg)
+**API**: [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
+
+![](diagrams/Logic_Command_SequenceDiagram.svg)
+
+1. `Command` is an abstract class and has an abstract method `execute()`.
+2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
+   responsible for one function of the application, such as adding new items or deleting items.
+3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser
+   and is then returned to the CLIverShelf after they are instantiated.
+4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function.
+5. The following sequence diagram illustrates how a general `Command` object interacts with other
+   components of the system.
+6. More details about specific commands will be covered in the Implementation section.
 
 ### Command: Subcomponent Sales
 
-This section describes how the subcomponent Sales interacts with the sales related commands. After the command input is
-parsed, depending on the Command type, different types uses different sales API.
+This section describes an overview of how the subcomponent `Sales` interacts with the sales related commands (`SellCommand`, `ReportCommand`, `MarkUpCommand`).
+After the command input is parsed, depending on the `Command` type, different types of sales related command uses different sales API.
 
 **API**:
-
 1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesManager.java)
-    * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
-    
-
 2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesReport.java)
-    * Supports ReportCommand & Handles generation of sales report
-
 3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesMarkUp.java)
 
+![](diagrams/SalesSubComponentClassDiagram.svg)
+
+The `Sales` subcomponent,
+* When CLIvershelf executes SellCommand, SellCommand calls the SalesManager to mark the item as sold.
+* When CLIvershelf executes MarkUpCommand, MarkUpCommand calls the SalesMarkUp to get markup information about the selected item. 
+* When CLIvershelf executes ReportCommand, ReportCommand calls the SalesReport to execute, and SalesReport will in turn 
+  call SalesManager to get the list of sold items for further processing. 
+
+For more specific details, refer to implementation of [`SellCommand`](#selling-an-item), [`ReportCommand`](#generating-sales-report), and [`MarkUpCommand`](#generating-item-markup-price). 
 
 ### Model component
 
@@ -411,7 +414,7 @@ The more detailed inner workings of the report implementation is as follows:
 
 This section will illustrate how the marking up of an item price (MarkUpCommand) is being implemented.
 
-![](diagrams/MarkUpSequenceDiagram.svg)
+![](diagrams/MarkUpCommandSequenceDiagram.svg)
 
 A user may choose to check the estimated marked up price of an item, given a specific mark up percentage.
 

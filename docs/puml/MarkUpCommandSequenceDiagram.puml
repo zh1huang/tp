@@ -2,8 +2,8 @@
 'https://plantuml.com/sequence-diagram
 
 !include Style.puml
-participant ":MarkUpCommand" as markupCommand MARKUP_COMMAND_COLOUR
-participant ":SalesMarkUp" as SalesMarkUp SALES_MARKUP_COLOUR
+participant ":MarkUpCommand" as markupCommand
+participant ":SalesMarkUp" as SalesMarkUp
 
 -> markupCommand : execute()
 
@@ -41,5 +41,6 @@ else
 end
 
 deactivate markupCommand
+destroy markupCommand
 
 @enduml

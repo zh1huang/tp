@@ -14,10 +14,14 @@ activate parser
 parser -> parser : prepare{commandWord}(argument)
 activate parser
 parser -> newCommand **
-deactivate parser
 activate newCommand
 newCommand --> parser
 deactivate newCommand
+
+parser --> parser : new {commandWord}Command
+
+deactivate parser
+
 parser --> app : {commandWord}Command
 deactivate parser
 app --> user
