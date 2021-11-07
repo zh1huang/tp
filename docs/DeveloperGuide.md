@@ -179,40 +179,13 @@ parsed, depending on the Command type, different types uses different sales API.
 
 1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesManager.java)
     * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
-        * When program invokes `SellCommand#execute`, 
-          * `SalesManager` object is constructed 
-          * `SalesManager#sell()` is then invoked to mark an item as sold
-        
-          ![](diagrams/SellCommandSequenceDiagram.svg)
-          
-        * When program invokes `ReportCommand#execute` shown below in the `SalesReport` API
-            1. A `SalesReport` object is constructed
-            2. When a function of `SalesReport` is invoked,
-               1. A `SalesManager` object is constructed
-               2. & `SalesManager` functions will filter the soldItems 
-               3. returning the list of filtered items to be printed
-
+    
 
 2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesReport.java)
     * Supports ReportCommand & Handles generation of sales report
-        * When program invokes `ReportCommand#execute`, a `SalesReport` object is created
-          & `SalesReport#generateSoldItemStats()`
-          or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
-          into strings before returning the String for printing.
-
-![](diagrams/ReportCommandSequenceDiagram.svg)
 
 3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesMarkUp.java)
-    * Supports MarkUpCommand & Handles Estimation of price markup of an item
-        1. When program invokes `MarkUpCommand#execute`, a `SalesMarkUp` object is created
-        2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current
-           details of the selected item
-        3. Then, if user markup percent is specified `SalesMarkUp#getUserRequestMarkUpInfo()` is invoked, to calculate
-           the user requested markup information & final price
-        4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the
-           general markup estimation in intervals of 20.
 
-![](diagrams/MarkUpCommandSequenceDiagram.svg)
 
 ### Model component
 
@@ -354,6 +327,20 @@ The Class Diagram below illustrates how the components work together in `ListCom
 The sequence diagram below shows how selling items is implemented.
 ![](diagrams/Implementation_SellItems.svg)
 
+1. When program invokes `SellCommand#execute()`, `SellCommand` object validates the itemID from user input by trying to 
+   get the item from the `ShelfList` through `ShelfList#getItem(itemID)`.
+2. Once it gets the item, `SellCommand` calls `SalesManager#sell()` to mark the item as sold.
+   <br> In `SalesManager#sell()`: 
+   1. It will try to get the `originalShelf` where the item to be sold belongs to
+   2. Then delete the sold item from the `originalShelf` by the shelf name
+   3. The function will first prepare to store the details of the soldItem 
+      * By calling `ShelfList#getShelf("soldItems")` to get the shelf called `soldItems` represented by `soldItemsShelf` 
+         to store the records of all soldItems.
+      * Also, details of Item to be sold will be constructed as a new `SoldItem` object, represented by `newSoldItem`
+   4. The `newSoldItem` will then be added to the `soldItemsShelf` via `Shelf#addItem(newSoldItem)`.
+3. Once the above steps are done, SalesManager will return a `finishedMessage`, which will then be passed back to 
+   `CLIverShelf` for printing.
+
 #### Design considerations:
 
 * Aspect: How to determine the sale time
@@ -366,31 +353,46 @@ The sequence diagram below shows how selling items is implemented.
         * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
+
+This section will describe how the report feature is implemented.
+
 ![](diagrams/Implementation_GenerateReports.svg)
+
+* When program invokes `ReportCommand#execute`, a `SalesReport` object is created
+  & `SalesReport#generateSoldItemStats()`
+  or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
+  into strings before returning the String for printing.
+
 ![](diagrams/Implementation_SalesReport.svg)
+
+* When program invokes `ReportCommand#execute` shown below in the `SalesReport` API
+  1. A `SalesReport` object is constructed
+  2. When a function of `SalesReport` is invoked,
+  1. A `SalesManager` object is constructed
+  2. & `SalesManager` functions will filter the soldItems
+  3. returning the list of filtered items to be printed
+
 #### Design considerations:
 
 ### Generating item markup price
 
-This sequence diagram shows how MarkUpCommand is being implemented.
+This section will describe how markup feature is being implemented.
 
 ![](diagrams/MarkUpSequenceDiagram.svg)
 
 A user may choose to check the estimated marked up price of an item, given a specific mark up percentage.
 
-1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
-2. CLIverShelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
-    1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
-    2. Else, continues by constructing `SalesMarkUp` Object Then `SalesMarkUp#getItemToMarkUpInfo()`
-       , `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence get the relevant information about the
-       selected item
-        2. `MarkUpCommand#execute()` then checks if the user has specified an input for markup percentage
-            1. If not specified, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` which get the
-               markup in percentage intervals of 20, returned as a string
-            2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up
-               information, returned as a string
-    3. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf`
-       as a `resultString` for printing.
+1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`.
+2. CLIverShelf invokes `MarkUpCommand#execute()`
+   1. A `SalesMarkUp` Object is constructed,
+   2. Then `SalesMarkUp#getItemToMarkUpInfo()` is called
+   3. followed by `SalesMarkUp#getSelectedItemMarkUpInfo()` to get the relevant information about the selected item
+       1. If `userRequestPercent` not specified in input, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` 
+          which get the markup in percentage intervals of 20, returned as a string
+       2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up
+          information, returned as a string
+   4. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf`
+      as a `resultString` for printing.
 
 #### Design considerations:
 

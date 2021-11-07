@@ -2,29 +2,29 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-actor user
+'actor user
 
-participant CLIverShelf as app LOGIC_COLOR
-participant ":Parser" as parser LOGIC_COLOR_T1
-participant ":newCommand: MarkUpCommand" as markupCommand MARKUP_COMMAND_COLOUR
+'participant CLIverShelf as app LOGIC_COLOR
+'participant ":Parser" as parser LOGIC_COLOR_T1
+participant "newCommand: MarkUpCommand" as markupCommand MARKUP_COMMAND_COLOUR
 participant ":SalesMarkUp" as SalesMarkUp SALES_MARKUP_COLOUR
 
-user -> app: input
-activate app
-app -> parser: parseCommand(input)
-activate parser
-parser -> parser : prepareMarkup(argument)
-activate parser
-parser -> markupCommand **
-deactivate parser
-activate markupCommand
-markupCommand --> parser
+'user -> app: input
+'activate app
+'app -> parser: parseCommand(input)
+'activate parser
+'parser -> parser : prepareMarkup(argument)
+'activate parser
+'parser -> markupCommand **
+'deactivate parser
+'activate markupCommand
+'markupCommand --> parser
+'
+'deactivate markupCommand
+'parser --> app
+'deactivate parser
 
-deactivate markupCommand
-parser --> app
-deactivate parser
-
-app -> markupCommand: execute()
+-> markupCommand: execute()
 
 activate markupCommand
 
@@ -55,9 +55,9 @@ else
        deactivate SalesMarkUp
 end
 
-markupCommand --> app : resultString
+<-- markupCommand : resultString
 deactivate markupCommand
-app --> user
+
 
 deactivate app
 
