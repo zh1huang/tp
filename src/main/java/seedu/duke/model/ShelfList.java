@@ -1,9 +1,11 @@
 package seedu.duke.model;
 
+
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.DuplicateShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
-import seedu.duke.model.exception.ItemNotExistModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
+import seedu.duke.model.exception.ItemNotExistModelException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -61,9 +63,32 @@ public class ShelfList {
      * @throws IllegalArgumentModelException if name does not follow the format
      * @throws DuplicateShelfModelException  if there already exist a Shelf with this name
      */
-    public Shelf addShelf(String name) throws IllegalArgumentModelException, DuplicateShelfModelException {
+    public Shelf addShelf(String name) throws IllegalArgumentModelException, DuplicateShelfModelException,
+            DeniedAccessToShelfModelException {
         if (existShelf(name)) {
             throw new DuplicateShelfModelException(name);
+        }
+
+        Shelf temp = new Shelf(name);
+        return temp;
+    }
+
+    /**
+     * Creates a new Shelf with the specified name in the ShelfList. Need to specify whether can create soldItems shelf.
+     *
+     * @param name The name of the new Shelf
+     * @param isDeniedAccessToSoldItems Whether can create soldItems shelf
+     * @throws IllegalArgumentModelException if name does not follow the format
+     * @throws DuplicateShelfModelException  if there already exist a Shelf with this name
+     */
+    public Shelf addShelf(String name, boolean isDeniedAccessToSoldItems) throws IllegalArgumentModelException,
+            DuplicateShelfModelException,
+            DeniedAccessToShelfModelException {
+        if (existShelf(name)) {
+            throw new DuplicateShelfModelException(name);
+        }
+        if (name.equals("soldItems") && isDeniedAccessToSoldItems) {
+            throw new DeniedAccessToShelfModelException(name);
         }
 
         Shelf temp = new Shelf(name);
@@ -89,7 +114,7 @@ public class ShelfList {
      * @param name Name of the Shelf to be removed
      * @throws ShelfNotExistModelException If no Shelf in the ShelfList has the specified name
      */
-    public void deleteShelf(String name) throws ShelfNotExistModelException {
+    public void deleteShelf(String name) throws ShelfNotExistModelException, DeniedAccessToShelfModelException {
         shelves.remove(getShelf(name, true));
     }
 
@@ -118,9 +143,10 @@ public class ShelfList {
      * @return the target shelf
      * @throws ShelfNotExistModelException if no such shelf exists.
      */
-    public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistModelException {
+    public Shelf getShelf(String name, boolean isSoldItemHidden) throws ShelfNotExistModelException,
+            DeniedAccessToShelfModelException {
         if (name.equals("soldItems") && isSoldItemHidden) {
-            throw new ShelfNotExistModelException(name);
+            throw new DeniedAccessToShelfModelException(name);
         }
         for (Shelf shelf : shelves) {
             if (shelf.getName().equals(name)) {
@@ -139,7 +165,7 @@ public class ShelfList {
     public boolean existShelf(String name) {
         try {
             getShelf(name, true);
-        } catch (ShelfNotExistModelException e) {
+        } catch (ShelfNotExistModelException | DeniedAccessToShelfModelException e) {
             return false;
         }
         return true;

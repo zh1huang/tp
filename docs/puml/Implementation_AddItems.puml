@@ -2,25 +2,15 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-actor user
-participant Main
-participant ":Parser" as Parser
+
+participant ":CLIverShelf" as Main
 participant "newCommand: \nAddCommand" as AddCommand
 participant "newItem: \nItem" as Item
+participant ":ShelfList" as ShelfList
 participant "specifiedShelf: \nShelf" as Shelf
-user -> Main: Run program & Input commands
+
 activate Main
-Main -> Parser: parseCommand(input)
-activate Parser
-Parser -> Parser: prepareAdd(input)
-activate Parser
-Parser -> AddCommand **: new AddCommand(arguments)
-deactivate Parser
-activate AddCommand
-AddCommand --> Parser: new AddCommand
-deactivate AddCommand
-Parser --> Main: new AddCommand
-deactivate Parser
+
 
 Main -> AddCommand: execute()
 activate AddCommand
@@ -28,14 +18,19 @@ AddCommand -> Item **
 activate Item
 Item --> AddCommand
 deactivate Item
+AddCommand -> ShelfList: getShelf(shelfName)
+activate ShelfList
+ShelfList --> AddCommand: specifiedShelf
+deactivate ShelfList
 AddCommand -> Shelf: addItem(newItem)
 activate Shelf
 Shelf --> AddCommand
 deactivate Shelf
-AddCommand --> Main
+AddCommand --> Main: finishedMessage
 deactivate AddCommand
-Main --> user
+
 deactivate Main
+destroy AddCommand
 
 
 @enduml

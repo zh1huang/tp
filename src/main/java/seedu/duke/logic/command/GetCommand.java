@@ -1,9 +1,11 @@
 package seedu.duke.logic.command;
 
+import seedu.duke.logic.command.exception.DeniedAccessToShelfCommandException;
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import java.util.logging.Level;
@@ -38,7 +40,8 @@ public class GetCommand extends Command {
      * @throws ShelfNotExistModelException  If the Shelf is not in the ShelfList
      * @throws ItemNotExistCommandException If empty does not exist in the shelf
      */
-    public String execute() throws ShelfNotExistModelException, ItemNotExistCommandException {
+    public String execute() throws ShelfNotExistModelException, ItemNotExistCommandException,
+            DeniedAccessToShelfCommandException {
         String output = "";
         try {
             Shelf selectedShelf = ShelfList
@@ -56,6 +59,8 @@ public class GetCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "GetCommand failed to execute because item not in shelf");
             throw new ItemNotExistCommandException(String.format(MESSAGE_ITEM_NOT_EXIST, index + 1));
+        } catch (DeniedAccessToShelfModelException e) {
+            throw new DeniedAccessToShelfCommandException(e.getMessage());
         }
 
         logger.log(Level.INFO, "GetCommand successfully executed");

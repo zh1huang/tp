@@ -24,14 +24,14 @@
 
 ## Introduction
 
-Clivershelf allows bookstore owners to create a management system of inventories and finances to better manage their
-business, where they can view these information in a user-friendly manner.
+CLIverShelf allows bookstore owners to create a management system of inventories and finances to better manage their
+business, where they can view this information in a user-friendly manner.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download &#11015; the latest version of `CliverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
-3. Run `cd (path to the folder containing CliverShelf.jar)` and `java -jar CliverShelf.jar` to start using Clivershelf.
+2. Download &#11015; the latest version of `CLIverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+3. Run `cd (path to the folder containing CLIverShelf.jar)` and `java -jar CLIverShelf.jar` to start using CLIvershelf.
 4. You should see the following:
 ```
                                                                   .............................................................
@@ -111,7 +111,7 @@ Expected outcome:
 
 Creates a shelf to store items.
 
-&#9888; **Note that shelf has to first created before [item can be added](#add-new-item).**
+&#9888; **Note that shelf has to be first created before [item can be added](#add-new-items).**
 
 &#9888; **Note `SHELF_NAME` should only consist of alphabets and integers (Eg: `book1`)**
 
@@ -156,17 +156,13 @@ Adds a new item to the inventory, specifying its name, shelf, purchase cost, sel
 
 **Important notes:**
 
-&#9888; **[Shelf has to first created](#create-a-shelf) before item can be added.**
+&#9888; **[Shelf has to be first created](#create-a-shelf) before item can be added.**
 
-&#9888; **Name of item should not be too long (Should not exceed 52 characters).**
+&#9888; **Maximum quantity of items in a shelf is 999.**
 
-&#9888; **Maximum price and cost of any item is $9999.99 (Only allow values with 2 decimal points and below).**
+&#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
 
-&#9888; **Maximum quantity of any item is 999.**
-
-&#8505; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item.**
-
-As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from the label, and use this ID to sell the item. Please make sure that you label the ID clearly as you can only use ID to sell items (refer to "Sell an item" section).
+&#9888; As a bookstore owner, you are **strongly encouraged to use this ID to label your item** before placing it on the shelf. When the customer wishes to purchase an item, you will need the ID from the label of that item to sell. Alternatively, you can use [`get` function](#get-information-about-an-item) to retrieve the ID of an item.
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
@@ -199,6 +195,9 @@ Expected outcome:
 
 Deletes item from the inventory by specifying its shelf name and its index in the shelf.
 
+&#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+
+
 Format: `delete shlv/SHELF_NAME i/INDEX`
 
 Example: **Delete item of `index 1` in shelf `book2`**
@@ -218,7 +217,7 @@ Expected outcome:
 
 ### Listing all items 
 
-Shows a list of all items in the inventory list.
+Shows a list of all items in the inventory list. (Arranged in alphabetical order for name)
 The attributes shown are: Item name, purchase cost, selling price, quantity, and if they have remarks.
 
 &#8505; Under remarks, 
@@ -310,6 +309,8 @@ Expected outcome:
 
 Retrieves information of an item. 
 
+&#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+
 Format: `get shlv/SHELF_NAME i/INDEX`
 
 Example: **Retrieves all the information of item `index 1` in shelf `book1`, including its unique and remarks**
@@ -342,14 +343,14 @@ get shlv/book1 i/1
 
 Updates the properties of an item. You need to specify which item to edit using its shelf name and index number in that shelf, and you also need to specify which property you want to edit and what the new value will be.
 
-Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
+&#8505; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
-&#8505; Only 3 `p/PROPERTY` can be edited. Use 
+&#8505; Only 3 `p/PROPERTY` can be edited. Use
 * `p/purchase cost` to select the cost of the item to edit
 * `p/selling price` to select the item price to edit
-* `p/remarks` to select the remarks of the item to edit. 
+* `p/remarks` to select the remarks of the item to edit.
 
-&#9888; **Maximum price and cost of any item is $9999.99 (Only allow values with 2 decimal points and below).**
+Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
 Example: **Update selling price of item with `index 1` as $30**
 ```
@@ -413,7 +414,11 @@ Expected outcome:
 
 Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
 
+If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20.
+
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
+
+&#8505; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 &#8505; If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20.
 
@@ -504,7 +509,7 @@ Expected outcome:
 
 ### Exit program
 
-Exits from Clivershelf.
+Exits from CLIvershelf.
 
 Format: `bye`
 
@@ -545,6 +550,7 @@ You can simply restart the program and your last updated data will be loaded.
 |**Add**     | `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]` <br> eg: `add n/Harry Potter shlv/book1 p/27 s/37 q/5`|
 |**Delete**  | `delete shlv/SHELF_NAME i/INDEX` <br> eg: `delete shlv/book2 i/1`                                                                         |
 |**List**    | `list [shlv/SHELF_NAME]` <br> eg: `list shlv/stationary`                                                                                |
+|**Search**  | //todo | |
 |**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
 |**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
 |**Sell**    | `sell id/ITEM_ID` <br> eg: `sell id/76a3e297`                                                                                    |

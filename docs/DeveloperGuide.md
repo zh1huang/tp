@@ -54,8 +54,8 @@ to get developers and potential contributors to get familiarised with the implem
 4. Import the project
     1. Click `File` > `Open Project`
     2. Select the project directory, and click `OK` to accept the default settings
-5. Verify the setup: After the importing is complete, locate `CliverShelf.java` file, right-click it
-   and `Run 'CliverShelf.main()'`. If the setup is correct, you should see something like this:
+5. Verify the setup: After the importing is complete, locate `CLIverShelf.java` file, right-click it
+   and `Run 'CLIverShelf.main()'`. If the setup is correct, you should see something like this:
 
 ```
                                                                   .............................................................
@@ -88,7 +88,7 @@ All UML diagrams in this guide are stored in `docs/diagrams` directory.
 
 The architecture diagram above describes the design of CLIverShelf. The main components are:
 
-1. `CliverShelf` Responsible for initializing the various components and connecting them up with one another at app
+1. `CLIverShelf` Responsible for initializing the various components and connecting them up with one another at app
    launch.
 2. `UI`: Handles the interactions with the user.
 3. `Logic`: Parses and executes the user input commands.
@@ -98,10 +98,10 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 ### General Program Flow
 
 1. User runs the programs & input user commands
-2. `CliverShelf` calls `Parser` to `parseCommand()`
+2. `CLIverShelf` calls `Parser` to `parseCommand()`
 3. `Parser` creates and returns a `Command` object when parsed successful
-4. `CliverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
-5. `CliverShelf` instantiates `UI` component to print the `result`
+4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
+5. `CLIverShelf` instantiates `UI` component to print the `result`
 
 ![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
@@ -154,16 +154,21 @@ The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 
 ![](diagrams/ParserSequenceDiagram.svg)
 
+
 ### Logic: Subcomponent Command
 
-2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
-    1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
-    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be
-       instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then
-       executed in the main class.
-    3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other
+1. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
+    1. `Command` is an abstract class and has an abstract method `execute()`.
+    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
+       responsible for one function of the application, such as adding new items or deleting items.
+    3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser 
+       and is then returned to the CLIverShelf after they are instantiated.
+    4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function. 
+    5. The following sequence diagram illustrates how a general `Command` object interacts with other
        components of the system.
-       ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+    6. More details about specific commands will be covered in the Implementation section. 
+       
+    ![](diagrams/Logic_Command_SequenceDiagram.svg)
 
 ### Command: Subcomponent Sales
 
@@ -177,7 +182,8 @@ parsed, depending on the Command type, different types uses different sales API.
         * When program invokes `SellCommand#execute`, 
           * `SalesManager` object is constructed 
           * `SalesManager#sell()` is then invoked to mark an item as sold
-        ![](diagrams/SellCommandSequenceDiagram.svg)
+        
+          ![](diagrams/SellCommandSequenceDiagram.svg)
           
         * When program invokes `ReportCommand#execute` shown below in the `SalesReport` API
             1. A `SalesReport` object is constructed
@@ -259,7 +265,19 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
 ## Implementation
 
 ### Adding an item
+The sequence diagram below shows the interactions of different subcomponents of the system when adding an item to the shelf.
+![](diagrams/Implementation_AddItems.svg)
 
+The user can add new items to a shelf by specifying the number of items, item details and the name of shelf to add to. 
+    
+1. After the user keys in the command to `CLIverShelf`, the `parseCommand(input: String)` method of `Parser` is invoked. 
+The `Parser` then parses the input and instantiates new `AddCommand` object using its `prepareAdd(arguments: String)` 
+   method. The new `AddCommand` object is then returned to the `CLIverShelf`.
+   
+2. The `CLIverShelf` then invokes the `execute()` method of the `AddCommand` object. 
+3. The `AddCommand` object instantiates a new `item` object. It also invokes the `getShelf(shelfName: String)` method of
+the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `addItem(newItem: Item)` method of 
+   the `Shelf` object to add the new `item` to this specific `Shelf`.
 #### Design considerations:
 
 * Aspect: Long chain for add command
@@ -274,6 +292,7 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
         * Cons: Additional methods and passing of data will be required.
 
 ### Editing an item
+![](diagrams/Implementation_EditItems.svg)
 
 #### Design considerations:
 
@@ -298,20 +317,20 @@ A user can choose to either list out all the items in the bookstore (i.e. every 
     2. This invokes `Parser#parseCommand()`, and since the command argument is `list`, it will further
        invoke `Parser#prepareList()`.
     3. It will then construct a command `ListCommand` using `ListCommand(shelf: String)`, returning it back
-       to `CliverShelf`.
-    4. Back in `CliverShelf`, `ListCommand#execute()` is invoked and since `ListCommand(shelf: String)` is constructed,
+       to `CLIverShelf`.
+    4. Back in `CLIverShelf`, `ListCommand#execute()` is invoked and since `ListCommand(shelf: String)` is constructed,
        condition for `toPrintAll` is set to `false` and not satisfied. This invokes `ListCommand#getOneList()`
-    5. The string result output is then passed back to `CliverShelf`.
+    5. The string result output is then passed back to `CLIverShelf`.
 
 
 * If user wishes to list out all the items in the bookstore:
     1. He keys in: `list`.
     2. This invokes `Parser#parseCommand()`, and since the input is `list` it will further invoke `Parser#prepareList()`
        .
-    3. It will then construct a command `ListCommand` using `ListCommand()`, returning it back to `CliverShelf`.
-    4. Back in `CliverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition
+    3. It will then construct a command `ListCommand` using `ListCommand()`, returning it back to `CLIverShelf`.
+    4. Back in `CLIverShelf`, `ListCommand#execute()` is invoked, and since `ListCommand()` is constructed, condition
        for `toPrintAll` is set to `true` and satisfied. This invokes `ListCommand#getEveryList()`
-    5. The string result output is then passed back to `CliverShelf`.
+    5. The string result output is then passed back to `CLIverShelf`.
 
 The Class Diagram below illustrates how the components work together in `ListCommand`
 
@@ -332,6 +351,8 @@ The Class Diagram below illustrates how the components work together in `ListCom
         * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
+The sequence diagram below shows how selling items is implemented.
+![](diagrams/Implementation_SellItems.svg)
 
 #### Design considerations:
 
@@ -345,7 +366,8 @@ The Class Diagram below illustrates how the components work together in `ListCom
         * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
-
+![](diagrams/Implementation_GenerateReports.svg)
+![](diagrams/Implementation_SalesReport.svg)
 #### Design considerations:
 
 ### Generating item markup price
