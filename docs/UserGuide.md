@@ -217,7 +217,7 @@ Expected outcome:
 
 ### Listing all items 
 
-Shows a list of all items in the inventory list.
+Shows a list of all items in the inventory list. (Arranged in alphabetical order for name)
 The attributes shown are: Item name, purchase cost, selling price, quantity, and if they have remarks.
 
 Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks.
