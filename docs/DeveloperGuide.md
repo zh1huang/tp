@@ -47,6 +47,7 @@ to get developers and potential contributors to get familiarised with the implem
 ### Target Audience
 This developer guide is for developers who want to understand, test or improve the design of **CLIverShelf**.
 
+### How to Use This User Guide
 ## Setting up
 
 **Pre-requisites**
