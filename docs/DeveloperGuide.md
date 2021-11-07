@@ -3,6 +3,9 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
+    1. [About CLIverShelf](#about-clivershelf)
+    2. [Aim](#aim)
+    3. [Target Audience](#target-audience)
 2. [Setting up](#setting-up)
 3. [Acknowledgements](#acknowledgements)
 4. [Design](#design)
@@ -29,14 +32,20 @@
 
 ## Introduction
 
-**Welcome to CLIverShelf!**
+### About CLIverShelf
+Welcome to CLIverShelf!
 
 **CLIverShelf** is a desktop command line interface-based app for bookstore owners to manage their bookstore. With
 **CLIverShelf**, owners can easily keep track of their items in their shelves, and even generate a sales report so that
 they know how well their business is going.
 
-This guide describes the design, implementation and architecture of **CLIverShelf**. The aim of this developer guide is
+### Aim
+This developer guide describes the design, implementation and architecture of **CLIverShelf**. The aim of this developer guide is
 to get developers and potential contributors to get familiarised with the implementation of **CLIverShelf**.
+
+
+### Target Audience
+This developer guide is for developers who want to understand, test or improve the design of **CLIverShelf**.
 
 ## Setting up
 
