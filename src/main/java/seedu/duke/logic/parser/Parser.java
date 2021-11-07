@@ -52,7 +52,7 @@ public class Parser {
             Pattern.compile("(shlv/(?<shelfName>[a-zA-Z0-9 _()-]+))?$"); // optional argument shelfName
 
     public static final Pattern SEARCH_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("\\S+");
+            Pattern.compile("k/(?<keyword>\\S+)");
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+) i/(?<indexInShelf>[0-9]+)");
@@ -256,7 +256,7 @@ public class Parser {
                     CORRECT_COMMAND_MESSAGE_STRING_FORMAT, SearchCommand.SEARCH_ITEM_DATA_ARGS_FORMAT));
         }
 
-        String keyword = matcher.group();
+        String keyword = matcher.group("keyword");
         SearchCommand searchCommand = new SearchCommand(keyword);
 
         logger.log(Level.INFO, "SearchCommand parse success.");
