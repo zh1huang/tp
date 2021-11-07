@@ -42,7 +42,7 @@ public class SalesMarkUp {
     public SalesMarkUp(String shelfName, int index, String userRequestPercent) throws ShelfNotExistModelException {
         Item selectedItem = ShelfList
                 .getShelfList()
-                .getShelf(shelfName)
+                .getShelf(shelfName, true)
                 .getItem(index);
         this.itemName = selectedItem.getName();
         this.cost = new BigDecimal(selectedItem.getPurchaseCost());

@@ -27,9 +27,6 @@ deactivate parser
 app -> markupCommand: execute()
 
 activate markupCommand
-alt shelfName == soldItems
-    markupCommand --> app : MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE
-end
 
 markupCommand -> SalesMarkUp ** : new SalesMarkUp(shelfName, index, userRequestPercent)
 activate SalesMarkUp
@@ -61,7 +58,10 @@ end
 markupCommand --> app : resultString
 deactivate markupCommand
 app --> user
+
 deactivate app
+
+
 
 hide footbox
 

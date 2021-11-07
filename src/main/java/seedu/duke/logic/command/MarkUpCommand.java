@@ -44,9 +44,6 @@ public class MarkUpCommand extends Command {
     public String execute() throws ShelfNotExistModelException, ItemNotExistCommandException {
         StringBuilder resultString = new StringBuilder();
         try {
-            if (shelfName.equals("soldItems")) {
-                return String.valueOf(resultString.append(MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE));
-            }
 
             SalesMarkUp salesMarkUp = new SalesMarkUp(shelfName, index, userRequestPercent);
 
