@@ -71,9 +71,9 @@ Notes about the command format:
   user guide will be flagged as **invalid** command formats.
 * &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
   of parameters will be flagged as **invalid** command format
-* &#9888; Program only takes in input typed in english character set, does not accept input of other languages such as 
+* &#9888; Program **_only_** takes in input typed in **english** character set (specifically **US-ASCII**), does not accept input of other languages such as 
   Chinese characters, Japanese characters.
-* &#9888; Index of items always start from `1`.
+* &#9888; Index of items always start from **`1`**.
 
 ## Features
 
@@ -164,7 +164,7 @@ Adds a new item to the inventory, specifying its name, shelf, purchase cost, sel
 
 &#9888; **Maximum quantity of any item is 999.**
 
-&#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item.**
+&#8505; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item.**
 
 As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from the label, and use this ID to sell the item. Please make sure that you label the ID clearly as you can only use ID to sell items (refer to "Sell an item" section).
 
@@ -221,8 +221,11 @@ Expected outcome:
 Shows a list of all items in the inventory list.
 The attributes shown are: Item name, purchase cost, selling price, quantity, and if they have remarks.
 
-Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks.
-Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
+&#8505; Under remarks, 
+* `x` signifies that the item does not have any remarks
+* `o` signifies that it has remarks.
+
+&#8505; Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
 
 Format: `list [shlv/SHELF_NAME]`
 
@@ -267,7 +270,7 @@ Search for any item that has ID, name, remark or pricing that contains the speci
 Shows a list of all items in the inventory list.
 The attributes shown are: Item ID, Item name, purchase cost, selling price, quantity, and remark.
 
-Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
+&#8505; Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
 
 Format: `search KEYWORD`
 
@@ -341,7 +344,10 @@ Updates the properties of an item. You need to specify which item to edit using 
 
 Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
-&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit. 
+&#8505; Only 3 `p/PROPERTY` can be edited. Use 
+* `p/purchase cost` to select the cost of the item to edit
+* `p/selling price` to select the item price to edit
+* `p/remarks` to select the remarks of the item to edit. 
 
 &#9888; **Maximum price and cost of any item is $9999.99 (Only allow values with 2 decimal points and below).**
 
@@ -383,7 +389,8 @@ Expected outcome:
 Mark an item as sold. The item will be removed from the shelf and will be added to your sales report.
 
 Format: `sell id/ITEM_ID`
-&#128221; the ID of an item is the 8 alphanumeric characthers printed out after you have added the item to a shelf.   
+
+&#8505; the ID of an item is the 8 alphanumeric characthers printed out after you have added the item to a shelf.   
 
 Example: **Sell the book "Harry Potter" which was previously added in "Add new items" section. Its ID is 76a3e297.**
 ```
@@ -405,9 +412,10 @@ Expected outcome:
 ### Markup price of an item
 
 Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
-If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20. 
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
+
+&#8505; If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20.
 
 &#9888; Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
 
@@ -455,13 +463,15 @@ Generates the sales report for given month.
 
 Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 
-&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view the list of all items
+&#8505; Only 2 `CONTENT_TYPE` can be specified  
+* `t/stats` to view statistics of sold items 
+* `t/items` to view the list of all items
 
-&#128221; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
+&#8505; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
+<br> If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges (inclusive of the months specified) will be generated.
+
+&#9888; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
 <br> e.g. Jan 2020 is represented as `ym/2020-01` or Dec 2021 is `ym/2021-12`
-
-&#128221; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
-If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
 
 Example: **Generate sales report for the month of Nov 2021**
 ```
