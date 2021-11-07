@@ -4,9 +4,11 @@ import seedu.duke.logic.command.exception.DuplicateItemCommandException;
 import seedu.duke.logic.command.exception.ExceedsShelfSizeLimitCommandException;
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.logic.command.exception.ShelfNotExistCommandException;
+import seedu.duke.logic.command.exception.DeniedAccessToShelfCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.DuplicateItemModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
@@ -79,7 +81,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute() throws IllegalArgumentCommandException, DuplicateItemCommandException,
-            ShelfNotExistCommandException, ExceedsShelfSizeLimitCommandException {
+            ShelfNotExistCommandException, ExceedsShelfSizeLimitCommandException, DeniedAccessToShelfCommandException {
         try {
             String itemID = "";
             Shelf selectedShelf = ShelfList
@@ -139,6 +141,8 @@ public class AddCommand extends Command {
             throw new ShelfNotExistCommandException(e.getMessage());
         } catch (ExceedsShelfSizeLimitCommandException e) {
             throw new ExceedsShelfSizeLimitCommandException(e.getMessage());
+        } catch (DeniedAccessToShelfModelException e) {
+            throw new DeniedAccessToShelfCommandException(e.getMessage());
         }
     }
 

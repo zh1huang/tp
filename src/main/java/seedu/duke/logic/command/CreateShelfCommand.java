@@ -1,9 +1,11 @@
 package seedu.duke.logic.command;
 
 import seedu.duke.logic.command.exception.CommandException;
+import seedu.duke.logic.command.exception.DeniedAccessToShelfCommandException;
 import seedu.duke.logic.command.exception.DuplicateShelfCommandException;
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.DuplicateShelfModelException;
 import seedu.duke.model.exception.IllegalArgumentModelException;
 
@@ -23,12 +25,14 @@ public class CreateShelfCommand extends Command {
     @Override
     public String execute() throws CommandException {
         try {
-            ShelfList.getShelfList().addShelf(shelfName);
+            ShelfList.getShelfList().addShelf(shelfName, true);
             return String.format(CREATE_COMPLETE_MESSAGE, shelfName);
         } catch (DuplicateShelfModelException e) {
             throw new DuplicateShelfCommandException(e.getMessage());
         } catch (IllegalArgumentModelException e) {
             throw new IllegalArgumentCommandException(e.getMessage());
+        } catch (DeniedAccessToShelfModelException e) {
+            throw new DeniedAccessToShelfCommandException(e.getMessage());
         }
     }
 
