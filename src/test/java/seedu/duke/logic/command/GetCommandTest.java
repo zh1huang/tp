@@ -41,18 +41,18 @@ public class GetCommandTest {
     }
 
     @Test
-    public void execute_emptyList_throwsItemNotExistException() {
+    public void execute_emptyList_throwsItemNotExistCommandException() {
         assertThrows(ItemNotExistCommandException.class, () -> testCommand2.execute());
     }
 
     @Test
-    public void execute_nonExistentShelf_throwsShelfNotExistException() {
+    public void execute_nonExistentShelf_throwsShelfNotExistModelException() {
         Command testCommand5 = new GetCommand("non","1");
         assertThrows(ShelfNotExistModelException.class, testCommand5::execute);
     }
 
     @Test
-    public void execute_noMatchedItemInList_throwItemNotExistException() throws Exception {
+    public void execute_noMatchedItemInList_throwsItemNotExistCommandException() throws Exception {
         testList.addItem(new Item("Hello", "25.12", "16.1", ""));
         assertTrue(testList.contains("Hello"));
         assertThrows(ItemNotExistCommandException.class, () -> testCommand2.execute());
