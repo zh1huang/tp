@@ -344,9 +344,7 @@ Updates the properties of an item. You need to specify which item to edit using 
 
 Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
-&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit. 
-
-&#9888; **Maximum price and cost of any item is $9999.99 (Only allow values with 2 decimal points and below).**
+&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit.
 
 Example: **Update selling price of item with `index 1` as $30**
 ```
