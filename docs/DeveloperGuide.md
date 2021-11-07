@@ -123,10 +123,6 @@ The sequence diagram below illustrates how message can be printed without a Mess
 
 ![](diagrams/UI_StaticPrintMessageSequenceDiagram.svg)
 
-The sequence diagram below shows how the message are separated into different lines with soft-wrapping.
-
-![]()
-
 ### Logic component
 
 The class diagram below shows the associations between the classes that make up the `Logic` component.
