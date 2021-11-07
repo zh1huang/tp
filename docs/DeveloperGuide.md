@@ -160,14 +160,18 @@ The `Logic` component consists of `Parser` and `Command` components.
 
 #### Subcomponent Command
 
-2. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
-    1. `Command` is an abstract class and has an abstract method `execute(list: Shelf)`.
-    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. They will be
-       instantiated inside the `parseCommand(userInputLine: String, list: Shelf): Command` method of parser and then
-       executed in the main class.
-    3. Use `AddCommand` as an example. The following sequence diagram illustrates how `AddCommand` interacts with other
+1. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
+    1. `Command` is an abstract class and has an abstract method `execute()`.
+    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
+       responsible for one function of the application, such as adding new items or deleting items.
+    3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser 
+       and is then returned to the CLIverShelf after they are instantiated.
+    4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function. 
+    5. The following sequence diagram illustrates how a general `Command` object interacts with other
        components of the system.
-       ![](diagrams/seedu_duke_logic_addCommand.drawio.svg)
+    6. More details about specific commands will be covered in the Implementation section. 
+       
+    ![](diagrams/Logic_Command_SequenceDiagram.svg)
 
 ##### Subcomponent Sales
 
@@ -255,7 +259,19 @@ The diagram below shows how `Storage` interacts with [`model`](#model-component)
 ## Implementation
 
 ### Adding an item
+The sequence diagram below shows the interactions of different subcomponents of the system when adding an item to the shelf.
+![](diagrams/Implementation_AddItems.svg)
 
+The user can add new items to a shelf by specifying the number of items, item details and the name of shelf to add to. 
+    
+1. After the user keys in the command to `CLIverShelf`, the `parseCommand(input: String)` method of `Parser` is invoked. 
+The `Parser` then parses the input and instantiates new `AddCommand` object using its `prepareAdd(arguments: String)` 
+   method. The new `AddCommand` object is then returned to the `CLIverShelf`.
+   
+2. The `CLIverShelf` then invokes the `execute()` method of the `AddCommand` object. 
+3. The `AddCommand` object instantiates a new `item` object. It also invokes the `getShelf(shelfName: String)` method of
+the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `addItem(newItem: Item)` method of 
+   the `Shelf` object to add the new `item` to this specific `Shelf`.
 #### Design considerations:
 
 * Aspect: Long chain for add command
