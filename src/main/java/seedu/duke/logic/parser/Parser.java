@@ -52,7 +52,7 @@ public class Parser {
             Pattern.compile("(shlv/(?<shelfName>[a-zA-Z0-9 _()-]+))?$"); // optional argument shelfName
 
     public static final Pattern SEARCH_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("k/(?<keyword>\\S+)");
+            Pattern.compile("k/(?<keyword>[a-zA-Z0-9 _()-]+)");
 
     public static final Pattern GET_ITEM_DATA_ARGS_FORMAT =
             Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+) i/(?<indexInShelf>[0-9]+)");
