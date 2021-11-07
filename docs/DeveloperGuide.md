@@ -20,6 +20,7 @@
    3. [Listing all items](#listing-all-items)
    4. [Selling an item](#selling-an-item)
    5. [Generating sales report](#generating-sales-report)
+   6. [Generating item markup price](#generating-item-markup-price)
 6. [Product Scope](#product-scope)
 7. [User stories](#user-stories)
 8. [Non-Functional Requirements](#non-functional-requirements)
