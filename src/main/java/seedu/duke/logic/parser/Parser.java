@@ -19,6 +19,7 @@ import seedu.duke.model.exception.ItemNotExistModelException;
 import seedu.duke.logic.parser.exception.IllegalFormatException;
 import seedu.duke.logic.parser.exception.NoPropertyFoundException;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -188,14 +189,8 @@ public class Parser {
         String remarks = matcher.group("remarks");
 
         Command addCommand;
-        if (remarks == null) {
-            addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
-                    quantity, shelfName, "");
-        } else {
-            addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
-                    quantity, shelfName, remarks);
-        }
-        assert addCommand.getClass() == AddCommand.class : "Add should return AddCommand\n";
+        addCommand = new AddCommand(itemName, purchaseCost, sellingPrice,
+                quantity, shelfName, Objects.requireNonNullElse(remarks, ""));
         logger.log(Level.INFO, "AddCommand parse success.");
         return addCommand;
     }
@@ -220,7 +215,6 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
 
         Command deleteCommand = new DeleteCommand(shelfName, indexInShelf);
-        assert deleteCommand.getClass() == DeleteCommand.class : "Delete should return DeleteCommand\n";
         logger.log(Level.INFO, "DeleteCommand parse success.");
         return deleteCommand;
     }
@@ -250,7 +244,6 @@ public class Parser {
             listCommand = new ListCommand(shelfName);
         }
 
-        assert listCommand.getClass() == ListCommand.class : "List should return ListCommand\n";
         logger.log(Level.INFO, "ListCommand parse success.");
         return listCommand;
     }
@@ -290,7 +283,6 @@ public class Parser {
         String indexInShelf = matcher.group("indexInShelf");
 
         Command getCommand = new GetCommand(shelfName, indexInShelf);
-        assert getCommand.getClass() == GetCommand.class : "Get should return GetCommand\n";
         logger.log(Level.INFO, "GetCommand parse success.");
         return getCommand;
     }
@@ -301,11 +293,8 @@ public class Parser {
      * @param arguments The additional arguments after command word
      * @return EditCommand object
      * @throws IllegalFormatException     If the input format is wrong
-     * @throws ItemNotExistModelException If the item cannot be found from the container
-     * @throws NoPropertyFoundException   If the associated item property cannot be found
      */
-    private Command prepareEdit(String arguments) throws IllegalFormatException,
-            ItemNotExistModelException, NoPropertyFoundException {
+    private Command prepareEdit(String arguments) throws IllegalFormatException {
         final Matcher matcher = EDIT_ITEM_DATA_ARGS_FORMAT.matcher(arguments.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -328,7 +317,6 @@ public class Parser {
             editCommand = new EditCommand(shelfName, indexInShelf, selectedProperty, newValue);
         }
 
-        assert editCommand.getClass() == EditCommand.class : "Edit should return EditCommand\n";
         logger.log(Level.INFO, "EditCommand parse success.");
         return editCommand;
     }
@@ -383,14 +371,8 @@ public class Parser {
 
         Command reportCommand;
 
-        if (endYearMonth == null) {
-            reportCommand = new ReportCommand(startYearMonth, "", type);
-        } else {
-            reportCommand = new ReportCommand(startYearMonth, endYearMonth, type);
-        }
+        reportCommand = new ReportCommand(startYearMonth, Objects.requireNonNullElse(endYearMonth, ""), type);
 
-        assert reportCommand.getClass() == ReportCommand.class :
-                "report should return reportCommand\n";
         logger.log(Level.INFO, "ReportCommand parse success.");
         return reportCommand;
     }
@@ -414,8 +396,6 @@ public class Parser {
         String itemID = matcher.group("ID");
 
         Command sellCommand = new SellCommand(itemID);
-        assert sellCommand.getClass() == SellCommand.class :
-                "report should return createShelfCommand\n";
         logger.log(Level.INFO, "SellCommand parse success.");
         return sellCommand;
     }
@@ -439,8 +419,6 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
 
         Command createShelfCommand = new CreateShelfCommand(shelfName);
-        assert createShelfCommand.getClass() == CreateShelfCommand.class :
-                "report should return createShelfCommand\n";
         logger.log(Level.INFO, "CreateShelfCommand parse success.");
         return createShelfCommand;
     }
@@ -464,8 +442,6 @@ public class Parser {
         String shelfName = matcher.group("shelfName");
 
         Command removeShelfCommand = new RemoveShelfCommand(shelfName);
-        assert removeShelfCommand.getClass() == RemoveShelfCommand.class :
-                "remove should return removeShelfCommand\n";
         logger.log(Level.INFO, "RemoveShelfCommand parse success.");
         return removeShelfCommand;
     }
@@ -491,13 +467,7 @@ public class Parser {
         String userRequestPercent = matcher.group("percent");
 
         Command markUpCommand;
-        if (userRequestPercent == null) {
-            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, "");
-        } else {
-            markUpCommand = new MarkUpCommand(shelfName, indexInShelf, userRequestPercent);
-        }
-        assert markUpCommand.getClass() == MarkUpCommand.class :
-                "report should return MarkUpCommand\n";
+        markUpCommand = new MarkUpCommand(shelfName, indexInShelf, Objects.requireNonNullElse(userRequestPercent, ""));
         logger.log(Level.INFO, "MarkUpCommand parse success.");
         return markUpCommand;
     }
