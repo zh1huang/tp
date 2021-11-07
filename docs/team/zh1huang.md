@@ -12,7 +12,7 @@ Given below are my contributions to the project.
   * `HelpCommand`: A new user is able to type `help` to check the allowed formatting of the instructions. Other users may also use it should they forget the commands.
   * `ExitCommand`: Allows for a way to exit the program elegantly.
   * Implementation of over-ridden `equals` method for `test`, reused for all the `Commands`
-  * Integration of main class `CliverShelf` with other components `Logic`, `UI`, `Storage` and `Model`.
+  * Integration of main class `CLIverShelf` with other components `Logic`, `UI`, `Storage` and `Model`.
 * Contributions to the UG:
   * Table of contents, Quick Start, FAQ and Command Summary
   * Features (Format, example inputs and expected outputs)
