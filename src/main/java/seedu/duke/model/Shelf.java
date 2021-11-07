@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class Shelf {
 
-    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid item container name";
+    public static final String MESSAGE_INVALID_NAME_FORMAT = "Invalid Shelf name";
     public static final String MESSAGE_NULL_ITEM_ADDITION = "Null item cannot be added";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);

@@ -4,7 +4,7 @@ package seedu.duke.command;
 public class HelpCommand extends Command {
 
     public static final String HELP_STRING = "help";
-    public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters";
+    public static final String INVALID_HELP_COMMAND = "Error: Type 'help' without additional parameters\n";
     public static final String COMMAND_LIST = "Here are the performable actions:\n"
             + "Words in UPPER_CASE are the parameters to be supplied by the user.\n"
             + "Items in square brackets [ ] are optional.\n"
