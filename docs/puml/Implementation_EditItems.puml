@@ -6,9 +6,9 @@ actor user
 participant ":CLIverShelf" as Main
 participant ":Parser" as Parser
 participant "newCommand: \nEditCommand" as Command
-participant "selectedItem: \nItem" as Item
 participant ":ShelfList" as ShelfList
 participant "specifiedShelf: \nShelf" as Shelf
+participant "selectedItem: \nItem" as Item
 user -> Main: Run program & Input commands
 activate Main
 Main -> Parser: parseCommand(input)

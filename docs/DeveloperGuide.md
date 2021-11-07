@@ -286,6 +286,7 @@ the global `ShelfList` to get the specified `Shelf` object. Then, it calls the `
         * Cons: Additional methods and passing of data will be required.
 
 ### Editing an item
+![](diagrams/Implementation_EditItems.svg)
 
 #### Design considerations:
 
@@ -354,7 +355,8 @@ The sequence diagram below shows how selling items is implemented.
         * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
-
+![](diagrams/Implementation_GenerateReports.svg)
+![](diagrams/Implementation_SalesReport.svg)
 #### Design considerations:
 
 ### Generating item markup price
