@@ -5,7 +5,7 @@ hide circle
 skinparam classAttributeIconSize 0
 hide empty members
 
-class CLIvershelf{
+class Clivershelf{
 }
 
 class SalesManager{
@@ -26,9 +26,9 @@ class MarkUpCommand{
 class ReportCommand{
 }
 
-CLIvershelf -- ReportCommand : executes >
-CLIvershelf -- MarkUpCommand : executes >
-CLIvershelf -- SellCommand : executes >
+Clivershelf -- ReportCommand : executes >
+Clivershelf -- MarkUpCommand : executes >
+Clivershelf -- SellCommand : executes >
 
 ReportCommand --> SalesReport
 SalesReport --> SalesManager
