@@ -97,7 +97,6 @@ public class SalesReport {
         return stringToReturn;
     }
 
-    //@@author haoyusimon
     /**
      * Generate and gets every sold item details in the soldItems shelf.
      *
