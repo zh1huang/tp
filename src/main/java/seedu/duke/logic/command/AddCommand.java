@@ -152,7 +152,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * The overriding equal method used for testing.
+     * The overriding equal method to compare with other commands.
      *
      * @param other the other object to be compared with
      * @return true if two objects are the same, else false
