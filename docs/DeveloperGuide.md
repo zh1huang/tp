@@ -155,8 +155,8 @@ The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 
 1. After user enters input, `CliverShelf` creates `Parser`.
 2. The input is parsed within `Parser`, generating a `Command` object, which is then executed.
-4. For sales-related commands, `Sales` is also used.
-5. After execution, the relevant output generated from `Command` is then generated to the user (e.g. successful command
+3. For sales-related commands, `Sales` is also used.
+4. After execution, the relevant output generated from `Command` is then generated to the user (e.g. successful command
    execution or error messages)
 
 ### Logic: Subcomponent Parser
