@@ -286,15 +286,17 @@ The user can add new items to a shelf by specifying the number of items, item de
 
 #### Design considerations:
 
-* Aspect: How to set up the shelf to add to
-    * Alternative 1 (current choice): User needs to ensure that the shelf exists before adding new items, or the
-      addition will not be successful. No automatic creation of shelves is allowed.
-        * Pros: Better control of the shelves.
-        * Cons: User needs to create a shelf first.
-    * Alternative 2: If the shelf does not exist, the shelf with the name specified by the user will be automatically
-      added.
-        * Pros: More convenient as creation of shelf is automatic.
-        * Cons: Can result in accidental addition of shelves of unwanted names (if the user typed in wrongly).
+Aspect: How to set up the shelf to add to
+* Alternative 1 (current choice): User needs to ensure that the shelf exists before adding new items, or the
+  addition will not be successful. No automatic creation of shelves is allowed.
+    * Pros: Better control of the shelves.
+    * Cons: User needs to create a shelf first.
+
+
+* Alternative 2: If the shelf does not exist, the shelf with the name specified by the user will be automatically
+  added.
+    * Pros: More convenient as creation of shelf is automatic.
+    * Cons: Can result in accidental addition of shelves of unwanted names (if the user typed in wrongly).
 
 ### Editing an item
 
@@ -314,14 +316,16 @@ value.
 
 #### Design considerations:
 
-* Aspect: How to change a certain property precisely
-    * Alternative 1 (current choice): Let the user specify which property to edit, and have setProperty methods for each
-      property in the code.
-        * Pros: Only need to change one property.
-        * Cons: Need one additional step to check which property is selected by the user.
-    * Alternative 2: Let the user specify the new values for all properties just like adding a new item.
-        * Pros: The user can change multiple properties at once using only one EditCommand.
-        * Cons: Longer input is needed from the user even if he/she just wants to change one property.
+Aspect: How to change a certain property precisely
+* Alternative 1 (current choice): Let the user specify which property to edit, and have setProperty methods for each
+  property in the code.
+    * Pros: Only need to change one property.
+    * Cons: Need one additional step to check which property is selected by the user.
+
+
+* Alternative 2: Let the user specify the new values for all properties just like adding a new item.
+    * Pros: The user can change multiple properties at once using only one EditCommand.
+    * Cons: Longer input is needed from the user even if he/she just wants to change one property.
 
 ### Listing all items
 
@@ -357,17 +361,19 @@ The Class Diagram below illustrates how the components work together in `ListCom
 
 #### Design considerations:
 
-* Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
-    * Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being
-      printed as a range. (e.g. First entry of 5 identical items on the list will be grouped as index "001-005", instead
-      of "1")
-        * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items
-          together (e.g. If there are 5 identical items, but you only want to change 1 of them because perhaps they are
-          damaged, and you want to add a remark)
-        * Cons: Looks less user-friendly
-    * Alternative 2: The indexes of the list are printed in single sequential order.
-        * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
-        * Cons: User is unable to `delete` or `edit` a singular item.
+Aspect: Indexes of items on the list are not in single sequential order (i.e 1, 2, 3...)
+* Alternative 1 (current choice): Identical items are grouped together into a single entry, with their indexes being
+  printed as a range. (e.g. First entry of 5 identical items on the list will be grouped as index "001-005", instead
+  of "1")
+    * Pros: User can use `delete` or `edit` on a single item, instead of the whole group of identical items
+      together (e.g. If there are 5 identical items, but you only want to change 1 of them because perhaps they are
+      damaged, and you want to add a remark)
+    * Cons: Looks less user-friendly
+  
+
+* Alternative 2: The indexes of the list are printed in single sequential order.
+    * Pros: Looks a lot neater as there is only 1 number instead of a range of numbers
+    * Cons: User is unable to `delete` or `edit` a singular item.
 
 ### Selling an item
 
@@ -391,14 +397,16 @@ The sequence diagram below shows how the feature of selling an item (SellCommand
 
 #### Design considerations:
 
-* Aspect: How to determine the sale time
-    * Alternative 1 (current choice): Use the system time when the user sold the item.
-        * Pros: Does not need one additional parameter (sale time) from the user. Shorter command for the user.
-        * Cons: Does not allow the user to manually set the sale time. Not very flexible for the user if he/she forgot
-          to sell an item and wants to make up for it later on.
-    * Alternative 2: Requires the user to specify the sale time.
-        * Pros: More flexibility for the user to add on sale records that he/she forgot to add.
-        * Cons: Needs one additional parameter from the user. Longer command.
+Aspect: How to determine the sale time
+
+* Alternative 1 (current choice): Use the system time when the user sold the item.
+    * Pros: Does not need one additional parameter (sale time) from the user. Shorter command for the user.
+    * Cons: Does not allow the user to manually set the sale time. Not very flexible for the user if he/she forgot
+      to sell an item and wants to make up for it later on.
+  
+* Alternative 2: Requires the user to specify the sale time.
+    * Pros: More flexibility for the user to add on sale records that he/she forgot to add.
+    * Cons: Needs one additional parameter from the user. Longer command.
 
 ### Generating sales report
 
@@ -430,6 +438,8 @@ The more detailed inner workings of the report implementation is as follows:
   5. `SalesReport` will then self invoke `SalesReport#getSalesStatisticsString(filteredSoltItems)` to calculate the 
      relevant statistical information needed, and returns a formatted string `salesStats`.
   6. `SalesReport` will return `salesStats` to `ReportCommand`.
+  
+  <br>
 
 * Case 2: user specifies `items` for type
   1. `ReportCommand#generateSoldItemDetails()` is executed.
@@ -442,16 +452,19 @@ The more detailed inner workings of the report implementation is as follows:
 
 #### Design considerations:
 
-* Aspect how to show the report `stats` or `items` within a time period
-  * Alternative 1 (current choice): Convert `YEAR-MONTH` input string to `YearMonth` object to check valid year and month 
-    * Pros: Able to use pre-written `YearMonth` class methods, to simplify verification of year & month input 
-      And also simple check if the `YearMonth` input is in correct order
-    * Cons: Have to implement valid year restriction since, the max year accepted is a very large integer.
-  * Alternative 2: check the and the input manually by extracting the year and the month from the string, 
-    then converting to integer for validity checking
-      * Pros: Able to have flexibility in terms of more restrictions for valid year e.g. starting from year 1970
-      * Cons: More lines of code due to more factors to consider for checking if the year and month are valid
-        This makes code messier, increases debugging efforts & number of unit test cases. 
+Aspect how to show the report `stats` or `items` within a time period
+
+* Alternative 1 (current choice): Convert `YEAR-MONTH` input string to `YearMonth` object to check valid year and month 
+  * Pros: Able to use pre-written `YearMonth` class methods, to simplify verification of year & month input 
+    And also simple check if the `YearMonth` input is in correct order
+  * Cons: Have to implement valid year restriction since, the max year accepted is a very large integer.
+
+
+* Alternative 2: check the and the input manually by extracting the year and the month from the string, 
+  then converting to integer for validity checking
+    * Pros: Able to have flexibility in terms of more restrictions for valid year e.g. starting from year 1970
+    * Cons: More lines of code due to more factors to consider for checking if the year and month are valid
+      This makes code messier, increases debugging efforts & number of unit test cases. 
 
 ### Generating item markup price
 
@@ -480,6 +493,7 @@ Aspect: How markup executes:
 * Alternative 1 (current choice): `SalesMarkup` is a separate class from `SalesManager`.
     * Pros: Increases cohesiveness. Easier testing efforts.
     * Cons: More code written.
+
 
 * Alternate 2: `SalesMarkUp` functions can be integrated with `SalesManager` class. However, having more methods in the same
   class

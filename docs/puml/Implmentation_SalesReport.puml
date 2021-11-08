@@ -7,6 +7,7 @@ participant "newSalesReport: \nSalesReport" as SalesReport
 participant ":SalesManager" as SalesManager
 participant ":ShelfList" as ShelfList
 
+alt type.equals("stats")
 
 ReportCommand -> SalesReport: generateSoldItemStats()
 activate SalesReport
@@ -18,6 +19,7 @@ ShelfList --> SalesManager: soldItemShelf
 deactivate ShelfList
 SalesManager --> SalesReport: filteredSoldItems
 deactivate SalesManager
+
 SalesReport -> SalesReport: getSalesStatisticsString(filteredSoldItems)
 activate SalesReport
 SalesReport --> SalesReport: salesStats
@@ -26,6 +28,7 @@ deactivate SalesReport
 SalesReport --> ReportCommand: salesStats
 deactivate SalesReport
 
+else
 
 ReportCommand -> SalesReport: generateSoldItemDetails()
 activate SalesReport
@@ -42,7 +45,9 @@ activate SalesReport
 SalesReport --> SalesReport: soldItemDetails
 deactivate SalesReport
 
+
 SalesReport --> ReportCommand: soldItemDetails
 deactivate SalesReport
+end
 destroy SalesReport
 @enduml
