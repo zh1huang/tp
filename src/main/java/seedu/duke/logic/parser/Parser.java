@@ -70,7 +70,7 @@ public class Parser {
             Pattern.compile("shlv/(?<shelfName>[a-zA-Z0-9 _()-]+)");
 
     public static final Pattern SELL_ITEM_DATA_ARGS_FORMAT =
-            Pattern.compile("id/(?<ID>[^/]{8}+)");
+            Pattern.compile("id/(?<ID>[0-9a-f]{8}+)$"); //only hex characters are allowed
 
     public static final Pattern REPORT_DATA_ARGS_FORMAT =
             Pattern.compile("t/(?<type>(stats|items))"
