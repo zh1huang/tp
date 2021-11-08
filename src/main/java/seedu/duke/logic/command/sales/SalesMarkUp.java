@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author t-l-xin
-
 /**
  * SalesMarkUp class handles actions that gets and calculates markup information.
  */
