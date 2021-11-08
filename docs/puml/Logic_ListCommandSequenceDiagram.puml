@@ -4,7 +4,6 @@
 
 actor user
 participant ":CLIverShelf" as app LOGIC_COLOR
-participant ":Parser" as parser LOGIC_COLOR_T1
 participant "newCommand:\nListCommand" as listCommand LOGIC_COLOR_T2
 participant "specifiedShelf:\nShelf" as Shelf
 user -> app: input
@@ -19,23 +18,23 @@ alt !printAll
     listCommand -> listCommand : getOneList(shelfName)
     activate listCommand
     listCommand -> Shelf : createOutput()
-
-    deactivate listCommand
     activate Shelf
-    Shelf --> listCommand
+    Shelf --> listCommand : shelfInfo
     deactivate Shelf
+    listCommand --> listCommand :output
+    deactivate listCommand
 
 
-else
+else printAll
     loop for every shelf in shelves
         listCommand -> listCommand : getOneList(shelf.getName())
         activate listCommand
         listCommand -> Shelf : createOutput()
         activate Shelf
-        Shelf --> listCommand
+        Shelf --> listCommand : shelfInfo
         deactivate Shelf
+        listCommand --> listCommand : output
         deactivate listCommand
-
     end
 
 end
