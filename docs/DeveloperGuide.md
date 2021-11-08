@@ -718,7 +718,7 @@ This section describes the steps to run and exit the program.
 | Percent Markup not specified | `markup shlv/book1 i/1` | shows estimated user markup in multiples of 20 till max of 100% |
 | Normal percent markup less than 999.99 | `markup shlv/book1 i/1 %/5` | Shows current item markup & the final estimated price after user markup percent |
 | Percent markup more than 2 dp | `markup shlv/book1 i/1 %/5.001` | Error message (invalid format) |
-| Percent markup more than 1000 dp | `markup shlv/book1 i/1 %/1234.67` | Error message (invalid format) |
+| Percent markup more than 1000 percent | `markup shlv/book1 i/1 %/1234.67` | Error message (invalid format) |
 | Non-existent shelf | `markup shlv/notexistshelf i/1 %/12.34` | Error message (shelf does not exist) |
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |
