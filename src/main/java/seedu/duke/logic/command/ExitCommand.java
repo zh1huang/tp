@@ -4,7 +4,7 @@ package seedu.duke.logic.command;
 public class ExitCommand extends Command {
 
     public static final String BYE_STRING = "bye";
-    public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit";
+    public static final String INVALID_BYE_COMMAND = "Error: Type 'bye' without additional parameters to exit\n";
     public static final String BYE_MESSAGE = "See you next time";
 
     /**
