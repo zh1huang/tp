@@ -9,12 +9,14 @@ import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GetCommandTest {
 
     private Shelf testList;
+    private Command testCommand;
     private Command testCommand1;
     private Command testCommand2;
     private Command testCommand3;
@@ -57,4 +59,39 @@ public class GetCommandTest {
         assertTrue(testList.contains("Hello"));
         assertThrows(ItemNotExistCommandException.class, () -> testCommand2.execute());
     }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        testCommand = new GetCommand("test","1");
+        Command sameCommand = testCommand;
+        assertEquals(testCommand, sameCommand);
+    }
+
+    @Test
+    public void equals_differentObjectSameArguments_returnsTrue() {
+        testCommand = new GetCommand("test","1");
+        Command anotherCommand = new GetCommand("test", "1");
+        assertEquals(testCommand, anotherCommand);
+    }
+
+    @Test
+    public void equals_null_returnFalse() {
+        testCommand = new GetCommand("test", "1");
+        assertNotEquals(testCommand, null);
+    }
+
+    @Test
+    public void equals_differentShelf_returnsFalse() {
+        testCommand = new GetCommand("test", "1");
+        Command anotherCommand = new GetCommand("different", "1");
+        assertNotEquals(testCommand, anotherCommand);
+    }
+
+    @Test
+    public void equals_differentIndex_returnsFalse() {
+        testCommand = new GetCommand("test", "1");
+        Command anotherCommand = new GetCommand("test", "2");
+        assertNotEquals(testCommand, anotherCommand);
+    }
+
 }
