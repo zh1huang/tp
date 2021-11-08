@@ -89,7 +89,13 @@ as any deviations may cause unexpected outcomes or cause application to not star
 ## Acknowledgements
 
 1. [addressbook-level3](https://se-education.org/addressbook-level3/)
-2. [Adapted Parser code: AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java)
+   <br> Inspired to design the overall program structure like AB3.
+2. [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java)
+   <br> Adapted Parser code from AddressBook (Level 2) which makes efficient use of Pattern matching to filter valid 
+   inputs from invalid inputs. Created our own Pattern Regex to simplify the parsing process to capture the needed matching 
+   groups, which also improves code readability instead of writing many lines of code to parse word by word. 
+3. JSON
+   <br> Utilised JSON to store the data.
 
 ## Design
 
