@@ -179,7 +179,7 @@ corresponding to the item.**
 **As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the
 real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from
 the label, and use this ID to sell the item. Please make sure that you label the ID clearly as you can only use ID to
-sell items (refer to "Sell an item" section).**
+sell items (refer to [Sell an item](#sell-an-item)).**
 
 **After adding multiple items (quantity > 1), the item IDs will not be displayed altogether. You can use `get` command or `search` command to view
 the IDs of the items you have just added (refer to [Get information about an item](#get-information-about-an-item) and [Search for item](#search-for-item))**. 
