@@ -1,5 +1,6 @@
 package seedu.duke.logic.command.exception;
 
+//@@author haoyusimon
 public class ExceedsShelfSizeLimitCommandException extends CommandException {
 
     public static final String MESSAGE_EXCEEDS_LIMIT =
