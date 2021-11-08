@@ -3,33 +3,24 @@
 !include Style.puml
 
 
-participant ":CLIverShelf" as Main
-participant "newCommand: \nAddCommand" as AddCommand
-participant "newItem: \nItem" as Item
+participant ":CliverShelf" as Main
+participant "newCommand:AddCommand" as AddCommand
+participant "newItem:Item" as Item
 participant ":ShelfList" as ShelfList
-participant "specifiedShelf: \nShelf" as Shelf
-
-activate Main
+participant "specifiedShelf:Shelf" as Shelf
 
 
 Main -> AddCommand: execute()
 activate AddCommand
 AddCommand -> Item **
 activate Item
-Item --> AddCommand
+Item --> AddCommand : newItem
 deactivate Item
 AddCommand -> ShelfList: getShelf(shelfName)
-activate ShelfList
-ShelfList --> AddCommand: specifiedShelf
-deactivate ShelfList
 AddCommand -> Shelf: addItem(newItem)
-activate Shelf
-Shelf --> AddCommand
-deactivate Shelf
 AddCommand --> Main: finishedMessage
 deactivate AddCommand
 
-deactivate Main
 destroy AddCommand
 
 

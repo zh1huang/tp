@@ -2,13 +2,11 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 participant ":Parser" as Parser
-participant "newCommand: \nCommand" as Command
+participant "newCommand:Command" as Command
 
 
-
-activate Main
 Main -> Parser: parseCommand(input)
 activate Parser
 Parser -> Parser: prepareCommand(input)
@@ -16,11 +14,11 @@ activate Parser
 Parser -> Command **: new Command(arguments)
 
 activate Command
-Command --> Parser
+Command --> Parser: newCommand
 deactivate Command
-Parser --> Parser: new Command
+Parser --> Parser: newCommand
 deactivate Parser
-Parser --> Main: new Command
+Parser --> Main: newCommand
 deactivate Parser
 
 Main -> Command: execute()
@@ -29,7 +27,7 @@ activate Command
 
 Command --> Main
 deactivate Command
-deactivate Main
+deactivate Command
 destroy Command
 
 @enduml

@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="361px" preserveAspectRatio="none" style="width:512px;height:361px;background:#FFFFFF;" version="1.1" viewBox="0 0 512 361" width="512px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="268.0122" style="stroke:#A80036;stroke-width:1.0;" width="10" x="45.5" y="68.2402"/><rect fill="#FFFFFF" height="198.5034" style="stroke:#A80036;stroke-width:1.0;" width="10" x="201.5" y="91.9946"/><rect fill="#FFFFFF" height="119.9946" style="stroke:#A80036;stroke-width:1.0;" width="10" x="206.5" y="131.749"/><rect fill="#FFFFFF" height="35.4858" style="stroke:#A80036;stroke-width:1.0;" width="10" x="446" y="178.5034"/><rect fill="#FFFFFF" height="14" style="stroke:#A80036;stroke-width:1.0;" width="10" x="446" y="322.2524"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="50" x2="50" y1="58.2402" y2="354.2524"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="206.5" x2="206.5" y1="58.2402" y2="354.2524"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="450.5" x2="450.5" y1="186.3691" y2="354.2524"/><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="91" x="5" y="24.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="12" y="47.1641">:CLIverShelf</text><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="60" x="176.5" y="24.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="183.5" y="47.1641">:Parser</text><rect fill="#FFFFFF" height="268.0122" style="stroke:#A80036;stroke-width:1.0;" width="10" x="45.5" y="68.2402"/><rect fill="#FFFFFF" height="198.5034" style="stroke:#A80036;stroke-width:1.0;" width="10" x="201.5" y="91.9946"/><rect fill="#FFFFFF" height="119.9946" style="stroke:#A80036;stroke-width:1.0;" width="10" x="206.5" y="131.749"/><rect fill="#FFFFFF" height="35.4858" style="stroke:#A80036;stroke-width:1.0;" width="10" x="446" y="178.5034"/><rect fill="#FFFFFF" height="14" style="stroke:#A80036;stroke-width:1.0;" width="10" x="446" y="322.2524"/><polygon fill="#A80036" points="189.5,87.9946,199.5,91.9946,189.5,95.9946" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="55.5" x2="195.5" y1="91.9946" y2="91.9946"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="127" x="62.5" y="87.1382">parseCommand(input)</text><line style="stroke:#A80036;stroke-width:1.0;" x1="211.5" x2="258.5" y1="118.749" y2="118.749"/><line style="stroke:#A80036;stroke-width:1.0;" x1="258.5" x2="258.5" y1="118.749" y2="131.749"/><line style="stroke:#A80036;stroke-width:1.0;" x1="217.5" x2="258.5" y1="131.749" y2="131.749"/><polygon fill="#A80036" points="227.5,127.749,217.5,131.749,227.5,135.749" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="138" x="223.5" y="113.8926">prepareCommand(input)</text><polygon fill="#A80036" points="383.5,164.5034,393.5,168.5034,383.5,172.5034" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="216.5" x2="389.5" y1="168.5034" y2="168.5034"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="223.5" y="163.647">new Command(arguments)</text><rect fill="#FEFECE" height="52.2402" style="stroke:#A80036;stroke-width:1.5;" width="111" x="395.5" y="144.749"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="402.5" y="167.793">newCommand:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="419" y="186.9131">Command</text><polygon fill="#A80036" points="227.5,209.9893,217.5,213.9893,227.5,217.9893" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="221.5" x2="450" y1="213.9893" y2="213.9893"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="216.5" x2="258.5" y1="250.7437" y2="250.7437"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="258.5" x2="258.5" y1="250.7437" y2="263.7437"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="211.5" x2="258.5" y1="263.7437" y2="263.7437"/><polygon fill="#A80036" points="221.5,259.7437,211.5,263.7437,221.5,267.7437" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="86" x="223.5" y="245.8872">new Command</text><polygon fill="#A80036" points="66.5,286.498,56.5,290.498,66.5,294.498" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="60.5" x2="205.5" y1="290.498" y2="290.498"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="86" x="72.5" y="285.6416">new Command</text><polygon fill="#A80036" points="434,318.2524,444,322.2524,434,326.2524" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="55.5" x2="440" y1="322.2524" y2="322.2524"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="62.5" y="317.396">execute()</text><polygon fill="#A80036" points="61.5,332.2524,51.5,336.2524,61.5,340.2524" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="55.5" x2="450" y1="336.2524" y2="336.2524"/><line style="stroke:#A80036;stroke-width:2.0;" x1="442" x2="460" y1="327.2524" y2="345.2524"/><line style="stroke:#A80036;stroke-width:2.0;" x1="442" x2="460" y1="345.2524" y2="327.2524"/><!--MD5=[5767fa7989811143e2de7ea96580c04f]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="340px" preserveAspectRatio="none" style="width:565px;height:340px;background:#FFFFFF;" version="1.1" viewBox="0 0 565 340" width="565px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="197.1377" style="stroke:#A80036;stroke-width:1.0;" width="10" x="194" y="72.8745"/><rect fill="#FFFFFF" height="118.6289" style="stroke:#A80036;stroke-width:1.0;" width="10" x="199" y="112.6289"/><rect fill="#FFFFFF" height="34.1201" style="stroke:#A80036;stroke-width:1.0;" width="10" x="468.5" y="159.3833"/><rect fill="#FFFFFF" height="14" style="stroke:#A80036;stroke-width:1.0;" width="10" x="468.5" y="301.7666"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="48" x2="48" y1="39.1201" y2="333.7666"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="199" x2="199" y1="39.1201" y2="333.7666"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="473" x2="473" y1="157.689" y2="333.7666"/><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="86" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="12" y="28.0439">:CliverShelf</text><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="60" x="169" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="176" y="28.0439">:Parser</text><rect fill="#FFFFFF" height="197.1377" style="stroke:#A80036;stroke-width:1.0;" width="10" x="194" y="72.8745"/><rect fill="#FFFFFF" height="118.6289" style="stroke:#A80036;stroke-width:1.0;" width="10" x="199" y="112.6289"/><rect fill="#FFFFFF" height="34.1201" style="stroke:#A80036;stroke-width:1.0;" width="10" x="468.5" y="159.3833"/><rect fill="#FFFFFF" height="14" style="stroke:#A80036;stroke-width:1.0;" width="10" x="468.5" y="301.7666"/><polygon fill="#A80036" points="182,68.8745,192,72.8745,182,76.8745" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="48" x2="188" y1="72.8745" y2="72.8745"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="127" x="55" y="68.0181">parseCommand(input)</text><line style="stroke:#A80036;stroke-width:1.0;" x1="204" x2="251" y1="99.6289" y2="99.6289"/><line style="stroke:#A80036;stroke-width:1.0;" x1="251" x2="251" y1="99.6289" y2="112.6289"/><line style="stroke:#A80036;stroke-width:1.0;" x1="210" x2="251" y1="112.6289" y2="112.6289"/><polygon fill="#A80036" points="220,108.6289,210,112.6289,220,116.6289" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="138" x="216" y="94.7725">prepareCommand(input)</text><polygon fill="#A80036" points="376,145.3833,386,149.3833,376,153.3833" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="209" x2="382" y1="149.3833" y2="149.3833"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="216" y="144.5269">new Command(arguments)</text><rect fill="#FEFECE" height="33.1201" style="stroke:#A80036;stroke-width:1.5;" width="171" x="388" y="125.6289"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="395" y="148.6729">newCommand:Command</text><polygon fill="#A80036" points="220,189.5034,210,193.5034,220,197.5034" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="214" x2="472.5" y1="193.5034" y2="193.5034"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="226" y="188.647">newCommand</text><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="209" x2="251" y1="230.2578" y2="230.2578"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="251" x2="251" y1="230.2578" y2="243.2578"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="204" x2="251" y1="243.2578" y2="243.2578"/><polygon fill="#A80036" points="214,239.2578,204,243.2578,214,247.2578" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="216" y="225.4014">newCommand</text><polygon fill="#A80036" points="59,266.0122,49,270.0122,59,274.0122" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="53" x2="198" y1="270.0122" y2="270.0122"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="65" y="265.1558">newCommand</text><polygon fill="#A80036" points="456.5,297.7666,466.5,301.7666,456.5,305.7666" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="48" x2="462.5" y1="301.7666" y2="301.7666"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="55" y="296.9102">execute()</text><polygon fill="#A80036" points="59,311.7666,49,315.7666,59,319.7666" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="53" x2="472.5" y1="315.7666" y2="315.7666"/><line style="stroke:#A80036;stroke-width:2.0;" x1="464.5" x2="482.5" y1="306.7666" y2="324.7666"/><line style="stroke:#A80036;stroke-width:2.0;" x1="464.5" x2="482.5" y1="324.7666" y2="306.7666"/><!--MD5=[6b4cee64a84fb2f45a034b31f801b047]
 @startuml
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 participant ":Parser" as Parser
-participant "newCommand: \nCommand" as Command
+participant "newCommand:Command" as Command
 
 
-
-activate Main
 Main -> Parser: parseCommand(input)
 activate Parser
 Parser -> Parser: prepareCommand(input)
@@ -17,11 +15,11 @@ activate Parser
 Parser -> Command **: new Command(arguments)
 
 activate Command
-Command - -> Parser
+Command - -> Parser: newCommand
 deactivate Command
-Parser - -> Parser: new Command
+Parser - -> Parser: newCommand
 deactivate Parser
-Parser - -> Main: new Command
+Parser - -> Main: newCommand
 deactivate Parser
 
 Main -> Command: execute()
@@ -30,7 +28,7 @@ activate Command
 
 Command - -> Main
 deactivate Command
-deactivate Main
+deactivate Command
 destroy Command
 
 @enduml
@@ -41,13 +39,11 @@ skinparam backgroundColor white
 skinparam box white
 skinparam classAttributeIconSize 0
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 participant ":Parser" as Parser
-participant "newCommand: \nCommand" as Command
+participant "newCommand:Command" as Command
 
 
-
-activate Main
 Main -> Parser: parseCommand(input)
 activate Parser
 Parser -> Parser: prepareCommand(input)
@@ -55,11 +51,11 @@ activate Parser
 Parser -> Command **: new Command(arguments)
 
 activate Command
-Command - -> Parser
+Command - -> Parser: newCommand
 deactivate Command
-Parser - -> Parser: new Command
+Parser - -> Parser: newCommand
 deactivate Parser
-Parser - -> Main: new Command
+Parser - -> Main: newCommand
 deactivate Parser
 
 Main -> Command: execute()
@@ -68,16 +64,16 @@ activate Command
 
 Command - -> Main
 deactivate Command
-deactivate Main
+deactivate Command
 destroy Command
 
 @enduml
 
-PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 CST 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
 Default Encoding: GBK
-Language: en
-Country: SG
+Language: zh
+Country: CN
 --></g></svg>
