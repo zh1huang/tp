@@ -129,6 +129,10 @@ The `UI` component is made up of 2 classes:
 * `MessageBubble`: Responsible for the display of messages
 * `PredefinedMessages`: Holds the messages required for MessageBubble to print to console.
 
+The sequence diagram below illustrates how message can be printed without a MessageBubble instance.
+
+![](diagrams/UI_StaticPrintMessageSequenceDiagram.svg)
+
 ### Logic component
 
 The class diagram below shows the associations between the classes that make up the `Logic` component.
