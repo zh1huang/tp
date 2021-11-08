@@ -28,6 +28,8 @@ public class SalesMarkUp {
             "markup: %s%%, increase: $%s, Final price: $%s\n";
     public static final String GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE = "Got MarkUp Item info. Name: %s, Cost: %s, Price"
             + "\nDifference: %s, markup %%: %s";
+    public static final String WARNING_CURRENT_MARKUP_NEGATIVE_MESSAGE =
+            "!!!WARNING: Current MarkUp is negative\nPlease consider a higher selling price to earn a profit.\n";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -81,12 +83,16 @@ public class SalesMarkUp {
      * @return String containing the selected item current markup information
      */
     public String getSelectedItemMarkUpInfo() {
-        String stringToAppend;
+        String stringToAppend = "";
         BigDecimal difference = price.subtract(cost);
         BigDecimal markUpPercent = difference
                 .divide(cost, TWO_DECIMAL_POINT, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
-        stringToAppend = String.format(CURRENT_ITEM_MARKUP_MESSAGE_FORMAT,
+        if(isMarkUpPercentNegative(markUpPercent)){
+            stringToAppend += WARNING_CURRENT_MARKUP_NEGATIVE_MESSAGE;
+        }
+
+        stringToAppend += String.format(CURRENT_ITEM_MARKUP_MESSAGE_FORMAT,
                 decimalFormat.format(difference), decimalFormat.format(markUpPercent));
 
         assert markUpPercent != null;
@@ -94,6 +100,10 @@ public class SalesMarkUp {
                 decimalFormat.format(difference),
                 decimalFormat.format(markUpPercent)));
         return stringToAppend;
+    }
+
+    private boolean isMarkUpPercentNegative(BigDecimal markUpPercent) {
+        return markUpPercent.signum() == -1;
     }
 
     /**
