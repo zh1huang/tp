@@ -2,15 +2,14 @@
 'https://plantuml.com/sequence-diagram
 
 !include Style.puml
-participant ":SellCommand" as sellCommand REPORT_COMMAND_COLOUR
-participant ":SalesManager" as SalesManager SALES_MANAGER_COLOUR
+participant ":SellCommand" as sellCommand
+participant ":SalesManager" as SalesManager
 
 -> sellCommand : execute()
 activate sellCommand
 sellCommand -> SalesManager : getSalesManager()
-activate SalesManager
 sellCommand -> SalesManager : sell(itemID)
-SalesManager --> sellCommand : itemSoldString
+<-- sellCommand:
 deactivate SalesManager
 deactivate sellCommand
 

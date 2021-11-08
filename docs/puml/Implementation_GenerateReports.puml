@@ -2,13 +2,10 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 
-participant "newCommand: \nReportCommand" as Command
-participant "newSalesReport: \nSalesReport" as SalesReport
-
-activate Main
-
+participant "newCommand:ReportCommand" as Command
+participant "newSalesReport:SalesReport" as SalesReport
 
 Main -> Command: execute()
 activate Command
@@ -29,7 +26,6 @@ else
 end
 Command --> Main: report
 deactivate Command
-deactivate Main
 destroy SalesReport
 destroy Command
 

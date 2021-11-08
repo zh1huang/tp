@@ -1,34 +1,18 @@
 @startuml
 'https://plantuml.com/class-diagram
 !include Style.puml
-hide circle
-skinparam classAttributeIconSize 0
 hide empty members
 
-class CLIvershelf{
-}
+class CliverShelf
+class SalesManager
+class SellCommand
+class ReportCommand
+class MarkUpCommand
+class SalesReport
 
-class SalesManager{
-}
-
-class SalesReport{
-}
-
-class SalesMarkUp{
-}
-
-class SellCommand{
-}
-
-class MarkUpCommand{
-}
-
-class ReportCommand{
-}
-
-CLIvershelf -- ReportCommand : executes >
-CLIvershelf -- MarkUpCommand : executes >
-CLIvershelf -- SellCommand : executes >
+CliverShelf -- ReportCommand : executes >
+CliverShelf -- SellCommand : executes >
+CliverShelf -- MarkUpCommand : executes >
 
 ReportCommand --> SalesReport
 SalesReport --> SalesManager

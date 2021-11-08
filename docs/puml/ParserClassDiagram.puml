@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-class Parser PARSER_COLOR {
+class Parser {
     +BASIC_COMMAND_FORMAT:Pattern
     +ADD_ITEM_DATA_ARGS_FORMAT:Pattern
     +DELETE_ITEM_DATA_ARGS_FORMAT:Pattern

@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author haoyusimon
 /**
  * The command that adds a new item to the list.
  */
@@ -76,8 +77,12 @@ public class AddCommand extends Command {
     /**
      * Executes the operation of adding the item to the shelf.
      *
-     * @throws IllegalArgumentCommandException if the input argument is wrong
-     * @throws DuplicateItemCommandException   if exactly the same item is added to the list
+     * @return completed message as String
+     * @throws IllegalArgumentCommandException       if the input argument is wrong
+     * @throws DuplicateItemCommandException         if exactly the same item is added to the list
+     * @throws ShelfNotExistCommandException         if the shelf specified does not exist
+     * @throws ExceedsShelfSizeLimitCommandException if the size limit is exceeded
+     * @throws DeniedAccessToShelfCommandException   if the user attempts to access the soldItems shelf
      */
     @Override
     public String execute() throws IllegalArgumentCommandException, DuplicateItemCommandException,
@@ -146,6 +151,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * The overriding equal method to compare with other commands.
+     *
+     * @param other the other object to be compared with
+     * @return true if two objects are the same, else false
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {

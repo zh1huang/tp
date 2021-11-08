@@ -68,15 +68,15 @@ Notes about the command format:
   which can be used as add n/Pilot Pen.
 * Items in square brackets are optional and can only be specified **once** for that command.
   E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
-* &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
+* :warning: Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
   such as "!@#$%^&*[]{}/|\\+=`~<>?,."
-* &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
+* :warning: Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
   user guide will be flagged as **invalid** command formats.
-* &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
+* :warning: Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
   of parameters will be flagged as **invalid** command format
-* &#9888; Program **_only_** takes in input typed in **english** character set (specifically **US-ASCII**), does not accept input of other languages such as 
+* :warning: Program **_only_** takes in input typed in **english** character set (specifically **US-ASCII**), does not accept input of other languages such as 
   Chinese characters, Japanese characters.
-* &#9888; Index of items always start from **`1`**.
+* :warning: Index of items always start from **`1`**.
 
 ## Features
 
@@ -116,9 +116,9 @@ Expected outcome:
 
 Creates a shelf to store items.
 
-&#9888; **Note that shelf has to be first created before [item can be added](#add-new-items).**
+:warning: **Note that shelf has to be first created before [item can be added](#add-new-items).**
 
-&#9888; **Note `SHELF_NAME` should only consist of alphabets and integers (Eg: `book1`)**
+:warning: **Note `SHELF_NAME` should only consist of alphabets and integers (Eg: `book1`)**
 
 Format: `create shlv/SHELF_NAME`
 
@@ -140,7 +140,7 @@ Expected outcome:
 
 Removes a shelf.
 
-&#9888; **You can only remove an empty shelf. Cannot remove a shelf with existing items.**
+:warning: **You can only remove an empty shelf. Cannot remove a shelf with existing items.**
 
 Format: `remove shlv/SHELF_NAME`
 
@@ -165,21 +165,21 @@ any).
 
 **Important notes:**
 
-&#9888; **[Shelf has to be first created](#create-a-shelf) before item can be added.**
+:warning: **[Shelf has to be first created](#create-a-shelf) before item can be added.**
 
-&#9888; **Maximum quantity of items in a shelf is 999.**
+:warning: **Maximum quantity of items in a shelf is 999.**
 
-&#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
+:warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
 
-&#9888; **Maximum quantity of any item is 999 per shelf.**
+:warning: **Maximum quantity of any item is 999 per shelf.**
 
-&#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID
+:warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID
 corresponding to the item.**
 
 **As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the
 real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from
 the label, and use this ID to sell the item. Please make sure that you label the ID clearly as you can only use ID to
-sell items (refer to "Sell an item" section).**
+sell items (refer to [Sell an item](#sell-an-item)).**
 
 **After adding multiple items (quantity > 1), the item IDs will not be displayed altogether. You can use `get` command or `search` command to view
 the IDs of the items you have just added (refer to [Get information about an item](#get-information-about-an-item) and [Search for item](#search-for-item))**. 
@@ -220,7 +220,7 @@ Expected outcome:
 
 Deletes item from the inventory by specifying its shelf name and its index in the shelf.
 
-&#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+:warning: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 
 Format: `delete shlv/SHELF_NAME i/INDEX`
@@ -369,7 +369,7 @@ Sample output:
 
 Retrieves information of an item.
 
-&#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+:warning: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 Format: `get shlv/SHELF_NAME i/INDEX`
 
@@ -491,7 +491,7 @@ Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 
 &#8505; If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20.
 
-&#9888; Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
+:warning: Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
 
 Example: **Check the markup percent estimates of the item `index 2` in shelf `book1`**
 
@@ -548,7 +548,7 @@ Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 &#8505; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
 <br> If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges (inclusive of the months specified) will be generated.
 
-&#9888; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
+ > :warning: `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
 <br> e.g. Jan 2020 is represented as `ym/2020-01` or Dec 2021 is `ym/2021-12`
 
 Example: **Generate sales report for the month of Nov 2021**

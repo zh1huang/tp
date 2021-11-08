@@ -12,6 +12,7 @@ import seedu.duke.model.exception.ShelfNotExistModelException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author haoyusimon
 /**
  * The command that deletes a selected item.
  */
@@ -43,6 +44,7 @@ public class DeleteCommand extends Command {
      * Executes the delete operation.
      *
      * @throws ItemNotExistCommandException if the specified item does not exist
+     * @throws ShelfNotExistCommandException if the specified shelf does not exist
      */
     public String execute() throws ItemNotExistCommandException, ShelfNotExistCommandException {
         try {
@@ -74,6 +76,12 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * The overriding equal method to compare with other commands.
+     *
+     * @param other the other object to be compared with
+     * @return true if two objects are the same, else false
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
