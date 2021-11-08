@@ -30,7 +30,8 @@ public class SalesMarkUp {
     public static final String GOT_MARKUP_ITEM_INFO_LOGGING_MESSAGE = "Got MarkUp Item info. Name: %s, Cost: %s, Price"
             + "\nDifference: %s, markup %%: %s";
     public static final String WARNING_CURRENT_MARKUP_NEGATIVE_MESSAGE =
-            "!!!WARNING: Current MarkUp is negative\nPlease consider a higher selling price to earn a profit.\n";
+            "!!!WARNING: Current MarkUp is negative\n"
+                    + "Please consider a higher selling price more than purchase cost to earn a profit.\n";
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
