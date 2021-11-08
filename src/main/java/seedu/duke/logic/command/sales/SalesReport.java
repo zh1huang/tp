@@ -3,7 +3,6 @@ package seedu.duke.logic.command.sales;
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.SoldItem;
-import seedu.duke.logic.command.sales.exception.EmptyListException;
 import seedu.duke.ui.Wrapping;
 
 import java.math.BigDecimal;
@@ -51,10 +50,9 @@ public class SalesReport {
      * Generate a string to contain all sold item statistics.
      *
      * @return A String containing the sold items statistics
-     * @throws EmptyListException If the soldItems shelf does not contain items
      */
     public String generateSoldItemStats()
-            throws EmptyListException, IllegalArgumentCommandException {
+            throws IllegalArgumentCommandException {
         SalesManager salesManager = SalesManager.getSalesManager();
         String stringToReturn = "";
         ArrayList<SoldItem> selectedSoldItems = salesManager.filterSoldItems(selectedDate, selectedEndDate);
@@ -113,7 +111,6 @@ public class SalesReport {
             String soldItemsDetailsToAppend = getSoldItemsDetailsString(selectedSoldItems);
             info.append(soldItemsDetailsToAppend);
         } else {
-
             assert selectedSoldItems.size() == 0 : "Should have no selected SoldItems";
             String emptySoldItemInMonthMessage = getEmptySoldItemInMonthMessage(selectedDate, selectedEndDate);
             info.append(emptySoldItemInMonthMessage);

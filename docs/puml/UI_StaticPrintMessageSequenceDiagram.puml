@@ -1,0 +1,21 @@
+@startuml
+!include Style.puml
+participant ":CLIverShelf" as app
+participant ":MessageBubble" as mb <<class>>
+participant "newMessage:MessageBubble" as msg
+
+app -> mb : {static} printMessageBubble(message)
+activate mb
+mb -> msg** : MessageBubble(message)
+activate msg
+msg --> mb : newMessage
+deactivate
+
+mb -> msg : addMessage(message)
+mb -> msg : printMessageBubble()
+
+mb --> app
+deactivate
+destroy msg
+
+@enduml
