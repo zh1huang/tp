@@ -1,24 +1,25 @@
 # User Guide
 
 ## Contents of User Guide
+
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
 - [Features](#features)
-  * [`help` - Show help](#display-help-message)
-  * [`create` - Create a shelf](#create-a-shelf)
-  * [`remove` - Remove a shelf](#remove-a-shelf)
-  * [`add` - Add new items](#add-new-items)  
-  * [`delete` - Delete item from list](#delete-an-item)
-  * [`list` - List all items](#listing-all-items)
-  * [`search` - Search for item](#search-for-item)
-  * [`get` - Retrieve information of an item](#get-information-about-an-item)
-  * [`edit` - Update an item](#edit-an-item)
-  * [`sell` - Sell an item](#sell-an-item)
-  * [`markup` - Markup price of an item](#markup-price-of-an-item)
-  * [`report` - Generate sales report](#generate-sales-report)
-  * [`bye` - Exit command](#exit-program)
-  * [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
+    * [`help` - Show help](#display-help-message)
+    * [`create` - Create a shelf](#create-a-shelf)
+    * [`remove` - Remove a shelf](#remove-a-shelf)
+    * [`add` - Add new items](#add-new-items)
+    * [`delete` - Delete item from list](#delete-an-item)
+    * [`list` - List all items](#listing-all-items)
+    * [`search` - Search for item](#search-for-item)
+    * [`get` - Retrieve information of an item](#get-information-about-an-item)
+    * [`edit` - Update an item](#edit-an-item)
+    * [`sell` - Sell an item](#sell-an-item)
+    * [`markup` - Markup price of an item](#markup-price-of-an-item)
+    * [`report` - Generate sales report](#generate-sales-report)
+    * [`bye` - Exit command](#exit-program)
+    * [`[coming in v3.0]` - Add customer rating & review for each item](#add-customer-rating--review-for-each-item-coming-in-v30)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -33,6 +34,7 @@ business, where they can view this information in a user-friendly manner.
 2. Download &#11015; the latest version of `CLIverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
 3. Run `cd (path to the folder containing CLIverShelf.jar)` and `java -jar CLIverShelf.jar` to start using CLIvershelf.
 4. You should see the following:
+
 ```
       .............................................................
       : Hello from                                                :
@@ -48,32 +50,35 @@ business, where they can view this information in a user-friendly manner.
                 : Enter 'help' for the list of available commands :
                 ......................................................
 ```
+
 5. Type `help` to see all the commands available. You may try some example commands below:
-   * `create shlv/book1` - creates a new shelf named `book1`
-   * `add  n/Geronimo shlv/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1" 
-   * `delete shlv/book2 i/3` - Deletes item of `index 3` from the shelf `book2`
-   * `list shlv/book1` - list the items from shelf name "book1"
-   * `get shlv/book1 i/2` - get information about an item of `index 2` in shelf `book1`
-   * `bye` - exit the app
+    * `create shlv/book1` - creates a new shelf named `book1`
+    * `add  n/Geronimo shlv/book1 p/15.90 s/23.99 q/10` - Adds a Book "Geronimo" to the shelf name "book1"
+    * `delete shlv/book2 i/3` - Deletes item of `index 3` from the shelf `book2`
+    * `list shlv/book1` - list the items from shelf name "book1"
+    * `get shlv/book1 i/2` - get information about an item of `index 2` in shelf `book1`
+    * `bye` - exit the app
 6. Refer to the [Features](#features) below for details of all available commands.
 
 ## Usage
 
 Notes about the command format:
 
-* Words in UPPER_CASE are the parameters to be supplied by the user. E.g. in delete `n/NAME`, `NAME` is the parameter
+* Words in UPPER_CASE are the parameters to be supplied by the user. E.g., in delete `n/NAME`, `NAME` is the parameter
   which can be used as add n/Pilot Pen.
-* Items in square brackets are optional and can only be specified **once** for that command. 
+* Items in square brackets are optional and can only be specified **once** for that command.
   E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
-* &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
-  such as "!@#$%^&*[]{}/|\+=`~<>?,."
-* &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
-  user guide will be flagged as **invalid** command formats.
-* &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
-  of parameters will be flagged as **invalid** command format
-* &#9888; Program only takes in input typed in english character set, does not accept input of other languages such as 
+* &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols such as "!@#$%^&*[]
+  {}/|\+=`~<>?,."
+* &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from user
+  guide will be flagged as **invalid** command formats.
+* &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any
+  reordering of parameters will be flagged as **invalid** command format
+* &#9888; Program only takes in input typed in english character set, does not accept input of other languages such as
   Chinese characters, Japanese characters.
 * &#9888; Index of items always start from `1`.
+* &#9888; It is recommended to use this application in full screen or resize the window until the UI is correctly
+  displayed.
 
 ## Features
 
@@ -84,6 +89,7 @@ Displays help message with list of performable actions.
 Format: `help`
 
 Expected outcome:
+
 ```
     ...................................................................................................
     : Here are the performable actions:                                                               :
@@ -107,6 +113,7 @@ Expected outcome:
     : 13. Exit program: bye                                                                           :
     ......................................................................................................
 ```
+
 ### Create a shelf
 
 Creates a shelf to store items.
@@ -118,11 +125,13 @@ Creates a shelf to store items.
 Format: `create shlv/SHELF_NAME`
 
 Example: **Create shelf named `book2`**
+
 ```
 create shlv/book2
 ```
 
 Expected outcome:
+
 ```
     ...................................
     : Shelf "book2" has been created. :
@@ -133,17 +142,18 @@ Expected outcome:
 
 Removes a shelf.
 
-&#9888; **Only can remove an empty shelf. Cannot remove a shelf with existing items.**
-
+&#9888; **You can only remove an empty shelf. Cannot remove a shelf with existing items.**
 
 Format: `remove shlv/SHELF_NAME`
 
 Example: **Remove shelf `book2`**
+
 ```
 remove shlv/book2
 ```
 
 Expected outcome:
+
 ```
     ...................................
     : Shelf "book2" has been removed. :
@@ -152,7 +162,8 @@ Expected outcome:
 
 ### Add new items
 
-Adds a new item to the inventory, specifying its name, shelf, purchase cost, selling price, quantity (and remarks if any).
+Adds a new item to the inventory, specifying its name, shelf, purchase cost, selling price, quantity (and remarks if
+any).
 
 **Important notes:**
 
@@ -162,16 +173,30 @@ Adds a new item to the inventory, specifying its name, shelf, purchase cost, sel
 
 &#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
 
-&#9888; As a bookstore owner, you are **strongly encouraged to use this ID to label your item** before placing it on the shelf. When the customer wishes to purchase an item, you will need the ID from the label of that item to sell. Alternatively, you can use [`get` function](#get-information-about-an-item) to retrieve the ID of an item.
+&#9888; **Maximum quantity of any item is 999 per shelf.**
+
+&#9888; **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID
+corresponding to the item.**
+
+**As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the
+real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from
+the label, and use this ID to sell the item. Please make sure that you label the ID clearly as you can only use ID to
+sell items (refer to "Sell an item" section).**
+
+**After adding multiple items (quantity > 1), the item IDs will not be displayed altogether. You can use `get` command or `search` command to view
+the IDs of the items you have just added (refer to [Get information about an item](#get-information-about-an-item) and [Search for item](#search-for-item))**. 
 
 Format: `add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]`
 
-Example: **Add 1 book titled "Harry Potter" with a purchase cost of $27 and selling price of $37 to shelf `book1`. Also added additional remarks**
+Example: **Add 1 book titled "Harry Potter" with a purchase cost of $27 and selling price of $37 to shelf `book1`. Also
+added additional remarks**
+
 ```
 add n/Harry Potter shlv/book1 p/27 s/37 q/1 r/50% discount
 ```
 
 Expected outcome
+
 ```
     ............................................................
     : This item has been added to the list. Its unique ID is:  :
@@ -180,11 +205,13 @@ Expected outcome
 ```
 
 Example: **Add 99 Pilot P100 stationary with a purchase cost of $1 and selling price of $1.50 to shelf `stationary1`.**
+
 ```
 add n/Pilot P100 shlv/stationary1 p/1 s/1.5 q/99
 ```
 
 Expected outcome:
+
 ```
     ...................................................................................
     : 99 items have been added to the list. Use Get command to view their unique IDs. :
@@ -201,10 +228,13 @@ Deletes item from the inventory by specifying its shelf name and its index in th
 Format: `delete shlv/SHELF_NAME i/INDEX`
 
 Example: **Delete item of `index 1` in shelf `book2`**
+
 ```
 delete shlv/book2 i/1
 ```
+
 Expected outcome:
+
 ```
     .............................................
     : This item has been removed from the list. :
@@ -215,21 +245,24 @@ Expected outcome:
     ................................................
 ```
 
-### Listing all items 
+### Listing all items
 
-Shows a list of all items in the inventory list. (Arranged in alphabetical order for name)
-The attributes shown are: Item name, purchase cost, selling price, quantity, and if they have remarks.
+Shows a list of all items in the inventory list. The attributes shown are: Item name, purchase cost, selling price,
+quantity, and if they have remarks.
 
-Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks.
-Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
+Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks. Users can
+use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
 
 Format: `list [shlv/SHELF_NAME]`
 
 Example: **Listing all items in all shelves**
+
 ```
 list 
 ```
+
 Expected outcome:
+
 ```
     .........................................................................................................
     : Here is the list of items:                                                                            :
@@ -246,10 +279,13 @@ Expected outcome:
 ```
 
 Example: **Listing all items under `book1` shelf**
+
 ```
 list shlv/book1
 ```
+
 Expected outcome:
+
 ```
     .........................................................................................................
     : Here is the list of items:                                                                            :
@@ -262,19 +298,21 @@ Expected outcome:
 
 ### Search for item
 
-Search for any item that has ID, name, remark or pricing that contains the specified keyword.
-Shows a list of all items in the inventory list.
-The attributes shown are: Item ID, Item name, purchase cost, selling price, quantity, and remark.
+Search for any item that has ID, name, remark or pricing that contains the specified keyword. Shows a list of all items
+in the inventory list. The attributes shown are: Item ID, Item name, purchase cost, selling price, quantity, and remark.
 
 Users can use the [`get`](#get-information-about-an-item) function to display more information about the item.
 
 Format: `search k/KEYWORD`
 
 Example: **Search for "potter"**
+
 ```
 search k/potter
 ```
+
 Expected outcome:
+
 ```
     .........................................................................................................
     : Here are the items that has matching name                                                             :
@@ -291,7 +329,9 @@ Example: **Search for "cover"**
 ```
 search cover
 ```
+
 Expected outcome:
+
 ```
     .........................................................................................................
     : Here are the items that has matching remark                                                           :
@@ -326,17 +366,20 @@ Sample output:
 
 ### Get information about an item
 
-Retrieves information of an item. 
+Retrieves information of an item.
 
 &#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 Format: `get shlv/SHELF_NAME i/INDEX`
 
 Example: **Retrieves all the information of item `index 1` in shelf `book1`, including its unique and remarks**
+
 ```
 get shlv/book1 i/1
 ```
+
 Expected outcome:
+
 ```
 list shlv/book1
   .........................................................................................................
@@ -360,15 +403,18 @@ get shlv/book1 i/1
 
 ### Edit an item
 
-Updates the properties of an item. You need to specify which item to edit using its shelf name and index number in that shelf, and you also need to specify which property you want to edit and what the new value will be.
+Updates the properties of an item. You need to specify which item to edit using its shelf name and index number in that
+shelf, and you also need to specify which property you want to edit and what the new value will be.
 
 &#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
-&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit.
+&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or
+use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit.
 
 Example: **Update selling price of item with `index 1` as $30**
+
 ```
 edit shlv/book1 i/1 p/selling price v/30
 ```
@@ -384,12 +430,15 @@ Expected outcome:
 : Remarks: new book           :
 ..................................
 ```
+
 Example: **Update purchase cost of item with `index 2` as $23.50**
+
 ```
 edit shlv/book1 i/2 p/purchase cost v/23.5 
 ```
 
 Expected outcome:
+
 ```
     ...............................
     : This item has been updated. :
@@ -404,15 +453,17 @@ Expected outcome:
 
 Mark an item as sold. The item will be removed from the shelf and will be added to your sales report.
 
-Format: `sell id/ITEM_ID
-&#128221; the ID of an item is the 8 alphanumeric characthers printed out after you have added the item to a shelf.   
+Format: `sell id/ITEM_ID &#128221; the ID of an item is the 8 alphanumeric characthers printed out after you have added
+the item to a shelf.
 
 Example: **Sell the book "Harry Potter" which was previously added in "Add new items" section. Its ID is 76a3e297.**
+
 ```
 sell id/76a3e297
 ```
 
 Expected outcome:
+
 ```
     ............................
     : This item has been sold. :
@@ -423,11 +474,10 @@ Expected outcome:
     ...............................
 ```
 
-
 ### Markup price of an item
 
-Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
-If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20. 
+Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price
+change. If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20.
 
 &#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
@@ -436,11 +486,13 @@ Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 &#9888; Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
 
 Example: **Check the markup percent estimates of the item `index 2` in shelf `book1`**
+
 ```
 markup shlv/book1 i/2
 ```
 
 Expected outcome:
+
 ```
     .....................................................
     : Item: Pilot P100                                  :
@@ -457,11 +509,13 @@ Expected outcome:
 ```
 
 Example: **Check the 5% markup of the item `index 2` in shelf `book1`**
+
 ```
 markup shlv/book1 i/2 %/5
 ```
 
 Expected outcome:
+
 ```
 markup shlv/book1 i/2 %/5
     ...................................................
@@ -479,20 +533,24 @@ Generates the sales report for given month.
 
 Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 
-&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view the list of all items
+&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view
+the list of all items
 
 &#128221; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
 <br> e.g. Jan 2020 is represented as `ym/2020-01` or Dec 2021 is `ym/2021-12`
 
-&#128221; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
-If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges will be generated
+&#128221; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in
+the specified year. If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date
+ranges will be generated
 
 Example: **Generate sales report for the month of Nov 2021**
+
 ```
 report t/stats ym/2021-11
 ```
 
 Expected outcome:
+
 ```
     ...........................................
     : Total Purchase Cost: $ 28.00            :
@@ -501,12 +559,15 @@ Expected outcome:
     : Gross Profit Margin (in percent): 11.11 :
     ..............................................
 ```
+
 Example: **Generate sales report in between Oct 2021 and Nov 2021 inclusive**
+
 ```
 report t/items ym/2021-10 ym/2021-11
 ```
 
 Expected outcome:
+
 ```
     .....................................................................................................
     : No  |                    Item                 |  Cost   |  Price  |  Profit |      Sold Time      :
@@ -523,6 +584,7 @@ Exits from CLIvershelf.
 Format: `bye`
 
 Expected outcome:
+
 ```
     .....................
     : See you next time :
@@ -531,23 +593,24 @@ Expected outcome:
 
 ### Add customer rating & review for each item `[coming in v3.0]`
 
-Users would be able to record the customer ratings and review of each item sold in the bookstore. 
+Users would be able to record the customer ratings and review of each item sold in the bookstore.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Copy the save file `data/Data.txt` on your current computer into the other computer that you wish to use. 
-Launch the program again and the saved data should load.
+**A**: Copy the save file `data/Data.txt` on your current computer into the other computer that you wish to use. Launch
+the program again and the saved data should load.
 
 **Q**: What happens if my app crashes half-way?
 
-**A**: Do not worry as your data will always be automatically saved in the text file whenever there are any changes made throughout the program. 
-You can simply restart the program and your last updated data will be loaded.
+**A**: Do not worry as your data will always be automatically saved in the text file whenever there are any changes made
+throughout the program. You can simply restart the program and your last updated data will be loaded.
 
 **Q**: I have some suggestions/found some bugs for CLIver Shelf, what should I do?
 
-**A**: Please do not hesitate to contact the [team](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/docs/AboutUs.md).
+**A**: Please do not hesitate to contact
+the [team](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/docs/AboutUs.md).
 
 ## Command Summary
 

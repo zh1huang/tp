@@ -4,7 +4,6 @@ import seedu.duke.logic.command.exception.EmptyListCommandException;
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.logic.command.exception.NoTypeFoundCommandException;
 import seedu.duke.logic.command.sales.SalesReport;
-import seedu.duke.logic.command.sales.exception.EmptyListException;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -40,20 +39,17 @@ public class ReportCommand extends Command {
             logger.log(Level.WARNING, "ReportCommand can't find the given type.");
             throw new NoTypeFoundCommandException(reportType);
         }
-        try {
-            if (reportType.equals("stats")) {
-                SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
-                logger.log(Level.INFO, "ReportCommand successfully executed.");
-                return newSalesReport.generateSoldItemStats();
-            } else {
-                assert reportType.equals("items") :
-                        "All types should have been listed";
-                SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
-                logger.log(Level.INFO, "ReportCommand successfully executed.");
-                return newSalesReport.generateSoldItemDetails();
-            }
-        } catch (EmptyListException e) {
-            throw new EmptyListCommandException(e.getMessage());
+
+        if (reportType.equals("stats")) {
+            SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
+            logger.log(Level.INFO, "ReportCommand successfully executed.");
+            return newSalesReport.generateSoldItemStats();
+        } else {
+            assert reportType.equals("items") :
+                    "All types should have been listed";
+            SalesReport newSalesReport = new SalesReport(selectedStartDate, selectedEndDate);
+            logger.log(Level.INFO, "ReportCommand successfully executed.");
+            return newSalesReport.generateSoldItemDetails();
         }
 
     }
