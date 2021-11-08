@@ -19,6 +19,16 @@ import java.util.logging.Logger;
 public class SalesManager {
 
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String YEAR_MONTH_ARGUMENTS_SWAPPED_EXCEPTION_MESSAGE = "Invalid argument sequence,"
+            + " 2nd Year Month parameter is earlier than 1st Year Month parameter.\nParameters are swapped.";
+    public static final String INVALID_YEAR_MONTH_MESSAGE = "Invalid Year Month";
+    public static final String ERROR_PARSING_START_END_YEAR_MONTH_LOGGING_MESSAGE =
+            "Error parsing Start & End YearMonth.";
+    public static final String PARSE_YEAR_MONTH_SUCCESS_LOGGING_MESSAGE = "Parse Start & End YearMonth success.";
+    public static final String YEAR_MONTH_PARAMETERS_SWAPPED_LOGGING_MESSAGE =
+            "YearMonth parameters are swapped, Start YearMonth is after End YearMonth.";
+    public static final String GET_FILTERED_LIST_WITHIN_A_PERIOD_SUCCESS_LOGGING_MESSAGE =
+            "Get filtered list within a period success.";
     private static SalesManager salesManager;
 
     /**
@@ -47,7 +57,6 @@ public class SalesManager {
         return null;
     }
 
-
     /**
      * Mark an item as sold.
      * This moves the item from its ItemContainer to the ItemContainer "soldItems"
@@ -72,6 +81,7 @@ public class SalesManager {
         return null;
     }
 
+    //@@author t-l-xin
     /**
      * Filter out soldItems that are not sold within the input date.
      *
@@ -96,6 +106,7 @@ public class SalesManager {
         return filteredSoldItems;
     }
 
+    //@@author t-l-xin
     /**
      * Filters the list of sold items for items in the specific month.
      *
@@ -103,9 +114,9 @@ public class SalesManager {
      * @param dateTimeFormatter Defines DateTimeFormat to parse
      * @return Arraylist of filtered sold items
      */
-    private ArrayList<SoldItem> getFilteredListInSpecificMonth(String selectedStartDate,
-                                                               DateTimeFormatter dateTimeFormatter)
-            throws IllegalArgumentCommandException {
+    private ArrayList<SoldItem> getFilteredListInSpecificMonth(
+            String selectedStartDate, DateTimeFormatter dateTimeFormatter) throws IllegalArgumentCommandException {
+
         YearMonth yearMonthToSearch;
         ArrayList<SoldItem> filteredSoldItems = new ArrayList<>();
         try {
@@ -113,7 +124,7 @@ public class SalesManager {
             logger.log(Level.INFO, "Parse YearMonth success.");
         } catch (DateTimeParseException e) {
             logger.log(Level.WARNING, "Error parsing YearMonth.");
-            throw new IllegalArgumentCommandException("Invalid Year Month");
+            throw new IllegalArgumentCommandException(INVALID_YEAR_MONTH_MESSAGE);
         }
 
         for (int i = 0; i < getSoldItemsShelf().getItemCount(); i++) {
@@ -127,6 +138,7 @@ public class SalesManager {
         return filteredSoldItems;
     }
 
+    //@@author t-l-xin
     /**
      * Filters the list for items sold between the starting year-month to the ending year-month specified
      * by the user.
@@ -136,9 +148,8 @@ public class SalesManager {
      * @param dateTimeFormatter Defines DateTimeFormat to parse
      * @return Arraylist of filtered sold items
      */
-    private ArrayList<SoldItem> getFilteredListWithinAPeriod(String selectedStartDate,
-                                                             String selectedEndDate,
-                                                             DateTimeFormatter dateTimeFormatter)
+    private ArrayList<SoldItem> getFilteredListWithinAPeriod(
+            String selectedStartDate, String selectedEndDate, DateTimeFormatter dateTimeFormatter)
             throws IllegalArgumentCommandException {
         YearMonth startYearMonthToSearch;
         YearMonth endYearMonthToSearch;
@@ -147,17 +158,15 @@ public class SalesManager {
         try {
             startYearMonthToSearch = YearMonth.parse(selectedStartDate, dateTimeFormatter);
             endYearMonthToSearch = YearMonth.parse(selectedEndDate, dateTimeFormatter);
-            logger.log(Level.INFO, "Parse Start & End YearMonth success.");
+            logger.log(Level.INFO, PARSE_YEAR_MONTH_SUCCESS_LOGGING_MESSAGE);
         } catch (DateTimeParseException e) {
-            logger.log(Level.WARNING, "Error parsing Start & End YearMonth.");
-            throw new IllegalArgumentCommandException("Invalid Year Month");
+            logger.log(Level.WARNING, ERROR_PARSING_START_END_YEAR_MONTH_LOGGING_MESSAGE);
+            throw new IllegalArgumentCommandException(INVALID_YEAR_MONTH_MESSAGE);
         }
 
         if (endYearMonthToSearch.isBefore(startYearMonthToSearch)) {
-            logger.log(Level.WARNING, "YearMonth parameters are swapped, Start YearMonth is after End YearMonth.");
-            throw new IllegalArgumentCommandException(
-                    "Invalid argument sequence, 2nd Year Month parameter is earlier than 1st Year Month parameter.\n"
-                            + "Parameters are swapped.");
+            logger.log(Level.WARNING, YEAR_MONTH_PARAMETERS_SWAPPED_LOGGING_MESSAGE);
+            throw new IllegalArgumentCommandException(YEAR_MONTH_ARGUMENTS_SWAPPED_EXCEPTION_MESSAGE);
         }
 
         for (int i = 0; i < getSoldItemsShelf().getItemCount(); i++) {
@@ -169,9 +178,8 @@ public class SalesManager {
             }
         }
 
-        logger.log(Level.INFO, "Get filtered list within a period success.");
+        logger.log(Level.INFO, GET_FILTERED_LIST_WITHIN_A_PERIOD_SUCCESS_LOGGING_MESSAGE);
         return filteredSoldItems;
     }
-
 
 }

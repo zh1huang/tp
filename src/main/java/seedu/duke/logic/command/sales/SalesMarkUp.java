@@ -2,6 +2,7 @@ package seedu.duke.logic.command.sales;
 
 import seedu.duke.model.Item;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import java.math.BigDecimal;
@@ -10,6 +11,10 @@ import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author t-l-xin
+/**
+ * SalesMarkUp class handles actions that gets and calculates markup information.
+ */
 public class SalesMarkUp {
 
     public static final String PARSE_MARKUP_SUCCESS_MESSAGE_FORMAT = "shelfname: %s\nindex: %s\npercent: %s\n";
@@ -38,10 +43,19 @@ public class SalesMarkUp {
     private BigDecimal userRequestPercent;
     private String itemName;
 
-    public SalesMarkUp(String shelfName, int index, String userRequestPercent) throws ShelfNotExistModelException {
+    /**
+     * SalesMarkUp constructor.
+     *
+     * @param shelfName Name of Shelf
+     * @param index Index in Shelf
+     * @param userRequestPercent User Requested Markup Percentage
+     * @throws ShelfNotExistModelException If Shelf name does not exist in the ShelfList
+     */
+    public SalesMarkUp(String shelfName, int index, String userRequestPercent)
+            throws ShelfNotExistModelException, DeniedAccessToShelfModelException {
         Item selectedItem = ShelfList
                 .getShelfList()
-                .getShelf(shelfName)
+                .getShelf(shelfName, true)
                 .getItem(index);
         this.itemName = selectedItem.getName();
         this.cost = new BigDecimal(selectedItem.getPurchaseCost());
@@ -51,6 +65,11 @@ public class SalesMarkUp {
         }
     }
 
+    /**
+     * Get details of selected item.
+     *
+     * @return String containing selected item information
+     */
     public String getItemToMarkUpInfo() {
         assert itemName != null;
         return String.format(ITEM_NAME_MESSAGE_FORMAT, itemName, cost, price);
@@ -59,7 +78,7 @@ public class SalesMarkUp {
     /**
      * Get the selected item markup information based on the current selling price.
      *
-     * @return String containing the selected item markup information
+     * @return String containing the selected item current markup information
      */
     public String getSelectedItemMarkUpInfo() {
         String stringToAppend;
@@ -78,7 +97,7 @@ public class SalesMarkUp {
     }
 
     /**
-     * Calculates the markup information based on the user requested markup percent.
+     * Calculates the markup information based on the user requested markup percentage.
      * Shows a warning when user requests for a percent more than one hundred.
      *
      * @return String containing calculations for user requested markup percentage information.
@@ -103,8 +122,8 @@ public class SalesMarkUp {
     }
 
     /**
-     * Calculates markup percentages in multiples of 10, along with the corresponding price increase
-     * final price.
+     * Calculates markup percentages in multiples of 20, along with the corresponding price increase
+     * and the final price of the selected item.
      *
      * @return String containing the estimated markup information
      */

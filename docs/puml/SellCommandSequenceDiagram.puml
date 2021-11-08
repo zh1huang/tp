@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+participant ":SellCommand" as sellCommand REPORT_COMMAND_COLOUR
+participant ":SalesManager" as SalesManager SALES_MANAGER_COLOUR
+
+-> sellCommand : execute()
+activate sellCommand
+sellCommand -> SalesManager : getSalesManager()
+activate SalesManager
+sellCommand -> SalesManager : sell(itemID)
+SalesManager --> sellCommand : itemSoldString
+deactivate SalesManager
+deactivate sellCommand
+
+@enduml

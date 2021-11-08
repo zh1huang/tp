@@ -4,16 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.logic.command.exception.CommandException;
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
-import seedu.duke.model.exception.IllegalArgumentModelException;
-import seedu.duke.model.exception.ModelException;
-import seedu.duke.model.exception.ShelfNotExistModelException;
 import seedu.duke.model.Item;
 import seedu.duke.model.Shelf;
 import seedu.duke.model.ShelfList;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
+import seedu.duke.model.exception.ModelException;
+import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.duke.logic.command.MarkUpCommand.MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE;
 
 class MarkUpCommandTest {
 
@@ -59,20 +58,20 @@ class MarkUpCommandTest {
     }
 
     @Test
-    public void execute_ItemInSoldItemList_executesNormally()
-            throws CommandException, IllegalArgumentException, ModelException {
+    public void execute_ItemInSoldItemList_throwsDeniedAccessToShelfModelException()
+            throws IllegalArgumentException {
         testCommand = new MarkUpCommand("soldItems", "1", "");
-        assertEquals(MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE, testCommand.execute());
+        assertThrows(DeniedAccessToShelfModelException.class, () -> testCommand.execute());
     }
 
     @Test
-    public void execute_ShelfNotExist_throwShelfNotExistException() {
+    public void execute_ShelfNotExist_throwShelfNotExistModelException() {
         testCommand = new MarkUpCommand("book1", "1", "");
         assertThrows(ShelfNotExistModelException.class, () -> testCommand.execute());
     }
 
     @Test
-    public void execute_NoItemInList_throwItemNotExistException() {
+    public void execute_NoItemInList_throwItemNotExistCommandException() {
         testCommand = new MarkUpCommand("test", "10", "");
         assertThrows(ItemNotExistCommandException.class, () -> testCommand.execute());
     }

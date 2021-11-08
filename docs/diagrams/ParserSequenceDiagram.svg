@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="360px" preserveAspectRatio="none" style="width:603px;height:360px;background:#FFFFFF;" version="1.1" viewBox="0 0 603 360" width="603px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="218.0156" style="stroke:#A80036;stroke-width:1.0;" width="10" x="85" y="117.9609"/><rect fill="#FFFFFF" height="173.6641" style="stroke:#A80036;stroke-width:1.0;" width="10" x="274" y="148.3125"/><rect fill="#FFFFFF" height="97.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="279" y="186.6641"/><rect fill="#FFFFFF" height="32.6094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="499" y="215.6641"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="22" x2="22" y1="85.6094" y2="353.9766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="90" x2="90" y1="85.6094" y2="353.9766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="279" x2="279" y1="85.6094" y2="353.9766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="503.5" x2="503.5" y1="230.9688" y2="353.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="5" y="82.5332">user</text><ellipse cx="22" cy="15" fill="#FEFECE" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M22,23 L22,50 M9,31 L35,31 M22,50 L9,65 M22,50 L35,65 " fill="none" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FFBF00" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="82" x="49" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="56" y="74.5332">CliverShelf</text><rect fill="#FFFF00" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="60" x="249" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="256" y="74.5332">:Parser</text><rect fill="#FFFFFF" height="218.0156" style="stroke:#A80036;stroke-width:1.0;" width="10" x="85" y="117.9609"/><rect fill="#FFFFFF" height="173.6641" style="stroke:#A80036;stroke-width:1.0;" width="10" x="274" y="148.3125"/><rect fill="#FFFFFF" height="97.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="279" y="186.6641"/><rect fill="#FFFFFF" height="32.6094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="499" y="215.6641"/><polygon fill="#A80036" points="73,113.9609,83,117.9609,73,121.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="22" x2="79" y1="117.9609" y2="117.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="29" y="113.1045">input</text><polygon fill="#A80036" points="262,144.3125,272,148.3125,262,152.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="95" x2="268" y1="148.3125" y2="148.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="127" x="102" y="143.4561">parseCommand(input)</text><line style="stroke:#A80036;stroke-width:1.0;" x1="284" x2="331" y1="173.6641" y2="173.6641"/><line style="stroke:#A80036;stroke-width:1.0;" x1="331" x2="331" y1="173.6641" y2="186.6641"/><line style="stroke:#A80036;stroke-width:1.0;" x1="290" x2="331" y1="186.6641" y2="186.6641"/><polygon fill="#A80036" points="300,182.6641,290,186.6641,300,190.6641" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="201" x="296" y="168.8076">prepare{commandWord}(argument)</text><polygon fill="#A80036" points="398.5,201.6641,408.5,205.6641,398.5,209.6641" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="289" x2="404.5" y1="205.6641" y2="205.6641"/><rect fill="#FFAABB" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="187" x="410.5" y="199.6641"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="417.5" y="221.1973">:{commandWord}Command</text><polygon fill="#A80036" points="300,244.2734,290,248.2734,300,252.2734" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="294" x2="503" y1="248.2734" y2="248.2734"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="289" x2="331" y1="283.625" y2="283.625"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="331" x2="331" y1="283.625" y2="296.625"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="284" x2="331" y1="296.625" y2="296.625"/><polygon fill="#A80036" points="294,292.625,284,296.625,294,300.625" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="182" x="296" y="278.7686">new {commandWord}Command</text><polygon fill="#A80036" points="106,317.9766,96,321.9766,106,325.9766" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="100" x2="278" y1="321.9766" y2="321.9766"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="112" y="317.1201">{commandWord}Command</text><polygon fill="#A80036" points="33,331.9766,23,335.9766,33,339.9766" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="27" x2="89" y1="335.9766" y2="335.9766"/><!--MD5=[0f83b968a5b1b1098c163fa16096c9e8]
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+actor user
+
+participant CliverShelf as app LOGIC_COLOR
+participant ":Parser" as parser LOGIC_COLOR_T1
+participant ":{commandWord}Command" as newCommand MARKUP_COMMAND_COLOUR
+
+user -> app: input
+activate app
+app -> parser: parseCommand(input)
+activate parser
+parser -> parser : prepare{commandWord}(argument)
+activate parser
+parser -> newCommand **
+activate newCommand
+newCommand - -> parser
+deactivate newCommand
+
+parser - -> parser : new {commandWord}Command
+
+deactivate parser
+
+parser - -> app : {commandWord}Command
+deactivate parser
+app - -> user
+deactivate app
+
+@enduml
+
+@startuml
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam box white
+skinparam classAttributeIconSize 0
+actor user
+
+participant CliverShelf as app #ffbf00
+participant ":Parser" as parser #ffff00
+participant ":{commandWord}Command" as newCommand #ffaabb
+
+user -> app: input
+activate app
+app -> parser: parseCommand(input)
+activate parser
+parser -> parser : prepare{commandWord}(argument)
+activate parser
+parser -> newCommand **
+activate newCommand
+newCommand - -> parser
+deactivate newCommand
+
+parser - -> parser : new {commandWord}Command
+
+deactivate parser
+
+parser - -> app : {commandWord}Command
+deactivate parser
+app - -> user
+deactivate app
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: SG
+--></g></svg>

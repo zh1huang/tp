@@ -4,8 +4,11 @@ skinparam box white
 skinparam classAttributeIconSize 0
 !define PARSER_COLOR #aqua
 !define MAIN_COLOR #orange
+!define REPORT_COMMAND_COLOUR #b5e5de
 !define LOGIC_COLOR #ffbf00
 !define LOGIC_COLOR_T1 #ffff00
 !define LOGIC_COLOR_T2 #bfff00
 !define MARKUP_COMMAND_COLOUR #ffaabb
 !define SALES_MARKUP_COLOUR #fad6a5
+!define SALES_MANAGER_COLOUR #fcd9e4
+!define SALES_REPORT_COLOUR #fbc1d3
