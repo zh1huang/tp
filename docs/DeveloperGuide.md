@@ -442,10 +442,10 @@ The more detailed inner workings of the report implementation is as follows:
 
 #### Design considerations:
 
-* Aspect how to show the report stats or items within a time period
-  * Alternative 1 (current choice): Convert YEAR-MONTH input string to YearMonth object to check valid year and month 
-    * Pros: Able to use pre-written YearMonth class methods, to simplify verification of year & month input 
-      And also simple check if the YearMonth input is in correct order
+* Aspect how to show the report `stats` or `items` within a time period
+  * Alternative 1 (current choice): Convert `YEAR-MONTH` input string to `YearMonth` object to check valid year and month 
+    * Pros: Able to use pre-written `YearMonth` class methods, to simplify verification of year & month input 
+      And also simple check if the `YearMonth` input is in correct order
     * Cons: Have to implement valid year restriction since, the max year accepted is a very large integer.
   * Alternative 2: check the and the input manually by extracting the year and the month from the string, 
     then converting to integer for validity checking
@@ -477,11 +477,11 @@ A user may choose to check the estimated marked up price of an item, given a spe
 
 Aspect: How markup executes:
 
-* Alternative 1 (current choice): SalesMarkup is a separate class from SalesManager.
+* Alternative 1 (current choice): `SalesMarkup` is a separate class from `SalesManager`.
     * Pros: Increases cohesiveness. Easier testing efforts.
     * Cons: More code written.
 
-* Alternate 2: SalesMarkUp functions can be integrated with SalesManager class. However, having more methods in the same
+* Alternate 2: `SalesMarkUp` functions can be integrated with `SalesManager` class. However, having more methods in the same
   class
     * Pros: All methods in the same class, lesser additional code.
     * Cons: Reduces cohesiveness. Increases testing efforts as more methods in the same class to be tested which could
