@@ -3,7 +3,7 @@
 !include Style.puml
 
 actor user
-participant CLIverShelf as main MAIN_COLOR
+participant CliverShelf as main
 participant Logic as logic
 participant Model as model
 participant UI as ui

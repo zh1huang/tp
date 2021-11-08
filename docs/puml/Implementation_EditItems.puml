@@ -2,35 +2,24 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 
-participant "newCommand: \nEditCommand" as Command
+participant "newCommand:EditCommand" as Command
 participant ":ShelfList" as ShelfList
-participant "specifiedShelf: \nShelf" as Shelf
-participant "selectedItem: \nItem" as Item
+participant "specifiedShelf:Shelf" as Shelf
+participant "selectedItem:Item" as Item
 
-activate Main
 
 
 Main -> Command: execute()
 activate Command
 
-Command -> ShelfList: getShelf(shelfName)
-activate ShelfList
-ShelfList --> Command: specifiedShelf
-deactivate ShelfList
-Command -> Shelf: getItem(index)
-activate Shelf
-Shelf --> Command: selectedItem
-deactivate Shelf
+Command -> ShelfList: getShelf(specifiedShelf)
+Command -> Shelf: getItem(selectedItem)
 Command -> Item: setProperty(newValue)
-activate Item
-Item --> Command
-deactivate Item
 Command --> Main: finishedMessage
 deactivate Command
 
-deactivate Main
 destroy Command
 
 

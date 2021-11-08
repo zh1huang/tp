@@ -1,6 +1,6 @@
 @startuml
-hide footbox
-participant CLIverShelf as app
+!include Style.puml
+participant CliverShelf as app
 participant ":Storage" as storage
 participant "shelfList:ShelfList" as shelfList
 participant "currentShelf: Shelf" as currentShelf
@@ -17,10 +17,7 @@ shelfList --> storage: nameOfAllShelves
 deactivate shelfList
 alt nameOfAllShelves.isBlank()
 
-    storage -> storage: sampleData()
-    activate storage
-    storage --> storage: storedData
-    deactivate storage
+    storage -> storage: generate sample data
 
 else
 

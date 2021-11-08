@@ -1,24 +1,34 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include Style.puml
-participant ":ReportCommand" as reportCommand REPORT_COMMAND_COLOUR
-participant ":SalesReport" as SalesReport SALES_REPORT_COLOUR
-participant ":SalesManager" as SalesManager SALES_MANAGER_COLOUR
+participant ":ReportCommand" as reportCommand
+participant ":SalesReport" as SalesReport
+participant ":SalesManager" as SalesManager
 
 --> reportCommand : execute()
+activate reportCommand
 
 alt type == stats
     reportCommand -> SalesReport : generateSoldItemStats()
+    activate SalesReport
     SalesReport -> SalesManager : filterSoldItems(selectedDate, selectedEndDate)
+    activate SalesManager
     SalesManager --> SalesReport : selectedSoldItems:ArrayList<SoldItem>
+    deactivate
     SalesReport --> reportCommand : soldItemsStatsString
+    deactivate
     <-- reportCommand : resultString
 else
     reportCommand -> SalesReport : generateSoldItemDetails()
+    activate SalesReport
     SalesReport -> SalesManager : filterSoldItems(selectedDate, selectedEndDate)
+    activate SalesManager
     SalesManager --> SalesReport : selectedSoldItems:ArrayList<SoldItem>
+    deactivate
     SalesReport --> reportCommand : soldItemsDetailsString
+    deactivate
     <-- reportCommand : resultString
+    deactivate reportCommand
 end
 
 @enduml

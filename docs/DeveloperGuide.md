@@ -12,9 +12,9 @@
     1. [Architecture](#architecture)
     2. [UI Component](#ui-component)
     3. [Logic Component](#logic-component)
-        1. [SubComponent Parser](#subcomponent-parser)
-        2. [Subcomponent Command](#subcomponent-command)
-            1. [Subcomponent Sales](#subcomponent-sales)
+        1. [SubComponent Parser](#logic:-subcomponent-parser)
+        2. [Subcomponent Command](#logic:-subcomponent-command)
+            1. [Subcomponent Sales](#command:-subcomponent-sales)
     4. [Model Component](#model-component)
     6. [Storage Component](#storage-component)
 5. [Implementation](#implementation)
@@ -321,7 +321,7 @@ value.
 
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
-![](diagrams/ListCommandSequenceDiagram.svg)
+![](diagrams/Logic_ListCommandSequenceDiagram.svg)
 
 A user can choose to either list out all the items in the bookstore (i.e. every shelf), or within a specific shelf.
 
@@ -411,7 +411,8 @@ The simplified overview of report implementation is as follows:
 
 The below diagram shows a more in-depth implementation of report feature. 
 
-![](diagrams/Implementation_SalesReport.svg)
+![](diagrams/Implementation_SalesReport_Stats.svg)
+![](diagrams/Implementation_SalesReport_Details.svg)
 
 The more detailed inner workings of the report implementation is as follows:
 
