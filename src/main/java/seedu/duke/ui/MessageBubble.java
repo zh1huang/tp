@@ -61,25 +61,17 @@ public class MessageBubble {
      * @param msg message(s) to be added
      */
     public void addMessage(String msg) {
-        if (msg.contains("\n")) {
-            for (String line : msg.split("\n")) {
-                addSingleMessage(line);
-            }
-        } else {
-            addSingleMessage(msg);
-        }
-    }
-
-    private void addSingleMessage(String msg) {
-        if (msg.length() < MAX_MESSAGE_LENGTH) {
-            updateBubbleWidth(msg);
-            messages[messagesCount++] = msg;
-        } else {
-            Wrapping autoWrap = new Wrapping(msg, MAX_MESSAGE_LENGTH);
-            while (!autoWrap.isEmpty()) {
-                String extracted = autoWrap.nextLine();
-                updateBubbleWidth(extracted);
-                messages[messagesCount++] = extracted;
+        for (String line : msg.split("\n")) {
+            if (line.length() < MAX_MESSAGE_LENGTH) {
+                updateBubbleWidth(line);
+                messages[messagesCount++] = line;
+            } else {
+                Wrapping autoWrap = new Wrapping(line, MAX_MESSAGE_LENGTH);
+                while (!autoWrap.isEmpty()) {
+                    String extracted = autoWrap.nextLine();
+                    updateBubbleWidth(extracted);
+                    messages[messagesCount++] = extracted;
+                }
             }
         }
     }

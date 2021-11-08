@@ -3,24 +3,13 @@
 !include Style.puml
 
 actor user
-participant CLIverShelf as app LOGIC_COLOR
+participant ":CLIverShelf" as app LOGIC_COLOR
 participant ":Parser" as parser LOGIC_COLOR_T1
-participant ":newCommand: ListCommand" as listCommand LOGIC_COLOR_T2
-
+participant "newCommand:\nListCommand" as listCommand LOGIC_COLOR_T2
+participant "specifiedShelf:\nShelf" as Shelf
 user -> app: input
 activate app
-app -> parser: parseCommand(input)
-activate parser
-parser -> parser : prepareList(argument)
-activate parser
-parser -> listCommand **
-deactivate parser
-activate listCommand
-listCommand --> parser
 
-deactivate listCommand
-parser --> app
-deactivate parser
 
 app -> listCommand: execute()
 
@@ -29,13 +18,22 @@ activate listCommand
 alt !printAll
     listCommand -> listCommand : getOneList(shelfName)
     activate listCommand
-    listCommand --> listCommand : output
+    listCommand -> Shelf : createOutput()
+
     deactivate listCommand
+    activate Shelf
+    Shelf --> listCommand
+    deactivate Shelf
+
+
 else
     loop for every shelf in shelves
         listCommand -> listCommand : getOneList(shelf.getName())
         activate listCommand
-        listCommand --> listCommand : output
+        listCommand -> Shelf : createOutput()
+        activate Shelf
+        Shelf --> listCommand
+        deactivate Shelf
         deactivate listCommand
 
     end

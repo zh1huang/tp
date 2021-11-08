@@ -1,64 +1,49 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="496px" preserveAspectRatio="none" style="width:996px;height:496px;background:#FFFFFF;" version="1.1" viewBox="0 0 996 496" width="996px" zoomAndPan="magnify"><defs/><g><!--MD5=[628cc5a2753cca06eb1ffef55c386535]
-class Parser--><rect codeLine="5" fill="#FEFECE" height="54.9297" id="Parser" style="stroke:#A80036;stroke-width:1.5;" width="171" x="232" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="299" y="24.457">Parser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="233" x2="402" y1="32.0938" y2="32.0938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="233" x2="402" y1="40.0938" y2="40.0938"/><ellipse cx="243" cy="51.0938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="145" x="252" y="55.5127">parseCommands() : Command</text><!--MD5=[71cea2dfb2163bac4b85ec617c47f2aa]
-class SalesManager--><rect codeLine="9" fill="#FEFECE" height="82.6016" id="SalesManager" style="stroke:#A80036;stroke-width:1.5;" width="436" x="126.5" y="407"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="304.5" y="424.457">SalesManager</text><line style="stroke:#A80036;stroke-width:1.5;" x1="127.5" x2="561.5" y1="432.0938" y2="432.0938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="127.5" x2="561.5" y1="440.0938" y2="440.0938"/><ellipse cx="137.5" cy="451.0938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="164" x="146.5" y="455.5127">getSalesManager():SalesManager</text><ellipse cx="137.5" cy="464.9297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="146.5" y="469.3486">sell(item:Item):SoldItem</text><ellipse cx="137.5" cy="478.7656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="410" x="146.5" y="483.1846">filterSoldItems(selectedStartDate:String, selectedEndDate:String):ArrayList&lt;SoldItem&gt;</text><!--MD5=[76f3fdfefeefff14323f9e9b031a1186]
-class SalesReport--><rect codeLine="15" fill="#FEFECE" height="82.6016" id="SalesReport" style="stroke:#A80036;stroke-width:1.5;" width="305" x="534" y="257.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="69" x="652" y="274.957">SalesReport</text><line style="stroke:#A80036;stroke-width:1.5;" x1="535" x2="838" y1="282.5938" y2="282.5938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="535" x2="838" y1="290.5938" y2="290.5938"/><ellipse cx="545" cy="301.5938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="279" x="554" y="306.0127">SalesReport(selectedDate:String, selectedEndDate:String)</text><ellipse cx="545" cy="315.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="147" x="554" y="319.8486">generateSoldItemStats():String</text><ellipse cx="545" cy="329.2656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="154" x="554" y="333.6846">generateSoldItemDetails():String</text><!--MD5=[b3f309f94dd16375349f0d0c3d202b6e]
-class SalesMarkUp--><rect codeLine="21" fill="#FEFECE" height="96.4375" id="SalesMarkUp" style="stroke:#A80036;stroke-width:1.5;" width="197" x="219" y="251"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="280.5" y="268.457">SalesMarkUp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="220" x2="415" y1="276.0938" y2="276.0938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="220" x2="415" y1="284.0938" y2="284.0938"/><ellipse cx="230" cy="295.0938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="139" x="239" y="299.5127">getItemToMarkUpInfo():String</text><ellipse cx="230" cy="308.9297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="169" x="239" y="313.3486">getSelectedItemMarkUpInfo():String</text><ellipse cx="230" cy="322.7656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="171" x="239" y="327.1846">getUserRequestMarkUpInfo():String</text><ellipse cx="230" cy="336.6016" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="154" x="239" y="341.0205">getEstimatedMarkUpInfo():String</text><!--MD5=[114918039f41c3fe658f8cf1cba4717d]
-class SellCommand--><rect codeLine="28" fill="#FEFECE" height="68.7656" id="SellCommand" style="stroke:#A80036;stroke-width:1.5;" width="157" x="7" y="264.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="45.5" y="281.957">SellCommand</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="163" y1="289.5938" y2="289.5938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="163" y1="297.5938" y2="297.5938"/><ellipse cx="18" cy="308.5938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="131" x="27" y="313.0127">SellCommand(String itemID)</text><ellipse cx="18" cy="322.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="27" y="326.8486">execute() : String</text><!--MD5=[f2131b5177caf1431dd19e2745434090]
-class MarkUpCommand--><rect codeLine="33" fill="#FEFECE" height="68.7656" id="MarkUpCommand" style="stroke:#A80036;stroke-width:1.5;" width="398" x="118.5" y="122"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="101" x="267" y="139.457">MarkUpCommand</text><line style="stroke:#A80036;stroke-width:1.5;" x1="119.5" x2="515.5" y1="147.0938" y2="147.0938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="119.5" x2="515.5" y1="155.0938" y2="155.0938"/><ellipse cx="129.5" cy="166.0938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="372" x="138.5" y="170.5127">MarkUpCommand(shelfName:String, index:String, userRequestPercent:String)</text><ellipse cx="129.5" cy="179.9297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="138.5" y="184.3486">execute() : String</text><!--MD5=[f97d9cdbbad848d6467e4cf8becab05b]
-class ReportCommand--><rect codeLine="38" fill="#FEFECE" height="68.7656" id="ReportCommand" style="stroke:#A80036;stroke-width:1.5;" width="438" x="551.5" y="122"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96" x="722.5" y="139.457">ReportCommand</text><line style="stroke:#A80036;stroke-width:1.5;" x1="552.5" x2="988.5" y1="147.0938" y2="147.0938"/><line style="stroke:#A80036;stroke-width:1.5;" x1="552.5" x2="988.5" y1="155.0938" y2="155.0938"/><ellipse cx="562.5" cy="166.0938" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="412" x="571.5" y="170.5127">ReportCommand(selectedStartDate:String, selectedEndDate:String, reportType:String)</text><ellipse cx="562.5" cy="179.9297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="571.5" y="184.3486">execute() : String</text><!--MD5=[4c2ddd603862042ae5724dfca22df36f]
-link Parser to ReportCommand--><path codeLine="43" d="M403.24,58.21 C469.75,75.83 563.09,100.56 639.03,120.67 " fill="none" id="Parser-to-ReportCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="644.01,121.99,636.3252,115.8301,639.1748,120.7168,634.2881,123.5664,644.01,121.99" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[089c3dcd82e0c50d8580a9a980624277]
-link Parser to MarkUpCommand--><path codeLine="44" d="M317.5,62.13 C317.5,78.03 317.5,98.5 317.5,116.22 " fill="none" id="Parser-to-MarkUpCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="317.5,121.63,321.5,112.63,317.5,116.63,313.5,112.63,317.5,121.63" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[20ff2c0da82614593b375632f3fa10bb]
-link Parser to SellCommand--><path codeLine="45" d="M231.92,47.55 C185.47,58.77 131.37,80.39 100.5,122 C71.21,161.48 72.72,220.53 77.94,259.16 " fill="none" id="Parser-to-SellCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="78.67,264.23,81.3685,254.758,77.9689,259.2794,73.4475,255.8798,78.67,264.23" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2e62dfbe5d1b95778ab6a4c9bdebeb59]
-link ReportCommand to SalesReport--><path codeLine="47" d="M750.38,191.15 C739.32,209.64 725.46,232.83 713.48,252.87 " fill="none" id="ReportCommand-to-SalesReport" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="710.8,257.36,718.8604,251.7005,713.3725,253.0725,712.0005,247.5846,710.8,257.36" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[84842e30aee1b4b5c4ebf82e5bfe9e0c]
-link SalesReport to SalesManager--><path codeLine="48" d="M592.59,340.5 C546.23,360.5 490.31,384.61 443.3,404.89 " fill="none" id="SalesReport-to-SalesManager" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="438.49,406.96,448.3384,407.0543,443.0783,404.9732,445.1595,399.7131,438.49,406.96" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2c7945e80522ad8a63c27e64cc502081]
-link MarkUpCommand to SalesMarkUp--><path codeLine="49" d="M317.5,191.15 C317.5,207.48 317.5,227.46 317.5,245.71 " fill="none" id="MarkUpCommand-to-SalesMarkUp" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="317.5,250.81,321.5,241.81,317.5,245.81,313.5,241.81,317.5,250.81" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0d9265a4d3005c8fb5c0fdbfb5818085]
-link SellCommand to SalesManager--><path codeLine="50" d="M144.6,333.65 C181.32,354.57 228.91,381.67 268.43,404.18 " fill="none" id="SellCommand-to-SalesManager" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="273.21,406.9,267.3663,398.9721,268.8644,404.427,263.4095,405.9251,273.21,406.9" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[17444a723919aebbf3921045e490255c]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="337px" preserveAspectRatio="none" style="width:348px;height:337px;background:#FFFFFF;" version="1.1" viewBox="0 0 348 337" width="348px" zoomAndPan="magnify"><defs/><g><!--MD5=[97ef906b1d0ea9ba1310723274dfd56e]
+class CLIvershelf--><rect codeLine="7" fill="#FEFECE" height="25.0938" id="CLIvershelf" style="stroke:#A80036;stroke-width:1.5;" width="68" x="117" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="120" y="24.457">CLIvershelf</text><!--MD5=[71cea2dfb2163bac4b85ec617c47f2aa]
+class SalesManager--><rect codeLine="10" fill="#FEFECE" height="25.0938" id="SalesManager" style="stroke:#A80036;stroke-width:1.5;" width="86" x="31" y="306"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="34" y="323.457">SalesManager</text><!--MD5=[76f3fdfefeefff14323f9e9b031a1186]
+class SalesReport--><rect codeLine="13" fill="#FEFECE" height="25.0938" id="SalesReport" style="stroke:#A80036;stroke-width:1.5;" width="75" x="238.5" y="220"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="69" x="241.5" y="237.457">SalesReport</text><!--MD5=[b3f309f94dd16375349f0d0c3d202b6e]
+class SalesMarkUp--><rect codeLine="16" fill="#FEFECE" height="25.0938" id="SalesMarkUp" style="stroke:#A80036;stroke-width:1.5;" width="80" x="110" y="220"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="113" y="237.457">SalesMarkUp</text><!--MD5=[114918039f41c3fe658f8cf1cba4717d]
+class SellCommand--><rect codeLine="19" fill="#FEFECE" height="25.0938" id="SellCommand" style="stroke:#A80036;stroke-width:1.5;" width="86" x="7" y="165"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="10" y="182.457">SellCommand</text><!--MD5=[f2131b5177caf1431dd19e2745434090]
+class MarkUpCommand--><rect codeLine="22" fill="#FEFECE" height="25.0938" id="MarkUpCommand" style="stroke:#A80036;stroke-width:1.5;" width="107" x="96.5" y="110"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="101" x="99.5" y="127.457">MarkUpCommand</text><!--MD5=[f97d9cdbbad848d6467e4cf8becab05b]
+class ReportCommand--><rect codeLine="25" fill="#FEFECE" height="25.0938" id="ReportCommand" style="stroke:#A80036;stroke-width:1.5;" width="102" x="239" y="110"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96" x="242" y="127.457">ReportCommand</text><!--MD5=[465191a4dc48dc1fde4a8047c914756b]
+link CLIvershelf to ReportCommand--><path codeLine="28" d="M175.55,32.16 C190.65,39.8 210.1,50.47 226,62 C246.15,76.6 266.75,96.91 278.95,109.63 " fill="none" id="CLIvershelf-ReportCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="255.0015,74.1738,249.5249,66.3983,246.0005,71.1023,255.0015,74.1738" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="260" y="76.4951">executes</text><!--MD5=[bfb169280b4917c133303aa77e459b7c]
+link CLIvershelf to MarkUpCommand--><path codeLine="29" d="M150.89,32.09 C150.69,51.46 150.31,90.24 150.12,109.74 " fill="none" id="CLIvershelf-MarkUpCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="154.9504,76.1755,157.9789,67.16,152.1013,67.1018,154.9504,76.1755" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="164" y="76.4951">executes</text><!--MD5=[e4695e1ec1b737d808962c963b22f0aa]
+link CLIvershelf to SellCommand--><path codeLine="30" d="M116.95,31.33 C101.63,37.87 84.63,47.77 74,62 C50.54,93.41 48.81,142.54 49.38,164.82 " fill="none" id="CLIvershelf-SellCommand" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="76.7419,75.6368,83.449,68.894,78.2047,66.2394,76.7419,75.6368" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="88" y="76.4951">executes</text><!--MD5=[2e62dfbe5d1b95778ab6a4c9bdebeb59]
+link ReportCommand to SalesReport--><path codeLine="32" d="M288.5,135.06 C286.02,154.2 281.05,192.57 278.18,214.71 " fill="none" id="ReportCommand-to-SalesReport" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="277.53,219.7,282.6542,211.2892,278.173,214.7415,274.7207,210.2603,277.53,219.7" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[84842e30aee1b4b5c4ebf82e5bfe9e0c]
+link SalesReport to SalesManager--><path codeLine="33" d="M248.34,245 C211.37,260.37 145.98,287.57 106.64,303.93 " fill="none" id="SalesReport-to-SalesManager" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="101.98,305.87,111.8264,306.09,106.5933,303.9419,108.7414,298.7087,101.98,305.87" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2c7945e80522ad8a63c27e64cc502081]
+link MarkUpCommand to SalesMarkUp--><path codeLine="34" d="M150,135.06 C150,154.12 150,192.25 150,214.42 " fill="none" id="MarkUpCommand-to-SalesMarkUp" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="150,219.7,154,210.7,150,214.7,146,210.7,150,219.7" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0d9265a4d3005c8fb5c0fdbfb5818085]
+link SellCommand to SalesManager--><path codeLine="35" d="M52.05,190.35 C56.31,215.07 66.18,272.21 71.1,300.71 " fill="none" id="SellCommand-to-SalesManager" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="71.96,305.68,74.3588,296.1277,71.1033,300.7539,66.4771,297.4985,71.96,305.68" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[652d478e552b977eddf6a991806e49ff]
 @startuml
 'https://plantuml.com/class-diagram
 !include Style.puml
 hide circle
+skinparam classAttributeIconSize 0
+hide empty members
 
-class Parser{
-    + parseCommands() : Command
+class CLIvershelf{
 }
 
 class SalesManager{
-    + {static} getSalesManager():SalesManager
-    + sell(item:Item):SoldItem
-    + filterSoldItems(selectedStartDate:String, selectedEndDate:String):ArrayList<SoldItem>
 }
 
 class SalesReport{
-    + SalesReport(selectedDate:String, selectedEndDate:String)
-    + generateSoldItemStats():String
-    + generateSoldItemDetails():String
 }
 
 class SalesMarkUp{
-    + getItemToMarkUpInfo():String
-    + getSelectedItemMarkUpInfo():String
-    + getUserRequestMarkUpInfo():String
-    + getEstimatedMarkUpInfo():String
 }
 
 class SellCommand{
-    + SellCommand(String itemID)
-    + execute() : String
 }
 
 class MarkUpCommand{
-    + MarkUpCommand(shelfName:String, index:String, userRequestPercent:String)
-    + execute() : String
 }
 
 class ReportCommand{
-    + ReportCommand(selectedStartDate:String, selectedEndDate:String, reportType:String)
-    + execute() : String
 }
 
-Parser - -> ReportCommand
-Parser - -> MarkUpCommand
-Parser - -> SellCommand
+CLIvershelf - - ReportCommand : executes >
+CLIvershelf - - MarkUpCommand : executes >
+CLIvershelf - - SellCommand : executes >
 
 ReportCommand - -> SalesReport
 SalesReport - -> SalesManager
@@ -71,49 +56,35 @@ SellCommand - -> SalesManager
 skinparam style strictuml
 skinparam backgroundColor white
 skinparam box white
+skinparam classAttributeIconSize 0
 hide circle
+skinparam classAttributeIconSize 0
+hide empty members
 
-class Parser{
-    + parseCommands() : Command
+class CLIvershelf{
 }
 
 class SalesManager{
-    + {static} getSalesManager():SalesManager
-    + sell(item:Item):SoldItem
-    + filterSoldItems(selectedStartDate:String, selectedEndDate:String):ArrayList<SoldItem>
 }
 
 class SalesReport{
-    + SalesReport(selectedDate:String, selectedEndDate:String)
-    + generateSoldItemStats():String
-    + generateSoldItemDetails():String
 }
 
 class SalesMarkUp{
-    + getItemToMarkUpInfo():String
-    + getSelectedItemMarkUpInfo():String
-    + getUserRequestMarkUpInfo():String
-    + getEstimatedMarkUpInfo():String
 }
 
 class SellCommand{
-    + SellCommand(String itemID)
-    + execute() : String
 }
 
 class MarkUpCommand{
-    + MarkUpCommand(shelfName:String, index:String, userRequestPercent:String)
-    + execute() : String
 }
 
 class ReportCommand{
-    + ReportCommand(selectedStartDate:String, selectedEndDate:String, reportType:String)
-    + execute() : String
 }
 
-Parser - -> ReportCommand
-Parser - -> MarkUpCommand
-Parser - -> SellCommand
+CLIvershelf - - ReportCommand : executes >
+CLIvershelf - - MarkUpCommand : executes >
+CLIvershelf - - SellCommand : executes >
 
 ReportCommand - -> SalesReport
 SalesReport - -> SalesManager
