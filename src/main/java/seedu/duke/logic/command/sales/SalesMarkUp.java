@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author t-l-xin
+
 /**
  * SalesMarkUp class handles actions that gets and calculates markup information.
  */
@@ -48,8 +49,8 @@ public class SalesMarkUp {
     /**
      * SalesMarkUp constructor.
      *
-     * @param shelfName Name of Shelf
-     * @param index Index in Shelf
+     * @param shelfName          Name of Shelf
+     * @param index              Index in Shelf
      * @param userRequestPercent User Requested Markup Percentage
      * @throws ShelfNotExistModelException If Shelf name does not exist in the ShelfList
      */
@@ -86,9 +87,9 @@ public class SalesMarkUp {
         String stringToAppend = "";
         BigDecimal difference = price.subtract(cost);
         BigDecimal markUpPercent = difference
-                .divide(cost, TWO_DECIMAL_POINT, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
+                .divide(cost, FOUR_DECIMAL_POINT, RoundingMode.HALF_UP).multiply(ONE_HUNDRED);
 
-        if(isMarkUpPercentNegative(markUpPercent)){
+        if (isMarkUpPercentNegative(markUpPercent)) {
             stringToAppend += WARNING_CURRENT_MARKUP_NEGATIVE_MESSAGE;
         }
 
