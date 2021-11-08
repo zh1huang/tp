@@ -1,6 +1,6 @@
 @startuml
 !include Style.puml
-participant CLIverShelf as app
+participant CliverShelf as app
 participant ":Storage" as storage
 participant "shelfList:ShelfList" as shelfList
 participant "currentShelf: Shelf" as currentShelf

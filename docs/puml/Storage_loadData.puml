@@ -1,7 +1,7 @@
 @startuml
 !include Style.puml
 
-participant ":CLIverShelf" as app
+participant ":CliverShelf" as app
 participant ":Storage" as storage
 participant "file:File" as file
 participant ":FileWriter" as FileWriter

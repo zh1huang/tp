@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 
 participant "newCommand:ReportCommand" as Command
 participant "newSalesReport:SalesReport" as SalesReport

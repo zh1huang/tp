@@ -3,7 +3,7 @@
 !include Style.puml
 
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 participant "newCommand:AddCommand" as AddCommand
 participant "newItem:Item" as Item
 participant ":ShelfList" as ShelfList

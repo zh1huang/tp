@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as Main
+participant ":CliverShelf" as Main
 participant ":Parser" as Parser
 participant "newCommand:Command" as Command
 

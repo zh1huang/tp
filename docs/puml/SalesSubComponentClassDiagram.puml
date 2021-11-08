@@ -3,7 +3,7 @@
 !include Style.puml
 hide empty members
 
-class CLIvershelf
+class CliverShelf
 class SalesManager
 class SellCommand
 class ReportCommand
@@ -11,9 +11,9 @@ class MarkUpCommand
 class SalesReport
 
 
-CLIvershelf -- ReportCommand : executes >
-CLIvershelf -- SellCommand : executes >
-CLIvershelf -- MarkUpCommand : executes >
+CliverShelf -- ReportCommand : executes >
+CliverShelf -- SellCommand : executes >
+CliverShelf -- MarkUpCommand : executes >
 
 ReportCommand --> SalesReport
 SalesReport --> SalesManager

@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-participant ":CLIverShelf" as app
+participant ":CliverShelf" as app
 participant "newCommand:ListCommand" as listCommand
 participant ":ShelfList" as shelflist
 participant ":Shelf" as shelf
