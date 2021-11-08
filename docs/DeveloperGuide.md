@@ -690,7 +690,7 @@ This section describes the steps to run and exit the program.
 | Report in invalid year-month | `report t/items ym/0000-10`  | shows invalid year error |
 | Report in year-month that does not have items sold | `report t/items ym/2010-10`  | Shows no items sold in Oct 2010 |
 | Report in between a time period that does not have items sold | `report t/items ym/1970-01 ym/2010-10` | Shows no items sold in between Jan 1970 and Oct 2010 |
-| Time YearMonth not in chronological order | `report t/items ym/2021-11 ym/2021-01` | Shows error time parameters are swapped |
+| Time YearMonth not in chronological order | `report t/items ym/2021-11 ym/2021-01` | Error message (parameters are swapped)  |
 | Missing parameters  | `report t/items` | Error message (invalid format) |
 | Invalid date format  | `report t/items ym/21-10`  | Error message (invalid format) |
 
