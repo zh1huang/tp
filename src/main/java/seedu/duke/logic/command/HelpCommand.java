@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
             + "4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS]\n"
             + "5. Delete item: delete shlv/SHELF_NAME i/INDEX\n"
             + "6. List items: list [shlv/SHELF_NAME]\n"
-            + "7. Search item: search KEYWORD\n"
+            + "7. Search item: search k/KEYWORD\n"
             + "8. Get information of item : get shlv/SHELF_NAME i/INDEX\n"
             + "9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE \n"
             + "10. Sell an item: sell id/ITEM_ID\n"
