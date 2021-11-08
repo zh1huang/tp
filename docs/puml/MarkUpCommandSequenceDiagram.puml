@@ -15,32 +15,19 @@ SalesMarkUp --> markupCommand
 deactivate SalesMarkUp
 
 markupCommand -> SalesMarkUp : getItemToMarkUpInfo()
-activate SalesMarkUp
-SalesMarkUp --> markupCommand : itemMarkUpInfoString
-deactivate SalesMarkUp
 
 markupCommand -> SalesMarkUp : getSelectedItemMarkUpInfo()
-activate SalesMarkUp
-SalesMarkUp --> markupCommand : selectedItemMarkUpInfoString
-deactivate SalesMarkUp
 
 alt userRequestPercent == ""
     markupCommand -> SalesMarkUp : getEstimatedMarkUpInfo()
-    activate SalesMarkUp
-    SalesMarkUp --> markupCommand : estimatedMarkUpInfoString
-    deactivate SalesMarkUp
     <-- markupCommand : resultString
 
 else
    markupCommand -> SalesMarkUp : getUserRequestMarkUpInfo()
-   activate SalesMarkUp
-   SalesMarkUp --> markupCommand : userRequestMarkUpInfoString
-   deactivate SalesMarkUp
    <-- markupCommand : resultString
-
+   deactivate markupCommand
 end
 
-deactivate markupCommand
 destroy markupCommand
 
 @enduml

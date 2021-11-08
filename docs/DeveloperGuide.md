@@ -331,7 +331,7 @@ Aspect: How to change a certain property precisely
 
 The diagram below shows the sequence diagram for ListCommand, which is responsible for listing the items in the shelves.
 
-![](diagrams/ListCommandSequenceDiagram.svg)
+![](diagrams/Logic_ListCommandSequenceDiagram.svg)
 
 A user can choose to either list out all the items in the bookstore (i.e. every shelf), or within a specific shelf.
 
@@ -425,7 +425,8 @@ The simplified overview of report implementation is as follows:
 
 The below diagram shows a more in-depth implementation of report feature. 
 
-![](diagrams/Implementation_SalesReport.svg)
+![](diagrams/Implementation_SalesReport_Stats.svg)
+![](diagrams/Implementation_SalesReport_Details.svg)
 
 The more detailed inner workings of the report implementation is as follows:
 

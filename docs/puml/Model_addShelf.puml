@@ -1,5 +1,6 @@
 @startuml
-hide footbox
+!include Style.puml
+
 participant ":Command" as command
 participant "shelfList:ShelfList" as shelfList
 participant "novel-1:Shelf" as shelf

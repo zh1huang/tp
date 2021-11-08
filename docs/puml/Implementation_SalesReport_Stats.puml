@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":ReportCommand" as ReportCommand
+participant "newSalesReport:SalesReport" as SalesReport
+participant ":SalesManager" as SalesManager
+participant ":ShelfList" as ShelfList
+
+ReportCommand -> SalesReport: generateSoldItemStats()
+activate SalesReport
+SalesReport -> SalesManager: filterSoldItems(timeSpan)
+activate SalesManager
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList --> SalesManager: soldItemShelf
+deactivate ShelfList
+
+SalesManager -> SalesManager: filter by timeSpan
+
+SalesManager --> SalesReport: filteredSoldItems
+deactivate SalesManager
+SalesReport -> SalesReport: getSalesStatisticsString()
+
+SalesReport --> ReportCommand: salesStats
+deactivate SalesReport
+destroy SalesReport
+
+@enduml
