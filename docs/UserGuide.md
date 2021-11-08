@@ -31,7 +31,7 @@ business, where they can view this information in a user-friendly manner.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download &#11015; the latest version of `CLIverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
+2. Download :arrow_down: the latest version of `CLIverShelf` from [here](https://github.com/AY2122S1-CS2113T-F11-4/tp/releases).
 3. Run `cd (path to the folder containing CLIverShelf.jar)` and `java -jar CLIverShelf.jar` to start using CLIvershelf.
 4. You should see the following:
 
@@ -67,8 +67,8 @@ Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user. E.g., in delete `n/NAME`, `NAME` is the parameter
   which can be used as add n/Pilot Pen.
 * Items in square brackets are optional and can only be specified **once** for that command.
-  E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
-* :warning: Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
+  E.g. `list [shlv/SHELF_NAME]` can be used as `list` or as `list shlv/book1`.
+* :warning: Parameters with `NAME` & `SHELF_NAME` & `KEYWORD` cannot contain special character or symbols
   such as "!@#$%^&*[]{}/|\\+=`~<>?,."
 * :warning: Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
   user guide will be flagged as **invalid** command formats.
@@ -116,9 +116,9 @@ Expected outcome:
 
 Creates a shelf to store items.
 
-:warning: **Note that shelf has to be first created before [item can be added](#add-new-items).**
+> :warning: **Note that shelf has to be first created before [item can be added](#add-new-items).**
 
-:warning: **Note `SHELF_NAME` should only consist of alphabets and integers (Eg: `book1`)**
+> :warning: **Note `SHELF_NAME` should only consist of alphabets and integers (Eg: `book1`)**
 
 Format: `create shlv/SHELF_NAME`
 
@@ -140,7 +140,7 @@ Expected outcome:
 
 Removes a shelf.
 
-:warning: **You can only remove an empty shelf. Cannot remove a shelf with existing items.**
+> :warning: **You can only remove an empty shelf. Cannot remove a shelf with existing items.**
 
 Format: `remove shlv/SHELF_NAME`
 
@@ -165,15 +165,15 @@ any).
 
 **Important notes:**
 
-:warning: **[Shelf has to be first created](#create-a-shelf) before item can be added.**
-
-:warning: **Maximum quantity of items in a shelf is 999.**
-
-:warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
-
-:warning: **Maximum quantity of any item is 999 per shelf.**
-
-:warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID
+> :warning: **[Shelf has to be first created](#create-a-shelf) before item can be added.**
+> 
+> :warning: **Maximum quantity of items in a shelf is 999.**
+> 
+> :warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
+> 
+> :warning: **Maximum quantity of any item is 999 per shelf.**
+> 
+> :warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID
 corresponding to the item.**
 
 **As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the
@@ -220,7 +220,7 @@ Expected outcome:
 
 Deletes item from the inventory by specifying its shelf name and its index in the shelf.
 
-:warning: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+> :warning: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 
 Format: `delete shlv/SHELF_NAME i/INDEX`
@@ -248,11 +248,11 @@ Expected outcome:
 Shows a list of all items in the inventory list. The attributes shown are: Item name, purchase cost, selling price,
 quantity, and if they have remarks.
 
-&#8505; Under remarks, 
-* `x` signifies that the item does not have any remarks
-* `o` signifies that it has remarks.
+> :information_source: Under remarks, 
+> * `x` signifies that the item does not have any remarks
+> * `o` signifies that it has remarks.
 
-&#8505; Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
+> :information_source: Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
 
 Format: `list [shlv/SHELF_NAME]`
 
@@ -302,7 +302,7 @@ Expected outcome:
 Search for any item that has ID, name, remark or pricing that contains the specified keyword. Shows a list of all items
 in the inventory list. The attributes shown are: Item ID, Item name, purchase cost, selling price, quantity, and remark.
 
-&#8505; Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
+> :information_source: Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
 
 Format: `search k/KEYWORD`
 
@@ -369,7 +369,7 @@ Sample output:
 
 Retrieves information of an item.
 
-:warning: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+> :warning: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
 Format: `get shlv/SHELF_NAME i/INDEX`
 
@@ -407,12 +407,12 @@ get shlv/book1 i/1
 Updates the properties of an item. You need to specify which item to edit using its shelf name and index number in that
 shelf, and you also need to specify which property you want to edit and what the new value will be.
 
-&#8505; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+> :information_source: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
-&#8505; Only 3 `p/PROPERTY` can be edited. Use
-* `p/purchase cost` to select the cost of the item to edit
-* `p/selling price` to select the item price to edit
-* `p/remarks` to select the remarks of the item to edit.
+> :information_source: Only 3 `p/PROPERTY` can be edited. Use
+> * `p/purchase cost` to select the cost of the item to edit
+> * `p/selling price` to select the item price to edit
+> * `p/remarks` to select the remarks of the item to edit.
 
 Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
 
@@ -458,8 +458,7 @@ Mark an item as sold. The item will be removed from the shelf and will be added 
 
 Format: `sell id/ITEM_ID`
 
-&#128221; the ID of an item is the 8 alphanumeric characters printed out after you have added the item to a shelf.   
-
+> :pushpin: the ID of an item is the 8 alphanumeric characters printed out after you have added the item to a shelf.   
 
 Example: **Sell the book "Harry Potter" which was previously added in "Add new items" section. Its ID is 76a3e297.**
 
@@ -487,11 +486,11 @@ If no user markup percent is specified, CLIvershelf will calculate the percent m
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
 
-&#8505; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+> :information_source: **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
 
-&#8505; If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20.
+> :information_source: If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20.
 
-:warning: Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
+> :warning: Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
 
 Example: **Check the markup percent estimates of the item `index 2` in shelf `book1`**
 
@@ -541,11 +540,11 @@ Generates the sales report for given month.
 
 Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 
-&#8505; Only 2 `CONTENT_TYPE` can be specified  
-* `t/stats` to view statistics of sold items 
-* `t/items` to view the list of all items
+> :information_source: Only 2 `CONTENT_TYPE` can be specified
+> * `t/stats` to view statistics of sold items 
+> * `t/items` to view the list of all items
 
-&#8505; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
+> :information_source: If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
 <br> If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges (inclusive of the months specified) will be generated.
 
  > :warning: `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`

@@ -32,7 +32,7 @@ class MarkUpCommandTest {
 
         testCommand = new MarkUpCommand("test", "1", "");
         String expectedOutput1 = "Item: Harry Potter\nCost: 16.1, Price: 25.12\nAmount Difference: 9.02\n"
-            + "Current Mark Up: 56%\nmarkup: 0%, increase: $0.00, Final price: $16.10\n"
+            + "Current Mark Up: 56.02%\nmarkup: 0%, increase: $0.00, Final price: $16.10\n"
             + "markup: 20%, increase: $3.22, Final price: $19.32\n"
             + "markup: 40%, increase: $6.44, Final price: $22.54\n"
             + "markup: 60%, increase: $9.66, Final price: $25.76\n"
@@ -41,7 +41,7 @@ class MarkUpCommandTest {
         assertEquals(expectedOutput1, testCommand.execute());
         testCommand = new MarkUpCommand("test", "1", "6.7");
         String expectedOutput2 = "Item: Harry Potter\nCost: 16.1, Price: 25.12\nAmount Difference: 9.02\n"
-            + "Current Mark Up: 56%\nmarkup: 6.7%, increase: $1.08, Final price: $17.18\n";
+            + "Current Mark Up: 56.02%\nmarkup: 6.7%, increase: $1.08, Final price: $17.18\n";
         assertEquals(expectedOutput2, testCommand.execute());
     }
 
@@ -51,7 +51,7 @@ class MarkUpCommandTest {
 
         testCommand = new MarkUpCommand("test", "1", "103.7");
         String expectedOutput2 = "Item: Harry Potter\nCost: 16.1, Price: 25.12\nAmount Difference: 9.02\n"
-            + "Current Mark Up: 56%\nmarkup: 103.7%, increase: $16.70, Final price: $32.80\n"
+            + "Current Mark Up: 56.02%\nmarkup: 103.7%, increase: $16.70, Final price: $32.80\n"
             + "!!!WARNING: NOT recommended to set a percentage > 100 to $32.80.\n"
             + "This is to keep the price of the item reasonable";
         assertEquals(expectedOutput2, testCommand.execute());

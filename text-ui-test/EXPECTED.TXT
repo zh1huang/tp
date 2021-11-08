@@ -112,7 +112,7 @@
           : 2. Words in UPPER_CASE are the parameters to be supplied by the user. Only US-ASCII characters are allowed.       :
           : 3. Parameters in [] are optional & can only be specified ONCE.                                                    :
           : 4. Command input is case-sensitive.                                                                               :
-          : 5. SHELF_NAME & NAME parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\                    :
+          : 5. SHELF_NAME & NAME & KEYWORD parameters cannot contain special characters e.g.!@#$%^&*[]{}+=`~<>?,./|\          :
           ........................................................................................................................
                       .........................................................................................................
                       : Here is the list of items:                                                                            :
@@ -187,7 +187,7 @@
                                                                         : Item: Three Little Pigs                             :
                                                                         : Cost: 10.90, Price: 12.99                           :
                                                                         : Amount Difference: 2.09                             :
-                                                                        : Current Mark Up: 19%                                :
+                                                                        : Current Mark Up: 19.17%                             :
                                                                         : markup: 0%, increase: $0.00, Final price: $10.90    :
                                                                         : markup: 20%, increase: $2.18, Final price: $13.08   :
                                                                         : markup: 40%, increase: $4.36, Final price: $15.26   :
@@ -199,7 +199,7 @@
                                                            : Item: Three Little Pigs                                          :
                                                            : Cost: 10.90, Price: 12.99                                        :
                                                            : Amount Difference: 2.09                                          :
-                                                           : Current Mark Up: 19%                                             :
+                                                           : Current Mark Up: 19.17%                                          :
                                                            : markup: 100.50%, increase: $10.95, Final price: $21.85           :
                                                            : !!!WARNING: NOT recommended to set a percentage > 100 to $21.85. :
                                                            : This is to keep the price of the item reasonable                 :
