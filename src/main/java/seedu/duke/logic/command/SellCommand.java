@@ -12,7 +12,7 @@ import seedu.duke.model.exception.ItemNotExistModelException;
  */
 public class SellCommand extends Command {
 
-    public static final String SELL_DATA_ARGS_FORMAT_STRING = "sell id/itemID";
+    public static final String SELL_DATA_ARGS_FORMAT_STRING = "sell id/ITEM_ID";
     public static final String SELL_STRING = "sell";
     private static final String SELL_COMPLETE_MESSAGE =
             "This item has been sold."; //to be added to UI part later

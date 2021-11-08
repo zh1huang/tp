@@ -2,48 +2,33 @@
 'https://plantuml.com/class-diagram
 !include Style.puml
 hide circle
+skinparam classAttributeIconSize 0
+hide empty members
 
-class Parser{
-    + parseCommands() : Command
+class CLIvershelf{
 }
 
 class SalesManager{
-    + {static} getSalesManager():SalesManager
-    + sell(item:Item):SoldItem
-    + filterSoldItems(selectedStartDate:String, selectedEndDate:String):ArrayList<SoldItem>
 }
 
 class SalesReport{
-    + SalesReport(selectedDate:String, selectedEndDate:String)
-    + generateSoldItemStats():String
-    + generateSoldItemDetails():String
 }
 
 class SalesMarkUp{
-    + getItemToMarkUpInfo():String
-    + getSelectedItemMarkUpInfo():String
-    + getUserRequestMarkUpInfo():String
-    + getEstimatedMarkUpInfo():String
 }
 
 class SellCommand{
-    + SellCommand(String itemID)
-    + execute() : String
 }
 
 class MarkUpCommand{
-    + MarkUpCommand(shelfName:String, index:String, userRequestPercent:String)
-    + execute() : String
 }
 
 class ReportCommand{
-    + ReportCommand(selectedStartDate:String, selectedEndDate:String, reportType:String)
-    + execute() : String
 }
 
-Parser --> ReportCommand
-Parser --> MarkUpCommand
-Parser --> SellCommand
+CLIvershelf -- ReportCommand : executes >
+CLIvershelf -- MarkUpCommand : executes >
+CLIvershelf -- SellCommand : executes >
 
 ReportCommand --> SalesReport
 SalesReport --> SalesManager

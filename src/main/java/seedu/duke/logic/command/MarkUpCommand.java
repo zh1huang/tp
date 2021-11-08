@@ -1,12 +1,17 @@
 package seedu.duke.logic.command;
 
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
+import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 import seedu.duke.logic.command.sales.SalesMarkUp;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author t-l-xin
+/**
+ * The command that gets the markup information for a selected item.
+ */
 public class MarkUpCommand extends Command {
 
     public static final String MARKUP_DATA_ARGS_FORMAT_STRING = "markup shlv/SHELF_NAME i/INDEX [%/PERCENT]\n"
@@ -39,13 +44,18 @@ public class MarkUpCommand extends Command {
         this.userRequestPercent = userRequestPercent;
     }
 
+    /**
+     * Executes the markup operation.
+     *
+     * @return A result string that contains all the markup information of a selected item
+     * @throws ShelfNotExistModelException If Shelf does not
+     * @throws ItemNotExistCommandException If Item at index does not exist
+     */
     @Override
-    public String execute() throws ShelfNotExistModelException, ItemNotExistCommandException {
+    public String execute() throws ShelfNotExistModelException,
+            ItemNotExistCommandException, DeniedAccessToShelfModelException {
         StringBuilder resultString = new StringBuilder();
         try {
-            if (shelfName.equals("soldItems")) {
-                return String.valueOf(resultString.append(MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE));
-            }
 
             SalesMarkUp salesMarkUp = new SalesMarkUp(shelfName, index, userRequestPercent);
 

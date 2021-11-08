@@ -50,6 +50,9 @@ This developer guide is for developers who want to understand, test or improve t
 ### How to Use This User Guide
 ## Setting up
 
+This section describes some pre-requisites and instructions to set up the application on your computer. Do follow the instructions closely
+as any deviations may cause unexpected outcomes or cause application to not startup.
+
 **Pre-requisites**
 
 1. JDK 11
@@ -90,7 +93,7 @@ This developer guide is for developers who want to understand, test or improve t
 
 ## Design
 
-All UML diagrams in this guide are stored in `docs/diagrams` directory.
+This section will briefly describe the overall design and structure of major components in the CLIverShelf.
 
 ### Architecture
 
@@ -107,13 +110,16 @@ The architecture diagram above describes the design of CLIverShelf. The main com
 
 ### General Program Flow
 
+This section illustrates how the major components interact with each other during program run.
+
+![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
+
 1. User runs the programs & input user commands
 2. `CLIverShelf` calls `Parser` to `parseCommand()`
 3. `Parser` creates and returns a `Command` object when parsed successful
 4. `CLIverShelf` calls the `Command` object to `execute()`, and it returns a String `result`
 5. `CLIverShelf` instantiates `UI` component to print the `result`
 
-![](diagrams/Architecture_GeneralProgramFlowSequenceDiagram.svg)
 
 ### UI component
 
@@ -149,73 +155,62 @@ The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 5. `Command` then checks the `ExitCommand` on whether the program should exit.
 6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
-#### Subcomponent Parser
+### Logic: Subcomponent Parser
+
+This section will illustrate how the Parser interacts with `CLIvershelf` class and different `Command` classes.
+
+**API**: [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/parser/Parser.java)
+
+![](diagrams/ParserSequenceDiagram.svg)
+
+1. When user enters a command into the terminal, upon submission, `CliverShelf` receives the input line and calls
+   the `Parser` to `parseCommand()`
+2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
+3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `add`, `delete` , etc.
+4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
+   the `prepare{commandWord}(arguments)` function of the `Parser`
+5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` object to the `CliverShelf`
+   component, for `CLIvershelf` to decide what to do with the `{commandWord}Command` object.
+
+### Logic: Subcomponent Command
+
+**API**: [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/Command.java)
+
+![](diagrams/Logic_Command_SequenceDiagram.svg)
+
+1. `Command` is an abstract class and has an abstract method `execute()`.
+2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
+   responsible for one function of the application, such as adding new items or deleting items.
+3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser
+   and is then returned to the CLIverShelf after they are instantiated.
+4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function.
+5. The following sequence diagram illustrates how a general `Command` object interacts with other
+   components of the system.
+6. More details about specific commands will be covered in the Implementation section.
+
+### Command: Subcomponent Sales
+
+This section describes an overview of how the subcomponent `Sales` interacts with the sales related commands (`SellCommand`, `ReportCommand`, `MarkUpCommand`).
+After the command input is parsed, depending on the `Command` type, different types of sales related command uses different sales API.
 
 **API**:
-
-1. [Parser.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/parser/Parser.java)
-    1. When user enters a command into the terminal, upon submission, `CLIverShelf` receives the input line and calls
-       the `Parser` to `parseCommand()`
-    2. `Parser` first checks for BASIC_COMMAND_FORMAT, to extract the 1st word in the input which is the `commandWord`
-    3. The commandWord would then be checked against the respective `COMMAND_STRINGS` such as `ADD_STRING`
-       , `DELETE_STRING` shown in the diagram below.
-    4. If the `COMMAND_WORD` matches any of the strings, the function will proceed to execute
-       the `prepare{commandWord}()` function of the `Parser`
-        1. Else, if not match any string the `parseCommand()` will throw an `IllegalFormatException`
-    5. Lastly, when the Parsing is complete, the Parser will return the `{commandWord}Command` to the `CLIverShelf`
-       component
-
-#### Subcomponent Command
-
-1. [Command.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/command/Command.java)
-    1. `Command` is an abstract class and has an abstract method `execute()`.
-    2. Specific commands, such as `AddCommand` or `DeleteCommand`, are the subclasses of `Command`. Each one of them is
-       responsible for one function of the application, such as adding new items or deleting items.
-    3. Specific commands will be instantiated inside the `parseCommand(userInputLine: String): Command` method of parser
-       and is then returned to the CLIverShelf after they are instantiated.
-    4. The CLIverShelf will call the `execute()` method of the `Command` object to execute its specific function.
-    5. The following sequence diagram illustrates how a general `Command` object interacts with other components of the
-       system.
-    6. More details about specific commands will be covered in the Implementation section.
-
-   ![](diagrams/Logic_Command_SequenceDiagram.svg)
-
-##### Subcomponent Sales
-
-This section describes how the subcomponent Sales interacts with the sales related commands. After the command input is
-parsed, depending on the Command type, different types uses different sales API.
-
-**API**:
-
-1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesManager.java)
-    * Supports Both SellCommand & ReportCommand & Handles some Sales behaviour
-        * When program invokes `SellCommand#execute`, a `SalesManager` object is created & `SalesManager#sell()` will be
-          called to mark an item as sold
-        * When program invokes `ReportCommand#execute`
-            1. A `SalesReport` object is created & when either 1 of `SalesReport#generateSoldItemStats()`
-               or `SalesReport#generateSoldItemDetails()` is called
-            2. A `SalesManager` object is created & `SalesManager#sell()` will be called to mark an item as sold
-
-2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesReport.java)
-    * Supports ReportCommand & Handles generation of sales report
-        * When program invokes `ReportCommand#execute`, a `SalesReport` object is created
-          & `SalesReport#generateSoldItemStats()`
-          or `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list for processing
-          into strings before returning the String for printing.
-
-3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/sales/SalesMarkUpele.java)
-    * Supports MarkUpCommand & Handles Estimation of price markup of an item
-        1. When program invokes `MarkUpCommand#execute`, a `SalesMarkUp` object is created
-        2. `SalesMarkUp#getItemToMarkUpInfo()` & `SalesMarkUp#getSelectedItemMarkUpInfo()` is invoked to get current
-           details of the selected item
-        3. Then, if user markup percent is specified `SalesMarkUp#getUserRequestMarkUpInfo()` is invoked, to calculate
-           the user requested markup information & final price
-        4. Else, if user markup percent not specified `SalesMarkUp#getEstimatedMarkUpInfo()` is invoked, which get the
-           general markup estimation in intervals of 20.
+1. [SalesManager.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesManager.java)
+2. [SalesReport.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesReport.java)
+3. [SalesMarkUp.java](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/src/main/java/seedu/duke/logic/command/sales/SalesMarkUp.java)
 
 ![](diagrams/SalesSubComponentClassDiagram.svg)
 
+The `Sales` subcomponent,
+* When CLIvershelf executes SellCommand, SellCommand calls the SalesManager to mark the item as sold.
+* When CLIvershelf executes MarkUpCommand, MarkUpCommand calls the SalesMarkUp to get markup information about the selected item. 
+* When CLIvershelf executes ReportCommand, ReportCommand calls the SalesReport to execute, and SalesReport will in turn 
+  call SalesManager to get the list of sold items for further processing. 
+
+For more specific details, refer to implementation of [`SellCommand`](#selling-an-item), [`ReportCommand`](#generating-sales-report), and [`MarkUpCommand`](#generating-item-markup-price). 
+
 ### Model component
+
+This sections describes how the classes in model component are structure and how they interact with each other.
 
 **API**:
 
@@ -370,8 +365,23 @@ The Class Diagram below illustrates how the components work together in `ListCom
 
 ### Selling an item
 
-The sequence diagram below shows how selling items is implemented.
+The sequence diagram below shows how the feature of selling an item (SellCommand) is implemented.
+
 ![](diagrams/Implementation_SellItems.svg)
+
+1. When program invokes `SellCommand#execute()`, `SellCommand` object validates the itemID from user input by trying to 
+   get the item from the `ShelfList` through `ShelfList#getItem(itemID)`.
+2. Once it gets the item, `SellCommand` calls `SalesManager#sell()` to mark the item as sold.
+   <br> In `SalesManager#sell()`: 
+   1. It will try to get the `originalShelf` where the item to be sold belongs to
+   2. Then delete the sold item from the `originalShelf` by the shelf name
+   3. The function will first prepare to store the details of the soldItem 
+      * By calling `ShelfList#getShelf("soldItems")` to get the shelf called `soldItems` represented by `soldItemsShelf` 
+         to store the records of all soldItems.
+      * Also, details of Item to be sold will be constructed as a new `SoldItem` object, represented by `newSoldItem`
+   4. The `newSoldItem` will then be added to the `soldItemsShelf` via `Shelf#addItem(newSoldItem)`.
+3. Once the above steps are done, `SalesManager` will return a `finishedMessage`, which will then be passed back to 
+   `CLIverShelf` for printing.
 
 #### Design considerations:
 
@@ -386,32 +396,76 @@ The sequence diagram below shows how selling items is implemented.
 
 ### Generating sales report
 
+This section will describe how the feature generating a sales report (ReportCommand) is implemented.
+
 ![](diagrams/Implementation_GenerateReports.svg)
+
+The simplified overview of report implementation is as follows: 
+
+1. `CLIverShelf` invokes `ReportCommand#execute()`
+2. A `SalesReport` object which is named `newSalesReport` is created
+3. If the type specified in user input is `stats`, `SalesReport#generateSoldItemStats()` is called to get a string of
+   sold item statistics represented by `statsReport` in the diagram.
+4. Else, `SalesReport#generateSoldItemDetails()` will be called to get the filtered SoldItem list in the form of a string 
+   before returning the String to `CLIverShelf` for printing.
+
+The below diagram shows a more in-depth implementation of report feature. 
+
 ![](diagrams/Implementation_SalesReport.svg)
+
+The more detailed inner workings of the report implementation is as follows:
+
+* Case 1: user specifies `stats` for type.
+  1. `ReportCommand#generateSoldItemStats()` is executed.
+  2. `SalesManager#filterSoldItems(timeSpan)` is called.
+  3. `SalesManager` will call `ShelfList#getShelf("soldItems")`, which returns a `soldItemShelf`.
+  4. `SalesManager` filters the items from `soldItemShelf` according to the `timeSpan`, 
+     & returns the list named `filteredSoldItems` which represents the list of `soldItems` named from that `timeSpan`.
+  5. `SalesReport` will then self invoke `SalesReport#getSalesStatisticsString(filteredSoltItems)` to calculate the 
+     relevant statistical information needed, and returns a formatted string `salesStats`.
+  6. `SalesReport` will return `salesStats` to `ReportCommand`.
+
+* Case 2: user specifies `items` for type
+  1. `ReportCommand#generateSoldItemDetails()` is executed.
+  2. Same as step 2 of case 1
+  3. Same as step 3 of case 1
+  4. Same as step 4 of case 1
+  5. `SalesReport` will then self invoke `SalesReport#getSoldItemsDetailsString(filteredSoldItems)` to 
+     get the formatted string `soldItemDetails` containing information about `SoldItem` details from `filteredSoldItems`.
+  6. `SalesReport` will return `soldItemDetails` to `ReportCommand`.
 
 #### Design considerations:
 
+* Aspect how to show the report stats or items within a time period
+  * Alternative 1 (current choice): Convert YEAR-MONTH input string to YearMonth object to check valid year and month 
+    * Pros: Able to use pre-written YearMonth class methods, to simplify verification of year & month input 
+      And also simple check if the YearMonth input is in correct order
+    * Cons: Have to implement valid year restriction since, the max year accepted is a very large integer.
+  * Alternative 2: check the and the input manually by extracting the year and the month from the string, 
+    then converting to integer for validity checking
+      * Pros: Able to have flexibility in terms of more restrictions for valid year e.g. starting from year 1970
+      * Cons: More lines of code due to more factors to consider for checking if the year and month are valid
+        This makes code messier, increases debugging efforts & number of unit test cases. 
+
 ### Generating item markup price
 
-This sequence diagram shows how MarkUpCommand is being implemented.
+This section will illustrate how the marking up of an item price (MarkUpCommand) is being implemented.
 
-![](diagrams/MarkUpSequenceDiagram.svg)
+![](diagrams/MarkUpCommandSequenceDiagram.svg)
 
 A user may choose to check the estimated marked up price of an item, given a specific mark up percentage.
 
-1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`
-2. CLIverShelf invokes `MarkUpCommand#execute()`, which checks if the shelf name is soldItems
-    1. If the shelf name is `soldItems`, an error string `MARKUP_ON_SOLDITEMS_NOT_PERMITTED_MESSAGE` will be returned
-    2. Else, continues by constructing `SalesMarkUp` Object Then `SalesMarkUp#getItemToMarkUpInfo()`
-       , `SalesMarkUp#getSelectedItemMarkUpInfo()` is executed in sequence get the relevant information about the
-       selected item
-        2. `MarkUpCommand#execute()` then checks if the user has specified an input for markup percentage
-            1. If not specified, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` which get the
-               markup in percentage intervals of 20, returned as a string
-            2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up
-               information, returned as a string
-    3. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf`
-       as a `resultString` for printing.
+1. After user input is parsed, a `MarkUpCommand` object is constructed & returned to `CLIvershelf`.
+2. CLIverShelf invokes `MarkUpCommand#execute()`
+   1. A `SalesMarkUp` Object is constructed,
+   2. Then `SalesMarkUp#getItemToMarkUpInfo()` is called
+   3. followed by `SalesMarkUp#getSelectedItemMarkUpInfo()` to get the relevant information about the selected item
+       1. If `userRequestPercent` not specified in input, `MarkUpCommand#execute()` calls `SalesMarkUp#getEstimatedMarkUpInfo()` 
+          which get the markup in percentage intervals of 20, returned as a string
+       2. Else, `SalesMarkUp#getUserRequestMarkUpInfo()` is called to get the requested user percentage mark up
+          information, returned as a string
+   4. All the strings received from calling functions in `SalesMarkUp`, will be appended and returned to `CLIvershelf`
+      as a `resultString` for printing.
 
 #### Design considerations:
 
@@ -428,6 +482,8 @@ Aspect: How markup executes:
       be more complicated.
 
 ## Product scope
+
+This section defined the target users, and the value proposition.
 
 ### Target user profile
 
@@ -500,6 +556,8 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 * [Markup price of an item test](#markup-price-of-an-item-test)
 
 ### Launch and shut down
+
+This section describes the steps to run and exit the program.
 
 #### Initial launch
 
@@ -663,5 +721,4 @@ the [developing team](https://ay2122s1-cs2113t-f11-4.github.io/tp/AboutUs.html).
 | Percent markup more than 1000 dp | `markup shlv/book1 i/1 %/1234.67` | Error message (invalid format) |
 | Non-existent shelf | `markup shlv/notexistshelf i/1 %/12.34` | Error message (shelf does not exist) |
 | Index out of bounds | `markup shlv/book1 i/999 %/12.34` | Error message (item at index not found) |
-| Markup item from soldItems shelf | `markup shlv/soldItems i/1 %/12.34` | Error message (operation not permitted) |
 | Missing Parameters | `markup shlv/book1 %/9` | Error message (invalid format) |

@@ -16,7 +16,6 @@ package "Logic Component" <<Rectangle>> {
         class GetCommand
         class ListCommand
         class SearchCommand
-        class ExitCommand
         class HelpCommand
     }
     class Parser
@@ -28,7 +27,6 @@ package "Logic Component" <<Rectangle>> {
     }
 
     class Sales
-
     abstract class "{abstract}\n Command" as command
 
 }
@@ -36,17 +34,19 @@ package "Logic Component" <<Rectangle>> {
 CLIverShelf "creates"--> "1" Parser
 
 Parser --> CreateShelfCommand
-Parser --> RemoveShelfCommand
-Parser --> AddCommand
-Parser --> DeleteCommand
-Parser --> EditCommand
-Parser --> GetCommand
-Parser --> ListCommand
-Parser --> SearchCommand
-Parser --> ExitCommand
-Parser --> ReportCommand
-Parser --> MarkupCommand
-Parser --> HelpCommand
+Parser ---> RemoveShelfCommand
+Parser ---> AddCommand
+Parser ---> DeleteCommand
+Parser ---> EditCommand
+Parser ---> GetCommand
+Parser ---> ListCommand
+Parser ---> SearchCommand
+
+Parser ---> ReportCommand
+Parser ---> MarkupCommand
+Parser ---> HelpCommand
+
+
 
 CreateShelfCommand --|> command
 RemoveShelfCommand --|> command
@@ -56,7 +56,7 @@ EditCommand --|> command
 GetCommand --|> command
 ListCommand --|> command
 SearchCommand --|> command
-ExitCommand --|> command
+
 SellCommand --|> command
 SellCommand --> Sales
 ReportCommand --|> command

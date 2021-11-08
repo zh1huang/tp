@@ -9,8 +9,10 @@ import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ListCommandTest {
     private Command testCommand;
@@ -90,5 +92,39 @@ public class ListCommandTest {
     @Test
     public void execute_addItemsToNonExistentShelf_ShelfNotExistModelException() {
         assertThrows(ShelfNotExistModelException.class, () -> testCommand.execute());
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        testCommand = new ListCommand("test");
+        Command sameCommand = testCommand;
+        assertEquals(testCommand, sameCommand);
+    }
+
+    @Test
+    public void equals_differentObjectSameArguments_returnsTrue() {
+        testCommand = new ListCommand("test");
+        Command anotherCommand = new ListCommand("test");
+        assertEquals(testCommand, anotherCommand);
+    }
+
+    @Test
+    public void equals_null_returnFalse() {
+        testCommand = new ListCommand("test");
+        assertNotEquals(testCommand, null);
+    }
+
+    @Test
+    public void equals_differentShelf_returnsFalse() {
+        testCommand = new ListCommand("test");
+        Command anotherCommand = new ListCommand("different");
+        assertNotEquals(testCommand, anotherCommand);
+    }
+
+    @Test
+    public void equals_noShelfParameter_returnsFalse() {
+        testCommand = new ListCommand();
+        Command anotherCommand = new ListCommand("different");
+        assertNotEquals(testCommand, anotherCommand);
     }
 }

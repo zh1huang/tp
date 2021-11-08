@@ -68,17 +68,15 @@ Notes about the command format:
   which can be used as add n/Pilot Pen.
 * Items in square brackets are optional and can only be specified **once** for that command.
   E.g. `get n/NAME [p/PROPERTY]` can be used as `get n/Pencil p/cost` or as `get n/Pencil`.
-* &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols such as "!@#$%^&*[]
-  {}/|\+=`~<>?,."
-* &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from user
-  guide will be flagged as **invalid** command formats.
-* &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any
-  reordering of parameters will be flagged as **invalid** command format
-* &#9888; Program only takes in input typed in english character set, does not accept input of other languages such as
+* &#9888; Parameters with `NAME` & `SHELF_NAME` cannot contain special character or symbols
+  such as "!@#$%^&*[]{}/|\\+=`~<>?,."
+* &#9888; Commands that do not take in extra unspecified parameters, including additional trailing spaces from 
+  user guide will be flagged as **invalid** command formats.
+* &#9888; Program input is **case-sensitive** & input sequence follows what has been mentioned in this user guide, any reordering 
+  of parameters will be flagged as **invalid** command format
+* &#9888; Program **_only_** takes in input typed in **english** character set (specifically **US-ASCII**), does not accept input of other languages such as 
   Chinese characters, Japanese characters.
-* &#9888; Index of items always start from `1`.
-* &#9888; It is recommended to use this application in full screen or resize the window until the UI is correctly
-  displayed.
+* &#9888; Index of items always start from **`1`**.
 
 ## Features
 
@@ -107,7 +105,7 @@ Expected outcome:
     : 7. Search item: search KEYWORD                                                                  :
     : 8. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
     : 9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
-    : 10. Sell an item: sell shlv/SHELF_NAME i/INDEX                                                  :
+    : 10. Sell an item: sell id/ITEM_ID                                                  :
     : 11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
     : 12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
     : 13. Exit program: bye                                                                           :
@@ -250,8 +248,11 @@ Expected outcome:
 Shows a list of all items in the inventory list. The attributes shown are: Item name, purchase cost, selling price,
 quantity, and if they have remarks.
 
-Under remarks, `x` signifies that the item does not have any remarks, while `o` signifies that it has remarks. Users can
-use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
+&#8505; Under remarks, 
+* `x` signifies that the item does not have any remarks
+* `o` signifies that it has remarks.
+
+&#8505; Users can use the [`get` function](#get-information-about-an-item) to display the items' ID and remarks.
 
 Format: `list [shlv/SHELF_NAME]`
 
@@ -301,7 +302,7 @@ Expected outcome:
 Search for any item that has ID, name, remark or pricing that contains the specified keyword. Shows a list of all items
 in the inventory list. The attributes shown are: Item ID, Item name, purchase cost, selling price, quantity, and remark.
 
-Users can use the [`get`](#get-information-about-an-item) function to display more information about the item.
+&#8505; Users can use the [`get` function](#get-information-about-an-item) to display more information about the item.
 
 Format: `search k/KEYWORD`
 
@@ -406,12 +407,14 @@ get shlv/book1 i/1
 Updates the properties of an item. You need to specify which item to edit using its shelf name and index number in that
 shelf, and you also need to specify which property you want to edit and what the new value will be.
 
-&#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+&#8505; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+
+&#8505; Only 3 `p/PROPERTY` can be edited. Use
+* `p/purchase cost` to select the cost of the item to edit
+* `p/selling price` to select the item price to edit
+* `p/remarks` to select the remarks of the item to edit.
 
 Format: `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE`
-
-&#128221; Only 3 `PROPERTY` can be edited. Use `p/purchase cost` to select the cost of the item to edit, or
-use `p/selling price` to select the item price to edit, or use `p/remarks` to select the remarks of the item to edit.
 
 Example: **Update selling price of item with `index 1` as $30**
 
@@ -453,8 +456,10 @@ Expected outcome:
 
 Mark an item as sold. The item will be removed from the shelf and will be added to your sales report.
 
-Format: `sell id/ITEM_ID &#128221; the ID of an item is the 8 alphanumeric characters printed out after you have added
-the item to a shelf.
+Format: `sell id/ITEM_ID`
+
+&#128221; the ID of an item is the 8 alphanumeric characters printed out after you have added the item to a shelf.   
+
 
 Example: **Sell the book "Harry Potter" which was previously added in "Add new items" section. Its ID is 76a3e297.**
 
@@ -476,12 +481,15 @@ Expected outcome:
 
 ### Markup price of an item
 
-Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price
-change. If no user markup percent is specified, Clivershelf will calculate the percent markup in multiples of 20.
+Checks the current price markup of an item and calculates user estimated markup percent with the corresponding price change.
 
-&#9888; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20.
 
 Format: `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]`
+
+&#8505; **For index, we accept both truncated and raw inputs (e.g. for index 1, both "1" and "001" are accepted.)**
+
+&#8505; If no user markup percent is specified, CLIvershelf will calculate the percent markup in multiples of 20.
 
 &#9888; Maximum allowed percentage is 999.99% (Only up to 2 decimal points input is allowed)
 
@@ -533,15 +541,15 @@ Generates the sales report for given month.
 
 Format: `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]`
 
-&#128221; Only 2 `CONTENT_TYPE` can be specified either `t/stats` to view statistics of sold items or `t/items` to view
-the list of all items
+&#8505; Only 2 `CONTENT_TYPE` can be specified  
+* `t/stats` to view statistics of sold items 
+* `t/items` to view the list of all items
 
-&#128221; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
+&#8505; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in the specified year.
+<br> If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date ranges (inclusive of the months specified) will be generated.
+
+&#9888; `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` need to follow the format `ym/YYYY-MM`
 <br> e.g. Jan 2020 is represented as `ym/2020-01` or Dec 2021 is `ym/2021-12`
-
-&#128221; If only 1 `ym/START-YEAR-MONTH` parameter is specified, report will be generated for that particular month in
-the specified year. If both `ym/START-YEAR-MONTH` & `ym/END-YEAR-MONTH` are specified, report in between the 2 date
-ranges will be generated
 
 Example: **Generate sales report for the month of Nov 2021**
 
@@ -625,9 +633,9 @@ the [team](https://github.com/AY2122S1-CS2113T-F11-4/tp/blob/master/docs/AboutUs
 |**Search**  | `search k/KEYWORD` <br> eg: `search k/sample item`
 |**Get**     | `get shlv/SHELF_NAME i/INDEX` <br> eg: `get shlv/book1 i/1`                                                         |
 |**Edit**    | `edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE` <br> eg: `edit shlv/book1 i/1 p/cost v/100`                      |
-|**Sell**    | `sell shlv/SHELF_NAME i/INDEX` <br> eg: `sell shlv/book1 i/1`                                                                                    |
+|**Sell**    | `sell id/ITEM_ID` <br> eg: `sell id/76a3e297`                                                                                    |
 |**Markup**  | `markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]` <br> eg: `markup shlv/book1 i/1 %/5`                                                                                    |
-|**Report**  | `report t/CONTENT_TYPE ym/YEAR-MONTH [ym/YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
+|**Report**  | `report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]` <br> eg: `report c/stats ym/2021-10`                                                                                    |
 |**Bye**     | `bye`                                                                                                                           |
 
 

@@ -66,6 +66,7 @@ public class SalesReport {
         return stringToReturn;
     }
 
+    //@@author t-l-xin
     private String getSalesStatisticsString(ArrayList<SoldItem> selectedSoldItems) {
 
         assert selectedSoldItems.size() != INTEGER_VALUE_ZERO;
@@ -97,6 +98,7 @@ public class SalesReport {
         return stringToReturn;
     }
 
+    //@@author t-l-xin
     /**
      * Generate and gets every sold item details in the soldItems shelf.
      *
@@ -146,6 +148,7 @@ public class SalesReport {
         return details.toString().trim();
     }
 
+    //@@author t-l-xin
     private String getEmptySoldItemInMonthMessage(String selectedDate, String selectedEndDate) {
         String emptySoldItemInPeriodString;
 
