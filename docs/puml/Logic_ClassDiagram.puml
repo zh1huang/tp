@@ -34,17 +34,17 @@ package "Logic Component" <<Rectangle>> {
 CLIverShelf "creates"--> "1" Parser
 
 Parser --> CreateShelfCommand
-Parser ---> RemoveShelfCommand
-Parser ---> AddCommand
-Parser ---> DeleteCommand
-Parser ---> EditCommand
-Parser ---> GetCommand
-Parser ---> ListCommand
-Parser ---> SearchCommand
+Parser --> RemoveShelfCommand
+Parser --> AddCommand
+Parser --> DeleteCommand
+Parser --> EditCommand
+Parser --> GetCommand
+Parser --> ListCommand
+Parser --> SearchCommand
 
-Parser ---> ReportCommand
-Parser ---> MarkupCommand
-Parser ---> HelpCommand
+Parser --> ReportCommand
+Parser --> MarkupCommand
+Parser --> HelpCommand
 
 
 
