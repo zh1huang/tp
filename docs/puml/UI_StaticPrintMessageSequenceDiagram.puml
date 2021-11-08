@@ -1,6 +1,6 @@
 @startuml
 !include Style.puml
-participant ":CLIverShelf" as app
+participant ":CliverShelf" as app
 participant ":MessageBubble" as mb <<class>>
 participant "newMessage:MessageBubble" as msg
 

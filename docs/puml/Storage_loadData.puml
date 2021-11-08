@@ -1,6 +1,7 @@
 @startuml
-hide footbox
-participant CLIverShelf as app
+!include Style.puml
+
+participant ":CliverShelf" as app
 participant ":Storage" as storage
 participant "file:File" as file
 participant ":FileWriter" as FileWriter
@@ -17,10 +18,7 @@ opt file not exist
     storage -> file:createNewFile()
     activate file
     file -> FileWriter **
-    file -> file:sampleData()
-    activate file
-    file --> file: sampleData
-    deactivate file
+    file -> file:generate sample data
     file -> FileWriter: write(sampleData)
     file -> FileWriter !!:close()
     file --> storage

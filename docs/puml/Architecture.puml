@@ -1,10 +1,10 @@
 @startuml
 skinparam componentStyle rectangle
 actor user
-user -down-> [CLIverShelf]
-[CLIverShelf] -down-> [Logic]
+user -down-> [CliverShelf]
+[CliverShelf] -down-> [Logic]
 [Logic] -down-> [Model]
 [Storage] --> [Model]
-[CLIverShelf] -right-> [UI]
-[CLIverShelf] -left-> [Storage]
+[CliverShelf] -right-> [UI]
+[CliverShelf] -left-> [Storage]
 @enduml
