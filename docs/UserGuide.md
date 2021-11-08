@@ -102,12 +102,12 @@ Expected outcome:
     : 4. Add item: add n/NAME shlv/SHELF_NAME p/PURCHASE_PRICE s/SELLING_PRICE q/QUANTITY [r/REMARKS] :
     : 5. Delete item: delete shlv/SHELF_NAME i/INDEX                                                  :
     : 6. List items: list [shlv/SHELF_NAME]                                                           :
-    : 7. Search item: search KEYWORD                                                                  :
+    : 7. Search item: search k/KEYWORD                                                                 :
     : 8. Get information of item : get shlv/SHELF_NAME i/INDEX                                        :
     : 9. Edit an item: edit shlv/SHELF_NAME i/INDEX p/PROPERTY v/VALUE                                :
     : 10. Sell an item: sell id/ITEM_ID                                                  :
     : 11. Markup price of item: markup shlv/SHELF_NAME i/INDEX [%/PERCENT_MARKUP]                     :
-    : 12. Generate sales report: report t/TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
+    : 12. Generate sales report: report t/CONTENT_TYPE ym/START-YEAR-MONTH [ym/END-YEAR-MONTH]                :
     : 13. Exit program: bye                                                                           :
     ......................................................................................................
 ```
@@ -170,11 +170,6 @@ any).
 > :warning: **Maximum quantity of items in a shelf is 999.**
 > 
 > :warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID corresponding to the item. This ID will be used to required for [selling an item](#sell-an-item).**
-> 
-> :warning: **Maximum quantity of any item is 999 per shelf.**
-> 
-> :warning: **After successfully adding the item, 8 alphanumeric characters will be printed. This is the unique ID
-corresponding to the item.**
 
 **As a bookstore owner, you are strongly encouraged to use this ID to label your item before putting the item on the
 real-life shelf. Later when the customer brings the item to the counter and pays, you will need to read the item ID from

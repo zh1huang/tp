@@ -153,13 +153,11 @@ The class diagram below shows the associations between the classes that make up 
 
 The `Logic` component consists of `Parser`, `Command` and `Sales` components.
 
-1. After user enters input, `UI` fetches and passes it to Parser for parsing.
-2. Parser then returns a `Command` object, which is then executed.
-3. The command execution directly affects the objects in the `Model` component.
-4. After execution, `Command` instructs the `UI` component to print out relevant output messages (e.g successful command
+1. After user enters input, `CliverShelf` creates `Parser`.
+2. The input is parsed within `Parser`, generating a `Command` object, which is then executed.
+4. For sales-related commands, `Sales` is also used.
+5. After execution, the relevant output generated from `Command` is then generated to the user (e.g. successful command
    execution or error messages)
-5. `Command` then checks the `ExitCommand` on whether the program should exit.
-6. In the absence of `ExitCommand`, UI then takes over to prompt and process the next user input.
 
 ### Logic: Subcomponent Parser
 
@@ -674,7 +672,7 @@ This section describes the steps to run and exit the program.
 | Test Case  | Command | Expected Result|
 | ------------- | ------------- | ------------- |
 | Listing out for existent shelf| `list shlv/existentshelf` | List of all items in that shelf |
-| Listing out for every shelf | `list` | Listing of all items in every shelf bookstore |
+| Listing out for every shelf | `list` | Listing of all items in every shelf in bookstore |
 | Non-existent shelf | `list shlv/nonexistshelf` | Error message prompting to create shelf first |
 | Missing flag | `list book1` | Error message (invalid format) |
 | Invalid parameters | `list shlv/&` | Error message (invalid format) |
