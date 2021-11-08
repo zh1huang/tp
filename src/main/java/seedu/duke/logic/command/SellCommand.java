@@ -1,12 +1,15 @@
 package seedu.duke.logic.command;
 
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
-import seedu.duke.logic.command.exception.ShelfNotExistCommandException;
 import seedu.duke.model.Item;
 import seedu.duke.model.ShelfList;
 import seedu.duke.logic.command.sales.SalesManager;
 import seedu.duke.model.exception.ItemNotExistModelException;
 
+//@@author haoyusimon
+/**
+ * Represents a command that sells an item.
+ */
 public class SellCommand extends Command {
 
     public static final String SELL_DATA_ARGS_FORMAT_STRING = "sell id/itemID";
@@ -16,11 +19,22 @@ public class SellCommand extends Command {
     public static final String SOLD_ITEM_DETAILS_FORMAT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
     private final String itemID;
 
+    /**
+     * Constructor of the SellCommand.
+     *
+     * @param itemID the ID of the item to sell
+     */
     public SellCommand(String itemID) {
         this.itemID = itemID;
     }
 
-    public String execute() throws ShelfNotExistCommandException, ItemNotExistCommandException {
+    /**
+     * Marks an item as sold.
+     *
+     * @return a completed message as String
+     * @throws ItemNotExistCommandException if the item does not exist
+     */
+    public String execute() throws ItemNotExistCommandException {
         try {
             Item selectedItem = ShelfList
                     .getShelfList()
@@ -38,6 +52,12 @@ public class SellCommand extends Command {
         }
     }
 
+    /**
+     * The overriding equal method used for testing.
+     *
+     * @param other the other object to be compared with
+     * @return true if two objects are the same, else false
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {

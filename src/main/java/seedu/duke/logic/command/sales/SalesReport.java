@@ -50,6 +50,7 @@ public class SalesReport {
      * Generate a string to contain all sold item statistics.
      *
      * @return A String containing the sold items statistics
+     * @throws IllegalArgumentCommandException if the selected dates are not valid
      */
     public String generateSoldItemStats()
             throws IllegalArgumentCommandException {
@@ -96,10 +97,12 @@ public class SalesReport {
         return stringToReturn;
     }
 
+    //@@author haoyusimon
     /**
      * Generate and gets every sold item details in the soldItems shelf.
      *
      * @return A String containing all sold item details
+     * @throws IllegalArgumentCommandException if the selected dates are not valid
      */
     public String generateSoldItemDetails() throws IllegalArgumentCommandException {
         SalesManager salesManager = SalesManager.getSalesManager();
@@ -117,8 +120,8 @@ public class SalesReport {
         return info.toString().trim();
     }
 
+    //@@author haoyusimon
     private String getSoldItemsDetailsString(ArrayList<SoldItem> selectedSoldItems) {
-
         assert selectedSoldItems.size() != 0;
         StringBuilder details = new StringBuilder();
         details.append(HEADER);

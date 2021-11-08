@@ -12,6 +12,7 @@ import seedu.duke.model.exception.ShelfNotExistModelException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author haoyusimon
 /**
  * The command that deletes a selected item.
  */
@@ -43,6 +44,7 @@ public class DeleteCommand extends Command {
      * Executes the delete operation.
      *
      * @throws ItemNotExistCommandException if the specified item does not exist
+     * @throws ShelfNotExistCommandException if the specified shelf does not exist
      */
     public String execute() throws ItemNotExistCommandException, ShelfNotExistCommandException {
         try {

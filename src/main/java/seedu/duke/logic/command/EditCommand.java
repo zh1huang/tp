@@ -1,6 +1,5 @@
 package seedu.duke.logic.command;
 
-
 import seedu.duke.logic.command.exception.IllegalArgumentCommandException;
 import seedu.duke.logic.command.exception.ItemNotExistCommandException;
 import seedu.duke.logic.command.exception.NoPropertyFoundCommandException;
@@ -17,6 +16,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author haoyusimon
 /**
  * The command that edits a selected item.
  */
@@ -34,11 +34,8 @@ public class EditCommand extends Command {
                     + "3. \"p/remarks\" - to edit remarks\n"
                     + "   Remarks property accepts any alphanumeric input";
     public static final String EDIT_STRING = "edit";
-    public static final String PARSE_EDIT_SUCCESS_MESSAGE_FORMAT =
-            "shelfname: %s\nindex: %s\nproperty: %s\nvalue: %s\n";
     public static final String EDIT_ITEM_DETAILS_FORMAT = "Name: %s\nCost: %s\nPrice: %s\nRemarks: %s";
     private static final String UPDATE_COMPLETE_MESSAGE = "This item has been updated.";
-    //to be added to UI part later
     private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final String shelfName;
     private final int index;
@@ -65,9 +62,13 @@ public class EditCommand extends Command {
     /**
      * Executes the update operation.
      *
-     * @throws ItemNotExistCommandException    when cannot find any item with the name
-     * @throws NullPointerException            when the name specified is null
-     * @throws IllegalArgumentCommandException when the argument is invalid
+     * @return completed message as String.
+     * @throws ItemNotExistCommandException        when cannot find any item with the name
+     * @throws NullPointerException                when the name specified is null
+     * @throws IllegalArgumentCommandException     when the argument is invalid
+     * @throws NoPropertyFoundCommandException     when the input property is invalid
+     * @throws ShelfNotExistCommandException       if the shelf specified does not exist
+     * @throws DeniedAccessToShelfCommandException if the user attrempts to access the soldItems shelf
      */
     public String execute() throws ItemNotExistCommandException,
             NullPointerException, IllegalArgumentCommandException,
@@ -117,6 +118,12 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * The overriding equal method used for testing.
+     *
+     * @param other the other object to be compared with
+     * @return true if two objects are the same, else false
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {

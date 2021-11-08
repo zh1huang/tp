@@ -7,6 +7,10 @@ import seedu.duke.model.ShelfList;
 import seedu.duke.model.exception.DeniedAccessToShelfModelException;
 import seedu.duke.model.exception.ShelfNotExistModelException;
 
+//@@author haoyusimon
+/**
+ * Represents the command that removes a specific shelf.
+ */
 public class RemoveShelfCommand extends Command {
 
     public static final String REMOVE_DATA_ARGS_FORMAT_STRING = "remove shlv/SHELF_NAME";
@@ -22,6 +26,14 @@ public class RemoveShelfCommand extends Command {
         this.shelfName = shelfName;
     }
 
+    /**
+     * Removes the specified shelf.
+     *
+     * @return the complete message as String
+     * @throws ShelfNotExistCommandException       if the specified shelf does not exist
+     * @throws IllegalArgumentCommandException     if the inputs are invalid
+     * @throws DeniedAccessToShelfCommandException if the user tries to access to the soldItems shelf.
+     */
     @Override
     public String execute() throws ShelfNotExistCommandException, IllegalArgumentCommandException,
             DeniedAccessToShelfCommandException {
@@ -41,6 +53,12 @@ public class RemoveShelfCommand extends Command {
         }
     }
 
+    /**
+     * The overriding equal method used for testing.
+     *
+     * @param other the other object to be compared with
+     * @return true if two objects are the same, else false
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
